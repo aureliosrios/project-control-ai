@@ -1,219 +1,667 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Control AI - Cursos de IA para Construcción</title>
-    <meta name="description" content="Domina la construcción del futuro con nuestros cursos de Inteligencia Artificial. Licitaciones inteligentes, planificación predictiva y más.">
-    <meta name="keywords" content="IA construcción, inteligencia artificial construcción, cursos IA construcción, licitación inteligente, planificación predictiva">
+    <title>Project Control AI | Ingeniería del Futuro</title>
+    <meta name="description"
+        content="Academia de Ingeniería Civil e Inteligencia Artificial. Automatiza licitaciones, controla costos y domina agentes autónomos.">
+
+    <!-- Fuentes: Inter (Lectura) y Space Grotesk (Títulos Técnicos) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icono -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+
+    <style>
+        /* --- VARIABLES DE DISEÑO (INGENIERÍA DARK) --- */
+        :root {
+            --bg-dark: #0f172a;
+            /* Fondo principal oscuro */
+            --bg-card: #1e293b;
+            /* Fondo tarjetas */
+            --text-main: #f1f5f9;
+            /* Blanco suave */
+            --text-muted: #94a3b8;
+            /* Gris texto secundario */
+            --accent-cyan: #38bdf8;
+            /* Tecnología/Datos */
+            --accent-orange: #f97316;
+            /* Construcción/Obra */
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- RESET & BASE --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        h1,
+        h2,
+        h3,
+        .logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            color: var(--accent-cyan);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Mobile menu toggle */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .whatsapp-btn:hover {
+            background: #20bd5a;
+            transform: translateY(-2px);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 160px 0 80px;
+            text-align: center;
+            background: radial-gradient(circle at 50% 30%, rgba(56, 189, 248, 0.1) 0%, transparent 60%);
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .hero-cta {
+            background: var(--accent-cyan);
+            color: #0f172a;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+        }
+
+        .hero-cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.5);
+        }
+
+        /* --- COURSES GRID --- */
+        .courses {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--accent-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        /* --- CARD DISEÑO PROFESIONAL --- */
+        .course-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
+        }
+
+        /* IMAGEN */
+        .course-img-container {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .course-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .course-card:hover .course-img {
+            transform: scale(1.05);
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent);
+        }
+
+        /* CONTENIDO CARD */
+        .course-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-meta {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .tag-price {
+            color: var(--accent-orange);
+            font-weight: bold;
+            background: rgba(249, 115, 22, 0.1);
+        }
+
+        .course-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            color: white;
+        }
+
+        .course-description {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- ACORDEÓN (TEMARIO DESPLEGABLE) --- */
+        details {
+            margin-top: auto;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            transition: 0.2s;
+        }
+
+        summary:hover {
+            opacity: 0.8;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: '+';
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        details[open] summary::after {
+            content: '-';
+            color: var(--accent-orange);
+        }
+
+        .course-sessions {
+            margin-top: 1rem;
+            padding-left: 0;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .session-item {
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 2px solid var(--accent-orange);
+        }
+
+        .session-title {
+            display: block;
+            font-weight: 600;
+            color: #f8fafc;
+            margin-bottom: 0.2rem;
+        }
+
+        .session-desc {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        /* --- FOOTER --- */
+        .footer {
+            background: #020617;
+            padding: 3rem 0;
+            margin-top: 5rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Responsive Mobile */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--bg-card);
+                flex-direction: column;
+                padding: 2rem;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: block;
+                margin-left: auto;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <!-- Navigation -->
+
+    <!-- NAVBAR -->
     <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">
-                <div class="logo">
-                    <span class="logo-icon">🏗️</span>
-                    <span class="logo-text">Project Control AI</span>
-                </div>
+        <div class="container nav-brand">
+            <div class="logo">
+                <span class="logo-icon">🏗️</span>
+                <span class="logo-text">Project Control <span>AI</span></span>
             </div>
+
+            <button class="nav-toggle" id="navToggle">☰</button>
             <div class="nav-menu" id="navMenu">
                 <a href="#cursos" class="nav-link">Cursos</a>
                 <a href="#contacto" class="nav-link">Contacto</a>
-                <a href="#inicio" class="nav-link">Inicio</a>
+                <a href="https://wa.me/51993147501" class="whatsapp-btn" target="_blank">Inscribirse</a>
             </div>
-            <button class="nav-toggle" id="navToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- HERO SECTION -->
     <section class="hero" id="inicio">
         <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Domina la Construcción del Futuro con Inteligencia Artificial</h1>
-                <p class="hero-subtitle">Nuestros cursos están diseñados por expertos para optimizar cada fase de tus proyectos. Próximamente disponibles.</p>
-                <button class="hero-cta" onclick="scrollToSection('cursos')">
-                    Ver Cursos
-                </button>
-            </div>
+            <h1 class="hero-title">Domina la Construcción del Futuro <br> con Inteligencia Artificial</h1>
+            <p class="hero-subtitle">Ingeniería Forense de Bases, Control Predictivo (EVM) y Agentes Autónomos.
+                Formación de alto nivel para ingenieros civiles.</p>
+            <button class="hero-cta" onclick="document.getElementById('cursos').scrollIntoView();">
+                Ver Ruta de Aprendizaje
+            </button>
         </div>
     </section>
 
-    <!-- Courses Section -->
+    <!-- COURSES SECTION -->
     <section class="courses" id="cursos">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Nuestros Cursos de IA</h2>
-                <p class="section-subtitle">Especialízate en las tecnologías más avanzadas del sector</p>
+                <h2 class="section-title">Formación Especializada</h2>
+                <p>De usuario básico a Developer Engineer en 4 pasos.</p>
             </div>
-            
+
             <div class="courses-grid">
-                <!-- Course 1 -->
+
+                <!-- CURSO 1 -->
                 <div class="course-card">
-                    <div class="course-price">S/200</div>
+                    <div class="course-img-container">
+                        <img src="Curso 1.png" alt="Licitaciones IA" class="course-img">
+                        <div class="overlay"></div>
+                    </div>
                     <div class="course-content">
-                        <h3 class="course-title">Licitaciones Inteligentes con IA</h3>
-                        <p class="course-description">Aprende a analizar bases de licitación, automatizar la preparación de propuestas técnicas y económicas y mejorar la tasa de adjudicación usando agentes y chatbots IA disponibles hoy.</p>
-                        <ul class="course-features">
-                            <li>Extracción automática de requisitos (OCR + IA)</li>
-                            <li>Matriz de cumplimiento automatizada</li>
-                            <li>Generación asistida de propuesta técnica</li>
-                            <li>Chatbot de apoyo para consultas</li>
-                        </ul>
-                        <div class="course-schedule">
-                            <strong>Horarios:</strong> Sábados 19:00-22:00 hrs
+                        <div class="course-meta">
+                            <span class="tag tag-price">$65 USD</span>
+                            <span class="tag">15 Horas</span>
                         </div>
+                        <h3 class="course-title">1. Licitaciones y Estrategia de Adjudicación con IA</h3>
+                        <p class="course-description">"Gana más licitaciones en menos tiempo reduciendo la incertidumbre
+                            técnica y económica mediante auditoría forense de bases."</p>
+
+                        <details>
+                            <summary>Ver Plan de Estudios</summary>
+                            <ul class="course-sessions">
+                                <li class="session-item">
+                                    <span class="session-title">1. Ingeniería Forense y Riesgos</span>
+                                    <span class="session-desc">Auditoría masiva de TDRs y documentos. Detección
+                                        automática de cláusulas leoninas.</span>
+                                </li>
+                                <li class="session-item">
+                                    <span class="session-title">2. Estrategia Técnica</span>
+                                    <span class="session-desc">Elaboración asistida de Propuestas Técnicas y planes de
+                                        seguridad con IA.</span>
+                                </li>
+                                <li class="session-item">
+                                    <span class="session-title">3. Ingeniería de Costos I</span>
+                                    <span class="session-desc">Validación de metrados clave y elaboración masiva de APUs
+                                        con agentes.</span>
+                                </li>
+                                <li class="session-item">
+                                    <span class="session-title">4. Ingeniería de Costos II</span>
+                                    <span class="session-desc">Análisis de Gastos Generales, simulación de utilidad y
+                                        benchmarking.</span>
+                                </li>
+                                <li class="session-item">
+                                    <span class="session-title">5. Consolidación y Cierre</span>
+                                    <span class="session-desc">Automatización de formatos finales y revisión cruzada
+                                        técnica-económica.</span>
+                                </li>
+                            </ul>
+                        </details>
                     </div>
                 </div>
 
-                <!-- Course 2 -->
+                <!-- CURSO 2 -->
                 <div class="course-card">
-                    <div class="course-price">S/200</div>
+                    <div class="course-img-container">
+                        <img src="Curso 2.png" alt="Control de Proyectos" class="course-img">
+                        <div class="overlay"></div>
+                    </div>
                     <div class="course-content">
-                        <h3 class="course-title">Planificación y Control del Cronograma con IA</h3>
-                        <p class="course-description">Planifica con precisión: crea cronogramas inteligentes, simula escenarios y controla el avance con métricas (SPI, SV) asistidas por IA.</p>
-                        <ul class="course-features">
-                            <li>WBS/OBS y lógica de programación aplicada</li>
-                            <li>Generación automática de actividades</li>
-                            <li>Control de avance: cálculo de SPI/SV</li>
-                            <li>Reprogramación bajo escenarios complejos</li>
-                        </ul>
-                        <div class="course-schedule">
-                            <strong>Horarios:</strong> Martes y Jueves 19:00-21:00 hrs
+                        <div class="course-meta">
+                            <span class="tag tag-price">$65 USD</span>
+                            <span class="tag">15 Horas</span>
                         </div>
+                        <h3 class="course-title">2. Control y Gerencia de Proyectos (EVM 4.0)</h3>
+                        <p class="course-description">"Deja de reportar el pasado. Predice el futuro del proyecto con
+                            Valor Ganado, auditoría de cronogramas y Forecast."</p>
+
+                        <details>
+                            <summary>Ver Plan de Estudios</summary>
+                            <ul class="course-sessions">
+                                <li class="session-item">
+                                    <span class="session-title">1. Auditoría de Planificación</span>
+                                    <span class="session-desc">Revisión algorítmica de cronogramas y validación de
+                                        Presupuesto Meta.</span>
+                                </li>
+                                <li class="session-item">
+                                    <span class="session-title">2. Captura de Datos</span>
+                                    <span class="session-desc">Procesamiento automatizado de reportes diarios e
+                                        integración de avances.</span>
+                                </li>
+                                <li class="session-item">
+                                    <span class="session-title">3. EVM Avanzado</span>
+                                    <span class="session-desc">Cálculo de Curvas S, métricas SPI/CPI y diagnóstico de
+                                        causas raíz.</span>
+                                </li>
+                                <li class="session-item">
+                                    <span class="session-title">4. Proyecciones y Forense</span>
+                                    <span class="session-desc">Generación de escenarios (EAC) y análisis de impacto
+                                        (TIA) para reclamos.</span>
+                                </li>
+                                <li class="session-item">
+                                    <span class="session-title">5. Dashboards Interactivos</span>
+                                    <span class="session-desc">Tableros de control ejecutivos para toma de decisiones
+                                        gerenciales.</span>
+                                </li>
+                            </ul>
+                        </details>
                     </div>
                 </div>
 
-                <!-- Course 3 -->
+                <!-- CURSO 3 -->
                 <div class="course-card">
-                    <div class="course-price">S/200</div>
+                    <div class="course-img-container">
+                        <img src="Curso 3.png" alt="Gestión Integral" class="course-img">
+                        <div class="overlay"></div>
+                    </div>
                     <div class="course-content">
-                        <h3 class="course-title">Control de Costos y Presupuestos con IA</h3>
-                        <p class="course-description">Desde la estimación hasta el control y pronóstico financiero: aprende a integrar metrados automáticos (CSV), construir presupuestos y detectar desviaciones con herramientas IA asistenciales.</p>
-                        <ul class="course-features">
-                            <li>Principios de APU y estructura CBS</li>
-                            <li>Armado de presupuesto base con IA</li>
-                            <li>Curvas S y cash flow predictivo</li>
-                            <li>Indicadores: CPI, desviaciones y EAC</li>
-                        </ul>
-                        <div class="course-schedule">
-                            <strong>Horarios:</strong> Sábados 14:00-18:00 hrs
+                        <div class="course-meta">
+                            <span class="tag tag-price">$65 USD</span>
+                            <span class="tag">15 Horas</span>
                         </div>
+                        <h3 class="course-title">3. Gestión Integral de Proyectos con IA</h3>
+                        <p class="course-description">"Tu copiloto inteligente para la gestión diaria: WBS, Contratos,
+                            Calidad y Comunicaciones."</p>
+
+                        <details>
+                            <summary>Ver Plan de Estudios</summary>
+                            <ul class="course-sessions">
+                                <li class="session-item">
+                                    <span class="session-title">1. Alcance y WBS</span>
+                                    <span class="session-desc">Descomposición automática (WBS) y diccionarios
+                                        técnicos.</span>
+                                </li>
+                                <li class="session-item">
+                                    <span class="session-title">2. Adquisiciones y Mercado</span>
+                                    <span class="session-desc">Investigación de proveedores y homologación de
+                                        cotizaciones.</span>
+                                </li>
+                                <li class="session-item">
+                                    <span class="session-title">3. Administración Contractual</span>
+                                    <span class="session-desc">Mapeo de obligaciones, penalidades y redacción de
+                                        comunicaciones.</span>
+                                </li>
+                                <li class="session-item">
+                                    <span class="session-title">4. Calidad y Seguridad</span>
+                                    <span class="session-desc">Planes de calidad, checklists y asistentes de
+                                        normativa.</span>
+                                </li>
+                                <li class="session-item">
+                                    <span class="session-title">5. Comunicación</span>
+                                    <span class="session-desc">Automatización de minutas y presentaciones de avance de
+                                        obra.</span>
+                                </li>
+                            </ul>
+                        </details>
                     </div>
                 </div>
 
-                <!-- Course 4 -->
+                <!-- CURSO 4 -->
                 <div class="course-card">
-                    <div class="course-price">S/200</div>
+                    <div class="course-img-container">
+                        <img src="Curso 4.png" alt="Developer Engineer" class="course-img">
+                        <div class="overlay"></div>
+                    </div>
                     <div class="course-content">
-                        <h3 class="course-title">Gestión de Contratos e Inteligencia Contractual con IA</h3>
-                        <p class="course-description">Reduce riesgos contractuales: analiza contratos, extrae obligaciones críticas y genera calendarios de cumplimiento usando chatbots y agentes IA.</p>
-                        <ul class="course-features">
-                            <li>Análisis automático de contratos</li>
-                            <li>Identificación de hitos y penalidades</li>
-                            <li>Matriz de cumplimiento y checklist</li>
-                            <li>Gestión de adendas y órdenes de cambio</li>
-                        </ul>
-                        <div class="course-schedule">
-                            <strong>Horarios:</strong> Lunes y Miércoles 19:00-21:00 hrs
+                        <div class="course-meta">
+                            <span class="tag tag-price">$65 USD</span>
+                            <span class="tag">15 Horas</span>
                         </div>
+                        <h3 class="course-title">4. Ingeniería Computacional y Agentes Autónomos</h3>
+                        <p class="course-description">"Nivel Experto. Conviértete en Developer Engineer. Crea tus
+                            propias herramientas, orquesta agentes y controla tu PC."</p>
+
+                        <details>
+                            <summary>Ver Plan de Estudios</summary>
+                            <ul class="course-sessions">
+                                <li class="session-item">
+                                    <span class="session-title">1. Deep Research</span>
+                                    <span class="session-desc">Agentes de navegación profunda y generación de informes
+                                        técnicos.</span>
+                                </li>
+                                <li class="session-item">
+                                    <span class="session-title">2. Gestión Dinámica</span>
+                                    <span class="session-desc">Investigación de precios en tiempo real y programación de
+                                        scripts.</span>
+                                </li>
+                                <li class="session-item">
+                                    <span class="session-title">3. Storytelling Algorítmico</span>
+                                    <span class="session-desc">Presentaciones web interactivas superiores al PowerPoint
+                                        tradicional.</span>
+                                </li>
+                                <li class="session-item">
+                                    <span class="session-title">4. Full-Stack Engineering</span>
+                                    <span class="session-desc">Web Apps para ingeniería con chatbots técnicos
+                                        embebidos.</span>
+                                </li>
+                                <li class="session-item">
+                                    <span class="session-title">5. Integración Local (MCP)</span>
+                                    <span class="session-desc">Conexión de IA al disco duro para auditoría masiva de
+                                        proyectos.</span>
+                                </li>
+                            </ul>
+                        </details>
                     </div>
                 </div>
 
-                <!-- Course 5 -->
-                <div class="course-card">
-                    <div class="course-price">S/200</div>
-                    <div class="course-content">
-                        <h3 class="course-title">Gestión Proactiva de Riesgos con IA</h3>
-                        <p class="course-description">Anticipa y mitiga riesgos con técnicas prácticas: crea matrices, simula probabilidades y diseña planes de respuesta asistidos por herramientas IA.</p>
-                        <ul class="course-features">
-                            <li>Extracción automática de riesgos</li>
-                            <li>Matriz probabilidad-impacto con IA</li>
-                            <li>Simulación de escenarios complejos</li>
-                            <li>Chatbot de monitoreo y reportes</li>
-                        </ul>
-                        <div class="course-schedule">
-                            <strong>Horarios:</strong> Viernes 19:00-22:00 hrs
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Course 6 -->
-                <div class="course-card">
-                    <div class="course-price">S/200</div>
-                    <div class="course-content">
-                        <h3 class="course-title">Control de Calidad y Supervisión Técnica con IA</h3>
-                        <p class="course-description">Implementa control de calidad digital: protocolos, checklists y uso práctico de visión asistida para documentar y clasificar hallazgos en obra.</p>
-                        <ul class="course-features">
-                            <li>Plan de Calidad automatizable (ITP)</li>
-                            <li>Visión IA para inspección visual</li>
-                            <li>Índice inteligente del dossier</li>
-                            <li>Chatbot técnico para consultas QA/QC</li>
-                        </ul>
-                        <div class="course-schedule">
-                            <strong>Horarios:</strong> Domingos 9:00-12:00 hrs
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contacto">
+    <!-- CONTACT SECTION -->
+    <section class="footer" id="contacto">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">¿Hablamos?</h2>
-                <p class="section-subtitle">Contáctanos para más información o para inscribirte</p>
-            </div>
-            
-            <div class="contact-options">
-                <a href="https://wa.me/51993147501?text=Hola%2C%20me%20interesa%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20cursos%20de%20Project%20Control%20AI" 
-                   class="contact-button whatsapp" target="_blank">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.106"/>
-                    </svg>
-                    Contactar por WhatsApp
+            <h2 style="margin-bottom: 2rem;">¿Listo para empezar?</h2>
+            <div style="display: flex; justify-content: center; gap: 2rem;">
+                <a href="https://wa.me/51993147501" class="whatsapp-btn" style="padding: 1rem 2rem; font-size: 1.1rem;">
+                    Conversar por WhatsApp
                 </a>
             </div>
+            <p style="margin-top: 3rem; color: var(--text-muted); font-size: 0.9rem;">© 2025 Project Control AI. Todos
+                los derechos reservados.</p>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <p class="footer-text">© 2024 Project Control AI</p>
-                <div class="footer-social">
-                    <a href="https://www.tiktok.com/@project.control.ai" target="_blank" class="social-link" aria-label="TikTok">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
-                        </svg>
-                    </a>
-                    <a href="#" target="_blank" class="social-link" aria-label="Facebook">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                        </svg>
-                    </a>
-                    <a href="#" target="_blank" class="social-link" aria-label="Instagram">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.328-1.297L3.615 17.2c.49 1.297 1.297 2.448 2.448 2.448 1.297 0 2.448-.49 3.328-1.297l1.506-1.506c-.49-.49-1.297-1.297-2.448-1.297z"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
 
-    <script src="script.js"></script>
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
+
 </body>
+
 </html>

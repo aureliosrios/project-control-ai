@@ -223,7 +223,7 @@ p {
 /* Grid de cursos */
 .courses-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for 4 courses looks balanced */
     gap: var(--spacing-md);
 }
 
@@ -236,6 +236,8 @@ p {
     transition: all var(--transition);
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .course-card:hover {
@@ -244,20 +246,14 @@ p {
 }
 
 .course-price {
-    position: absolute;
-    top: var(--spacing-sm);
-    right: var(--spacing-sm);
-    background-color: var(--primary-100);
-    color: var(--primary-500);
-    padding: 4px 8px;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 500;
-}
+    /* Removed absolute positioning for a cleaner flow inside meta */
+    display: none; /* We will use tags instead */
+} 
 
 .course-title {
     margin-bottom: var(--spacing-sm);
     color: var(--neutral-900);
+    min-height: 3em; /* Align titles */
 }
 
 .course-description {
@@ -265,32 +261,86 @@ p {
     color: var(--neutral-500);
 }
 
-.course-features {
-    list-style: none;
-    margin-bottom: var(--spacing-sm);
+.course-quote {
+    font-style: italic;
+    color: var(--primary-700);
+    margin-bottom: var(--spacing-md);
+    font-size: 0.95em;
+    border-left: 3px solid var(--primary-500);
+    padding-left: 12px;
 }
 
-.course-features li {
+.course-meta {
+    display: flex;
+    gap: 8px;
+    margin-bottom: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.tag {
+    background-color: var(--neutral-50);
+    border: 1px solid rgba(108, 117, 125, 0.2); 
     color: var(--neutral-500);
-    font-size: 14px;
-    margin-bottom: 4px;
-    padding-left: 16px;
-    position: relative;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
 }
 
-.course-features li::before {
-    content: "✓";
+.tag-primary {
+    background-color: var(--primary-100);
+    border-color: transparent;
+    color: var(--primary-700);
+    font-weight: 600;
+}
+
+.course-sessions-title {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    color: var(--neutral-500);
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--neutral-50);
+    padding-bottom: 8px;
+}
+
+.course-sessions {
+    list-style: none;
+}
+
+.session-item {
+    margin-bottom: 16px;
+    position: relative;
+    padding-left: 16px; 
+}
+
+/* Custom bullet for sessions */
+.session-item::before {
+    content: ""; /* Using empty content for line */
     position: absolute;
     left: 0;
-    color: var(--primary-500);
-    font-weight: bold;
+    top: 6px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--primary-500);
 }
 
-.course-schedule {
+.session-title {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--neutral-900);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.session-desc {
     font-size: 14px;
     color: var(--neutral-500);
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-    padding-top: var(--spacing-sm);
+    margin-top: 2px;
+    line-height: 1.5;
 }
 
 /* Sección de contacto */
@@ -365,7 +415,9 @@ p {
     }
     
     .courses-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr; /* Switch to 1 column earlier if content is dense */
+        max-width: 700px;
+        margin: 0 auto;
     }
     
     h1 {

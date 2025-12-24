@@ -148,6 +148,30 @@
             transform: translateY(-2px);
         }
 
+        /* --- BOTÓN INSCRIPCIÓN (NAV) --- */
+        .nav-inscripcion-btn {
+            background: linear-gradient(135deg, var(--accent-orange), #ea580c);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-inscripcion-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(249, 115, 22, 0.5);
+            filter: brightness(1.1);
+            color: white;
+        }
+
         /* --- HERO --- */
         .hero {
             padding: 160px 0 80px;
@@ -617,6 +641,7 @@
                 <a href="#cursos" class="nav-link">Capacitaciones</a>
                 <a href="#contacto" class="nav-link">Contacto</a>
                 <a href="https://wa.me/51993147501" class="whatsapp-btn" target="_blank">Agendar Cita</a>
+                <a href="inscripcion.html" class="nav-inscripcion-btn">Matricularse</a>
             </div>
         </div>
     </nav>
@@ -627,9 +652,15 @@
             <h1 class="hero-title">Consultoría Tecnológica & <br> Capacitaciones para Construcción</h1>
             <p class="hero-subtitle">Optimizamos tus proyectos con Agentes Autónomos, Auditoría Forense y Control
                 Predictivo (EVM).</p>
-            <button class="hero-cta" onclick="document.getElementById('consultoria').scrollIntoView();">
-                Nuestras Soluciones
-            </button>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <button class="hero-cta" onclick="document.getElementById('consultoria').scrollIntoView();">
+                    Nuestras Soluciones
+                </button>
+                <a href="inscripcion.html" class="hero-cta"
+                    style="background: transparent; border: 2px solid var(--accent-cyan); color: var(--accent-cyan); display: flex; align-items: center; justify-content: center;">
+                    Ficha de Inscripción
+                </a>
+            </div>
         </div>
     </section>
 
@@ -741,10 +772,13 @@
                                 <li class="session-item">
                                     <span class="session-title">5. Automatización de Ofertas y Cronogramas</span>
                                     <span class="session-desc">Generación de propuestas técnicas con GenAI y creación de
-                                        <strong>Cronogramas Base con IA y reporte interactivo en HTML</strong>.</span>
+                                        <strong>Cronogramas Base con IA</strong>.</span>
                                 </li>
                             </ul>
                         </details>
+                        <a href="inscripcion.html" class="hero-cta"
+                            style="display: block; text-align: center; margin-top: 20px; font-size: 0.9rem; padding: 12px;">INSCRIBIRME
+                            AHORA</a>
                     </div>
                 </div>
 
@@ -771,31 +805,29 @@
                             <ul class="course-sessions">
                                 <li class="session-item">
                                     <span class="session-title">1. Arquitectura de Datos en Obra</span>
-                                    <span class="session-desc">Creación de bases de datos robustas y escalables mediante
-                                        VBA.</span>
+                                    <span class="session-desc">Creación de bases de datos robustas mediante VBA.</span>
                                 </li>
                                 <li class="session-item">
                                     <span class="session-title">2. Auditoría de Cronogramas</span>
-                                    <span class="session-desc">Revisión algorítmica de la ruta crítica bajo estándares
-                                        internacionales.</span>
+                                    <span class="session-desc">Revisión algorítmica de la ruta crítica.</span>
                                 </li>
                                 <li class="session-item">
                                     <span class="session-title">3. Python en Excel (=PY)</span>
-                                    <span class="session-desc">Análisis estadístico nativo de productividad, histogramas
-                                        y tendencias de campo.</span>
+                                    <span class="session-desc">Análisis estadístico nativo de productividad.</span>
                                 </li>
                                 <li class="session-item">
                                     <span class="session-title">4. EVM & Proyecciones</span>
-                                    <span class="session-desc">Control de Valor Ganado con análisis de causas raíz
-                                        automatizado por agentes RAG.</span>
+                                    <span class="session-desc">Control de Valor Ganado automatizado.</span>
                                 </li>
                                 <li class="session-item">
                                     <span class="session-title">5. Dashboards Ejecutivos</span>
-                                    <span class="session-desc">Tableros dinámicos en Excel y Web con KPIs predictivos y
-                                        escenarios EAC/TIA.</span>
+                                    <span class="session-desc">Tableros dinámicos con KPIs predictivos.</span>
                                 </li>
                             </ul>
                         </details>
+                        <a href="inscripcion.html" class="hero-cta"
+                            style="display: block; text-align: center; margin-top: 20px; font-size: 0.9rem; padding: 12px;">INSCRIBIRME
+                            AHORA</a>
                     </div>
                 </div>
 
@@ -811,10 +843,8 @@
                             <span class="tag">15 Horas</span>
                         </div>
                         <h3 class="course-title">3. Gestión de Proyectos con IA: El Despertar Digital</h3>
-                        <p class="course-description">El curso esencial para ingenieros y profesionales que necesitan
-                            dar el salto digital con confianza. No tengas miedo a la tecnología; aquí te llevaremos de
-                            la mano para que te integres de manera sencilla a la IA en tu gestión diaria sin necesidad
-                            de programar.</p>
+                        <p class="course-description">El curso esencial para ingenieros que necesitan dar el salto
+                            digital con confianza e integrar IA en su gestión diaria.</p>
                         <div class="course-schedule">
                             <div class="schedule-line"><span>📅 Horario:</span> Domingos (10am a 1pm)</div>
                             <div class="schedule-line"><span>🚀 Inicia:</span> Domingo 14 de Enero 2026</div>
@@ -825,30 +855,31 @@
                                 <li class="session-item">
                                     <span class="session-title">1. Adopción Digital Gradual</span>
                                     <span class="session-desc">Mindset Digital: De la operación manual a la asistencia
-                                        inteligente paso a paso.</span>
+                                        inteligente.</span>
                                 </li>
                                 <li class="session-item">
                                     <span class="session-title">2. Alcance y WBS con IA</span>
-                                    <span class="session-desc">Estructuración de diccionarios de obra y desgloses
-                                        asistidos por lenguaje natural.</span>
+                                    <span class="session-desc">Estructuración de diccionarios de obra asistidos por
+                                        IA.</span>
                                 </li>
                                 <li class="session-item">
                                     <span class="session-title">3. Copiloto de Gestión Diaria</span>
-                                    <span class="session-desc">Automatización de minutas, reportabilidad básica y
-                                        correos contractuales críticos.</span>
+                                    <span class="session-desc">Automatización de minutas y reportabilidad básica.</span>
                                 </li>
                                 <li class="session-item">
                                     <span class="session-title">4. Contratos, Calidad y HSE</span>
-                                    <span class="session-desc">Mapeo de obligaciones y checklists de seguridad
-                                        supervisados por inteligencia artificial.</span>
+                                    <span class="session-desc">Mapeo de obligaciones y checklists de seguridad.</span>
                                 </li>
                                 <li class="session-item">
                                     <span class="session-title">5. Comunicaciones Críticas</span>
-                                    <span class="session-desc">Gestión eficiente de stakeholders y flujo de información
-                                        mediante agentes de asistencia.</span>
+                                    <span class="session-desc">Gestión eficiente de stakeholders mediante
+                                        agentes.</span>
                                 </li>
                             </ul>
                         </details>
+                        <a href="inscripcion.html" class="hero-cta"
+                            style="display: block; text-align: center; margin-top: 20px; font-size: 0.9rem; padding: 12px;">INSCRIBIRME
+                            AHORA</a>
                     </div>
                 </div>
 
@@ -865,8 +896,8 @@
                         </div>
                         <div class="prerequisite-tag">🔑 Requiere: Curso 3 (Gestión con IA)</div>
                         <h3 class="course-title">4. Developer Engineer: Programación Avanzada</h3>
-                        <p class="course-description">Nivel Experto: Evoluciona de usuario de herramientas a arquitecto
-                            de software especializado para la ingeniería y construcción.</p>
+                        <p class="course-description">Nivel Experto: Evoluciona de usuario a arquitecto de software
+                            especializado para ingeniería y construcción.</p>
                         <div class="course-schedule">
                             <div class="schedule-line"><span>📅 Horario:</span> Próximamente</div>
                         </div>
@@ -875,31 +906,31 @@
                             <ul class="course-sessions">
                                 <li class="session-item">
                                     <span class="session-title">1. VBA + Python Masterclass</span>
-                                    <span class="session-desc">Desarrollo de macros avanzadas y herramientas propias
-                                        para control total de datos locales.</span>
+                                    <span class="session-desc">Desarrollo de macros avanzadas para control de
+                                        datos.</span>
                                 </li>
                                 <li class="session-item">
                                     <span class="session-title">2. Full-Stack para Ingenieros</span>
-                                    <span class="session-desc">Creación de Web Apps técnicas y chatbots entrenados con
-                                        normativas y leyes locales.</span>
+                                    <span class="session-desc">Creación de Web Apps técnicas y chatbots RAG.</span>
                                 </li>
                                 <li class="session-item">
                                     <span class="session-title">3. Orquestación de Agentes</span>
-                                    <span class="session-desc">Configuración de agentes (Manus, Minimax) para ejecución
-                                        de tareas sin supervisión.</span>
+                                    <span class="session-desc">Configuración de agentes para tareas autónomas.</span>
                                 </li>
                                 <li class="session-item">
                                     <span class="session-title">4. Protocolos MCP</span>
-                                    <span class="session-desc">Model Context Protocol: Conexión segura de la IA a datos
-                                        locales del servidor de obra.</span>
+                                    <span class="session-desc">Conexión segura de IA a datos de servidores
+                                        locales.</span>
                                 </li>
                                 <li class="session-item">
                                     <span class="session-title">5. Ingeniería Aumentada</span>
-                                    <span class="session-desc">Deep Research técnico y Storytelling interactivo para
-                                        presentaciones a nivel directorio.</span>
+                                    <span class="session-desc">Deep Research técnico y Storytelling interactivo.</span>
                                 </li>
                             </ul>
                         </details>
+                        <a href="inscripcion.html" class="hero-cta"
+                            style="display: block; text-align: center; margin-top: 20px; font-size: 0.9rem; padding: 12px;">INSCRIBIRME
+                            AHORA</a>
                     </div>
                 </div>
             </div>
@@ -919,6 +950,9 @@
                         <p>Número: <strong>993147501</strong></p>
                         <p style="color: var(--text-muted); margin-top: 3px;">Titular: <strong>Aurelio Solorzano
                                 Rios</strong></p>
+                        <a href="inscripcion.html" class="hero-cta"
+                            style="display: block; text-align: center; margin-top: 15px; font-size: 0.8rem; padding: 10px;">INICIAR
+                            REGISTRO</a>
                     </div>
                 </div>
                 <div class="payment-card">
@@ -929,6 +963,9 @@
                         <p>CCI: <strong>00219113317712204359</strong></p>
                         <p style="color: var(--text-muted); margin-top: 3px;">Titular: <strong>Aurelio Solorzano
                                 Rios</strong></p>
+                        <a href="inscripcion.html" class="hero-cta"
+                            style="display: block; text-align: center; margin-top: 15px; font-size: 0.8rem; padding: 10px;">INICIAR
+                            REGISTRO</a>
                     </div>
                 </div>
                 <div class="payment-card">
@@ -939,6 +976,9 @@
                         <p>CCI: <strong>00219111321109614056</strong></p>
                         <p style="color: var(--text-muted); margin-top: 3px;">Titular: <strong>Aurelio Solorzano
                                 Rios</strong></p>
+                        <a href="inscripcion.html" class="hero-cta"
+                            style="display: block; text-align: center; margin-top: 15px; font-size: 0.8rem; padding: 10px;">INICIAR
+                            REGISTRO</a>
                     </div>
                 </div>
             </div>

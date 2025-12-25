@@ -336,6 +336,12 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="email">Correo Electrónico (Para recibir accesos)</label>
+                    <input type="email" id="email" name="email" required placeholder="ejemplo@correo.com"
+                        autocomplete="email">
+                </div>
+
+                <div class="form-group">
                     <label for="curso">Curso a Inscribirse</label>
                     <select id="curso" name="curso" required>
                         <option value="" disabled selected>Seleccione un curso...</option>
@@ -350,10 +356,10 @@
                     <label for="metodo">Medio de Pago Utilizado</label>
                     <select id="metodo" name="metodo_pago" required>
                         <option value="" disabled selected>Seleccione el medio...</option>
-                        <option value="Yape">Yape</option>
-                        <option value="BCP Soles">BCP Soles</option>
-                        <option value="BCP Dolares">BCP Dólares</option>
-                        <option value="Otro">Otro (Transferencia/Interbancario)</option>
+                        <option value="Yape / Plin">Yape / Plin</option>
+                        <option value="Transferencia BCP">Transferencia BCP</option>
+                        <option value="Transferencia BBVA">Transferencia BBVA</option>
+                        <option value="Transferencia Interbank">Transferencia Interbank</option>
                     </select>
                 </div>
 
@@ -376,8 +382,8 @@
         <div id="successMsg" class="success-msg">
             <div class="success-icon">✓</div>
             <h3>¡Registro Exitoso!</h3>
-            <p>Tu información ha sido recibida correctamente. Para activar tu acceso, por favor envía una foto de tu
-                voucher de pago por WhatsApp.</p>
+            <p>Tus datos han sido guardados y se te ha enviado un correo de bienvenida.<br>
+                Para validar tu vacante, envía tu voucher por WhatsApp.</p>
 
             <a id="waLink" href="#" class="wa-button" target="_blank">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -425,7 +431,7 @@
                     const curso = form.curso.value;
                     const metodo = form.metodo_pago.value;
                     const phone = "51993147501";
-                    const waMsg = `Hola, mi nombre es ${nombre}. Acabo de inscribirme al curso de: *${curso}*. Pagué vía: *${metodo}*. Adjunto mi voucher de pago para la verificación del administrador.`;
+                    const waMsg = `Hola, soy ${nombre}. Me acabo de inscribir al curso ${curso}. Pagué vía ${metodo}. Adjunto mi voucher para validación.`;
                     document.getElementById('waLink').href = `https://wa.me/${phone}?text=${encodeURIComponent(waMsg)}`;
                 })
                 .catch(error => {
@@ -439,17 +445,18 @@
             // Nota: Con mode 'no-cors', no podemos leer la respuesta, pero si no hay error en fetch, 
             // usualmente significa que los datos salieron. Forzamos el éxito después de 1.5s si no hay error.
             setTimeout(() => {
-                if (btn.disabled) {
+                if (btn.disabled && formSection.style.display !== 'none') {
                     formSection.style.display = 'none';
                     successBox.style.display = 'block';
 
                     const nombre = form.nombre.value;
                     const curso = form.curso.value;
+                    const metodo = form.metodo_pago.value;
                     const phone = "51993147501";
-                    const waMsg = `Hola, mi nombre es ${nombre}. Acabo de inscribirme al curso de: *${curso}*. Adjunto mi voucher de pago para la verificación del administrador.`;
+                    const waMsg = `Hola, soy ${nombre}. Me acabo de inscribir al curso ${curso}. Pagué vía ${metodo}. Adjunto mi voucher para validación.`;
                     document.getElementById('waLink').href = `https://wa.me/${phone}?text=${encodeURIComponent(waMsg)}`;
                 }
-            }, 1500);
+            }, 2000);
         });
     </script>
 

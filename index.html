@@ -20,16 +20,18 @@
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
 
     <style>
-        /* --- VARIABLES (INGENIERÍA DARK) --- */
+        /* --- VARIABLES (INGENIERÍA DARK PREMIUM) --- */
         :root {
-            --bg-dark: #0f172a;
-            --bg-card: #1e293b;
-            --text-main: #f1f5f9;
+            --bg-dark: #020617;
+            --bg-card: rgba(30, 41, 59, 0.7);
+            --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --accent-cyan: #38bdf8;
-            --accent-orange: #f97316;
-            --border-color: rgba(255, 255, 255, 0.1);
-            --glass-bg: rgba(30, 41, 59, 0.6);
+            --accent-cyan: #22d3ee;
+            --accent-orange: #fb923c;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --glass-bg: rgba(15, 23, 42, 0.8);
+            --primary-gradient: linear-gradient(135deg, #22d3ee, #0ea5e9);
+            --secondary-gradient: linear-gradient(135deg, #fb923c, #f97316);
         }
 
         /* --- BASIC RESET --- */
@@ -45,6 +47,7 @@
             color: var(--text-main);
             line-height: 1.6;
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         h1,
@@ -52,12 +55,13 @@
         h3,
         .logo-text {
             font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: -0.02em;
         }
 
         a {
             text-decoration: none;
             color: inherit;
-            transition: 0.3s;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         ul {
@@ -66,14 +70,14 @@
 
         /* --- NAVBAR --- */
         .navbar {
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            padding: 0.8rem 0;
+            padding: 0.6rem 0;
         }
 
         .container {
@@ -89,7 +93,7 @@
         }
 
         .logo-img {
-            height: 70px;
+            height: 60px;
             width: auto;
             object-fit: contain;
         }
@@ -101,21 +105,23 @@
         }
 
         .logo-tagline {
-            font-size: 0.95rem;
-            /* Más grande */
-            color: #fbbf24;
-            /* Color ambar/dorado para contraste premium con azul/negro */
-            font-weight: 600;
-            margin-top: 2px;
-            letter-spacing: 0.3px;
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            font-weight: 500;
+            margin-top: -5px;
+            letter-spacing: 0.5px;
             font-family: 'Space Grotesk', sans-serif;
-            text-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
         }
 
         .nav-menu {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
             align-items: center;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            font-size: 0.95rem;
         }
 
         .nav-link:hover {
@@ -134,32 +140,34 @@
         .whatsapp-btn {
             background: #25D366;
             color: white;
-            padding: 0.5rem 1.2rem;
-            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
+            transition: 0.3s;
         }
 
         .whatsapp-btn:hover {
             background: #20bd5a;
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
         }
 
         /* --- BOTÓN INSCRIPCIÓN (NAV) --- */
         .nav-inscripcion-btn {
-            background: linear-gradient(135deg, var(--accent-orange), #ea580c);
+            background: var(--secondary-gradient);
             color: white;
-            padding: 0.5rem 1.2rem;
-            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.2);
             border: none;
             cursor: pointer;
             transition: 0.3s;
@@ -167,70 +175,114 @@
 
         .nav-inscripcion-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(249, 115, 22, 0.5);
+            box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4);
             filter: brightness(1.1);
-            color: white;
         }
 
         /* --- HERO --- */
         .hero {
-            padding: 160px 0 80px;
+            padding: 180px 0 100px;
             text-align: center;
-            background: radial-gradient(circle at 50% 30%, rgba(56, 189, 248, 0.1) 0%, transparent 60%);
+            background: linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.85)), url('hero_bg.png');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to top, var(--bg-dark), transparent);
         }
 
         .hero-title {
             font-size: 3.5rem;
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            background: linear-gradient(to right, #fff, #94a3b8);
+            background: linear-gradient(to bottom, #ffffff 30%, #94a3b8);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            font-weight: 700;
         }
 
         .hero-subtitle {
             font-size: 1.2rem;
             color: var(--text-muted);
-            max-width: 700px;
-            margin: 0 auto 2.5rem;
+            max-width: 750px;
+            margin: 0 auto 3rem;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .hero-cta {
-            background: var(--accent-cyan);
-            color: #0f172a;
+            background: var(--primary-gradient);
+            color: #020617;
             padding: 1rem 2.5rem;
-            border-radius: 50px;
+            border-radius: 12px;
             font-weight: 700;
             font-size: 1.1rem;
             border: none;
             cursor: pointer;
             transition: 0.3s;
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+            box-shadow: 0 10px 25px rgba(34, 211, 238, 0.2);
         }
 
         .hero-cta:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(56, 189, 248, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(34, 211, 238, 0.4);
+        }
+
+        .hero-cta-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+
+        .hero-cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-cyan);
         }
 
         /* --- SECTION HEADERS --- */
         .section-padding {
-            padding: 80px 0;
+            padding: 100px 0;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 70px;
         }
 
         .section-title {
-            font-size: 2.5rem;
-            color: var(--accent-cyan);
-            margin-bottom: 0.5rem;
+            font-size: 2.8rem;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            letter-spacing: -0.03em;
         }
 
-        /* --- CONSULTANCY SERVICES (NEW) --- */
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* --- CONSULTANCY SERVICES --- */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -238,61 +290,83 @@
         }
 
         .service-card {
-            background: var(--glass-bg);
+            background: var(--bg-card);
             backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 2rem;
-            transition: all 0.3s ease;
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: 0.3s;
         }
 
         .service-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-cyan);
-            background: rgba(30, 41, 59, 0.8);
+            transform: translateY(-8px);
+            border-color: rgba(34, 211, 238, 0.4);
+            background: rgba(30, 41, 59, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
         }
 
         .service-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
             display: block;
         }
 
         .service-title {
-            font-size: 1.25rem;
+            font-size: 1.4rem;
             color: white;
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
         }
 
         .service-desc {
             color: var(--text-muted);
             font-size: 0.95rem;
+            line-height: 1.7;
         }
 
         /* --- COURSES --- */
         .courses-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 3rem;
         }
 
         .course-card {
-            background: var(--bg-card);
+            background: #0f172a;
             border: 1px solid var(--border-color);
-            border-radius: 16px;
+            border-radius: 24px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s, border-color 0.3s;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .course-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
             border-color: var(--accent-cyan);
+            box-shadow: 0 20px 50px rgba(34, 211, 238, 0.1);
         }
 
         .course-img-container {
-            height: 220px;
+            height: 240px;
             overflow: hidden;
             position: relative;
         }
@@ -301,11 +375,11 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s ease;
         }
 
         .course-card:hover .course-img {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
         .overlay {
@@ -314,11 +388,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent);
+            background: linear-gradient(to top, #0f172a, transparent);
         }
 
         .course-content {
-            padding: 1.5rem;
+            padding: 2rem;
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -326,54 +400,56 @@
 
         .course-meta {
             display: flex;
-            gap: 10px;
-            margin-bottom: 1rem;
+            gap: 12px;
+            margin-bottom: 1.5rem;
         }
 
         .tag {
             background: rgba(255, 255, 255, 0.05);
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 0.8rem;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
             color: var(--text-muted);
+            font-weight: 500;
         }
 
         .tag-price {
             color: var(--accent-orange);
-            font-weight: bold;
-            background: rgba(249, 115, 22, 0.1);
+            font-weight: 700;
+            background: rgba(251, 146, 60, 0.1);
+            border: 1px solid rgba(251, 146, 60, 0.2);
         }
 
         .course-title {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            line-height: 1.3;
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            line-height: 1.2;
             color: white;
+            font-weight: 700;
         }
 
         .course-description {
-            font-size: 0.95rem;
+            font-size: 1rem;
             color: var(--text-muted);
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.5rem;
         }
 
         .course-schedule {
-            margin-bottom: 1.2rem;
-            font-size: 0.85rem;
-            color: #fbbf24;
-            background: rgba(251, 191, 36, 0.08);
-            padding: 10px 14px;
-            border-radius: 8px;
-            border-left: 4px solid #fbbf24;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--accent-orange);
+            background: rgba(251, 146, 60, 0.05);
+            padding: 12px 18px;
+            border-radius: 12px;
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 6px;
         }
 
         .schedule-line {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
 
         .schedule-line span:first-child {
@@ -381,13 +457,13 @@
         }
 
         .prerequisite-tag {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: var(--accent-cyan);
             background: rgba(34, 211, 238, 0.1);
-            padding: 4px 10px;
-            border-radius: 4px;
+            padding: 4px 12px;
+            border-radius: 6px;
             display: inline-block;
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
             font-weight: 600;
             border: 1px solid rgba(34, 211, 238, 0.2);
         }
@@ -395,7 +471,7 @@
         details {
             margin-top: auto;
             border-top: 1px solid var(--border-color);
-            padding-top: 1rem;
+            padding-top: 1.5rem;
         }
 
         summary {
@@ -406,49 +482,41 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.5rem 0;
-        }
-
-        summary:hover {
-            opacity: 0.8;
-        }
-
-        summary::-webkit-details-marker {
-            display: none;
         }
 
         summary::after {
             content: '+';
             font-size: 1.2rem;
-            font-weight: bold;
+            transition: 0.3s;
         }
 
         details[open] summary::after {
             content: '-';
             color: var(--accent-orange);
+            transform: rotate(180deg);
         }
 
         .course-sessions {
-            margin-top: 1rem;
+            margin-top: 1.5rem;
             padding-left: 0;
-            animation: fadeIn 0.3s ease-in-out;
+            animation: fadeIn 0.4s ease-out;
         }
 
         .session-item {
-            margin-bottom: 1rem;
-            padding-left: 1rem;
+            margin-bottom: 1.2rem;
+            padding-left: 1.2rem;
             border-left: 2px solid var(--accent-orange);
         }
 
         .session-title {
             display: block;
             font-weight: 600;
-            color: #f8fafc;
-            margin-bottom: 0.2rem;
+            color: white;
+            margin-bottom: 0.3rem;
         }
 
         .session-desc {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: #94a3b8;
         }
 
@@ -632,15 +700,21 @@
         <div class="container nav-brand">
             <a href="#" class="logo-container">
                 <img src="Logotipo.png" alt="Project Control AI" class="logo-img">
-                <span class="logo-tagline">Potenciando la ingeniería con inteligencia artificial</span>
+                <span class="logo-tagline">POTENCIANDO LA INGENIERÍA CON IA</span>
             </a>
 
             <button class="nav-toggle" id="navToggle">☰</button>
             <div class="nav-menu" id="navMenu">
-                <a href="#consultoria" class="nav-link">Consultoría</a>
                 <a href="#cursos" class="nav-link">Capacitaciones</a>
-                <a href="#contacto" class="nav-link">Contacto</a>
-                <a href="https://wa.me/51993147501" class="whatsapp-btn" target="_blank">Agendar Cita</a>
+                <a href="#casos" class="nav-link">TikTok</a>
+                <a href="#consultoria" class="nav-link">Consultoría</a>
+                <a href="https://wa.me/51993147501" class="whatsapp-btn" target="_blank">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12.031 6.172c-2.32 0-4.591.398-6.758 1.189-.306.112-.618.33-.867.556l-1.921 1.76a.915.915 0 0 0-.273.847c.143.841.214 1.285.421 2.113a.914.914 0 0 0 .845.694c.124.005.25-.003.371-.03l1.607-.354c.446-.099.637-.6.463-.997a10.26 10.26 0 0 1-.087-2.327l.1.002zM18.103 5.672c-.012-.001-.024-.001-.036 0-.012.001-.024.001-.036 0zm-.696.84c-1.506-1.503-3.606-2.432-5.922-2.432-4.632 0-8.386 3.754-8.386 8.386 0 1.576.438 3.05 1.197 4.312L3.333 21l4.47-1.176a8.347 8.347 0 0 0 4.228 1.157c4.632 0 8.386-3.754 8.386-8.386 0-2.316-.929-4.416-2.432-5.922zM12.031 18.272c-1.103 0-2.149-.258-3.074-.717l-.22-.11-2.28.6 1.171-2.2a8.318 8.318 0 0 1-.689-3.235c0-3.141 2.556-5.698 5.698-5.698 3.141 0 5.698 2.556 5.698 5.698 0 3.141-2.556 5.698-5.698 5.698z" />
+                    </svg>
+                    Chat WhatsApp
+                </a>
                 <a href="inscripcion.html" class="nav-inscripcion-btn">Matricularse</a>
             </div>
         </div>
@@ -649,75 +723,30 @@
     <!-- HERO SECTION -->
     <section class="hero" id="inicio">
         <div class="container">
-            <h1 class="hero-title">Consultoría Tecnológica & <br> Capacitaciones para Construcción</h1>
-            <p class="hero-subtitle">Optimizamos tus proyectos con Agentes Autónomos, Auditoría Forense y Control
-                Predictivo (EVM).</p>
-            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                <button class="hero-cta" onclick="document.getElementById('consultoria').scrollIntoView();">
-                    Nuestras Soluciones
+            <h1 class="hero-title">Domina la Inteligencia Artificial <br> en la Construcción</h1>
+            <p class="hero-subtitle">Transforma tu carrera con las capacitaciones más avanzadas en Agentes Autónomos,
+                Auditoría Forense y Control Predictivo.</p>
+            <div class="hero-cta-group">
+                <button class="hero-cta" onclick="document.getElementById('cursos').scrollIntoView();">
+                    Ver Capacitaciones
                 </button>
-                <a href="inscripcion.html" class="hero-cta"
-                    style="background: transparent; border: 2px solid var(--accent-cyan); color: var(--accent-cyan); display: flex; align-items: center; justify-content: center;">
+                <a href="inscripcion.html" class="hero-cta-secondary">
                     Ficha de Inscripción
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- CONSULTORÍA SECTION (NEW) -->
-    <section class="section-padding" id="consultoria">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Servicios de Consultoría</h2>
-                <p>Implementación de IA y soluciones estratégicas para tus obras.</p>
-            </div>
+    <!-- TIKTOK BANNER -->
+    <div
+        style="background: rgba(255,255,255,0.03); padding: 1rem 0; text-align: center; border-bottom: 1px solid var(--border-color);">
+        <p style="font-size: 0.9rem; color: var(--text-muted);">
+            🚀 ¿Vienes de <strong>TikTok</strong>? Estás en el lugar correcto. Mira nuestras <a href="#cursos"
+                style="color: var(--accent-cyan); font-weight: 600;">capacitaciones</a> abajo.
+        </p>
+    </div>
 
-            <div class="services-grid">
-                <!-- Servicio 1 -->
-                <div class="service-card">
-                    <span class="service-icon">📝</span>
-                    <h3 class="service-title">Licitaciones Estratégicas</h3>
-                    <p class="service-desc">Auditoría forense de bases y generación de propuestas ganadoras (Técnicas y
-                        Económicas) utilizando Agentes de Investigación.</p>
-                </div>
-                <!-- Servicio 2 -->
-                <div class="service-card">
-                    <span class="service-icon">📊</span>
-                    <h3 class="service-title">PMO Digital & EVM</h3>
-                    <p class="service-desc">Implementación de Oficina de Control de Proyectos. Procesamiento de datos
-                        masivos y dashboards predictivos con Earned Value Management.</p>
-                </div>
-                <!-- Servicio 3 -->
-                <div class="service-card">
-                    <span class="service-icon">🛒</span>
-                    <h3 class="service-title">Smart Procurement</h3>
-                    <p class="service-desc">Abastecimiento inteligente: Agentes de navegación autónomos para
-                        homologación de precios y búsqueda de proveedores en tiempo real.</p>
-                </div>
-                <!-- Servicio 4 -->
-                <div class="service-card">
-                    <span class="service-icon">⚖️</span>
-                    <h3 class="service-title">Gestión Contractual Legal</h3>
-                    <p class="service-desc">Defensa de claims y administración contractual mediante Chatbots RAG
-                        entrenados específicamente con tu contrato y la ley.</p>
-                </div>
-                <!-- Servicio 5 -->
-                <div class="service-card">
-                    <span class="service-icon">🔒</span>
-                    <h3 class="service-title">Auditoría Técnica Privada (MCP)</h3>
-                    <p class="service-desc">Máxima seguridad: Auditoría de proyectos sin subir datos a la nube. Conexión
-                        directa de IA a tus servidores locales.</p>
-                </div>
-                <!-- Servicio 6 -->
-                <div class="service-card">
-                    <span class="service-icon">💻</span>
-                    <h3 class="service-title">Desarrollo In-House</h3>
-                    <p class="service-desc">Creación de aplicativos web personalizados y herramientas de cálculo a
-                        medida para las necesidades específicas de tu obra.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- COURSES SECTION -->
     <section class="section-padding" id="cursos">
@@ -946,82 +975,116 @@
                 <div class="payment-card">
                     <img src="Yape.png" alt="Yape" class="payment-logo">
                     <div class="payment-details">
-                        <h4>Pago por Yape</h4>
-                        <p>Número: <strong>993147501</strong></p>
-                        <p style="color: var(--text-muted); margin-top: 3px;">Titular: <strong>Aurelio Solorzano
-                                Rios</strong></p>
-                        <a href="inscripcion.html" class="hero-cta"
-                            style="display: block; text-align: center; margin-top: 15px; font-size: 0.8rem; padding: 10px;">INICIAR
-                            REGISTRO</a>
+                        <h4>Yape</h4>
+                        <p><strong>993 147 501</strong></p>
+                        <p style="font-size: 0.8rem; opacity: 0.7;">Titular: Aurelio Solorzano</p>
+                        <a href="inscripcion.html" class="nav-inscripcion-btn"
+                            style="margin-top: 10px; width: 100%; font-size: 0.75rem;">Inscribirme con Yape</a>
                     </div>
                 </div>
                 <div class="payment-card">
                     <img src="BCP.png" alt="BCP" class="payment-logo">
                     <div class="payment-details">
                         <h4>BCP (Soles)</h4>
-                        <p>Cuenta: <strong>19133177122043</strong></p>
-                        <p>CCI: <strong>00219113317712204359</strong></p>
-                        <p style="color: var(--text-muted); margin-top: 3px;">Titular: <strong>Aurelio Solorzano
-                                Rios</strong></p>
-                        <a href="inscripcion.html" class="hero-cta"
-                            style="display: block; text-align: center; margin-top: 15px; font-size: 0.8rem; padding: 10px;">INICIAR
-                            REGISTRO</a>
+                        <p><strong>19133177122043</strong></p>
+                        <p style="font-size: 0.75rem; opacity: 0.7;">CCI: 00219113317712204359</p>
+                        <a href="inscripcion.html" class="nav-inscripcion-btn"
+                            style="margin-top: 10px; width: 100%; font-size: 0.75rem;">Inscribirme con BCP</a>
                     </div>
                 </div>
                 <div class="payment-card">
                     <img src="BCP.png" alt="BCP" class="payment-logo">
                     <div class="payment-details">
                         <h4>BCP (Dólares)</h4>
-                        <p>Cuenta: <strong>191-13211096-1-40</strong></p>
-                        <p>CCI: <strong>00219111321109614056</strong></p>
-                        <p style="color: var(--text-muted); margin-top: 3px;">Titular: <strong>Aurelio Solorzano
-                                Rios</strong></p>
-                        <a href="inscripcion.html" class="hero-cta"
-                            style="display: block; text-align: center; margin-top: 15px; font-size: 0.8rem; padding: 10px;">INICIAR
-                            REGISTRO</a>
+                        <p><strong>191-13211096-1-40</strong></p>
+                        <p style="font-size: 0.75rem; opacity: 0.7;">CCI: 00219111321109614056</p>
+                        <a href="inscripcion.html" class="nav-inscripcion-btn"
+                            style="margin-top: 10px; width: 100%; font-size: 0.75rem;">Join in Dollars</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- TIKTOK SOCIAL PROOF (NEW) -->
+    <!-- TIKTOK SOCIAL PROOF -->
     <section class="tiktok-section" id="casos">
         <div class="container tiktok-content">
-            <h2 class="tiktok-title">Casos de Uso Reales</h2>
-            <p class="tiktok-subtitle">Mira cómo aplicamos estos agentes en proyectos reales. Aprende con nuestros
-                ejemplos prácticos de 60 segundos.</p>
+            <h2 class="tiktok-title">Casos de Uso en TikTok</h2>
+            <p class="tiktok-subtitle">Mira cómo aplicamos estos agentes en proyectos reales con ejemplos prácticos de
+                60 segundos.</p>
             <a href="https://www.tiktok.com/@project.control.a?is_from_webapp=1&sender_device=pc" target="_blank"
                 class="tiktok-btn">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                     <path
                         d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
                 </svg>
-                Ver Casos en TikTok
+                Ver en TikTok
             </a>
         </div>
     </section>
 
-    <!-- CONTACT FOOTER -->
-    <section class="footer" id="contacto">
+    <!-- CONSULTORÍA SECTION (CONDENSED AT THE END) -->
+    <section class="section-padding" id="consultoria" style="background: rgba(15, 23, 42, 0.4);">
         <div class="container">
-            <h2 style="margin-bottom: 1rem;">¿Listo para transformar tu gestión?</h2>
-            <p style="margin-bottom: 2rem; color: var(--text-muted);">Contáctanos directamente para consultas sobre
-                consultoría o capacitaciones.</p>
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
-                <a href="https://wa.me/51993147501" class="whatsapp-btn" style="padding: 1rem 2rem; font-size: 1.1rem;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M12.031 6.172c-2.32 0-4.591.398-6.758 1.189-.306.112-.618.33-.867.556l-1.921 1.76a.915.915 0 0 0-.273.847c.143.841.214 1.285.421 2.113a.914.914 0 0 0 .845.694c.124.005.25-.003.371-.03l1.607-.354c.446-.099.637-.6.463-.997a10.26 10.26 0 0 1-.087-2.327l.1.002zM18.103 5.672c-.012-.001-.024-.001-.036 0-.012.001-.024.001-.036 0zm-.696.84c-1.506-1.503-3.606-2.432-5.922-2.432-4.632 0-8.386 3.754-8.386 8.386 0 1.576.438 3.05 1.197 4.312L3.333 21l4.47-1.176a8.347 8.347 0 0 0 4.228 1.157c4.632 0 8.386-3.754 8.386-8.386 0-2.316-.929-4.416-2.432-5.922zM12.031 18.272c-1.103 0-2.149-.258-3.074-.717l-.22-.11-2.28.6 1.171-2.2a8.318 8.318 0 0 1-.689-3.235c0-3.141 2.556-5.698 5.698-5.698 3.141 0 5.698 2.556 5.698 5.698 0 3.141-2.556 5.698-5.698 5.698zM15.827 13.911c-.24-.12-1.424-.703-1.644-.783-.22-.08-.38-.12-.54.12s-.62.783-.76.943-.28.18-.52.06c-.24-.12-1.011-.373-1.926-1.189-.712-.635-1.192-1.42-1.332-1.66s-.015-.37.105-.489c.108-.107.24-.28.36-.42s.16-.24.24-.4.04-.32-.02-.44-.54-1.304-.74-1.784c-.195-.468-.393-.404-.54-.412l-.46-.008c-.16 0-.42.06-.64.3s-.84.823-.84 2.008.86 2.327.98 2.487c.12.16 1.693 2.583 4.1 3.623.573.247 1.02.395 1.368.505.576.183 1.1.157 1.513.097.46-.067 1.424-.582 1.624-1.144s.2-.1.14-.24z" />
-                    </svg>
-                    WhatsApp: (+51) 993 147 501
-                </a>
-                <p style="color: var(--accent-cyan); font-weight: 500;">Atención Inmediata - Ing. Aurelio Solórzano</p>
+            <div class="section-header">
+                <h2 class="section-title">Consultoría Estratégica</h2>
+                <p>Soluciones personalizadas y asesoría directa por el Ing. Aurelio Solorzano.</p>
             </div>
-            <p style="margin-top: 3rem; color: var(--text-muted); font-size: 0.9rem;">© 2025 Project Control AI. Todos
-                los derechos reservados.</p>
+
+            <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                <div class="service-card">
+                    <h3 class="service-title">Licitaciones & PMO Digital</h3>
+                    <p class="service-desc">Optimización de propuestas y control predictivo con EVM 4.0.</p>
+                </div>
+                <div class="service-card">
+                    <h3 class="service-title">Agentes IA & Automatización</h3>
+                    <p class="service-desc">Implementación de agentes autónomos y desarrollo in-house para ingeniería.
+                    </p>
+                </div>
+                <div class="service-card">
+                    <h3 class="service-title">Gestión Contractual</h3>
+                    <p class="service-desc">Defensa de claims y auditoría técnica privada (MCP).</p>
+                </div>
+            </div>
+
+            <div
+                style="margin-top: 3rem; text-align: center; background: var(--glass-bg); padding: 2.5rem; border-radius: 20px; border: 1px solid rgba(34, 211, 238, 0.3); backdrop-filter: blur(20px);">
+                <h3 style="margin-bottom: 1rem; color: white;">¿Buscas una Consultoría Privada?</h3>
+                <p
+                    style="margin-bottom: 2rem; color: var(--text-muted); max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Agenda una sesión técnica directamente con el <strong>Ing. Aurelio Solorzano</strong> para evaluar
+                    las necesidades específicas de tu proyecto u organización.
+                </p>
+                <a href="https://wa.me/51993147501" class="hero-cta"
+                    style="display: inline-flex; align-items: center; gap: 10px;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12.031 6.172c-2.32 0-4.591.398-6.758 1.189-.306.112-.618.33-.867.556l-1.921 1.76a.915.915 0 0 0-.273.847c.143.841.214 1.285.421 2.113a.914.914 0 0 0 .845.694c.124.005.25-.003.371-.03l1.607-.354c.446-.099.637-.6.463-.997a10.26 10.26 0 0 1-.087-2.327l.1.002zM18.103 5.672c-.012-.001-.024-.001-.036 0-.012.001-.024.001-.036 0zm-.696.84c-1.506-1.503-3.606-2.432-5.922-2.432-4.632 0-8.386 3.754-8.386 8.386 0 1.576.438 3.05 1.197 4.312L3.333 21l4.47-1.176a8.347 8.347 0 0 0 4.228 1.157c4.632 0 8.386-3.754 8.386-8.386 0-2.316-.929-4.416-2.432-5.922zM12.031 18.272c-1.103 0-2.149-.258-3.074-.717l-.22-.11-2.28.6 1.171-2.2a8.318 8.318 0 0 1-.689-3.235c0-3.141 2.556-5.698 5.698-5.698 3.141 0 5.698 2.556 5.698 5.698 0 3.141-2.556 5.698-5.698 5.698z" />
+                    </svg>
+                    Contactar al Ingeniero
+                </a>
+            </div>
         </div>
     </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container" style="text-align: center; padding: 4rem 0 2rem;">
+            <div style="margin-bottom: 2rem;">
+                <img src="Logotipo.png" alt="Project Control AI" style="height: 50px; opacity: 0.8;">
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">© 2025 Project Control AI. Todos los derechos
+                reservados.</p>
+            <p style="color: var(--accent-cyan); font-weight: 500; margin-top: 0.5rem; letter-spacing: 1px;">POTENCIANDO
+                LA INGENIERÍA CON INTELIGENCIA ARTIFICIAL</p>
+            <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 20px;">
+                <a href="https://wa.me/51993147501" style="color: var(--text-muted); font-size: 0.8rem;">WhatsApp</a>
+                <a href="https://www.tiktok.com/@project.control.a"
+                    style="color: var(--text-muted); font-size: 0.8rem;">TikTok</a>
+                <a href="#cursos" style="color: var(--text-muted); font-size: 0.8rem;">Cursos</a>
+            </div>
+        </div>
+    </footer>
 
     <script>
         const navToggle = document.getElementById('navToggle');
@@ -1029,6 +1092,24 @@
 
         navToggle.addEventListener('click', () => {
             navMenu.classList.toggle('active');
+        });
+
+        // Smooth scroll adjustment for fixed header
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
         });
     </script>
 </body>

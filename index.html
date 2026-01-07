@@ -74,10 +74,45 @@
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
             position: fixed;
-            top: 0;
+            top: 75px;
+            /* Ajuste para el banner de inicio con contador */
             width: 100%;
             z-index: 1000;
             padding: 0.6rem 0;
+            transition: top 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                top: 130px;
+                /* Banner más alto en móviles por el wrap */
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7);
+            }
+
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(249, 115, 22, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(249, 115, 22, 0);
+            }
+        }
+
+        .time-block {
+            background: rgba(56, 189, 248, 0.1);
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            min-width: 45px;
+            text-align: center;
         }
 
         .container {
@@ -701,6 +736,47 @@
 
 <body>
 
+    <!-- BANNER CON CONTADOR REGRESIVO -->
+    <div id="promo-banner"
+        style="background: #0f172a; border-bottom: 2px solid #f97316; padding: 15px 0; position: fixed; top: 0; width: 100%; z-index: 2000;">
+        <div class="container"
+            style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+
+            <!-- Mensaje de Cupos -->
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span
+                    style="background: #f97316; color: #fff; padding: 5px 12px; border-radius: 5px; font-weight: bold; animation: pulse 2s infinite;">
+                    ¡CUPOS LIMITADOS!
+                </span>
+                <p style="margin: 0; font-size: 0.9rem; color: #f1f5f9;">
+                    Solo quedan <strong style="color: #f97316;">8 vacantes</strong> para el grupo de Enero.
+                </p>
+            </div>
+
+            <!-- Reloj Contador -->
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span style="font-size: 0.8rem; color: #94a3b8; text-transform: uppercase;">Iniciamos en:</span>
+                <div id="countdown"
+                    style="display: flex; gap: 10px; font-family: 'Space Grotesk', sans-serif; font-weight: bold; color: #38bdf8; font-size: 1.2rem;">
+                    <div class="time-block"><span id="days">00</span><small
+                            style="display:block; font-size:0.6rem; color:#94a3b8; text-align:center;">Días</small>
+                    </div>
+                    <div class="time-block"><span id="hours">00</span><small
+                            style="display:block; font-size:0.6rem; color:#94a3b8; text-align:center;">Hrs</small></div>
+                    <div class="time-block"><span id="minutes">00</span><small
+                            style="display:block; font-size:0.6rem; color:#94a3b8; text-align:center;">Min</small></div>
+                    <div class="time-block"><span id="seconds">00</span><small
+                            style="display:block; font-size:0.6rem; color:#94a3b8; text-align:center;">Seg</small></div>
+                </div>
+            </div>
+
+            <a href="https://wa.me/51993147501" class="whatsapp-btn"
+                style="margin: 0; padding: 8px 15px; font-size: 0.8rem;">
+                Asegurar mi Vacante
+            </a>
+        </div>
+    </div>
+
     <!-- NAVBAR -->
     <nav class="navbar">
         <div class="container nav-brand">
@@ -764,208 +840,50 @@
 
             <div class="courses-grid">
                 <!-- CURSO 1 -->
-                <div class="course-card">
-                    <div class="course-img-container">
-                        <img src="Curso 1.png" alt="Licitaciones y Estrategia 360" class="course-img">
-                        <div class="overlay"></div>
-                    </div>
+                <div class="course-card" style="border: 2px solid #38bdf8;">
                     <div class="course-content">
-                        <div class="course-meta">
-                            <span class="tag tag-price">$65 USD / S/ 200</span>
-                            <span class="tag">15 Horas</span>
-                        </div>
-                        <h3 class="course-title">1. Licitaciones y Estrategia de Adjudicación (Estrategia 360°)</h3>
-                        <p class="course-description">Convierte el proceso de licitación en un sistema de precisión
-                            quirúrgica mediante ingeniería forense y agentes autónomos.</p>
-                        <div class="course-schedule">
-                            <div class="schedule-line"><span>📅 Horario:</span> Martes y Jueves (7pm a 10pm)</div>
-                            <div class="schedule-line"><span>🚀 Inicia:</span> Martes 13 de Enero 2026</div>
-                        </div>
-                        <details>
-                            <summary>Ver Plan de Estudios</summary>
-                            <ul class="course-sessions">
-                                <li class="session-item">
-                                    <span class="session-title">1. Ingeniería Forense de Bases</span>
-                                    <span class="session-desc">Auditoría algorítmica de TDRs y detección proactiva de
-                                        riesgos ocultos.</span>
-                                </li>
-                                <li class="session-item">
-                                    <span class="session-title">2. Smart Procurement & Cotizaciones</span>
-                                    <span class="session-desc">Agentes autónomos para extracción masiva de precios y
-                                        homologación en tiempo real.</span>
-                                </li>
-                                <li class="session-item">
-                                    <span class="session-title">3. Estudio de Mercado IA</span>
-                                    <span class="session-desc">Análisis de tendencias, competidores y optimización de
-                                        márgenes con datos históricos.</span>
-                                </li>
-                                <li class="session-item">
-                                    <span class="session-title">4. Ingeniería de Costos (I y II)</span>
-                                    <span class="session-desc">Metrados automáticos, APUs dinámicos y simulación de
-                                        utilidad mediante modelos estocásticos.</span>
-                                </li>
-                                <li class="session-item">
-                                    <span class="session-title">5. Automatización de Ofertas y Cronogramas</span>
-                                    <span class="session-desc">Generación de propuestas técnicas con GenAI y creación de
-                                        <strong>Cronogramas Base con IA</strong>.</span>
-                                </li>
-                            </ul>
-                        </details>
-                        <a href="inscripcion.html" class="hero-cta"
-                            style="display: block; text-align: center; margin-top: 20px; font-size: 0.9rem; padding: 12px;">INSCRIBIRME
-                            AHORA</a>
+                        <span class="tag" style="background: #38bdf8; color: #000; font-weight: bold;">INICIA: MARTES
+                            13/01</span>
+                        <h3 class="course-title">1. Licitaciones Inteligentes con IA</h3>
+                        <p>Auditoría de expedientes masivos, APUs, Presupuestos y Cronogramas automáticos.</p>
+                        <p style="color: #f97316; font-weight: bold; font-size: 0.8rem;">⚠️ PRERREQUISITO PARA CURSO 2
+                        </p>
+                        <a href="https://wa.me/51993147501" class="nav-link"
+                            style="color:#38bdf8; font-weight:bold;">Solicitar Brochure →</a>
                     </div>
                 </div>
 
                 <!-- CURSO 2 -->
                 <div class="course-card">
-                    <div class="course-img-container">
-                        <img src="Curso 2.png" alt="Control y Gerencia EVM 4.0" class="course-img">
-                        <div class="overlay"></div>
-                    </div>
                     <div class="course-content">
-                        <div class="course-meta">
-                            <span class="tag tag-price">$65 USD / S/ 200</span>
-                            <span class="tag">15 Horas</span>
-                        </div>
-                        <div class="prerequisite-tag">🔑 Requiere: Curso 1 (Licitaciones)</div>
-                        <h3 class="course-title">2. Control y Gerencia (EVM 4.0 & Analítica de Datos)</h3>
-                        <p class="course-description">Deja de reportar el pasado. Aprende a controlar el futuro del
-                            proyecto mediante arquitectura de datos y analítica predictiva.</p>
-                        <div class="course-schedule">
-                            <div class="schedule-line"><span>📅 Horario:</span> Próximamente</div>
-                        </div>
-                        <details>
-                            <summary>Ver Plan de Estudios</summary>
-                            <ul class="course-sessions">
-                                <li class="session-item">
-                                    <span class="session-title">1. Arquitectura de Datos en Obra</span>
-                                    <span class="session-desc">Creación de bases de datos robustas mediante VBA.</span>
-                                </li>
-                                <li class="session-item">
-                                    <span class="session-title">2. Auditoría de Cronogramas</span>
-                                    <span class="session-desc">Revisión algorítmica de la ruta crítica.</span>
-                                </li>
-                                <li class="session-item">
-                                    <span class="session-title">3. Python en Excel (=PY)</span>
-                                    <span class="session-desc">Análisis estadístico nativo de productividad.</span>
-                                </li>
-                                <li class="session-item">
-                                    <span class="session-title">4. EVM & Proyecciones</span>
-                                    <span class="session-desc">Control de Valor Ganado automatizado.</span>
-                                </li>
-                                <li class="session-item">
-                                    <span class="session-title">5. Dashboards Ejecutivos</span>
-                                    <span class="session-desc">Tableros dinámicos con KPIs predictivos.</span>
-                                </li>
-                            </ul>
-                        </details>
-                        <a href="inscripcion.html" class="hero-cta"
-                            style="display: block; text-align: center; margin-top: 20px; font-size: 0.9rem; padding: 12px;">INSCRIBIRME
-                            AHORA</a>
+                        <span class="tag">ESPECIALIZACIÓN</span>
+                        <h3 class="course-title">2. Control y Gerencia EVM</h3>
+                        <p>Gestión predictiva de proyectos. Seguimiento de costos y plazos con Valor Ganado.</p>
+                        <p style="color: #94a3b8; font-size: 0.8rem;">*Requiere conocimientos del Curso 1</p>
                     </div>
                 </div>
 
                 <!-- CURSO 3 -->
-                <div class="course-card">
-                    <div class="course-img-container">
-                        <img src="Curso 3.png" alt="Gestión de Proyectos con IA" class="course-img">
-                        <div class="overlay"></div>
-                    </div>
+                <div class="course-card" style="border: 2px solid #fbbf24;">
                     <div class="course-content">
-                        <div class="course-meta">
-                            <span class="tag tag-price">$65 USD / S/ 200</span>
-                            <span class="tag">15 Horas</span>
-                        </div>
-                        <h3 class="course-title">3. Gestión de Proyectos con IA: El Despertar Digital</h3>
-                        <p class="course-description">El curso esencial para ingenieros que necesitan dar el salto
-                            digital con confianza e integrar IA en su gestión diaria.</p>
-                        <div class="course-schedule">
-                            <div class="schedule-line"><span>📅 Horario:</span> Domingos (10am a 1pm)</div>
-                            <div class="schedule-line"><span>🚀 Inicia:</span> Domingo 18 de Enero 2026</div>
-                        </div>
-                        <details>
-                            <summary>Ver Plan de Estudios</summary>
-                            <ul class="course-sessions">
-                                <li class="session-item">
-                                    <span class="session-title">1. Adopción Digital Gradual</span>
-                                    <span class="session-desc">Mindset Digital: De la operación manual a la asistencia
-                                        inteligente.</span>
-                                </li>
-                                <li class="session-item">
-                                    <span class="session-title">2. Alcance y WBS con IA</span>
-                                    <span class="session-desc">Estructuración de diccionarios de obra asistidos por
-                                        IA.</span>
-                                </li>
-                                <li class="session-item">
-                                    <span class="session-title">3. Copiloto de Gestión Diaria</span>
-                                    <span class="session-desc">Automatización de minutas y reportabilidad básica.</span>
-                                </li>
-                                <li class="session-item">
-                                    <span class="session-title">4. Contratos, Calidad y HSE</span>
-                                    <span class="session-desc">Mapeo de obligaciones y checklists de seguridad.</span>
-                                </li>
-                                <li class="session-item">
-                                    <span class="session-title">5. Comunicaciones Críticas</span>
-                                    <span class="session-desc">Gestión eficiente de stakeholders mediante
-                                        agentes.</span>
-                                </li>
-                            </ul>
-                        </details>
-                        <a href="inscripcion.html" class="hero-cta"
-                            style="display: block; text-align: center; margin-top: 20px; font-size: 0.9rem; padding: 12px;">INSCRIBIRME
-                            AHORA</a>
+                        <span class="tag" style="background: #fbbf24; color: #000; font-weight: bold;">INICIA: DOMINGO
+                            18/01</span>
+                        <h3 class="course-title">3. Gestión Integral de Proyectos con IA</h3>
+                        <p>Gestión de Alcance, Contratos, Calidad y HSE potenciada por Inteligencia Artificial.</p>
+                        <p style="color: #f97316; font-weight: bold; font-size: 0.8rem;">⚠️ PRERREQUISITO PARA CURSO 4
+                        </p>
+                        <a href="https://wa.me/51993147501" class="nav-link"
+                            style="color:#fbbf24; font-weight:bold;">Solicitar Brochure →</a>
                     </div>
                 </div>
 
                 <!-- CURSO 4 -->
                 <div class="course-card">
-                    <div class="course-img-container">
-                        <img src="Curso 4.png" alt="Developer Engineer" class="course-img">
-                        <div class="overlay"></div>
-                    </div>
                     <div class="course-content">
-                        <div class="course-meta">
-                            <span class="tag tag-price">$65 USD / S/ 200</span>
-                            <span class="tag">15 Horas</span>
-                        </div>
-                        <div class="prerequisite-tag">🔑 Requiere: Curso 3 (Gestión con IA)</div>
-                        <h3 class="course-title">4. Developer Engineer: Programación Avanzada</h3>
-                        <p class="course-description">Nivel Experto: Evoluciona de usuario a arquitecto de software
-                            especializado para ingeniería y construcción.</p>
-                        <div class="course-schedule">
-                            <div class="schedule-line"><span>📅 Horario:</span> Próximamente</div>
-                        </div>
-                        <details>
-                            <summary>Ver Plan de Estudios</summary>
-                            <ul class="course-sessions">
-                                <li class="session-item">
-                                    <span class="session-title">1. VBA + Python Masterclass</span>
-                                    <span class="session-desc">Desarrollo de macros avanzadas para control de
-                                        datos.</span>
-                                </li>
-                                <li class="session-item">
-                                    <span class="session-title">2. Full-Stack para Ingenieros</span>
-                                    <span class="session-desc">Creación de Web Apps técnicas y chatbots RAG.</span>
-                                </li>
-                                <li class="session-item">
-                                    <span class="session-title">3. Orquestación de Agentes</span>
-                                    <span class="session-desc">Configuración de agentes para tareas autónomas.</span>
-                                </li>
-                                <li class="session-item">
-                                    <span class="session-title">4. Protocolos MCP</span>
-                                    <span class="session-desc">Conexión segura de IA a datos de servidores
-                                        locales.</span>
-                                </li>
-                                <li class="session-item">
-                                    <span class="session-title">5. Ingeniería Aumentada</span>
-                                    <span class="session-desc">Deep Research técnico y Storytelling interactivo.</span>
-                                </li>
-                            </ul>
-                        </details>
-                        <a href="inscripcion.html" class="hero-cta"
-                            style="display: block; text-align: center; margin-top: 20px; font-size: 0.9rem; padding: 12px;">INSCRIBIRME
-                            AHORA</a>
+                        <span class="tag">NIVEL EXPERTO</span>
+                        <h3 class="course-title">4. Automation Engineer</h3>
+                        <p>Automatizaciones avanzadas con Python, HTML, VBA y Agentes Autónomos.</p>
+                        <p style="color: #94a3b8; font-size: 0.8rem;">*Requiere base de Gestión Digital (Curso 3)</p>
                     </div>
                 </div>
             </div>
@@ -1106,7 +1024,7 @@
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    const headerOffset = 80;
+                    const headerOffset = 150; // Ajustado para el banner con contador + navbar
                     const elementPosition = target.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -1117,7 +1035,53 @@
                 }
             });
         });
+
+        // --- MOTOR DEL RELOJ (PROMO BANNER) ---
+        // Configura la fecha de inicio (13 de Enero de 2026)
+        const targetDate = new Date("Jan 13, 2026 00:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (document.getElementById("days")) {
+                // Cálculos de tiempo
+                const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Inyectar en el HTML
+                document.getElementById("days").innerText = d < 10 ? "0" + d : d;
+                document.getElementById("hours").innerText = h < 10 ? "0" + h : h;
+                document.getElementById("minutes").innerText = m < 10 ? "0" + m : m;
+                document.getElementById("seconds").innerText = s < 10 ? "0" + s : s;
+            }
+
+            // Si el tiempo termina
+            if (distance < 0) {
+                clearInterval(timerInterval);
+                const banner = document.getElementById("promo-banner");
+                if (banner) {
+                    banner.innerHTML = "<div class='container' style='text-align:center; color:#fff; font-weight:bold;'>🚀 ¡INSCRIPCIONES CERRADAS! Estamos en clases. Próximo inicio: Febrero.</div>";
+                    banner.style.padding = "20px 0";
+                }
+            }
+        }
+
+        const timerInterval = setInterval(updateCountdown, 1000);
+        updateCountdown(); // Ejecutar al cargar
     </script>
+
+    <!-- BOTÓN FLOTANTE WHATSAPP -->
+    <a href="https://wa.me/51993147501?text=Hola%20Ing.%20Aurelio,%20deseo%20informaci%C3%B3n%20de%20los%20cursos%20de%20Project%20Control%20AI"
+        style="position:fixed; width:60px; height:60px; bottom:40px; right:40px; background-color:#25d366; color:#FFF; border-radius:50px; text-align:center; font-size:30px; box-shadow: 2px 2px 3px #999; z-index:2000;"
+        target="_blank">
+        <svg style="margin-top:15px;" width="30" height="30" fill="currentColor" viewBox="0 0 24 24">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.411-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+    </a>
 </body>
 
 </html>

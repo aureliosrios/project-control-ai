@@ -749,13 +749,15 @@
                     ¡CUPOS LIMITADOS!
                 </span>
                 <p style="margin: 0; font-size: 0.9rem; color: #f1f5f9;">
-                    Solo quedan <strong style="color: #f97316;">8 vacantes</strong> para el grupo de Enero.
+                    Solo quedan <strong style="color: #f97316;">8 vacantes</strong> para el curso de <strong
+                        style="color: #38bdf8;">Licitaciones</strong>.
                 </p>
             </div>
 
             <!-- Reloj Contador -->
             <div style="display: flex; align-items: center; gap: 15px;">
-                <span style="font-size: 0.8rem; color: #94a3b8; text-transform: uppercase;">Iniciamos en:</span>
+                <span style="font-size: 0.8rem; color: #94a3b8; text-transform: uppercase;">Licitaciones inicia
+                    en:</span>
                 <div id="countdown"
                     style="display: flex; gap: 10px; font-family: 'Space Grotesk', sans-serif; font-weight: bold; color: #38bdf8; font-size: 1.2rem;">
                     <div class="time-block"><span id="days">00</span><small
@@ -842,8 +844,12 @@
                 <!-- CURSO 1 -->
                 <div class="course-card" style="border: 2px solid #38bdf8;">
                     <div class="course-content">
-                        <span class="tag" style="background: #38bdf8; color: #000; font-weight: bold;">INICIA: MARTES
-                            13/01</span>
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                            <span class="tag" style="background: #38bdf8; color: #000; font-weight: bold;">INICIA:
+                                MARTES 13/01</span>
+                            <span class="tag tag-price">S/ 200 | $65</span>
+                        </div>
                         <h3 class="course-title">1. Licitaciones Inteligentes con IA</h3>
                         <p>Auditoría de expedientes masivos, APUs, Presupuestos y Cronogramas automáticos.</p>
                         <p style="color: #f97316; font-weight: bold; font-size: 0.8rem;">⚠️ PRERREQUISITO PARA CURSO 2
@@ -856,7 +862,11 @@
                 <!-- CURSO 2 -->
                 <div class="course-card">
                     <div class="course-content">
-                        <span class="tag">ESPECIALIZACIÓN</span>
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                            <span class="tag">ESPECIALIZACIÓN</span>
+                            <span class="tag tag-price">S/ 200 | $65</span>
+                        </div>
                         <h3 class="course-title">2. Control y Gerencia EVM</h3>
                         <p>Gestión predictiva de proyectos. Seguimiento de costos y plazos con Valor Ganado.</p>
                         <p style="color: #94a3b8; font-size: 0.8rem;">*Requiere conocimientos del Curso 1</p>
@@ -866,8 +876,12 @@
                 <!-- CURSO 3 -->
                 <div class="course-card" style="border: 2px solid #fbbf24;">
                     <div class="course-content">
-                        <span class="tag" style="background: #fbbf24; color: #000; font-weight: bold;">INICIA: DOMINGO
-                            18/01</span>
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                            <span class="tag" style="background: #fbbf24; color: #000; font-weight: bold;">INICIA:
+                                DOMINGO 18/01</span>
+                            <span class="tag tag-price">S/ 200 | $65</span>
+                        </div>
                         <h3 class="course-title">3. Gestión Integral de Proyectos con IA</h3>
                         <p>Gestión de Alcance, Contratos, Calidad y HSE potenciada por Inteligencia Artificial.</p>
                         <p style="color: #f97316; font-weight: bold; font-size: 0.8rem;">⚠️ PRERREQUISITO PARA CURSO 4
@@ -880,7 +894,13 @@
                 <!-- CURSO 4 -->
                 <div class="course-card">
                     <div class="course-content">
-                        <span class="tag">NIVEL EXPERTO</span>
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                            <span class="tag">NIVEL EXPERTO</span>
+                            <span class="tag tag-price"
+                                style="color: #22d3ee; background: rgba(34, 211, 238, 0.1); border-color: rgba(34, 211, 238, 0.2);">S/
+                                330 | $100</span>
+                        </div>
                         <h3 class="course-title">4. Automation Engineer</h3>
                         <p>Automatizaciones avanzadas con Python, HTML, VBA y Agentes Autónomos.</p>
                         <p style="color: #94a3b8; font-size: 0.8rem;">*Requiere base de Gestión Digital (Curso 3)</p>
@@ -895,7 +915,7 @@
                     curso completamente <strong>GRATIS</strong>!</p>
             </div>
 
-            <div class="payment-info">
+            <div class="payment-info" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
                 <div class="payment-card">
                     <img src="Yape.png" alt="Yape" class="payment-logo">
                     <div class="payment-details">
@@ -926,7 +946,29 @@
                             style="margin-top: 10px; width: 100%; font-size: 0.75rem;">Join in Dollars</a>
                     </div>
                 </div>
+                <!-- NUEVA TARJETA PAYPAL -->
+                <div class="payment-card" style="border: 1px solid #0070ba; background: rgba(0, 112, 186, 0.05);">
+                    <div class="payment-logo"
+                        style="display: flex; align-items: center; justify-content: center; background: white; border-radius: 10px; padding: 5px; height: 60px; width: 60px;">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="#003087">
+                            <path
+                                d="M20.067 6.378c-.281-1.465-1.071-2.585-2.316-3.328-1.066-.639-2.383-.935-4.226-.935h-5.244c-.58 0-1.066.431-1.144 1.002L5.05 18.067c-.057.417.265.795.688.795h3.047l.952-6.009c.078-.571.564-1.002 1.144-1.002h1.613c3.424 0 5.626-1.636 6.307-5.127.18-.921.164-1.69-.134-2.346zm-2.827 3.551c-.482 2.476-2.152 3.86-4.627 3.86H11.53c-.15 0-.256.082-.266.216l-.609 3.832h-1.92l1.611-10.165c.01-.064.067-.113.131-.113h2.647c.928 0 1.636.143 2.112.43.518.312.823.824.912 1.53.078.618-.035 1.258-.266 1.834l.001-.024z" />
+                            <path
+                                d="M16.513 5.378c-.281-1.465-1.071-2.585-2.316-3.328-1.066-.639-2.383-.935-4.226-.935h-5.244c-.58 0-1.066.431-1.144 1.002L1.496 17.067c-.057.417.265.795.688.795h3.047l.952-6.009C6.261 11.282 6.747 10.851 7.327 10.851h1.613c3.424 0 5.626-1.636 6.307-5.127.18-.921.164-1.69-.134-2.346zm-2.827 3.551c-.482 2.476-2.152 3.86-4.627 3.86H8.53c-.15 0-.256.082-.266.216l-.609 3.832H5.735l1.611-10.165c.01-.064.067-.113.131-.113h2.647c.928 0 1.636.143 2.112.43.518.312.823.824.912 1.53.078.618-.035 1.258-.266 1.834l.001-.024z" />
+                        </svg>
+                    </div>
+                    <div class="payment-details">
+                        <h4 style="color: #0070ba;">PayPal</h4>
+                        <p><strong>Pago Global</strong></p>
+                        <p style="font-size: 0.7rem; opacity: 0.8;">Visa / Master / AMEX</p>
+                        <a href="https://paypal.me/ProjectControlAI" target="_blank" class="nav-inscripcion-btn"
+                            style="margin-top: 10px; width: 100%; font-size: 0.75rem; background: #0070ba; color: white; display: flex; align-items: center; justify-content: center; gap: 5px;">
+                            Ir a PayPal
+                        </a>
+                    </div>
+                </div>
             </div>
+        </div>
         </div>
     </section>
 
@@ -1063,7 +1105,7 @@
                 clearInterval(timerInterval);
                 const banner = document.getElementById("promo-banner");
                 if (banner) {
-                    banner.innerHTML = "<div class='container' style='text-align:center; color:#fff; font-weight:bold;'>🚀 ¡INSCRIPCIONES CERRADAS! Estamos en clases. Próximo inicio: Febrero.</div>";
+                    banner.innerHTML = "<div class='container' style='text-align:center; color:#fff; font-weight:bold;'>🚀 ¡INSCRIPCIONES CERRADAS PARA LICITACIONES! Próximo inicio: Febrero.</div>";
                     banner.style.padding = "20px 0";
                 }
             }

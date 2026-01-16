@@ -731,6 +731,38 @@
                 margin-left: auto;
             }
         }
+
+        /* --- DOWNLOAD BUTTON --- */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(34, 211, 238, 0.1);
+            color: var(--accent-cyan);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            margin-top: 1.5rem;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            width: fit-content;
+        }
+
+        .download-btn:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(34, 211, 238, 0.2);
+        }
+
+        .download-btn svg {
+            transition: transform 0.3s;
+        }
+
+        .download-btn:hover svg {
+            transform: translateY(2px);
+        }
     </style>
 </head>
 
@@ -842,28 +874,39 @@
 
             <div class="courses-grid">
                 <!-- CURSO 1 (CERRADO) -->
-                <div class="course-card" style="border: 2px solid #475569; opacity: 0.7; filter: grayscale(0.5);">
+                <div class="course-card" style="border: 2px solid #fbbf24;">
                     <div class="course-content">
                         <div
                             style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
-                            <span class="tag" style="background: #ef4444; color: #fff; font-weight: bold;">INSCRIPCIONES
-                                CERRADAS</span>
+                            <span class="tag" style="background: #fbbf24; color: #000; font-weight: bold;">INICIA:
+                                26/01</span>
                             <span class="tag tag-price">S/ 200 | $65</span>
                         </div>
-                        <h3 class="course-title" style="color: #94a3b8;">1. Licitaciones Inteligentes con IA</h3>
+                        <h3 class="course-title">1. Licitaciones Inteligentes con IA</h3>
                         <p>Auditoría de expedientes masivos, APUs, Presupuestos y Cronogramas automáticos.</p>
 
                         <!-- HORARIO CURSO 1 -->
-                        <div class="course-schedule" style="background: rgba(71, 85, 105, 0.1); color: #94a3b8;">
+                        <div class="course-schedule">
                             <div class="schedule-line">
-                                <span>Martes y Jueves:</span>
+                                <span>Lunes y Miércoles:</span>
                                 <span>7:00 PM - 10:00 PM</span>
                             </div>
                         </div>
 
-                        <p style="color: #64748b; font-weight: bold; font-size: 0.8rem;">Próxima convocatoria: Febrero
-                            2026</p>
-                        <span style="color:#64748b; font-weight:bold; font-size: 0.9rem;">Curso en progreso →</span>
+                        <p style="color: #f97316; font-weight: bold; font-size: 0.8rem;">¡CUPOS DISPONIBLES!</p>
+                        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 1rem;">
+                            <a href="https://wa.me/51993147501" class="nav-link"
+                                style="color:#fbbf24; font-weight:bold;">Matricularme Ahora →</a>
+                            <a href="Brochure_Curso_1_Licitaciones_360_v2.pdf" download class="download-btn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                                </svg>
+                                Descargar Brochure
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -878,6 +921,15 @@
                         <h3 class="course-title">2. Control y Gerencia EVM</h3>
                         <p>Gestión predictiva de proyectos. Seguimiento de costos y plazos con Valor Ganado.</p>
                         <p style="color: #94a3b8; font-size: 0.8rem;">*Requiere conocimientos del Curso 1</p>
+                        <a href="Brochure_Curso_2_EVM_Final.pdf" download class="download-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Descargar Brochure
+                        </a>
                     </div>
                 </div>
 
@@ -901,16 +953,20 @@
                                 style="display: flex; justify-content: center; gap: 8px; font-family: 'Space Grotesk', sans-serif; font-weight: bold; color: #fbbf24; font-size: 1rem;">
                                 <div style="background: rgba(251, 191, 36, 0.1); padding: 2px 6px; border-radius: 4px;">
                                     <span class="days-c3">00</span><small
-                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">D</small></div>
+                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">D</small>
+                                </div>
                                 <div style="background: rgba(251, 191, 36, 0.1); padding: 2px 6px; border-radius: 4px;">
                                     <span class="hours-c3">00</span><small
-                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">H</small></div>
+                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">H</small>
+                                </div>
                                 <div style="background: rgba(251, 191, 36, 0.1); padding: 2px 6px; border-radius: 4px;">
                                     <span class="minutes-c3">00</span><small
-                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">M</small></div>
+                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">M</small>
+                                </div>
                                 <div style="background: rgba(251, 191, 36, 0.1); padding: 2px 6px; border-radius: 4px;">
                                     <span class="seconds-c3">00</span><small
-                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">S</small></div>
+                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">S</small>
+                                </div>
                             </div>
                         </div>
 
@@ -926,8 +982,19 @@
 
                         <p style="color: #f97316; font-weight: bold; font-size: 0.8rem;">⚠️ PRERREQUISITO PARA CURSO 4
                         </p>
-                        <a href="https://wa.me/51993147501" class="nav-link"
-                            style="color:#fbbf24; font-weight:bold;">Matricularme Ahora →</a>
+                        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 1rem;">
+                            <a href="https://wa.me/51993147501" class="nav-link"
+                                style="color:#fbbf24; font-weight:bold;">Matricularme Ahora →</a>
+                            <a href="Brochure_Curso_3_IA_Despertar_Digital.pdf" download class="download-btn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                                </svg>
+                                Descargar Brochure
+                            </a>
+                        </div>
                     </div>
                 </div>
 

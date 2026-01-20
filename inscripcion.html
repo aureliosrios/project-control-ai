@@ -424,31 +424,30 @@
 
             const formData = new FormData(form);
 
-            // 1. Preparar objeto para Supabase (Identidad del Alumno)
-            const alumnoPayload = {
-                "Fecha": new Date().toLocaleString(),
-                "Nombre": formData.get('nombre'),
-                "Apellido": formData.get('apellido'),
-                "DNI": formData.get('dni'),
-                "Profesion": formData.get('profesion'),
-                "Telefono": formData.get('telefono'),
-                "Email": formData.get('email'),
-                "Curso": formData.get('curso'),
-                "metodo_pago": formData.get('metodo_pago'),
-                "Pago_Realizado": 'NO', // Por defecto NO hasta su validación humana
-                "validado_director": false
+            // 1. Este mapeo debe ser EXACTO a los nombres del SQL
+            const payload = {
+                nombre: formData.get('nombre'),
+                apellido: formData.get('apellido'),     // Corrección: minúsculas para coincidir con SQL
+                dni: formData.get('dni'),
+                profesion: formData.get('profesion'),
+                telefono: formData.get('telefono'),
+                email: formData.get('email'),
+                curso: formData.get('curso'),
+                metodo_pago: formData.get('metodo_pago'),
+                pago_realizado: formData.get('pago') ? 'SI' : 'NO'
             };
 
             try {
-                console.log("Iniciando envío a Supabase...", alumnoPayload); // SENSOR 1
+                console.log("Iniciando envío a Supabase...", payload); // SENSOR 1
 
+                // Luego el envío
                 const { data, error } = await _supabase
                     .from('alumnos')
-                    .insert([alumnoPayload]);
+                    .insert([payload]);
 
                 if (error) {
-                    console.error("ERROR REAL DE SUPABASE:", error.message); // AQUÍ APARECERÁ EL MOTIVO
                     alert("Error Supabase: " + error.message);
+                    console.error("ERROR REAL DE SUPABASE:", error);
                     throw error;
                 } else {
                     console.log("Datos guardados en Supabase con éxito");

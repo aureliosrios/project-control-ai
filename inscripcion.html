@@ -426,15 +426,16 @@
 
             // 1. Este mapeo debe ser EXACTO a los nombres del SQL
             const payload = {
+                fecha: new Date().toLocaleString(), // << CAMBIADO: ahora coincide con la DB
                 nombre: formData.get('nombre'),
-                apellido: formData.get('apellido'),     // Corrección: minúsculas para coincidir con SQL
+                apellido: formData.get('apellido'),
                 dni: formData.get('dni'),
                 profesion: formData.get('profesion'),
                 telefono: formData.get('telefono'),
                 email: formData.get('email'),
                 curso: formData.get('curso'),
                 metodo_pago: formData.get('metodo_pago'),
-                pago_realizado: formData.get('pago') ? 'SI' : 'NO'
+                pago_realizado: 'NO'
             };
 
             try {

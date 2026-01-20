@@ -396,9 +396,15 @@
         </div>
     </div>
 
+    <!-- Cargar el SDK de Supabase primero -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <script>
-        // --- CONFIGURACIÓN ---
-        // URL proporcionada por el usuario para Google Apps Script
+        // --- CONFIGURACIÓN DE PRODUCCIÓN PROJECT CONTROL AI ---
+        const supabaseUrl = 'https://bpsumudexpywfffcwpun.supabase.co';
+        const supabaseKey = 'sb_publishable_OzjgZjclmEDlDuVdLGuvQQ_SyX2aTy0';
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwPvR7sL6JQMM9EEs-X9jHGB-JL93U4sxpN9YR-pxcdcFKza5wxxfrtteU9O19lBiftzA/exec';
 
         const form = document.getElementById('registrationForm');
@@ -408,56 +414,59 @@
         const formSection = document.getElementById('formSection');
         const successBox = document.getElementById('successMsg');
 
-        form.addEventListener('submit', e => {
+        form.addEventListener('submit', async e => {
             e.preventDefault();
 
-            // Estado de carga
+            // UI: Estado de carga
             btn.disabled = true;
-            btnText.innerText = "Procesando...";
+            btnText.innerText = "Sincronizando con Servidores...";
             btnSpinner.style.display = "inline-block";
 
-            // Enviar a Google Sheets
-            fetch(scriptURL, {
-                method: 'POST',
-                body: new FormData(form),
-                mode: 'no-cors' // Importante para evitar problemas de CORS con Apps Script
-            })
-                .then(response => {
-                    // Éxito
-                    formSection.style.display = 'none';
-                    successBox.style.display = 'block';
+            const formData = new FormData(form);
 
-                    // Preparar mensaje de WhatsApp
-                    const nombre = form.nombre.value;
-                    const curso = form.curso.value;
-                    const metodo = form.metodo_pago.value;
-                    const phone = "51993147501";
-                    const waMsg = `Hola, soy ${nombre}. Me acabo de inscribir al curso ${curso}. Pagué vía ${metodo}. Adjunto mi voucher para validación.`;
-                    document.getElementById('waLink').href = `https://wa.me/${phone}?text=${encodeURIComponent(waMsg)}`;
-                })
-                .catch(error => {
-                    console.error('Error!', error.message);
-                    alert('Hubo un error al enviar. Por favor intenta de nuevo o contáctanos por WhatsApp.');
-                    btn.disabled = false;
-                    btnText.innerText = "FINALIZAR INSCRIPCIÓN";
-                    btnSpinner.style.display = "none";
-                });
+            // 1. Preparar objeto para Supabase (Identidad del Alumno)
+            const alumnoPayload = {
+                "Fecha": new Date().toLocaleString(),
+                "Nombre": formData.get('nombre'),
+                "Apellido": formData.get('apellido'),
+                "DNI": formData.get('dni'),
+                "Profesion": formData.get('profesion'),
+                "Telefono": formData.get('telefono'),
+                "Email": formData.get('email'),
+                "Curso": formData.get('curso'),
+                "metodo_pago": formData.get('metodo_pago'),
+                "Pago_Realizado": 'NO', // Por defecto NO hasta su validación humana
+                "validado_director": false
+            };
 
-            // Nota: Con mode 'no-cors', no podemos leer la respuesta, pero si no hay error en fetch, 
-            // usualmente significa que los datos salieron. Forzamos el éxito después de 1.5s si no hay error.
-            setTimeout(() => {
-                if (btn.disabled && formSection.style.display !== 'none') {
-                    formSection.style.display = 'none';
-                    successBox.style.display = 'block';
+            try {
+                // EJECUCIÓN EN PARALELO (Shadow Writing)
+                // Usamos upsert para que si el DNI ya existe, solo se actualice la info
+                await Promise.all([
+                    // A. Google Sheets (Su flujo tradicional)
+                    fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' }),
 
-                    const nombre = form.nombre.value;
-                    const curso = form.curso.value;
-                    const metodo = form.metodo_pago.value;
-                    const phone = "51993147501";
-                    const waMsg = `Hola, soy ${nombre}. Me acabo de inscribir al curso ${curso}. Pagué vía ${metodo}. Adjunto mi voucher para validación.`;
-                    document.getElementById('waLink').href = `https://wa.me/${phone}?text=${encodeURIComponent(waMsg)}`;
-                }
-            }, 2000);
+                    // B. Supabase (Su nueva base de datos para certificados e IA)
+                    _supabase.from('alumnos').upsert([alumnoPayload], { onConflict: 'DNI' })
+                ]);
+
+                // UI: Éxito
+                formSection.style.display = 'none';
+                successBox.style.display = 'block';
+
+                // Preparar WhatsApp para el Voucher
+                const nombre = formData.get('nombre');
+                const curso = formData.get('curso');
+                const waMsg = `Hola Ing. Aurelio, soy ${nombre}. Acabo de inscribirme al curso ${curso}. Aquí adjunto mi voucher para la certificación automática.`;
+                document.getElementById('waLink').href = `https://wa.me/51993147501?text=${encodeURIComponent(waMsg)}`;
+
+            } catch (error) {
+                console.error('Error de registro:', error);
+                alert('Hubo un problema al sincronizar. Sus datos se enviaron a Google, pero no a Supabase. Contacte al soporte.');
+                btn.disabled = false;
+                btnText.innerText = "FINALIZAR INSCRIPCIÓN";
+                btnSpinner.style.display = "none";
+            }
         });
     </script>
 

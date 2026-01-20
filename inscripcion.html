@@ -440,15 +440,23 @@
             };
 
             try {
-                // EJECUCIÓN EN PARALELO (Shadow Writing)
-                // Usamos upsert para que si el DNI ya existe, solo se actualice la info
-                await Promise.all([
-                    // A. Google Sheets (Su flujo tradicional)
-                    fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' }),
+                console.log("Iniciando envío a Supabase...", alumnoPayload); // SENSOR 1
 
-                    // B. Supabase (Su nueva base de datos para certificados e IA)
-                    _supabase.from('alumnos').upsert([alumnoPayload], { onConflict: 'DNI' })
-                ]);
+                const { data, error } = await _supabase
+                    .from('alumnos')
+                    .insert([alumnoPayload]);
+
+                if (error) {
+                    console.error("ERROR REAL DE SUPABASE:", error.message); // AQUÍ APARECERÁ EL MOTIVO
+                    alert("Error Supabase: " + error.message);
+                    throw error;
+                } else {
+                    console.log("Datos guardados en Supabase con éxito");
+                }
+
+                // El fetch de Google Sheets
+                await fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' });
+                console.log("Datos enviados a Google Sheets");
 
                 // UI: Éxito
                 formSection.style.display = 'none';
@@ -460,9 +468,8 @@
                 const waMsg = `Hola Ing. Aurelio, soy ${nombre}. Acabo de inscribirme al curso ${curso}. Aquí adjunto mi voucher para la certificación automática.`;
                 document.getElementById('waLink').href = `https://wa.me/51993147501?text=${encodeURIComponent(waMsg)}`;
 
-            } catch (error) {
-                console.error('Error de registro:', error);
-                alert('Hubo un problema al sincronizar. Sus datos se enviaron a Google, pero no a Supabase. Contacte al soporte.');
+            } catch (err) {
+                console.error("Error crítico de red/script:", err);
                 btn.disabled = false;
                 btnText.innerText = "FINALIZAR INSCRIPCIÓN";
                 btnSpinner.style.display = "none";

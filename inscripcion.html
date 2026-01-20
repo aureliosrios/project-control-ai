@@ -438,26 +438,22 @@
             };
 
             try {
-                console.log("Iniciando envío a Supabase...", payload); // SENSOR 1
-
-                // Luego el envío
+                // Regresamos a .insert() para crear una fila nueva por cada curso
                 const { data, error } = await _supabase
                     .from('alumnos')
                     .insert([payload]);
 
                 if (error) {
-                    alert("Error Supabase: " + error.message);
-                    console.error("ERROR REAL DE SUPABASE:", error);
+                    console.error("Error en Supabase:", error.message);
+                    alert("Error: " + error.message);
                     throw error;
-                } else {
-                    console.log("Datos guardados en Supabase con éxito");
                 }
 
-                // El fetch de Google Sheets
+                // Si llegó aquí, Supabase guardó la nueva fila. 
+                // Ahora enviamos a Google Sheets (Shadow Writing)
                 await fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' });
-                console.log("Datos enviados a Google Sheets");
 
-                // UI: Éxito
+                // Éxito UI
                 formSection.style.display = 'none';
                 successBox.style.display = 'block';
 
@@ -470,7 +466,7 @@
             } catch (err) {
                 console.error("Error crítico de red/script:", err);
                 btn.disabled = false;
-                btnText.innerText = "FINALIZAR INSCRIPCIÓN";
+                btnText.innerText = "REINTENTAR";
                 btnSpinner.style.display = "none";
             }
         });

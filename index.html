@@ -239,6 +239,8 @@
             width: 100%;
             height: 150px;
             background: linear-gradient(to top, var(--bg-dark), transparent);
+            pointer-events: none;
+            /* Asegura que no bloquee clics en los botones */
         }
 
         .hero-title {
@@ -277,6 +279,9 @@
             cursor: pointer;
             transition: 0.3s;
             box-shadow: 0 10px 25px rgba(34, 211, 238, 0.2);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .hero-cta:hover {
@@ -294,6 +299,9 @@
             font-weight: 600;
             font-size: 1.1rem;
             transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .hero-cta-secondary:hover {
@@ -804,8 +812,7 @@
                 </div>
             </div>
 
-            <a href="https://wa.me/51993147501" class="whatsapp-btn"
-                style="margin: 0; padding: 8px 15px; font-size: 0.8rem;">
+            <a href="inscripcion.html" class="whatsapp-btn" style="margin: 0; padding: 8px 15px; font-size: 0.8rem;">
                 Asegurar mi Vacante
             </a>
         </div>

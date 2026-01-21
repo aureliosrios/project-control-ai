@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal de Certificados | Project Control AI</title>
+    <title>Portal de Certificación | Project Control AI</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -36,7 +36,7 @@
         .btn {
             background: #38bdf8;
             color: #020617;
-            padding: 12px 20px;
+            padding: 12px 25px;
             border-radius: 10px;
             font-weight: 700;
             cursor: pointer;
@@ -88,18 +88,18 @@
 <body>
     <div class="container">
         <img src="Logotipo.png" alt="Project Control AI" class="logo">
-        <h2 style="margin-top:0; color:#38bdf8;">Portal de Certificación</h2>
+        <h2>Portal de Certificación</h2>
 
         <div id="searchSection">
-            <p style="color: #94a3b8;">Ingrese su DNI para consultar sus certificados disponibles:</p>
+            <p style="color: #94a3b8;">Ingrese su DNI para consultar sus certificados:</p>
             <input type="text" id="dniInput" class="input-dni" placeholder="Número de DNI">
             <button class="btn" style="width:100%" onclick="buscarCertificados()">Consultar</button>
         </div>
 
         <div id="resultsSection" style="display:none;">
-            <button class="btn" style="background:none; color:#38bdf8; font-size:0.8rem; padding:0; margin-bottom:15px;"
-                onclick="location.reload()">← Volver a buscar</button>
             <div id="listaCertificados"></div>
+            <button class="btn" style="background:none; color:#38bdf8; font-size:0.8rem; margin-top:20px;"
+                onclick="location.reload()">← Volver a buscar</button>
         </div>
     </div>
 
@@ -112,7 +112,6 @@
             const dni = document.getElementById('dniInput').value.trim();
             if (!dni) return alert("Ingrese un DNI");
 
-            // Buscamos los certificados vinculados a ese DNI a través de la tabla alumnos
             const { data, error } = await _supabase
                 .from('certificados')
                 .select('*, alumnos!inner(*)')
@@ -129,13 +128,11 @@
         function mostrarResultados(certificados) {
             document.getElementById('searchSection').style.display = 'none';
             const container = document.getElementById('listaCertificados');
-
-            // Tomamos el nombre actual de la base de datos como sugerencia
             const nombreSugerido = `${certificados[0].alumnos.nombre} ${certificados[0].alumnos.apellido}`;
 
             container.innerHTML = `
-                <div style="margin-bottom:20px; padding:15px; background:rgba(56, 189, 248, 0.1); border-radius:10px;">
-                    <p style="font-size:0.9rem; color:#94a3b8; margin-bottom:10px;">Confirme o corrija su nombre oficial para los certificados:</p>
+                <div style="margin-bottom:20px; text-align:left;">
+                    <label style="font-size:0.8rem; color:#94a3b8;">Nombre que aparecerá en el diploma:</label>
                     <input type="text" id="nombreConfirmado" class="input-dni" value="${nombreSugerido.toUpperCase()}">
                 </div>
             `;
@@ -143,8 +140,8 @@
             certificados.forEach(cert => {
                 const card = document.createElement('div');
                 card.className = 'cert-card';
+                let btnHtml = `<button class="btn" id="btn-${cert.id}" onclick="procesarDiploma('${cert.id}')">Descargar PDF</button>`;
 
-                let btnHtml = `<button class="btn" onclick="procesarDiploma('${cert.id}')">Descargar PDF</button>`;
                 if (cert.descarga_bloqueada) {
                     btnHtml = `<button class="btn btn-locked" disabled>Descarga Bloqueada</button>`;
                 }
@@ -153,7 +150,7 @@
                     <div style="display:flex; justify-content:space-between; align-items:center;">
                         <div>
                             <div style="font-weight:bold; color:#38bdf8;">${cert.curso_nombre}</div>
-                            <div style="font-size:0.8rem; color:#94a3b8;">Folio: ${cert.codigo_verificacion}</div>
+                            <div style="font-size:0.7rem; color:#94a3b8;">Folio: ${cert.codigo_verificacion}</div>
                         </div>
                         ${btnHtml}
                     </div>
@@ -164,17 +161,17 @@
         }
 
         async function procesarDiploma(certId) {
+            const btn = document.getElementById(`btn-${certId}`);
             const nombreOficial = document.getElementById('nombreConfirmado').value.trim();
-            if (!nombreOficial) return alert("Por favor, ingrese su nombre oficial.");
 
-            // Buscamos los datos exactos de este certificado
-            const { data: cert } = await _supabase.from('certificados').select('*, alumnos(*)').eq('id', certId).single();
-
-            const btn = event.target;
-            btn.innerText = "Emitiendo...";
+            btn.innerText = "Procesando...";
             btn.disabled = true;
 
             try {
+                // 1. Obtener datos del certificado
+                const { data: cert } = await _supabase.from('certificados').select('*, alumnos(*)').eq('id', certId).single();
+
+                // 2. Cargar motor PDF
                 const { PDFDocument, rgb, StandardFonts } = PDFLib;
                 const templateUrl = "https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/academia/plantilla_maestra.pdf";
 
@@ -184,61 +181,63 @@
                 const page = pdfDoc.getPages()[0];
                 const { width, height } = page.getSize();
 
-                // --- ESCRITURA DINÁMICA ---
-                // 1. Nombre Corregido (Dorado)
+                // --- ESCRIBIR EN EL PDF (COORDENADAS AJUSTADAS) ---
+
+                // Nombre Alumno (Centrado)
                 page.drawText(nombreOficial.toUpperCase(), {
-                    x: width / 2 - (nombreOficial.length * 8), // Centrado automático
-                    y: height - 265,
-                    size: 30, font: fontBold, color: rgb(0.98, 0.75, 0.14)
+                    x: width / 2 - (nombreOficial.length * 7.5),
+                    y: height - 250,
+                    size: 32, font: fontBold, color: rgb(0.98, 0.75, 0.14)
                 });
 
-                // 2. Curso (Azul)
-                page.drawText(cert.curso_nombre, { x: 120, y: height - 355, size: 22, font: fontBold, color: rgb(0.13, 0.45, 0.93) });
+                // Nombre del Curso
+                page.drawText(cert.curso_nombre, { x: 120, y: height - 340, size: 24, font: fontBold, color: rgb(0.13, 0.45, 0.93) });
 
-                // 3. Fechas (Si el director cerró el curso)
-                if (cert.fecha_inicio_clases && cert.fecha_fin_clases) {
-                    const options = { day: 'numeric', month: 'long', year: 'numeric' };
-                    const fInicio = new Date(cert.fecha_inicio_clases).toLocaleDateString('es-ES', options);
-                    const fFin = new Date(cert.fecha_fin_clases).toLocaleDateString('es-ES', options);
-                    const fEmision = new Date(cert.fecha_emision).toLocaleDateString('es-ES', options);
+                // Fechas e ID
+                const options = { day: 'numeric', month: 'long', year: 'numeric' };
+                const fInicio = cert.fecha_inicio_clases ? new Date(cert.fecha_inicio_clases).toLocaleDateString('es-ES', options) : "---";
+                const fFin = cert.fecha_fin_clases ? new Date(cert.fecha_fin_clases).toLocaleDateString('es-ES', options) : "---";
+                const fEmision = new Date(cert.fecha_emision).toLocaleDateString('es-ES', options);
 
-                    page.drawText(fInicio, { x: 130, y: height - 485, size: 14, color: rgb(0, 0, 0) });
-                    page.drawText(fFin, { x: 510, y: height - 485, size: 14, color: rgb(0, 0, 0) });
-                    page.drawText(fEmision, { x: 510, y: height - 485, size: 14, color: rgb(0, 0, 0) });
-                }
+                page.drawText(fInicio, { x: 130, y: height - 485, size: 14, color: rgb(0, 0, 0) });
+                page.drawText(fFin, { x: 510, y: height - 485, size: 14, color: rgb(0, 0, 0) });
+                page.drawText(fEmision, { x: 510, y: height - 485, size: 14, color: rgb(0, 0, 0) });
+                page.drawText(`ID: ${cert.codigo_verificacion}`, { x: width - 150, y: 110, size: 10, color: rgb(1, 1, 1) });
 
-                // 4. Código QR Dinámico
-                const qrContainer = document.getElementById("qrcode");
-                qrContainer.innerHTML = "";
-                const verifyUrl = `https://aureliosrios.github.io/project-control-ai/verificar.html?cod=${cert.codigo_verificacion}`;
-                new QRCode(qrContainer, { text: verifyUrl, width: 200, height: 200 });
+                // --- GENERAR QR ---
+                const qrDiv = document.getElementById("qrcode");
+                qrDiv.innerHTML = "";
+                const verifyUrl = window.location.href + "?cod=" + cert.codigo_verificacion;
+                new QRCode(qrDiv, { text: verifyUrl, width: 200, height: 200, correctLevel: QRCode.CorrectLevel.H });
 
+                // Espera para render de QR
                 setTimeout(async () => {
-                    const canvas = qrContainer.querySelector('canvas');
+                    const canvas = qrDiv.querySelector('canvas');
                     const qrImage = await pdfDoc.embedPng(canvas.toDataURL("image/png"));
-                    page.drawImage(qrImage, { x: 805, y: 125, width: 135, height: 135 });
+                    page.drawImage(qrImage, { x: 805, y: 135, width: 135, height: 135 });
 
+                    // Finalizar y Descargar
                     const pdfBytes = await pdfDoc.save();
                     const blob = new Blob([pdfBytes], { type: "application/pdf" });
+                    const link = document.createElement("a");
+                    link.href = URL.createObjectURL(blob);
+                    link.download = `Certificado_PCAI_${nombreOficial}.pdf`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
 
-                    // Bloqueo en DB para evitar re-descargas
+                    // Bloquear descarga en Supabase
                     await _supabase.from('certificados').update({
                         descarga_bloqueada: true,
                         nombre_confirmado: nombreOficial
                     }).eq('id', cert.id);
 
-                    const link = document.createElement("a");
-                    link.href = URL.createObjectURL(blob);
-                    link.download = `Certificado_PCAI_${nombreOficial}.pdf`;
-                    link.click();
-
                     btn.innerText = "Descargado";
-                    btn.className = "btn btn-locked";
-                }, 600);
+                }, 800);
 
-            } catch (e) {
-                console.error("Error PDF:", e);
-                alert("Hubo un error al generar el PDF. Revise la consola (F12).");
+            } catch (err) {
+                console.error("Error completo:", err);
+                alert("Error al generar PDF. Revise la consola.");
                 btn.disabled = false;
                 btn.innerText = "Reintentar";
             }

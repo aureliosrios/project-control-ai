@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación Oficial | Project Control AI</title>
-    <!-- Librerías de Ingeniería -->
+    <title>Portal de Certificados | Project Control AI</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -29,23 +28,21 @@
             border-radius: 24px;
             border: 1px solid rgba(56, 189, 248, 0.2);
             text-align: center;
-            max-width: 500px;
-            width: 90%;
+            max-width: 600px;
+            width: 95%;
             backdrop-filter: blur(10px);
         }
 
         .btn {
             background: #38bdf8;
             color: #020617;
-            padding: 15px 30px;
-            border-radius: 12px;
-            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 10px;
             font-weight: 700;
-            display: inline-block;
             cursor: pointer;
             border: none;
-            margin-top: 20px;
             transition: 0.3s;
+            margin: 5px;
         }
 
         .btn:hover {
@@ -53,16 +50,16 @@
             transform: translateY(-2px);
         }
 
-        .btn:disabled {
+        .btn-locked {
             background: #475569;
             cursor: not-allowed;
-            transform: none;
+            opacity: 0.6;
         }
 
         .input-dni {
             width: 100%;
             padding: 15px;
-            margin: 20px 0;
+            margin-bottom: 20px;
             border-radius: 10px;
             border: 1px solid #1e293b;
             background: #0f172a;
@@ -72,14 +69,13 @@
             outline: none;
         }
 
-        .input-dni:focus {
-            border-color: #38bdf8;
-        }
-
-        #status {
-            margin-bottom: 20px;
-            font-weight: 600;
-            color: #38bdf8;
+        .cert-card {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 15px;
+            border: 1px solid #334155;
+            text-align: left;
         }
 
         .logo {
@@ -92,91 +88,81 @@
 <body>
     <div class="container">
         <img src="Logotipo.png" alt="Project Control AI" class="logo">
-        <div id="status">Iniciando verificación de folio...</div>
+        <h2 style="margin-top:0; color:#38bdf8;">Portal de Certificación</h2>
 
-        <!-- SECCIÓN 1: VALIDACIÓN DE IDENTIDAD -->
-        <div id="authSection" style="display:none;">
-            <p style="color: #94a3b8;">Por seguridad, ingrese el <b>DNI</b> del titular para emitir el certificado:</p>
-            <input type="text" id="dniInput" class="input-dni" placeholder="DNI del Alumno">
-            <button class="btn" onclick="validarDNI()">Validar Identidad</button>
+        <div id="searchSection">
+            <p style="color: #94a3b8;">Ingrese su DNI para consultar sus certificados disponibles:</p>
+            <input type="text" id="dniInput" class="input-dni" placeholder="Número de DNI">
+            <button class="btn" style="width:100%" onclick="buscarCertificados()">Consultar</button>
         </div>
 
-        <!-- SECCIÓN 2: DESCARGA -->
-        <div id="result" style="display:none;">
-            <h2 style="color: #10b981; margin-top:0;">✓ Folio Auténtico</h2>
-            <div id="detalles" style="font-size: 1.1rem; border-bottom: 1px solid #334155; padding-bottom: 15px;"></div>
-            <button class="btn" id="dlBtn" onclick="procesarDiploma()">Generar Certificado PDF</button>
-            <p id="lockMsg" style="color:#fb923c; font-size:0.85rem; margin-top:15px; display:none;">
-                ⚠️ El certificado ya fue descargado. Si necesita una copia adicional, contacte al Ing. Aurelio
-                Solórzano.
-            </p>
+        <div id="resultsSection" style="display:none;">
+            <button class="btn" style="background:none; color:#38bdf8; font-size:0.8rem; padding:0; margin-bottom:15px;"
+                onclick="location.reload()">← Volver a buscar</button>
+            <div id="listaCertificados"></div>
         </div>
     </div>
 
-    <!-- Generador de QR oculto (necesario para el PDF) -->
     <div id="qrcode" style="display:none;"></div>
 
     <script>
-        // Configuración Project Control AI
         const _supabase = supabase.createClient('https://bpsumudexpywfffcwpun.supabase.co', 'sb_publishable_OzjgZjclmEDlDuVdLGuvQQ_SyX2aTy0');
-        const urlParams = new URLSearchParams(window.location.search);
-        const folio = urlParams.get('cod');
-        let certData = null;
 
-        async function start() {
-            if (!folio) {
-                document.getElementById('status').innerHTML = "<span style='color:#ef4444'>Acceso Denegado: Falta código de folio.</span>";
+        async function buscarCertificados() {
+            const dni = document.getElementById('dniInput').value.trim();
+            if (!dni) return alert("Ingrese un DNI");
+
+            // Buscamos los certificados vinculados a ese DNI a través de la tabla alumnos
+            const { data, error } = await _supabase
+                .from('certificados')
+                .select('*, alumnos!inner(*)')
+                .eq('alumnos.dni', dni);
+
+            if (error || !data || data.length === 0) {
+                alert("No se encontraron certificados aprobados para este DNI.");
                 return;
             }
 
-            // Consultamos los datos uniendo Tablas Alumnos + Certificados
-            const { data, error } = await _supabase
-                .from('certificados')
-                .select('*, alumnos(*)')
-                .eq('codigo_verificacion', folio)
-                .single();
-
-            if (error || !data) {
-                document.getElementById('status').innerHTML = "<span style='color:#ef4444'>Folio no encontrado en el sistema central.</span>";
-            } else {
-                certData = data;
-                document.getElementById('status').style.display = 'none';
-                document.getElementById('authSection').style.display = 'block';
-            }
+            mostrarResultados(data);
         }
 
-        function validarDNI() {
-            const input = document.getElementById('dniInput').value.trim();
-            if (input === certData.alumnos.dni) {
-                document.getElementById('authSection').style.display = 'none';
+        function mostrarResultados(certificados) {
+            document.getElementById('searchSection').style.display = 'none';
+            const container = document.getElementById('listaCertificados');
+            container.innerHTML = `<p style="margin-bottom:20px;">Certificados encontrados para: <b>${certificados[0].alumnos.nombre} ${certificados[0].alumnos.apellido}</b></p>`;
 
-                // MOSTRAR CAMPO DE CORRECCIÓN DE NOMBRE
-                document.getElementById('result').style.display = 'block';
-                document.getElementById('detalles').innerHTML = `
-                    <p style="margin-bottom:10px;">Hola <b>${certData.alumnos.nombre}</b>, antes de generar tu certificado, 
-                    por favor confirma o corrige cómo debe aparecer tu nombre:</p>
-                    <input type="text" id="nombreCorrecto" class="input-dni" 
-                           value="${certData.alumnos.nombre} ${certData.alumnos.apellido}">
-                    <p style="font-size:0.8rem; color:#fb923c; margin-top:5px;">⚠️ Una vez generado, no podrás cambiarlo.</p>
-                `;
+            certificados.forEach(cert => {
+                const card = document.createElement('div');
+                card.className = 'cert-card';
 
-                // Aplicar regla de negocio: Bloqueo tras descarga
-                if (certData.descarga_bloqueada) {
-                    const btn = document.getElementById('dlBtn');
-                    btn.innerText = "Descarga Inhabilitada";
-                    btn.disabled = true;
-                    document.getElementById('lockMsg').style.display = 'block';
+                let btnHtml = `<button class="btn" onclick="procesarDiploma('${cert.id}')">Descargar PDF</button>`;
+                if (cert.descarga_bloqueada) {
+                    btnHtml = `<button class="btn btn-locked" disabled>Descarga Bloqueada (Límite)</button>`;
                 }
-            } else {
-                alert("DNI incorrecto. Verifique sus datos.");
-            }
+
+                card.innerHTML = `
+                    <div style="display:flex; justify-content:space-between; align-items:center; gap:15px;">
+                        <div style="flex:1;">
+                            <div style="font-weight:bold; color:#38bdf8; font-size:1.1rem;">${cert.curso_nombre}</div>
+                            <div style="font-size:0.85rem; color:#94a3b8; margin-top:4px;">Folio: ${cert.codigo_verificacion}</div>
+                        </div>
+                        ${btnHtml}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            document.getElementById('resultsSection').style.display = 'block';
         }
 
-        async function procesarDiploma() {
-            const btn = document.getElementById('dlBtn');
-            const nuevoNombre = document.getElementById('nombreCorrecto').value; // El nombre que el alumno corrigió
+        async function procesarDiploma(certId) {
+            // 1. Obtener datos frescos del certificado seleccionado
+            const { data: cert, error } = await _supabase.from('certificados').select('*, alumnos(*)').eq('id', certId).single();
 
-            btn.innerText = "Emitiendo Ingeniería Aumentada...";
+            if (error || !cert) return alert("Error al recuperar los datos del certificado.");
+
+            const btn = event.target;
+            const originalText = btn.innerText;
+            btn.innerText = "Generando...";
             btn.disabled = true;
 
             try {
@@ -189,35 +175,46 @@
                 const page = pdfDoc.getPages()[0];
                 const { width, height } = page.getSize();
 
-                // --- FORMATEO DE FECHAS (Lectura desde el Panel del Director) ---
-                const options = { day: 'numeric', month: 'long', year: 'numeric' };
-                const pInicio = new Date(certData.fecha_inicio_clases).toLocaleDateString('es-ES', options);
-                const pFin = new Date(certData.fecha_fin_clases).toLocaleDateString('es-ES', options);
-                const fEmision = new Date(certData.fecha_emision).toLocaleDateString('es-ES', options);
+                // --- ESCRITURA DINÁMICA ---
+                // Usamos nombre_confirmado si existe, si no, el nombre de la tabla alumnos
+                const nombreMostrar = cert.nombre_confirmado || `${cert.alumnos.nombre} ${cert.alumnos.apellido}`;
+                const nombreFinal = nombreMostrar.toUpperCase();
 
-                // --- ESCRITURA EN EL PDF ---
-
-                // 1. Nombre Corregido por el Alumno (Dorado)
-                page.drawText(nuevoNombre.toUpperCase(), {
-                    x: width / 2 - (nuevoNombre.length * 8), // Centrado dinámico
+                page.drawText(nombreFinal, {
+                    x: width / 2 - (nombreFinal.length * 8.5),
                     y: height - 265,
                     size: 32, font: fontBold, color: rgb(0.98, 0.75, 0.14)
                 });
 
-                // 2. Periodo Académico (Debajo de las etiquetas)
-                page.drawText(pInicio, { x: 130, y: height - 480, size: 14, color: rgb(0, 0, 0) });
-                page.drawText(pFin, { x: 510, y: height - 480, size: 14, color: rgb(0, 0, 0) });
+                // Curso
+                page.drawText(cert.curso_nombre.toUpperCase(), {
+                    x: width / 2 - (cert.curso_nombre.length * 6),
+                    y: height - 355,
+                    size: 24,
+                    font: fontBold,
+                    color: rgb(0.13, 0.45, 0.93)
+                });
 
-                // 3. Fecha de Emisión (Derecha)
-                page.drawText(fEmision, { x: 510, y: height - 480, size: 14, color: rgb(0, 0, 0) });
+                // Fechas (Lectura desde el Panel del Director)
+                if (cert.fecha_inicio_clases && cert.fecha_fin_clases) {
+                    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+                    const fInicio = new Date(cert.fecha_inicio_clases).toLocaleDateString('es-ES', options);
+                    const fFin = new Date(cert.fecha_fin_clases).toLocaleDateString('es-ES', options);
+                    const fEmision = cert.fecha_emision ? new Date(cert.fecha_emision).toLocaleDateString('es-ES', options) : fFin;
 
-                // 4. ID Folio y QR
-                page.drawText(`ID: ${certData.codigo_verificacion}`, { x: 810, y: 85, size: 10, color: rgb(1, 1, 1) });
+                    page.drawText(fInicio, { x: 130, y: height - 480, size: 14, color: rgb(0, 0, 0) });
+                    page.drawText(fFin, { x: 510, y: height - 480, size: 14, color: rgb(0, 0, 0) });
+                    page.drawText(fEmision, { x: 510, y: height - 480, size: 14, color: rgb(0, 0, 0) }); // Ajustar posición según diseño real
+                }
 
-                // --- GENERAR QR E INSERTAR ---
+                // ID Folio
+                page.drawText(`ID: ${cert.codigo_verificacion}`, { x: 810, y: 85, size: 10, color: rgb(1, 1, 1) });
+
+                // QR dinámico (Apunta a este mismo archivo con el folio)
                 const qrContainer = document.getElementById("qrcode");
                 qrContainer.innerHTML = "";
-                new QRCode(qrContainer, { text: window.location.href, width: 200, height: 200 });
+                const verifyUrl = `${window.location.origin}${window.location.pathname}?cod=${cert.codigo_verificacion}`;
+                new QRCode(qrContainer, { text: verifyUrl, width: 200, height: 200 });
 
                 setTimeout(async () => {
                     const canvas = qrContainer.querySelector('canvas');
@@ -227,27 +224,44 @@
                     const pdfBytes = await pdfDoc.save();
                     const blob = new Blob([pdfBytes], { type: "application/pdf" });
 
-                    // Guardar nombre confirmado en DB y bloquear
-                    await _supabase.from('certificados').update({
-                        nombre_confirmado: nuevoNombre,
-                        descarga_bloqueada: true
-                    }).eq('id', certData.id);
+                    // Bloqueo en DB
+                    await _supabase.from('certificados').update({ descarga_bloqueada: true }).eq('id', cert.id);
 
                     const link = document.createElement("a");
                     link.href = URL.createObjectURL(blob);
-                    link.download = `Certificado_PCAI_${nuevoNombre}.pdf`;
+                    link.download = `Certificado_PCAI_${cert.alumnos.apellido}.pdf`;
                     link.click();
-                    btn.innerText = "Descarga Exitosa";
+                    btn.innerText = "Descargado";
+                    btn.classList.add('btn-locked');
                 }, 600);
 
             } catch (e) {
                 console.error(e);
-                alert("Error en el motor de impresión.");
+                alert("Error en el motor PDF.");
+                btn.innerText = originalText;
                 btn.disabled = false;
-                btn.innerText = "Generar Certificado PDF";
             }
         }
-        start();
+
+        // FUNCIÓN AUTO-START: Para verificación directa vía QR
+        async function start() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const folio = urlParams.get('cod');
+            if (folio) {
+                const { data, error } = await _supabase
+                    .from('certificados')
+                    .select('*, alumnos!inner(*)')
+                    .eq('codigo_verificacion', folio)
+                    .single();
+
+                if (data && !error) {
+                    mostrarResultados([data]);
+                } else {
+                    console.log("Folio no encontrado.");
+                }
+            }
+        }
+        window.onload = start;
     </script>
 </body>
 

@@ -129,7 +129,16 @@
         function mostrarResultados(certificados) {
             document.getElementById('searchSection').style.display = 'none';
             const container = document.getElementById('listaCertificados');
-            container.innerHTML = `<p style="margin-bottom:20px;">Certificados encontrados para: <b>${certificados[0].alumnos.nombre} ${certificados[0].alumnos.apellido}</b></p>`;
+
+            // Tomamos el nombre actual de la base de datos como sugerencia
+            const nombreSugerido = `${certificados[0].alumnos.nombre} ${certificados[0].alumnos.apellido}`;
+
+            container.innerHTML = `
+                <div style="margin-bottom:20px; padding:15px; background:rgba(56, 189, 248, 0.1); border-radius:10px;">
+                    <p style="font-size:0.9rem; color:#94a3b8; margin-bottom:10px;">Confirme o corrija su nombre oficial para los certificados:</p>
+                    <input type="text" id="nombreConfirmado" class="input-dni" value="${nombreSugerido.toUpperCase()}">
+                </div>
+            `;
 
             certificados.forEach(cert => {
                 const card = document.createElement('div');
@@ -137,14 +146,14 @@
 
                 let btnHtml = `<button class="btn" onclick="procesarDiploma('${cert.id}')">Descargar PDF</button>`;
                 if (cert.descarga_bloqueada) {
-                    btnHtml = `<button class="btn btn-locked" disabled>Descarga Bloqueada (Límite)</button>`;
+                    btnHtml = `<button class="btn btn-locked" disabled>Descarga Bloqueada</button>`;
                 }
 
                 card.innerHTML = `
-                    <div style="display:flex; justify-content:space-between; align-items:center; gap:15px;">
-                        <div style="flex:1;">
-                            <div style="font-weight:bold; color:#38bdf8; font-size:1.1rem;">${cert.curso_nombre}</div>
-                            <div style="font-size:0.85rem; color:#94a3b8; margin-top:4px;">Folio: ${cert.codigo_verificacion}</div>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <div>
+                            <div style="font-weight:bold; color:#38bdf8;">${cert.curso_nombre}</div>
+                            <div style="font-size:0.8rem; color:#94a3b8;">Folio: ${cert.codigo_verificacion}</div>
                         </div>
                         ${btnHtml}
                     </div>
@@ -155,14 +164,15 @@
         }
 
         async function procesarDiploma(certId) {
-            // 1. Obtener datos frescos del certificado seleccionado
-            const { data: cert, error } = await _supabase.from('certificados').select('*, alumnos(*)').eq('id', certId).single();
+            const nombreOficial = document.getElementById('nombreConfirmado').value.trim();
+            if (!nombreOficial) return alert("Por favor, ingrese su nombre oficial.");
 
-            if (error || !cert) return alert("Error al recuperar los datos del certificado.");
+            // Buscamos los datos exactos de este certificado
+            const { data: cert } = await _supabase.from('certificados').select('*, alumnos(*)').eq('id', certId).single();
 
             const btn = event.target;
             const originalText = btn.innerText;
-            btn.innerText = "Generando...";
+            btn.innerText = "Emitiendo...";
             btn.disabled = true;
 
             try {
@@ -176,44 +186,32 @@
                 const { width, height } = page.getSize();
 
                 // --- ESCRITURA DINÁMICA ---
-                // Usamos nombre_confirmado si existe, si no, el nombre de la tabla alumnos
-                const nombreMostrar = cert.nombre_confirmado || `${cert.alumnos.nombre} ${cert.alumnos.apellido}`;
-                const nombreFinal = nombreMostrar.toUpperCase();
-
-                page.drawText(nombreFinal, {
-                    x: width / 2 - (nombreFinal.length * 8.5),
+                // 1. Nombre Corregido (Dorado)
+                page.drawText(nombreOficial.toUpperCase(), {
+                    x: width / 2 - (nombreOficial.length * 8), // Centrado automático
                     y: height - 265,
-                    size: 32, font: fontBold, color: rgb(0.98, 0.75, 0.14)
+                    size: 30, font: fontBold, color: rgb(0.98, 0.75, 0.14)
                 });
 
-                // Curso
-                page.drawText(cert.curso_nombre.toUpperCase(), {
-                    x: width / 2 - (cert.curso_nombre.length * 6),
-                    y: height - 355,
-                    size: 24,
-                    font: fontBold,
-                    color: rgb(0.13, 0.45, 0.93)
-                });
+                // 2. Curso (Azul)
+                page.drawText(cert.curso_nombre, { x: 120, y: height - 355, size: 22, font: fontBold, color: rgb(0.13, 0.45, 0.93) });
 
-                // Fechas (Lectura desde el Panel del Director)
+                // 3. Fechas (Si el director cerró el curso)
                 if (cert.fecha_inicio_clases && cert.fecha_fin_clases) {
                     const options = { day: 'numeric', month: 'long', year: 'numeric' };
                     const fInicio = new Date(cert.fecha_inicio_clases).toLocaleDateString('es-ES', options);
                     const fFin = new Date(cert.fecha_fin_clases).toLocaleDateString('es-ES', options);
                     const fEmision = cert.fecha_emision ? new Date(cert.fecha_emision).toLocaleDateString('es-ES', options) : fFin;
 
-                    page.drawText(fInicio, { x: 130, y: height - 480, size: 14, color: rgb(0, 0, 0) });
-                    page.drawText(fFin, { x: 510, y: height - 480, size: 14, color: rgb(0, 0, 0) });
-                    page.drawText(fEmision, { x: 510, y: height - 480, size: 14, color: rgb(0, 0, 0) }); // Ajustar posición según diseño real
+                    page.drawText(fInicio, { x: 130, y: height - 485, size: 14, color: rgb(0, 0, 0) });
+                    page.drawText(fFin, { x: 510, y: height - 485, size: 14, color: rgb(0, 0, 0) });
+                    page.drawText(fEmision, { x: 510, y: height - 485, size: 14, color: rgb(0, 0, 0) });
                 }
 
-                // ID Folio
-                page.drawText(`ID: ${cert.codigo_verificacion}`, { x: 810, y: 85, size: 10, color: rgb(1, 1, 1) });
-
-                // QR dinámico (Apunta a este mismo archivo con el folio)
+                // 4. Código QR Dinámico
                 const qrContainer = document.getElementById("qrcode");
                 qrContainer.innerHTML = "";
-                const verifyUrl = `${window.location.origin}${window.location.pathname}?cod=${cert.codigo_verificacion}`;
+                const verifyUrl = `https://aureliosrios.github.io/project-control-ai/verificar.html?cod=${cert.codigo_verificacion}`;
                 new QRCode(qrContainer, { text: verifyUrl, width: 200, height: 200 });
 
                 setTimeout(async () => {
@@ -224,22 +222,26 @@
                     const pdfBytes = await pdfDoc.save();
                     const blob = new Blob([pdfBytes], { type: "application/pdf" });
 
-                    // Bloqueo en DB
-                    await _supabase.from('certificados').update({ descarga_bloqueada: true }).eq('id', cert.id);
+                    // Bloqueo en DB para evitar re-descargas
+                    await _supabase.from('certificados').update({
+                        descarga_bloqueada: true,
+                        nombre_confirmado: nombreOficial
+                    }).eq('id', cert.id);
 
                     const link = document.createElement("a");
                     link.href = URL.createObjectURL(blob);
-                    link.download = `Certificado_PCAI_${cert.alumnos.apellido}.pdf`;
+                    link.download = `Certificado_PCAI_${nombreOficial}.pdf`;
                     link.click();
+
                     btn.innerText = "Descargado";
-                    btn.classList.add('btn-locked');
+                    btn.className = "btn btn-locked";
                 }, 600);
 
             } catch (e) {
-                console.error(e);
-                alert("Error en el motor PDF.");
-                btn.innerText = originalText;
+                console.error("Error PDF:", e);
+                alert("Hubo un error al generar el PDF. Revise la consola (F12).");
                 btn.disabled = false;
+                btn.innerText = "Reintentar";
             }
         }
 

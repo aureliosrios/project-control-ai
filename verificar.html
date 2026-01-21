@@ -164,82 +164,120 @@
             const btn = document.getElementById(`btn-${certId}`);
             const nombreOficial = document.getElementById('nombreConfirmado').value.trim();
 
-            btn.innerText = "Procesando...";
+            btn.innerText = "Imprimiendo Folio...";
             btn.disabled = true;
 
             try {
-                // 1. Obtener datos del certificado
                 const { data: cert } = await _supabase.from('certificados').select('*, alumnos(*)').eq('id', certId).single();
-
-                // 2. Cargar motor PDF
                 const { PDFDocument, rgb, StandardFonts } = PDFLib;
-                const templateUrl = "https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/academia/plantilla_maestra.pdf";
 
+                // 1. Cargar Plantilla Maestra (2 páginas)
+                const templateUrl = "https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/academia/plantilla_maestra.pdf";
                 const existingPdfBytes = await fetch(templateUrl).then(res => res.arrayBuffer());
                 const pdfDoc = await PDFDocument.load(existingPdfBytes);
                 const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-                const page = pdfDoc.getPages()[0];
-                const { width, height } = page.getSize();
+                const fontRegular = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
-                // --- ESCRIBIR EN EL PDF (COORDENADAS AJUSTADAS) ---
+                const pages = pdfDoc.getPages();
+                const page1 = pages[0];
+                const page2 = pages[1];
+                const { width, height } = page1.getSize();
 
-                // Nombre Alumno (Centrado)
-                page.drawText(nombreOficial.toUpperCase(), {
-                    x: width / 2 - (nombreOficial.length * 7.5),
-                    y: height - 250,
-                    size: 32, font: fontBold, color: rgb(0.98, 0.75, 0.14)
-                });
-
-                // Nombre del Curso
-                page.drawText(cert.curso_nombre, { x: 120, y: height - 340, size: 24, font: fontBold, color: rgb(0.13, 0.45, 0.93) });
-
-                // Fechas e ID
+                // --- FORMATEO DE FECHAS ---
                 const options = { day: 'numeric', month: 'long', year: 'numeric' };
                 const fInicio = cert.fecha_inicio_clases ? new Date(cert.fecha_inicio_clases).toLocaleDateString('es-ES', options) : "---";
                 const fFin = cert.fecha_fin_clases ? new Date(cert.fecha_fin_clases).toLocaleDateString('es-ES', options) : "---";
                 const fEmision = new Date(cert.fecha_emision).toLocaleDateString('es-ES', options);
+                const periodoTexto = `${fInicio} al ${fFin}`;
 
-                page.drawText(fInicio, { x: 130, y: height - 485, size: 14, color: rgb(0, 0, 0) });
-                page.drawText(fFin, { x: 510, y: height - 485, size: 14, color: rgb(0, 0, 0) });
-                page.drawText(fEmision, { x: 510, y: height - 485, size: 14, color: rgb(0, 0, 0) });
-                page.drawText(`ID: ${cert.codigo_verificacion}`, { x: width - 150, y: 110, size: 10, color: rgb(1, 1, 1) });
+                // ==========================================
+                // PÁGINA 1: CARÁTULA
+                // ==========================================
 
-                // --- GENERAR QR ---
+                // 1. Nombre del Alumno (Dorado - Centrado)
+                const txtNombre = nombreOficial.toUpperCase();
+                page1.drawText(txtNombre, {
+                    x: width / 2 - (txtNombre.length * 7),
+                    y: 375, // Ajustado a la línea de "Otorgado a"
+                    size: 30, font: fontBold, color: rgb(0.98, 0.75, 0.14)
+                });
+
+                // 2. Texto de Resumen Mastery (Fijo según su solicitud)
+                const summary = "Mastery in AI Forensic Bidding, Automated APU Engineering, and Strategic Procurement Risk Analysis.";
+                page1.drawText(summary, {
+                    x: width / 2 - (summary.length * 3.5),
+                    y: 315, size: 14, font: fontRegular, color: rgb(0.2, 0.2, 0.2)
+                });
+
+                // 3. Periodo Académico (Debajo del resumen)
+                const labelPeriodo = `Periodo académico: ${periodoTexto}`;
+                page1.drawText(labelPeriodo, {
+                    x: width / 2 - (labelPeriodo.length * 3.5),
+                    y: 285, size: 12, font: fontBold, color: rgb(0, 0, 0)
+                });
+
+                // 4. Folio ID (Cerca del QR)
+                page1.drawText(`ID: ${cert.codigo_verificacion}`, {
+                    x: 690, y: 105, size: 9, color: rgb(1, 1, 1)
+                });
+
+                // ==========================================
+                // PÁGINA 2: MÓDULOS Y FECHAS
+                // ==========================================
+
+                // 1. Fechas de Impartición (En la línea azul de la pág 2)
+                page2.drawText(periodoTexto, {
+                    x: width / 2 - (periodoTexto.length * 4),
+                    y: 65, size: 14, font: fontBold, color: rgb(0.13, 0.45, 0.93)
+                });
+
+                // 2. Fecha de Impresión / Emisión (Página 2)
+                const txtEmision = `Fecha de emisión: ${fEmision}`;
+                page2.drawText(txtEmision, {
+                    x: width / 2 - (txtEmision.length * 3),
+                    y: 45, size: 10, font: fontRegular, color: rgb(0.4, 0.4, 0.4)
+                });
+
+
+                // ==========================================
+                // GENERACIÓN DE QR DINÁMICO
+                // ==========================================
                 const qrDiv = document.getElementById("qrcode");
                 qrDiv.innerHTML = "";
-                const verifyUrl = window.location.href + "?cod=" + cert.codigo_verificacion;
+                const verifyUrl = window.location.origin + window.location.pathname + "?cod=" + cert.codigo_verificacion;
                 new QRCode(qrDiv, { text: verifyUrl, width: 200, height: 200, correctLevel: QRCode.CorrectLevel.H });
 
-                // Espera para render de QR
                 setTimeout(async () => {
                     const canvas = qrDiv.querySelector('canvas');
                     const qrImage = await pdfDoc.embedPng(canvas.toDataURL("image/png"));
-                    page.drawImage(qrImage, { x: 805, y: 135, width: 135, height: 135 });
 
-                    // Finalizar y Descargar
+                    // Ubicación del QR en el recuadro negro (Página 1)
+                    page1.drawImage(qrImage, {
+                        x: 685, y: 135, width: 115, height: 115
+                    });
+
+                    // Finalizar PDF
                     const pdfBytes = await pdfDoc.save();
                     const blob = new Blob([pdfBytes], { type: "application/pdf" });
                     const link = document.createElement("a");
                     link.href = URL.createObjectURL(blob);
-                    link.download = `Certificado_PCAI_${nombreOficial}.pdf`;
-                    document.body.appendChild(link);
+                    link.download = `Certificado_PCAI_${nombreOficial.replace(/ /g, "_")}.pdf`;
                     link.click();
-                    document.body.removeChild(link);
 
-                    // Bloquear descarga en Supabase
+                    // Bloquear en Supabase
                     await _supabase.from('certificados').update({
                         descarga_bloqueada: true,
                         nombre_confirmado: nombreOficial
                     }).eq('id', cert.id);
 
-                    btn.innerText = "Descargado";
+                    btn.innerText = "Certificado Emitido";
+                    btn.className = "btn btn-locked";
                 }, 800);
 
             } catch (err) {
-                console.error("Error completo:", err);
-                alert("Error al generar PDF. Revise la consola.");
+                console.error(err);
+                alert("Error en el Motor ConTech. Revise consola.");
                 btn.disabled = false;
-                btn.innerText = "Reintentar";
             }
         }
 

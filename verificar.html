@@ -171,7 +171,6 @@
             const { data: cert } = await _supabase.from('certificados').select('*, alumnos(*)').eq('id', certId).single();
 
             const btn = event.target;
-            const originalText = btn.innerText;
             btn.innerText = "Emitiendo...";
             btn.disabled = true;
 
@@ -201,7 +200,7 @@
                     const options = { day: 'numeric', month: 'long', year: 'numeric' };
                     const fInicio = new Date(cert.fecha_inicio_clases).toLocaleDateString('es-ES', options);
                     const fFin = new Date(cert.fecha_fin_clases).toLocaleDateString('es-ES', options);
-                    const fEmision = cert.fecha_emision ? new Date(cert.fecha_emision).toLocaleDateString('es-ES', options) : fFin;
+                    const fEmision = new Date(cert.fecha_emision).toLocaleDateString('es-ES', options);
 
                     page.drawText(fInicio, { x: 130, y: height - 485, size: 14, color: rgb(0, 0, 0) });
                     page.drawText(fFin, { x: 510, y: height - 485, size: 14, color: rgb(0, 0, 0) });

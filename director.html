@@ -183,50 +183,31 @@
         // 2. EJECUTAR EL CIERRE MASIVO
         async function cerrarCurso() {
             const curso = document.getElementById('cursoFiltro').value;
-            const inicio = document.getElementById('fInicio').value;
-            const fin = document.getElementById('fFin').value;
+            const inicio = document.getElementById('fInicio').value; // Formato YYYY-MM-DD
+            const fin = document.getElementById('fFin').value;     // Formato YYYY-MM-DD
             const msgBox = document.getElementById('status-msg');
-            const btn = document.getElementById('btnAplicar');
 
-            if (!curso || !inicio || !fin) {
-                alert("Por favor, complete el curso y ambas fechas.");
-                return;
-            }
+            if (!curso || !inicio || !fin) return alert("Complete curso, inicio y fin.");
 
-            if (!confirm(`¿Confirmas aplicar las fechas oficiales a todos los alumnos de "${curso}"?`)) return;
-
-            btn.disabled = true;
-            btn.innerText = "Procesando...";
             msgBox.style.display = "block";
             msgBox.style.background = "#1e293b";
-            msgBox.style.color = "white";
-            msgBox.innerText = "Inyectando fechas en Supabase...";
+            msgBox.innerText = `Sincronizando ${curso}...`;
 
-            try {
-                // Actualizar todos los certificados que coincidan con ese nombre de curso
-                const { error } = await _supabase
-                    .from('certificados')
-                    .update({
-                        fecha_inicio_clases: inicio,
-                        fecha_fin_clases: fin
-                    })
-                    .eq('curso_nombre', curso);
+            // ACTUALIZACIÓN FORZADA (Quitamos el filtro .is(null))
+            const { data, error } = await _supabase
+                .from('certificados')
+                .update({
+                    fecha_inicio_clases: inicio,
+                    fecha_fin_clases: fin
+                })
+                .eq('curso_nombre', curso);
 
-                if (error) throw error;
-
-                msgBox.style.background = "#064e3b";
-                msgBox.innerText = `ÉXITO: Se han actualizado los certificados para: ${curso}`;
-                setTimeout(() => {
-                    msgBox.style.display = "none";
-                    btn.disabled = false;
-                    btn.innerText = "Aplicar Fechas a Certificados";
-                }, 5000);
-
-            } catch (e) {
+            if (error) {
                 msgBox.style.background = "#450a0a";
-                msgBox.innerText = "Error: " + e.message;
-                btn.disabled = false;
-                btn.innerText = "Aplicar Fechas a Certificados";
+                msgBox.innerText = "Error: " + error.message;
+            } else {
+                msgBox.style.background = "#064e3b";
+                msgBox.innerHTML = `✅ ÉXITO TOTAL: Ciclo de <b>${curso}</b> actualizado con fechas: <br> ${inicio} al ${fin}`;
             }
         }
 

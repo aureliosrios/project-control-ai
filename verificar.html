@@ -171,7 +171,6 @@
                 const { data: cert } = await _supabase.from('certificados').select('*, alumnos(*)').eq('id', certId).single();
                 const { PDFDocument, rgb, StandardFonts } = PDFLib;
 
-                // 1. Cargar Plantilla Maestra (2 páginas)
                 const templateUrl = "https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/academia/plantilla_maestra.pdf";
                 const existingPdfBytes = await fetch(templateUrl).then(res => res.arrayBuffer());
                 const pdfDoc = await PDFDocument.load(existingPdfBytes);
@@ -187,76 +186,66 @@
                 const options = { day: 'numeric', month: 'long', year: 'numeric' };
                 const fInicio = cert.fecha_inicio_clases ? new Date(cert.fecha_inicio_clases).toLocaleDateString('es-ES', options) : "---";
                 const fFin = cert.fecha_fin_clases ? new Date(cert.fecha_fin_clases).toLocaleDateString('es-ES', options) : "---";
-                const fEmision = new Date(cert.fecha_emision).toLocaleDateString('es-ES', options);
+                const fEmision = new Date().toLocaleDateString('es-ES', options); // Fecha de hoy
                 const periodoTexto = `${fInicio} al ${fFin}`;
 
                 // ==========================================
                 // PÁGINA 1: CARÁTULA
                 // ==========================================
 
-                // 1. Nombre del Alumno (Dorado - Centrado)
+                // 1. Nombre del Alumno (Subido y Centrado)
                 const txtNombre = nombreOficial.toUpperCase();
                 page1.drawText(txtNombre, {
-                    x: width / 2 - (txtNombre.length * 7),
-                    y: 375, // Ajustado a la línea de "Otorgado a"
-                    size: 30, font: fontBold, color: rgb(0.98, 0.75, 0.14)
+                    x: width / 2 - (txtNombre.length * 7.2),
+                    y: 445, // SUBIDO: Estaba en 375
+                    size: 28, font: fontBold, color: rgb(0.98, 0.75, 0.14)
                 });
 
-                // 2. Texto de Resumen Mastery (Fijo según su solicitud)
-                const summary = "Mastery in AI Forensic Bidding, Automated APU Engineering, and Strategic Procurement Risk Analysis.";
-                page1.drawText(summary, {
-                    x: width / 2 - (summary.length * 3.5),
-                    y: 315, size: 14, font: fontRegular, color: rgb(0.2, 0.2, 0.2)
+                // 2. Periodo Académico (Ubicación optimizada)
+                page1.drawText(periodoTexto, {
+                    x: 185 - (periodoTexto.length * 1.5),
+                    y: 215, size: 13, font: fontBold, color: rgb(0, 0, 0)
                 });
 
-                // 3. Periodo Académico (Debajo del resumen)
-                const labelPeriodo = `Periodo académico: ${periodoTexto}`;
-                page1.drawText(labelPeriodo, {
-                    x: width / 2 - (labelPeriodo.length * 3.5),
-                    y: 285, size: 12, font: fontBold, color: rgb(0, 0, 0)
-                });
-
-                // 4. Folio ID (Cerca del QR)
+                // 3. Folio ID (Blanco, junto al QR)
                 page1.drawText(`ID: ${cert.codigo_verificacion}`, {
-                    x: 690, y: 105, size: 9, color: rgb(1, 1, 1)
+                    x: 708, y: 155, size: 8, color: rgb(1, 1, 1)
                 });
 
                 // ==========================================
-                // PÁGINA 2: MÓDULOS Y FECHAS
+                // PÁGINA 2: REVERSO
                 // ==========================================
 
-                // 1. Fechas de Impartición (En la línea azul de la pág 2)
-                page2.drawText(periodoTexto, {
-                    x: width / 2 - (periodoTexto.length * 4),
-                    y: 65, size: 14, font: fontBold, color: rgb(0.13, 0.45, 0.93)
+                // 1. Fechas de Impartición (Sobre línea azul inferior)
+                page2.drawText(`Periodo de impartición: ${periodoTexto}`, {
+                    x: width / 2 - 120,
+                    y: 65, size: 12, font: fontBold, color: rgb(0.13, 0.45, 0.93)
                 });
 
-                // 2. Fecha de Impresión / Emisión (Página 2)
-                const txtEmision = `Fecha de emisión: ${fEmision}`;
-                page2.drawText(txtEmision, {
-                    x: width / 2 - (txtEmision.length * 3),
-                    y: 45, size: 10, font: fontRegular, color: rgb(0.4, 0.4, 0.4)
+                // 2. Fecha de Impresión (Debajo de la línea)
+                const msgImpresion = `Documento emitido digitalmente el ${fEmision}`;
+                page2.drawText(msgImpresion, {
+                    x: width / 2 - 100,
+                    y: 45, size: 9, font: fontRegular, color: rgb(0.4, 0.4, 0.4)
                 });
-
 
                 // ==========================================
-                // GENERACIÓN DE QR DINÁMICO
+                // QR DINÁMICO (TAMAÑO REDUCIDO)
                 // ==========================================
                 const qrDiv = document.getElementById("qrcode");
                 qrDiv.innerHTML = "";
-                const verifyUrl = window.location.origin + window.location.pathname + "?cod=" + cert.codigo_verificacion;
-                new QRCode(qrDiv, { text: verifyUrl, width: 200, height: 200, correctLevel: QRCode.CorrectLevel.H });
+                const verifyUrl = `https://aureliosrios.github.io/project-control-ai/verificar.html?cod=${cert.codigo_verificacion}`;
+                new QRCode(qrDiv, { text: verifyUrl, width: 150, height: 150, correctLevel: QRCode.CorrectLevel.H });
 
                 setTimeout(async () => {
                     const canvas = qrDiv.querySelector('canvas');
                     const qrImage = await pdfDoc.embedPng(canvas.toDataURL("image/png"));
 
-                    // Ubicación del QR en el recuadro negro (Página 1)
+                    // Ubicación del QR centrada en el cuadro negro
                     page1.drawImage(qrImage, {
-                        x: 685, y: 135, width: 115, height: 115
+                        x: 710, y: 180, width: 85, height: 85 // REDUCIDO: Estaba en 115
                     });
 
-                    // Finalizar PDF
                     const pdfBytes = await pdfDoc.save();
                     const blob = new Blob([pdfBytes], { type: "application/pdf" });
                     const link = document.createElement("a");
@@ -264,19 +253,18 @@
                     link.download = `Certificado_PCAI_${nombreOficial.replace(/ /g, "_")}.pdf`;
                     link.click();
 
-                    // Bloquear en Supabase
                     await _supabase.from('certificados').update({
                         descarga_bloqueada: true,
                         nombre_confirmado: nombreOficial
                     }).eq('id', cert.id);
 
-                    btn.innerText = "Certificado Emitido";
+                    btn.innerText = "Descarga Finalizada";
                     btn.className = "btn btn-locked";
                 }, 800);
 
             } catch (err) {
                 console.error(err);
-                alert("Error en el Motor ConTech. Revise consola.");
+                alert("Error en Motor PDF. Revise la consola (F12)");
                 btn.disabled = false;
             }
         }

@@ -166,6 +166,13 @@
 
             try {
                 const { data: cert } = await _supabase.from('certificados').select('*, alumnos(*)').eq('id', certId).single();
+
+                // ESTO ES PARA DIAGNÓSTICO: Presione F12 en la web para ver si salen las fechas
+                console.log("DATOS RECIBIDOS DE SUPABASE:", cert);
+
+                if (!cert.fecha_fin_clases) {
+                    alert("Atención: Este certificado aún no tiene fecha de fin en la base de datos.");
+                }
                 const { PDFDocument, rgb, StandardFonts } = PDFLib;
 
                 const templateUrl = "https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/academia/plantilla_maestra.pdf";

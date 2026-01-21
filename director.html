@@ -204,15 +204,13 @@
 
             try {
                 // Actualizar todos los certificados que coincidan con ese nombre de curso
-                // Este comando solo afectará a los certificados que tienen la fecha vacía (ciclo actual)
                 const { error } = await _supabase
                     .from('certificados')
                     .update({
                         fecha_inicio_clases: inicio,
                         fecha_fin_clases: fin
                     })
-                    .eq('curso_nombre', curso)
-                    .is('fecha_fin_clases', null); // <<< EL FILTRO DE SEGURIDAD
+                    .eq('curso_nombre', curso);
 
                 if (error) throw error;
 

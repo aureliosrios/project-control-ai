@@ -140,11 +140,8 @@
             certificados.forEach(cert => {
                 const card = document.createElement('div');
                 card.className = 'cert-card';
+                // ELIMINADA LA LÓGICA DE BLOQUEO: El botón siempre estará activo
                 let btnHtml = `<button class="btn" id="btn-${cert.id}" onclick="procesarDiploma('${cert.id}')">Descargar PDF</button>`;
-
-                if (cert.descarga_bloqueada) {
-                    btnHtml = `<button class="btn btn-locked" disabled>Descarga Bloqueada</button>`;
-                }
 
                 card.innerHTML = `
                     <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -164,7 +161,7 @@
             const btn = document.getElementById(`btn-${certId}`);
             const nombreOficial = document.getElementById('nombreConfirmado').value.trim();
 
-            btn.innerText = "Imprimiendo Folio...";
+            btn.innerText = "Procesando...";
             btn.disabled = true;
 
             try {
@@ -197,7 +194,7 @@
                 const txtNombre = nombreOficial.toUpperCase();
                 page1.drawText(txtNombre, {
                     x: width / 2 - (txtNombre.length * 7.2),
-                    y: 445, // SUBIDO: Estaba en 375
+                    y: 445,
                     size: 28, font: fontBold, color: rgb(0.98, 0.75, 0.14)
                 });
 
@@ -243,7 +240,7 @@
 
                     // Ubicación del QR centrada en el cuadro negro
                     page1.drawImage(qrImage, {
-                        x: 710, y: 180, width: 85, height: 85 // REDUCIDO: Estaba en 115
+                        x: 710, y: 180, width: 85, height: 85
                     });
 
                     const pdfBytes = await pdfDoc.save();
@@ -253,18 +250,19 @@
                     link.download = `Certificado_PCAI_${nombreOficial.replace(/ /g, "_")}.pdf`;
                     link.click();
 
+                    // ELIMINADA LA ACTUALIZACIÓN DE BLOQUEO EN SUPABASE
+                    // Solo actualizamos el nombre confirmado para registro interno
                     await _supabase.from('certificados').update({
-                        descarga_bloqueada: true,
                         nombre_confirmado: nombreOficial
                     }).eq('id', cert.id);
 
-                    btn.innerText = "Descarga Finalizada";
-                    btn.className = "btn btn-locked";
+                    btn.innerText = "Descargar PDF"; // Vuelve al texto original
+                    btn.disabled = false; // El botón queda libre para otra prueba
                 }, 800);
 
             } catch (err) {
                 console.error(err);
-                alert("Error en Motor PDF. Revise la consola (F12)");
+                alert("Error en Motor PDF.");
                 btn.disabled = false;
             }
         }

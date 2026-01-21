@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificación Oficial | Project Control AI</title>
+    <!-- Librerías de Ingeniería -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #020617;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: rgba(30, 41, 59, 0.8);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn {
+            background: #38bdf8;
+            color: #020617;
+            padding: 15px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            cursor: pointer;
+            border: none;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #22d3ee;
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            background: #475569;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .input-dni {
+            width: 100%;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 1px solid #1e293b;
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            font-size: 1.2rem;
+            outline: none;
+        }
+
+        .input-dni:focus {
+            border-color: #38bdf8;
+        }
+
+        #status {
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #38bdf8;
+        }
+
+        .logo {
+            height: 60px;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img src="Logotipo.png" alt="Project Control AI" class="logo">
+        <div id="status">Iniciando verificación de folio...</div>
+
+        <!-- SECCIÓN 1: VALIDACIÓN DE IDENTIDAD -->
+        <div id="authSection" style="display:none;">
+            <p style="color: #94a3b8;">Por seguridad, ingrese el <b>DNI</b> del titular para emitir el certificado:</p>
+            <input type="text" id="dniInput" class="input-dni" placeholder="DNI del Alumno">
+            <button class="btn" onclick="verificarIdentidad()">Validar Identidad</button>
+        </div>
+
+        <!-- SECCIÓN 2: DESCARGA -->
+        <div id="downloadSection" style="display:none;">
+            <h2 style="color: #10b981; margin-top:0;">✓ Folio Auténtico</h2>
+            <p id="certInfo" style="font-size: 1.1rem; border-bottom: 1px solid #334155; padding-bottom: 15px;"></p>
+            <button class="btn" id="dlBtn" onclick="procesarDiploma()">Generar Certificado PDF</button>
+            <p id="lockMsg" style="color:#fb923c; font-size:0.85rem; margin-top:15px; display:none;">
+                ⚠️ El certificado ya fue descargado. Si necesita una copia adicional, contacte al Ing. Aurelio
+                Solórzano.
+            </p>
+        </div>
+    </div>
+
+    <!-- Generador de QR oculto (necesario para el PDF) -->
+    <div id="qrcode" style="display:none;"></div>
+
+    <script>
+        // Configuración Project Control AI
+        const _supabase = supabase.createClient('https://bpsumudexpywfffcwpun.supabase.co', 'sb_publishable_OzjgZjclmEDlDuVdLGuvQQ_SyX2aTy0');
+        const urlParams = new URLSearchParams(window.location.search);
+        const folio = urlParams.get('cod');
+        let certData = null;
+
+        async function start() {
+            if (!folio) {
+                document.getElementById('status').innerHTML = "<span style='color:#ef4444'>Acceso Denegado: Falta código de folio.</span>";
+                return;
+            }
+
+            // Consultamos los datos uniendo Tablas Alumnos + Certificados
+            const { data, error } = await _supabase
+                .from('certificados')
+                .select('*, alumnos(*)')
+                .eq('codigo_verificacion', folio)
+                .single();
+
+            if (error || !data) {
+                document.getElementById('status').innerHTML = "<span style='color:#ef4444'>Folio no encontrado en el sistema central.</span>";
+            } else {
+                certData = data;
+                document.getElementById('status').style.display = 'none';
+                document.getElementById('authSection').style.display = 'block';
+            }
+        }
+
+        function verificarIdentidad() {
+            const input = document.getElementById('dniInput').value.trim();
+            if (input === certData.alumnos.dni) {
+                document.getElementById('authSection').style.display = 'none';
+                document.getElementById('downloadSection').style.display = 'block';
+                document.getElementById('certInfo').innerHTML = `<b>Alumno:</b> ${certData.alumnos.nombre} ${certData.alumnos.apellido}<br><small>${certData.curso_nombre}</small>`;
+
+                // Aplicar regla de negocio: Bloqueo tras descarga
+                if (certData.descarga_bloqueada) {
+                    const btn = document.getElementById('dlBtn');
+                    btn.innerText = "Descarga Inhabilitada";
+                    btn.disabled = true;
+                    document.getElementById('lockMsg').style.display = 'block';
+                }
+            } else {
+                alert("DNI incorrecto. Verifique sus datos.");
+            }
+        }
+
+        async function procesarDiploma() {
+            const btn = document.getElementById('dlBtn');
+            const originalText = btn.innerText;
+            btn.innerText = "Escribiendo en Plantilla...";
+            btn.disabled = true;
+
+            try {
+                const { PDFDocument, rgb, StandardFonts } = PDFLib;
+                const templateUrl = "https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/academia/plantilla_maestra.pdf";
+
+                const existingPdfBytes = await fetch(templateUrl).then(res => res.arrayBuffer());
+                const pdfDoc = await PDFDocument.load(existingPdfBytes);
+                const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+                const pages = pdfDoc.getPages();
+                const page = pages[0];
+                const { width, height } = page.getSize();
+
+                // --- ESCRITURA DE DATOS ---
+                // Nombre Alumno (Color Dorado aproximado: #FBC024)
+                const nombre = `${certData.alumnos.nombre} ${certData.alumnos.apellido}`.toUpperCase();
+                page.drawText(nombre, {
+                    x: width / 2 - (nombre.length * 7), // Intento de centrado básico
+                    y: height - 250,
+                    size: 32,
+                    font: fontBold,
+                    color: rgb(0.98, 0.75, 0.14)
+                });
+
+                // Nombre del Curso (Color Azul: #2273ED)
+                const curso = certData.curso_nombre;
+                page.drawText(curso, {
+                    x: 100,
+                    y: height - 330,
+                    size: 24,
+                    font: fontBold,
+                    color: rgb(0.13, 0.45, 0.93)
+                });
+
+                // ID del Folio (Parte inferior derecha)
+                page.drawText(`ID: ${certData.codigo_verificacion}`, {
+                    x: width - 150,
+                    y: 110,
+                    size: 12,
+                    color: rgb(1, 1, 1)
+                });
+
+                // --- GENERAR QR E INSERTAR ---
+                const qrContainer = document.getElementById("qrcode");
+                qrContainer.innerHTML = ""; // Limpiar
+                new QRCode(qrContainer, { text: window.location.href, width: 200, height: 200 });
+
+                // Espera técnica para renderizado de QR
+                setTimeout(async () => {
+                    const canvas = qrContainer.querySelector('canvas');
+                    const qrImg64 = canvas.toDataURL("image/png");
+                    const qrImage = await pdfDoc.embedPng(qrImg64);
+
+                    // Posición sobre el recuadro negro de su diseño
+                    page.drawImage(qrImage, {
+                        x: width - 180,
+                        y: 140,
+                        width: 125,
+                        height: 125
+                    });
+
+                    // Guardar y descargar
+                    const pdfBytes = await pdfDoc.save();
+                    const blob = new Blob([pdfBytes], { type: "application/pdf" });
+                    const link = document.createElement("a");
+                    link.href = URL.createObjectURL(blob);
+                    link.download = `Certificado_PCAI_${certData.alumnos.apellido}.pdf`;
+                    link.click();
+
+                    // ACTUALIZAR BASE DE DATOS: Bloquear descarga futura
+                    await _supabase
+                        .from('certificados')
+                        .update({ descarga_bloqueada: true })
+                        .eq('id', certData.id);
+
+                    btn.innerText = "Descarga Completada";
+                }, 600);
+
+            } catch (e) {
+                console.error("Error en motor PDF:", e);
+                alert("Error al procesar el diploma dinámico.");
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
+        }
+        start();
+    </script>
+</body>
+
+</html>

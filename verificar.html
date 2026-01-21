@@ -161,7 +161,7 @@
             const btn = document.getElementById(`btn-${certId}`);
             const nombreOficial = document.getElementById('nombreConfirmado').value.trim();
 
-            btn.innerText = "Sincronizando coordenadas...";
+            btn.innerText = "Finalizando Acabados...";
             btn.disabled = true;
 
             try {
@@ -179,53 +179,60 @@
                 const page2 = pages[1];
                 const { width, height } = page1.getSize();
 
-                // --- PREPARACIÓN DE TEXTOS DINÁMICOS ---
+                // --- PREPARACIÓN DE FECHAS ---
                 const options = { day: 'numeric', month: 'long', year: 'numeric' };
                 const fInicio = cert.fecha_inicio_clases ? new Date(cert.fecha_inicio_clases).toLocaleDateString('es-ES', options) : "---";
                 const fFin = cert.fecha_fin_clases ? new Date(cert.fecha_fin_clases).toLocaleDateString('es-ES', options) : "---";
                 const fEmision = new Date().toLocaleDateString('es-ES', options);
 
-                // El texto compuesto que usted solicitó:
                 const textoDetalle = `con una duración de 45 horas, impartido del ${fInicio} al ${fFin} en modalidad online.`;
+                const periodoFase2 = `Periodo de impartición: del ${fInicio} al ${fFin}`;
+                const textoLima = `Lima, ${fEmision}`;
 
                 // ==========================================
-                // PÁGINA 1: CARÁTULA (ACABADOS)
+                // PÁGINA 1: CARÁTULA (AJUSTE FINO)
                 // ==========================================
 
-                // 1. Nombre del Alumno (Bajado un poco para que flote sobre la línea)
+                // 1. Nombre del Alumno (Centrado sobre la línea azul)
                 const txtNombre = nombreOficial.toUpperCase();
                 page1.drawText(txtNombre, {
-                    x: width / 2 - (txtNombre.length * 7.5),
-                    y: 430, // AJUSTADO: Bajó de 445 a 430
+                    x: width / 2 - (txtNombre.length * 6.5), // Ajuste de centrado
+                    y: 435,
                     size: 26, font: fontBold, color: rgb(0.98, 0.75, 0.14)
                 });
 
-                // 2. Texto de Resumen y Modalidad (Debajo del curso)
+                // 2. Texto de Fechas/Duración (DEBAJO del texto Mastery fijo)
                 page1.drawText(textoDetalle, {
-                    x: width / 2 - (textoDetalle.length * 3.2),
-                    y: 350, // Ubicado debajo del título del curso
-                    size: 11, font: fontRegular, color: rgb(0.2, 0.2, 0.2)
+                    x: width / 2 - (textoDetalle.length * 3.1),
+                    y: 325, // Bajado para estar debajo del Mastery
+                    size: 11, font: fontRegular, color: rgb(0.3, 0.3, 0.3)
                 });
 
-                // 3. Folio ID (Ubicación debajo del recuadro del QR)
+                // 3. Folio ID (Pequeño, debajo del cuadro QR)
                 page1.drawText(`ID: ${cert.codigo_verificacion}`, {
-                    x: 715, y: 130, size: 8, color: rgb(1, 1, 1)
+                    x: 715, y: 135, size: 8, color: rgb(1, 1, 1)
                 });
 
                 // ==========================================
-                // PÁGINA 2: REVERSO (LIMA + FECHA)
+                // PÁGINA 2: REVERSO (TRAZABILIDAD)
                 // ==========================================
 
-                // Texto solicitado: "Lima, [Fecha de hoy]"
-                const textoLima = `Lima, ${fEmision}`;
-                page2.drawText(textoLima, {
-                    x: width / 2 - (textoLima.length * 3.5),
-                    y: 60, // Sobre la línea azul inferior de la pág 2
+                // 1. Rango de Fechas (Sobre línea azul inferior)
+                page2.drawText(periodoFase2, {
+                    x: width / 2 - (periodoFase2.length * 3.5),
+                    y: 75, // Ubicación precisa sobre la línea azul
                     size: 13, font: fontBold, color: rgb(0.13, 0.45, 0.93)
                 });
 
+                // 2. Fecha de Impresión: Lima, [Hoy]
+                page2.drawText(textoLima, {
+                    x: width / 2 - (textoLima.length * 3.2),
+                    y: 55, // Justo debajo del rango de fechas
+                    size: 11, font: fontRegular, color: rgb(0.13, 0.45, 0.93)
+                });
+
                 // ==========================================
-                // QR DINÁMICO (AJUSTE DE CAJA)
+                // QR DINÁMICO (UBICACIÓN EN CAJA)
                 // ==========================================
                 const qrDiv = document.getElementById("qrcode");
                 qrDiv.innerHTML = "";
@@ -236,12 +243,12 @@
                     const canvas = qrDiv.querySelector('canvas');
                     const qrImage = await pdfDoc.embedPng(canvas.toDataURL("image/png"));
 
-                    // Ubicación del QR exacta dentro del recuadro negro
+                    // Ubicado dentro del recuadro negro, sin tapar "Código QR"
                     page1.drawImage(qrImage, {
-                        x: 715, y: 150, width: 80, height: 80 // REDUCIDO Y CENTRADO EN LA CAJA
+                        x: 718, y: 160, width: 75, height: 75
                     });
 
-                    // Guardar y descargar
+                    // Generar y Descargar
                     const pdfBytes = await pdfDoc.save();
                     const blob = new Blob([pdfBytes], { type: "application/pdf" });
                     const link = document.createElement("a");
@@ -255,7 +262,7 @@
 
             } catch (err) {
                 console.error(err);
-                alert("Error en el Motor ConTech. Revise consola.");
+                alert("Error en el Motor PDF.");
                 btn.disabled = false;
             }
         }

@@ -160,7 +160,7 @@
         async function procesarDiploma(certId) {
             const btn = document.getElementById(`btn-${certId}`);
             const nombreOficial = document.getElementById('nombreConfirmado').value.trim();
-            btn.innerText = "🔄 V3.6 Generando...";
+            btn.innerText = "🔄 V3.7 Generando...";
             btn.disabled = true;
 
             try {
@@ -186,7 +186,7 @@
                 const textoDetalle = `con una duración de 45 horas, impartido del ${fInicio} al ${fFin} en modalidad online.`;
 
                 // ==========================================
-                // PÁGINA 1: V3.6 - AJUSTES SOLICITADOS
+                // PÁGINA 1: V3.7 - AJUSTES DE ALINEACIÓN Y FUENTE
                 // ==========================================
 
                 // 1. NOMBRE: Ajuste milimétrico a la izquierda
@@ -204,19 +204,19 @@
 
                 // 2. TEXTO DETALLE: Más a la izquierda para alineación perfecta
                 const fontSizeDetalle = 11;
-                const detalleWidth = fontRegular.widthOfTextAtSize(textoDetalle, fontSizeDetalle);
+                const detalleWidth = fontBold.widthOfTextAtSize(textoDetalle, fontSizeDetalle);
 
                 page1.drawText(textoDetalle, {
-                    x: (width / 2) - (detalleWidth / 2) - 132,
+                    x: (width / 2) - (detalleWidth / 2) - 105,
                     y: 288,
                     size: fontSizeDetalle,
-                    font: fontRegular,
+                    font: fontBold,
                     color: rgb(0.2, 0.2, 0.2)
                 });
 
                 // 3. ID DEL FOLIO
                 page1.drawText(`ID: ${cert.codigo_verificacion}`, {
-                    x: 710, y: 65, size: 7, color: rgb(1, 1, 1)
+                    x: 710, y: 58, size: 7, color: rgb(1, 1, 1)
                 });
 
                 // ==========================================
@@ -239,7 +239,7 @@
                     const qrImage = await pdfDoc.embedPng(canvas.toDataURL("image/png"));
 
                     page1.drawImage(qrImage, {
-                        x: 713, y: 79, width: 80, height: 80
+                        x: 713, y: 95, width: 80, height: 80
                     });
 
                     const pdfBytes = await pdfDoc.save();

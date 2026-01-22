@@ -160,7 +160,7 @@
         async function procesarDiploma(certId) {
             const btn = document.getElementById(`btn-${certId}`);
             const nombreOficial = document.getElementById('nombreConfirmado').value.trim();
-            btn.innerText = "🔄 V3.0 Generando...";
+            btn.innerText = "🔄 V3.2 Generando...";
             btn.disabled = true;
 
             try {
@@ -186,37 +186,37 @@
                 const textoDetalle = `con una duración de 45 horas, impartido del ${fInicio} al ${fFin} en modalidad online.`;
 
                 // ==========================================
-                // PÁGINA 1: ITERACIÓN 3 - AJUSTE FINO FINAL
+                // PÁGINA 1: V3.2 - NOMBRE SUBIDO
                 // ==========================================
 
-                // 1. NOMBRE: Bajado más para asentarse en la línea azul
+                // 1. NOMBRE: SUBIDO MÁS (y: 430) para posicionarlo correctamente
                 const txtNombre = nombreOficial.toUpperCase();
                 const fontSizeNombre = 21;
                 const nombreWidth = fontBold.widthOfTextAtSize(txtNombre, fontSizeNombre);
 
                 page1.drawText(txtNombre, {
                     x: (width / 2) - (nombreWidth / 2) - 38,
-                    y: 395,
+                    y: 430,
                     size: fontSizeNombre,
                     font: fontBold,
                     color: rgb(0.98, 0.75, 0.14)
                 });
 
-                // 2. TEXTO DETALLE: Ajustado para mejor separación
-                const fontSizeDetalle = 10;
+                // 2. TEXTO DETALLE: Bajado, movido a la izquierda, y con fuente más definida (11pt)
+                const fontSizeDetalle = 11;
                 const detalleWidth = fontRegular.widthOfTextAtSize(textoDetalle, fontSizeDetalle);
 
                 page1.drawText(textoDetalle, {
-                    x: (width / 2) - (detalleWidth / 2) - 38,
-                    y: 305,
+                    x: (width / 2) - (detalleWidth / 2) - 50,
+                    y: 295,
                     size: fontSizeDetalle,
                     font: fontRegular,
-                    color: rgb(0.3, 0.3, 0.3)
+                    color: rgb(0.2, 0.2, 0.2)
                 });
 
                 // 3. ID DEL FOLIO
                 page1.drawText(`ID: ${cert.codigo_verificacion}`, {
-                    x: 715, y: 95, size: 7, color: rgb(1, 1, 1)
+                    x: 715, y: 85, size: 7, color: rgb(1, 1, 1)
                 });
 
                 // ==========================================
@@ -226,7 +226,7 @@
                 page2.drawText(`Lima, ${fEmision}`, { x: width / 2 - 60, y: 55, size: 11, font: fontRegular, color: rgb(0.13, 0.45, 0.93) });
 
                 // ==========================================
-                // QR DINÁMICO: Ajustado ligeramente
+                // QR DINÁMICO: Bajado y centrado en el recuadro negro
                 // ==========================================
                 const qrDiv = document.getElementById("qrcode");
                 qrDiv.innerHTML = "";
@@ -239,7 +239,7 @@
                     const qrImage = await pdfDoc.embedPng(canvas.toDataURL("image/png"));
 
                     page1.drawImage(qrImage, {
-                        x: 718, y: 120, width: 80, height: 80
+                        x: 718, y: 110, width: 80, height: 80
                     });
 
                     const pdfBytes = await pdfDoc.save();

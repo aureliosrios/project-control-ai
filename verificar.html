@@ -160,7 +160,7 @@
         async function procesarDiploma(certId) {
             const btn = document.getElementById(`btn-${certId}`);
             const nombreOficial = document.getElementById('nombreConfirmado').value.trim();
-            btn.innerText = "🔄 V3.7 Generando...";
+            btn.innerText = "🔄 V3.8 Generando...";
             btn.disabled = true;
 
             try {
@@ -186,7 +186,7 @@
                 const textoDetalle = `con una duración de 45 horas, impartido del ${fInicio} al ${fFin} en modalidad online.`;
 
                 // ==========================================
-                // PÁGINA 1: V3.7 - AJUSTES DE ALINEACIÓN Y FUENTE
+                // PÁGINA 1: V3.8 - CENTRADO DE QR E ID
                 // ==========================================
 
                 // 1. NOMBRE: Ajuste milimétrico a la izquierda
@@ -215,8 +215,8 @@
                 });
 
                 // 3. ID DEL FOLIO
-                page1.drawText(`ID: ${cert.codigo_verificacion}`, {
-                    x: 710, y: 58, size: 7, color: rgb(1, 1, 1)
+                page1.drawText(`${cert.codigo_verificacion}`, {
+                    x: 742, y: 68, size: 7, color: rgb(1, 1, 1)
                 });
 
                 // ==========================================
@@ -239,7 +239,7 @@
                     const qrImage = await pdfDoc.embedPng(canvas.toDataURL("image/png"));
 
                     page1.drawImage(qrImage, {
-                        x: 713, y: 95, width: 80, height: 80
+                        x: 714, y: 95, width: 80, height: 80
                     });
 
                     const pdfBytes = await pdfDoc.save();

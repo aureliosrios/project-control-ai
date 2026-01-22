@@ -160,7 +160,7 @@
         async function procesarDiploma(certId) {
             const btn = document.getElementById(`btn-${certId}`);
             const nombreOficial = document.getElementById('nombreConfirmado').value.trim();
-            btn.innerText = "🔄 V4.0 Generando...";
+            btn.innerText = "🔄 V4.1 Generando...";
             btn.disabled = true;
 
             try {
@@ -186,7 +186,7 @@
                 const textoDetalle = `con una duración de 45 horas, impartido del ${fInicio} al ${fFin} en modalidad online.`;
 
                 // ==========================================
-                // PÁGINA 1: V4.0 - CENTRADO FINAL QR Y FOLIO
+                // PÁGINA 1: V4.1 - REVERSIÓN X Y AJUSTE Y DE QR
                 // ==========================================
 
                 // 1. NOMBRE: Ajuste milimétrico a la izquierda
@@ -239,7 +239,7 @@
                     const qrImage = await pdfDoc.embedPng(canvas.toDataURL("image/png"));
 
                     page1.drawImage(qrImage, {
-                        x: 717, y: 89, width: 80, height: 80
+                        x: 714, y: 86, width: 80, height: 80
                     });
 
                     const pdfBytes = await pdfDoc.save();

@@ -160,7 +160,7 @@
         async function procesarDiploma(certId) {
             const btn = document.getElementById(`btn-${certId}`);
             const nombreOficial = document.getElementById('nombreConfirmado').value.trim();
-            btn.innerText = "Afinando coordenadas...";
+            btn.innerText = "Calibrando...";
             btn.disabled = true;
 
             try {
@@ -177,7 +177,7 @@
                 const page2 = pdfDoc.getPages()[1];
                 const { width, height } = page1.getSize();
 
-                // --- FORMATEO DE FECHAS ---
+                // --- DATA ---
                 const formatFecha = (f) => new Date(f + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
                 const fInicio = formatFecha(cert.fecha_inicio_clases);
                 const fFin = formatFecha(cert.fecha_fin_clases);
@@ -186,51 +186,50 @@
                 const textoDetalle = `con una duración de 45 horas, impartido del ${fInicio} al ${fFin} en modalidad online.`;
 
                 // ==========================================
-                // PÁGINA 1: CALIBRACIÓN DE ACABADOS
+                // PÁGINA 1: AJUSTE FINO DE COORDENADAS
                 // ==========================================
 
                 // 1. NOMBRE DEL ALUMNO: 
-                // - Centrado matemático exacto
-                // - Y: 420 (Justo sobre la línea azul de "Otorgado a")
+                // - Y: 425 (Subido para no pisar la línea azul)
                 const txtNombre = nombreOficial.toUpperCase();
                 const fontSizeNombre = 21;
                 const nombreWidth = fontBold.widthOfTextAtSize(txtNombre, fontSizeNombre);
 
                 page1.drawText(txtNombre, {
-                    x: (width / 2) - (nombreWidth / 2) - 40, // Centrado menos el offset del margen derecho negro
-                    y: 420,
+                    x: (width / 2) - (nombreWidth / 2) - 45,
+                    y: 425,
                     size: fontSizeNombre,
                     font: fontBold,
                     color: rgb(0.98, 0.75, 0.14)
                 });
 
-                // 2. TEXTO DETALLE (DEBAJO DE MASTERY):
-                // - Y: 265 (Subido respecto al anterior para que no quede muy abajo)
+                // 2. TEXTO DETALLE:
+                // - Y: 338 (Subido para quedar pegado al bloque Mastery de la plantilla)
                 const fontSizeDetalle = 10;
                 const detalleWidth = fontRegular.widthOfTextAtSize(textoDetalle, fontSizeDetalle);
 
                 page1.drawText(textoDetalle, {
-                    x: (width / 2) - (detalleWidth / 2) - 40,
-                    y: 265,
+                    x: (width / 2) - (detalleWidth / 2) - 45,
+                    y: 338,
                     size: fontSizeDetalle,
                     font: fontRegular,
                     color: rgb(0.3, 0.3, 0.3)
                 });
 
-                // 3. ID DEL FOLIO: Al pie del código QR
-                page1.drawText(cert.codigo_verificacion, {
-                    x: 740, y: 55, size: 7, color: rgb(1, 1, 1)
+                // 3. ID DEL FOLIO: Ubicado bajo el QR
+                page1.drawText(`ID: ${cert.codigo_verificacion}`, {
+                    x: 715, y: 135, size: 7, color: rgb(1, 1, 1)
                 });
 
                 // ==========================================
-                // PÁGINA 2: LIMA Y FECHAS
+                // PÁGINA 2: REVERSO
                 // ==========================================
                 page2.drawText(`Periodo de impartición: del ${fInicio} al ${fFin}`, { x: width / 2 - 130, y: 75, size: 12, font: fontBold, color: rgb(0.13, 0.45, 0.93) });
                 page2.drawText(`Lima, ${fEmision}`, { x: width / 2 - 60, y: 55, size: 11, font: fontRegular, color: rgb(0.13, 0.45, 0.93) });
 
                 // ==========================================
-                // QR DINÁMICO: BAJADO AL CENTRO DEL CUADRO NEGRO
-                // - Y: 75 (Bajado 32mm respecto a la posición anterior de 135)
+                // QR DINÁMICO: CENTRADO EN EL CUADRO NEGRO
+                // - Y: 155 (Subido para centrarlo visualmente)
                 // ==========================================
                 const qrDiv = document.getElementById("qrcode");
                 qrDiv.innerHTML = "";
@@ -244,7 +243,7 @@
                     const qrImage = await pdfDoc.embedPng(canvas.toDataURL("image/png"));
 
                     page1.drawImage(qrImage, {
-                        x: 725, y: 75, width: 75, height: 75
+                        x: 715, y: 155, width: 85, height: 85
                     });
 
                     const pdfBytes = await pdfDoc.save();
@@ -260,7 +259,7 @@
 
             } catch (err) {
                 console.error(err);
-                alert("Error en Motor de Ingeniería PDF.");
+                alert("Error en el PDF.");
                 btn.disabled = false;
             }
         }

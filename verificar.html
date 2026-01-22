@@ -160,7 +160,7 @@
         async function procesarDiploma(certId) {
             const btn = document.getElementById(`btn-${certId}`);
             const nombreOficial = document.getElementById('nombreConfirmado').value.trim();
-            btn.innerText = "🔄 V3.5 Generando...";
+            btn.innerText = "🔄 V3.6 Generando...";
             btn.disabled = true;
 
             try {
@@ -186,7 +186,7 @@
                 const textoDetalle = `con una duración de 45 horas, impartido del ${fInicio} al ${fFin} en modalidad online.`;
 
                 // ==========================================
-                // PÁGINA 1: V3.5 - AJUSTES MILIMÉTRICOS FINALES
+                // PÁGINA 1: V3.6 - AJUSTES SOLICITADOS
                 // ==========================================
 
                 // 1. NOMBRE: Ajuste milimétrico a la izquierda
@@ -195,7 +195,7 @@
                 const nombreWidth = fontBold.widthOfTextAtSize(txtNombre, fontSizeNombre);
 
                 page1.drawText(txtNombre, {
-                    x: (width / 2) - (nombreWidth / 2) - 75,
+                    x: (width / 2) - (nombreWidth / 2) - 103,
                     y: 430,
                     size: fontSizeNombre,
                     font: fontBold,
@@ -207,7 +207,7 @@
                 const detalleWidth = fontRegular.widthOfTextAtSize(textoDetalle, fontSizeDetalle);
 
                 page1.drawText(textoDetalle, {
-                    x: (width / 2) - (detalleWidth / 2) - 92,
+                    x: (width / 2) - (detalleWidth / 2) - 132,
                     y: 288,
                     size: fontSizeDetalle,
                     font: fontRegular,
@@ -239,7 +239,7 @@
                     const qrImage = await pdfDoc.embedPng(canvas.toDataURL("image/png"));
 
                     page1.drawImage(qrImage, {
-                        x: 713, y: 90, width: 80, height: 80
+                        x: 713, y: 79, width: 80, height: 80
                     });
 
                     const pdfBytes = await pdfDoc.save();

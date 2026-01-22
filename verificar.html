@@ -160,7 +160,7 @@
         async function procesarDiploma(certId) {
             const btn = document.getElementById(`btn-${certId}`);
             const nombreOficial = document.getElementById('nombreConfirmado').value.trim();
-            btn.innerText = "Aplicando milímetros...";
+            btn.innerText = "Calculando coordenadas...";
             btn.disabled = true;
 
             try {
@@ -173,12 +173,11 @@
                 const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
                 const fontRegular = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
-                const pages = pdfDoc.getPages();
-                const page1 = pages[0];
-                const page2 = pages[1];
+                const page1 = pdfDoc.getPages()[0];
+                const page2 = pdfDoc.getPages()[1];
                 const { width, height } = page1.getSize();
 
-                // --- DATA ---
+                // --- LÓGICA DE FECHAS ---
                 const formatFecha = (f) => new Date(f + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
                 const fInicio = formatFecha(cert.fecha_inicio_clases);
                 const fFin = formatFecha(cert.fecha_fin_clases);
@@ -187,30 +186,34 @@
                 const textoDetalle = `con una duración de 45 horas, impartido del ${fInicio} al ${fFin} en modalidad online.`;
 
                 // ==========================================
-                // PÁGINA 1: AJUSTES SOLICITADOS
+                // PÁGINA 1: ESTAMPADO MATEMÁTICO (MILÍMETROS A PUNTOS)
                 // ==========================================
 
-                // 1. NOMBRE: 20% más pequeño (size 21) y 40mm a la izquierda (x: 310)
+                // 1. NOMBRE DEL ALUMNO: 
+                // - Posición X: 40mm desde la izquierda = 113.4 pts
+                // - Posición Y: Sobre la línea azul (aprox 445 pts desde el fondo)
+                // - Tamaño: 21 pts (Reducción del 20% del anterior)
                 page1.drawText(nombreOficial.toUpperCase(), {
-                    x: 310,
-                    y: 380,
+                    x: 115,
+                    y: 445,
                     size: 21,
                     font: fontBold,
                     color: rgb(0.98, 0.75, 0.14)
                 });
 
-                // 2. DETALLE: 20 mm más abajo (y: 225)
+                // 2. TEXTO DETALLE (DEBAJO DE MASTERY):
+                // - Posición Y: 20mm debajo de lo anterior (Aproximadamente 240 pts)
                 page1.drawText(textoDetalle, {
-                    x: width / 2 - (textoDetalle.length * 2.8),
-                    y: 225,
+                    x: width / 2 - (textoDetalle.length * 2.8), // Centrado horizontal
+                    y: 240,
                     size: 10,
                     font: fontRegular,
                     color: rgb(0.3, 0.3, 0.3)
                 });
 
-                // 3. ID FOLIO: Se mantiene cerca del QR (más abajo)
+                // 3. ID DEL FOLIO: Ubicado bajo el recuadro negro
                 page1.drawText(`ID: ${cert.codigo_verificacion}`, {
-                    x: 718, y: 35, size: 8, color: rgb(1, 1, 1)
+                    x: 715, y: 105, size: 8, color: rgb(1, 1, 1)
                 });
 
                 // ==========================================
@@ -220,23 +223,25 @@
                 page2.drawText(`Lima, ${fEmision}`, { x: width / 2 - 60, y: 55, size: 11, font: fontRegular, color: rgb(0.13, 0.45, 0.93) });
 
                 // ==========================================
-                // QR: 32 mm más abajo (y: 45)
+                // QR: 32mm DEBAJO DEL NIVEL DE HORAS (Recuadro Blanco)
+                // - Posición Y: 135 pts (Baja al centro del recuadro negro)
                 // ==========================================
                 const qrDiv = document.getElementById("qrcode");
                 qrDiv.innerHTML = "";
-                // Usamos origin + pathname para evitar duplicar parámetros si ya existen
-                const verifyUrl = window.location.origin + window.location.pathname + "?cod=" + cert.codigo_verificacion;
+                // Mantenemos la lógica de URL limpia para evitar bucles de parámetros
+                const baseUrl = window.location.origin + window.location.pathname;
+                const verifyUrl = baseUrl + "?cod=" + cert.codigo_verificacion;
                 new QRCode(qrDiv, { text: verifyUrl, width: 120, height: 120, correctLevel: QRCode.CorrectLevel.H });
 
                 setTimeout(async () => {
                     const canvas = qrDiv.querySelector('canvas');
                     const qrImage = await pdfDoc.embedPng(canvas.toDataURL("image/png"));
 
-                    // QR ubicado 32mm debajo de la posición anterior (y: 45, antes 135)
                     page1.drawImage(qrImage, {
-                        x: 720, y: 45, width: 85, height: 85
+                        x: 718, y: 135, width: 80, height: 80
                     });
 
+                    // Descarga Automática
                     const pdfBytes = await pdfDoc.save();
                     const blob = new Blob([pdfBytes], { type: "application/pdf" });
                     const link = document.createElement("a");
@@ -250,7 +255,7 @@
 
             } catch (err) {
                 console.error(err);
-                alert("Error en el PDF.");
+                alert("Error en Motor de Ingeniería PDF.");
                 btn.disabled = false;
             }
         }

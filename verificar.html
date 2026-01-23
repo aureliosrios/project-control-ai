@@ -157,14 +157,78 @@
             document.getElementById('resultsSection').style.display = 'block';
         }
 
+        // ==========================================
+        // FUNCIÓN PARA ESTAMPAR FIRMA DEL INSTRUCTOR
+        // ==========================================
+        async function estamparSelloInstructor(page, pdfDoc, datosProfesor, helveticaBold) {
+            const { rgb } = PDFLib;
+
+            // 1. CARGAR E IMPRIMIR LA FIRMA (PNG)
+            const firmaBytes = await fetch(datosProfesor.firma_url).then(res => res.arrayBuffer());
+            const firmaImagen = await pdfDoc.embedPng(firmaBytes);
+            const dims = firmaImagen.scale(0.35); // Ajuste de escala
+
+            // Posición de la Imagen de la Firma (Lado derecho, sobre la línea "Instructor del curso")
+            page.drawImage(firmaImagen, {
+                x: 560, // Coordenada X - Lado derecho del certificado
+                y: 135, // Coordenada Y - Sobre la línea
+                width: dims.width,
+                height: dims.height,
+            });
+
+            // 2. IMPRIMIR EL CARGO
+            // Nota: El texto "Instructor del curso :" ya está impreso en la plantilla
+            // Si necesitas sobrescribirlo o cambiarlo dinámicamente, descomenta:
+            /*
+            const cargo = (datosProfesor.dni === '76508') ? 'Director Académico :' : 'Instructor del curso :';
+            page.drawText(cargo, {
+                x: 545,
+                y: 105,
+                size: 10,
+                font: helveticaBold,
+                color: rgb(0, 0, 0),
+            });
+            */
+
+            // 3. IMPRIMIR NOMBRE COMPLETO DEL INSTRUCTOR
+            const nombreCompleto = `Ing. ${datosProfesor.nombre} ${datosProfesor.apellido}`;
+            const nombreWidth = helveticaBold.widthOfTextAtSize(nombreCompleto, 11);
+
+            page.drawText(nombreCompleto, {
+                x: 635 - (nombreWidth / 2), // Centrado bajo la línea del instructor
+                y: 88,
+                size: 11,
+                font: helveticaBold,
+                color: rgb(0, 0, 0),
+            });
+
+            // 4. IMPRIMIR EL CIP (Dato dinámico de la DB)
+            const textoCIP = `CIP: ${datosProfesor.cip}`;
+            const cipWidth = helveticaBold.widthOfTextAtSize(textoCIP, 10);
+
+            page.drawText(textoCIP, {
+                x: 635 - (cipWidth / 2), // Centrado bajo el nombre
+                y: 72,
+                size: 10,
+                font: helveticaBold,
+                color: rgb(0, 0, 0),
+            });
+        }
+
         async function procesarDiploma(certId) {
             const btn = document.getElementById(`btn-${certId}`);
             const nombreOficial = document.getElementById('nombreConfirmado').value.trim();
-            btn.innerText = "🔄 V4.1 Generando...";
+            btn.innerText = "🔄 V4.2 Generando...";
             btn.disabled = true;
 
             try {
-                const { data: cert } = await _supabase.from('certificados').select('*, alumnos(*)').eq('id', certId).single();
+                // Obtener datos del certificado con información del instructor
+                const { data: cert } = await _supabase
+                    .from('certificados')
+                    .select('*, alumnos(*), instructores(*)')
+                    .eq('id', certId)
+                    .single();
+
                 const { PDFDocument, rgb, StandardFonts } = PDFLib;
 
                 const templateUrl = "https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/academia/plantilla_maestra.pdf";
@@ -186,7 +250,7 @@
                 const textoDetalle = `con una duración de 45 horas, impartido del ${fInicio} al ${fFin} en modalidad online.`;
 
                 // ==========================================
-                // PÁGINA 1: V4.1 - REVERSIÓN X Y AJUSTE Y DE QR
+                // PÁGINA 1: V4.2 - CON FIRMA DEL INSTRUCTOR
                 // ==========================================
 
                 // 1. NOMBRE: Ajuste milimétrico a la izquierda
@@ -218,6 +282,13 @@
                 page1.drawText(`${cert.codigo_verificacion}`, {
                     x: 722, y: 65, size: 7, color: rgb(1, 1, 1)
                 });
+
+                // ==========================================
+                // 4. ESTAMPAR FIRMA DEL INSTRUCTOR
+                // ==========================================
+                if (cert.instructores && cert.instructores.firma_url) {
+                    await estamparSelloInstructor(page1, pdfDoc, cert.instructores, fontBold);
+                }
 
                 // ==========================================
                 // PÁGINA 2: REVERSO
@@ -255,7 +326,7 @@
 
             } catch (err) {
                 console.error(err);
-                alert("Error en el PDF.");
+                alert("Error en el PDF: " + err.message);
                 btn.disabled = false;
             }
         }

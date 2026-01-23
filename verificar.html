@@ -142,36 +142,36 @@
             loaderText.innerText = "Consultando base de datos...";
 
             try {
-                // 2. CONSULTA RELACIONAL
+                // CONSULTA ROBUSTA
                 const { data, error } = await _supabase
                     .from('certificados')
                     .select(`
-                    nombre_confirmado,
-                    codigo_verificacion,
-                    fecha_emision,
-                    alumnos!inner(dni),
-                    cursos(
-                        nombre_curso,
-                        horas_academicas,
-                        profesores(nombre, apellido, cip, firma_url)
-                    )
-                `)
-                    .eq('alumnos.dni', dni)
-                    .single();
+                        nombre_confirmado,
+                        codigo_verificacion,
+                        fecha_emision,
+                        alumnos!inner(dni),
+                        cursos(
+                            nombre_curso,
+                            horas_academicas,
+                            profesores(nombre, apellido, cip, firma_url, dni)
+                        )
+                    `)
+                    .eq('alumnos.dni', dni); // Traemos una lista por si tiene varios cursos
 
-                if (error || !data) {
+                if (error || !data || data.length === 0) {
                     console.error("Error query:", error);
-                    alert("No se encontró certificado aprobado para este DNI.");
+                    alert(`No se encontró certificado para el DNI: ${dni}. Verifique que el número sea correcto.`);
                     resetState();
                     return;
                 }
 
                 loaderText.innerText = "Generando PDF oficial...";
-                await generarPDF(data);
+                // Si tiene varios certificados, tomamos el primero para la prueba por ahora
+                await generarPDF(data[0]);
                 resetState();
 
             } catch (err) {
-                console.error(err);
+                console.error("Error técnico:", err);
                 alert("Error crítico en el sistema de verificación.");
                 resetState();
             }
@@ -187,74 +187,72 @@
         async function generarPDF(data) {
             const { PDFDocument, rgb, StandardFonts } = PDFLib;
 
-            // 3. CARGAR PLANTILLA MAESTRA
-            const urlPlantilla = "https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/academia/plantilla_maestra.pdf";
+            // Carga de plantilla (Asegurando la ruta correcta del Storage)
+            const urlPlantilla = "https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/Plantillas/Plantilla_Maestra_PCAI.pdf";
 
             try {
                 const existingPdfBytes = await fetch(urlPlantilla).then(res => {
-                    if (!res.ok) throw new Error("No se pudo cargar la plantilla");
+                    if (!res.ok) throw new Error("No se pudo cargar la plantilla maestra");
                     return res.arrayBuffer();
                 });
 
                 const pdfDoc = await PDFDocument.load(existingPdfBytes);
                 const helveticaBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
                 const firstPage = pdfDoc.getPages()[0];
-                const { width, height } = firstPage.getSize();
 
-                // 4. ESTAMPAR DATOS DEL ALUMNO (POSICIONAMIENTO CALIBRADO)
-                const nombre = (data.nombre_confirmado || "ALUMNO").toUpperCase();
-                const nombreWidth = helveticaBold.widthOfTextAtSize(nombre, 28);
-
-                firstPage.drawText(nombre, {
-                    x: (width / 2) - (nombreWidth / 2) - 100, // Ajuste según diseño previo
+                // Datos del Alumno y Curso (Coordenadas calibradas)
+                firstPage.drawText(data.nombre_confirmado.toUpperCase(), {
+                    x: 150,
                     y: 345,
-                    size: 28,
+                    size: 26,
                     font: helveticaBold,
                     color: rgb(0.1, 0.1, 0.2)
                 });
 
-                const curso = data.cursos?.nombre_curso || "CURSO ESPECIALIZADO";
-                firstPage.drawText(curso, {
-                    x: 150, y: 280, size: 18, font: helveticaBold
+                firstPage.drawText(data.cursos.nombre_curso, {
+                    x: 150,
+                    y: 280,
+                    size: 18,
+                    font: helveticaBold
                 });
 
-                firstPage.drawText(`Folio de Verificación: ${data.codigo_verificacion}`, {
-                    x: 50, y: 50, size: 8, font: helveticaBold, color: rgb(0.5, 0.5, 0.5)
-                });
+                // Lógica del Instructor (Mario o Aurelio)
+                const prof = data.cursos.profesores;
 
-                // 5. BLOQUE DEL INSTRUCTOR (FIRMA + CARGO + NOMBRE + CIP)
-                const prof = data.cursos?.profesores;
-                if (prof && prof.firma_url) {
+                // Solo intentamos estampar la firma si la URL no es NULL
+                if (prof.firma_url && prof.firma_url !== "") {
                     try {
                         const firmaBytes = await fetch(prof.firma_url).then(res => res.arrayBuffer());
                         const firmaImage = await pdfDoc.embedPng(firmaBytes);
-                        const dims = firmaImage.scale(0.35);
-
-                        // Firma posicionada en el bloque derecho
                         firstPage.drawImage(firmaImage, {
-                            x: 580, y: 135, width: dims.width, height: dims.height // Ajuste a X:580 para alineación derecha
+                            x: 430,
+                            y: 135,
+                            width: 120,
+                            height: 50
                         });
-                    } catch (e) { console.error("Error al cargar firma del instructor"); }
+                    } catch (e) { console.warn("Firma no disponible físicamente en Storage"); }
                 }
 
-                if (prof) {
-                    const cargo = (prof.cip === '76508') ? "Director Académico :" : "Instructor Principal :";
-                    firstPage.drawText(cargo, { x: 590, y: 105, size: 10, font: helveticaBold });
-                    firstPage.drawText(`Ing. ${prof.nombre} ${prof.apellido}`, { x: 570, y: 88, size: 11, font: helveticaBold });
-                    firstPage.drawText(`CIP: ${prof.cip}`, { x: 620, y: 72, size: 10, font: helveticaBold });
-                }
+                // Bloque de Texto (CIP e Identidad)
+                // Usamos el CIP 76508 para identificar al Director
+                const esDirector = (prof.cip === '76508');
+                const cargo = esDirector ? "Director Académico :" : "Instructor Principal :";
 
-                // 6. DESCARGA AUTOMÁTICA
+                firstPage.drawText(cargo, { x: 440, y: 105, size: 10, font: helveticaBold });
+                firstPage.drawText(`Ing. ${prof.nombre} ${prof.apellido}`, { x: 420, y: 88, size: 11, font: helveticaBold });
+                firstPage.drawText(`CIP: ${prof.cip}`, { x: 470, y: 72, size: 10, font: helveticaBold });
+
+                // Descarga automática
                 const pdfBytes = await pdfDoc.save();
                 const blob = new Blob([pdfBytes], { type: "application/pdf" });
                 const link = document.createElement("a");
                 link.href = URL.createObjectURL(blob);
-                link.download = `Certificado_${data.codigo_verificacion}_PCAI.pdf`;
+                link.download = `Certificado_${data.codigo_verificacion}.pdf`;
                 link.click();
 
             } catch (e) {
-                console.error(e);
-                alert("Error al generar el PDF: " + e.message);
+                console.error("Error al generar el PDF:", e);
+                alert("Error al procesar el documento: " + e.message);
             }
         }
     </script>

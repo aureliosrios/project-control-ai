@@ -130,7 +130,13 @@
                 `)
                 .eq('dni_alumno', dni);
 
-            if (error || !data || data.length === 0) {
+            if (error) {
+                console.error("Error de Supabase:", error);
+                alert("Error en la base de datos: " + error.message);
+                return;
+            }
+
+            if (!data || data.length === 0) {
                 alert("No se encontraron certificados aprobados para este DNI.");
                 return;
             }

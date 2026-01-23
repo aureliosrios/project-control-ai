@@ -114,8 +114,21 @@
 
             const { data, error } = await _supabase
                 .from('certificados')
-                .select('*, alumnos!inner(*)')
-                .eq('alumnos.dni', dni);
+                .select(`
+                    *,
+                    cursos (
+                        nombre_curso,
+                        horas_academicas,
+                        profesores (
+                            nombre,
+                            apellido,
+                            cip,
+                            dni,
+                            firma_url
+                        )
+                    )
+                `)
+                .eq('dni_alumno', dni);
 
             if (error || !data || data.length === 0) {
                 alert("No se encontraron certificados aprobados para este DNI.");
@@ -128,7 +141,7 @@
         function mostrarResultados(certificados) {
             document.getElementById('searchSection').style.display = 'none';
             const container = document.getElementById('listaCertificados');
-            const nombreSugerido = `${certificados[0].alumnos.nombre} ${certificados[0].alumnos.apellido}`;
+            const nombreSugerido = certificados[0].nombre_confirmado || 'NOMBRE DEL ALUMNO';
 
             container.innerHTML = `
                 <div style="margin-bottom:20px; text-align:left;">
@@ -146,7 +159,7 @@
                 card.innerHTML = `
                     <div style="display:flex; justify-content:space-between; align-items:center;">
                         <div>
-                            <div style="font-weight:bold; color:#38bdf8;">${cert.curso_nombre}</div>
+                            <div style="font-weight:bold; color:#38bdf8;">${cert.cursos?.nombre_curso || 'Curso'}</div>
                             <div style="font-size:0.7rem; color:#94a3b8;">Folio: ${cert.codigo_verificacion}</div>
                         </div>
                         ${btnHtml}
@@ -222,10 +235,23 @@
             btn.disabled = true;
 
             try {
-                // Obtener datos del certificado con información del instructor
+                // Obtener datos del certificado con información del curso e instructor
                 const { data: cert } = await _supabase
                     .from('certificados')
-                    .select('*, alumnos(*), instructores(*)')
+                    .select(`
+                        *,
+                        cursos (
+                            nombre_curso,
+                            horas_academicas,
+                            profesores (
+                                nombre,
+                                apellido,
+                                cip,
+                                dni,
+                                firma_url
+                            )
+                        )
+                    `)
                     .eq('id', certId)
                     .single();
 
@@ -284,10 +310,10 @@
                 });
 
                 // ==========================================
-                // 4. ESTAMPAR FIRMA DEL INSTRUCTOR
+                // 4. ESTAMPAR FIRMA DEL INSTRUCTOR (PROFESOR)
                 // ==========================================
-                if (cert.instructores && cert.instructores.firma_url) {
-                    await estamparSelloInstructor(page1, pdfDoc, cert.instructores, fontBold);
+                if (cert.cursos && cert.cursos.profesores && cert.cursos.profesores.firma_url) {
+                    await estamparSelloInstructor(page1, pdfDoc, cert.cursos.profesores, fontBold);
                 }
 
                 // ==========================================
@@ -338,7 +364,20 @@
             if (folio) {
                 const { data, error } = await _supabase
                     .from('certificados')
-                    .select('*, alumnos!inner(*)')
+                    .select(`
+                        *,
+                        cursos (
+                            nombre_curso,
+                            horas_academicas,
+                            profesores (
+                                nombre,
+                                apellido,
+                                cip,
+                                dni,
+                                firma_url
+                            )
+                        )
+                    `)
                     .eq('codigo_verificacion', folio)
                     .single();
 

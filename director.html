@@ -113,7 +113,7 @@
     <div class="container">
         <h1 style="display: flex; justify-content: space-between; align-items: center;">
             Mando del Director Académico
-            <span style="font-size: 0.8rem; color: #475569; font-family: 'Inter', sans-serif;">v2.1</span>
+            <span style="font-size: 0.8rem; color: #475569; font-family: 'Inter', sans-serif;">v2.2</span>
         </h1>
 
         <div class="card">
@@ -141,12 +141,20 @@
             <button id="btnAplicar" class="btn" onclick="cerrarCurso()">Aplicar Fechas a Certificados</button>
             <div id="status-msg"></div>
         </div>
+
+        <div class="card" style="margin-top: 30px; border-color: rgba(249, 115, 22, 0.3);">
+            <h3 style="color: #fb923c;">Sobreescritura Inteligente (Corrección)</h3>
+            <p style="color:#94a3b8; margin-bottom:25px;">Use esta función <b>solo si cometió un error</b> al cerrar un
+                ciclo y necesita corregir la Fecha Fin.</p>
+            <button class="btn" style="background: linear-gradient(135deg, #fb923c, #f97316);"
+                onclick="corregirFechasCiclo()">Corregir Fecha de Ciclo Cerrado</button>
+        </div>
     </div>
 
     <script>
         // SEGURIDAD: Acceso Técnico
         const PASS_TECNICA = "PCAI";
-        const access = prompt("Acceso Restringido. Ingrese Clave Técnica (v2.1):");
+        const access = prompt("Acceso Restringido. Ingrese Clave Técnica (v2.2):");
 
         if (access !== PASS_TECNICA) {
             document.body.innerHTML = "<h1 style='text-align:center; margin-top:100px; color:#ef4444; font-family:sans-serif;'>Acceso Denegado</h1>";
@@ -245,6 +253,57 @@
                 msgBox.style.color = "#fff";
                 msgBox.innerHTML = `✅ ¡ÉXITO! Se han cerrado <b>${count}</b> certificados correctamente. <br> Periodo: ${inicio} al ${fin}`;
                 alert(`¡Éxito! Se han cerrado ${count} certificados correctamente.`);
+            }
+        }
+
+        // 3. SOBREESCRITURA INTELIGENTE (v2.2)
+        async function corregirFechasCiclo() {
+            const cursoId = document.getElementById('cursoFiltro').value;
+            const fInicio = document.getElementById('fInicio').value;
+            const fFinNueva = document.getElementById('fFin').value;
+            const msgBox = document.getElementById('status-msg');
+
+            if (!cursoId || !fInicio || !fFinNueva) {
+                return alert("Por favor, seleccione el curso, la fecha de inicio y la NUEVA fecha de fin arriba.");
+            }
+
+            // El Director quiere cambiar la fecha de un ciclo que acaba de cerrar.
+            // Necesitamos saber qué fecha puso por ERROR para encontrar esos registros.
+            const fFinError = prompt("Ingrese la fecha ERRÓNEA que desea corregir (AAAA-MM-DD):");
+
+            if (!fFinError) return;
+
+            msgBox.style.display = "block";
+            msgBox.style.background = "#fb923c";
+            msgBox.style.color = "#000";
+            msgBox.innerText = `Corrigiendo registros de ${fFinError} a ${fFinNueva}...`;
+
+            try {
+                const { data, error } = await _supabase
+                    .from('certificados')
+                    .update({
+                        fecha_fin_clases: fFinNueva // La nueva fecha correcta
+                    })
+                    .match({
+                        curso_id: cursoId,
+                        fecha_inicio_clases: fInicio, // Filtramos por el inicio de este grupo
+                        fecha_fin_clases: fFinError    // Filtramos exactamente por el error
+                    });
+
+                if (error) {
+                    msgBox.style.background = "#450a0a";
+                    msgBox.style.color = "#fff";
+                    msgBox.innerText = "Error en la corrección: " + error.message;
+                    alert("Error en la corrección: " + error.message);
+                } else {
+                    msgBox.style.background = "#064e3b";
+                    msgBox.style.color = "#fff";
+                    msgBox.innerHTML = `✅ ¡CORRECCIÓN EXITOSA! <br> Los registros han sido actualizados de ${fFinError} a ${fFinNueva}.`;
+                    alert("¡Corrección exitosa! Los registros han sido actualizados.");
+                }
+            } catch (err) {
+                console.error("Error técnico:", err);
+                alert("Error crítico en el sistema.");
             }
         }
 

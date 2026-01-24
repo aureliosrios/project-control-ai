@@ -240,11 +240,11 @@
 
                     // 2. TEXTO DE DETALLE (COORDINADAS V4.1)
                     const formatFecha = (f) => f ? new Date(f + 'T12:00:00').toLocaleDateString('es-PE') : "---";
-                    const fInicioRaw = data.fecha_inicio_clases;
-                    const fFinRaw = data.fecha_fin_clases;
+                    const fInicio = formatFecha(data.fecha_inicio_clases);
+                    const fFin = formatFecha(data.fecha_fin_clases);
                     const horas = data.cursos?.horas_academicas || "45";
 
-                    const textoDetalle = `con una duración de ${horas} horas, impartido del ${formatFecha(fInicioRaw)} al ${formatFecha(fFinRaw)} en modalidad online.`;
+                    const textoDetalle = `con una duración de ${horas} horas, impartido del ${fInicio} al ${fFin} en modalidad online.`;
 
                     const fontSizeDetalle = 11;
                     const detalleWidth = fontBold.widthOfTextAtSize(textoDetalle, fontSizeDetalle);

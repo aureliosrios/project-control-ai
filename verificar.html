@@ -239,10 +239,12 @@
                     });
 
                     // 2. TEXTO DE DETALLE (COORDINADAS V4.1)
-                    const formatF = (f) => new Date(f + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
-                    const fInicio = data.fecha_inicio_clases ? formatF(data.fecha_inicio_clases) : "---";
-                    const fFin = data.fecha_fin_clases ? formatF(data.fecha_fin_clases) : "---";
-                    const textoDetalle = `con una duración de 45 horas, impartido del ${fInicio} al ${fFin} en modalidad online.`;
+                    const formatFecha = (f) => f ? new Date(f + 'T12:00:00').toLocaleDateString('es-PE') : "---";
+                    const fInicioRaw = data.fecha_inicio_clases;
+                    const fFinRaw = data.fecha_fin_clases;
+                    const horas = data.cursos?.horas_academicas || "45";
+
+                    const textoDetalle = `con una duración de ${horas} horas, impartido del ${formatFecha(fInicioRaw)} al ${formatFecha(fFinRaw)} en modalidad online.`;
 
                     const fontSizeDetalle = 11;
                     const detalleWidth = fontBold.widthOfTextAtSize(textoDetalle, fontSizeDetalle);

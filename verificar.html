@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación de Certificados v5.0 | Project Control AI</title>
+    <title>Verificación de Certificados v6.0 | Project Control AI</title>
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -107,7 +108,7 @@
 <body>
 
     <div class="card">
-        <div class="version-tag">v5.0</div>
+        <div class="version-tag">v6.0</div>
         <img src="Logotipo.png" alt="PCAI" style="height: 50px; margin-bottom: 1.5rem;">
         <h2 style="margin-bottom: 0.5rem;">Portal de Certificación</h2>
         <p style="color: #94a3b8; font-size: 0.95rem;">Ingrese su DNI para descargar su certificado oficial.</p>
@@ -119,36 +120,38 @@
         <div id="loader" class="loader">
             <span id="loaderText">Verificando credenciales...</span>
         </div>
-    </div>
+        <div id="qrcode" style="display:none;"></div>
 
-    <p class="footer-text">Project Control AI | Sistema de Verificación Algorítmica</p>
+        <p class="footer-text">Project Control AI | Sistema de Verificación Algorítmica</p>
 
-    <script>
-        // 1. CONFIGURACIÓN SUPABASE (CREDENCIALES PRODUCTIVAS RESTAURADAS)
-        const SUPABASE_URL = 'https://bpsumudexpywfffcwpun.supabase.co';
-        const SUPABASE_KEY = 'sb_publishable_OzjgZjclmEDlDuVdLGuvQQ_SyX2aTy0';
-        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        <script>
+            // 1. CONFIGURACIÓN SUPABASE (CREDENCIALES PRODUCTIVAS RESTAURADAS)
+            const SUPABASE_URL = 'https://bpsumudexpywfffcwpun.supabase.co';
+            const SUPABASE_KEY = 'sb_publishable_OzjgZjclmEDlDuVdLGuvQQ_SyX2aTy0';
+            const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        async function procesarConsulta() {
-            const dniInput = document.getElementById('dniInput').value.trim();
-            const loader = document.getElementById('loader');
-            const loaderText = document.getElementById('loaderText');
-            const btn = document.getElementById('btnConsultar');
+            async function procesarConsulta() {
+                const dniInput = document.getElementById('dniInput').value.trim();
+                const loader = document.getElementById('loader');
+                const loaderText = document.getElementById('loaderText');
+                const btn = document.getElementById('btnConsultar');
 
-            if (!dniInput) return alert("Ingrese un DNI válido");
+                if (!dniInput) return alert("Ingrese un DNI válido");
 
-            btn.disabled = true;
-            loader.style.display = 'block';
-            loaderText.innerText = "Consultando base de datos...";
+                btn.disabled = true;
+                loader.style.display = 'block';
+                loaderText.innerText = "Consultando base de datos...";
 
-            try {
-                // CONSULTA CON RESOLUCIÓN DE AMBIGÜEDAD (!)
-                const { data, error } = await _supabase
-                    .from('certificados')
-                    .select(`
+                try {
+                    // CONSULTA CON RESOLUCIÓN DE AMBIGÜEDAD (!)
+                    const { data, error } = await _supabase
+                        .from('certificados')
+                        .select(`
                         nombre_confirmado,
                         codigo_verificacion,
                         fecha_emision,
+                        fecha_inicio_clases,
+                        fecha_fin_clases,
                         alumnos!alumno_id ( dni, nombre ),
                         cursos!curso_id (
                             nombre_curso,
@@ -161,119 +164,174 @@
                             )
                         )
                     `)
-                    .eq('alumnos.dni', dniInput);
+                        .eq('alumnos.dni', dniInput);
 
-                if (error) {
-                    console.error("Error query:", error);
-                    loader.style.display = 'none';
-                    alert("Error de conexión: " + (error.details || error.message));
+                    if (error) {
+                        console.error("Error query:", error);
+                        loader.style.display = 'none';
+                        alert("Error de conexión: " + (error.details || error.message));
+                        resetState();
+                        return;
+                    }
+
+                    if (data && data.length > 0) {
+                        loaderText.innerText = "Generando PDF oficial...";
+                        // Si hay varios, el sistema bajará el primero encontrado
+                        await generarPDF(data[0]);
+                        resetState();
+                    } else {
+                        loader.style.display = 'none';
+                        alert("No se encontró certificado para el DNI: " + dniInput);
+                        resetState();
+                    }
+
+                } catch (err) {
+                    console.error("Error técnico:", err);
+                    alert("Error crítico en el sistema de verificación.");
                     resetState();
-                    return;
                 }
-
-                if (data && data.length > 0) {
-                    loaderText.innerText = "Generando PDF oficial...";
-                    // Si hay varios, el sistema bajará el primero encontrado
-                    await generarPDF(data[0]);
-                    resetState();
-                } else {
-                    loader.style.display = 'none';
-                    alert("No se encontró certificado para el DNI: " + dniInput);
-                    resetState();
-                }
-
-            } catch (err) {
-                console.error("Error técnico:", err);
-                alert("Error crítico en el sistema de verificación.");
-                resetState();
             }
-        }
 
-        function resetState() {
-            const loader = document.getElementById('loader');
-            const btn = document.getElementById('btnConsultar');
-            loader.style.display = 'none';
-            btn.disabled = false;
-        }
+            function resetState() {
+                const loader = document.getElementById('loader');
+                const btn = document.getElementById('btnConsultar');
+                loader.style.display = 'none';
+                btn.disabled = false;
+            }
 
-        async function generarPDF(data) {
-            const { PDFDocument, rgb, StandardFonts } = PDFLib;
+            async function generarPDF(data) {
+                const { PDFDocument, rgb, StandardFonts } = PDFLib;
 
-            // URL exacta de la plantilla en el Storage
-            const urlPlantilla = "https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/academia/plantilla_maestra.pdf";
+                const urlPlantilla = "https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/academia/plantilla_maestra.pdf";
 
-            try {
-                const response = await fetch(urlPlantilla);
-                if (!response.ok) throw new Error("No se pudo descargar el archivo desde el Storage. Verifique la URL.");
+                try {
+                    const response = await fetch(urlPlantilla);
+                    if (!response.ok) throw new Error("No se pudo descargar el archivo desde el Storage. Verifique la URL.");
 
-                const existingPdfBytes = await response.arrayBuffer();
-                const pdfDoc = await PDFDocument.load(existingPdfBytes);
+                    const existingPdfBytes = await response.arrayBuffer();
+                    const pdfDoc = await PDFDocument.load(existingPdfBytes);
+                    const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+                    const fontRegular = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
-                console.log("Plantilla cargada con éxito, procediendo al estampado...");
+                    const pages = pdfDoc.getPages();
+                    const firstPage = pages[0];
+                    const page2 = pages[1];
+                    const { width, height } = firstPage.getSize();
 
-                const helveticaBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-                const firstPage = pdfDoc.getPages()[0];
+                    console.log("Iniciando estampado V6.0 (Guía V4.1)...");
 
-                // Lógica de Resiliencia: Si no hay nombre_confirmado, no se cae el sistema
-                const nombreRaw = data.nombre_confirmado || "Participante Registrado";
-                const nombreFormateado = nombreRaw.toUpperCase();
+                    // 1. NOMBRE DEL ALUMNO (COORDINADAS V4.1)
+                    const nombreRaw = data.nombre_confirmado || (data.alumnos ? data.alumnos.nombre : "Participante Registrado");
+                    const txtNombre = nombreRaw.toUpperCase();
+                    const fontSizeNombre = 21;
+                    const nombreWidth = fontBold.widthOfTextAtSize(txtNombre, fontSizeNombre);
 
-                firstPage.drawText(nombreFormateado, {
-                    x: 150,
-                    y: 345,
-                    size: 26,
-                    font: helveticaBold,
-                    color: rgb(0.1, 0.1, 0.2)
-                });
+                    firstPage.drawText(txtNombre, {
+                        x: (width / 2) - (nombreWidth / 2) - 103, // Ajuste milimétrico izquierda
+                        y: 430,
+                        size: fontSizeNombre,
+                        font: fontBold,
+                        color: rgb(0.98, 0.75, 0.14) // Color Dorado
+                    });
 
-                firstPage.drawText(data.cursos.nombre_curso, {
-                    x: 150,
-                    y: 280,
-                    size: 18,
-                    font: helveticaBold
-                });
+                    // 2. TEXTO DE DETALLE (COORDINADAS V4.1)
+                    const formatF = (f) => new Date(f + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+                    const fInicio = data.fecha_inicio_clases ? formatF(data.fecha_inicio_clases) : "---";
+                    const fFin = data.fecha_fin_clases ? formatF(data.fecha_fin_clases) : "---";
+                    const textoDetalle = `con una duración de 45 horas, impartido del ${fInicio} al ${fFin} en modalidad online.`;
 
-                // Lógica del Instructor (Mario o Aurelio)
-                const prof = data.cursos.profesores;
+                    const fontSizeDetalle = 11;
+                    const detalleWidth = fontBold.widthOfTextAtSize(textoDetalle, fontSizeDetalle);
 
-                // Solo intentamos estampar la firma si la URL no es NULL
-                if (prof.firma_url && prof.firma_url !== "") {
-                    try {
-                        const firmaBytes = await fetch(prof.firma_url).then(res => res.arrayBuffer());
-                        const firmaImage = await pdfDoc.embedPng(firmaBytes);
-                        firstPage.drawImage(firmaImage, {
-                            x: 430,
-                            y: 135,
-                            width: 120,
-                            height: 50
+                    firstPage.drawText(textoDetalle, {
+                        x: (width / 2) - (detalleWidth / 2) - 105,
+                        y: 288,
+                        size: fontSizeDetalle,
+                        font: fontBold,
+                        color: rgb(0.2, 0.2, 0.2)
+                    });
+
+                    // 3. ID DEL FOLIO (COORDINADAS V4.1)
+                    firstPage.drawText(data.codigo_verificacion, {
+                        x: 722,
+                        y: 65,
+                        size: 7,
+                        font: fontRegular,
+                        color: rgb(1, 1, 1) // Blanco
+                    });
+
+                    // 4. QR DINÁMICO (COORDINADAS V4.1)
+                    const qrDiv = document.getElementById("qrcode");
+                    qrDiv.innerHTML = "";
+                    const verifyUrl = window.location.origin + window.location.pathname + "?cod=" + data.codigo_verificacion;
+                    new QRCode(qrDiv, { text: verifyUrl, width: 120, height: 120, correctLevel: QRCode.CorrectLevel.H });
+
+                    // Esperar a que el canvas del QR se genere
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                    const canvas = qrDiv.querySelector('canvas');
+                    if (canvas) {
+                        const qrImage = await pdfDoc.embedPng(canvas.toDataURL("image/png"));
+                        firstPage.drawImage(qrImage, {
+                            x: 714, y: 86, width: 80, height: 80
                         });
-                    } catch (e) { console.warn("Firma no disponible físicamente en Storage"); }
+                    }
+
+                    // 5. BLOQUE DEL INSTRUCTOR (FIRMA + CARGO + NOMBRE + CIP)
+                    const prof = data.cursos?.profesores;
+                    if (prof && prof.firma_url) {
+                        try {
+                            const firmaBytes = await fetch(prof.firma_url).then(res => res.arrayBuffer());
+                            const firmaImage = await pdfDoc.embedPng(firmaBytes);
+                            firstPage.drawImage(firmaImage, {
+                                x: 430, y: 135, width: 120, height: 50
+                            });
+                        } catch (e) { console.warn("Firma no disponible físicamente"); }
+                    }
+
+                    if (prof) {
+                        const esDirector = (prof.cip === '76508');
+                        const cargo = esDirector ? "Director Académico :" : "Instructor Principal :";
+                        firstPage.drawText(cargo, { x: 440, y: 105, size: 10, font: fontBold });
+                        firstPage.drawText(`Ing. ${prof.nombre} ${prof.apellido}`, { x: 420, y: 88, size: 11, font: fontBold });
+                        firstPage.drawText(`CIP: ${prof.cip}`, { x: 470, y: 72, size: 10, font: fontBold });
+                    }
+
+                    // 6. PÁGINA 2: REVERSO (COORDINADAS V4.1)
+                    if (page2) {
+                        const fEmision = new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+
+                        page2.drawText(`Periodo de impartición: del ${fInicio} al ${fFin}`, {
+                            x: (width / 2) - 130,
+                            y: 75,
+                            size: 12,
+                            font: fontBold,
+                            color: rgb(0, 0, 0)
+                        });
+
+                        page2.drawText(`Lima, ${fEmision}`, {
+                            x: (width / 2) - 60,
+                            y: 55,
+                            size: 11,
+                            font: fontRegular,
+                            color: rgb(0, 0, 0)
+                        });
+                    }
+
+                    // Descarga automática
+                    const pdfBytes = await pdfDoc.save();
+                    const blob = new Blob([pdfBytes], { type: "application/pdf" });
+                    const link = document.createElement("a");
+                    link.href = URL.createObjectURL(blob);
+                    link.download = `Certificado_${data.codigo_verificacion}.pdf`;
+                    link.click();
+
+                } catch (error) {
+                    console.error("Error al generar el PDF:", error);
+                    alert("Error al procesar el documento: " + error.message);
+                    throw error;
                 }
-
-                // Bloque de Texto (CIP e Identidad)
-                // Usamos el CIP 76508 para identificar al Director
-                const esDirector = (prof.cip === '76508');
-                const cargo = esDirector ? "Director Académico :" : "Instructor Principal :";
-
-                firstPage.drawText(cargo, { x: 440, y: 105, size: 10, font: helveticaBold });
-                firstPage.drawText(`Ing. ${prof.nombre} ${prof.apellido}`, { x: 420, y: 88, size: 11, font: helveticaBold });
-                firstPage.drawText(`CIP: ${prof.cip}`, { x: 470, y: 72, size: 10, font: helveticaBold });
-
-                // Descarga automática
-                const pdfBytes = await pdfDoc.save();
-                const blob = new Blob([pdfBytes], { type: "application/pdf" });
-                const link = document.createElement("a");
-                link.href = URL.createObjectURL(blob);
-                link.download = `Certificado_${data.codigo_verificacion}.pdf`;
-                link.click();
-
-            } catch (error) {
-                console.error("Error al generar el PDF:", error);
-                alert("Error al procesar el documento: " + error.message);
-                throw error;
             }
-        }
-    </script>
+        </script>
 
 </body>
 

@@ -111,7 +111,10 @@
 
 <body>
     <div class="container">
-        <h1>Mando del Director Académico</h1>
+        <h1 style="display: flex; justify-content: space-between; align-items: center;">
+            Mando del Director Académico
+            <span style="font-size: 0.8rem; color: #475569; font-family: 'Inter', sans-serif;">v2.1</span>
+        </h1>
 
         <div class="card">
             <h3>Cierre de Ciclo de Curso</h3>
@@ -143,7 +146,7 @@
     <script>
         // SEGURIDAD: Acceso Técnico
         const PASS_TECNICA = "PCAI";
-        const access = prompt("Acceso Restringido. Ingrese Clave Técnica (v2.0):");
+        const access = prompt("Acceso Restringido. Ingrese Clave Técnica (v2.1):");
 
         if (access !== PASS_TECNICA) {
             document.body.innerHTML = "<h1 style='text-align:center; margin-top:100px; color:#ef4444; font-family:sans-serif;'>Acceso Denegado</h1>";

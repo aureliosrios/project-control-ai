@@ -331,8 +331,6 @@
 
                     // 6. PÁGINA 2: REVERSO (COORDINADAS V4.1)
                     if (page2) {
-                        const fEmision = new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
-
                         page2.drawText(`Periodo de impartición: del ${fInicio} al ${fFin}`, {
                             x: (width / 2) - 130,
                             y: 75,
@@ -341,12 +339,18 @@
                             color: rgb(0, 0, 0)
                         });
 
-                        page2.drawText(`Lima, ${fEmision}`, {
-                            x: (width / 2) - 60,
-                            y: 55,
-                            size: 11,
+                        const now = new Date();
+                        const fImpresion = now.toLocaleDateString('es-PE') + " " + now.toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' });
+                        const txtImpresion = `Fecha de Impresión: ${fImpresion}`;
+                        const fontSizeImp = 8;
+                        const impWidth = fontRegular.widthOfTextAtSize(txtImpresion, fontSizeImp);
+
+                        page2.drawText(txtImpresion, {
+                            x: width - impWidth - 50, // Esquina derecha
+                            y: 35, // Posición discreta en la parte inferior
+                            size: fontSizeImp,
                             font: fontRegular,
-                            color: rgb(0, 0, 0)
+                            color: rgb(0.4, 0.4, 0.4) // Gris discreto
                         });
                     }
 

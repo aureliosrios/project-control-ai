@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación de Certificados v6.2 | Project Control AI</title>
+    <title>Verificación de Certificados v6.3 | Project Control AI</title>
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -108,7 +108,7 @@
 <body>
 
     <div class="card">
-        <div class="version-tag">v6.2</div>
+        <div class="version-tag">v6.3</div>
         <img src="Logotipo.png" alt="PCAI" style="height: 50px; margin-bottom: 1.5rem;">
         <h2 style="margin-bottom: 0.5rem;">Portal de Certificación</h2>
         <p style="color: #94a3b8; font-size: 0.95rem;">Ingrese su DNI para descargar su certificado oficial.</p>
@@ -286,24 +286,50 @@
                         });
                     }
 
-                    // 5. BLOQUE DEL INSTRUCTOR (FIRMA + CARGO + NOMBRE + CIP)
+                    // 5. BLOQUE DEL INSTRUCTOR (FIRMA + NOMBRE + CIP)
+                    // Se elimina el Cargo porque ya existe en la plantilla ("Instructor del curso :")
                     const prof = data.cursos?.profesores;
+                    const baseX = 635; // Centro del bloque del instructor
+
                     if (prof && prof.firma_url) {
                         try {
                             const firmaBytes = await fetch(prof.firma_url).then(res => res.arrayBuffer());
                             const firmaImage = await pdfDoc.embedPng(firmaBytes);
+
+                            // Firma más grande y alargada (V6.3)
                             firstPage.drawImage(firmaImage, {
-                                x: 430, y: 135, width: 120, height: 50
+                                x: 545,
+                                y: 115,
+                                width: 180,
+                                height: 80
                             });
                         } catch (e) { console.warn("Firma no disponible físicamente"); }
                     }
 
                     if (prof) {
-                        const esDirector = (prof.cip === '76508');
-                        const cargo = esDirector ? "Director Académico :" : "Instructor Principal :";
-                        firstPage.drawText(cargo, { x: 440, y: 105, size: 10, font: fontBold });
-                        firstPage.drawText(`Ing. ${prof.nombre} ${prof.apellido}`, { x: 420, y: 88, size: 11, font: fontBold });
-                        firstPage.drawText(`CIP: ${prof.cip}`, { x: 470, y: 72, size: 10, font: fontBold });
+                        // Nombre centrado bajo la línea (V6.3 - Posición más baja)
+                        const nombreInstructor = `Ing. ${prof.nombre} ${prof.apellido}`;
+                        const nombreWidth = fontBold.widthOfTextAtSize(nombreInstructor, 11);
+
+                        firstPage.drawText(nombreInstructor, {
+                            x: baseX - (nombreWidth / 2),
+                            y: 72,
+                            size: 11,
+                            font: fontBold,
+                            color: rgb(0, 0, 0)
+                        });
+
+                        // CIP centrado justo debajo del nombre (V6.3)
+                        const textoCIP = `CIP: ${prof.cip}`;
+                        const cipWidth = fontBold.widthOfTextAtSize(textoCIP, 10);
+
+                        firstPage.drawText(textoCIP, {
+                            x: baseX - (cipWidth / 2),
+                            y: 58,
+                            size: 10,
+                            font: fontBold,
+                            color: rgb(0, 0, 0)
+                        });
                     }
 
                     // 6. PÁGINA 2: REVERSO (COORDINADAS V4.1)

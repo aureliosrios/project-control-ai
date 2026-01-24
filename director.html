@@ -184,37 +184,64 @@
             });
         }
 
-        // 2. EJECUTAR EL CIERRE MASIVO (Lógica de Resiliencia)
+        // 2. EJECUTAR EL CIERRE MASIVO (Lógica de Control v2.1)
         async function cerrarCurso() {
             const cursoId = document.getElementById('cursoFiltro').value;
             const inicio = document.getElementById('fInicio').value;
             const fin = document.getElementById('fFin').value;
             const msgBox = document.getElementById('status-msg');
 
-            if (!cursoId || !inicio || !fin) return alert("Complete todos los campos.");
+            if (!cursoId || !inicio || !fin) return alert("Por favor, complete todos los campos (Curso, Inicio y Fin).");
 
             msgBox.style.display = "block";
             msgBox.style.background = "#1e293b";
-            msgBox.innerText = `Sincronizando ciclo...`;
+            msgBox.innerText = `Verificando registros pendientes...`;
 
-            /* 
-               Lógica sugerida: Para mayor robustez, se recomienda usar un Trigger 
-               en Supabase que pueble 'nombre_confirmado' automáticamente.
-            */
+            // 1. PRIMERO VERIFICAMOS SI HAY REGISTROS PENDIENTES
+            const { count, error: countError } = await _supabase
+                .from('certificados')
+                .select('*', { count: 'exact', head: true })
+                .eq('curso_id', cursoId)
+                .is('fecha_fin_clases', null);
+
+            if (countError) {
+                console.error(countError);
+                msgBox.style.background = "#450a0a";
+                msgBox.innerText = "Error al verificar: " + countError.message;
+                return;
+            }
+
+            if (count === 0) {
+                msgBox.style.background = "#f59e0b";
+                msgBox.style.color = "#000";
+                msgBox.innerText = "Operación cancelada: No hay certificados pendientes de cierre para este curso.";
+                alert("No hay certificados pendientes de cierre para este curso.");
+                return;
+            }
+
+            // 2. SI HAY REGISTROS, PROCEDEMOS CON EL UPDATE
+            msgBox.innerText = `Inyectando fechas en ${count} certificados...`;
+
             const { data, error } = await _supabase
                 .from('certificados')
                 .update({
                     fecha_inicio_clases: inicio,
                     fecha_fin_clases: fin
                 })
-                .match({ curso_id: cursoId, fecha_fin_clases: null });
+                .eq('curso_id', cursoId)
+                .is('fecha_fin_clases', null);
 
             if (error) {
+                console.error(error);
                 msgBox.style.background = "#450a0a";
-                msgBox.innerText = "Error: " + error.message;
+                msgBox.style.color = "#fff";
+                msgBox.innerText = "Error al inyectar fechas: " + error.message;
+                alert("Error al inyectar fechas: " + error.message);
             } else {
                 msgBox.style.background = "#064e3b";
-                msgBox.innerHTML = `✅ ÉXITO: Ciclo cerrado. <br> Fecha: ${inicio} al ${fin}`;
+                msgBox.style.color = "#fff";
+                msgBox.innerHTML = `✅ ¡ÉXITO! Se han cerrado <b>${count}</b> certificados correctamente. <br> Periodo: ${inicio} al ${fin}`;
+                alert(`¡Éxito! Se han cerrado ${count} certificados correctamente.`);
             }
         }
 

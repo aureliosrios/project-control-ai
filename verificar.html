@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación de Certificados v4.5 | Project Control AI</title>
+    <title>Verificación de Certificados v4.6 | Project Control AI</title>
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
@@ -107,7 +107,7 @@
 <body>
 
     <div class="card">
-        <div class="version-tag">v4.5</div>
+        <div class="version-tag">v4.6</div>
         <img src="Logotipo.png" alt="PCAI" style="height: 50px; margin-bottom: 1.5rem;">
         <h2 style="margin-bottom: 0.5rem;">Portal de Certificación</h2>
         <p style="color: #94a3b8; font-size: 0.95rem;">Ingrese su DNI para descargar su certificado oficial.</p>
@@ -142,18 +142,18 @@
             loaderText.innerText = "Consultando base de datos...";
 
             try {
-                // CONSULTA ROBUSTA
+                // CONSULTA ROBUSTA CON ALIAS DE LLAVES FORÁNEAS
                 const { data, error } = await _supabase
                     .from('certificados')
                     .select(`
                         nombre_confirmado,
                         codigo_verificacion,
                         fecha_emision,
-                        alumnos!inner(dni),
-                        cursos(
+                        alumnos:alumno_id(dni),
+                        cursos:curso_id(
                             nombre_curso,
                             horas_academicas,
-                            profesores(nombre, apellido, cip, firma_url, dni)
+                            profesores:profesor_id(nombre, apellido, cip, firma_url)
                         )
                     `)
                     .eq('alumnos.dni', dni); // Traemos una lista por si tiene varios cursos

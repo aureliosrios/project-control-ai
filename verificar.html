@@ -117,7 +117,7 @@
 
         <button id="btnConsultar" onclick="procesarConsulta()">Consultar y Descargar</button>
 
-        <div id="resultadoDiv" style="margin-top: 1.5rem; text-align: left;"></div>
+        <div id="resultadoContainer" style="margin-top: 1.5rem; text-align: left;"></div>
 
         <div id="loader" class="loader">
             <span id="loaderText">Verificando credenciales...</span>
@@ -130,103 +130,69 @@
             // 1. CONFIGURACIÓN SUPABASE (CREDENCIALES PRODUCTIVAS RESTAURADAS)
             const SUPABASE_URL = 'https://bpsumudexpywfffcwpun.supabase.co';
             const SUPABASE_KEY = 'sb_publishable_OzjgZjclmEDlDuVdLGuvQQ_SyX2aTy0';
-            const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-            let resultadosActuales = [];
-
-            async function descargarManual(index) {
-                const loader = document.getElementById('loader');
-                const loaderText = document.getElementById('loaderText');
-                loader.style.display = 'block';
-                loaderText.innerText = "Preparando descarga...";
-                try {
-                    await generarPDF(resultadosActuales[index]);
-                } finally {
-                    loader.style.display = 'none';
-                }
-            }
+            const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
             async function procesarConsulta() {
                 const dniInput = document.getElementById('dniInput').value.trim();
                 const loader = document.getElementById('loader');
-                const loaderText = document.getElementById('loaderText');
-                const btn = document.getElementById('btnConsultar');
-                const resultadoDiv = document.getElementById('resultadoDiv');
+                const container = document.getElementById('resultadoContainer');
 
                 if (!dniInput) return alert("Ingrese un DNI válido");
 
-                resultadoDiv.innerHTML = "";
-                btn.disabled = true;
                 loader.style.display = 'block';
-                loaderText.innerText = "Consultando base de datos...";
+                container.innerHTML = ""; // Limpiamos búsquedas previas
 
-                try {
-                    // CONSULTA CON FILTRO FORZADO (!inner)
-                    const { data, error } = await _supabase
-                        .from('certificados')
-                        .select(`
-                        id,
-                        nombre_confirmado,
-                        codigo_verificacion,
-                        fecha_emision,
-                        fecha_inicio_clases,
-                        fecha_fin_clases,
-                        alumnos!alumno_id!inner ( dni, nombre ),
+                const { data, error } = await _supabase
+                    .from('certificados')
+                    .select(`
+                        nombre_confirmado, codigo_verificacion, fecha_inicio_clases, fecha_fin_clases,
+                        alumnos!alumno_id!inner ( dni ),
                         cursos!curso_id (
-                            nombre_curso,
-                            horas_academicas,
-                            profesores!profesor_id (
-                                nombre,
-                                apellido,
-                                cip,
-                                firma_url
-                            )
+                            nombre_curso, horas_academicas,
+                            profesores!profesor_id ( nombre, apellido, cip, firma_url )
                         )
                     `)
-                        .eq('alumnos.dni', dniInput);
+                    .eq('alumnos.dni', dniInput);
 
-                    if (error) {
-                        console.error("Error query:", error);
-                        loader.style.display = 'none';
-                        alert("Error de conexión: " + (error.details || error.message));
-                        resetState();
-                        return;
-                    }
+                loader.style.display = 'none';
 
-                    if (data && data.length > 0) {
-                        resultadosActuales = data;
+                if (error || !data || data.length === 0) {
+                    if (error) console.error("Error Supabase:", error);
+                    return alert("No se encontraron certificados aprobados para este DNI.");
+                }
 
-                        if (data.length === 1) {
-                            loaderText.innerText = "Generando PDF oficial...";
-                            await generarPDF(data[0]);
-                            resetState();
-                        } else {
-                            // SI TIENE MÁS DE UNO, MOSTRAMOS UNA LISTA (V6.5)
-                            loader.style.display = 'none';
-                            let html = `<p style="font-size:0.85rem; color:#94a3b8; margin-bottom:10px;">Ingeniero, hemos encontrado ${data.length} certificados para usted:</p>`;
-                            data.forEach((cert, index) => {
-                                html += `
-                                    <div style="background:#1e293b; padding:12px; margin:8px 0; border-radius:10px; border:1px solid rgba(56,189,248,0.2); display:flex; justify-content:space-between; align-items:center; gap:10px;">
-                                        <div style="flex:1;">
-                                            <div style="color:#38bdf8; font-weight:bold; font-size:0.9rem;">${cert.cursos.nombre_curso}</div>
-                                            <div style="color:#64748b; font-size:0.75rem;">Folio: ${cert.codigo_verificacion}</div>
-                                        </div>
-                                        <button onclick="descargarManual(${index})" style="width:auto; padding:8px 15px; background:#0ea5e9; border-radius:8px; border:none; color:white; font-size:0.8rem; font-weight:bold; cursor:pointer; transition:0.3s;">Descargar</button>
-                                    </div>`;
-                            });
-                            resultadoDiv.innerHTML = html;
-                            btn.disabled = false;
-                        }
-                    } else {
-                        loader.style.display = 'none';
-                        alert(`No se encontró ningún certificado aprobado para el DNI: ${dniInput}`);
-                        resetState();
-                    }
+                // SOLUCIÓN INTEGRAL: Gestión de múltiples resultados
+                if (data.length === 1) {
+                    await generarPDF(data[0]); // Descarga directa si es solo uno
+                } else {
+                    // Renderizamos una lista profesional para que el alumno elija
+                    let html = `<h3 style='margin-bottom:15px; color:#fbbf24; font-size:1rem;'>Logros encontrados: ${data.length}</h3>`;
+                    data.forEach((cert, index) => {
+                        html += `
+                            <div style="background:#1e293b; padding:15px; margin-bottom:10px; border-radius:10px; border:1px solid #334155; display:flex; justify-content:space-between; align-items:center; gap: 10px;">
+                                <div style="text-align:left; flex: 1;">
+                                    <div style="font-weight:bold; color:white; font-size:0.9rem;">${cert.cursos.nombre_curso}</div>
+                                    <div style="font-size:0.8rem; color:#94a3b8;">Folio: ${cert.codigo_verificacion}</div>
+                                </div>
+                                <button onclick='descargarCertificadoSeleccionado(${index})' style="width:auto; padding:8px 15px; font-size:0.8rem; text-transform:none;">Descargar PDF</button>
+                            </div>`;
+                    });
+                    container.innerHTML = html;
+                    window.certificadosEncontrados = data; // Guardamos en memoria temporal
+                }
+            }
 
-                } catch (err) {
-                    console.error("Error técnico:", err);
-                    alert("Error crítico en el sistema de verificación.");
-                    resetState();
+            // Función para descargar el elegido de la lista
+            async function descargarCertificadoSeleccionado(index) {
+                const btn = event.target;
+                const originalText = btn.innerText;
+                btn.disabled = true;
+                btn.innerText = "Procesando...";
+                try {
+                    await generarPDF(window.certificadosEncontrados[index]);
+                } finally {
+                    btn.disabled = false;
+                    btn.innerText = originalText;
                 }
             }
 

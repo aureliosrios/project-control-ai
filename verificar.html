@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación de Certificados v6.7 | Project Control AI</title>
+    <title>Verificación de Certificados v6.8 | Project Control AI</title>
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -108,7 +108,7 @@
 <body>
 
     <div class="card">
-        <div class="version-tag">v6.7</div>
+        <div class="version-tag">v6.8</div>
         <img src="Logotipo.png" alt="PCAI" style="height: 50px; margin-bottom: 1.5rem;">
         <h2 style="margin-bottom: 0.5rem;">Portal de Certificación</h2>
         <p style="color: #94a3b8; font-size: 0.95rem;">Ingrese su DNI para descargar su certificado oficial.</p>
@@ -347,10 +347,10 @@
 
                         page2.drawText(txtImpresion, {
                             x: width - impWidth - 50, // Esquina derecha
-                            y: 35, // Posición discreta en la parte inferior
+                            y: 53, // Subido para estar cerca del borde achurado
                             size: fontSizeImp,
                             font: fontRegular,
-                            color: rgb(0.4, 0.4, 0.4) // Gris discreto
+                            color: rgb(0.3, 0.3, 0.3) // Gris un poco más oscuro para mejor lectura
                         });
                     }
 

@@ -199,16 +199,18 @@
         async function generarPDF(data) {
             const { PDFDocument, rgb, StandardFonts } = PDFLib;
 
-            // Carga de plantilla (Asegurando la ruta correcta del Storage)
+            // URL exacta de la plantilla en el Storage
             const urlPlantilla = "https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/Plantillas/Plantilla_Maestra_PCAI.pdf";
 
             try {
-                const existingPdfBytes = await fetch(urlPlantilla).then(res => {
-                    if (!res.ok) throw new Error("No se pudo cargar la plantilla maestra");
-                    return res.arrayBuffer();
-                });
+                const response = await fetch(urlPlantilla);
+                if (!response.ok) throw new Error("No se pudo descargar el archivo desde el Storage. Verifique la URL.");
 
+                const existingPdfBytes = await response.arrayBuffer();
                 const pdfDoc = await PDFDocument.load(existingPdfBytes);
+
+                console.log("Plantilla cargada con éxito, procediendo al estampado...");
+
                 const helveticaBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
                 const firstPage = pdfDoc.getPages()[0];
 
@@ -262,9 +264,10 @@
                 link.download = `Certificado_${data.codigo_verificacion}.pdf`;
                 link.click();
 
-            } catch (e) {
-                console.error("Error al generar el PDF:", e);
-                alert("Error al procesar el documento: " + e.message);
+            } catch (error) {
+                console.error("Error al generar el PDF:", error);
+                alert("Error al procesar el documento: " + error.message);
+                throw error;
             }
         }
     </script>

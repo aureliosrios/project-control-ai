@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación de Certificados v6.1 | Project Control AI</title>
+    <title>Verificación de Certificados v6.2 | Project Control AI</title>
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -108,7 +108,7 @@
 <body>
 
     <div class="card">
-        <div class="version-tag">v6.1</div>
+        <div class="version-tag">v6.2</div>
         <img src="Logotipo.png" alt="PCAI" style="height: 50px; margin-bottom: 1.5rem;">
         <h2 style="margin-bottom: 0.5rem;">Portal de Certificación</h2>
         <p style="color: #94a3b8; font-size: 0.95rem;">Ingrese su DNI para descargar su certificado oficial.</p>
@@ -176,12 +176,22 @@
 
                     if (data && data.length > 0) {
                         loaderText.innerText = "Generando PDF oficial...";
-                        // Si hay varios, el sistema bajará el primero encontrado
-                        await generarPDF(data[0]);
+
+                        if (data.length === 1) {
+                            // Un solo certificado: Descarga directa
+                            await generarPDF(data[0]);
+                        } else {
+                            // Múltiples certificados: Descarga masiva
+                            alert(`Ingeniero/Participante, hemos encontrado ${data.length} certificados para su DNI. Se descargarán a continuación.`);
+                            // Usamos un bucle for...of con await para no sobrecargar el navegador
+                            for (const cert of data) {
+                                await generarPDF(cert);
+                            }
+                        }
                         resetState();
                     } else {
                         loader.style.display = 'none';
-                        alert("No se encontró certificado para el DNI: " + dniInput);
+                        alert(`No se encontró ningún certificado aprobado para el DNI: ${dniInput}`);
                         resetState();
                     }
 

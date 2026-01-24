@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación de Certificados v6.0 | Project Control AI</title>
+    <title>Verificación de Certificados v6.1 | Project Control AI</title>
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -108,7 +108,7 @@
 <body>
 
     <div class="card">
-        <div class="version-tag">v6.0</div>
+        <div class="version-tag">v6.1</div>
         <img src="Logotipo.png" alt="PCAI" style="height: 50px; margin-bottom: 1.5rem;">
         <h2 style="margin-bottom: 0.5rem;">Portal de Certificación</h2>
         <p style="color: #94a3b8; font-size: 0.95rem;">Ingrese su DNI para descargar su certificado oficial.</p>
@@ -143,7 +143,7 @@
                 loaderText.innerText = "Consultando base de datos...";
 
                 try {
-                    // CONSULTA CON RESOLUCIÓN DE AMBIGÜEDAD (!)
+                    // CONSULTA CON FILTRO FORZADO (!inner) PARA EVITAR DUPLICADOS DE OTROS DNI
                     const { data, error } = await _supabase
                         .from('certificados')
                         .select(`
@@ -152,7 +152,7 @@
                         fecha_emision,
                         fecha_inicio_clases,
                         fecha_fin_clases,
-                        alumnos!alumno_id ( dni, nombre ),
+                        alumnos!alumno_id!inner ( dni, nombre ),
                         cursos!curso_id (
                             nombre_curso,
                             horas_academicas,

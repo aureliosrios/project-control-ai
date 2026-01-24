@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación de Certificados v6.3 | Project Control AI</title>
+    <title>Verificación de Certificados v6.4 | Project Control AI</title>
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -108,7 +108,7 @@
 <body>
 
     <div class="card">
-        <div class="version-tag">v6.3</div>
+        <div class="version-tag">v6.4</div>
         <img src="Logotipo.png" alt="PCAI" style="height: 50px; margin-bottom: 1.5rem;">
         <h2 style="margin-bottom: 0.5rem;">Portal de Certificación</h2>
         <p style="color: #94a3b8; font-size: 0.95rem;">Ingrese su DNI para descargar su certificado oficial.</p>
@@ -287,27 +287,28 @@
                     }
 
                     // 5. BLOQUE DEL INSTRUCTOR (FIRMA + NOMBRE + CIP)
-                    // Se elimina el Cargo porque ya existe en la plantilla ("Instructor del curso :")
+                    // Ajuste V6.4: Desplazamiento 40mm a la izquierda (~113 pts) y distorsión Y
                     const prof = data.cursos?.profesores;
-                    const baseX = 635; // Centro del bloque del instructor
+                    const baseX = 522; // Centro del bloque desplazado 40mm a la izquierda (635 - 113)
 
                     if (prof && prof.firma_url) {
                         try {
                             const firmaBytes = await fetch(prof.firma_url).then(res => res.arrayBuffer());
                             const firmaImage = await pdfDoc.embedPng(firmaBytes);
 
-                            // Firma más grande y alargada (V6.3)
+                            // Firma con distorsión: X=1, Y=1.5 (Ajustada a 180x120)
+                            // Desplazada 40mm a la izquierda (545 - 113 = 432)
                             firstPage.drawImage(firmaImage, {
-                                x: 545,
+                                x: 432,
                                 y: 115,
                                 width: 180,
-                                height: 80
+                                height: 120
                             });
                         } catch (e) { console.warn("Firma no disponible físicamente"); }
                     }
 
                     if (prof) {
-                        // Nombre centrado bajo la línea (V6.3 - Posición más baja)
+                        // Nombre centrado bajo la nueva base X
                         const nombreInstructor = `Ing. ${prof.nombre} ${prof.apellido}`;
                         const nombreWidth = fontBold.widthOfTextAtSize(nombreInstructor, 11);
 
@@ -319,7 +320,7 @@
                             color: rgb(0, 0, 0)
                         });
 
-                        // CIP centrado justo debajo del nombre (V6.3)
+                        // CIP centrado bajo la nueva base X
                         const textoCIP = `CIP: ${prof.cip}`;
                         const cipWidth = fontBold.widthOfTextAtSize(textoCIP, 10);
 

@@ -113,7 +113,7 @@
     <div class="container">
         <h1 style="display: flex; justify-content: space-between; align-items: center;">
             Mando del Director Académico
-            <span style="font-size: 0.8rem; color: #475569; font-family: 'Inter', sans-serif;">v2.2</span>
+            <span style="font-size: 0.8rem; color: #475569; font-family: 'Inter', sans-serif;">v2.3</span>
         </h1>
 
         <div class="card">
@@ -124,7 +124,7 @@
             <div class="grid">
                 <div>
                     <label>Seleccionar Curso</label>
-                    <select id="cursoFiltro">
+                    <select id="cursoSelect">
                         <option value="">Cargando cursos...</option>
                     </select>
                 </div>
@@ -154,7 +154,7 @@
     <script>
         // SEGURIDAD: Acceso Técnico
         const PASS_TECNICA = "PCAI";
-        const access = prompt("Acceso Restringido. Ingrese Clave Técnica (v2.2):");
+        const access = prompt("Acceso Restringido. Ingrese Clave Técnica (v2.3):");
 
         if (access !== PASS_TECNICA) {
             document.body.innerHTML = "<h1 style='text-align:center; margin-top:100px; color:#ef4444; font-family:sans-serif;'>Acceso Denegado</h1>";
@@ -163,41 +163,29 @@
 
         const _supabase = supabase.createClient('https://bpsumudexpywfffcwpun.supabase.co', 'sb_publishable_OzjgZjclmEDlDuVdLGuvQQ_SyX2aTy0');
 
-        // 1. CARGAR CURSOS DESDE LA TABLA DE CONFIGURACIÓN
+        // 1. CARGAR CURSOS (Simplificado v2.3)
         async function cargarCursos() {
-            const select = document.getElementById('cursoFiltro');
-
-            const { data, error } = await _supabase
-                .from('cursos')
-                .select('id, nombre_curso');
+            const { data: listaCursos, error } = await _supabase.from('cursos').select('id, nombre_curso');
+            const select = document.getElementById('cursoSelect');
 
             if (error) {
-                console.error("Error cargando tabla cursos:", error);
-                // Fallback a alumnos si la tabla no existe o falla
-                const { data: dataAlumnos } = await _supabase.from('alumnos').select('curso');
-                const cursosUnicos = [...new Set(dataAlumnos?.map(item => item.curso))].filter(c => c);
-                select.innerHTML = '<option value="" disabled selected>Elija un curso (Fallback)</option>';
-                cursosUnicos.forEach(c => {
-                    const option = document.createElement('option');
-                    option.value = c; option.textContent = c;
-                    select.appendChild(option);
-                });
+                console.error("Error al cargar:", error);
+                select.innerHTML = '<option disabled>Error de conexión</option>';
                 return;
             }
 
-            // Llenar el desplegable con IDs Reales
             select.innerHTML = '<option value="" disabled selected>Elija un curso oficial</option>';
-            data.forEach(curso => {
-                const option = document.createElement('option');
-                option.value = curso.id; // UUID
-                option.textContent = curso.nombre_curso;
-                select.appendChild(option);
+            listaCursos.forEach(curso => {
+                let opt = document.createElement('option');
+                opt.value = curso.id; // UUID REAL
+                opt.innerHTML = curso.nombre_curso;
+                select.appendChild(opt);
             });
         }
 
         // 2. EJECUTAR EL CIERRE MASIVO (Lógica de Control v2.1)
         async function cerrarCurso() {
-            const cursoId = document.getElementById('cursoFiltro').value;
+            const cursoId = document.getElementById('cursoSelect').value;
             const inicio = document.getElementById('fInicio').value;
             const fin = document.getElementById('fFin').value;
             const msgBox = document.getElementById('status-msg');
@@ -258,7 +246,7 @@
 
         // 3. SOBREESCRITURA INTELIGENTE (v2.2)
         async function corregirFechasCiclo() {
-            const cursoId = document.getElementById('cursoFiltro').value;
+            const cursoId = document.getElementById('cursoSelect').value;
             const fInicio = document.getElementById('fInicio').value;
             const fFinNueva = document.getElementById('fFin').value;
             const msgBox = document.getElementById('status-msg');

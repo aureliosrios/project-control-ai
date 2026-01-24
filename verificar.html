@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación de Certificados v4.9 | Project Control AI</title>
+    <title>Verificación de Certificados v5.0 | Project Control AI</title>
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
@@ -107,7 +107,7 @@
 <body>
 
     <div class="card">
-        <div class="version-tag">v4.9</div>
+        <div class="version-tag">v5.0</div>
         <img src="Logotipo.png" alt="PCAI" style="height: 50px; margin-bottom: 1.5rem;">
         <h2 style="margin-bottom: 0.5rem;">Portal de Certificación</h2>
         <p style="color: #94a3b8; font-size: 0.95rem;">Ingrese su DNI para descargar su certificado oficial.</p>
@@ -214,14 +214,11 @@
                 const helveticaBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
                 const firstPage = pdfDoc.getPages()[0];
 
-                // REEMPLAZO DE SEGURIDAD ULTRACALIBRADO
-                // Esto evita el error de "toUpperCase" sobre un valor NULL
-                const nombreFinal = (
-                    data.nombre_confirmado ||
-                    (data.alumnos && data.alumnos.nombre ? data.alumnos.nombre : "PARTICIPANTE")
-                ).toUpperCase();
+                // Lógica de Resiliencia: Si no hay nombre_confirmado, no se cae el sistema
+                const nombreRaw = data.nombre_confirmado || "Participante Registrado";
+                const nombreFormateado = nombreRaw.toUpperCase();
 
-                firstPage.drawText(nombreFinal, {
+                firstPage.drawText(nombreFormateado, {
                     x: 150,
                     y: 345,
                     size: 26,

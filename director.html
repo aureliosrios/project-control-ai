@@ -143,7 +143,7 @@
     <script>
         // SEGURIDAD: Acceso Técnico
         const PASS_TECNICA = "PCAI";
-        const access = prompt("Acceso Restringido. Ingrese Clave Técnica:");
+        const access = prompt("Acceso Restringido. Ingrese Clave Técnica (v2.0):");
 
         if (access !== PASS_TECNICA) {
             document.body.innerHTML = "<h1 style='text-align:center; margin-top:100px; color:#ef4444; font-family:sans-serif;'>Acceso Denegado</h1>";
@@ -152,66 +152,72 @@
 
         const _supabase = supabase.createClient('https://bpsumudexpywfffcwpun.supabase.co', 'sb_publishable_OzjgZjclmEDlDuVdLGuvQQ_SyX2aTy0');
 
-        // 1. CARGAR CURSOS DINÁMICAMENTE AL INICIAR
+        // 1. CARGAR CURSOS DESDE LA TABLA DE CONFIGURACIÓN
         async function cargarCursos() {
             const select = document.getElementById('cursoFiltro');
 
-            // Consultamos los nombres únicos de cursos que existen en la tabla alumnos
             const { data, error } = await _supabase
-                .from('alumnos')
-                .select('curso');
+                .from('cursos')
+                .select('id, nombre_curso');
 
             if (error) {
-                console.error("Error cargando cursos:", error);
-                select.innerHTML = '<option value="" disabled>Error al cargar cursos</option>';
+                console.error("Error cargando tabla cursos:", error);
+                // Fallback a alumnos si la tabla no existe o falla
+                const { data: dataAlumnos } = await _supabase.from('alumnos').select('curso');
+                const cursosUnicos = [...new Set(dataAlumnos?.map(item => item.curso))].filter(c => c);
+                select.innerHTML = '<option value="" disabled selected>Elija un curso (Fallback)</option>';
+                cursosUnicos.forEach(c => {
+                    const option = document.createElement('option');
+                    option.value = c; option.textContent = c;
+                    select.appendChild(option);
+                });
                 return;
             }
 
-            // Filtrar duplicados en JavaScript
-            const cursosUnicos = [...new Set(data.map(item => item.curso))].filter(c => c);
-
-            // Llenar el desplegable
-            select.innerHTML = '<option value="" disabled selected>Elija un curso activo</option>';
-            cursosUnicos.forEach(curso => {
+            // Llenar el desplegable con IDs Reales
+            select.innerHTML = '<option value="" disabled selected>Elija un curso oficial</option>';
+            data.forEach(curso => {
                 const option = document.createElement('option');
-                option.value = curso;
-                option.textContent = curso;
+                option.value = curso.id; // UUID
+                option.textContent = curso.nombre_curso;
                 select.appendChild(option);
             });
         }
 
-        // 2. EJECUTAR EL CIERRE MASIVO
+        // 2. EJECUTAR EL CIERRE MASIVO (Lógica de Resiliencia)
         async function cerrarCurso() {
-            const curso = document.getElementById('cursoFiltro').value;
-            const inicio = document.getElementById('fInicio').value; // Formato YYYY-MM-DD
-            const fin = document.getElementById('fFin').value;     // Formato YYYY-MM-DD
+            const cursoId = document.getElementById('cursoFiltro').value;
+            const inicio = document.getElementById('fInicio').value;
+            const fin = document.getElementById('fFin').value;
             const msgBox = document.getElementById('status-msg');
 
-            if (!curso || !inicio || !fin) return alert("Complete curso, inicio y fin.");
+            if (!cursoId || !inicio || !fin) return alert("Complete todos los campos.");
 
             msgBox.style.display = "block";
             msgBox.style.background = "#1e293b";
-            msgBox.innerText = `Sincronizando ${curso}...`;
+            msgBox.innerText = `Sincronizando ciclo...`;
 
-            // ACTUALIZACIÓN FORZADA (Quitamos el filtro .is(null))
+            /* 
+               Lógica sugerida: Para mayor robustez, se recomienda usar un Trigger 
+               en Supabase que pueble 'nombre_confirmado' automáticamente.
+            */
             const { data, error } = await _supabase
                 .from('certificados')
                 .update({
                     fecha_inicio_clases: inicio,
                     fecha_fin_clases: fin
                 })
-                .eq('curso_nombre', curso);
+                .match({ curso_id: cursoId, fecha_fin_clases: null });
 
             if (error) {
                 msgBox.style.background = "#450a0a";
                 msgBox.innerText = "Error: " + error.message;
             } else {
                 msgBox.style.background = "#064e3b";
-                msgBox.innerHTML = `✅ ÉXITO TOTAL: Ciclo de <b>${curso}</b> actualizado con fechas: <br> ${inicio} al ${fin}`;
+                msgBox.innerHTML = `✅ ÉXITO: Ciclo cerrado. <br> Fecha: ${inicio} al ${fin}`;
             }
         }
 
-        // Iniciar carga
         window.onload = cargarCursos;
     </script>
 </body>

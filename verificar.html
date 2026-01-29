@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación de Certificados v7.2 | Project Control AI</title>
+    <title>Verificación de Certificados v7.3 | Project Control AI</title>
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -108,7 +108,7 @@
 <body>
 
     <div class="card">
-        <div class="version-tag">v7.2</div>
+        <div class="version-tag">v7.3</div>
         <img src="Logotipo.png" alt="PCAI" style="height: 50px; margin-bottom: 1.5rem;">
         <h2 style="margin-bottom: 0.5rem;">Portal de Certificación</h2>
         <p style="color: #94a3b8; font-size: 0.95rem;">Ingrese su DNI para descargar su certificado oficial.</p>
@@ -372,20 +372,27 @@
                     });
 
                     // 4. QR DINÁMICO (COORDINADAS V4.1)
-                    const qrDiv = document.getElementById("qrcode");
-                    qrDiv.innerHTML = "";
-                    const verifyUrl = window.location.origin + window.location.pathname + "?v=" + data.codigo_verificacion;
-                    new QRCode(qrDiv, { text: verifyUrl, width: 120, height: 120, correctLevel: QRCode.CorrectLevel.H });
+                    const qrUrl = `https://aureliosrios.github.io/project-control-ai/verificar.html?v=${data.codigo_verificacion}`;
+                    const qrImageBase64 = await QRCode.toDataURL(qrUrl, {
+                        margin: 4,
+                        width: 300,
+                        errorCorrectionLevel: 'M'
+                    });
+                    const qrImage = await pdfDoc.embedPng(qrImageBase64);
 
-                    // Esperar a que el canvas del QR se genere
-                    await new Promise(resolve => setTimeout(resolve, 500));
-                    const canvas = qrDiv.querySelector('canvas');
-                    if (canvas) {
-                        const qrImage = await pdfDoc.embedPng(canvas.toDataURL("image/png"));
-                        firstPage.drawImage(qrImage, {
-                            x: 714, y: 86, width: 80, height: 80
-                        });
-                    }
+                    // Dibujamos un fondo blanco para asegurar el contraste de la cámara
+                    firstPage.drawRectangle({
+                        x: 710,
+                        y: 82,
+                        width: 88,
+                        height: 88,
+                        color: rgb(1, 1, 1),
+                    });
+
+                    // Estampamos el QR en sus coordenadas oficiales
+                    firstPage.drawImage(qrImage, {
+                        x: 714, y: 86, width: 80, height: 80
+                    });
 
                     // 5. BLOQUE DEL INSTRUCTOR (FIRMA + NOMBRE + CIP)
                     // Ajuste V6.4: Desplazamiento 40mm a la izquierda (~113 pts) y distorsión Y

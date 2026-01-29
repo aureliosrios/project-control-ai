@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación de Certificados v7.3 | Project Control AI</title>
+    <title>Verificación de Certificados v7.5 | Project Control AI</title>
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
@@ -108,7 +108,7 @@
 <body>
 
     <div class="card">
-        <div class="version-tag">v7.3</div>
+        <div class="version-tag">v7.5</div>
         <img src="Logotipo.png" alt="PCAI" style="height: 50px; margin-bottom: 1.5rem;">
         <h2 style="margin-bottom: 0.5rem;">Portal de Certificación</h2>
         <p style="color: #94a3b8; font-size: 0.95rem;">Ingrese su DNI para descargar su certificado oficial.</p>
@@ -235,7 +235,7 @@
                     .from('certificados')
                     .select(`
                         nombre_confirmado, codigo_verificacion, fecha_inicio_clases, fecha_fin_clases,
-                        alumnos!alumno_id!inner ( dni ),
+                        alumnos!alumno_id!inner ( dni, nombre, apellido ),
                         cursos!curso_id (
                             nombre_curso, horas_academicas,
                             profesores!profesor_id ( nombre, apellido, cip, firma_url )
@@ -266,34 +266,63 @@
                     return;
                 }
 
-                // SOLUCIÓN INTEGRAL: Gestión de múltiples resultados
-                if (data.length === 1) {
-                    await generarPDF(data[0]); // Descarga directa si es solo uno
-                } else {
-                    // Renderizamos una lista profesional para que el alumno elija
-                    let html = `<h3 style='margin-bottom:15px; color:#fbbf24; font-size:1rem;'>Logros encontrados: ${data.length}</h3>`;
-                    data.forEach((cert, index) => {
-                        html += `
-                            <div style="background:#1e293b; padding:15px; margin-bottom:10px; border-radius:10px; border:1px solid #334155; display:flex; justify-content:space-between; align-items:center; gap: 10px;">
-                                <div style="text-align:left; flex: 1;">
-                                    <div style="font-weight:bold; color:white; font-size:0.9rem;">${cert.cursos.nombre_curso}</div>
-                                    <div style="font-size:0.8rem; color:#94a3b8;">Folio: ${cert.codigo_verificacion}</div>
-                                </div>
-                                <button onclick='descargarCertificadoSeleccionado(${index})' style="width:auto; padding:8px 15px; font-size:0.8rem; text-transform:none;">Descargar PDF</button>
-                            </div>`;
-                    });
-                    container.innerHTML = html;
-                    window.certificadosEncontrados = data; // Guardamos en memoria temporal
-                }
+                // MOSTRAR PANEL DE CONFIRMACIÓN (V7.4)
+                let html = `<h3 style='color:#fbbf24; font-size:1.1rem; margin-bottom:10px;'>¡Certificados Encontrados!</h3>
+                            <p style='font-size:0.85rem; color:#94a3b8; margin-bottom:20px;'>Verifique su nombre. Si hay un error, corríjalo antes de descargar.</p>`;
+
+                data.forEach((cert, index) => {
+                    const inputId = `nombre_edit_${index}`;
+                    const nombreActual = cert.nombre_confirmado || (cert.alumnos.nombre + " " + cert.alumnos.apellido);
+
+                    html += `
+                        <div style="background:#1e293b; padding:20px; margin-bottom:15px; border-radius:12px; border:1px solid #334155;">
+                            <div style="margin-bottom:12px;">
+                                <label style="font-size:0.75rem; color:#0ea5e9; display:block; margin-bottom:5px; font-weight:bold; text-transform:uppercase;">Nombre en el diploma:</label>
+                                <input type="text" id="${inputId}" value="${nombreActual.toUpperCase()}" 
+                                       style="width:100%; background:#0f172a; border:1px solid #38bdf8; color:white; padding:10px; border-radius:8px; font-weight:bold; font-size:1rem; outline:none; box-shadow: 0 0 10px rgba(56, 189, 248, 0.1);">
+                            </div>
+                            <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
+                                <div style="font-size:0.8rem; color:#94a3b8; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:5px;">Curso: <strong>${cert.cursos.nombre_curso}</strong></div>
+                                <button onclick='validarYDescargar(${index}, "${cert.codigo_verificacion}")' 
+                                        id="btn_dl_${index}"
+                                        style="width:100%; padding:10px; background:linear-gradient(135deg, #22d3ee, #0ea5e9); color:#020617; text-transform:none; font-weight:900; letter-spacing:0.5px; margin-top:5px;">
+                                    Confirmar y Descargar PDF
+                                </button>
+                            </div>
+                        </div>`;
+                });
+                container.innerHTML = html;
+                window.certificadosEncontrados = data;
             }
 
-            // Función para descargar el elegido de la lista
-            async function descargarCertificadoSeleccionado(index) {
-                const btn = event.target;
+            async function validarYDescargar(index, codigoFolio) {
+                const btn = document.getElementById(`btn_dl_${index}`);
+                const input = document.getElementById(`nombre_edit_${index}`);
+                const nuevoNombre = input.value.trim().toUpperCase();
+
+                if (!nuevoNombre) return alert("El nombre no puede estar vacío");
+
                 const originalText = btn.innerText;
                 btn.disabled = true;
-                btn.innerText = "Procesando...";
+                btn.innerText = "Guardando y preparando...";
+
                 try {
+                    // 1. ACTUALIZAR EN SUPABASE (PERSISTENCIA OFICIAL)
+                    const { error } = await _supabase
+                        .from('certificados')
+                        .update({ nombre_confirmado: nuevoNombre })
+                        .eq('codigo_verificacion', codigoFolio);
+
+                    if (error) throw error;
+
+                    // 2. ACTUALIZAR EN MEMORIA Y GENERAR PDF
+                    window.certificadosEncontrados[index].nombre_confirmado = nuevoNombre;
+                    await generarPDF(window.certificadosEncontrados[index]);
+
+                } catch (err) {
+                    console.error("Error al persistir nombre:", err);
+                    alert("No se pudo guardar la corrección en la base de datos, pero procederemos con la descarga.");
+                    // Intentamos generar el PDF de todos modos con el nombre en memoria
                     await generarPDF(window.certificadosEncontrados[index]);
                 } finally {
                     btn.disabled = false;

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación de Certificados v7.5 | Project Control AI</title>
+    <title>Verificación de Certificados v7.7 | Project Control AI</title>
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
@@ -108,7 +108,7 @@
 <body>
 
     <div class="card">
-        <div class="version-tag">v7.5</div>
+        <div class="version-tag">v7.7</div>
         <img src="Logotipo.png" alt="PCAI" style="height: 50px; margin-bottom: 1.5rem;">
         <h2 style="margin-bottom: 0.5rem;">Portal de Certificación</h2>
         <p style="color: #94a3b8; font-size: 0.95rem;">Ingrese su DNI para descargar su certificado oficial.</p>
@@ -126,34 +126,7 @@
 
         <p class="footer-text">Project Control AI | Sistema de Verificación Algorítmica</p>
 
-        <!-- Modal de Declaración Jurada (Oculto por defecto) -->
-        <div id="modalDeclaracion"
-            style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(2,6,23,0.98); z-index:9999; overflow-y:auto; padding:20px;">
-            <div
-                style="max-width:700px; margin:40px auto; background:#fff; color:#000; padding:40px; border-radius:10px; box-shadow:0 0 50px rgba(34,211,238,0.3); font-family: 'Inter', sans-serif;">
 
-                <!-- Encabezado con Logo -->
-                <div
-                    style="text-align:center; border-bottom:2px solid #0ea5e9; padding-bottom:20px; margin-bottom:20px;">
-                    <img src="https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/Logos/Logotipo.png"
-                        style="height:60px;">
-                    <h2 style="margin:10px 0; color:#0f172a;">DECLARACIÓN JURADA DIGITAL</h2>
-                    <p style="font-size:0.8rem; color:#64748b;">SISTEMA DE VALIDACIÓN ALGORÍTMICA PCAI-DB</p>
-                </div>
-
-                <!-- Cuerpo del Texto -->
-                <div id="cuerpoDeclaracion" style="line-height:1.6; text-align:justify; font-size:1rem;">
-                    <!-- Aquí se inyecta el texto dinámico -->
-                </div>
-
-                <!-- Botón de Cierre -->
-                <div style="text-align:center; margin-top:30px;">
-                    <button onclick="document.getElementById('modalDeclaracion').style.display='none'"
-                        style="background:#0f172a; color:white; padding:10px 30px; border-radius:5px; border:none; cursor:pointer;">Cerrar
-                        Validación</button>
-                </div>
-            </div>
-        </div>
 
         <script>
             // 1. CONFIGURACIÓN SUPABASE (CREDENCIALES PRODUCTIVAS RESTAURADAS)
@@ -161,16 +134,17 @@
             const SUPABASE_KEY = 'sb_publishable_OzjgZjclmEDlDuVdLGuvQQ_SyX2aTy0';
             const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-            // EJECUCIÓN AL CARGAR LA PÁGINA: Verificar si viene desde un QR (URL params)
+            // 1. Detectar el escaneo al cargar la página (V7.7)
             window.onload = async () => {
                 const params = new URLSearchParams(window.location.search);
                 const v = params.get('v');
                 if (v) {
-                    await verificarDesdeQR(v);
+                    await ejecutarValidacionQR(v);
                 }
             };
 
-            async function verificarDesdeQR(codigo) {
+            // 2. Función Maestra de Validación (V7.7)
+            async function ejecutarValidacionQR(folio) {
                 const loader = document.getElementById('loader');
                 loader.style.display = 'block';
 
@@ -181,42 +155,47 @@
                         alumnos!alumno_id ( dni, nombre ),
                         cursos!curso_id ( nombre_curso, horas_academicas )
                     `)
-                    .eq('codigo_verificacion', codigo)
+                    .eq('codigo_verificacion', folio)
                     .single();
 
                 loader.style.display = 'none';
 
                 if (error || !data) {
-                    alert("El código de verificación no es válido o no existe en nuestra base de datos.");
+                    alert("El código de verificación no es válido o ha sido revocado.");
                     return;
                 }
 
-                mostrarDeclaracionJurada(data);
-            }
-
-            function mostrarDeclaracionJurada(data) {
-                const modal = document.getElementById('modalDeclaracion');
-                const cuerpo = document.getElementById('cuerpoDeclaracion');
-                const nombreAlumno = (data.nombre_confirmado || data.alumnos.nombre).toUpperCase();
-                const dni = data.alumnos.dni;
-                const curso = data.cursos.nombre_curso;
-                const folio = data.codigo_verificacion;
+                // Formateo de Fechas
                 const fInicio = new Date(data.fecha_inicio_clases + 'T12:00:00').toLocaleDateString('es-PE');
                 const fFin = new Date(data.fecha_fin_clases + 'T12:00:00').toLocaleDateString('es-PE');
+                const nombreAlumno = (data.nombre_confirmado || data.alumnos.nombre).toUpperCase();
 
-                cuerpo.innerHTML = `
-                    <p>Se informa al departamento de Recursos Humanos o entidad interesada, que tras verificar nuestros registros, se confirma que el <strong>Sr(a). ${nombreAlumno}</strong>, identificado(a) con DNI <strong>${dni}</strong>, ha cursado y aprobado satisfactoriamente el programa: <strong>${curso}</strong>.</p>
+                // Construcción del Texto con resaltado de Marca (V7.7)
+                const cuerpoHtml = `
+                    <p>A través de su plataforma de auditoría en tiempo real, la <strong>Dirección Académica de PROJECT CONTROL AI</strong> emite el presente dictamen de validez digital.</p>
                     
-                    <p>Dicho programa se desarrolló del <strong>${fInicio}</strong> al <strong>${fFin}</strong>, con una intensidad horaria de <strong>45 horas académicas</strong> (15 horas lectivas síncronas y 30 horas asíncronas).</p>
-                    
-                    <div style="background:#f0f9ff; padding:15px; border-left:4px solid #0ea5e9; margin:20px 0;">
-                        <strong>Validación PCAI:</strong> El registro ${folio} es un documento oficial emitido por Project Control AI y cuenta con plena validez académica en nuestros sistemas.
+                    <p>Se confirma de manera oficial que el <strong>Sr(a). ${nombreAlumno}</strong>, identificado(a) con DNI <strong>${data.alumnos.dni}</strong>, ha superado satisfactoriamente los estándares de evaluación de <strong>PROJECT CONTROL AI</strong> en el programa:</p>
+
+                    <div style="background: #f8fafc; border-left: 5px solid #0ea5e9; padding: 20px; margin: 20px 0; border-radius: 4px;">
+                        <span style="color: #0f172a; font-weight: 800; font-size: 1.2rem; display: block; line-height: 1.3;">
+                            ${data.cursos.nombre_curso}
+                        </span>
                     </div>
 
-                    <p style="margin-top:20px; font-size:0.9rem; color:#64748b; font-style:italic;">Validación digital emitida el: ${new Date().toLocaleDateString('es-PE')} a las ${new Date().toLocaleTimeString('es-PE')}</p>
+                    <p>Este programa, desarrollado por los especialistas de <strong>PROJECT CONTROL AI</strong> del <strong>${fInicio} al ${fFin}</strong>, consta de una intensidad horaria total de <strong>45 horas académicas</strong> (15 horas lectivas síncronas y 30 horas asíncronas de aplicación práctica), certificando competencias avanzadas bajo nuestra metodología de <strong>Ingeniería Aumentada</strong>.</p>
+
+                    <p style="background: #eff6ff; color: #1d4ed8; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-align: center; border: 1px solid #dbeafe; margin-top: 25px;">
+                        ✅ REGISTRO OFICIAL VERIFICADO EN PCAI-DB
+                    </p>
                 `;
-                modal.style.display = 'block';
+
+                // Inyectar y mostrar en el Modal Premium
+                document.getElementById('cuerpoValidacion').innerHTML = cuerpoHtml;
+                document.getElementById('idConsulta').innerText = data.codigo_verificacion;
+                document.getElementById('modalValidacion').style.display = 'block';
             }
+
+
 
             async function procesarConsulta() {
                 const dniInput = document.getElementById('dniInput').value.trim();
@@ -510,6 +489,52 @@
                 }
             }
         </script>
+
+        <!-- MODAL DE VALIDACIÓN PREMIUM -->
+        <div id="modalValidacion"
+            style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(2,6,23,0.97); z-index:9999; overflow-y:auto; padding:15px; backdrop-filter: blur(10px);">
+            <div
+                style="max-width:600px; margin:20px auto; background:#ffffff; border-radius:16px; overflow:hidden; box-shadow:0 25px 50px -12px rgba(0,0,0,0.5); font-family: 'Inter', sans-serif; border: 1px solid rgba(14, 165, 233, 0.2);">
+
+                <!-- Línea de Identidad -->
+                <div style="height: 8px; background: linear-gradient(90deg, #0ea5e9, #22d3ee, #0ea5e9);"></div>
+
+                <div style="padding: 40px;">
+                    <!-- CABECERA -->
+                    <div style="text-align:center; margin-bottom:30px;">
+                        <img src="https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/Logos/Logotipo.png"
+                            alt="Project Control AI" style="height:75px; margin-bottom:15px;">
+
+                        <h1
+                            style="color:#0f172a; font-size:1.6rem; margin:0; font-family:'Space Grotesk', sans-serif; font-weight:800; letter-spacing:-0.5px; line-height:1.2;">
+                            VALIDACIÓN DE AUTENTICIDAD ACADÉMICA
+                        </h1>
+                        <p
+                            style="color:#0ea5e9; font-weight:700; font-size:0.8rem; letter-spacing:2px; margin-top:8px; text-transform:uppercase;">
+                            SISTEMA DE AUDITORÍA DIGITAL PCAI-DB
+                        </p>
+                    </div>
+
+                    <!-- CUERPO DE LA DECLARACIÓN -->
+                    <div id="cuerpoValidacion"
+                        style="color: #1e293b; font-size: 1.05rem; line-height: 1.8; text-align: justify;">
+                        <!-- Se inyecta dinámicamente -->
+                    </div>
+
+                    <!-- PIE DE PÁGINA -->
+                    <div style="margin-top:35px; padding-top:20px; border-top:1px solid #f1f5f9; text-align:center;">
+                        <p style="color:#94a3b8; font-size:0.75rem; margin-bottom:20px;">
+                            Validación emitida por el servidor central de <strong>PROJECT CONTROL AI</strong><br>
+                            ID Consulta: <span id="idConsulta"></span> | Lima, Perú
+                        </p>
+                        <button onclick="document.getElementById('modalValidacion').style.display='none'"
+                            style="width:100%; background:#0f172a; color:#fff; border:none; padding:16px; border-radius:10px; font-weight:800; cursor:pointer; font-size:0.9rem; transition:0.3s; letter-spacing:1px;">
+                            CERRAR VERIFICACIÓN OFICIAL
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 </body>
 

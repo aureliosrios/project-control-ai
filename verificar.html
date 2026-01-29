@@ -137,7 +137,10 @@
                 const loader = document.getElementById('loader');
                 const container = document.getElementById('resultadoContainer');
 
-                if (!dniInput) return alert("Ingrese un DNI válido");
+                if (!dniInput) {
+                    container.innerHTML = `<div style="color: #f87171; padding: 10px; border: 1px solid rgba(248, 113, 113, 0.2); border-radius: 8px; font-size: 0.9rem;">⚠️ Por favor, ingrese un número de DNI.</div>`;
+                    return;
+                }
 
                 loader.style.display = 'block';
                 container.innerHTML = ""; // Limpiamos búsquedas previas
@@ -158,7 +161,23 @@
 
                 if (error || !data || data.length === 0) {
                     if (error) console.error("Error Supabase:", error);
-                    return alert("No se encontraron certificados aprobados para este DNI.");
+                    container.innerHTML = `
+                        <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; padding: 20px; border-radius: 12px; margin-top: 20px; text-align: left;">
+                            <h4 style="color: #f87171; margin-top: 0;">⚠️ Certificado no encontrado</h4>
+                            <p style="font-size: 0.9rem; color: #fca5a5; line-height: 1.5;">
+                                No hemos localizado registros aprobados para el DNI: <strong>${dniInput}</strong>. 
+                                Esto puede deberse a un error tipográfico cometido durante el formulario de inscripción o que aún no se ha procesado su emisión.
+                            </p>
+                            <hr style="border: 0; border-top: 1px solid rgba(239, 68, 68, 0.2); margin: 15px 0;">
+                            <p style="font-size: 0.85rem; color: white;">Para corregir sus datos y realizar la descarga, contacte con nuestra central de soporte:</p>
+                            <a href="https://wa.me/51993147501?text=Hola,%20mi%20DNI%20${dniInput}%20no%20aparece%20en%20el%20portal%20de%20certificados.%20Deseo%20verificar%20mi%20inscripci%C3%B3n." 
+                               target="_blank" 
+                               style="display: inline-block; background: #25d366; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; margin-top: 10px; transition: 0.3s;">
+                               Solicitar Soporte Técnico
+                            </a>
+                        </div>
+                    `;
+                    return;
                 }
 
                 // SOLUCIÓN INTEGRAL: Gestión de múltiples resultados

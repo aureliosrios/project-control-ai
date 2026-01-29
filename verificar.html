@@ -213,7 +213,7 @@
                 const { data, error } = await _supabase
                     .from('certificados')
                     .select(`
-                        nombre_confirmado, codigo_verificacion, fecha_inicio_clases, fecha_fin_clases,
+                        nombre_confirmado, codigo_verificacion, fecha_inicio_clases, fecha_fin_clases, descargas_count,
                         alumnos!alumno_id!inner ( dni, nombre, apellido ),
                         cursos!curso_id (
                             nombre_curso, horas_academicas,
@@ -275,37 +275,61 @@
             }
 
             async function validarYDescargar(index, codigoFolio) {
-                const btn = document.getElementById(`btn_dl_${index}`);
-                const input = document.getElementById(`nombre_edit_${index}`);
-                const nuevoNombre = input.value.trim().toUpperCase();
+                const certData = window.certificadosEncontrados[index];
+                const container = document.getElementById('resultadoContainer');
 
-                if (!nuevoNombre) return alert("El nombre no puede estar vacío");
+                // 1. VERIFICACIÓN DE LÍMITE (Regla de Negocio)
+                if (certData.descargas_count >= 1) {
+                    container.innerHTML = `
+                        <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; padding: 25px; border-radius: 12px; margin-top: 20px; text-align: left;">
+                            <h3 style="color: #f87171; margin-top: 0;">⚠️ Límite de Descargas Alcanzado</h3>
+                            <p style="color: white; line-height: 1.6;">
+                                Usted ya ha realizado la descarga de su certificado oficial (Folio: ${codigoFolio}). 
+                            </p>
+                            <p style="color: #fca5a5; font-size: 0.9rem;">
+                                Por políticas de seguridad de <strong>PROJECT CONTROL AI</strong>, el sistema permite una (01) única emisión gratuita por alumno. 
+                                Cualquier descarga adicional o re-emisión requiere una <strong>Autorización Administrativa</strong> y conlleva una tasa por trámite de gestión de datos.
+                            </p>
+                            <hr style="border: 0; border-top: 1px solid rgba(239, 68, 68, 0.2); margin: 20px 0;">
+                            <a href="https://wa.me/51993147501?text=Hola,%20he%20superado%20el%20l%C3%ADmite%20de%20descargas%20de%20mi%20certificado%20${codigoFolio}.%20Deseo%20solicitar%20una%20re-emisi%C3%B3n." 
+                               target="_blank" 
+                               style="display: block; text-align: center; background: #fb923c; color: #020617; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: 800;">
+                               Solicitar Autorización de Re-emisión
+                            </a>
+                        </div>
+                    `;
+                    return;
+                }
 
-                const originalText = btn.innerText;
-                btn.disabled = true;
-                btn.innerText = "Guardando y preparando...";
-
+                // 2. SI TIENE CUPOS, PROCEDEMOS A ACTUALIZAR Y DESCARGAR
                 try {
-                    // 1. ACTUALIZAR EN SUPABASE (PERSISTENCIA OFICIAL)
+                    const nuevoNombre = document.getElementById(`nombre_edit_${index}`).value.trim();
+
+                    // Actualizamos nombre e incrementamos el contador en una sola transacción
                     const { error } = await _supabase
                         .from('certificados')
-                        .update({ nombre_confirmado: nuevoNombre })
+                        .update({
+                            nombre_confirmado: nuevoNombre.toUpperCase(),
+                            descargas_count: (certData.descargas_count || 0) + 1 // Sumamos 1
+                        })
                         .eq('codigo_verificacion', codigoFolio);
 
                     if (error) throw error;
 
-                    // 2. ACTUALIZAR EN MEMORIA Y GENERAR PDF
-                    window.certificadosEncontrados[index].nombre_confirmado = nuevoNombre;
-                    await generarPDF(window.certificadosEncontrados[index]);
+                    // Actualizamos objeto en memoria para esta sesión
+                    certData.nombre_confirmado = nuevoNombre.toUpperCase();
+                    certData.descargas_count = (certData.descargas_count || 0) + 1;
+
+                    // Generamos el PDF
+                    await generarPDF(certData);
+
+                    // Opcional: Recargamos la vista para mostrar el bloqueo inmediatamente
+                    alert("Descarga exitosa. Este documento es su copia oficial única.");
+                    location.reload();
 
                 } catch (err) {
-                    console.error("Error al persistir nombre:", err);
-                    alert("No se pudo guardar la corrección en la base de datos, pero procederemos con la descarga.");
-                    // Intentamos generar el PDF de todos modos con el nombre en memoria
-                    await generarPDF(window.certificadosEncontrados[index]);
-                } finally {
-                    btn.disabled = false;
-                    btn.innerText = originalText;
+                    console.error("Error en seguridad de descarga:", err);
+                    alert("Error al validar la emisión.");
                 }
             }
 

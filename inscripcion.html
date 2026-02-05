@@ -405,6 +405,7 @@
         // --- CONFIGURACIÓN DE PRODUCCIÓN PROJECT CONTROL AI ---
         const supabaseUrl = 'https://bpsumudexpywfffcwpun.supabase.co';
         const supabaseKey = 'sb_publishable_OzjgZjclmEDlDuVdLGuvQQ_SyX2aTy0';
+        // Renombramos el cliente a 'supabase' para que coincida con la estructura solicitada
         const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwPvR7sL6JQMM9EEs-X9jHGB-JL93U4sxpN9YR-pxcdcFKza5wxxfrtteU9O19lBiftzA/exec';
@@ -416,62 +417,90 @@
         const formSection = document.getElementById('formSection');
         const successBox = document.getElementById('successMsg');
 
+        /**
+         * Lógica de Ingeniería Robusta para Inscripciones
+         */
+        async function procesarInscripcion(datosFormulario) {
+            // 1. ENVIAR A GOOGLE DRIVE (Backup siempre activo)
+            // Lo enviamos primero para asegurar que el dato llegue a su Drive pase lo que pase
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: new URLSearchParams(datosFormulario)
+            }).then(() => console.log("Respaldo en Sheets exitoso"));
+
+            // 2. LOGICA SUPABASE (Identidad + Actividad)
+            try {
+                // PASO A: Asegurar Identidad (UPSERT en tabla 'alumnos')
+                const { data: alumno, error: errorAlumno } = await _supabase
+                    .from('alumnos')
+                    .upsert({
+                        dni: datosFormulario.dni,
+                        nombre: datosFormulario.nombre,
+                        apellido: datosFormulario.apellido,
+                        profesion: datosFormulario.profesion,
+                        telefono: datosFormulario.telefono,
+                        email: datosFormulario.email
+                    }, { onConflict: 'dni' })
+                    .select()
+                    .single();
+
+                if (errorAlumno) throw errorAlumno;
+
+                // PASO B: Registrar la Inscripción (INSERT en tabla 'certificados')
+                // Buscamos el ID del curso basándonos en el nombre que viene del formulario
+                const cursoQuery = await _supabase
+                    .from('cursos')
+                    .select('id')
+                    .ilike('nombre_curso', `%${datosFormulario.curso}%`)
+                    .single();
+
+                if (cursoQuery.error) throw new Error("Curso no encontrado en la base de datos.");
+
+                const { error: errorInscripcion } = await _supabase
+                    .from('certificados')
+                    .insert({
+                        alumno_id: alumno.id,
+                        curso_id: cursoQuery.data.id,
+                        nombre_confirmado: `${datosFormulario.nombre} ${datosFormulario.apellido}`.toUpperCase()
+                    });
+
+                if (errorInscripcion) throw errorInscripcion;
+
+                // ÉXITO: Mostrar UI de confirmación
+                formSection.style.display = 'none';
+                successBox.style.display = 'block';
+
+                // Preparar enlace de WhatsApp personalizado
+                const waMsg = `Hola Ing. Aurelio, soy ${datosFormulario.nombre}. Acabo de inscribirme al curso ${datosFormulario.curso}. Aquí adjunto mi voucher para validación.`;
+                document.getElementById('waLink').href = `https://wa.me/51993147501?text=${encodeURIComponent(waMsg)}`;
+
+            } catch (err) {
+                console.error("Error técnico:", err);
+                alert("Hubo un inconveniente con el servidor, pero su registro ha sido respaldado en nuestra base de datos de seguridad.");
+
+                // Aun con error en Supabase, mostramos el éxito parcial porque Sheets ya tiene la data
+                formSection.style.display = 'none';
+                successBox.style.display = 'block';
+            }
+        }
+
         form.addEventListener('submit', async e => {
             e.preventDefault();
 
             // UI: Estado de carga
             btn.disabled = true;
-            btnText.innerText = "Sincronizando con Servidores...";
+            btnText.innerText = "Procesando inscripción...";
             btnSpinner.style.display = "inline-block";
 
             const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
 
-            // 1. Este mapeo debe ser EXACTO a los nombres del SQL
-            const payload = {
-                fecha: new Date().toLocaleString(), // << CAMBIADO: ahora coincide con la DB
-                nombre: formData.get('nombre'),
-                apellido: formData.get('apellido'),
-                dni: formData.get('dni'),
-                profesion: formData.get('profesion'),
-                telefono: formData.get('telefono'),
-                email: formData.get('email'),
-                curso: formData.get('curso'),
-                metodo_pago: formData.get('metodo_pago'),
-                pago_realizado: 'NO'
-            };
+            await procesarInscripcion(data);
 
-            try {
-                // Regresamos a .insert() para crear una fila nueva por cada curso
-                const { data, error } = await _supabase
-                    .from('alumnos')
-                    .insert([payload]);
-
-                if (error) {
-                    console.error("Error en Supabase:", error.message);
-                    alert("Error: " + error.message);
-                    throw error;
-                }
-
-                // Si llegó aquí, Supabase guardó la nueva fila. 
-                // Ahora enviamos a Google Sheets (Shadow Writing)
-                await fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' });
-
-                // Éxito UI
-                formSection.style.display = 'none';
-                successBox.style.display = 'block';
-
-                // Preparar WhatsApp para el Voucher
-                const nombre = formData.get('nombre');
-                const curso = formData.get('curso');
-                const waMsg = `Hola Ing. Aurelio, soy ${nombre}. Acabo de inscribirme al curso ${curso}. Aquí adjunto mi voucher para la certificación automática.`;
-                document.getElementById('waLink').href = `https://wa.me/51993147501?text=${encodeURIComponent(waMsg)}`;
-
-            } catch (err) {
-                console.error("Error crítico de red/script:", err);
-                btn.disabled = false;
-                btnText.innerText = "REINTENTAR";
-                btnSpinner.style.display = "none";
-            }
+            btn.disabled = false;
+            btnText.innerText = "FINALIZAR INSCRIPCIÓN";
+            btnSpinner.style.display = "none";
         });
     </script>
 

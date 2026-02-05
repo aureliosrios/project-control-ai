@@ -420,13 +420,13 @@
         /**
          * Lógica de Ingeniería Robusta para Inscripciones
          */
-        async function procesarInscripcion(datosFormulario) {
+        async function procesarInscripcion(datos) {
             // 1. ENVIAR A GOOGLE DRIVE (Backup siempre activo)
             // Lo enviamos primero para asegurar que el dato llegue a su Drive pase lo que pase
             fetch(scriptURL, {
                 method: 'POST',
                 mode: 'no-cors',
-                body: new URLSearchParams(datosFormulario)
+                body: new URLSearchParams(datos)
             }).then(() => console.log("Respaldo en Sheets exitoso"));
 
             // 2. LOGICA SUPABASE (Identidad + Actividad)
@@ -435,49 +435,50 @@
                 const { data: alumno, error: errorAlumno } = await _supabase
                     .from('alumnos')
                     .upsert({
-                        dni: datosFormulario.dni,
-                        nombre: datosFormulario.nombre,
-                        apellido: datosFormulario.apellido,
-                        profesion: datosFormulario.profesion,
-                        telefono: datosFormulario.telefono,
-                        email: datosFormulario.email
+                        dni: datos.dni,
+                        nombre: datos.nombre,
+                        apellido: datos.apellido,
+                        profesion: datos.profesion,
+                        telefono: datos.telefono,
+                        email: datos.email
                     }, { onConflict: 'dni' })
                     .select()
                     .single();
 
                 if (errorAlumno) throw errorAlumno;
 
-                // PASO B: Registrar la Inscripción (INSERT en tabla 'certificados')
-                // Buscamos el ID del curso basándonos en el nombre que viene del formulario
-                const cursoQuery = await _supabase
+                // 2. GESTIÓN DE MATRÍCULA (INSERT)
+                // Buscamos el ID del curso seleccionado
+                const { data: cursoData } = await _supabase
                     .from('cursos')
                     .select('id')
-                    .ilike('nombre_curso', `%${datosFormulario.curso}%`)
+                    .ilike('nombre_curso', `%${datos.curso}%`)
                     .single();
 
-                if (cursoQuery.error) throw new Error("Curso no encontrado en la base de datos.");
-
-                const { error: errorInscripcion } = await _supabase
+                // Creamos la nueva fila en certificados (el alumno puede tener infinitas filas aquí)
+                const { error: errorCert } = await _supabase
                     .from('certificados')
                     .insert({
                         alumno_id: alumno.id,
-                        curso_id: cursoQuery.data.id,
-                        nombre_confirmado: `${datosFormulario.nombre} ${datosFormulario.apellido}`.toUpperCase()
+                        curso_id: cursoData.id,
+                        nombre_confirmado: `${datos.nombre} ${datos.apellido}`.toUpperCase()
                     });
 
-                if (errorInscripcion) throw errorInscripcion;
+                if (errorCert) throw errorCert;
+
+                alert("¡Inscripción Exitosa! Bienvenido a Project Control AI.");
 
                 // ÉXITO: Mostrar UI de confirmación
                 formSection.style.display = 'none';
                 successBox.style.display = 'block';
 
                 // Preparar enlace de WhatsApp personalizado
-                const waMsg = `Hola Ing. Aurelio, soy ${datosFormulario.nombre}. Acabo de inscribirme al curso ${datosFormulario.curso}. Aquí adjunto mi voucher para validación.`;
+                const waMsg = `Hola Ing. Aurelio, soy ${datos.nombre}. Acabo de inscribirme al curso ${datos.curso}. Aquí adjunto mi voucher para validación.`;
                 document.getElementById('waLink').href = `https://wa.me/51993147501?text=${encodeURIComponent(waMsg)}`;
 
             } catch (err) {
-                console.error("Error técnico:", err);
-                alert("Hubo un inconveniente con el servidor, pero su registro ha sido respaldado en nuestra base de datos de seguridad.");
+                console.error("Error en flujo de datos:", err);
+                alert("Su registro fue enviado a respaldo. La administración validará su ingreso.");
 
                 // Aun con error en Supabase, mostramos el éxito parcial porque Sheets ya tiene la data
                 formSection.style.display = 'none';

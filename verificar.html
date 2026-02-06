@@ -225,7 +225,8 @@
                             profesores!profesor_id ( nombre, apellido, cip, firma_url )
                         )
                     `)
-                    .eq('alumnos.dni', dni);
+                    .eq('alumnos.dni', dni)
+                    .not('fecha_fin_clases', 'is', null);
 
                 loader.style.display = 'none';
 

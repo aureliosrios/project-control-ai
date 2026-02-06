@@ -115,7 +115,7 @@
 
         <input type="text" id="dniInput" placeholder="Ej: 70001234" maxlength="15">
 
-        <button id="btnConsultar" onclick="procesarConsulta()">Consultar y Descargar</button>
+        <button id="btnConsultar" onclick="buscarCertificados()">Consultar y Descargar</button>
 
         <div id="resultadoContainer" style="margin-top: 1.5rem; text-align: left;"></div>
 
@@ -197,45 +197,56 @@
 
 
 
-            async function procesarConsulta() {
-                const dniInput = document.getElementById('dniInput').value.trim();
-                const loader = document.getElementById('loader');
+            async function buscarCertificados() {
+                const dni = document.getElementById('dniInput').value.trim();
                 const container = document.getElementById('resultadoContainer');
+                const loader = document.getElementById('loader');
 
-                if (!dniInput) {
-                    container.innerHTML = `<div style="color: #f87171; padding: 10px; border: 1px solid rgba(248, 113, 113, 0.2); border-radius: 8px; font-size: 0.9rem;">⚠️ Por favor, ingrese un número de DNI.</div>`;
-                    return;
-                }
+                if (!dni) return alert("Ingrese un DNI");
+
+                console.log("Buscando certificados para DNI:", dni);
 
                 loader.style.display = 'block';
-                container.innerHTML = ""; // Limpiamos búsquedas previas
+                container.innerHTML = "";
 
+                // CONSULTA DIRECTA: Buscamos en certificados filtrando por el DNI del alumno
+                // Note: We keep the necessary fields for PDF generation (cursos, profesores)
                 const { data, error } = await _supabase
                     .from('certificados')
                     .select(`
-                        nombre_confirmado, codigo_verificacion, fecha_inicio_clases, fecha_fin_clases, descargas_count,
-                        alumnos!alumno_id!inner ( dni, nombre, apellido ),
+                        *,
+                        alumnos!inner (
+                            nombre,
+                            apellido,
+                            dni
+                        ),
                         cursos!curso_id (
                             nombre_curso, horas_academicas,
                             profesores!profesor_id ( nombre, apellido, cip, firma_url )
                         )
                     `)
-                    .eq('alumnos.dni', dniInput);
+                    .eq('alumnos.dni', dni);
 
                 loader.style.display = 'none';
 
-                if (error || !data || data.length === 0) {
-                    if (error) console.error("Error Supabase:", error);
+                if (error) {
+                    console.error("Error en consulta:", error.message);
+                    alert("Error de conexión: " + error.message);
+                    return;
+                }
+
+                if (!data || data.length === 0) {
+                    console.log("No se encontraron registros.");
                     container.innerHTML = `
                         <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; padding: 20px; border-radius: 12px; margin-top: 20px; text-align: left;">
                             <h4 style="color: #f87171; margin-top: 0;">⚠️ Certificado no encontrado</h4>
                             <p style="font-size: 0.9rem; color: #fca5a5; line-height: 1.5;">
-                                No hemos localizado registros aprobados para el DNI: <strong>${dniInput}</strong>. 
+                                No hemos localizado registros aprobados para el DNI: <strong>${dni}</strong>. 
                                 Esto puede deberse a un error tipográfico cometido durante el formulario de inscripción o que aún no se ha procesado su emisión.
                             </p>
                             <hr style="border: 0; border-top: 1px solid rgba(239, 68, 68, 0.2); margin: 15px 0;">
                             <p style="font-size: 0.85rem; color: white;">Para corregir sus datos y realizar la descarga, contacte con nuestra central de soporte:</p>
-                            <a href="https://wa.me/51993147501?text=Hola,%20mi%20DNI%20${dniInput}%20no%20aparece%20en%20el%20portal%20de%20certificados.%20Deseo%20verificar%20mi%20inscripci%C3%B3n." 
+                            <a href="https://wa.me/51993147501?text=Hola,%20mi%20DNI%20${dni}%20no%20aparece%20en%20el%20portal%20de%20certificados.%20Deseo%20verificar%20mi%20inscripci%C3%B3n." 
                                target="_blank" 
                                style="display: inline-block; background: #25d366; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; margin-top: 10px; transition: 0.3s;">
                                Solicitar Soporte Técnico
@@ -245,13 +256,18 @@
                     return;
                 }
 
-                // MOSTRAR PANEL DE CONFIRMACIÓN (V7.4)
+                console.log("Certificados encontrados:", data);
+                mostrarResultados(data);
+            }
+
+            function mostrarResultados(data) {
+                const container = document.getElementById('resultadoContainer');
                 let html = `<h3 style='color:#fbbf24; font-size:1.1rem; margin-bottom:10px;'>¡Certificados Encontrados!</h3>
                             <p style='font-size:0.85rem; color:#94a3b8; margin-bottom:20px;'>Verifique su nombre. Si hay un error, corríjalo antes de descargar.</p>`;
 
                 data.forEach((cert, index) => {
                     const inputId = `nombre_edit_${index}`;
-                    const nombreActual = cert.nombre_confirmado || (cert.alumnos.nombre + " " + cert.alumnos.apellido);
+                    const nombreActual = cert.nombre_confirmado || (cert.alumnos.nombre + " " + (cert.alumnos.apellido || ""));
 
                     html += `
                         <div style="background:#1e293b; padding:20px; margin-bottom:15px; border-radius:12px; border:1px solid #334155;">
@@ -261,7 +277,7 @@
                                        style="width:100%; background:#0f172a; border:1px solid #38bdf8; color:white; padding:10px; border-radius:8px; font-weight:bold; font-size:1rem; outline:none; box-shadow: 0 0 10px rgba(56, 189, 248, 0.1);">
                             </div>
                             <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
-                                <div style="font-size:0.8rem; color:#94a3b8; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:5px;">Curso: <strong>${cert.cursos.nombre_curso}</strong></div>
+                                <div style="font-size:0.8rem; color:#94a3b8; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:5px;">Curso: <strong>${cert.cursos?.nombre_curso || 'N/A'}</strong></div>
                                 <button onclick='validarYDescargar(${index}, "${cert.codigo_verificacion}")' 
                                         id="btn_dl_${index}"
                                         style="width:100%; padding:10px; background:linear-gradient(135deg, #22d3ee, #0ea5e9); color:#020617; text-transform:none; font-weight:900; letter-spacing:0.5px; margin-top:5px;">

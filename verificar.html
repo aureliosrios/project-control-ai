@@ -109,13 +109,20 @@
 
     <div class="card">
         <div class="version-tag">v7.8</div>
-        <img src="Logotipo.png" alt="PCAI" style="height: 50px; margin-bottom: 1.5rem;">
-        <h2 style="margin-bottom: 0.5rem;">Portal de Certificación</h2>
-        <p style="color: #94a3b8; font-size: 0.95rem;">Ingrese su DNI para descargar su certificado oficial.</p>
 
-        <input type="text" id="dniInput" placeholder="Ej: 70001234" maxlength="15">
+        <div id="searchSection">
+            <img src="Logotipo.png" alt="PCAI" style="height: 50px; margin-bottom: 1.5rem;">
+            <h2 style="margin-bottom: 0.5rem;">Portal de Certificación</h2>
+            <p style="color: #94a3b8; font-size: 0.95rem;">Ingrese su DNI para descargar su certificado oficial.</p>
 
-        <button id="btnConsultar" onclick="buscarCertificados()">Consultar y Descargar</button>
+            <input type="text" id="dniInput" placeholder="Ej: 70001234" maxlength="15">
+
+            <button id="btnConsultar" onclick="buscarCertificados()">Consultar y Descargar</button>
+        </div>
+
+        <div id="resultsSection" style="display:none; margin-top: 1.5rem; text-align: left;">
+            <div id="listaCertificados"></div>
+        </div>
 
         <div id="resultadoContainer" style="margin-top: 1.5rem; text-align: left;"></div>
 
@@ -261,272 +268,174 @@
                 mostrarResultados(data);
             }
 
-            function mostrarResultados(data) {
-                const container = document.getElementById('resultadoContainer');
-                let html = `<h3 style='color:#fbbf24; font-size:1.1rem; margin-bottom:10px;'>¡Certificados Encontrados!</h3>
-                            <p style='font-size:0.85rem; color:#94a3b8; margin-bottom:20px;'>Verifique su nombre. Si hay un error, corríjalo antes de descargar.</p>`;
+            // 1. EL ALUMNO ELIGE SU TÍTULO Y CONFIRMA SU NOMBRE
+            function mostrarResultados(certificados) {
+                document.getElementById('searchSection').style.display = 'none';
+                const container = document.getElementById('listaCertificados');
+                const nombreSugerido = `${certificados[0].alumnos.nombre} ${certificados[0].alumnos.apellido}`;
 
-                data.forEach((cert, index) => {
-                    const inputId = `nombre_edit_${index}`;
-                    const nombreActual = cert.nombre_confirmado || (cert.alumnos.nombre + " " + (cert.alumnos.apellido || ""));
+                container.innerHTML = `
+                    <div style="margin-bottom:20px; text-align:left; background:rgba(56, 189, 248, 0.05); padding:20px; border-radius:15px;">
+                        <label style="font-size:0.8rem; color:#94a3b8; display:block; margin-bottom:10px;">Tratamiento y Nombre Oficial:</label>
+                        <div style="display:flex; gap:10px;">
+                            <select id="tituloTratamiento" style="width:100px; padding:12px; border-radius:10px; background:#0f172a; color:white; border:1px solid #334155;">
+                                <option value="Sr.">Sr.</option>
+                                <option value="Sra.">Sra.</option>
+                                <option value="Srtita.">Srtita.</option>
+                                <option value="Ing.">Ing.</option>
+                                <option value="Arq.">Arq.</option>
+                            </select>
+                            <input type="text" id="nombreConfirmado" style="width:100%; background:#0f172a; border:1px solid #334155; color:white; padding:12px; border-radius:10px; flex:1;" value="${nombreSugerido.toUpperCase()}">
+                        </div>
+                        <p style="font-size:0.75rem; color:#fb923c; margin-top:10px;">* El título seleccionado aparecerá antes de su nombre en el diploma.</p>
+                    </div>
+                `;
 
-                    html += `
-                        <div style="background:#1e293b; padding:20px; margin-bottom:15px; border-radius:12px; border:1px solid #334155;">
-                            <div style="margin-bottom:12px;">
-                                <label style="font-size:0.75rem; color:#0ea5e9; display:block; margin-bottom:5px; font-weight:bold; text-transform:uppercase;">Nombre en el diploma:</label>
-                                <input type="text" id="${inputId}" value="${nombreActual.toUpperCase()}" 
-                                       style="width:100%; background:#0f172a; border:1px solid #38bdf8; color:white; padding:10px; border-radius:8px; font-weight:bold; font-size:1rem; outline:none; box-shadow: 0 0 10px rgba(56, 189, 248, 0.1);">
+                certificados.forEach(cert => {
+                    const card = document.createElement('div');
+                    card.style.background = '#1e293b';
+                    card.style.padding = '15px';
+                    card.style.borderRadius = '12px';
+                    card.style.marginBottom = '10px';
+                    card.style.border = '1px solid #334155';
+
+                    card.innerHTML = `
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <div>
+                                <div style="font-weight:bold; color:#38bdf8;">${cert.cursos?.nombre_curso || cert.curso_nombre}</div>
+                                <div style="font-size:0.75rem; color:#94a3b8;">Folio: ${cert.codigo_verificacion}</div>
                             </div>
-                            <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
-                                <div style="font-size:0.8rem; color:#94a3b8; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:5px;">Curso: <strong>${cert.cursos?.nombre_curso || 'N/A'}</strong></div>
-                                <button onclick='validarYDescargar(${index}, "${cert.codigo_verificacion}")' 
-                                        id="btn_dl_${index}"
-                                        style="width:100%; padding:10px; background:linear-gradient(135deg, #22d3ee, #0ea5e9); color:#020617; text-transform:none; font-weight:900; letter-spacing:0.5px; margin-top:5px;">
-                                    Confirmar y Descargar PDF
-                                </button>
-                            </div>
-                        </div>`;
-                });
-                container.innerHTML = html;
-                window.certificadosEncontrados = data;
-            }
-
-            async function validarYDescargar(index, codigoFolio) {
-                const certData = window.certificadosEncontrados[index];
-                const container = document.getElementById('resultadoContainer');
-
-                // 1. VERIFICACIÓN DE LÍMITE (Regla de Negocio)
-                if (certData.descargas_count >= 1) {
-                    container.innerHTML = `
-                        <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; padding: 25px; border-radius: 12px; margin-top: 20px; text-align: left;">
-                            <h3 style="color: #f87171; margin-top: 0;">⚠️ Límite de Descargas Alcanzado</h3>
-                            <p style="color: white; line-height: 1.6;">
-                                Usted ya ha realizado la descarga de su certificado oficial (Folio: ${codigoFolio}). 
-                            </p>
-                            <p style="color: #fca5a5; font-size: 0.9rem;">
-                                Por políticas de seguridad de <strong>PROJECT CONTROL AI</strong>, el sistema permite una (01) única emisión gratuita por alumno. 
-                                Cualquier descarga adicional o re-emisión requiere una <strong>Autorización Administrativa</strong> y conlleva una tasa por trámite de gestión de datos.
-                            </p>
-                            <hr style="border: 0; border-top: 1px solid rgba(239, 68, 68, 0.2); margin: 20px 0;">
-                            <a href="https://wa.me/51993147501?text=Hola,%20he%20superado%20el%20l%C3%ADmite%20de%20descargas%20de%20mi%20certificado%20${codigoFolio}.%20Deseo%20solicitar%20una%20re-emisi%C3%B3n." 
-                               target="_blank" 
-                               style="display: block; text-align: center; background: #fb923c; color: #020617; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: 800;">
-                               Solicitar Autorización de Re-emisión
-                            </a>
+                            <button id="btn-${cert.id}" onclick="procesarDiploma('${cert.id}')" style="width:auto; padding:8px 15px; font-size:0.8rem;">Generar</button>
                         </div>
                     `;
-                    return;
-                }
-
-                // 2. SI TIENE CUPOS, PROCEDEMOS A ACTUALIZAR Y DESCARGAR
-                try {
-                    const nuevoNombre = document.getElementById(`nombre_edit_${index}`).value.trim();
-
-                    // Actualizamos nombre e incrementamos el contador en una sola transacción
-                    const { error } = await _supabase
-                        .from('certificados')
-                        .update({
-                            nombre_confirmado: nuevoNombre.toUpperCase(),
-                            descargas_count: (certData.descargas_count || 0) + 1 // Sumamos 1
-                        })
-                        .eq('codigo_verificacion', codigoFolio);
-
-                    if (error) throw error;
-
-                    // Actualizamos objeto en memoria para esta sesión
-                    certData.nombre_confirmado = nuevoNombre.toUpperCase();
-                    certData.descargas_count = (certData.descargas_count || 0) + 1;
-
-                    // Generamos el PDF
-                    await generarPDF(certData);
-
-                    // Opcional: Recargamos la vista para mostrar el bloqueo inmediatamente
-                    alert("Descarga exitosa. Este documento es su copia oficial única.");
-                    location.reload();
-
-                } catch (err) {
-                    console.error("Error en seguridad de descarga:", err);
-                    alert("Error al validar la emisión.");
-                }
+                    container.appendChild(card);
+                });
+                document.getElementById('resultsSection').style.display = 'block';
             }
 
-            function resetState() {
-                const loader = document.getElementById('loader');
-                const btn = document.getElementById('btnConsultar');
-                loader.style.display = 'none';
-                btn.disabled = false;
-            }
+            // 2. MOTOR DE IMPRESIÓN CON TRATAMIENTO Y HORAS DETALLADAS
+            async function procesarDiploma(certId) {
+                const btn = document.getElementById(`btn-${certId}`);
+                const tratamiento = document.getElementById('tituloTratamiento').value;
+                const nombreOficial = document.getElementById('nombreConfirmado').value.trim();
+                const nombreCompletoConTitulo = `${tratamiento} ${nombreOficial}`;
 
-            async function generarPDF(data) {
-                const { PDFDocument, rgb, StandardFonts } = PDFLib;
-
-                const urlPlantilla = "https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/academia/plantilla_maestra.pdf";
+                btn.innerText = "Procesando...";
+                btn.disabled = true;
 
                 try {
-                    const response = await fetch(urlPlantilla);
-                    if (!response.ok) throw new Error("No se pudo descargar el archivo desde el Storage. Verifique la URL.");
+                    // Fetch data including instructor/course details
+                    const { data: cert, error } = await _supabase.from('certificados')
+                        .select('*, alumnos(*), cursos(*, profesores(*))')
+                        .eq('id', certId)
+                        .single();
 
-                    const existingPdfBytes = await response.arrayBuffer();
+                    if (error || !cert) throw new Error("No se pudo obtener el certificado");
+
+                    const { PDFDocument, rgb, StandardFonts } = PDFLib;
+
+                    const templateUrl = `https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/academia/plantilla_maestra.pdf`;
+                    const existingPdfBytes = await fetch(templateUrl).then(res => res.arrayBuffer());
                     const pdfDoc = await PDFDocument.load(existingPdfBytes);
                     const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
                     const fontRegular = await pdfDoc.embedFont(StandardFonts.Helvetica);
-
                     const pages = pdfDoc.getPages();
                     const firstPage = pages[0];
                     const page2 = pages[1];
                     const { width, height } = firstPage.getSize();
 
-                    console.log("Iniciando estampado V6.0 (Guía V4.1)...");
+                    // --- PREPARACIÓN DE TEXTO ---
+                    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+                    const fInicio = new Date(cert.fecha_inicio_clases + 'T12:00:00').toLocaleDateString('es-ES', options);
+                    const fFin = new Date(cert.fecha_fin_clases + 'T12:00:00').toLocaleDateString('es-ES', options);
+                    const fEmision = new Date().toLocaleDateString('es-ES', options);
 
-                    // 1. NOMBRE DEL ALUMNO (COORDINADAS V4.1)
-                    const nombreRaw = data.nombre_confirmado || (data.alumnos ? data.alumnos.nombre : "Participante Registrado");
-                    const txtNombre = nombreRaw.toUpperCase();
+                    const textoDetalle = `con una duración de 45 horas de clase impartidas, del ${fInicio} al ${fFin} en modalidad online.`;
+
+                    // ==========================================
+                    // PÁGINA 1: ESTAMPADO (COORDENADAS V5.0 PRESERVADAS)
+                    // ==========================================
+
+                    // 1. NOMBRE CON TRATAMIENTO
+                    const txtNombre = nombreCompletoConTitulo.toUpperCase();
                     const fontSizeNombre = 21;
                     const nombreWidth = fontBold.widthOfTextAtSize(txtNombre, fontSizeNombre);
-
                     firstPage.drawText(txtNombre, {
-                        x: (width / 2) - (nombreWidth / 2) - 103, // Ajuste milimétrico izquierda
-                        y: 430,
-                        size: fontSizeNombre,
-                        font: fontBold,
-                        color: rgb(0.98, 0.75, 0.14) // Color Dorado
+                        x: (width / 2) - (nombreWidth / 2) - 103, y: 430,
+                        size: fontSizeNombre, font: fontBold, color: rgb(0.98, 0.75, 0.14)
                     });
 
-                    // 2. TEXTO DE DETALLE (COORDINADAS V4.1)
-                    const formatFecha = (f) => f ? new Date(f + 'T12:00:00').toLocaleDateString('es-PE') : "---";
-                    const fInicio = formatFecha(data.fecha_inicio_clases);
-                    const fFin = formatFecha(data.fecha_fin_clases);
-                    const horas = data.cursos?.horas_academicas || "45";
-
-                    const textoDetalle = `con una duración de ${horas} horas, impartido del ${fInicio} al ${fFin} en modalidad online.`;
-
+                    // 2. TEXTO DETALLE
                     const fontSizeDetalle = 11;
                     const detalleWidth = fontBold.widthOfTextAtSize(textoDetalle, fontSizeDetalle);
-
                     firstPage.drawText(textoDetalle, {
-                        x: (width / 2) - (detalleWidth / 2) - 105,
-                        y: 288,
-                        size: fontSizeDetalle,
-                        font: fontBold,
-                        color: rgb(0.2, 0.2, 0.2)
+                        x: (width / 2) - (detalleWidth / 2) - 105, y: 288,
+                        size: fontSizeDetalle, font: fontBold, color: rgb(0.2, 0.2, 0.2)
                     });
 
-                    // 3. ID DEL FOLIO (COORDINADAS V4.1)
-                    firstPage.drawText(data.codigo_verificacion, {
-                        x: 722,
-                        y: 65,
-                        size: 7,
-                        font: fontRegular,
-                        color: rgb(1, 1, 1) // Blanco
+                    // 3. ID FOLIO
+                    firstPage.drawText(cert.codigo_verificacion, {
+                        x: 722, y: 65, size: 7, font: fontRegular, color: rgb(1, 1, 1)
                     });
 
-                    // 4. QR DINÁMICO (COORDINADAS V4.1)
-                    const qrUrl = `https://aureliosrios.github.io/project-control-ai/verificar.html?v=${data.codigo_verificacion}`;
-                    const qrImageBase64 = await QRCode.toDataURL(qrUrl, {
-                        margin: 4,
-                        width: 300,
-                        errorCorrectionLevel: 'M'
-                    });
-                    const qrImage = await pdfDoc.embedPng(qrImageBase64);
-
-                    // Dibujamos un fondo blanco para asegurar el contraste de la cámara
-                    firstPage.drawRectangle({
-                        x: 710,
-                        y: 82,
-                        width: 88,
-                        height: 88,
-                        color: rgb(1, 1, 1),
-                    });
-
-                    // Estampamos el QR en sus coordenadas oficiales
-                    firstPage.drawImage(qrImage, {
-                        x: 714, y: 86, width: 80, height: 80
-                    });
-
-                    // 5. BLOQUE DEL INSTRUCTOR (FIRMA + NOMBRE + CIP)
-                    // Ajuste V6.4: Desplazamiento 40mm a la izquierda (~113 pts) y distorsión Y
-                    const prof = data.cursos?.profesores;
-                    const baseX = 522; // Centro del bloque desplazado 40mm a la izquierda (635 - 113)
-
-                    if (prof && prof.firma_url) {
-                        try {
-                            const firmaBytes = await fetch(prof.firma_url).then(res => res.arrayBuffer());
-                            const firmaImage = await pdfDoc.embedPng(firmaBytes);
-
-                            // Ajuste V6.9: Firma Ultra-Discreta (Escala Director 0.75x)
-                            // Tamaño compacto para evitar saturación visual
-                            firstPage.drawImage(firmaImage, {
-                                x: 472,
-                                y: 115,
-                                width: 100,
-                                height: 120
-                            });
-                        } catch (e) { console.warn("Firma no disponible físicamente"); }
-                    }
-
+                    // 4. BLOQUE DEL INSTRUCTOR (FIRMA + DATOS)
+                    const prof = cert.cursos?.profesores;
                     if (prof) {
-                        // Nombre centrado bajo la nueva base X
-                        const nombreInstructor = `Ing. ${prof.nombre} ${prof.apellido}`;
-                        const nombreWidth = fontBold.widthOfTextAtSize(nombreInstructor, 11);
-
-                        firstPage.drawText(nombreInstructor, {
-                            x: baseX - (nombreWidth / 2),
-                            y: 72,
-                            size: 11,
-                            font: fontBold,
-                            color: rgb(0, 0, 0)
+                        const baseX = 522;
+                        if (prof.firma_url) {
+                            try {
+                                const firmaBytes = await fetch(prof.firma_url).then(res => res.arrayBuffer());
+                                const firmaImage = await pdfDoc.embedPng(firmaBytes);
+                                firstPage.drawImage(firmaImage, { x: 472, y: 115, width: 100, height: 120 });
+                            } catch (e) { console.warn("Firma no disponible"); }
+                        }
+                        const niWidth = fontBold.widthOfTextAtSize(`Ing. ${prof.nombre} ${prof.apellido}`, 11);
+                        firstPage.drawText(`Ing. ${prof.nombre} ${prof.apellido}`, {
+                            x: baseX - (niWidth / 2), y: 72, size: 11, font: fontBold, color: rgb(0, 0, 0)
                         });
-
-                        // CIP centrado bajo la nueva base X
-                        const textoCIP = `CIP: ${prof.cip}`;
-                        const cipWidth = fontBold.widthOfTextAtSize(textoCIP, 10);
-
-                        firstPage.drawText(textoCIP, {
-                            x: baseX - (cipWidth / 2),
-                            y: 58,
-                            size: 10,
-                            font: fontBold,
-                            color: rgb(0, 0, 0)
+                        const ciWidth = fontBold.widthOfTextAtSize(`CIP: ${prof.cip}`, 10);
+                        firstPage.drawText(`CIP: ${prof.cip}`, {
+                            x: baseX - (ciWidth / 2), y: 58, size: 10, font: fontBold, color: rgb(0, 0, 0)
                         });
                     }
 
-                    // 6. PÁGINA 2: REVERSO (COORDINADAS V4.1)
+                    // 5. QR DINÁMICO
+                    const qrUrl = `https://aureliosrios.github.io/project-control-ai/verificar.html?v=${cert.codigo_verificacion}`;
+                    const qrImageBase64 = await QRCode.toDataURL(qrUrl, { margin: 4, width: 300, errorCorrectionLevel: 'M' });
+                    const qrImage = await pdfDoc.embedPng(qrImageBase64);
+                    firstPage.drawRectangle({ x: 710, y: 82, width: 88, height: 88, color: rgb(1, 1, 1) });
+                    firstPage.drawImage(qrImage, { x: 714, y: 86, width: 80, height: 80 });
+
+                    // ==========================================
+                    // PÁGINA 2: LIMA Y TRAZABILIDAD
+                    // ==========================================
                     if (page2) {
                         page2.drawText(`Periodo de impartición: del ${fInicio} al ${fFin}`, {
-                            x: (width / 2) - 130,
-                            y: 75,
-                            size: 12,
-                            font: fontBold,
-                            color: rgb(0, 0, 0)
+                            x: width / 2 - 130, y: 75, size: 12, font: fontBold, color: rgb(0, 0, 0)
+                        });
+                        page2.drawText(`Lima, ${fEmision}`, {
+                            x: width / 2 - 60, y: 55, size: 11, font: fontRegular, color: rgb(0.13, 0.45, 0.93)
                         });
 
-                        const now = new Date();
-                        const fImpresion = now.toLocaleDateString('es-PE') + " " + now.toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' });
-                        const txtImpresion = `Fecha de Impresión: ${fImpresion}`;
-                        const fontSizeImp = 8;
-                        const impWidth = fontRegular.widthOfTextAtSize(txtImpresion, fontSizeImp);
-
-                        page2.drawText(txtImpresion, {
-                            x: width - impWidth - 50, // Esquina derecha
-                            y: 53, // Subido para estar cerca del borde achurado
-                            size: fontSizeImp,
-                            font: fontRegular,
-                            color: rgb(0.3, 0.3, 0.3) // Gris un poco más oscuro para mejor lectura
-                        });
+                        const txtImp = `Fecha de Impresión: ${fEmision} ${new Date().toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' })}`;
+                        const tw = fontRegular.widthOfTextAtSize(txtImp, 8);
+                        page2.drawText(txtImp, { x: width - tw - 50, y: 53, size: 8, font: fontRegular, color: rgb(0.3, 0.3, 0.3) });
                     }
 
-                    // Descarga automática
                     const pdfBytes = await pdfDoc.save();
                     const blob = new Blob([pdfBytes], { type: "application/pdf" });
                     const link = document.createElement("a");
                     link.href = URL.createObjectURL(blob);
-                    link.download = `Certificado_${data.codigo_verificacion}.pdf`;
+                    link.download = `Certificado_PCAI_${nombreOficial.replace(/ /g, "_")}.pdf`;
                     link.click();
 
-                } catch (error) {
-                    console.error("Error al generar el PDF:", error);
-                    alert("Error al procesar el documento: " + error.message);
-                    throw error;
+                    btn.innerText = "Descargar PDF";
+                    btn.disabled = false;
+
+                } catch (err) {
+                    console.error(err);
+                    alert("Error en Motor PDF.");
+                    btn.disabled = false;
                 }
             }
         </script>

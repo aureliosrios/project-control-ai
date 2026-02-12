@@ -247,19 +247,29 @@
             const btn = document.getElementById(`btn-${certId}`);
             const tratamiento = document.getElementById('tituloTratamiento').value;
             const nombreOficial = document.getElementById('nombreConfirmado').value.trim();
-            const nombreCompletoConTitulo = `${tratamiento} ${nombreOficial}`;
+            const nombreCompleto = `${tratamiento} ${nombreOficial}`;
 
-            btn.innerText = "Procesando...";
+            btn.innerText = "Conectando...";
             btn.disabled = true;
 
             try {
-                const { data: cert } = await _supabase.from('certificados')
+                // 1. Obtener datos con sensor de error
+                const { data: cert, error: fetchError } = await _supabase
+                    .from('certificados')
                     .select('*, alumnos(*), cursos(*, profesores(*))')
-                    .eq('id', certId).single();
+                    .eq('id', certId)
+                    .single();
+
+                if (fetchError || !cert) throw new Error("No se pudo leer la base de datos");
 
                 const { PDFDocument, rgb, StandardFonts } = PDFLib;
-                const templateUrl = `https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/academia/plantilla_maestra.pdf`;
-                const existingPdfBytes = await fetch(templateUrl).then(res => res.arrayBuffer());
+
+                // 2. Cargar Plantilla
+                const templateUrl = "https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/academia/plantilla_maestra.pdf";
+                const response = await fetch(templateUrl);
+                if (!response.ok) throw new Error("No se pudo cargar la plantilla PDF del Storage");
+
+                const existingPdfBytes = await response.arrayBuffer();
                 const pdfDoc = await PDFDocument.load(existingPdfBytes);
                 const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
                 const fontRegular = await pdfDoc.embedFont(StandardFonts.Helvetica);
@@ -268,26 +278,50 @@
                 const page2 = pages[1];
                 const { width } = page1.getSize();
 
-                const options = { day: 'numeric', month: 'long', year: 'numeric' };
-                const fInicio = new Date(cert.fecha_inicio_clases + 'T12:00:00').toLocaleDateString('es-ES', options);
-                const fFin = new Date(cert.fecha_fin_clases + 'T12:00:00').toLocaleDateString('es-ES', options);
-                const fEmision = new Date().toLocaleDateString('es-ES', options);
+                // 3. Procesar Fechas (Seguro contra nulos)
+                const formatFecha = (f) => {
+                    if (!f) return "---";
+                    return new Date(f + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+                };
+                const fInicio = formatFecha(cert.fecha_inicio_clases);
+                const fFin = formatFecha(cert.fecha_fin_clases);
+                const fEmision = new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
 
                 const textoDetalle = `con una duración de 45 horas de clase impartidas, del ${fInicio} al ${fFin} en modalidad online.`;
 
-                // PÁGINA 1 (COORDENADAS V5.0)
-                const txtNombre = nombreCompletoConTitulo.toUpperCase();
+                // ==========================================
+                // 4. ESTAMPADO PÁGINA 1 (COORDENADAS V5.0 PRESERVADAS)
+                // ==========================================
+
+                // 1. NOMBRE CON TRATAMIENTO
+                const txtNombre = nombreCompleto.toUpperCase();
                 const fontSizeNombre = 21;
                 const nWidth = fontBold.widthOfTextAtSize(txtNombre, fontSizeNombre);
-                page1.drawText(txtNombre, { x: (width / 2) - (nWidth / 2) - 103, y: 430, size: fontSizeNombre, font: fontBold, color: rgb(0.98, 0.75, 0.14) });
+                page1.drawText(txtNombre, {
+                    x: (width / 2) - (nWidth / 2) - 103,
+                    y: 430,
+                    size: fontSizeNombre,
+                    font: fontBold,
+                    color: rgb(0.98, 0.75, 0.14)
+                });
 
+                // 2. TEXTO DETALLE
                 const fontSizeDetalle = 11;
                 const dWidth = fontBold.widthOfTextAtSize(textoDetalle, fontSizeDetalle);
-                page1.drawText(textoDetalle, { x: (width / 2) - (dWidth / 2) - 105, y: 288, size: fontSizeDetalle, font: fontBold, color: rgb(0.2, 0.2, 0.2) });
+                page1.drawText(textoDetalle, {
+                    x: (width / 2) - (dWidth / 2) - 105,
+                    y: 288,
+                    size: fontSizeDetalle,
+                    font: fontBold,
+                    color: rgb(0.2, 0.2, 0.2)
+                });
 
-                page1.drawText(cert.codigo_verificacion, { x: 722, y: 65, size: 7, font: fontRegular, color: rgb(1, 1, 1) });
+                // 3. ID FOLIO
+                page1.drawText(cert.codigo_verificacion, {
+                    x: 722, y: 65, size: 7, font: fontRegular, color: rgb(1, 1, 1)
+                });
 
-                // INSTRUCTOR
+                // 4. BLOQUE DEL INSTRUCTOR (Firma + Datos)
                 const prof = cert.cursos?.profesores;
                 if (prof) {
                     const baseX = 522;
@@ -296,7 +330,7 @@
                             const fBytes = await fetch(prof.firma_url).then(res => res.arrayBuffer());
                             const fImg = await pdfDoc.embedPng(fBytes);
                             page1.drawImage(fImg, { x: 472, y: 115, width: 100, height: 120 });
-                        } catch (e) { }
+                        } catch (e) { console.warn("Firma omitida por error de carga"); }
                     }
                     const niW = fontBold.widthOfTextAtSize(`Ing. ${prof.nombre} ${prof.apellido}`, 11);
                     page1.drawText(`Ing. ${prof.nombre} ${prof.apellido}`, { x: baseX - (niW / 2), y: 72, size: 11, font: fontBold });
@@ -304,45 +338,64 @@
                     page1.drawText(`CIP: ${prof.cip}`, { x: baseX - (ciW / 2), y: 58, size: 10, font: fontBold });
                 }
 
-                // QR
-                const qrUrl = `https://aureliosrios.github.io/project-control-ai/verificar.html?v=${cert.codigo_verificacion}`;
-                const qrImg64 = await QRCode.toDataURL(qrUrl, { margin: 4, width: 300 });
-                const qrImg = await pdfDoc.embedPng(qrImg64);
-                page1.drawRectangle({ x: 710, y: 82, width: 88, height: 88, color: rgb(1, 1, 1) });
-                page1.drawImage(qrImg, { x: 714, y: 86, width: 80, height: 80 });
-
-                // PÁGINA 2
+                // ==========================================
+                // 5. ESTAMPADO PÁGINA 2
+                // ==========================================
                 if (page2) {
-                    page2.drawText(`Periodo de impartición: del ${fInicio} al ${fFin}`, { x: width / 2 - 130, y: 75, size: 12, font: fontBold });
-                    page2.drawText(`Lima, ${fEmision}`, { x: width / 2 - 60, y: 55, size: 11, font: fontRegular, color: rgb(0.13, 0.45, 0.93) });
+                    page2.drawText(`Periodo de impartición: del ${fInicio} al ${fFin}`, {
+                        x: width / 2 - 130, y: 75, size: 12, font: fontBold
+                    });
+                    page2.drawText(`Lima, ${fEmision}`, {
+                        x: width / 2 - 60, y: 55, size: 11, font: fontRegular, color: rgb(0.13, 0.45, 0.93)
+                    });
+
+                    const fTime = new Date().toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' });
+                    const txtImp = `Fecha de Impresión: ${fEmision} ${fTime}`;
+                    const tw = fontRegular.widthOfTextAtSize(txtImp, 8);
+                    page2.drawText(txtImp, { x: width - tw - 50, y: 53, size: 8, font: fontRegular, color: rgb(0.3, 0.3, 0.3) });
                 }
 
+                // ==========================================
+                // 6. GENERAR QR Y FINALIZAR
+                // ==========================================
+                const qrDiv = document.getElementById("qrcode");
+                qrDiv.innerHTML = "";
+                const verifyUrl = window.location.href.split('?')[0] + "?v=" + cert.codigo_verificacion;
+                new QRCode(qrDiv, { text: verifyUrl, width: 128, height: 128 });
+
+                // Espera de seguridad para render de QR
                 setTimeout(async () => {
-                    const pdfBytes = await pdfDoc.save();
-                    const blob = new Blob([pdfBytes], { type: "application/pdf" });
-                    const link = document.createElement("a");
-                    link.href = URL.createObjectURL(blob);
-                    link.download = `Certificado_PCAI_${nombreOficial.replace(/ /g, "_")}.pdf`;
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
+                    try {
+                        const canvas = qrDiv.querySelector('canvas');
+                        if (!canvas) throw new Error("QR no generado");
 
-                    // --- LÓGICA DE BLOQUEO TEMPORALMENTE DESACTIVADA ---
-                    /* 
-                    await _supabase.from('certificados').update({ 
-                        descarga_bloqueada: true,
-                        nombre_confirmado: nombreOficial 
-                    }).eq('id', cert.id); 
-                    */
+                        // Estampamos el QR con fondo blanco para contraste (V5.0)
+                        page1.drawRectangle({ x: 710, y: 82, width: 88, height: 88, color: rgb(1, 1, 1) });
+                        const qrImage = await pdfDoc.embedPng(canvas.toDataURL("image/png"));
+                        page1.drawImage(qrImage, { x: 714, y: 86, width: 80, height: 80 });
 
-                    btn.innerText = "Descargar PDF";
-                    btn.disabled = false;
-                }, 800);
+                        const pdfBytes = await pdfDoc.save();
+                        const blob = new Blob([pdfBytes], { type: "application/pdf" });
+                        const link = document.createElement("a");
+                        link.href = URL.createObjectURL(blob);
+                        link.download = `Certificado_PCAI_${cert.codigo_verificacion}.pdf`;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+
+                        btn.innerText = "Descarga Exitosa";
+                        btn.disabled = false;
+                    } catch (e) {
+                        alert("Error en el paso final del QR: " + e.message);
+                        btn.disabled = false;
+                    }
+                }, 1000);
 
             } catch (err) {
-                console.error(err);
-                alert("Error en Motor PDF.");
+                console.error("DETALLE DEL ERROR:", err);
+                alert("Error Crítico: " + err.message);
                 btn.disabled = false;
+                btn.innerText = "Reintentar";
             }
         }
     </script>

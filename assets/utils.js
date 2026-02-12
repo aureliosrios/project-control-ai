@@ -40,16 +40,16 @@ const PCAI_Utils = {
 
     // --- MANEJO DE ERRORES CONSISTENTE ---
     manejarError(error, contexto = '') {
-        console.error(`Error en ${contexto}:`, error);
+        console.error(`Error Detallado en ${contexto}:`, error);
 
-        if (error.message.includes('network')) {
+        if (error.message?.includes('network')) {
             return 'Error de conexión. Verifica tu internet.';
-        } else if (error.message.includes('duplicate')) {
+        } else if (error.code === 'PGRST116') {
+            return 'No se encontró información en la base de datos para este registro.';
+        } else if (error.message?.includes('duplicate')) {
             return 'Ya existe un registro con estos datos.';
-        } else if (error.message.includes('No se pudo leer la base de datos')) {
-            return 'No se encontró el certificado o hubo un error en la base de datos.';
         } else {
-            return 'Ocurrió un error inesperado. Por favor, intente más tarde.';
+            return 'Ocurrió un error inesperado al procesar los datos. Por favor, intente de nuevo.';
         }
     }
 };

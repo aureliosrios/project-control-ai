@@ -1,0 +1,111 @@
+/* =============================================================================
+   ESTILOS GLOBALES - PROJECT CONTROL AI
+   Tokens de diseño compartidos entre todas las páginas
+============================================================================= */
+
+:root {
+    /* --- COLORES CORPORATIVOS --- */
+    --bg-dark: #020617;
+    --bg-card: #0f172a;
+    --bg-card-alt: #1e293b;
+    --bg-card-glass: rgba(30, 41, 59, 0.7);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent-cyan: #38bdf8;
+    --accent-orange: #fb923c;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --success-green: #10b981;
+    --error-red: #ef4444;
+    
+    /* --- GRADIENTES --- */
+    --gradient-primary: linear-gradient(135deg, #0ea5e9, #38bdf8);
+    --gradient-secondary: linear-gradient(135deg, #fb923c, #f97316);
+    
+    /* --- TIPOGRAFÍA --- */
+    --font-primary: 'Inter', sans-serif;
+    --font-heading: 'Space Grotesk', sans-serif;
+    
+    /* --- ESPACIADO --- */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    
+    /* --- BORDES --- */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+}
+
+/* --- RESET GLOBAL --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+/* --- CLASES UTILITARIAS REUTILIZABLES --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.btn-primary {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 14px 28px;
+    border-radius: var(--radius-md);
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(14, 165, 233, 0.3);
+}
+
+.btn-primary:disabled {
+    background: #334155;
+    color: #94a3b8;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* --- COMPONENTE: LOGO --- */
+.logo-oficial {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+}
+
+.input-standard {
+    width: 100%;
+    padding: 14px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    background: var(--bg-card-alt);
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input-standard:focus {
+    border-color: var(--accent-cyan);
+}

@@ -422,15 +422,28 @@
                         page2.drawText(txtImp, { x: width - tw - 50, y: 53, size: 8, font: fontRegular, color: rgb(0.3, 0.3, 0.3) });
                     }
 
-                    const pdfBytes = await pdfDoc.save();
-                    const blob = new Blob([pdfBytes], { type: "application/pdf" });
-                    const link = document.createElement("a");
-                    link.href = URL.createObjectURL(blob);
-                    link.download = `Certificado_PCAI_${nombreOficial.replace(/ /g, "_")}.pdf`;
-                    link.click();
+                    setTimeout(async () => {
+                        // Finalizar y Descargar el archivo
+                        const pdfBytes = await pdfDoc.save();
+                        const blob = new Blob([pdfBytes], { type: "application/pdf" });
+                        const link = document.createElement("a");
+                        link.href = URL.createObjectURL(blob);
+                        link.download = `Certificado_PCAI_${nombreOficial.replace(/ /g, "_")}.pdf`;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
 
-                    btn.innerText = "Descargar PDF";
-                    btn.disabled = false;
+                        // --- LÓGICA DE BLOQUEO TEMPORALMENTE DESACTIVADA ---
+                        /* 
+                        await _supabase.from('certificados').update({ 
+                            descarga_bloqueada: true,
+                            nombre_confirmado: nombreOficial 
+                        }).eq('id', cert.id); 
+                        */
+
+                        btn.innerText = "Descargar PDF"; // El botón vuelve a estar listo
+                        btn.disabled = false;            // El botón se vuelve a habilitar
+                    }, 800);
 
                 } catch (err) {
                     console.error(err);

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación de Certificados v7.9 | Project Control AI</title>
+    <title>Verificación de Certificados v8.0 | Project Control AI</title>
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
@@ -142,7 +142,7 @@
 <body>
 
     <div class="card">
-        <div class="version-tag">v7.9</div>
+        <div class="version-tag">v8.0</div>
 
         <div id="searchSection">
             <img src="Logotipo.png" alt="PCAI" style="height: 50px; margin-bottom: 1.5rem;">
@@ -167,6 +167,14 @@
         const SUPABASE_URL = 'https://bpsumudexpywfffcwpun.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_OzjgZjclmEDlDuVdLGuvQQ_SyX2aTy0';
         const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // 1. MAPEAMOS LOS CURSOS A SUS ARCHIVOS
+        const plantillasCursos = {
+            "Licitaciones Inteligentes": "cert_licitaciones_ia.pdf",
+            "Gestion Proyectos IA": "cert_gestion_integral.pdf",
+            "Control y Gerencia EVM": "cert_control_evm.pdf",
+            "Automation Engineer": "cert_automation_engineer.pdf"
+        };
 
         async function buscarCertificados() {
             const dni = document.getElementById('dniInput').value.trim();
@@ -198,7 +206,7 @@
             mostrarResultados(data);
         }
 
-        // 1. LISTADO DE RESULTADOS MULTICURSO Y TÍTULOS ACTUALIZADOS
+        // 2. MOSTRAR RESULTADOS CON ESTADOS CLAROS
         function mostrarResultados(certificados) {
             document.getElementById('searchSection').style.display = 'none';
             const container = document.getElementById('listaCertificados');
@@ -224,10 +232,27 @@
             certificados.forEach(cert => {
                 const card = document.createElement('div');
                 card.className = 'cert-card';
-                const estaListo = cert.fecha_fin_clases !== null;
-                const btnHtml = estaListo
-                    ? `<button class="btn" id="btn-${cert.id}" onclick="procesarDiploma('${cert.id}')">Descargar PDF</button>`
-                    : `<span style="color:#94a3b8; font-size:0.8rem; font-style:italic;">Próximamente disponible (Curso en ejecución)</span>`;
+
+                let statusHtml = "";
+
+                // ESCENARIO A: GRADUADO HISTÓRICO (BLOQUEADO)
+                if (cert.descarga_bloqueada) {
+                    statusHtml = `<div style="text-align:right;">
+                                    <span style="color:#10b981; font-weight:bold; display:block;">✓ GRADUADO</span>
+                                    <small style="color:#94a3b8;">Registro de participación confirmado</small>
+                                  </div>`;
+                }
+                // ESCENARIO B: EN PROCESO DE ESTUDIO (BLOQUEADO HASTA FECHA FIN)
+                else if (!cert.fecha_fin_clases) {
+                    statusHtml = `<div style="text-align:right;">
+                                    <span style="color:#fb923c; font-weight:bold; display:block;">⏳ EN ESTUDIO</span>
+                                    <small style="color:#94a3b8;">Disponible al finalizar el curso</small>
+                                  </div>`;
+                }
+                // ESCENARIO C: PRIORIDAD CURSO 3 (LISTO PARA DESCARGA)
+                else {
+                    statusHtml = `<button class="btn" id="btn-${cert.id}" onclick="procesarDiploma('${cert.id}')">Descargar Certificado</button>`;
+                }
 
                 card.innerHTML = `
                     <div style="display:flex; justify-content:space-between; align-items:center; gap:15px;">
@@ -235,7 +260,7 @@
                             <div style="font-weight:bold; color:white; font-size:1.1rem;">${cert.cursos?.nombre_curso || cert.curso_nombre}</div>
                             <div style="font-size:0.75rem; color:#94a3b8; margin-top:4px;">Folio: ${cert.codigo_verificacion}</div>
                         </div>
-                        ${btnHtml}
+                        ${statusHtml}
                     </div>
                 `;
                 container.appendChild(card);
@@ -243,13 +268,14 @@
             document.getElementById('resultsSection').style.display = 'block';
         }
 
+        // 3. MOTOR PDF DINÁMICO Y ROBUSTO
         async function procesarDiploma(certId) {
             const btn = document.getElementById(`btn-${certId}`);
             const tratamiento = document.getElementById('tituloTratamiento').value;
             const nombreOficial = document.getElementById('nombreConfirmado').value.trim();
             const nombreCompleto = `${tratamiento} ${nombreOficial}`;
 
-            btn.innerText = "Conectando...";
+            btn.innerText = "Localizando Plantilla...";
             btn.disabled = true;
 
             try {
@@ -264,10 +290,12 @@
 
                 const { PDFDocument, rgb, StandardFonts } = PDFLib;
 
-                // 2. Cargar Plantilla
-                const templateUrl = "https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/academia/plantilla_maestra.pdf";
+                // 2. Identificar Plantilla Dinámica
+                const nombreArchivo = plantillasCursos[cert.cursos?.nombre_curso || cert.curso_nombre] || "plantilla_maestra.pdf";
+                const templateUrl = `https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/academia/${nombreArchivo}`;
+
                 const response = await fetch(templateUrl);
-                if (!response.ok) throw new Error("No se pudo cargar la plantilla PDF del Storage");
+                if (!response.ok) throw new Error(`El archivo ${nombreArchivo} no está disponible.`);
 
                 const existingPdfBytes = await response.arrayBuffer();
                 const pdfDoc = await PDFDocument.load(existingPdfBytes);
@@ -278,7 +306,7 @@
                 const page2 = pages[1];
                 const { width } = page1.getSize();
 
-                // 3. Procesar Fechas (Seguro contra nulos)
+                // 3. Procesar Fechas
                 const formatFecha = (f) => {
                     if (!f) return "---";
                     return new Date(f + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -289,39 +317,20 @@
 
                 const textoDetalle = `con una duración de 45 horas de clase impartidas, del ${fInicio} al ${fFin} en modalidad online.`;
 
-                // ==========================================
-                // 4. ESTAMPADO PÁGINA 1 (COORDENADAS V5.0 PRESERVADAS)
-                // ==========================================
-
-                // 1. NOMBRE CON TRATAMIENTO
+                // 4. ESTAMPADO PÁGINA 1
                 const txtNombre = nombreCompleto.toUpperCase();
                 const fontSizeNombre = 21;
                 const nWidth = fontBold.widthOfTextAtSize(txtNombre, fontSizeNombre);
-                page1.drawText(txtNombre, {
-                    x: (width / 2) - (nWidth / 2) - 103,
-                    y: 430,
-                    size: fontSizeNombre,
-                    font: fontBold,
-                    color: rgb(0.98, 0.75, 0.14)
-                });
+                // Coordenadas V5.0 (Actualizadas segun requerimiento v8.0)
+                page1.drawText(txtNombre, { x: 115, y: 425, size: fontSizeNombre, font: fontBold, color: rgb(0.98, 0.75, 0.14) });
 
-                // 2. TEXTO DETALLE
-                const fontSizeDetalle = 11;
-                const dWidth = fontBold.widthOfTextAtSize(textoDetalle, fontSizeDetalle);
-                page1.drawText(textoDetalle, {
-                    x: (width / 2) - (dWidth / 2) - 105,
-                    y: 288,
-                    size: fontSizeDetalle,
-                    font: fontBold,
-                    color: rgb(0.2, 0.2, 0.2)
-                });
+                const fontSizeDetalle = 10;
+                const dWidth = fontRegular.widthOfTextAtSize(textoDetalle, fontSizeDetalle);
+                page1.drawText(textoDetalle, { x: width / 2 - (textoDetalle.length * 2.8), y: 338, size: fontSizeDetalle, font: fontRegular, color: rgb(0.3, 0.3, 0.3) });
 
-                // 3. ID FOLIO
-                page1.drawText(cert.codigo_verificacion, {
-                    x: 722, y: 65, size: 7, font: fontRegular, color: rgb(1, 1, 1)
-                });
+                page1.drawText(`ID: ${cert.codigo_verificacion}`, { x: 715, y: 135, size: 7, color: rgb(1, 1, 1) });
 
-                // 4. BLOQUE DEL INSTRUCTOR (Firma + Datos)
+                // INSTRUCTOR (Preservado de v7.9)
                 const prof = cert.cursos?.profesores;
                 if (prof) {
                     const baseX = 522;
@@ -338,41 +347,22 @@
                     page1.drawText(`CIP: ${prof.cip}`, { x: baseX - (ciW / 2), y: 58, size: 10, font: fontBold });
                 }
 
-                // ==========================================
-                // 5. ESTAMPADO PÁGINA 2
-                // ==========================================
-                if (page2) {
-                    page2.drawText(`Periodo de impartición: del ${fInicio} al ${fFin}`, {
-                        x: width / 2 - 130, y: 75, size: 12, font: fontBold
-                    });
-                    page2.drawText(`Lima, ${fEmision}`, {
-                        x: width / 2 - 60, y: 55, size: 11, font: fontRegular, color: rgb(0.13, 0.45, 0.93)
-                    });
-
-                    const fTime = new Date().toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' });
-                    const txtImp = `Fecha de Impresión: ${fEmision} ${fTime}`;
-                    const tw = fontRegular.widthOfTextAtSize(txtImp, 8);
-                    page2.drawText(txtImp, { x: width - tw - 50, y: 53, size: 8, font: fontRegular, color: rgb(0.3, 0.3, 0.3) });
-                }
-
-                // ==========================================
-                // 6. GENERAR QR Y FINALIZAR
-                // ==========================================
+                // QR
                 const qrDiv = document.getElementById("qrcode");
                 qrDiv.innerHTML = "";
                 const verifyUrl = window.location.href.split('?')[0] + "?v=" + cert.codigo_verificacion;
                 new QRCode(qrDiv, { text: verifyUrl, width: 128, height: 128 });
 
-                // Espera de seguridad para render de QR
                 setTimeout(async () => {
                     try {
                         const canvas = qrDiv.querySelector('canvas');
                         if (!canvas) throw new Error("QR no generado");
-
-                        // Estampamos el QR con fondo blanco para contraste (V5.0)
-                        page1.drawRectangle({ x: 710, y: 82, width: 88, height: 88, color: rgb(1, 1, 1) });
                         const qrImage = await pdfDoc.embedPng(canvas.toDataURL("image/png"));
-                        page1.drawImage(qrImage, { x: 714, y: 86, width: 80, height: 80 });
+                        page1.drawImage(qrImage, { x: 715, y: 155, width: 85, height: 85 });
+
+                        if (page2) {
+                            page2.drawText(`Lima, ${fEmision}`, { x: width / 2 - 60, y: 55, size: 11, font: fontRegular, color: rgb(0.13, 0.45, 0.93) });
+                        }
 
                         const pdfBytes = await pdfDoc.save();
                         const blob = new Blob([pdfBytes], { type: "application/pdf" });
@@ -386,14 +376,14 @@
                         btn.innerText = "Descarga Exitosa";
                         btn.disabled = false;
                     } catch (e) {
-                        alert("Error en el paso final del QR: " + e.message);
+                        alert("Error en QR final: " + e.message);
                         btn.disabled = false;
                     }
                 }, 1000);
 
             } catch (err) {
-                console.error("DETALLE DEL ERROR:", err);
-                alert("Error Crítico: " + err.message);
+                console.error("DETALLE:", err);
+                alert("Error: " + err.message);
                 btn.disabled = false;
                 btn.innerText = "Reintentar";
             }

@@ -178,10 +178,10 @@
                     <label>Curso a Inscribirse</label>
                     <select name="curso" class="input-standard" required>
                         <option value="" disabled selected>Seleccione curso...</option>
+                        <option value="Webinar Primavera P6">🎁 Webinar P6 (Gratuito - 14/02)</option>
                         <option value="Licitaciones Inteligentes">1. Licitaciones Inteligentes con IA</option>
                         <option value="Control y Gerencia EVM">2. Control y Gerencia EVM</option>
                         <option value="Gestion Proyectos IA">3. Gestión de Proyectos con IA</option>
-                        <option value="Webinar P6">🎁 Webinar P6 (Gratuito - 14/02)</option>
                         <option value="Automation Engineer">4. Automation Engineer</option>
                         <option value="Primavera P6 Professional">5. Primavera P6 Professional</option>
                     </select>
@@ -213,6 +213,37 @@
     </div>
 
     <script>
+        // --- PRE-SELECCIÓN DE CURSO DESDE URL ---
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const cursoParam = urlParams.get('curso');
+            if (cursoParam) {
+                const selectCurso = document.querySelector('select[name="curso"]');
+                if (selectCurso) {
+                    selectCurso.value = cursoParam;
+                    // Disparar evento de cambio para activar lógica de UI
+                    selectCurso.dispatchEvent(new Event('change'));
+                }
+            }
+        });
+
+        // --- LÓGICA DINÁMICA DE LA UI ---
+        document.querySelector('select[name="curso"]').addEventListener('change', (e) => {
+            const esWebinar = e.target.value === "Webinar Primavera P6";
+            const pagoGroup = document.querySelector('.form-group:has(select[name="metodo_pago"])') ||
+                document.querySelector('select[name="metodo_pago"]').parentElement;
+
+            if (esWebinar) {
+                pagoGroup.style.display = 'none';
+                document.querySelector('select[name="metodo_pago"]').required = false;
+                document.getElementById('submitBtn').innerText = "REGISTRARME GRATIS AL WEBINAR";
+            } else {
+                pagoGroup.style.display = 'block';
+                document.querySelector('select[name="metodo_pago"]').required = true;
+                document.getElementById('submitBtn').innerText = "FINALIZAR INSCRIPCIÓN";
+            }
+        });
+
         document.getElementById('registrationForm').addEventListener('submit', async e => {
             e.preventDefault();
 
@@ -264,8 +295,16 @@
                 document.getElementById('formSection').style.display = 'none';
                 document.getElementById('successMsg').style.display = 'block';
 
-                const waMsg = `Hola Ing. Aurelio, soy ${data.nombre}. Me inscribí al curso ${data.curso}. Adjunto mi voucher.`;
-                document.getElementById('waLink').href = PCAI_Utils.generarLinkWhatsApp(waMsg);
+                const esWebinar = data.curso === "Webinar Primavera P6";
+                if (esWebinar) {
+                    document.querySelector('#successMsg p').innerText = "¡Te has registrado con éxito al Webinar! Únete al grupo de WhatsApp para recibir el link de acceso.";
+                    document.getElementById('waLink').innerText = "Unirse al Grupo de WhatsApp";
+                    const waMsgWebinar = `Hola Ing. Aurelio, soy ${data.nombre}. Me registré al Webinar GRATUITO de P6. Solicito el link del evento.`;
+                    document.getElementById('waLink').href = PCAI_Utils.generarLinkWhatsApp(waMsgWebinar);
+                } else {
+                    const waMsg = `Hola Ing. Aurelio, soy ${data.nombre}. Me inscribí al curso ${data.curso}. Adjunto mi voucher.`;
+                    document.getElementById('waLink').href = PCAI_Utils.generarLinkWhatsApp(waMsg);
+                }
 
             } catch (err) {
                 console.error("DEBUG ERROR:", err);

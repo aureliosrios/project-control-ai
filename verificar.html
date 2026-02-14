@@ -245,7 +245,9 @@
                 const fFin = PCAI_Utils.formatearFecha(cert.fecha_fin_clases);
                 const fEmision = PCAI_Utils.formatearFecha(new Date().toISOString().split('T')[0]);
 
-                const textoDetalle = `con una duración de 45 horas de clase impartidas, del ${fInicio} al ${fFin} en modalidad online.`;
+                // Lógica de horas dinámica
+                let horasCurso = (cert.cursos?.nombre_curso || cert.curso_nombre || "").includes("Webinar") ? "2" : "45";
+                const textoDetalle = `con una duración de ${horasCurso} horas de clase impartidas, del ${fInicio} al ${fFin} en modalidad online.`;
 
                 // ESTAMPADO PÁGINA 1 (COORDENADAS V8.0/8.1)
                 const txtNombre = nombreCompleto.toUpperCase();

@@ -7,9 +7,9 @@
     <title>Project Control AI | Consultora & Academia</title>
 
     <!-- SHARED ASSETS -->
-    <link rel="stylesheet" href="assets/styles-global.css">
-    <script src="assets/config.js"></script>
-    <script src="assets/utils.js"></script>
+    <link rel="stylesheet" href="assets/css/styles-global.css">
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/utils.js"></script>
 
     <!-- Icono Favicon -->
     <link rel="icon" type="image/svg+xml"
@@ -199,7 +199,7 @@
         .hero {
             padding: 180px 0 100px;
             text-align: center;
-            background: linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.85)), url('hero_bg.png');
+            background: linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.85)), url('assets/images/hero_bg.png');
             background-size: cover;
             background-position: center;
             position: relative;
@@ -798,12 +798,14 @@
     <nav class="navbar">
         <div class="container nav-brand">
             <a href="#" class="logo-container">
-                <img src="Logotipo.png" alt="Project Control AI" class="logo-img">
+                <img src="assets/images/Logotipo.png" alt="Project Control AI" class="logo-img">
                 <span class="logo-tagline">Forjando a los Ingenieros de la Era IA</span>
             </a>
 
             <button class="nav-toggle" id="navToggle">☰</button>
             <div class="nav-menu" id="navMenu">
+                <a href="clases-grabadas.html" class="nav-link"
+                    style="color: var(--accent-orange); font-weight: 700;">Clases Grabadas</a>
                 <a href="#cursos" class="nav-link">Capacitaciones</a>
                 <a href="#casos" class="nav-link">TikTok</a>
                 <a href="#consultoria" class="nav-link">Consultoría</a>
@@ -829,6 +831,10 @@
                 <button class="hero-cta" onclick="document.getElementById('cursos').scrollIntoView();">
                     Ver Capacitaciones
                 </button>
+                <a href="clases-grabadas.html" class="hero-cta-secondary"
+                    style="border-color: var(--accent-orange); color: var(--accent-orange);">
+                    📺 Ver Clases Grabadas
+                </a>
                 <a href="inscripcion.html" class="hero-cta-secondary">
                     Ficha de Inscripción
                 </a>
@@ -1000,6 +1006,7 @@
                         <p style="color: var(--accent-cyan); font-weight: bold; font-size: 0.8rem; text-align: center;">
                             CUPOS DISPONIBLES</p>
                         <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 1.5rem;">
+
                             <a href="https://pay.hotmart.com/N104187999C" target="_blank" class="hero-cta"
                                 style="background: #f97316; color: white; width: 100%; text-align: center; padding: 12px; font-weight: bold;">
                                 Pago Global (Tarjetas / Efectivo)
@@ -1396,7 +1403,7 @@
 
             <div class="payment-info" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
                 <div class="payment-card">
-                    <img src="Yape.png" alt="Yape" class="payment-logo">
+                    <img src="assets/images/Yape.png" alt="Yape" class="payment-logo">
                     <div class="payment-details">
                         <h4>Yape</h4>
                         <p><strong>993 147 501</strong></p>
@@ -1516,7 +1523,7 @@
     <footer class="footer">
         <div class="container" style="text-align: center; padding: 4rem 0 2rem;">
             <div style="margin-bottom: 2rem;">
-                <img src="Logotipo.png" alt="Project Control AI" style="height: 50px; opacity: 0.8;">
+                <img src="assets/images/Logotipo.png" alt="Project Control AI" style="height: 50px; opacity: 0.8;">
             </div>
             <p style="color: var(--text-muted); font-size: 0.9rem;">© 2025 Project Control AI. Todos los derechos
                 reservados.</p>

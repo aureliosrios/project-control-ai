@@ -1,0 +1,39 @@
+# Ignorar archivos del sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Ignorar configuraciones de IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Ignorar archivos temporales
+*.tmp
+*.bak
+*.old
+*backup*
+
+# Ignorar node_modules si se instalan dependencias
+node_modules/
+
+# Ignorar archivos de log
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignorar archivos de entorno sensibles (si los tienes)
+.env
+.env.local
+.env.production
+
+# Ignorar carpetas de build/dist si se generan
+dist/
+build/
+
+# Ignorar archivos específicos de desarrollo
+test-local.html
+pruebas-*.html

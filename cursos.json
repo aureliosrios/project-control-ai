@@ -1,0 +1,214 @@
+{
+  "version": "1.0",
+  "lastUpdate": "2026-02-13",
+  "cursos": [
+    {
+      "id": "LIC",
+      "codigo": "LIC",
+      "nombre": "Licitaciones Inteligentes con IA",
+      "descripcion": "Auditoría de expedientes masivos, APUs, Presupuestos y Cronogramas automáticos.",
+      "duracion": "15 horas",
+      "sesiones": 5,
+      "precio": {
+        "soles": 200,
+        "dolares": 75
+      },
+      "fechaInicio": "2026-02-25",
+      "horario": "Lunes y Miércoles: 7:00 PM - 10:00 PM",
+      "nivel": "Intermedio",
+      "brochure": "Brochure_Curso_1_Licitaciones_360.pdf",
+      "imagen": "Curso 1.png",
+      "linkPagoGlobal": "https://pay.hotmart.com/N104187999C",
+      "linkInscripcion": "inscripcion.html",
+      "playlist": {
+        "id": "PLxxxxxx",
+        "url": "https://www.youtube.com/playlist?list=PLxxxxxx",
+        "visibilidad": "oculta"
+      },
+      "lecciones": [
+        {
+          "numero": "01",
+          "codigo": "LIC-01",
+          "titulo": "Configuración de Cerebros Digitales con NotebookLM",
+          "descripcion": "Aprende a configurar tu primer cerebro digital utilizando NotebookLM para gestionar información de proyectos.",
+          "videoId": "2QxbQ8IY0Zc",
+          "duracion": "3 horas",
+          "visibilidad": "publica",
+          "materiales": [
+            {
+              "tipo": "PDF",
+              "nombre": "Guía NotebookLM",
+              "url": "#"
+            },
+            {
+              "tipo": "Template",
+              "nombre": "Plantilla Cerebro Digital",
+              "url": "#"
+            }
+          ]
+        },
+        {
+          "numero": "02",
+          "codigo": "LIC-02",
+          "titulo": "Generación Dinámica del WBS y Visualización HTML",
+          "descripcion": "Técnicas avanzadas para generar estructuras de desglose de trabajo (WBS) dinámicas y visualizarlas profesionalmente.",
+          "videoId": "QhgXgxZFmCY",
+          "duracion": "3 horas",
+          "visibilidad": "oculta",
+          "materiales": []
+        },
+        {
+          "numero": "03",
+          "codigo": "LIC-03",
+          "titulo": "Refinamiento de Alcances y Frentes de Trabajo",
+          "descripcion": "Cómo utilizar IA para detallar alcances y definir frentes de trabajo con precisión milimétrica.",
+          "videoId": "DQuA1ZFOXNQ",
+          "duracion": "3 horas",
+          "visibilidad": "oculta",
+          "materiales": []
+        },
+        {
+          "numero": "04",
+          "codigo": "LIC-04",
+          "titulo": "Ingeniería de Metrados Automática y \"Gemas\"",
+          "descripcion": "Automatización de metrados y extracción de 'gemas' informativas para auditorías y presupuestos.",
+          "videoId": "R_LgivWPH30",
+          "duracion": "3 horas",
+          "visibilidad": "oculta",
+          "materiales": []
+        },
+        {
+          "numero": "05",
+          "codigo": "LIC-05",
+          "titulo": "Automatización de APUs con Scripts VBA",
+          "descripcion": "Integración de scripts VBA para automatizar el análisis de precios unitarios (APU) en proyectos de construcción.",
+          "videoId": "y7p_4U-rTEA",
+          "duracion": "3 horas",
+          "visibilidad": "oculta",
+          "materiales": []
+        },
+        {
+          "numero": "06",
+          "codigo": "LIC-06",
+          "titulo": "Elaboración de Oferta Técnica y Mermaid",
+          "descripcion": "Creación de diagramas Mermaid y elaboración de ofertas técnicas ganadoras asistidas por agentes IA.",
+          "videoId": "SXJ8Be4nhMU",
+          "duracion": "3 horas",
+          "visibilidad": "oculta",
+          "materiales": []
+        }
+      ]
+    },
+    {
+      "id": "GIP",
+      "codigo": "GIP",
+      "nombre": "Control y Gerencia EVM",
+      "descripcion": "Gestión predictiva de proyectos. Seguimiento de costos y plazos con Valor Ganado.",
+      "duracion": "15 horas",
+      "sesiones": 5,
+      "precio": {
+        "soles": 200,
+        "dolares": 75
+      },
+      "fechaInicio": "2026-02-26",
+      "horario": "Martes y Jueves: 7:00 PM - 10:00 PM",
+      "nivel": "Avanzado",
+      "brochure": "Brochure_Curso_2_EVM.pdf",
+      "imagen": "Curso 2.png",
+      "linkPagoGlobal": "https://pay.hotmart.com/N104188538H",
+      "linkInscripcion": "inscripcion.html",
+      "playlist": {
+        "id": "PLxxxxxx",
+        "url": "https://www.youtube.com/playlist?list=PLxxxxxx",
+        "visibilidad": "oculta"
+      },
+      "lecciones": []
+    },
+    {
+      "id": "IAD",
+      "codigo": "IAD",
+      "nombre": "IA para el Despertar Digital",
+      "descripcion": "Introducción práctica a la Inteligencia Artificial aplicada a la ingeniería y gestión de proyectos.",
+      "duracion": "15 horas",
+      "sesiones": 5,
+      "precio": {
+        "soles": 200,
+        "dolares": 75
+      },
+      "fechaInicio": "2026-03-04",
+      "horario": "Martes y Jueves: 7:00 PM - 10:00 PM",
+      "nivel": "Básico",
+      "brochure": "Brochure_Curso_3_IA_Despertar_Digital.pdf",
+      "imagen": "Curso 3.png",
+      "linkPagoGlobal": "#",
+      "linkInscripcion": "inscripcion.html",
+      "playlist": {
+        "id": "PLxxxxxx",
+        "url": "https://www.youtube.com/playlist?list=PLxxxxxx",
+        "visibilidad": "oculta"
+      },
+      "lecciones": []
+    },
+    {
+      "id": "PRO",
+      "codigo": "PRO",
+      "nombre": "Productividad con Agentes IA",
+      "descripcion": "Automatización de tareas repetitivas y optimización de flujos de trabajo con agentes inteligentes.",
+      "duracion": "15 horas",
+      "sesiones": 5,
+      "precio": {
+        "soles": 200,
+        "dolares": 75
+      },
+      "fechaInicio": "2026-03-11",
+      "horario": "Martes y Jueves: 7:00 PM - 10:00 PM",
+      "nivel": "Intermedio",
+      "brochure": "#",
+      "imagen": "Curso 4.png",
+      "linkPagoGlobal": "#",
+      "linkInscripcion": "inscripcion.html",
+      "playlist": {
+        "id": "PLxxxxxx",
+        "url": "https://www.youtube.com/playlist?list=PLxxxxxx",
+        "visibilidad": "oculta"
+      },
+      "lecciones": []
+    },
+    {
+      "id": "P6",
+      "codigo": "P6",
+      "nombre": "Primavera P6 Profesional",
+      "descripcion": "Dominio completo de Oracle Primavera P6 para planificación y control de proyectos de gran escala.",
+      "duracion": "15 horas",
+      "sesiones": 5,
+      "precio": {
+        "soles": 200,
+        "dolares": 75
+      },
+      "fechaInicio": "2026-02-14",
+      "horario": "Viernes: 7:00 PM - 10:00 PM",
+      "nivel": "Intermedio",
+      "brochure": "Brochure_Curso_5_Primavera_P6.pdf",
+      "imagen": "#",
+      "linkPagoGlobal": "#",
+      "linkInscripcion": "inscripcion.html",
+      "playlist": {
+        "id": "PLxxxxxx",
+        "url": "https://www.youtube.com/playlist?list=PLxxxxxx",
+        "visibilidad": "oculta"
+      },
+      "lecciones": []
+    }
+  ],
+  "nomenclatura": {
+    "LIC": "Licitaciones Inteligentes con IA",
+    "GIP": "Control y Gerencia EVM (Gestión Integral de Proyectos)",
+    "IAD": "IA para el Despertar Digital",
+    "PRO": "Productividad con Agentes IA",
+    "P6": "Primavera P6 Profesional",
+    "AUT": "Automation Engineering (Futuro)",
+    "BIM": "BIM y Modelado Digital (Futuro)"
+  },
+  "formatoTitulo": "[CODIGO-##] Nombre del Curso - Clase ##: Título de la Lección",
+  "ejemploTitulo": "[LIC-01] Licitaciones Inteligentes - Clase 01: Configuración de Cerebros Digitales"
+}

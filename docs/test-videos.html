@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de Videos - YouTube Embed</title>
+    <link rel="stylesheet" href="../assets/css/styles-global.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #22d3ee;
+            text-align: center;
+        }
+
+        .video-test {
+            margin: 30px 0;
+            padding: 20px;
+            background: #2a2a2a;
+            border-radius: 10px;
+            border: 2px solid #333;
+        }
+
+        .video-test.working {
+            border-color: #22c55e;
+        }
+
+        .video-test.error {
+            border-color: #ef4444;
+        }
+
+        .video-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .video-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .status {
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .status.ok {
+            background: #22c55e;
+            color: #000;
+        }
+
+        .status.error {
+            background: #ef4444;
+            color: #fff;
+        }
+
+        .status.testing {
+            background: #f59e0b;
+            color: #000;
+        }
+
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .info {
+            margin-top: 10px;
+            padding: 10px;
+            background: #1a1a1a;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .video-id {
+            color: #22d3ee;
+            font-family: monospace;
+        }
+
+        .instructions {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 4px solid #22d3ee;
+        }
+
+        .instructions h2 {
+            margin-top: 0;
+            color: #22d3ee;
+        }
+
+        .instructions ul {
+            line-height: 1.8;
+        }
+
+        .test-link {
+            color: #22d3ee;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .test-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🎥 Prueba de Videos de YouTube</h1>
+
+    <div class="instructions">
+        <h2>📋 Instrucciones</h2>
+        <ul>
+            <li><strong>Si el video se reproduce:</strong> El video está configurado correctamente (Público o No
+                listado)</li>
+            <li><strong>Si aparece "Video no disponible":</strong> El video está en Privado o fue eliminado</li>
+            <li><strong>Si aparece "La reproducción en otros sitios web ha sido desactivada":</strong> Debes activar
+                "Permitir inserción" en YouTube Studio</li>
+        </ul>
+        <p><strong>Solución:</strong> Ve a <a href="https://studio.youtube.com" target="_blank"
+                class="test-link">YouTube Studio</a> y cambia cada video problemático a "No listado" y activa "Permitir
+            inserción"</p>
+    </div>
+
+    <!-- Video 1 -->
+    <div class="video-test" id="test-1">
+        <div class="video-header">
+            <div class="video-title">Lección 01: Configuración de Cerebros Digitales</div>
+            <span class="status testing">PROBANDO...</span>
+        </div>
+        <a href="https://www.youtube.com/watch?v=2QxbQ8IY0Zc" target="_blank" class="youtube-thumbnail-container"
+            style="background-image: url('https://img.youtube.com/vi/2QxbQ8IY0Zc/maxresdefault.jpg'); height: 300px; border-radius: 8px;">
+            <div class="play-button-overlay">
+                <svg viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+            </div>
+            <div class="thumbnail-hint">Hacer clic para ver en YouTube</div>
+        </a>
+        <div class="info">
+            ID del Video: <span class="video-id">2QxbQ8IY0Zc</span><br>
+            <a href="https://www.youtube.com/watch?v=2QxbQ8IY0Zc" target="_blank" class="test-link">Abrir en YouTube</a>
+        </div>
+    </div>
+
+    <!-- Video 2 -->
+    <div class="video-test" id="test-2">
+        <div class="video-header">
+            <div class="video-title">Lección 02: Generación Dinámica del WBS</div>
+            <span class="status testing">PROBANDO...</span>
+        </div>
+        <a href="https://www.youtube.com/watch?v=QhgXgxZFmCY" target="_blank" class="youtube-thumbnail-container"
+            style="background-image: url('https://img.youtube.com/vi/QhgXgxZFmCY/maxresdefault.jpg'); height: 300px; border-radius: 8px;">
+            <div class="play-button-overlay">
+                <svg viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+            </div>
+            <div class="thumbnail-hint">Hacer clic para ver en YouTube</div>
+        </a>
+        <div class="info">
+            ID del Video: <span class="video-id">QhgXgxZFmCY</span><br>
+            <a href="https://www.youtube.com/watch?v=QhgXgxZFmCY" target="_blank" class="test-link">Abrir en YouTube</a>
+        </div>
+    </div>
+
+    <!-- Video 3 -->
+    <div class="video-test" id="test-3">
+        <div class="video-header">
+            <div class="video-title">Lección 03: Refinamiento de Alcances</div>
+            <span class="status testing">PROBANDO...</span>
+        </div>
+        <a href="https://www.youtube.com/watch?v=DQuA1ZFOXNQ" target="_blank" class="youtube-thumbnail-container"
+            style="background-image: url('https://img.youtube.com/vi/DQuA1ZFOXNQ/maxresdefault.jpg'); height: 300px; border-radius: 8px;">
+            <div class="play-button-overlay">
+                <svg viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+            </div>
+            <div class="thumbnail-hint">Hacer clic para ver en YouTube</div>
+        </a>
+        <div class="info">
+            ID del Video: <span class="video-id">DQuA1ZFOXNQ</span><br>
+            <a href="https://www.youtube.com/watch?v=DQuA1ZFOXNQ" target="_blank" class="test-link">Abrir en YouTube</a>
+        </div>
+    </div>
+
+    <!-- Video 4 -->
+    <div class="video-test" id="test-4">
+        <div class="video-header">
+            <div class="video-title">Lección 04: Ingeniería de Metrados Automática</div>
+            <span class="status testing">PROBANDO...</span>
+        </div>
+        <a href="https://www.youtube.com/watch?v=R_LgivWPH30" target="_blank" class="youtube-thumbnail-container"
+            style="background-image: url('https://img.youtube.com/vi/R_LgivWPH30/maxresdefault.jpg'); height: 300px; border-radius: 8px;">
+            <div class="play-button-overlay">
+                <svg viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+            </div>
+            <div class="thumbnail-hint">Hacer clic para ver en YouTube</div>
+        </a>
+        <div class="info">
+            ID del Video: <span class="video-id">R_LgivWPH30</span><br>
+            <a href="https://www.youtube.com/watch?v=R_LgivWPH30" target="_blank" class="test-link">Abrir en YouTube</a>
+        </div>
+    </div>
+
+    <!-- Video 5 -->
+    <div class="video-test" id="test-5">
+        <div class="video-header">
+            <div class="video-title">Lección 05: Automatización de APUs con VBA</div>
+            <span class="status testing">PROBANDO...</span>
+        </div>
+        <a href="https://www.youtube.com/watch?v=y7p_4U-rTEA" target="_blank" class="youtube-thumbnail-container"
+            style="background-image: url('https://img.youtube.com/vi/y7p_4U-rTEA/maxresdefault.jpg'); height: 300px; border-radius: 8px;">
+            <div class="play-button-overlay">
+                <svg viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+            </div>
+            <div class="thumbnail-hint">Hacer clic para ver en YouTube</div>
+        </a>
+        <div class="info">
+            ID del Video: <span class="video-id">y7p_4U-rTEA</span><br>
+            <a href="https://www.youtube.com/watch?v=y7p_4U-rTEA" target="_blank" class="test-link">Abrir en YouTube</a>
+        </div>
+    </div>
+
+    <!-- Video 6 -->
+    <div class="video-test" id="test-6">
+        <div class="video-header">
+            <div class="video-title">Lección 06: Elaboración de Oferta Técnica</div>
+            <span class="status testing">PROBANDO...</span>
+        </div>
+        <a href="https://www.youtube.com/watch?v=SXJ8Be4nhMU" target="_blank" class="youtube-thumbnail-container"
+            style="background-image: url('https://img.youtube.com/vi/SXJ8Be4nhMU/maxresdefault.jpg'); height: 300px; border-radius: 8px;">
+            <div class="play-button-overlay">
+                <svg viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+            </div>
+            <div class="thumbnail-hint">Hacer clic para ver en YouTube</div>
+        </a>
+        <div class="info">
+            ID del Video: <span class="video-id">SXJ8Be4nhMU</span><br>
+            <a href="https://www.youtube.com/watch?v=SXJ8Be4nhMU" target="_blank" class="test-link">Abrir en YouTube</a>
+        </div>
+    </div>
+
+    <script>
+        function videoLoaded(testId) {
+            const container = document.getElementById(testId);
+            const status = container.querySelector('.status');
+            // Note: iframe onload doesn't guarantee video playability
+            // This just means the iframe loaded, not that the video is accessible
+            setTimeout(() => {
+                status.textContent = 'IFRAME CARGADO';
+                status.className = 'status ok';
+                container.classList.add('working');
+            }, 1000);
+        }
+
+        function videoError(testId) {
+            const container = document.getElementById(testId);
+            const status = container.querySelector('.status');
+            status.textContent = 'ERROR';
+            status.className = 'status error';
+            container.classList.add('error');
+        }
+
+        // Auto-update status after 3 seconds
+        setTimeout(() => {
+            document.querySelectorAll('.status.testing').forEach(status => {
+                status.textContent = 'VERIFICAR MANUALMENTE';
+                status.className = 'status ok';
+            });
+        }, 3000);
+    </script>
+</body>
+
+</html>

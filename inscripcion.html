@@ -7,9 +7,9 @@
     <title>Inscripción | Project Control AI</title>
 
     <!-- SHARED ASSETS -->
-    <link rel="stylesheet" href="assets/styles-global.css">
-    <script src="assets/config.js"></script>
-    <script src="assets/utils.js"></script>
+    <link rel="stylesheet" href="assets/css/styles-global.css">
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/utils.js"></script>
 
     <!-- EXTERNAL LIBRARIES -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -138,7 +138,7 @@
     <div class="form-container">
         <div id="formSection">
             <div class="header">
-                <img src="Logotipo.png" alt="PCAI" class="logo">
+                <img src="assets/images/Logotipo.png" alt="PCAI" class="logo">
                 <h2>Ficha de Inscripción</h2>
                 <p class="subtitle">Academia de Ingeniería & Construcción</p>
             </div>
@@ -213,16 +213,20 @@
     </div>
 
     <script>
-        const _supabase = initSupabase();
-
         document.getElementById('registrationForm').addEventListener('submit', async e => {
             e.preventDefault();
+
+            const _supabase = initSupabase();
+            if (!_supabase) {
+                return PCAI_Utils.mostrarNotificacion("Error: No se pudo conectar con el servidor de base de datos.", "error");
+            }
+
             const btn = document.getElementById('submitBtn');
             const formData = new FormData(e.target);
             const data = Object.fromEntries(formData);
 
             if (!PCAI_Utils.validarDNI(data.dni)) {
-                return PCAI_Utils.mostrarNotificacion("DNI inválido", "warning");
+                return PCAI_Utils.mostrarNotificacion("DNI inválido. Debe tener entre 8 y 15 dígitos.", "warning");
             }
 
             btn.disabled = true;
@@ -232,9 +236,10 @@
                 // 1. Google Sheets Backup
                 fetch(PCAI_CONFIG.googleSheets.scriptUrl, {
                     method: 'POST', mode: 'no-cors', body: new URLSearchParams(data)
-                });
+                }).catch(e => console.warn("Google Sheets Backup falló (no crítico):", e));
 
                 // 2. Supabase Integration
+                console.log("Registrando alumno:", data.dni);
                 const { data: alumno, error: errorAlumno } = await _supabase.from('alumnos')
                     .upsert({
                         dni: data.dni, nombre: data.nombre, apellido: data.apellido,
@@ -243,10 +248,13 @@
 
                 if (errorAlumno) throw errorAlumno;
 
-                const { data: cursoData } = await _supabase.from('cursos')
+                console.log("Alumno registrado. Buscando curso:", data.curso);
+                const { data: cursoData, error: errorCurso } = await _supabase.from('cursos')
                     .select('id').ilike('nombre_curso', `%${data.curso}%`).single();
 
-                if (cursoData) {
+                if (errorCurso || !cursoData) {
+                    console.warn("Curso no encontrado en DB, registrando solo alumno.");
+                } else {
                     await _supabase.from('certificados').insert({
                         alumno_id: alumno.id, curso_id: cursoData.id,
                         nombre_confirmado: `${data.nombre} ${data.apellido}`.toUpperCase()
@@ -260,6 +268,7 @@
                 document.getElementById('waLink').href = PCAI_Utils.generarLinkWhatsApp(waMsg);
 
             } catch (err) {
+                console.error("DEBUG ERROR:", err);
                 PCAI_Utils.mostrarNotificacion(PCAI_Utils.manejarError(err, "Inscripción"), "error");
                 btn.disabled = false;
                 btn.innerText = "INTENTAR DE NUEVO";

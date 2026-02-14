@@ -253,62 +253,85 @@
             }
 
             const btn = document.getElementById('submitBtn');
-            const formData = new FormData(e.target);
-            const data = Object.fromEntries(formData);
+            const formSection = document.getElementById('formSection');
+            const successBox = document.getElementById('successMsg');
 
-            if (!PCAI_Utils.validarDNI(data.dni)) {
+            // Si el botón ya tiene un span para el texto, lo usamos, si no, lo manejamos directamente
+            const btnText = btn;
+
+            btn.disabled = true;
+            btn.innerText = "PROCESANDO...";
+
+            const formData = new FormData(e.target);
+
+            // Mapeo exacto a columnas de la base de datos
+            const payload = {
+                fecha: new Date().toLocaleString('es-PE', { timeZone: 'America/Lima' }),
+                nombre: formData.get('nombre'),
+                apellido: formData.get('apellido'),
+                dni: formData.get('dni'),
+                profesion: formData.get('profesion'),
+                telefono: formData.get('telefono'),
+                email: formData.get('email'),
+                curso: formData.get('curso'),
+                metodo_pago: formData.get('metodo_pago'),
+                pago_realizado: 'NO' // Por defecto hasta validar voucher
+            };
+
+            if (!PCAI_Utils.validarDNI(payload.dni)) {
+                btn.disabled = false;
+                btn.innerText = "FINALIZAR INSCRIPCIÓN";
                 return PCAI_Utils.mostrarNotificacion("DNI inválido. Debe tener entre 8 y 15 dígitos.", "warning");
             }
 
-            btn.disabled = true;
-            btn.innerText = "Procesando...";
-
             try {
-                // 1. Google Sheets Backup
-                fetch(PCAI_CONFIG.googleSheets.scriptUrl, {
-                    method: 'POST', mode: 'no-cors', body: new URLSearchParams(data)
-                }).catch(e => console.warn("Google Sheets Backup falló (no crítico):", e));
+                // Ejecución en paralelo: Supabase + Google Sheets
+                const [resSupabase, resGoogle] = await Promise.all([
+                    _supabase.from('alumnos').insert([payload]),
+                    fetch(PCAI_CONFIG.googleSheets.scriptUrl, {
+                        method: 'POST',
+                        body: new URLSearchParams(payload), // Usamos el payload mapeado
+                        mode: 'no-cors'
+                    })
+                ]);
 
-                // 2. Supabase Integration
-                console.log("Registrando alumno:", data.dni);
-                const { data: alumno, error: errorAlumno } = await _supabase.from('alumnos')
-                    .upsert({
-                        dni: data.dni, nombre: data.nombre, apellido: data.apellido,
-                        profesion: data.profesion, telefono: data.telefono, email: data.email
-                    }, { onConflict: 'dni' }).select().single();
+                // Verificamos si Supabase devolvió un error
+                if (resSupabase.error) {
+                    console.error("Error de Supabase:", resSupabase.error);
 
-                if (errorAlumno) throw errorAlumno;
-
-                console.log("Alumno registrado. Buscando curso:", data.curso);
-                const { data: cursoData, error: errorCurso } = await _supabase.from('cursos')
-                    .select('id').ilike('nombre_curso', `%${data.curso}%`).single();
-
-                if (errorCurso || !cursoData) {
-                    console.warn("Curso no encontrado en DB, registrando solo alumno.");
+                    // Si el error es por DNI duplicado, informamos de forma amigable
+                    if (resSupabase.error.message.includes('duplicate')) {
+                        PCAI_Utils.mostrarNotificacion("Ya existe un registro con este DNI.", "info");
+                        // Abrimos directamente el éxito si ya estaba registrado
+                        formSection.style.display = 'none';
+                        successBox.style.display = 'block';
+                    } else {
+                        alert(`Aviso Técnico: ${resSupabase.error.message}`);
+                        btn.disabled = false;
+                        btn.innerText = "REINTENTAR";
+                        return;
+                    }
                 } else {
-                    await _supabase.from('certificados').insert({
-                        alumno_id: alumno.id, curso_id: cursoData.id,
-                        nombre_confirmado: `${data.nombre} ${data.apellido}`.toUpperCase()
-                    });
+                    // ÉXITO
+                    formSection.style.display = 'none';
+                    successBox.style.display = 'block';
                 }
 
-                document.getElementById('formSection').style.display = 'none';
-                document.getElementById('successMsg').style.display = 'block';
-
-                const esWebinar = data.curso === "Webinar Primavera P6";
+                // Personalizar mensaje de WhatsApp
+                const esWebinar = (payload.curso || "").includes("Webinar");
                 if (esWebinar) {
                     document.querySelector('#successMsg p').innerText = "¡Te has registrado con éxito al Webinar! Únete al grupo de WhatsApp para recibir el link de acceso.";
                     document.getElementById('waLink').innerText = "Unirse al Grupo de WhatsApp";
-                    const waMsgWebinar = `Hola Ing. Aurelio, soy ${data.nombre}. Me registré al Webinar GRATUITO de P6. Solicito el link del evento.`;
+                    const waMsgWebinar = `Hola Ing. Aurelio, soy ${payload.nombre}. Me registré al Webinar GRATUITO de P6. Solicito el link del evento.`;
                     document.getElementById('waLink').href = PCAI_Utils.generarLinkWhatsApp(waMsgWebinar);
                 } else {
-                    const waMsg = `Hola Ing. Aurelio, soy ${data.nombre}. Me inscribí al curso ${data.curso}. Adjunto mi voucher.`;
+                    const waMsg = `Hola Ing. Aurelio, soy ${payload.nombre}. Me inscribí al ${payload.curso}. Adjunto mi voucher.`;
                     document.getElementById('waLink').href = PCAI_Utils.generarLinkWhatsApp(waMsg);
                 }
 
-            } catch (err) {
-                console.error("DEBUG ERROR:", err);
-                PCAI_Utils.mostrarNotificacion(PCAI_Utils.manejarError(err, "Inscripción"), "error");
+            } catch (error) {
+                console.error('Error Crítico:', error);
+                alert("Error de conexión. Verifique su internet o la consola F12.");
                 btn.disabled = false;
                 btn.innerText = "INTENTAR DE NUEVO";
             }

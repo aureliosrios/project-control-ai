@@ -218,7 +218,7 @@
             try {
                 const { data: cert, error: fetchError } = await _supabase
                     .from('certificados')
-                    .select('*, alumnos(*), cursos(*, profesores(*))')
+                    .select('*, alumnos(*), cursos(*, profesores:profesor_id(*))')
                     .eq('id', certId)
                     .single();
 
@@ -265,14 +265,17 @@
                 let horasCurso = (cert.cursos?.nombre_curso || cert.curso_nombre || "").includes("Webinar") ? "2" : "45";
                 const textoDetalle = `con una duración de ${horasCurso} horas de clase impartidas, del ${fInicio} al ${fFin} en modalidad online.`;
 
-                // ESTAMPADO PÁGINA 1 (COORDENADAS V8.0/8.1)
+                // ESTAMPADO PÁGINA 1 (COORDENADAS V5.1 - AJUSTADO POR USUARIO)
                 const txtNombre = nombreCompleto.toUpperCase();
-                page1.drawText(txtNombre, { x: 115, y: 425, size: 21, font: fontBold, color: rgb(0.98, 0.75, 0.14) });
+                const nameWidth = fontBold.widthOfTextAtSize(txtNombre, 21);
+                page1.drawText(txtNombre, { x: (width / 2) - (nameWidth / 2) - 103, y: 430, size: 21, font: fontBold, color: rgb(0.98, 0.75, 0.14) });
 
-                const fontSizeDetalle = 10;
-                page1.drawText(textoDetalle, { x: width / 2 - (textoDetalle.length * 2.8), y: 338, size: fontSizeDetalle, font: fontRegular, color: rgb(0.3, 0.3, 0.3) });
+                const fontSizeDetalle = 11;
+                const detailWidth = fontRegular.widthOfTextAtSize(textoDetalle, fontSizeDetalle);
+                // Ajuste: -6mm Y (approx -17pt), -5.5mm X (approx -15.6pt)
+                page1.drawText(textoDetalle, { x: (width / 2) - (detailWidth / 2) - 120.6, y: 271, size: fontSizeDetalle, font: fontRegular, color: rgb(0.2, 0.2, 0.2) });
 
-                page1.drawText(`ID: ${cert.codigo_verificacion}`, { x: 715, y: 135, size: 7, color: rgb(1, 1, 1) });
+                page1.drawText(`ID: ${cert.codigo_verificacion}`, { x: 722, y: 55, size: 7, color: rgb(1, 1, 1) });
 
                 // FIRMA INSTRUCTOR
                 const prof = cert.cursos?.profesores;
@@ -301,7 +304,8 @@
                         const canvas = qrDiv.querySelector('canvas');
                         if (!canvas) throw new Error("Error generando código QR");
                         const qrImage = await pdfDoc.embedPng(canvas.toDataURL("image/png"));
-                        page1.drawImage(qrImage, { x: 715, y: 155, width: 85, height: 85 });
+                        // Ajuste: -25mm Y (approx -71pt) -> 86 - 71 = 15
+                        page1.drawImage(qrImage, { x: 714, y: 15, width: 80, height: 80 });
 
                         if (page2) {
                             page2.drawText(`Lima, ${fEmision}`, { x: width / 2 - 60, y: 55, size: 11, font: fontRegular, color: rgb(0.13, 0.45, 0.93) });

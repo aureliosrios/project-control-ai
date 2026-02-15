@@ -293,7 +293,9 @@
                 page1.drawText(`ID: ${cert.codigo_verificacion}`, { x: 722, y: 125, size: 7, color: rgb(1, 1, 1) });
 
                 // FIRMA INSTRUCTOR (v9.0 - MEJORADO)
-                const prof = cert.cursos?.profesores || cert.cursos?.[0]?.profesores;
+                // Fix: Robust access (array vs object)
+                let cursoObj = Array.isArray(cert.cursos) ? cert.cursos[0] : cert.cursos;
+                let prof = Array.isArray(cursoObj?.profesores) ? cursoObj.profesores[0] : cursoObj?.profesores;
 
                 if (prof) {
                     const iNombre = prof.nombre || "";

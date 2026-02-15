@@ -87,7 +87,7 @@
 <body>
 
     <div class="card">
-        <div class="version-tag">v8.9</div>
+        <div class="version-tag">v9.0</div>
 
         <div id="searchSection">
             <img src="assets/images/Logotipo.png" alt="PCAI" class="logo-oficial" style="margin-bottom: 1.5rem;">
@@ -221,9 +221,10 @@
                     .select(`
                         *,
                         alumnos (*),
-                        cursos:curso_id (
+                        cursos (
                             nombre_curso,
                             horas_academicas,
+                            profesor_id,
                             profesores:profesor_id (
                                 nombre,
                                 apellido,
@@ -234,6 +235,8 @@
                     `)
                     .eq('id', certId)
                     .single();
+
+                console.log("DEBUG DATA:", cert); // Para verificar que llega el objeto profesores
 
                 if (fetchError || !cert) throw new Error("No se pudo leer la base de datos");
 
@@ -285,33 +288,43 @@
 
                 const fontSizeDetalle = 11;
                 const detailWidth = fontRegular.widthOfTextAtSize(textoDetalle, fontSizeDetalle);
-                // Ajuste fino: -2mm Y (318 -> 312), +2mm X (Offset -108 -> -102)
-                page1.drawText(textoDetalle, { x: (width / 2) - (detailWidth / 2) - 102, y: 312, size: fontSizeDetalle, font: fontRegular, color: rgb(0.2, 0.2, 0.2) });
+                // Ajuste fino v9.0: +3mm X (Offset -102 -> -93.5), -3mm Y (312 -> 303.5)
+                page1.drawText(textoDetalle, { x: (width / 2) - (detailWidth / 2) - 93.5, y: 303.5, size: fontSizeDetalle, font: fontRegular, color: rgb(0.2, 0.2, 0.2) });
 
                 page1.drawText(`ID: ${cert.codigo_verificacion}`, { x: 722, y: 125, size: 7, color: rgb(1, 1, 1) });
 
-                // FIRMA INSTRUCTOR (COORDENADAS CALIBRADAS v8.9)
-                const prof = cert.cursos?.profesores;
+                // FIRMA INSTRUCTOR (v9.0 - MEJORADO)
+                const prof = cert.cursos?.profesores || cert.cursos?.[0]?.profesores;
+
                 if (prof) {
-                    if (prof.firma_url) {
+                    const iNombre = prof.nombre || "";
+                    const iApellido = prof.apellido || "";
+                    const iCip = prof.cip || "";
+                    const iFirma = prof.firma_url;
+
+                    if (iFirma) {
                         try {
-                            const resp = await fetch(prof.firma_url);
+                            const resp = await fetch(iFirma);
                             const imageBytes = await resp.arrayBuffer();
-                            const esPng = prof.firma_url.toLowerCase().endsWith('.png');
+                            const esPng = iFirma.toLowerCase().endsWith('.png');
                             const firmaImg = esPng ? await pdfDoc.embedPng(imageBytes) : await pdfDoc.embedJpg(imageBytes);
 
                             page1.drawImage(firmaImg, {
-                                x: 550, // Ajustado según diseño solicitado
+                                x: 550,
                                 y: 120,
                                 width: 120,
                                 height: 60
                             });
                         } catch (e) { console.error("Error cargando firma:", e); }
                     }
-                    const nW = fontBold.widthOfTextAtSize(`Ing. ${prof.nombre} ${prof.apellido}`, 10);
-                    page1.drawText(`Ing. ${prof.nombre} ${prof.apellido}`, { x: 550, y: 105, size: 10, font: fontBold });
-                    const cW = fontRegular.widthOfTextAtSize(`CIP: ${prof.cip}`, 9);
-                    page1.drawText(`CIP: ${prof.cip}`, { x: 550, y: 92, size: 9, font: fontRegular });
+
+                    if (iNombre) {
+                        const txtInst = `Ing. ${iNombre} ${iApellido}`;
+                        page1.drawText(txtInst, { x: 550, y: 105, size: 10, font: fontBold });
+                        page1.drawText(`CIP: ${iCip}`, { x: 550, y: 92, size: 9, font: fontRegular });
+                    }
+                } else {
+                    console.warn("No se encontró data de profesores en el objeto cert.cursos");
                 }
 
                 // QR

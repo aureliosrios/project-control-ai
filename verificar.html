@@ -236,6 +236,22 @@
                     .single();
 
                 console.log("DEBUG DATA:", cert); // Para verificar que llega el objeto profesores
+                
+                // --- DEBUG BLOCK START ---
+                // Verifica estructura de cursos
+                if (!cert.cursos) {
+                    alert("ERROR: cert.cursos es NULL o UNDEFINED");
+                } else {
+                    let cDebug = Array.isArray(cert.cursos) ? cert.cursos[0] : cert.cursos;
+                    alert("CURSO DATA:\n" + JSON.stringify(cDebug, null, 2));
+                    
+                    if (!cDebug.profesores) {
+                        alert("ERROR: No existe la propiedad 'profesores' dentro del curso.\nRevise la relación !profesor_id en Supabase.");
+                    } else {
+                        alert("PROFESOR DATA:\n" + JSON.stringify(cDebug.profesores, null, 2));
+                    }
+                }
+                // --- DEBUG BLOCK END ---
 
                 if (fetchError || !cert) throw new Error("No se pudo leer la base de datos");
 

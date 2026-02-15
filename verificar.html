@@ -226,11 +226,27 @@
 
                 const { PDFDocument, rgb, StandardFonts } = PDFLib;
 
-                const nombreArchivo = PLANTILLAS_CURSOS[cert.cursos?.nombre_curso || cert.curso_nombre] || "plantilla_maestra.pdf";
+                const cursoKey = cert.cursos?.nombre_curso || cert.curso_nombre;
+                const nombreArchivo = PLANTILLAS_CURSOS[cursoKey];
+
+                if (!nombreArchivo) {
+                    throw new Error(`Aviso: El curso "${cursoKey}" no tiene una plantilla PDF configurada en el sistema.`);
+                }
+
                 const templateUrl = `${PCAI_CONFIG.supabase.url}/storage/v1/object/public/academia/${nombreArchivo}`;
 
+                console.log(`Intentando cargar plantilla: ${nombreArchivo} para el curso: ${cursoKey}`);
+
                 const response = await fetch(templateUrl);
-                if (!response.ok) throw new Error(`La plantilla ${nombreArchivo} no fue encontrada.`);
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        throw new Error(`La plantilla "${nombreArchivo}" no existe en el storage para el curso "${cursoKey}".`);
+                    } else if (response.status === 403) {
+                        throw new Error(`Acceso denegado a la plantilla "${nombreArchivo}". Verifica los permisos del bucket.`);
+                    } else {
+                        throw new Error(`Error al descargar la plantilla (${response.status}): ${response.statusText}`);
+                    }
+                }
 
                 const existingPdfBytes = await response.arrayBuffer();
                 const pdfDoc = await PDFDocument.load(existingPdfBytes);

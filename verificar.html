@@ -87,7 +87,7 @@
 <body>
 
     <div class="card">
-        <div class="version-tag">v8.8</div>
+        <div class="version-tag">v8.9</div>
 
         <div id="searchSection">
             <img src="assets/images/Logotipo.png" alt="PCAI" class="logo-oficial" style="margin-bottom: 1.5rem;">
@@ -218,7 +218,20 @@
             try {
                 const { data: cert, error: fetchError } = await _supabase
                     .from('certificados')
-                    .select('*, alumnos(*), cursos:curso_id(*, profesores:profesor_id(*))')
+                    .select(`
+                        *,
+                        alumnos (*),
+                        cursos:curso_id (
+                            nombre_curso,
+                            horas_academicas,
+                            profesores:profesor_id (
+                                nombre,
+                                apellido,
+                                cip,
+                                firma_url
+                            )
+                        )
+                    `)
                     .eq('id', certId)
                     .single();
 
@@ -261,9 +274,9 @@
                 const fFin = PCAI_Utils.formatearFecha(cert.fecha_fin_clases);
                 const fEmision = PCAI_Utils.formatearFecha(new Date().toISOString().split('T')[0]);
 
-                // Lógica de horas dinámica
-                let horasCurso = (cert.cursos?.nombre_curso || cert.curso_nombre || "").includes("Webinar") ? "2" : "45";
-                const textoDetalle = `con una duración de ${horasCurso} horas de clase impartidas, del ${fInicio} al ${fFin} en modalidad online.`;
+                // Lógica de horas dinámica (v8.9)
+                const horasCert = cert.cursos?.horas_academicas || "45";
+                const textoDetalle = `con una duración de ${horasCert} horas académicas, impartidas del ${fInicio} al ${fFin} en modalidad online.`;
 
                 // ESTAMPADO PÁGINA 1 (COORDENADAS V8.8 - AJUSTE FINO)
                 const txtNombre = nombreCompleto.toUpperCase();
@@ -277,20 +290,28 @@
 
                 page1.drawText(`ID: ${cert.codigo_verificacion}`, { x: 722, y: 125, size: 7, color: rgb(1, 1, 1) });
 
-                // FIRMA INSTRUCTOR
+                // FIRMA INSTRUCTOR (COORDENADAS CALIBRADAS v8.9)
                 const prof = cert.cursos?.profesores;
                 if (prof) {
                     if (prof.firma_url) {
                         try {
-                            const fBytes = await fetch(prof.firma_url).then(res => res.arrayBuffer());
-                            const fImg = await pdfDoc.embedPng(fBytes);
-                            page1.drawImage(fImg, { x: 472, y: 115, width: 100, height: 120 });
-                        } catch (e) { console.warn("Firma no disponible"); }
+                            const resp = await fetch(prof.firma_url);
+                            const imageBytes = await resp.arrayBuffer();
+                            const esPng = prof.firma_url.toLowerCase().endsWith('.png');
+                            const firmaImg = esPng ? await pdfDoc.embedPng(imageBytes) : await pdfDoc.embedJpg(imageBytes);
+
+                            page1.drawImage(firmaImg, {
+                                x: 550, // Ajustado según diseño solicitado
+                                y: 120,
+                                width: 120,
+                                height: 60
+                            });
+                        } catch (e) { console.error("Error cargando firma:", e); }
                     }
-                    const nW = fontBold.widthOfTextAtSize(`Ing. ${prof.nombre} ${prof.apellido}`, 11);
-                    page1.drawText(`Ing. ${prof.nombre} ${prof.apellido}`, { x: 522 - (nW / 2), y: 72, size: 11, font: fontBold });
-                    const cW = fontBold.widthOfTextAtSize(`CIP: ${prof.cip}`, 10);
-                    page1.drawText(`CIP: ${prof.cip}`, { x: 522 - (cW / 2), y: 58, size: 10, font: fontBold });
+                    const nW = fontBold.widthOfTextAtSize(`Ing. ${prof.nombre} ${prof.apellido}`, 10);
+                    page1.drawText(`Ing. ${prof.nombre} ${prof.apellido}`, { x: 550, y: 105, size: 10, font: fontBold });
+                    const cW = fontRegular.widthOfTextAtSize(`CIP: ${prof.cip}`, 9);
+                    page1.drawText(`CIP: ${prof.cip}`, { x: 550, y: 92, size: 9, font: fontRegular });
                 }
 
                 // QR

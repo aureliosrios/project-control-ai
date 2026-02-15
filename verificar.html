@@ -87,7 +87,7 @@
 <body>
 
     <div class="card">
-        <div class="version-tag">v8.6</div>
+        <div class="version-tag">v8.7</div>
 
         <div id="searchSection">
             <img src="assets/images/Logotipo.png" alt="PCAI" class="logo-oficial" style="margin-bottom: 1.5rem;">
@@ -218,7 +218,7 @@
             try {
                 const { data: cert, error: fetchError } = await _supabase
                     .from('certificados')
-                    .select('*, alumnos(*), cursos(*, profesores:profesor_id(*))')
+                    .select('*, alumnos(*), cursos:curso_id(*, profesores:profesor_id(*))')
                     .eq('id', certId)
                     .single();
 
@@ -265,17 +265,18 @@
                 let horasCurso = (cert.cursos?.nombre_curso || cert.curso_nombre || "").includes("Webinar") ? "2" : "45";
                 const textoDetalle = `con una duración de ${horasCurso} horas de clase impartidas, del ${fInicio} al ${fFin} en modalidad online.`;
 
-                // ESTAMPADO PÁGINA 1 (COORDENADAS V5.1 - AJUSTADO POR USUARIO)
+                // ESTAMPADO PÁGINA 1 (COORDENADAS V8.7 - REFINADO)
                 const txtNombre = nombreCompleto.toUpperCase();
                 const nameWidth = fontBold.widthOfTextAtSize(txtNombre, 21);
                 page1.drawText(txtNombre, { x: (width / 2) - (nameWidth / 2) - 103, y: 430, size: 21, font: fontBold, color: rgb(0.98, 0.75, 0.14) });
 
                 const fontSizeDetalle = 11;
                 const detailWidth = fontRegular.widthOfTextAtSize(textoDetalle, fontSizeDetalle);
-                // Ajuste: -6mm Y (approx -17pt), -5.5mm X (approx -15.6pt)
-                page1.drawText(textoDetalle, { x: (width / 2) - (detailWidth / 2) - 120.6, y: 271, size: fontSizeDetalle, font: fontRegular, color: rgb(0.2, 0.2, 0.2) });
+                // Ajuste moderado: V8.1 era 338, ahora bajamos a 318 (-20pt / ~7mm). 
+                // X Offset: Ajustado a -108 para evitar que se pegue tanto a la izquierda.
+                page1.drawText(textoDetalle, { x: (width / 2) - (detailWidth / 2) - 108, y: 318, size: fontSizeDetalle, font: fontRegular, color: rgb(0.2, 0.2, 0.2) });
 
-                page1.drawText(`ID: ${cert.codigo_verificacion}`, { x: 722, y: 55, size: 7, color: rgb(1, 1, 1) });
+                page1.drawText(`ID: ${cert.codigo_verificacion}`, { x: 722, y: 125, size: 7, color: rgb(1, 1, 1) });
 
                 // FIRMA INSTRUCTOR
                 const prof = cert.cursos?.profesores;
@@ -304,8 +305,8 @@
                         const canvas = qrDiv.querySelector('canvas');
                         if (!canvas) throw new Error("Error generando código QR");
                         const qrImage = await pdfDoc.embedPng(canvas.toDataURL("image/png"));
-                        // Ajuste: -25mm Y (approx -71pt) -> 86 - 71 = 15
-                        page1.drawImage(qrImage, { x: 714, y: 15, width: 80, height: 80 });
+                        // Ajuste QR: V8.1 era 155, bajamos a 84 (aprox -25mm)
+                        page1.drawImage(qrImage, { x: 714, y: 84, width: 80, height: 80 });
 
                         if (page2) {
                             page2.drawText(`Lima, ${fEmision}`, { x: width / 2 - 60, y: 55, size: 11, font: fontRegular, color: rgb(0.13, 0.45, 0.93) });

@@ -248,90 +248,112 @@
             e.preventDefault();
 
             const _supabase = initSupabase();
-            if (!_supabase) {
-                return PCAI_Utils.mostrarNotificacion("Error: No se pudo conectar con el servidor de base de datos.", "error");
-            }
+            if (!_supabase) return PCAI_Utils.mostrarNotificacion("Error de conexión", "error");
 
             const btn = document.getElementById('submitBtn');
             const formSection = document.getElementById('formSection');
             const successBox = document.getElementById('successMsg');
 
-            // Si el botón ya tiene un span para el texto, lo usamos, si no, lo manejamos directamente
-            const btnText = btn;
-
             btn.disabled = true;
             btn.innerText = "PROCESANDO...";
 
             const formData = new FormData(e.target);
+            const dni = formData.get('dni');
 
-            // Mapeo exacto a columnas de la base de datos
-            const payload = {
-                fecha: new Date().toLocaleString('es-PE', { timeZone: 'America/Lima' }),
-                nombre: formData.get('nombre'),
-                apellido: formData.get('apellido'),
-                dni: formData.get('dni'),
-                profesion: formData.get('profesion'),
-                telefono: formData.get('telefono'),
-                email: formData.get('email'),
-                curso: formData.get('curso'),
-                metodo_pago: formData.get('metodo_pago'),
-                pago_realizado: 'NO' // Por defecto hasta validar voucher
-            };
-
-            if (!PCAI_Utils.validarDNI(payload.dni)) {
+            // --- VALIDACIÓN ---
+            if (!PCAI_Utils.validarDNI(dni)) {
                 btn.disabled = false;
                 btn.innerText = "FINALIZAR INSCRIPCIÓN";
                 return PCAI_Utils.mostrarNotificacion("DNI inválido. Debe tener entre 8 y 15 dígitos.", "warning");
             }
 
+            // 1. Datos del Estudiante (Persona)
+            const datosEstudiante = {
+                dni: dni,
+                nombre: formData.get('nombre'),
+                apellido: formData.get('apellido'),
+                profesion: formData.get('profesion'),
+                telefono: formData.get('telefono'),
+                email: formData.get('email')
+            };
+
+            // 2. Datos de la Matrícula (Curso)
+            const datosMatricula = {
+                fecha: new Date().toLocaleString('es-PE', { timeZone: 'America/Lima' }),
+                curso: formData.get('curso'),
+                metodo_pago: formData.get('metodo_pago') || 'GRATUITO',
+                pago_realizado: 'NO',
+                validado_director: false,
+                edicion_curso: 'AUTO-REGISTRO'
+            };
+
             try {
-                // Ejecución en paralelo: Supabase + Google Sheets
-                const [resSupabase, resGoogle] = await Promise.all([
-                    _supabase.from('alumnos').insert([payload]),
-                    fetch(PCAI_CONFIG.googleSheets.scriptUrl, {
-                        method: 'POST',
-                        body: new URLSearchParams(payload), // Usamos el payload mapeado
-                        mode: 'no-cors'
-                    })
-                ]);
+                // PASO A: Verificar si el estudiante ya existe
+                let { data: estudianteExistente } = await _supabase
+                    .from('estudiantes')
+                    .select('id')
+                    .eq('dni', dni)
+                    .maybeSingle();
 
-                // Verificamos si Supabase devolvió un error
-                if (resSupabase.error) {
-                    console.error("Error de Supabase:", resSupabase.error);
+                let estudianteId;
 
-                    // Si el error es por DNI duplicado, informamos de forma amigable
-                    if (resSupabase.error.message.includes('duplicate')) {
-                        PCAI_Utils.mostrarNotificacion("Ya existe un registro con este DNI.", "info");
-                        // Abrimos directamente el éxito si ya estaba registrado
-                        formSection.style.display = 'none';
-                        successBox.style.display = 'block';
-                    } else {
-                        alert(`Aviso Técnico: ${resSupabase.error.message}`);
-                        btn.disabled = false;
-                        btn.innerText = "REINTENTAR";
-                        return;
-                    }
+                if (estudianteExistente) {
+                    // Ya existe: Usamos su ID y actualizamos sus datos
+                    estudianteId = estudianteExistente.id;
+                    await _supabase.from('estudiantes').update(datosEstudiante).eq('id', estudianteId);
                 } else {
-                    // ÉXITO
-                    formSection.style.display = 'none';
-                    successBox.style.display = 'block';
+                    // No existe: Lo creamos
+                    const { data: nuevoEstudiante, error: errorCreacion } = await _supabase
+                        .from('estudiantes')
+                        .insert([datosEstudiante])
+                        .select()
+                        .single();
+
+                    if (errorCreacion) throw new Error("Error creando estudiante: " + errorCreacion.message);
+                    estudianteId = nuevoEstudiante.id;
                 }
 
+                // PASO B: Crear la Matrícula vinculada al Estudiante
+                const payloadMatricula = {
+                    ...datosMatricula,
+                    estudiante_id: estudianteId, // Clave relacional
+                    dni: dni, // Redundancia para compatibilidad
+                    nombre: datosEstudiante.nombre, // Redundancia para compatibilidad
+                    apellido: datosEstudiante.apellido // Redundancia para compatibilidad
+                };
+
+                const { error: errorMatricula } = await _supabase
+                    .from('matriculas')
+                    .insert([payloadMatricula]);
+
+                if (errorMatricula) throw new Error("Error en matrícula: " + errorMatricula.message);
+
+                // --- ENVIAR A GOOGLE SHEETS ---
+                fetch(PCAI_CONFIG.googleSheets.scriptUrl, {
+                    method: 'POST',
+                    body: new URLSearchParams(payloadMatricula),
+                    mode: 'no-cors'
+                });
+
+                // --- ÉXITO ---
+                formSection.style.display = 'none';
+                successBox.style.display = 'block';
+
                 // Personalizar mensaje de WhatsApp
-                const esWebinar = (payload.curso || "").includes("Webinar");
+                const esWebinar = (datosMatricula.curso || "").includes("Webinar");
                 if (esWebinar) {
                     document.querySelector('#successMsg p').innerText = "¡Te has registrado con éxito al Webinar! Únete al grupo de WhatsApp para recibir el link de acceso.";
                     document.getElementById('waLink').innerText = "Unirse al Grupo de WhatsApp";
-                    const waMsgWebinar = `Hola Ing. Aurelio, soy ${payload.nombre}. Me registré al Webinar GRATUITO de P6. Solicito el link del evento.`;
+                    const waMsgWebinar = `Hola Ing. Aurelio, soy ${datosEstudiante.nombre}. Me registré al Webinar GRATUITO de P6. Solicito el link del evento.`;
                     document.getElementById('waLink').href = PCAI_Utils.generarLinkWhatsApp(waMsgWebinar);
                 } else {
-                    const waMsg = `Hola Ing. Aurelio, soy ${payload.nombre}. Me inscribí al ${payload.curso}. Adjunto mi voucher.`;
+                    const waMsg = `Hola Ing. Aurelio, soy ${datosEstudiante.nombre}. Me inscribí al ${datosMatricula.curso}. Adjunto mi voucher.`;
                     document.getElementById('waLink').href = PCAI_Utils.generarLinkWhatsApp(waMsg);
                 }
 
             } catch (error) {
                 console.error('Error Crítico:', error);
-                alert("Error de conexión. Verifique su internet o la consola F12.");
+                alert("Ocurrió un error: " + error.message);
                 btn.disabled = false;
                 btn.innerText = "INTENTAR DE NUEVO";
             }

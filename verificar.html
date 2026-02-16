@@ -86,7 +86,7 @@
 <body>
 
     <div class="card">
-        <div class="version-tag">v9.4</div>
+        <div class="version-tag">v9.5</div>
 
         <div id="searchSection">
             <img src="assets/images/Logotipo.png" alt="PCAI" class="logo-oficial" style="margin-bottom: 1.5rem;">
@@ -124,23 +124,28 @@
             loader.style.display = 'block';
 
             try {
+                // CAMBIO CLAVE v9.5: Buscamos en 'alumnos' para ver TODO su historial (Inscritos y Graduados)
                 const { data, error } = await _supabase
-                    .from('certificados')
+                    .from('alumnos')
                     .select(`
                         *,
-                        alumnos!inner (nombre, apellido, dni),
-                        cursos!curso_id (
-                            nombre_curso, horas_academicas,
-                            profesores!profesor_id ( nombre, apellido, cip, firma_url )
+                        certificados (
+                            id, codigo_verificacion, descarga_bloqueada, fecha_emision,
+                            cursos:curso_id (
+                                nombre_curso, horas_academicas,
+                                profesores:profesor_id ( nombre, apellido, cip, firma_url )
+                            )
                         )
                     `)
-                    .eq('alumnos.dni', dni);
+                    .eq('dni', dni);
 
                 loader.style.display = 'none';
                 if (error) throw error;
+
                 if (!data || data.length === 0) {
                     return PCAI_Utils.mostrarNotificacion("No se encontraron registros para el DNI: " + dni, "info");
                 }
+
                 mostrarResultados(data);
             } catch (err) {
                 loader.style.display = 'none';
@@ -148,10 +153,11 @@
             }
         }
 
-        function mostrarResultados(certificados) {
+        function mostrarResultados(inscripciones) {
             document.getElementById('searchSection').style.display = 'none';
             const container = document.getElementById('listaCertificados');
-            const dataAlumno = certificados[0].alumnos;
+            // Usamos los datos del primer registro para el nombre sugerido
+            const dataAlumno = inscripciones[0];
             const nombreSugerido = `${dataAlumno.nombre} ${dataAlumno.apellido}`;
 
             container.innerHTML = `
@@ -170,34 +176,54 @@
                     </div>
                     <p style="font-size:0.7rem; color:var(--text-muted); margin-top:8px;">* Puedes editar tu nombre y grado como aparecerá en el certificado.</p>
                 </div>
-                <h3 style="color:var(--accent-orange); font-size:0.9rem; text-align:left; margin-bottom:15px; text-transform:uppercase;">Tus Diplomas Disponibles:</h3>
+                <h3 style="color:var(--accent-orange); font-size:0.9rem; text-align:left; margin-bottom:15px; text-transform:uppercase;">Historial de Cursos y Diplomas:</h3>
             `;
 
-            certificados.forEach(cert => {
+            inscripciones.forEach(registro => {
                 const card = document.createElement('div');
                 card.className = 'cert-card';
 
-                // Análisis de estado: Si está en la base de datos es porque ya aprobó/graduó
-                const isReady = !cert.descarga_bloqueada;
+                // LÓGICA DE ESTADO v9.5
+                const tieneCertificado = registro.certificados && registro.certificados.length > 0;
+                const cert = tieneCertificado ? registro.certificados[0] : null;
+                const esDescargable = tieneCertificado && !cert.descarga_bloqueada;
 
-                let actionHtml = isReady ?
-                    `<button class="btn-primary btn-download" id="btn-${cert.id}" onclick="procesarDiploma('${cert.id}')">Descargar Diploma</button>` :
-                    `<span style="color:var(--text-muted); font-size:0.8rem; font-style:italic;">En proceso de firma...</span>`;
-
-                card.innerHTML = `
-                    <div style="display:flex; justify-content:space-between; align-items:center; gap:15px;">
-                        <div style="flex:1;">
-                            <div style="font-weight:bold; color:white; font-size:1.05rem;">${cert.cursos?.nombre_curso || cert.curso_nombre}</div>
-                            <div style="display:flex; align-items:center; gap:8px; margin-top:5px;">
-                                <span style="background:rgba(34, 197, 94, 0.1); color:var(--success-green); padding:2px 8px; border-radius:4px; font-size:0.7rem; font-weight:bold;">✓ GRADUADO</span>
-                                <span style="font-size:0.75rem; color:var(--text-muted);">Folio: ${cert.codigo_verificacion}</span>
+                if (esDescargable) {
+                    // ESTADO: GRADUADO (Botón de descarga)
+                    card.innerHTML = `
+                        <div style="display:flex; justify-content:space-between; align-items:center; gap:15px;">
+                            <div style="flex:1;">
+                                <div style="font-weight:bold; color:white; font-size:1.05rem;">${registro.curso}</div>
+                                <div style="display:flex; align-items:center; gap:8px; margin-top:5px;">
+                                    <span style="background:rgba(34, 197, 94, 0.1); color:var(--success-green); padding:2px 8px; border-radius:4px; font-size:0.7rem; font-weight:bold;">✅ GRADUADO</span>
+                                    <span style="font-size:0.75rem; color:var(--text-muted);">Folio: ${cert.codigo_verificacion}</span>
+                                </div>
+                            </div>
+                            <div style="text-align:right;">
+                                <button class="btn-primary btn-download" id="btn-${cert.id}" onclick="procesarDiploma('${cert.id}')">Descargar</button>
                             </div>
                         </div>
-                        <div style="text-align:right;">
-                            ${actionHtml}
+                    `;
+                } else {
+                    // ESTADO: EN PROCESO (O bloqueado)
+                    const labelEstado = tieneCertificado ? "VERIFICANDO FIRMAS" : "EN PROCESO DE CERTIFICACIÓN";
+                    const colorEstado = tieneCertificado ? "var(--accent-cyan)" : "var(--accent-orange)";
+
+                    card.innerHTML = `
+                        <div style="display:flex; justify-content:space-between; align-items:center; opacity:0.85; gap:15px;">
+                            <div style="flex:1;">
+                                <div style="font-weight:bold; color:#f1f5f9; font-size:1.05rem;">${registro.curso}</div>
+                                <div style="display:flex; align-items:center; gap:8px; margin-top:5px;">
+                                    <span style="background:rgba(245, 158, 11, 0.1); color:${colorEstado}; padding:2px 8px; border-radius:4px; font-size:0.7rem; font-weight:bold;">⏳ ${labelEstado}</span>
+                                    <span style="font-size:0.7rem; color:var(--text-muted);">Próxima emisión</span>
+                                </div>
+                            </div>
+                            <div style="text-align:right;">
+                                <span style="font-size:0.75rem; color:var(--text-muted); font-style:italic;">Disponible pronto</span>
+                            </div>
                         </div>
-                    </div>
-                `;
+                    `;
+                }
                 container.appendChild(card);
             });
             document.getElementById('resultsSection').style.display = 'block';

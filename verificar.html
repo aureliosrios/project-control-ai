@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación de Certificados v9.3 | Project Control AI</title>
+    <title>Verificación de Certificados v9.7 | Project Control AI</title>
 
     <!-- SHARED ASSETS -->
     <link rel="stylesheet" href="assets/css/styles-global.css">
-    <script src="assets/js/config.js?v=9.3"></script>
-    <script src="assets/js/utils.js?v=9.3"></script>
+    <script src="assets/js/config.js?v=9.7"></script>
+    <script src="assets/js/utils.js?v=9.7"></script>
 
     <!-- EXTERNAL LIBRARIES -->
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
@@ -86,7 +86,7 @@
 <body>
 
     <div class="card">
-        <div class="version-tag">v9.6</div>
+        <div class="version-tag">v9.7</div>
 
         <div id="searchSection">
             <img src="assets/images/Logotipo.png" alt="PCAI" class="logo-oficial" style="margin-bottom: 1.5rem;">
@@ -131,7 +131,7 @@
                         *,
                         certificados (
                             id, codigo_verificacion, descarga_bloqueada, fecha_emision,
-                            fecha_inicio_clases, fecha_fin_clases,
+                            fecha_inicio_clases, fecha_fin_clases, archivado,
                             cursos:curso_id (
                                 nombre_curso, horas_academicas,
                                 profesores:profesor_id ( nombre, apellido, cip, firma_url )
@@ -181,6 +181,11 @@
             `;
 
             inscripciones.forEach(registro => {
+                // REGLA DE ORO: Si está archivado en la DB, no lo dibujamos en el portal
+                if (registro.certificados && registro.certificados[0] && registro.certificados[0].archivado) {
+                    return; // Saltar este registro
+                }
+
                 const card = document.createElement('div');
                 card.className = 'cert-card';
 

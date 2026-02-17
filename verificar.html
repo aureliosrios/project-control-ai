@@ -148,39 +148,32 @@
                 }
 
                 // 6. QR CODE SECRETO (Coordenada MD: X=714, Y=87)
-                const qrDiv = document.getElementById("qrcode");
+                --- GENERADOR DE QR ULTRA-COMPATIBLE v11.0 ---
+const qrDiv = document.getElementById("qrcode");
 qrDiv.innerHTML = "";
 
-// Simplificamos la URL al máximo para reducir la cantidad de puntos
-const urlBase = window.location.href.split('?')[0].replace('verificar.html', 'validar.html');
-const urlFinal = `${urlBase}?v=${cert.codigo_verificacion}`;
+// Construcción de URL Absoluta (A prueba de fallos)
+const pathAbsoluto = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+const urlValidacion = window.location.origin + pathAbsoluto + "validar.html?v=" + cert.codigo_verificacion;
+
+console.log("Link oficial generado:", urlValidacion); // Ver en consola F12
 
 new QRCode(qrDiv, { 
-    text: urlFinal, 
+    text: urlValidacion, 
     width: 300, 
     height: 300,
-    // SEGUNDO SECRETO: Nivel L (Low). Es el que genera los puntos más grandes.
-    // Es el más fácil de leer para cámaras Xiaomi o sensores básicos.
-    correctLevel: QRCode.CorrectLevel.L 
+    correctLevel: QRCode.CorrectLevel.L // Cuadros grandes para el Xiaomi C3
 });
 
 setTimeout(async () => {
     const canvas = qrDiv.querySelector('canvas');
     if (canvas) {
         const qrImg = await pdfDoc.embedPng(canvas.toDataURL("image/png"));
-        
-        // Dibujamos un rectángulo blanco detrás del QR para crear un "margen de silencio"
-        // Esto ayuda a la cámara a enfocar el código sin distraerse con el fondo.
-        page1.drawRectangle({
-            x: 710, y: 83,
-            width: 88, height: 88,
-            color: rgb(1, 1, 1)
-        });
-
-        // Estampamos el QR (Coordenadas originales X: 714, Y: 87)
+        // Margen de seguridad blanco
+        page1.drawRectangle({ x: 710, y: 83, width: 88, height: 88, color: rgb(1, 1, 1) });
+        // Estampado
         page1.drawImage(qrImg, { x: 714, y: 87, width: 80, height: 80 });
     }
-    
     const pdfBytes = await pdfDoc.save();
     const link = document.createElement("a");
     link.href = URL.createObjectURL(new Blob([pdfBytes], { type: "application/pdf" }));

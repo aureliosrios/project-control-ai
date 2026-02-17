@@ -8,8 +8,8 @@
 
     <!-- SHARED ASSETS -->
     <link rel="stylesheet" href="assets/css/styles-global.css">
-    <script src="assets/js/config.js?v=11.1"></script>
-    <script src="assets/js/utils.js?v=11.1"></script>
+    <script src="assets/js/config.js?v=11.2"></script>
+    <script src="assets/js/utils.js?v=11.2"></script>
 
     <!-- EXTERNAL LIBRARIES -->
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
@@ -28,13 +28,13 @@
 <body>
 
     <div class="card">
-        <div class="version-tag">v11.1 PRO</div>
+        <div class="version-tag">v11.2 PRO</div>
 
         <!-- SECCIÓN BÚSQUEDA -->
         <div id="searchSection">
             <img src="assets/images/Logotipo.png" alt="PCAI" style="max-height: 70px; margin-bottom: 1.5rem;">
             <h2 style="color: white; margin-bottom: 0.5rem; font-family: var(--font-heading);">Portal de Certificación</h2>
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">Ingresa tu DNI para descargar tus certificados oficiales.</p>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">Ingresa tu DNI para gestionar tus diplomas oficiales.</p>
             
             <input type="text" id="dniInput" class="input-standard" placeholder="Número de DNI" 
                    style="text-align: center; font-size: 1.2rem; margin-bottom: 1rem;">
@@ -89,7 +89,12 @@
                     <div style="text-align:left; background:rgba(56, 189, 248, 0.05); padding:15px; border-radius:12px; border:1px solid rgba(56, 189, 248, 0.2); margin-bottom:20px;">
                         <h3 style="color:white; margin:0 0 10px 0;">${alumno.nombre_completo}</h3>
                         <div style="display:flex; gap:5px;">
-                             <select id="tituloAlumno" class="input-standard" style="width: 75px;"><option value="Ing.">Ing.</option><option value="Arq.">Arq.</option><option value="Lic.">Lic.</option></select>
+                             <select id="tituloAlumno" class="input-standard" style="width: 75px;">
+                                <option value="Ing.">Ing.</option>
+                                <option value="Arq.">Arq.</option>
+                                <option value="Lic.">Lic.</option>
+                                <option value="">---</option>
+                            </select>
                             <input type="text" id="nombreConfirmado" class="input-standard" style="flex:1;" value="${alumno.nombre_completo.toUpperCase()}">
                         </div>
                     </div>`;
@@ -103,7 +108,7 @@
                     if (item.estado_academico === 'GRADUADO') {
                         card.innerHTML = `
                             <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
-                                <div>
+                                <div style="flex:1;">
                                     <div style="font-weight:bold; color:white; font-size:0.95rem;">${curso}</div>
                                     <span style="color:#4ade80; font-size:0.75rem; font-weight:bold;">✅ GRADUADO</span>
                                 </div>
@@ -127,7 +132,6 @@
 
                 const { PDFDocument, rgb, StandardFonts } = PDFLib;
 
-                // 1. Plantilla
                 const slug = (cert.nombre_curso_oficial || cert.nombre_curso_inscrito || "").toLowerCase();
                 let archivo = "cert_gestion_integral.pdf";
                 if (slug.includes("licitaciones")) archivo = "cert_licitaciones_ia.pdf";
@@ -145,12 +149,11 @@
                 const nombreFull = (document.getElementById('tituloAlumno').value + " " + document.getElementById('nombreConfirmado').value).trim();
                 const detalle = `con una duración de 45 horas académicas, impartidas del ${PCAI_Utils.formatearFecha(cert.fecha_inicio_clases)} al ${PCAI_Utils.formatearFecha(cert.fecha_fin_clases)} en modalidad online.`;
 
-                // 2. Estampado (COORDENADAS MD)
+                // --- ESTAMPADO PÁGINA 1 ---
                 page1.drawText(nombreFull.toUpperCase(), { x: (width / 2) - 257, y: 430, size: 21, font: fontB, color: rgb(0.98, 0.75, 0.14) });
                 const dWidth = fontR.widthOfTextAtSize(detalle, 11);
                 page1.drawText(detalle, { x: (width / 2) - (dWidth / 2) - 85, y: 278, size: 11, font: fontR, color: rgb(0.2, 0.2, 0.2) });
 
-                // Firma e Instructor (X:437, Y:120 y X:448, Y:74/61)
                 if (cert.prof_firma) {
                     try {
                         const fImg = await pdfDoc.embedPng(await (await fetch(cert.prof_firma)).arrayBuffer());
@@ -161,7 +164,7 @@
                 const offsetE = fontB.widthOfTextAtSize("Ing. Aur", 10);
                 page1.drawText(`CIP: ${cert.prof_cip || ''}`, { x: 448 + offsetE, y: 61, size: 9, font: fontR });
 
-                // 3. Página 2 (Reverso)
+                // --- PÁGINA 2 ---
                 if (pdfDoc.getPages().length > 1) {
                     const p2 = pdfDoc.getPages()[1];
                     const { width: w2 } = p2.getSize();
@@ -170,28 +173,31 @@
                     p2.drawText(emision, { x: w2 - fontR.widthOfTextAtSize(emision, 8) - 50, y: 45, size: 8, font: fontR, color: rgb(0.3, 0.3, 0.3) });
                 }
 
-                // 4. QR CODE ULTRA-LEGIBLE (Nivel L + Fondo Blanco)
+                // --- QR ULTRA-LEGIBLE (URL ABSOLUTA) ---
                 const qrDiv = document.getElementById("qrcode");
                 qrDiv.innerHTML = "";
-                const urlVal = window.location.origin + window.location.pathname.replace('verificar.html', 'validar.html') + "?v=" + cert.codigo_verificacion;
+                
+                // Construimos la URL completa al archivo validar.html
+                const urlSitio = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
+                const urlFinalQR = urlSitio + "validar.html?v=" + cert.codigo_verificacion;
 
                 new QRCode(qrDiv, { 
-                    text: urlVal, 
+                    text: urlFinalQR, 
                     width: 300, height: 300, 
-                    correctLevel: QRCode.CorrectLevel.L // Cuadros grandes para Xiaomi
+                    correctLevel: QRCode.CorrectLevel.L 
                 });
 
                 setTimeout(async () => {
                     const canvas = qrDiv.querySelector('canvas');
                     if (canvas) {
                         const qrImg = await pdfDoc.embedPng(canvas.toDataURL("image/png"));
+                        // Fondo blanco para el QR
                         page1.drawRectangle({ x: 710, y: 83, width: 88, height: 88, color: rgb(1, 1, 1) });
                         page1.drawImage(qrImg, { x: 714, y: 87, width: 80, height: 80 });
                     }
                     const pdfBytes = await pdfDoc.save();
-                    const blob = new Blob([pdfBytes], { type: "application/pdf" });
                     const link = document.createElement("a");
-                    link.href = URL.createObjectURL(blob);
+                    link.href = URL.createObjectURL(new Blob([pdfBytes], { type: "application/pdf" }));
                     link.download = `Certificado_PCAI_${cert.codigo_verificacion}.pdf`;
                     link.click();
                     btn.innerText = "DESCARGADO"; btn.disabled = false;

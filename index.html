@@ -49,19 +49,11 @@
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
             position: fixed;
-            top: 75px;
-            /* Ajuste para el banner de inicio con contador */
+            top: 0;
             width: 100%;
             z-index: 1000;
             padding: 0.6rem 0;
             transition: top 0.3s;
-        }
-
-        @media (max-width: 768px) {
-            .navbar {
-                top: 130px;
-                /* Banner más alto en móviles por el wrap */
-            }
         }
 
         @keyframes pulse {
@@ -751,50 +743,6 @@
 
 <body>
 
-    <!-- BANNER CON CONTADOR REGRESIVO -->
-    <div id="promo-banner"
-        style="background: #0f172a; border-bottom: 2px solid #f97316; padding: 15px 0; position: fixed; top: 0; width: 100%; z-index: 2000;">
-        <div class="container"
-            style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-
-            <!-- Mensaje de Inicio -->
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <span
-                    style="background: #22c55e; color: #fff; padding: 5px 12px; border-radius: 5px; font-weight: bold;">
-                    INSCRIPCIONES ABIERTAS
-                </span>
-                <p style="margin: 0; font-size: 0.9rem; color: #f1f5f9;">
-                    🔥 <strong>NUEVO:</strong> <span style="color: #22d3ee;">Webinar Primavera P6 (14/02)</span> |
-                    <strong style="color: #fb923c;">Inscripciones Abiertas</strong> para Licitaciones, EVM, IA,
-                    Primavera P6 y Automation Eng.
-                </p>
-            </div>
-
-            <!-- Próxima Fecha -->
-            <div style="display: flex; align-items: center; gap: 15px;">
-                <span style="font-size: 0.8rem; color: #fbbf24; font-weight: bold; text-transform: uppercase;">
-                    Próximo Inicio (Primavera P6):
-                </span>
-                <div
-                    style="display: flex; gap: 5px; font-family: 'Space Grotesk', sans-serif; font-weight: bold; color: #22d3ee; font-size: 0.9rem;">
-                    <div class="time-block"><span class="days-webinar">00</span><small
-                            style="font-size: 0.5rem; display: block; color: #94a3b8;">D</small></div>
-                    <div class="time-block"><span class="hours-webinar">00</span><small
-                            style="font-size: 0.5rem; display: block; color: #94a3b8;">H</small></div>
-                    <div class="time-block"><span class="minutes-webinar">00</span><small
-                            style="font-size: 0.5rem; display: block; color: #94a3b8;">M</small></div>
-                    <div class="time-block"><span class="seconds-webinar">00</span><small
-                            style="font-size: 0.5rem; display: block; color: #94a3b8;">S</small></div>
-                </div>
-            </div>
-
-            <a href="inscripcion.html?curso=Webinar Primavera P6" class="whatsapp-btn"
-                style="margin: 0; padding: 8px 15px; font-size: 0.8rem;">
-                Inscribirme Ahora
-            </a>
-        </div>
-    </div>
-
     <!-- NAVBAR -->
     <nav class="navbar">
         <div class="container nav-brand">
@@ -805,10 +753,8 @@
 
             <button class="nav-toggle" id="navToggle">☰</button>
             <div class="nav-menu" id="navMenu">
-                <a href="clases-grabadas.html" class="nav-link"
-                    style="color: var(--accent-orange); font-weight: 700;">Clases Grabadas</a>
                 <a href="#cursos" class="nav-link">Capacitaciones</a>
-                <a href="#casos" class="nav-link">TikTok</a>
+                <a href="#material-estudio" class="nav-link">Recursos</a>
                 <a href="#consultoria" class="nav-link">Consultoría</a>
                 <a href="https://wa.me/51993147501" class="whatsapp-btn" target="_blank">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -832,10 +778,6 @@
                 <button class="hero-cta" onclick="document.getElementById('cursos').scrollIntoView();">
                     Ver Capacitaciones
                 </button>
-                <a href="clases-grabadas.html" class="hero-cta-secondary"
-                    style="border-color: var(--accent-orange); color: var(--accent-orange);">
-                    📺 Ver Clases Grabadas
-                </a>
                 <a href="inscripcion.html" class="hero-cta-secondary">
                     Ficha de Inscripción
                 </a>
@@ -843,98 +785,7 @@
         </div>
     </section>
 
-    <!-- WEBINAR HIGHLIGHT SECTION -->
-    <section id="webinar"
-        style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 60px 0; border-bottom: 2px solid #22d3ee; position: relative; overflow: hidden;">
-        <div
-            style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: rgba(34, 211, 238, 0.1); filter: blur(80px); border-radius: 50%;">
-        </div>
-        <div class="container"
-            style="display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;">
-            <div style="flex: 1; min-width: 300px;">
-                <span
-                    style="background: var(--accent-orange); color: white; padding: 6px 15px; border-radius: 50px; font-weight: bold; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);">
-                    Evento Gratuito
-                </span>
-                <h2
-                    style="font-size: 2.5rem; color: white; margin-bottom: 15px; font-family: 'Space Grotesk', sans-serif;">
-                    Webinar: <span style="color: var(--accent-cyan);">Primavera Project Planner</span>
-                </h2>
-                <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 25px; max-width: 600px;">
-                    Domina la planificación estratégica y el control de proyectos con el software líder en la industria.
-                    Aprende las claves de administración y gestión contractual en vivo.
-                </p>
-                <div style="display: flex; gap: 30px; margin-bottom: 30px;">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 1.5rem;">📅</span>
-                        <div>
-                            <p style="color: white; font-weight: bold; margin: 0;">Sábado 14/02</p>
-                            <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0;">Fecha del Evento</p>
-                        </div>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 1.5rem;">clock</span>
-                        <div>
-                            <p style="color: white; font-weight: bold; margin: 0;">8:00 PM</p>
-                            <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0;">Hora (Perú/Col)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div
-                style="flex: 0 0 auto; background: rgba(2, 6, 23, 0.6); padding: 30px; border-radius: 20px; border: 1px solid rgba(34, 211, 238, 0.2); backdrop-filter: blur(10px); text-align: center; min-width: 320px;">
-                <p style="color: var(--accent-cyan); font-weight: bold; margin-bottom: 15px; font-size: 1rem;">EL TIEMPO
-                    SE AGOTA:</p>
-                <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 25px;">
-                    <div
-                        style="background: rgba(34, 211, 238, 0.1); padding: 10px; border-radius: 12px; min-width: 60px; border: 1px solid rgba(34, 211, 238, 0.2);">
-                        <span class="days-webinar"
-                            style="font-size: 1.5rem; font-weight: bold; color: white; display: block;">00</span>
-                        <small
-                            style="color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase;">Días</small>
-                    </div>
-                    <div
-                        style="background: rgba(34, 211, 238, 0.1); padding: 10px; border-radius: 12px; min-width: 60px; border: 1px solid rgba(34, 211, 238, 0.2);">
-                        <span class="hours-webinar"
-                            style="font-size: 1.5rem; font-weight: bold; color: white; display: block;">00</span>
-                        <small
-                            style="color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase;">Horas</small>
-                    </div>
-                    <div
-                        style="background: rgba(34, 211, 238, 0.1); padding: 10px; border-radius: 12px; min-width: 60px; border: 1px solid rgba(34, 211, 238, 0.2);">
-                        <span class="minutes-webinar"
-                            style="font-size: 1.5rem; font-weight: bold; color: white; display: block;">00</span>
-                        <small
-                            style="color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase;">Min</small>
-                    </div>
-                    <div
-                        style="background: rgba(34, 211, 238, 0.1); padding: 10px; border-radius: 12px; min-width: 60px; border: 1px solid rgba(34, 211, 238, 0.2);">
-                        <span class="seconds-webinar"
-                            style="font-size: 1.5rem; font-weight: bold; color: white; display: block;">00</span>
-                        <small
-                            style="color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase;">Seg</small>
-                    </div>
-                </div>
-                <a href="inscripcion.html?curso=Webinar Primavera P6" class="hero-cta"
-                    style="width: 100%; font-size: 1rem; padding: 15px; background: var(--gradient-secondary);">
-                    ¡Inscribirse Gratis Ahora!
-                </a>
-                <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 15px; font-style: italic;">
-                    Cupos limitados por plataforma (Zoom/Meet)
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- TIKTOK BANNER -->
-    <div
-        style="background: rgba(255,255,255,0.03); padding: 1rem 0; text-align: center; border-bottom: 1px solid var(--border-color);">
-        <p style="font-size: 0.9rem; color: var(--text-muted);">
-            🚀 ¿Vienes de <strong>TikTok</strong>? Estás en el lugar correcto. Mira nuestras <a href="#cursos"
-                style="color: var(--accent-cyan); font-weight: 600;">capacitaciones</a> abajo.
-        </p>
-    </div>
 
 
 
@@ -1459,20 +1310,61 @@
         </div>
     </section>
 
-    <!-- TIKTOK SOCIAL PROOF -->
-    <section class="tiktok-section" id="casos">
-        <div class="container tiktok-content">
-            <h2 class="tiktok-title">Casos de Uso en TikTok</h2>
-            <p class="tiktok-subtitle">Mira cómo aplicamos estos agentes en proyectos reales con ejemplos prácticos de
-                60 segundos.</p>
-            <a href="https://www.tiktok.com/@project.control.a?is_from_webapp=1&sender_device=pc" target="_blank"
-                class="tiktok-btn">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path
-                        d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
-                </svg>
-                Ver en TikTok
-            </a>
+    <!-- MATERIAL DE ESTUDIO COMPLEMENTARIO -->
+    <section class="section-padding" id="material-estudio" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-top: 2px solid var(--border-color);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Material de Estudio Complementario</h2>
+                <p>Recursos adicionales para potenciar tu aprendizaje y ver en acción lo que enseñamos en nuestra academia.</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 3rem;">
+                <!-- TIKTOK SECTION -->
+                <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); border-radius: 20px; padding: 3rem; text-align: center; transition: all 0.4s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='rgba(34, 211, 238, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)';">
+                    <div style="font-size: 4rem; margin-bottom: 1.5rem;">📱</div>
+                    <h3 style="font-size: 1.8rem; color: white; margin-bottom: 1rem; font-family: 'Space Grotesk', sans-serif;">TikTok</h3>
+                    <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.7; margin-bottom: 1.5rem;">
+                        Encuentra <strong style="color: var(--accent-cyan);">cientos de videos cortos</strong> donde podrás observar lo que aprenderás en nuestra academia utilizando IA en proyectos reales. Ejemplos prácticos de 60 segundos que te mostrarán el poder de nuestras herramientas.
+                    </p>
+                    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                        <span style="background: rgba(34, 211, 238, 0.1); padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; color: var(--accent-cyan);">🎬 Videos cortos</span>
+                        <span style="background: rgba(34, 211, 238, 0.1); padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; color: var(--accent-cyan);">⚡ Ejemplos reales</span>
+                        <span style="background: rgba(34, 211, 238, 0.1); padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; color: var(--accent-cyan);">🤖 IA en acción</span>
+                    </div>
+                    <a href="https://www.tiktok.com/@project.control.a?is_from_webapp=1&sender_device=pc" target="_blank" class="tiktok-btn" style="display: inline-flex; align-items: center; gap: 10px;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                        </svg>
+                        Ver en TikTok
+                    </a>
+                </div>
+
+                <!-- YOUTUBE / CLASES GRABADAS SECTION -->
+                <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); border-radius: 20px; padding: 3rem; text-align: center; transition: all 0.4s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='rgba(249, 115, 22, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)';">
+                    <div style="font-size: 4rem; margin-bottom: 1.5rem;">📺</div>
+                    <h3 style="font-size: 1.8rem; color: white; margin-bottom: 1rem; font-family: 'Space Grotesk', sans-serif;">Clases Grabadas</h3>
+                    <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.7; margin-bottom: 1.5rem;">
+                        Accede a nuestra biblioteca completa de <strong style="color: var(--accent-orange);">clases grabadas</strong>. Ideal si no pudiste llevar las clases en vivo, quieres repasar las lecciones o necesitas profundizar en temas específicos.
+                    </p>
+                    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                        <span style="background: rgba(249, 115, 22, 0.1); padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; color: var(--accent-orange);">📚 +50 Clases</span>
+                        <span style="background: rgba(249, 115, 22, 0.1); padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; color: var(--accent-orange);">🔄 Acceso ilimitado</span>
+                        <span style="background: rgba(249, 115, 22, 0.1); padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; color: var(--accent-orange);">🎓 Para alumnos</span>
+                    </div>
+                    <a href="clases-grabadas.html" class="hero-cta" style="display: inline-flex; align-items: center; gap: 10px; background: var(--gradient-secondary);">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+                        </svg>
+                        Explorar Clases
+                    </a>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: rgba(56, 189, 248, 0.05); border-radius: 15px; border: 1px dashed rgba(56, 189, 248, 0.3);">
+                <p style="color: var(--text-muted); font-size: 1rem; margin: 0;">
+                    💡 <strong style="color: var(--accent-cyan);">Tip:</strong> Comienza con TikTok para ver ejemplos rápidos, luego profundiza con nuestras clases grabadas para dominar cada tema.
+                </p>
+            </div>
         </div>
     </section>
 

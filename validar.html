@@ -59,7 +59,6 @@
             max-height: 75px;
             width: auto;
             margin-bottom: 15px;
-            /* Eliminados filtros que restaban nitidez */
             display: block;
             margin-left: auto;
             margin-right: auto;
@@ -158,7 +157,6 @@
         <div class="watermark">VERIFICADO</div>
 
         <div class="header">
-            <!-- Logo con alta nitidez -->
             <img src="assets/images/Logotipo.png" class="logo" alt="Project Control AI">
             <div class="status-badge">✓ DOCUMENTO AUTÉNTICO DIGITAL</div>
             <h1>Declaración de Validez Académica</h1>
@@ -241,15 +239,29 @@
                 document.getElementById('valInstructor').innerText = `Ing. ${data.prof_nombre} ${data.prof_apellido}`;
                 document.getElementById('valCIP').innerText = `CIP: ${data.prof_cip}`;
 
-                // --- GENERACIÓN DE QR MEJORADO ---
-                // Tamaño 160px es el ideal para enfoque rápido de cámara
-                new QRCode(document.getElementById("qr-container"), {
-                    text: window.location.href,
-                    width: 160,
-                    height: 160,
-                    colorDark : "#000000",
-                    colorLight : "#ffffff",
-                    correctLevel: QRCode.CorrectLevel.M // Nivel M permite puntos más grandes y legibles
+                // ===================================
+                // QR CODE MEJORADO - URL ABSOLUTA COMPLETA
+                // ===================================
+                const qrContainer = document.getElementById("qr-container");
+                
+                // Construir URL ABSOLUTA del documento actual
+                const protocolo = window.location.protocol;  // http: o https:
+                const host = window.location.host;           // dominio.com
+                const pathname = window.location.pathname;   // /carpeta/validar.html
+                const search = window.location.search;       // ?v=ABC123
+                
+                // URL completa actual (la que debe ir en el QR)
+                const urlCompleta = `${protocolo}//${host}${pathname}${search}`;
+                
+                console.log("🔗 URL del QR:", urlCompleta); // Para debug
+
+                new QRCode(qrContainer, {
+                    text: urlCompleta,
+                    width: 200,        // Tamaño óptimo para escaneo móvil
+                    height: 200,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.M  // Nivel M = equilibrio perfecto
                 });
 
                 document.getElementById('loader').style.display = 'none';

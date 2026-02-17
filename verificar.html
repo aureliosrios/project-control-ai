@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación de Certificados v10.6 | Project Control AI</title>
+    <title>Verificación de Certificados v10.7 | Project Control AI</title>
 
     <!-- SHARED ASSETS -->
     <link rel="stylesheet" href="assets/css/styles-global.css">
@@ -86,7 +86,7 @@
 <body>
 
     <div class="card">
-        <div class="version-tag">v10.6</div>
+        <div class="version-tag">v10.7</div>
 
         <div id="searchSection">
             <img src="assets/images/Logotipo.png" alt="PCAI" class="logo-oficial" style="margin-bottom: 1.5rem;">
@@ -113,7 +113,21 @@
     <script>
         const _supabase = initSupabase();
 
-        // --- NUEVA FUNCIÓN OPTIMIZADA v10.1 ---
+        // --- FUNCIÓN PARA OBTENER URL BASE DEL DOMINIO ---
+        function obtenerUrlBase() {
+            // Obtiene la URL completa sin query params ni hashes
+            const protocolo = window.location.protocol; // http: o https:
+            const host = window.location.host; // dominio.com o dominio.com:puerto
+            const pathname = window.location.pathname; // /carpeta/verificar.html
+            
+            // Obtener solo la parte del directorio (sin el archivo)
+            const directorioBase = pathname.substring(0, pathname.lastIndexOf('/') + 1);
+            
+            // Construir URL base completa
+            return `${protocolo}//${host}${directorioBase}`;
+        }
+
+        // --- NUEVA FUNCIÓN OPTIMIZADA v10.7 ---
         async function buscarCertificados() {
             const dni = document.getElementById('dniInput').value.trim();
             const loader = document.getElementById('loader');
@@ -181,49 +195,36 @@
 
                     // Usar nombre oficial del curso si existe, sino el de inscripción
                     const nombreCurso = item.nombre_curso_oficial || item.nombre_curso_inscrito;
+                    const estado = item.estado_academico || "EN CURSO";
 
-                    if (item.estado_academico === 'GRADUADO') {
-                        // TARJETA VERDE: GRADUADO
-                        card.innerHTML = `
-                            <div style="display:flex; justify-content:space-between; align-items:center; gap:15px;">
-                                <div style="flex:1;">
-                                    <div style="font-weight:bold; color:white; font-size:1.05rem;">${nombreCurso}</div>
-                                    <div style="margin-top:5px; display:flex; align-items:center; gap:10px;">
-                                        <span style="background:rgba(34, 197, 94, 0.2); color:#4ade80; padding:2px 8px; border-radius:4px; font-size:0.75rem; font-weight:bold;">
-                                            ✅ GRADUADO
-                                        </span>
-                                        <span style="color:#94a3b8; font-size:0.75rem;">Folio: ${item.codigo_verificacion}</span>
-                                    </div>
-                                </div>
-                                <button class="btn-primary" onclick="procesarDiploma('${item.certificado_id}')" style="padding:8px 15px; font-size:0.85rem; width:auto;">
-                                    Descargar PDF
-                                </button>
-                            </div>
-                        `;
+                    // Badge de estado
+                    let estadoBadge = "";
+                    if (estado === "COMPLETADO") {
+                        estadoBadge = `<span style="background:#22c55e; color:white; padding:4px 10px; border-radius:15px; font-size:0.7rem; font-weight:bold; float:right;">✓ APROBADO</span>`;
+                    } else if (estado === "EN CURSO") {
+                        estadoBadge = `<span style="background:#fbbf24; color:black; padding:4px 10px; border-radius:15px; font-size:0.7rem; font-weight:bold; float:right;">EN CURSO</span>`;
                     } else {
-                        // TARJETA AMARILLA/GRIS: EN PROCESO
-                        const estadoTexto = item.estado_academico.replace('_', ' ');
-                        card.innerHTML = `
-                            <div style="display:flex; justify-content:space-between; align-items:center; opacity:0.8; gap:15px;">
-                                <div style="flex:1;">
-                                    <div style="font-weight:bold; color:white; font-size:1.05rem;">${nombreCurso}</div>
-                                    <div style="margin-top:5px;">
-                                        <span style="background:rgba(234, 179, 8, 0.2); color:#facc15; padding:2px 8px; border-radius:4px; font-size:0.75rem; font-weight:bold;">
-                                            ⏳ ${estadoTexto}
-                                        </span>
-                                    </div>
-                                </div>
-                                <span style="color:#64748b; font-size:0.85rem; font-style:italic;">No disponible</span>
-                            </div>
-                        `;
+                        estadoBadge = `<span style="background:#64748b; color:white; padding:4px 10px; border-radius:15px; font-size:0.7rem; font-weight:bold; float:right;">${estado}</span>`;
                     }
+
+                    card.innerHTML = `
+                        ${estadoBadge}
+                        <p style="font-size:0.75rem; color:var(--text-muted); margin:0;">Código: ${item.codigo_verificacion}</p>
+                        <p style="font-size:1rem; color:white; font-weight:600; margin:8px 0;">${nombreCurso}</p>
+                        <p style="font-size:0.8rem; color:var(--text-muted); margin:4px 0;">Fecha de inscripción: ${PCAI_Utils.formatearFecha(item.fecha_inscripcion)}</p>
+                        ${estado === "COMPLETADO" ?
+                            `<button class="btn-primary btn-download" style="margin-top:12px;" onclick="procesarDiploma('${item.certificado_id}')">📄 Descargar PDF</button>` :
+                            `<p style="font-size:0.75rem; color:var(--accent-orange); margin-top:10px;">⏳ Disponible al finalizar el curso.</p>`
+                        }
+                    `;
+
                     container.appendChild(card);
                 });
 
-            } catch (err) {
+            } catch (error) {
                 loader.style.display = 'none';
-                console.error(err);
-                PCAI_Utils.mostrarNotificacion(PCAI_Utils.manejarError(err, "buscarCertificados"), "error");
+                console.error(error);
+                PCAI_Utils.mostrarNotificacion("Error: " + error.message, "error");
             }
         }
 
@@ -296,7 +297,7 @@
                     color: rgb(0.2, 0.2, 0.2)
                 });
 
-                // --- COORDENADAS FIRMA E INSTRUCTOR (Refinadas v10.4) ---
+                // --- COORDENADAS FIRMA E INSTRUCTOR ---
                 const instX = 448;
                 const instY_Nombre = 74;
                 const instY_CIP = 61;
@@ -335,7 +336,7 @@
                     const page2 = pages[1];
                     const { width: w2 } = page2.getSize();
 
-                    // Periodo (Simplificado v10.4)
+                    // Periodo
                     page2.drawText(`Del ${fInicio}, al ${fFin}.`, {
                         x: (w2 / 2) - 130,
                         y: 75,
@@ -344,42 +345,45 @@
                         color: rgb(0, 0, 0)
                     });
 
-                    // Fecha Emisión (Bajado 3mm ~8.5pt -> Y: 44.5)
+                    // Fecha Emisión
                     const now = new Date();
                     const fechaImp = `Fecha de Emisión: ${now.toLocaleDateString('es-PE')} ${now.toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' })}`;
                     const anchoF = fontRegular.widthOfTextAtSize(fechaImp, 8);
 
                     page2.drawText(fechaImp, {
                         x: w2 - anchoF - 50,
-                        y: 45, // Bajado ~3mm
+                        y: 45,
                         size: 8,
                         font: fontRegular,
                         color: rgb(0.3, 0.3, 0.3)
                     });
                 }
 
-                // QR (Apunta a validar.html v10.6 - Optimizado)
+                // ===================================
+                // QR CODE MEJORADO v10.7 - URL ABSOLUTA
+                // ===================================
                 const qrDiv = document.getElementById("qrcode");
                 qrDiv.innerHTML = "";
 
-                // Construir URL absoluta hacia validar.html
-                const currentUrl = window.location.href.split('?')[0];
-                const validarUrl = currentUrl.replace('verificar.html', 'validar.html') + "?v=" + cert.codigo_verificacion;
+                // Construir URL ABSOLUTA usando la función helper
+                const urlBase = obtenerUrlBase();
+                const validarUrlCompleta = `${urlBase}validar.html?v=${cert.codigo_verificacion}`;
+
+                console.log("🔗 URL del QR:", validarUrlCompleta); // Debug en consola
 
                 new QRCode(qrDiv, {
-                    text: validarUrl,
-                    width: 256,
-                    height: 256,
+                    text: validarUrlCompleta,
+                    width: 200,        // Tamaño óptimo para escaneo
+                    height: 200,
                     colorDark: "#000000",
                     colorLight: "#ffffff",
-                    correctLevel: QRCode.CorrectLevel.H
+                    correctLevel: QRCode.CorrectLevel.M  // Nivel M = mejor balance
                 });
 
                 setTimeout(async () => {
                     const canvas = qrDiv.querySelector('canvas');
                     if (canvas) {
                         const qrImg = await pdfDoc.embedPng(canvas.toDataURL("image/png"));
-                        // Restaurado a X: 714, Y: 87 según documento v10
                         page1.drawImage(qrImg, { x: 714, y: 87, width: 80, height: 80 });
                     }
                     const pdfBytes = await pdfDoc.save();

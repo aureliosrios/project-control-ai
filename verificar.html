@@ -8,8 +8,8 @@
 
     <!-- SHARED ASSETS -->
     <link rel="stylesheet" href="assets/css/styles-global.css">
-    <script src="assets/js/config.js?v=10.7"></script>
-    <script src="assets/js/utils.js?v=10.7"></script>
+    <script src="assets/js/config.js?v=11.0"></script>
+    <script src="assets/js/utils.js?v=11.0"></script>
 
     <!-- EXTERNAL LIBRARIES -->
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
@@ -28,7 +28,7 @@
 
 <body>
     <div class="card">
-        <div class="version-tag">v10.7 FINAL</div>
+        <div class="version-tag">v11.0 FINAL</div>
         <div id="searchSection">
             <img src="assets/images/Logotipo.png" alt="PCAI" style="max-height: 70px; margin-bottom: 1.5rem;">
             <h2 style="font-family: var(--font-heading); color:white;">Portal de Certificación</h2>
@@ -38,7 +38,7 @@
         </div>
 
         <div id="resultsSection" style="display:none; margin-top: 1.5rem;"><div id="listaCertificados"></div></div>
-        <div id="loader" class="loader">Verificando credenciales...</div>
+        <div id="loader" class="loader">Procesando solicitud...</div>
         <div id="qrcode" style="display:none;"></div>
     </div>
 
@@ -47,16 +47,25 @@
 
         async function buscarCertificados() {
             const dni = document.getElementById('dniInput').value.trim();
-            if (!PCAI_Utils.validarDNI(dni)) return alert("DNI Inválido");
+            if (!PCAI_Utils.validarDNI(dni)) return alert("Por favor, ingrese un DNI válido.");
+            
             document.getElementById('loader').style.display = 'block';
 
             try {
-                const { data: resultados, error } = await _supabase.from('vw_certificados_publicos').select('*').eq('dni', dni).order('fecha_inscripcion', { ascending: false });
+                const { data: resultados, error } = await _supabase
+                    .from('vw_certificados_publicos')
+                    .select('*')
+                    .eq('dni', dni)
+                    .order('fecha_inscripcion', { ascending: false });
+
                 document.getElementById('loader').style.display = 'none';
-                if (error || !resultados.length) return alert("No se encontraron registros.");
+
+                if (error) throw error;
+                if (!resultados || resultados.length === 0) return alert("No se encontraron registros.");
 
                 document.getElementById('searchSection').style.display = 'none';
                 document.getElementById('resultsSection').style.display = 'block';
+                
                 const container = document.getElementById('listaCertificados');
                 const alumno = resultados[0].nombre_completo;
 
@@ -64,7 +73,11 @@
                     <div style="text-align:left; background:rgba(56, 189, 248, 0.05); padding:15px; border-radius:10px; border:1px solid rgba(56, 189, 248, 0.2); margin-bottom:20px;">
                         <h3 style="color:white; margin:0;">${alumno}</h3>
                         <div style="display:flex; gap:5px; margin-top:10px;">
-                            <select id="tituloAlumno" class="input-standard" style="width:75px"><option value="Ing.">Ing.</option><option value="Arq.">Arq.</option><option value="Lic.">Lic.</option></select>
+                            <select id="tituloAlumno" class="input-standard" style="width:75px">
+                                <option value="Ing.">Ing.</option>
+                                <option value="Arq.">Arq.</option>
+                                <option value="Lic.">Lic.</option>
+                            </select>
                             <input type="text" id="nombreConfirmado" class="input-standard" style="flex:1" value="${alumno.toUpperCase()}">
                         </div>
                     </div>`;
@@ -78,31 +91,40 @@
                     if (item.estado_academico === 'GRADUADO') {
                         card.innerHTML = `
                             <div style="display:flex; justify-content:space-between; align-items:center;">
-                                <div><div style="color:white; font-weight:bold;">${curso}</div><span style="color:#4ade80; font-size:0.75rem;">✅ GRADUADO</span></div>
+                                <div>
+                                    <div style="color:white; font-weight:bold; font-size:0.9rem;">${curso}</div>
+                                    <span style="color:#4ade80; font-size:0.7rem; font-weight:bold;">✅ GRADUADO</span>
+                                </div>
                                 <button class="btn-primary btn-download" onclick="procesarDiploma('${item.certificado_id}')">DESCARGAR</button>
                             </div>`;
                     } else {
-                        card.innerHTML = `<div style="color:gray;">${curso} (En curso)</div>`;
+                        card.innerHTML = `<div style="color:gray; font-size:0.9rem;">${curso} (En curso)</div>`;
                     }
                     container.appendChild(card);
                 });
-            } catch (e) { alert("Error de servidor"); }
+            } catch (e) { 
+                document.getElementById('loader').style.display = 'none';
+                alert("Error de conexión con el servidor."); 
+            }
         }
 
         async function procesarDiploma(certId) {
             const btn = document.querySelector(`button[onclick="procesarDiploma('${certId}')"]`);
-            btn.disabled = true; btn.innerText = "PROCESANDO...";
+            btn.disabled = true; btn.innerText = "ESPERE...";
 
             try {
                 const { data: cert, error } = await _supabase.from('vw_certificados_publicos').select('*').eq('certificado_id', certId).single();
+                if (error || !cert) throw new Error("No se hallaron datos.");
+
                 const { PDFDocument, rgb, StandardFonts } = PDFLib;
 
-                const nombreCurso = (cert.nombre_curso_oficial || cert.nombre_curso_inscrito || "").toLowerCase();
+                // 1. Selección de Plantilla
+                const cursoSlug = (cert.nombre_curso_oficial || cert.nombre_curso_inscrito || "").toLowerCase();
                 let archivoPDF = "cert_gestion_integral.pdf";
-                if (nombreCurso.includes("licitaciones")) archivoPDF = "cert_licitaciones_ia.pdf";
-                else if (nombreCurso.includes("evm")) archivoPDF = "cert_control_evm.pdf";
-                else if (nombreCurso.includes("p6")) archivoPDF = "cert_primavera_p6.pdf";
-                else if (nombreCurso.includes("automation")) archivoPDF = "cert_automation_engineer.pdf";
+                if (cursoSlug.includes("licitaciones")) archivoPDF = "cert_licitaciones_ia.pdf";
+                else if (cursoSlug.includes("evm")) archivoPDF = "cert_control_evm.pdf";
+                else if (cursoSlug.includes("p6")) archivoPDF = "cert_primavera_p6.pdf";
+                else if (cursoSlug.includes("automation")) archivoPDF = "cert_automation_engineer.pdf";
 
                 const response = await fetch(`${PCAI_CONFIG.supabase.url}/storage/v1/object/public/academia/${archivoPDF}`);
                 const pdfDoc = await PDFDocument.load(await response.arrayBuffer());
@@ -115,14 +137,15 @@
                 const fullUser = (document.getElementById('tituloAlumno').value + " " + document.getElementById('nombreConfirmado').value).trim();
                 const textoDetalle = `con una duración de 45 horas académicas, impartidas del ${PCAI_Utils.formatearFecha(cert.fecha_inicio_clases)} al ${PCAI_Utils.formatearFecha(cert.fecha_fin_clases)} en modalidad online.`;
 
-                // 1. NOMBRE DEL ESTUDIANTE (Coordenada MD: Y=430)
+                // 2. Estampado de Datos (Página 1)
+                // Nombre Estudiante (Y: 430)
                 page1.drawText(fullUser.toUpperCase(), { x: (width / 2) - 257, y: 430, size: 21, font: fontBold, color: rgb(0.98, 0.75, 0.14) });
 
-                // 2. DETALLE DEL CURSO (Coordenada MD: Y=278)
+                // Detalle Curso (Y: 278)
                 const dWidth = fontReg.widthOfTextAtSize(textoDetalle, 11);
                 page1.drawText(textoDetalle, { x: (width / 2) - (dWidth / 2) - 85, y: 278, size: 11, font: fontReg, color: rgb(0.2, 0.2, 0.2) });
 
-                // 3. FIRMA (Coordenada MD: X=437, Y=120)
+                // Firma Instructor (X: 437, Y: 120)
                 if (cert.prof_firma) {
                     try {
                         const fImg = await pdfDoc.embedPng(await (await fetch(cert.prof_firma)).arrayBuffer());
@@ -130,58 +153,56 @@
                     } catch (e) { console.warn("Error firma"); }
                 }
 
-                // 4. DATOS INSTRUCTOR (Coordenada MD: X=448, Y=74 y Y=61)
+                // Texto Instructor (Y: 74 y 61)
                 page1.drawText(`Ing. ${cert.prof_nombre} ${cert.prof_apellido}`, { x: 448, y: 74, size: 10, font: fontBold });
                 const offsetE = fontBold.widthOfTextAtSize("Ing. Aur", 10);
                 page1.drawText(`CIP: ${cert.prof_cip || ''}`, { x: 448 + offsetE, y: 61, size: 9, font: fontReg });
 
-                // 5. PÁGINA 2 (Reverso)
+                // 3. Estampado de Datos (Página 2)
                 if (pages.length > 1) {
                     const page2 = pages[1];
                     const { width: w2 } = page2.getSize();
-                    // Periodo (Y=75)
                     page2.drawText(`Del ${PCAI_Utils.formatearFecha(cert.fecha_inicio_clases)}, al ${PCAI_Utils.formatearFecha(cert.fecha_fin_clases)}.`, { x: (w2 / 2) - 130, y: 75, size: 12, font: fontBold });
-                    // Timestamp Emisión (Y=45)
+                    
                     const nowStr = `Fecha de Emisión: ${new Date().toLocaleDateString('es-PE')} ${new Date().toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit', hour12: true })}`;
                     const fWidth = fontReg.widthOfTextAtSize(nowStr, 8);
                     page2.drawText(nowStr, { x: w2 - fWidth - 50, y: 45, size: 8, font: fontReg, color: rgb(0.3, 0.3, 0.3) });
                 }
 
-                // 6. QR CODE SECRETO (Coordenada MD: X=714, Y=87)
-                --- GENERADOR DE QR ULTRA-COMPATIBLE v11.0 ---
-const qrDiv = document.getElementById("qrcode");
-qrDiv.innerHTML = "";
+                // 4. GENERADOR DE QR ULTRA-COMPATIBLE v11.0
+                const qrDiv = document.getElementById("qrcode");
+                qrDiv.innerHTML = "";
+                const pathAbsoluto = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+                const urlValidacion = window.location.origin + pathAbsoluto + "validar.html?v=" + cert.codigo_verificacion;
 
-// Construcción de URL Absoluta (A prueba de fallos)
-const pathAbsoluto = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
-const urlValidacion = window.location.origin + pathAbsoluto + "validar.html?v=" + cert.codigo_verificacion;
+                new QRCode(qrDiv, { 
+                    text: urlValidacion, 
+                    width: 300, 
+                    height: 300,
+                    correctLevel: QRCode.CorrectLevel.L // Cuadros grandes para el Xiaomi C3
+                });
 
-console.log("Link oficial generado:", urlValidacion); // Ver en consola F12
+                setTimeout(async () => {
+                    const canvas = qrDiv.querySelector('canvas');
+                    if (canvas) {
+                        const qrImg = await pdfDoc.embedPng(canvas.toDataURL("image/png"));
+                        // Cuadro blanco de fondo para el QR
+                        page1.drawRectangle({ x: 710, y: 83, width: 88, height: 88, color: rgb(1, 1, 1) });
+                        // QR en coordenada oficial (X: 714, Y: 87)
+                        page1.drawImage(qrImg, { x: 714, y: 87, width: 80, height: 80 });
+                    }
+                    const pdfBytes = await pdfDoc.save();
+                    const link = document.createElement("a");
+                    link.href = URL.createObjectURL(new Blob([pdfBytes], { type: "application/pdf" }));
+                    link.download = `Certificado_${cert.codigo_verificacion}.pdf`;
+                    link.click();
+                    btn.innerText = "DESCARGADO"; btn.disabled = false;
+                }, 800);
 
-new QRCode(qrDiv, { 
-    text: urlValidacion, 
-    width: 300, 
-    height: 300,
-    correctLevel: QRCode.CorrectLevel.L // Cuadros grandes para el Xiaomi C3
-});
-
-setTimeout(async () => {
-    const canvas = qrDiv.querySelector('canvas');
-    if (canvas) {
-        const qrImg = await pdfDoc.embedPng(canvas.toDataURL("image/png"));
-        // Margen de seguridad blanco
-        page1.drawRectangle({ x: 710, y: 83, width: 88, height: 88, color: rgb(1, 1, 1) });
-        // Estampado
-        page1.drawImage(qrImg, { x: 714, y: 87, width: 80, height: 80 });
-    }
-    const pdfBytes = await pdfDoc.save();
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(new Blob([pdfBytes], { type: "application/pdf" }));
-    link.download = `Certificado_PCAI_${cert.codigo_verificacion}.pdf`;
-    link.click();
-    btn.innerText = "Hecho"; btn.disabled = false;
-}, 800);
-            } catch (err) { alert("Error"); btn.disabled = false; }
+            } catch (err) { 
+                alert("Error al procesar: " + err.message); 
+                btn.innerText = "REINTENTAR"; btn.disabled = false; 
+            }
         }
     </script>
 </body>

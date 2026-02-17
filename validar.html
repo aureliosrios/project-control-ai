@@ -9,88 +9,59 @@
     <script src="assets/js/utils.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        body { background: #f8fafc; color: #1e293b; display: flex; justify-content: center; padding: 20px; font-family: sans-serif; }
-        .document { background: white; max-width: 600px; width: 100%; padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 6px solid #0ea5e9; position: relative; }
+        body { background: #f4f7f9; color: #1e293b; display: flex; justify-content: center; padding: 20px; font-family: sans-serif; }
+        .document { background: white; max-width: 600px; width: 100%; padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 6px solid #0ea5e9; }
         .header { text-align: center; border-bottom: 1px solid #eee; padding-bottom: 20px; margin-bottom: 25px; }
-        .logo { max-height: 80px; margin-bottom: 15px; }
-        .badge { background: #dcfce7; color: #166534; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
-        .field { margin-bottom: 20px; padding: 15px; background: #f1f5f9; border-radius: 8px; border-left: 4px solid #0ea5e9; }
-        .label { font-size: 0.7rem; color: #64748b; text-transform: uppercase; font-weight: bold; display: block; margin-bottom: 5px; }
-        .value { font-size: 1.1rem; color: #0f172a; font-weight: bold; }
-        #debug-info { display:none; background: #fee2e2; color: #b91c1c; padding: 15px; font-size: 0.75rem; border-radius: 8px; margin-top: 20px; }
+        .logo { max-height: 80px; filter: none !important; margin-bottom: 10px; }
+        .field { margin-bottom: 15px; padding: 12px; background: #f8fafc; border-radius: 8px; border-left: 4px solid #0ea5e9; }
+        .label { font-size: 0.7rem; color: #64748b; text-transform: uppercase; font-weight: bold; display: block; }
+        .value { font-size: 1.05rem; color: #0f172a; font-weight: bold; }
     </style>
 </head>
 <body>
-    <div id="loader" style="margin-top: 50px; font-weight: bold;">🔍 VALIDANDO CREDENCIALES...</div>
-
+    <div id="loader" style="margin-top: 50px;">🔍 VALIDANDO...</div>
     <div id="doc" class="document" style="display:none">
         <div class="header">
-            <img src="assets/images/Logotipo.png" class="logo" alt="PCAI">
-            <br><span class="badge">✓ CERTIFICADO DIGITAL AUTÉNTICO</span>
-            <h1 style="font-size: 1.3rem; margin-top: 15px;">DECLARACIÓN JURADA DE VALIDEZ</h1>
+            <img src="assets/images/Logotipo.png" class="logo">
+            <h1 style="font-size: 1.2rem; color:#0f172a;">DECLARACIÓN JURADA DE VALIDEZ</h1>
+            <span style="background:#dcfce7; color:#166534; padding:5px 12px; border-radius:20px; font-size:0.75rem; font-weight:bold;">✓ DOCUMENTO AUTÉNTICO</span>
         </div>
-
-        <p>Project Control AI, en calidad de institución capacitadora, certifica la veracidad de la siguiente información académica:</p>
-
+        <p style="font-size:0.9rem;">Project Control AI certifica la veracidad de la siguiente información:</p>
         <div class="field"><span class="label">Profesional:</span><span class="value" id="resNombre"></span></div>
         <div class="field"><span class="label">Documento Identidad:</span><span class="value" id="resDNI"></span></div>
         <div class="field"><span class="label">Programa Académico:</span><span class="value" id="resCurso"></span></div>
-        <div class="field"><span class="label">Intensidad Horaria:</span><span class="value">45 Horas Académicas</span></div>
-        <div class="field"><span class="label">Periodo de Impartición:</span><span class="value" id="resFechas"></span></div>
-        
+        <div class="field"><span class="label">Intensidad:</span><span class="value">45 Horas Académicas</span></div>
+        <div class="field"><span class="label">Periodo:</span><span class="value" id="resFechas"></span></div>
         <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center;">
-            <div style="font-size: 0.8rem; color: gray;">Folio: <span id="resID"></span></div>
+            <div style="font-size: 0.75rem; color: gray;">Folio: <span id="resID"></span></div>
             <div style="text-align: center;">
-                <img id="resFirma" style="max-height: 80px;"><br>
-                <strong id="resProf" style="font-size: 0.9rem;"></strong><br>
-                <span id="resCIP" style="font-size: 0.8rem; color: gray;"></span>
+                <img id="resFirma" style="max-height: 70px;"><br>
+                <strong id="resProf" style="font-size: 0.85rem;"></strong><br>
+                <span id="resCIP" style="font-size: 0.75rem; color: gray;"></span>
             </div>
         </div>
-        <button class="btn-primary" onclick="window.location.href='verificar.html'" style="margin-top:20px; width:100%">Volver al Portal</button>
     </div>
-
-    <div id="debug-info"></div>
 
     <script>
         const _supabase = initSupabase();
-
-        function mostrarError(msg) {
-            document.getElementById('loader').style.display = 'none';
-            const dbg = document.getElementById('debug-info');
-            dbg.style.display = 'block';
-            dbg.innerText = "ERROR DE VALIDACIÓN: " + msg;
-        }
-
         window.onload = async () => {
             const v = new URLSearchParams(window.location.search).get('v');
-            if (!v) { mostrarError("No se recibió código de verificación."); return; }
-
+            if (!v) { document.getElementById('loader').innerText = "Falta código v."; return; }
             try {
-                const { data, error } = await _supabase
-                    .from('vw_certificados_publicos')
-                    .select('*')
-                    .eq('codigo_verificacion', v)
-                    .maybeSingle();
+                const { data, error } = await _supabase.from('vw_certificados_publicos').select('*').eq('codigo_verificacion', v).maybeSingle();
+                if (error || !data) { document.getElementById('loader').innerText = "Certificado no encontrado (" + v + ")"; return; }
 
-                if (error) { mostrarError("Error en Base de Datos: " + error.message); return; }
-                if (!data) { mostrarError("El folio " + v + " no existe en nuestros registros."); return; }
-
-                // Llenar datos
                 document.getElementById('resID').innerText = data.codigo_verificacion;
-                document.getElementById('resNombre').innerText = (data.nombre_completo || "").toUpperCase();
+                document.getElementById('resNombre').innerText = data.nombre_completo.toUpperCase();
                 document.getElementById('resDNI').innerText = data.dni;
                 document.getElementById('resCurso').innerText = data.nombre_curso_oficial || data.nombre_curso_inscrito;
                 document.getElementById('resFechas').innerText = "Del " + PCAI_Utils.formatearFecha(data.fecha_inicio_clases) + " al " + PCAI_Utils.formatearFecha(data.fecha_fin_clases);
                 document.getElementById('resFirma').src = data.prof_firma;
                 document.getElementById('resProf').innerText = "Ing. " + data.prof_nombre + " " + data.prof_apellido;
                 document.getElementById('resCIP').innerText = "CIP: " + data.prof_cip;
-
                 document.getElementById('loader').style.display = 'none';
                 document.getElementById('doc').style.display = 'block';
-
-            } catch (e) {
-                mostrarError("Error crítico de sistema: " + e.message);
-            }
+            } catch (e) { document.getElementById('loader').innerText = "Error de conexión."; }
         };
     </script>
 </body>

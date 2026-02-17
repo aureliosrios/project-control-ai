@@ -10,78 +10,108 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         body { background: #f8fafc; color: #1e293b; display: flex; justify-content: center; padding: 20px; font-family: sans-serif; }
-        .document { background: white; max-width: 600px; width: 100%; padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 6px solid #0ea5e9; }
+        .document { background: white; max-width: 600px; width: 100%; padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 8px solid #0ea5e9; }
         .header { text-align: center; border-bottom: 1px solid #eee; padding-bottom: 20px; margin-bottom: 25px; }
-        .logo { max-height: 80px; margin-bottom: 15px; }
+        .logo { max-height: 80px; margin-bottom: 15px; filter: none !important; }
         .badge { background: #dcfce7; color: #166534; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
         .field { margin-bottom: 20px; padding: 15px; background: #f1f5f9; border-radius: 8px; border-left: 4px solid #0ea5e9; }
         .label { font-size: 0.7rem; color: #64748b; text-transform: uppercase; font-weight: bold; display: block; margin-bottom: 5px; }
         .value { font-size: 1.1rem; color: #0f172a; font-weight: bold; }
+        #error-msg { display:none; color: #ef4444; text-align: center; padding: 20px; }
     </style>
 </head>
 <body>
-    <div id="loader">Autenticando documento...</div>
+    <div id="loader" style="font-weight: bold; margin-top: 50px;">🔍 AUTENTICANDO CON EL SERVIDOR OFICIAL...</div>
+    
+    <div id="error-msg">
+        <h2 style="margin:0;">Certificado no encontrado</h2>
+        <p>El código de verificación no existe en nuestros registros o ha sido revocado.</p>
+        <button class="btn-primary" onclick="window.location.href='verificar.html'">Ir al Portal</button>
+    </div>
+
     <div id="doc" class="document" style="display:none">
         <div class="header">
-            <img src="assets/images/Logotipo.png" class="logo" alt="PCAI">
-            <br><span class="badge">✓ CERTIFICADO AUTÉNTICO DIGITAL</span>
-            <h1 style="font-size: 1.3rem; margin-top: 15px;">DECLARACIÓN JURADA DE VALIDEZ</h1>
+            <img src="assets/images/Logotipo.png" class="logo" alt="Project Control AI">
+            <br><span class="badge">✓ CERTIFICADO DIGITAL AUTÉNTICO</span>
+            <h1 style="font-size: 1.3rem; margin-top: 15px; color:#0f172a;">DECLARACIÓN JURADA DE VALIDEZ</h1>
         </div>
-        <p>Project Control AI certifica la veracidad de la siguiente información académica:</p>
+
+        <p style="font-size: 0.95rem; line-height: 1.5;">Project Control AI, en calidad de institución capacitadora, <strong>DECLARA BAJO JURAMENTO</strong> la veracidad de la siguiente información académica:</p>
+
         <div class="field"><span class="label">Profesional:</span><span class="value" id="resNombre"></span></div>
         <div class="field"><span class="label">Documento Identidad:</span><span class="value" id="resDNI"></span></div>
         <div class="field"><span class="label">Programa Académico:</span><span class="value" id="resCurso"></span></div>
         <div class="field"><span class="label">Intensidad Horaria:</span><span class="value">45 Horas Académicas</span></div>
-        <div class="field"><span class="label">Periodo:</span><span class="value" id="resFechas"></span></div>
+        <div class="field"><span class="label">Periodo de Impartición:</span><span class="value" id="resFechas"></span></div>
         
-        <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center;">
-            <div style="font-size: 0.8rem; color: gray;">Folio: <span id="resID"></span></div>
+        <p style="font-size: 0.85rem; color: #64748b; font-style: italic; margin-top: 20px;">
+            Este documento ha sido generado automáticamente por nuestro sistema de verificación y certifica que el titular ha cumplido con los requisitos exigidos.
+        </p>
+
+        <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items: flex-end;">
+            <div style="font-size: 0.75rem; color: #94a3b8;">
+                Folio: <span id="resID" style="font-weight: bold;"></span><br>
+                Estado: ✅ VIGENTE
+            </div>
             <div style="text-align: center;">
-                <img id="resFirma" style="max-height: 80px;"><br>
-                <strong id="resProf" style="font-size: 0.9rem;"></strong><br>
-                <span id="resCIP" style="font-size: 0.8rem; color: gray;"></span>
+                <img id="resFirma" style="max-height: 70px; display: block; margin: 0 auto;"><br>
+                <strong id="resProf" style="font-size: 0.85rem; color: #0f172a;"></strong><br>
+                <span id="resCIP" style="font-size: 0.75rem; color: #64748b;"></span>
             </div>
         </div>
-        <button class="btn-primary" onclick="window.location.href='verificar.html'" style="margin-top:20px; width:100%">Volver al Portal</button>
+        
+        <button class="btn-primary" onclick="window.location.href='verificar.html'" style="margin-top:30px; width:100%; background:#64748b;">Cerrar Verificación</button>
     </div>
 
     <script>
         const _supabase = initSupabase();
+
         window.onload = async () => {
-            // Obtenemos el parámetro 'v' de la URL
-            const v = new URLSearchParams(window.location.search).get('v');
+            const params = new URLSearchParams(window.location.search);
+            const v = params.get('v');
+
             if (!v) {
-                document.getElementById('loader').innerHTML = "<h1>Error: Acceso no autorizado</h1>";
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('error-msg').style.display = 'block';
                 return;
             }
 
             try {
+                // Consultamos la vista maestra
                 const { data, error } = await _supabase
                     .from('vw_certificados_publicos')
                     .select('*')
                     .eq('codigo_verificacion', v)
-                    .single();
+                    .maybeSingle(); // Usamos maybeSingle para evitar errores si no hay datos
 
                 if (error || !data) {
-                    document.getElementById('loader').innerHTML = "<h1>Documento no encontrado o código inválido.</h1>";
+                    console.error("Error Supabase:", error);
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('error-msg').style.display = 'block';
                     return;
                 }
 
-                // Llenado de datos
-                document.getElementById('resID').innerText = data.codigo_verificacion;
-                document.getElementById('resNombre').innerText = data.nombre_completo.toUpperCase();
-                document.getElementById('resDNI').innerText = data.dni;
+                // Llenado de datos (con protección contra nulos)
+                document.getElementById('resID').innerText = data.codigo_verificacion || "N/A";
+                document.getElementById('resNombre').innerText = (data.nombre_completo || "").toUpperCase();
+                document.getElementById('resDNI').innerText = data.dni || "N/A";
                 document.getElementById('resCurso').innerText = data.nombre_curso_oficial || data.nombre_curso_inscrito;
-                document.getElementById('resFechas').innerText = "Del " + PCAI_Utils.formatearFecha(data.fecha_inicio_clases) + " al " + PCAI_Utils.formatearFecha(data.fecha_fin_clases);
-                document.getElementById('resFirma').src = data.prof_firma;
-                document.getElementById('resProf').innerText = "Ing. " + data.prof_nombre + " " + data.prof_apellido;
-                document.getElementById('resCIP').innerText = "CIP: " + data.prof_cip;
+                
+                const fechaIni = data.fecha_inicio_clases ? PCAI_Utils.formatearFecha(data.fecha_inicio_clases) : "...";
+                const fechaFin = data.fecha_fin_clases ? PCAI_Utils.formatearFecha(data.fecha_fin_clases) : "...";
+                document.getElementById('resFechas').innerText = `Del ${fechaIni} al ${fechaFin}`;
+                
+                document.getElementById('resFirma').src = data.prof_firma || "";
+                document.getElementById('resProf').innerText = `Ing. ${data.prof_nombre || ''} ${data.prof_apellido || ''}`;
+                document.getElementById('resCIP').innerText = `CIP: ${data.prof_cip || 'N/A'}`;
 
+                // Mostrar documento
                 document.getElementById('loader').style.display = 'none';
                 document.getElementById('doc').style.display = 'block';
 
-            } catch (e) {
-                document.getElementById('loader').innerText = "Error de conexión con Supabase.";
+            } catch (err) {
+                console.error("Error crítico:", err);
+                document.getElementById('loader').innerText = "Error de conexión.";
             }
         };
     </script>

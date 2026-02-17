@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,269 +8,70 @@
     <script src="assets/js/config.js"></script>
     <script src="assets/js/utils.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <!-- Librería QR -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
-        body {
-            background: #f1f5f9;
-            color: #1e293b;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .document-container {
-            background: white;
-            max-width: 650px;
-            width: 100%;
-            padding: 50px;
-            border-radius: 12px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            border-top: 8px solid #0ea5e9;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .watermark {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
-            font-size: 8rem;
-            color: rgba(14, 165, 233, 0.04);
-            font-weight: 900;
-            pointer-events: none;
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-
-        .header {
-            text-align: center;
-            border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 25px;
-            margin-bottom: 30px;
-        }
-
-        .logo {
-            max-height: 75px;
-            width: auto;
-            margin-bottom: 15px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .status-badge {
-            background: #dcfce7;
-            color: #166534;
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            display: inline-block;
-            margin-bottom: 15px;
-            border: 1px solid #bbf7d0;
-        }
-
-        h1 {
-            font-size: 1.6rem;
-            color: #0f172a;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 800;
-        }
-
-        .content {
-            line-height: 1.8;
-            font-size: 1.05rem;
-        }
-
-        .field-group {
-            margin: 20px 0;
-            padding: 20px;
-            background: #f8fafc;
-            border-radius: 8px;
-            border-left: 5px solid #0ea5e9;
-        }
-
-        .label {
-            font-size: 0.8rem;
-            color: #64748b;
-            text-transform: uppercase;
-            font-weight: 700;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .value {
-            font-size: 1.2rem;
-            color: #0f172a;
-            font-weight: 700;
-        }
-
-        .footer {
-            margin-top: 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.9rem;
-            border-top: 1px solid #f1f5f9;
-            padding-top: 30px;
-        }
-
-        .signature-box {
-            text-align: center;
-            min-width: 200px;
-        }
-
-        .signature-img {
-            max-height: 90px;
-            margin-bottom: 10px;
-        }
-
-        #qr-container {
-            margin-top: 15px;
-            display: inline-block;
-            padding: 10px;
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-        }
-
-        #loader {
-            font-weight: 700;
-            color: #0ea5e9;
-            font-size: 1.2rem;
-        }
+        body { background: #f1f5f9; color: #1e293b; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; font-family: sans-serif; }
+        .document-container { background: white; max-width: 600px; width: 100%; padding: 40px; border-radius: 12px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); border-top: 8px solid #0ea5e9; position: relative; }
+        .header { text-align: center; border-bottom: 2px solid #f1f5f9; padding-bottom: 20px; margin-bottom: 25px; }
+        .logo { max-height: 80px; filter: none !important; margin-bottom: 15px; } /* Filtros eliminados para nitidez */
+        .badge { background: #dcfce7; color: #166534; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; border: 1px solid #bbf7d0; }
+        .field-group { margin: 20px 0; padding: 20px; background: #f8fafc; border-radius: 8px; border-left: 5px solid #0ea5e9; }
+        .label { font-size: 0.75rem; color: #64748b; text-transform: uppercase; font-weight: bold; display: block; }
+        .value { font-size: 1.15rem; color: #0f172a; font-weight: 700; }
+        #loader { font-weight: bold; color: #0ea5e9; }
     </style>
 </head>
-
 <body>
-    <div id="loader">AUTENTICANDO CREDENCIALES...</div>
-
+    <div id="loader">AUTENTICANDO CON EL SERVIDOR...</div>
     <div class="document-container" id="doc" style="display: none;">
-        <div class="watermark">VERIFICADO</div>
-
         <div class="header">
-            <img src="assets/images/Logotipo.png" class="logo" alt="Project Control AI">
-            <div class="status-badge">✓ DOCUMENTO AUTÉNTICO DIGITAL</div>
-            <h1>Declaración de Validez Académica</h1>
-            <p style="color: #64748b; font-size: 0.9rem;">ID DE VERIFICACIÓN: <span id="valID"
-                    style="font-weight: 800; color: #0ea5e9;"></span></p>
+            <img src="assets/images/Logotipo.png" class="logo" alt="PCAI">
+            <br><span class="badge">✓ CERTIFICADO AUTÉNTICO DIGITAL</span>
+            <h1 style="font-size: 1.3rem; margin-top: 15px; color:#0f172a;">DECLARACIÓN DE VALIDEZ ACADÉMICA</h1>
         </div>
-
         <div class="content">
-            <p>Por la presente, <strong>Project Control AI</strong>, en su calidad de institución capacitadora líder en ingeniería, declara
-                bajo juramento la veracidad de la siguiente información académica:</p>
-
-            <p>Que el profesional:</p>
-            <div class="value" id="valNombre"
-                style="font-size: 1.6rem; border-bottom: 2px solid #e2e8f0; display: inline-block; margin-bottom: 15px; color: #0f172a;">
-            </div>
-
-            <p>Identificado con documento de identidad <strong>N° <span id="valDNI"></span></strong>, ha cumplido
-                satisfactoriamente con todos los requisitos de evaluación, participación y asistencia para el curso de:</p>
-
+            <p>Project Control AI certifica que el profesional:</p>
+            <div class="value" id="valNombre" style="font-size: 1.5rem; border-bottom: 2px solid #e2e8f0; display: inline-block; margin-bottom: 15px;"></div>
+            <p>Identificado con DNI <strong>N° <span id="valDNI"></span></strong>, ha culminado satisfactoriamente el curso de:</p>
             <div class="field-group">
-                <span class="label">Programa Académico Especializado</span>
+                <span class="label">Programa Académico</span>
                 <span class="value" id="valCurso"></span>
             </div>
-
-            <p>Dicho programa fue impartido en modalidad online desde el <strong id="valInicio"></strong> hasta el
-                <strong id="valFin"></strong>, con una carga académica total de <strong>45 horas cronológicas</strong>.
-            </p>
+            <p>Impartido del <strong id="valInicio"></strong> al <strong id="valFin"></strong> con un total de <strong>45 horas académicas</strong>.</p>
         </div>
-
-        <div class="footer">
-            <div class="info-meta">
-                <p><strong>Fecha de Emisión:</strong> <br><span id="valEmision"></span></p>
-                <p style="margin-top: 10px; color: #64748b; font-size: 0.75rem; max-width: 250px;">
-                    Este documento electrónico cuenta con firma digital y es verificado en tiempo real por nuestros servidores.
-                </p>
-                <!-- QR más grande y legible -->
-                <div id="qr-container"></div>
-            </div>
-            <div class="signature-box">
-                <img id="valFirma" src="" class="signature-img">
-                <p><strong id="valInstructor" style="font-size: 1rem; color: #0f172a;"></strong><br>
-                   <span id="valCIP" style="color: #64748b; font-weight: 600;"></span></p>
+        <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center;">
+            <div id="qr-container" style="background: white; padding: 5px; border: 1px solid #eee;"></div>
+            <div style="text-align: center;">
+                <img id="valFirma" src="" style="max-height: 80px;"><br>
+                <strong id="valInstructor" style="font-size: 0.9rem;"></strong><br>
+                <span id="valCIP" style="font-size: 0.8rem; color: #64748b;"></span>
             </div>
         </div>
     </div>
 
     <script>
         const _supabase = initSupabase();
-
         window.addEventListener('DOMContentLoaded', async () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const v = urlParams.get('v');
-
-            if (!v) {
-                document.body.innerHTML = "<h1 style='color:#0f172a'>Error: Acceso no autorizado.</h1>";
-                return;
-            }
-
+            const v = new URLSearchParams(window.location.search).get('v');
+            if (!v) return;
             try {
-                const { data, error } = await _supabase
-                    .from('vw_certificados_publicos')
-                    .select('*')
-                    .eq('codigo_verificacion', v)
-                    .single();
+                const { data, error } = await _supabase.from('vw_certificados_publicos').select('*').eq('codigo_verificacion', v).single();
+                if (error || !data) { document.getElementById('loader').innerText = "Documento no encontrado."; return; }
 
-                if (error || !data) {
-                    document.body.innerHTML = "<h1 style='color:#0f172a'>Documento no encontrado o revocado.</h1>";
-                    return;
-                }
-
-                // Llenar datos
-                document.getElementById('valID').innerText = data.codigo_verificacion;
                 document.getElementById('valNombre').innerText = data.nombre_completo.toUpperCase();
                 document.getElementById('valDNI').innerText = data.dni;
                 document.getElementById('valCurso').innerText = data.nombre_curso_oficial || data.nombre_curso_inscrito;
                 document.getElementById('valInicio').innerText = PCAI_Utils.formatearFecha(data.fecha_inicio_clases);
                 document.getElementById('valFin').innerText = PCAI_Utils.formatearFecha(data.fecha_fin_clases);
-                document.getElementById('valEmision').innerText = PCAI_Utils.formatearFecha(data.fecha_emision);
                 document.getElementById('valFirma').src = data.prof_firma;
                 document.getElementById('valInstructor').innerText = `Ing. ${data.prof_nombre} ${data.prof_apellido}`;
                 document.getElementById('valCIP').innerText = `CIP: ${data.prof_cip}`;
 
-                // ===================================
-                // QR CODE MEJORADO - URL ABSOLUTA COMPLETA
-                // ===================================
-                const qrContainer = document.getElementById("qr-container");
-                
-                // Construir URL ABSOLUTA del documento actual
-                const protocolo = window.location.protocol;  // http: o https:
-                const host = window.location.host;           // dominio.com
-                const pathname = window.location.pathname;   // /carpeta/validar.html
-                const search = window.location.search;       // ?v=ABC123
-                
-                // URL completa actual (la que debe ir en el QR)
-                const urlCompleta = `${protocolo}//${host}${pathname}${search}`;
-                
-                console.log("🔗 URL del QR:", urlCompleta); // Para debug
-
-                new QRCode(qrContainer, {
-                    text: urlCompleta,
-                    width: 200,        // Tamaño óptimo para escaneo móvil
-                    height: 200,
-                    colorDark: "#000000",
-                    colorLight: "#ffffff",
-                    correctLevel: QRCode.CorrectLevel.M  // Nivel M = equilibrio perfecto
-                });
-
+                new QRCode(document.getElementById("qr-container"), { text: window.location.href, width: 100, height: 100, correctLevel: QRCode.CorrectLevel.M });
                 document.getElementById('loader').style.display = 'none';
                 document.getElementById('doc').style.display = 'block';
-
-            } catch (e) {
-                document.body.innerHTML = "<h1 style='color:#0f172a'>Error de conexión con el servidor.</h1>";
-            }
+            } catch (e) { document.getElementById('loader').innerText = "Error de conexión."; }
         });
     </script>
 </body>
-
 </html>

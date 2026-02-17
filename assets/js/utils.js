@@ -42,12 +42,17 @@ const PCAI_Utils = {
     manejarError(error, contexto = '') {
         console.error(`Error Detallado en ${contexto}:`, error);
 
-        if (error.message?.includes('network')) {
+        const msg = error.message || "";
+
+        if (msg.toLowerCase().includes('network')) {
             return 'Error de conexión. Verifica tu internet.';
         } else if (error.code === 'PGRST116') {
             return 'No se encontró información en la base de datos para este registro.';
-        } else if (error.message?.includes('duplicate')) {
+        } else if (msg.toLowerCase().includes('duplicate')) {
             return 'Ya existe un registro con estos datos.';
+        } else if (msg.length > 0 && !msg.includes('[object Object]')) {
+            // Si el error tiene un mensaje legible, lo mostramos
+            return msg;
         } else {
             return 'Ocurrió un error inesperado al procesar los datos. Por favor, intente de nuevo.';
         }

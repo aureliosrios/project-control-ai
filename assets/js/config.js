@@ -18,11 +18,29 @@ const PCAI_CONFIG = {
 };
 
 // --- PLANTILLAS DE CERTIFICADOS ---
+// Se recomienda usar el nombre exacto de la tabla 'cursos' en Supabase
 const PLANTILLAS_CURSOS = {
+    // Licitaciones
     "Licitaciones Inteligentes": "cert_licitaciones_ia.pdf",
+    "Licitaciones Inteligentes con IA": "cert_licitaciones_ia.pdf",
+
+    // Gestión de Proyectos
     "Gestion Proyectos IA": "cert_gestion_integral.pdf",
+    "Gestión Proyectos IA": "cert_gestion_integral.pdf",
+    "Gestion de Proyectos con IA": "cert_gestion_integral.pdf",
+    "Gestión de Proyectos con IA": "cert_gestion_integral.pdf",
+
+    // EVM
     "Control y Gerencia EVM": "cert_control_evm.pdf",
-    "Automation Engineer": "cert_automation_engineer.pdf"
+    "Control y Gerencia (EVM 4.0)": "cert_control_evm.pdf",
+
+    // Automation
+    "Automation Engineer": "cert_automation_engineer.pdf",
+    "Automation Engineer (Python/VBA)": "cert_automation_engineer.pdf",
+
+    // Primavera & Webinar
+    "Primavera P6 Professional": "cert_primavera_p6.pdf",
+
 };
 
 // --- LISTA DE CURSOS (Single Source of Truth) ---
@@ -32,7 +50,7 @@ const CURSOS_DISPONIBLES = [
     { id: 'c3', nombre: 'Gestión de Proyectos con IA', fecha_inicio: 'Feb 22, 2026 10:00:00' },
     { id: 'c4', nombre: 'Automation Engineer', fecha_inicio: 'Feb 22, 2026 15:00:00' },
     { id: 'c5', nombre: 'Primavera P6 Professional', fecha_inicio: 'Feb 20, 2026 19:00:00' },
-    { id: 'webinar', nombre: 'Webinar P6 (Gratuito)', fecha_inicio: 'Feb 14, 2026 20:00:00' }
+
 ];
 
 // --- INICIALIZAR SUPABASE (REUTILIZABLE) ---

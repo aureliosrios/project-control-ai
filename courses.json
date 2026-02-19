@@ -1,0 +1,39 @@
+{
+    "gip_specialization": [
+        {
+            "id": "e7I-HLme2aA",
+            "code": "GIP_01",
+            "title": "El Arte del Prompt Engineering para Ingenieros",
+            "visibility": "Public",
+            "tag": "Sesión Gratuita"
+        },
+        {
+            "id": "VkI5DaT23eo",
+            "code": "GIP_02",
+            "title": "Auditoría Forense de Contratos y Riesgos",
+            "visibility": "Hidden",
+            "tag": "Contenido Exclusivo"
+        },
+        {
+            "id": "jXKeAhJD0A4",
+            "code": "GIP_03",
+            "title": "Deep Research y Arquitectura de Datos en Excel",
+            "visibility": "Hidden",
+            "tag": "Contenido Exclusivo"
+        },
+        {
+            "id": "gf4_1sXfv8E",
+            "code": "GIP_04",
+            "title": "Creación de Chatbots en Excel con IA",
+            "visibility": "Hidden",
+            "tag": "Contenido Exclusivo"
+        },
+        {
+            "id": "G6Pgy4nsGPA",
+            "code": "GIP_05",
+            "title": "Automatización VBA y Dashboards de Control",
+            "visibility": "Hidden",
+            "tag": "Contenido Exclusivo"
+        }
+    ]
+}

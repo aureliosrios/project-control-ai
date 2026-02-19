@@ -325,13 +325,29 @@
     </footer>
 
     <script>
-        const lessons = [
-            { id: "e7I-HLme2aA", num: "01", status: "PÚBLICA", title: "El Arte del Prompt Engineering para Ingenieros", desc: "Sesión Gratuita: Domina las técnicas de prompting aplicadas a la ingeniería." },
-            { id: "VkI5DaT23eo", num: "02", status: "OCULTA", title: "Auditoría Forense de Contratos y Riesgos", desc: "Contenido Exclusivo: Técnicas de auditoría asistidas por IA." },
-            { id: "jXKeAhJD0A4", num: "03", status: "OCULTA", title: "Deep Research y Arquitectura de Datos en Excel", desc: "Contenido Exclusivo: Investigación profunda y estructuración de datos." },
-            { id: "gf4_1sXfv8E", num: "04", status: "OCULTA", title: "Creación de Chatbots en Excel con IA", desc: "Contenido Exclusivo: Implementación de chatbots funcionales en hojas de cálculo." },
-            { id: "G6Pgy4nsGPA", num: "05", status: "OCULTA", title: "Automatización VBA y Dashboards de Control", desc: "Contenido Exclusivo: Dashboards dinámicos y automatización avanzada." }
-        ];
+        const courses = {
+            "LIC": {
+                name: "Licitaciones Inteligentes",
+                lessons: [
+                    { id: "2QxbQ8IY0Zc", num: "01", status: "PÚBLICA", title: "Configuración de Cerebros Digitales con NotebookLM", desc: "Aprende a configurar tu primer cerebro digital utilizando NotebookLM para gestionar información de proyectos." },
+                    { id: "QhgXgxZFmCY", num: "02", status: "OCULTA", title: "Generación Dinámica del WBS y Visualización HTML", desc: "Técnicas avanzadas para generar estructuras de desglose de trabajo (WBS) dinámicas y visualizarlas profesionalmente." },
+                    { id: "DQuA1ZFOXNQ", num: "03", status: "OCULTA", title: "Refinamiento de Alcances y Frentes de Trabajo", desc: "Cómo utilizar IA para detallar alcances y definir frentes de trabajo con precisión milimétrica." },
+                    { id: "R_LgivWPH30", num: "04", status: "OCULTA", title: "Ingeniería de Metrados Automática y \"Gemas\"", desc: "Automatización de metrados y extracción de 'gemas' informativas para auditorías y presupuestos." },
+                    { id: "y7p_4U-rTEA", num: "05", status: "OCULTA", title: "Automatización de APUs con Scripts VBA", desc: "Integración de scripts VBA para automatizar el análisis de precios unitarios (APU) en proyectos de construcción." },
+                    { id: "SXJ8Be4nhMU", num: "06", status: "OCULTA", title: "Elaboración de Oferta Técnica y Mermaid", desc: "Creación de diagramas Mermaid y elaboración de ofertas técnicas ganadoras asistidas por agentes IA." }
+                ]
+            },
+            "GIP": {
+                name: "Gestión Integral de Proyectos",
+                lessons: [
+                    { id: "e7I-HLme2aA", num: "01", status: "PÚBLICA", title: "El Arte del Prompt Engineering para Ingenieros", desc: "Sesión Gratuita: Domina las técnicas de prompting aplicadas a la ingeniería." },
+                    { id: "VkI5DaT23eo", num: "02", status: "OCULTA", title: "Auditoría Forense de Contratos y Riesgos", desc: "Contenido Exclusivo: Técnicas de auditoría asistidas por IA." },
+                    { id: "jXKeAhJD0A4", num: "03", status: "OCULTA", title: "Deep Research y Arquitectura de Datos en Excel", desc: "Contenido Exclusivo: Investigación profunda y estructuración de datos." },
+                    { id: "gf4_1sXfv8E", num: "04", status: "OCULTA", title: "Creación de Chatbots en Excel con IA", desc: "Contenido Exclusivo: Implementación de chatbots funcionales en hojas de cálculo." },
+                    { id: "G6Pgy4nsGPA", num: "05", status: "OCULTA", title: "Automatización VBA y Dashboards de Control", desc: "Contenido Exclusivo: Dashboards dinámicos y automatización avanzada." }
+                ]
+            }
+        };
 
         const lessonsContainer = document.getElementById('lessonsContainer');
         const videoLink = document.getElementById('videoLink');
@@ -342,29 +358,54 @@
 
         function loadLessons() {
             lessonsContainer.innerHTML = '';
-            lessons.forEach((lesson, index) => {
-                const item = document.createElement('div');
-                item.className = `lesson-item ${index === 0 ? 'active' : ''}`;
-                item.onclick = () => selectLesson(index);
 
-                item.innerHTML = `
-                    <div class="lesson-thumb" style="background-image: url('https://img.youtube.com/vi/${lesson.id}/mqdefault.jpg')"></div>
-                    <div class="lesson-details">
-                        <span class="lesson-num">Lección ${lesson.num}</span>
-                        <span class="lesson-name">${lesson.title}</span>
-                    </div>
+            for (const courseCode in courses) {
+                const course = courses[courseCode];
+
+                // Crear encabezado de curso
+                const header = document.createElement('div');
+                header.style.cssText = `
+                    padding: 10px 15px;
+                    background: rgba(34, 211, 238, 0.1);
+                    color: var(--accent-cyan);
+                    font-weight: 800;
+                    font-size: 0.8rem;
+                    border-radius: 8px;
+                    margin: 15px 0 10px 0;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    border: 1px solid rgba(34, 211, 238, 0.2);
                 `;
-                lessonsContainer.appendChild(item);
-            });
+                header.innerText = course.name;
+                lessonsContainer.appendChild(header);
+
+                course.lessons.forEach((lesson, index) => {
+                    const item = document.createElement('div');
+                    item.className = `lesson-item`;
+                    item.id = `lesson-${courseCode}-${index}`;
+                    item.onclick = () => selectLesson(courseCode, index);
+
+                    item.innerHTML = `
+                        <div class="lesson-thumb" style="background-image: url('https://img.youtube.com/vi/${lesson.id}/mqdefault.jpg')"></div>
+                        <div class="lesson-details">
+                            <span class="lesson-num">${courseCode} - Lección ${lesson.num}</span>
+                            <span class="lesson-name">${lesson.title}</span>
+                        </div>
+                    `;
+                    lessonsContainer.appendChild(item);
+                });
+            }
+
+            // Seleccionar la primera lección por defecto (GIP 01)
+            selectLesson("GIP", 0);
         }
 
-        function selectLesson(index) {
-            const lesson = lessons[index];
+        function selectLesson(courseCode, index) {
+            const lesson = courses[courseCode].lessons[index];
 
             // Update active state
-            document.querySelectorAll('.lesson-item').forEach((el, i) => {
-                el.classList.toggle('active', i === index);
-            });
+            document.querySelectorAll('.lesson-item').forEach(el => el.classList.remove('active'));
+            document.getElementById(`lesson-${courseCode}-${index}`).classList.add('active');
 
             // Update Video Link and Thumbnail
             videoLink.href = `https://www.youtube.com/watch?v=${lesson.id}`;

@@ -88,17 +88,7 @@
             color: var(--text-muted);
         }
 
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: rgba(56, 189, 248, 0.05);
-            padding: 16px;
-            border-radius: var(--radius-md);
-            border: 1px dashed rgba(56, 189, 248, 0.3);
-            margin-top: 10px;
-            cursor: pointer;
-        }
+        
 
         .success-msg {
             display: none;
@@ -296,13 +286,18 @@
                 }
 
                 // PASO B: Crear la Matrícula vinculada al Estudiante
-                const payloadMatricula = {
+                                const payloadMatricula = {
                     ...datosMatricula,
-                    estudiante_id: estudianteId, // Clave relacional
-                    dni: dni, // Redundancia para compatibilidad
-                    nombre: datosEstudiante.nombre, // Redundancia para compatibilidad
-                    apellido: datosEstudiante.apellido // Redundancia para compatibilidad
+                    estudiante_id: estudianteId,
+                    dni: dni,
+                    nombre: datosEstudiante.nombre,
+                    apellido: datosEstudiante.apellido,
+                    profesion: datosEstudiante.profesion,
+                    telefono: datosEstudiante.telefono,
+                    email: datosEstudiante.email
                 };
+
+                console.log("📤 Registrando en Supabase y Google Sheets:", payloadMatricula);
 
                 const { error: errorMatricula } = await _supabase
                     .from('matriculas')

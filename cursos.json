@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdate": "2026-02-19",
+  "lastUpdate": "2026-02-27",
   "cursos": [
     {
       "id": "LIC",
@@ -13,7 +13,7 @@
         "soles": 200,
         "dolares": 75
       },
-      "fechaInicio": "2026-02-23",
+      "fechaInicio": "2026-03-16",
       "horario": "Lunes y Miércoles: 7:00 PM - 10:00 PM",
       "nivel": "Intermedio",
       "brochure": "Brochure_Curso_1_Licitaciones_360.pdf",
@@ -110,7 +110,7 @@
         "soles": 200,
         "dolares": 75
       },
-      "fechaInicio": "2026-02-26",
+      "fechaInicio": "2026-03-05",
       "horario": "Martes y Jueves: 7:00 PM - 10:00 PM",
       "nivel": "Avanzado",
       "brochure": "Brochure_Curso_2_EVM.pdf",
@@ -135,7 +135,7 @@
         "soles": 200,
         "dolares": 75
       },
-      "fechaInicio": "2026-02-22",
+      "fechaInicio": "2026-03-22",
       "horario": "Martes y Jueves: 7:00 PM - 10:00 PM",
       "nivel": "Básico",
       "brochure": "Brochure_Curso_3_IA_Despertar_Digital.pdf",
@@ -193,15 +193,15 @@
     {
       "id": "PRO",
       "codigo": "PRO",
-      "nombre": "Productividad con Agentes IA",
-      "descripcion": "Automatización de tareas repetitivas y optimización de flujos de trabajo con agentes inteligentes.",
+      "nombre": "Automation Engineer",
+      "descripcion": "Automatización avanzada con Python, HTML, VBA y Agentes Autónomos.",
       "duracion": "15 horas",
       "sesiones": 5,
       "precio": {
-        "soles": 200,
-        "dolares": 75
+        "soles": 300,
+        "dolares": 90
       },
-      "fechaInicio": "2026-03-11",
+      "fechaInicio": "2026-03-29",
       "horario": "Martes y Jueves: 7:00 PM - 10:00 PM",
       "nivel": "Intermedio",
       "brochure": "#",
@@ -226,7 +226,7 @@
         "soles": 200,
         "dolares": 75
       },
-      "fechaInicio": "2026-02-27",
+      "fechaInicio": "2026-03-20",
       "horario": "Viernes: 7:00 PM - 10:00 PM",
       "nivel": "Intermedio",
       "brochure": "Brochure_Curso_5_Primavera_P6.pdf",

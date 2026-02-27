@@ -45,11 +45,11 @@ const PLANTILLAS_CURSOS = {
 
 // --- LISTA DE CURSOS (Single Source of Truth) ---
 const CURSOS_DISPONIBLES = [
-    { id: 'c1', nombre: 'Licitaciones Inteligentes con IA', fecha_inicio: 'Feb 23, 2026 19:00:00' },
-    { id: 'c2', nombre: 'Control y Gerencia EVM', fecha_inicio: 'Feb 26, 2026 19:30:00' },
-    { id: 'c3', nombre: 'Gestión de Proyectos con IA', fecha_inicio: 'Feb 22, 2026 10:00:00' },
-    { id: 'c4', nombre: 'Automation Engineer', fecha_inicio: 'Feb 22, 2026 15:00:00' },
-    { id: 'c5', nombre: 'Primavera P6 Professional', fecha_inicio: 'Feb 27, 2026 19:00:00' },
+    { id: 'c1', nombre: 'Licitaciones Inteligentes con IA', fecha_inicio: 'Mar 16, 2026 19:00:00' },
+    { id: 'c2', nombre: 'Control y Gerencia EVM', fecha_inicio: 'Mar 05, 2026 19:30:00' },
+    { id: 'c3', nombre: 'Gestión de Proyectos con IA', fecha_inicio: 'Mar 22, 2026 10:00:00' },
+    { id: 'c4', nombre: 'Automation Engineer', fecha_inicio: 'Mar 29, 2026 15:00:00' },
+    { id: 'c5', nombre: 'Primavera P6 Professional', fecha_inicio: 'Mar 20, 2026 19:00:00' },
 
 ];
 

@@ -17,29 +17,82 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
     <style>
-        body { display: flex; justify-content: center; align-items: center; min-height: 100vh; flex-direction: column; padding: 20px; }
-        .card { background: var(--bg-card); padding: 2.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border-color); text-align: center; width: 100%; max-width: 480px; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6); position: relative; }
-        .version-tag { position: absolute; top: 10px; right: 15px; font-size: 0.65rem; color: var(--text-muted); font-weight: 800; }
-        .cert-card { background: var(--bg-card-alt); padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 15px; text-align: left; }
-        .loader { display: none; margin-top: 1.5rem; color: var(--accent-cyan); font-weight: 600; }
-        .limit-reached { color: #ef4444; font-size: 0.75rem; font-weight: 800; border: 1px solid #ef4444; padding: 10px; border-radius: 6px; text-align: center; background: rgba(239, 68, 68, 0.1); width: 100%; }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+            position: relative;
+        }
+
+        .version-tag {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            font-weight: 800;
+        }
+
+        .cert-card {
+            background: var(--bg-card-alt);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .loader {
+            display: none;
+            margin-top: 1.5rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        .limit-reached {
+            color: #ef4444;
+            font-size: 0.75rem;
+            font-weight: 800;
+            border: 1px solid #ef4444;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            background: rgba(239, 68, 68, 0.1);
+            width: 100%;
+        }
     </style>
 </head>
 
 <body>
 
     <div class="card">
-        <div class="version-tag">v11.7 SAFE-DOWNLOAD</div>
+        <div class="version-tag">v11.8 SAFE-DOWNLOAD</div>
 
         <!-- SECCIÓN BÚSQUEDA -->
         <div id="searchSection">
             <img src="assets/images/Logotipo.png" alt="PCAI" style="max-height: 70px; margin-bottom: 1.5rem;">
-            <h2 style="color: white; margin-bottom: 0.5rem; font-family: var(--font-heading);">Portal de Certificación</h2>
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">Ingresa tu DNI para descargar tus certificados oficiales (Límite: 1 descarga).</p>
-            
-            <input type="text" id="dniInput" class="input-standard" placeholder="Número de DNI" 
-                   style="text-align: center; font-size: 1.2rem; margin-bottom: 1rem;">
-            
+            <h2 style="color: white; margin-bottom: 0.5rem; font-family: var(--font-heading);">Portal de Certificación
+            </h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">Ingresa tu DNI para descargar
+                tus certificados oficiales (Límite: 1 descarga).</p>
+
+            <input type="text" id="dniInput" class="input-standard" placeholder="Número de DNI"
+                style="text-align: center; font-size: 1.2rem; margin-bottom: 1rem;">
+
             <button class="btn-primary" style="width: 100%; padding: 15px;" onclick="buscarCertificados()">
                 CONSULTAR MIS CURSOS
             </button>
@@ -48,7 +101,8 @@
         <!-- SECCIÓN RESULTADOS -->
         <div id="resultsSection" style="display:none; margin-top: 1rem;">
             <div id="listaCertificados"></div>
-            <button class="btn-secondary" onclick="location.reload()" style="margin-top: 15px; width: 100%; background: transparent; border: 1px dashed var(--border-color); color: var(--text-muted);">
+            <button class="btn-secondary" onclick="location.reload()"
+                style="margin-top: 15px; width: 100%; background: transparent; border: 1px dashed var(--border-color); color: var(--text-muted);">
                 Realizar otra búsqueda
             </button>
         </div>
@@ -110,19 +164,23 @@
                     const curso = item.nombre_curso_oficial || item.nombre_curso_inscrito;
 
                     if (item.estado_academico === 'GRADUADO') {
-                        // REVISIÓN DE LÍMITE
+                        // REVISIÓN DE LÍMITE DE DESCARGA ÚNICA (v11.8)
                         const yaDescargado = (item.descargas_count >= 1);
-                        
+
                         card.innerHTML = `
                             <div style="display:flex; flex-direction:column; gap:12px;">
                                 <div style="display:flex; justify-content:space-between; align-items:center;">
                                     <div style="color:white; font-weight:bold; font-size:1rem;">${curso}</div>
                                     <span style="color:#4ade80; font-size:0.7rem; font-weight:bold;">✅ GRADUADO</span>
                                 </div>
-                                ${yaDescargado ? 
-                                    `<div class="limit-reached">LÍMITE DE DESCARGA ÚNICA AGOTADO</div>` : 
-                                    `<button class="btn-primary" onclick="procesarDiploma('${item.certificado_id}')" style="width:100%; padding:12px;">DESCARGAR DIPLOMA</button>`
-                                }
+                                ${yaDescargado ?
+                                `<div class="limit-reached" style="background: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; color: #fca5a5; padding: 10px; border-radius: 8px; font-weight: 800; text-align: center; font-size: 0.75rem;">
+                                        ⚠️ LÍMITE DE DESCARGA ÚNICA AGOTADO
+                                     </div>` :
+                                `<button class="btn-primary" onclick="procesarDiploma('${item.certificado_id}')" style="width:100%; padding:12px; font-weight: 800;">
+                                        📥 DESCARGAR DIPLOMA
+                                     </button>`
+                            }
                             </div>`;
                     } else {
                         card.innerHTML = `<div style="opacity:0.6; color:white; font-size:0.9rem;">${curso} <br><span style="color:#facc15; font-size:0.75rem;">⏳ EN PROCESO</span></div>`;
@@ -137,25 +195,37 @@
             if (btn) { btn.disabled = true; btn.innerText = "REGISTRANDO..."; }
 
             try {
-                // 1. Obtener datos
+                // 1. Obtener datos y validar límite
                 const { data: cert, error: fetchErr } = await _supabase.from('vw_certificados_publicos').select('*').eq('certificado_id', certId).single();
                 if (fetchErr || !cert) throw new Error("No se hallaron los datos del folio.");
 
+                if (cert.descargas_count >= 1) {
+                    throw new Error("LÍMITE DE DESCARGA AGOTADO: Este certificado ya ha sido descargado previamente.");
+                }
+
                 // ===========================================
-                // BLOQUEO DE SEGURIDAD v11.7
+                // BLOQUEO DE SEGURIDAD v11.8
                 // ===========================================
                 const { error: rpcError } = await _supabase.rpc('incrementar_descarga', { cert_id: certId });
-                if (rpcError) throw new Error("No se pudo validar la descarga. Intente nuevamente.");
+                if (rpcError) throw new Error("No se pudo validar la descarga. Es posible que el límite se haya alcanzado en otra sesión.");
 
                 const { PDFDocument, rgb, StandardFonts } = PDFLib;
 
-                // 2. Plantilla
+                // 2. Selección de Plantilla (Mapeo Control y Gerencia)
                 const slug = (cert.nombre_curso_oficial || cert.nombre_curso_inscrito || "").toLowerCase();
-                let archivo = "cert_gestion_integral.pdf";
-                if (slug.includes("licitaciones")) archivo = "cert_licitaciones_ia.pdf";
-                else if (slug.includes("evm")) archivo = "cert_control_evm.pdf";
-                else if (slug.includes("p6")) archivo = "cert_primavera_p6.pdf";
-                else if (slug.includes("automation")) archivo = "cert_automation_engineer.pdf";
+                let archivo = "cert_gestion_integral.pdf"; // Default para Gerencia / Otros
+
+                if (slug.includes("licitaciones")) {
+                    archivo = "cert_licitaciones_ia.pdf";
+                } else if (slug.includes("evm") || slug.includes("control")) {
+                    archivo = "cert_control_evm.pdf";
+                } else if (slug.includes("gerencia") || slug.includes("gestion")) {
+                    archivo = "cert_gestion_integral.pdf";
+                } else if (slug.includes("p6")) {
+                    archivo = "cert_primavera_p6.pdf";
+                } else if (slug.includes("automation")) {
+                    archivo = "cert_automation_engineer.pdf";
+                }
 
                 const response = await fetch(`${PCAI_CONFIG.supabase.url}/storage/v1/object/public/academia/${archivo}`);
                 const pdfDoc = await PDFDocument.load(await response.arrayBuffer());
@@ -177,7 +247,7 @@
                     try {
                         const fImg = await pdfDoc.embedPng(await (await fetch(cert.prof_firma)).arrayBuffer());
                         page1.drawImage(fImg, { x: 437, y: 120, width: 120, height: 120 });
-                    } catch (e) {}
+                    } catch (e) { }
                 }
                 page1.drawText(`Ing. ${cert.prof_nombre} ${cert.prof_apellido}`, { x: 448, y: 74, size: 10, font: fontB });
                 const offsetE = fontB.widthOfTextAtSize("Ing. Aur", 10);
@@ -219,7 +289,7 @@
                     link.href = URL.createObjectURL(blob);
                     link.download = `Certificado_PCAI_${cert.codigo_verificacion}.pdf`;
                     link.click();
-                    
+
                     alert("¡Descarga exitosa! El sistema ha registrado este diploma oficialmente. Recuerda que es de descarga única.");
                     location.reload();
                 }, 800);
@@ -228,4 +298,5 @@
         }
     </script>
 </body>
+
 </html>

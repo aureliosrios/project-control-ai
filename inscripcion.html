@@ -88,7 +88,7 @@
             color: var(--text-muted);
         }
 
-        
+
 
         .success-msg {
             display: none;
@@ -170,7 +170,7 @@
                         <option value="" disabled selected>Seleccione curso...</option>
                         <option value="Licitaciones Inteligentes">1. Licitaciones Inteligentes con IA</option>
                         <option value="Control y Gerencia EVM">2. Control y Gerencia EVM</option>
-                        <option value="Gestion Proyectos IA">3. Gestión de Proyectos con IA</option>
+                        <option value="Gestion Proyectos IA">3. Gestión Integral de Proyectos con IA</option>
                         <option value="Automation Engineer">4. Automation Engineer</option>
                         <option value="Primavera P6 Professional">5. Primavera P6 Professional</option>
                     </select>
@@ -286,7 +286,7 @@
                 }
 
                 // PASO B: Crear la Matrícula vinculada al Estudiante
-                                const payloadMatricula = {
+                const payloadMatricula = {
                     ...datosMatricula,
                     estudiante_id: estudianteId,
                     dni: dni,
@@ -317,7 +317,8 @@
                 successBox.style.display = 'block';
 
                 // Personalizar mensaje de WhatsApp
-                const waMsg = `Hola Ing. Aurelio, soy ${datosEstudiante.nombre}. Me inscribí al ${datosMatricula.curso}. Adjunto mi voucher.`;
+                const waMsg = `Hola Ing. Aurelio, soy ${datosEstudiante.nombre}. Me inscribí al ${datosMatricula.curso}.
+                Adjunto mi voucher.`;
                 document.getElementById('waLink').href = PCAI_Utils.generarLinkWhatsApp(waMsg);
 
             } catch (error) {

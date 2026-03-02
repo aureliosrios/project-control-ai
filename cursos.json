@@ -239,6 +239,72 @@
         "visibilidad": "oculta"
       },
       "lecciones": []
+    },
+    {
+      "id": "EVM",
+      "codigo": "EVM",
+      "nombre": "Control y Gerencia EVM 4.0: Ingeniería de Costos & Control Predictivo",
+      "descripcion": "Especialización avanzada en control predictivo, reingeniería de costos y dashboards de élite con IA.",
+      "duracion": "15 horas",
+      "sesiones": 5,
+      "precio": {
+        "soles": 200,
+        "dolares": 75
+      },
+      "fechaInicio": "2026-03-25",
+      "horario": "Sábados y Domingos: 7:00 PM - 10:00 PM",
+      "nivel": "Experto",
+      "brochure": "#",
+      "imagen": "#",
+      "linkPagoGlobal": "#",
+      "linkInscripcion": "inscripcion.html",
+      "playlist": {
+        "id": "PLxxxxxx",
+        "url": "https://www.youtube.com/playlist?list=PLxxxxxx",
+        "visibilidad": "oculta"
+      },
+      "lecciones": [
+        {
+          "numero": "01",
+          "codigo": "EVM-01",
+          "titulo": "El Puente Estratégico y Reingeniería de Costos",
+          "descripcion": "Transición de Licitación a Obra, establecimiento del Presupuesto Meta y motor de rentabilidad estratégica.",
+          "videoId": "9JJ1GBdzxMI",
+          "visibilidad": "publica"
+        },
+        {
+          "numero": "02",
+          "codigo": "EVM-02",
+          "titulo": "Control de Tiempo (Scheduling) y Líneas de Balance",
+          "descripcion": "Programación por rendimientos, Ruta Crítica (CPM) y optimización de cronogramas.",
+          "videoId": "zQ0aA30-1WQ",
+          "visibilidad": "oculta"
+        },
+        {
+          "numero": "03",
+          "codigo": "EVM-03",
+          "titulo": "El Escudo de Costos y Gestión de Contingencias",
+          "descripcion": "Blindaje del margen, administración de imprevistos y log de cambios automatizado.",
+          "videoId": "PjBTPXH8nU0",
+          "visibilidad": "oculta"
+        },
+        {
+          "numero": "04",
+          "codigo": "EVM-04",
+          "titulo": "Valor Ganado (EVM 4.0) y Forecasting Predictivo",
+          "descripcion": "Integración tiempo/costo, métricas SPI/CPI y proyección de EAC/VAC mediante IA.",
+          "videoId": "xMLNpMt6qIM",
+          "visibilidad": "oculta"
+        },
+        {
+          "numero": "05",
+          "codigo": "EVM-05",
+          "titulo": "Inteligencia Gerencial y Dashboards de Élite",
+          "descripcion": "Storytelling de datos con Python/Plotly y presentaciones ejecutivas dinámicas.",
+          "videoId": "zfVR4CPG0MQ",
+          "visibilidad": "oculta"
+        }
+      ]
     }
   ],
   "nomenclatura": {

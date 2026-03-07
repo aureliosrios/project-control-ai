@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdate": "2026-02-27",
+  "lastUpdate": "2026-03-06",
   "cursos": [
     {
       "id": "LIC",
@@ -110,7 +110,7 @@
         "soles": 200,
         "dolares": 75
       },
-      "fechaInicio": "2026-03-05",
+      "fechaInicio": "2026-03-10",
       "horario": "Martes y Jueves: 7:00 PM - 10:00 PM",
       "nivel": "Avanzado",
       "brochure": "Brochure_Curso_2_EVM.pdf",

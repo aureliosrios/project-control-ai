@@ -754,6 +754,7 @@
             <button class="nav-toggle" id="navToggle">☰</button>
             <div class="nav-menu" id="navMenu">
                 <a href="#cursos" class="nav-link">Capacitaciones</a>
+                <a href="academy.html" class="nav-link" style="color: var(--accent-cyan); font-weight: 700;">Academy</a>
                 <a href="#material-estudio" class="nav-link">Recursos</a>
                 <a href="#consultoria" class="nav-link">Consultoría</a>
                 <a href="https://wa.me/51993147501" class="whatsapp-btn" target="_blank">
@@ -775,12 +776,13 @@
             <p class="hero-subtitle">Transforma tu carrera con las capacitaciones más avanzadas en Agentes Autónomos,
                 Auditoría Forense y Control Predictivo.</p>
             <div class="hero-cta-group">
-                <button class="hero-cta" onclick="document.getElementById('cursos').scrollIntoView();">
-                    Ver Capacitaciones
+                <button class="hero-cta" onclick="document.getElementById('cursos').scrollIntoView();"
+                    style="background: var(--gradient-primary); box-shadow: 0 10px 25px rgba(34, 211, 238, 0.3);">
+                    🔴 Cursos en Vivo
                 </button>
-                <a href="inscripcion.html" class="hero-cta-secondary">
-                    Ficha de Inscripción
-                </a>
+                <button class="hero-cta" onclick="document.getElementById('academy-appendix').scrollIntoView();">
+                    🟢 Academy Asincrónica
+                </button>
             </div>
         </div>
     </section>
@@ -1417,6 +1419,69 @@
     </section>
 
 
+
+    <!-- ACADEMY (ASINCRÓNICO) APPENDIX SECTION -->
+    <section class="section-padding" id="academy-appendix"
+        style="background: linear-gradient(to bottom, var(--bg-dark), #0a1628);">
+        <div class="container">
+            <div
+                style="background: rgba(251, 191, 36, 0.1); border: 1px solid var(--accent-orange); color: var(--accent-orange); padding: 1rem; border-radius: 12px; text-align: center; margin-bottom: 3rem; font-weight: 700; letter-spacing: 0.5px;">
+                🚀 NOTA IMPORTANTE: NUESTRA PRIMERA PUBLICACIÓN SERÁ EL DÍA 20/03 EN HOTMART
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+                <div>
+                    <span class="tag tag-price" style="margin-bottom: 1rem; display: inline-block;">NUEVO: ACADEMY
+                        ASINCRÓNICA</span>
+                    <h2 class="section-title">¿Problemas técnicos hoy? Resuélvelos hoy.</h2>
+                    <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem;">
+                        Hemos liberado <strong>20 Micro-Cursos</strong> intensivos de 2-3 horas. Sin esperar grupos,
+                        sin horarios fijos. Elige tu disciplina, descarga el prompt y soluciona el problema de tu obra
+                        ahora mismo.
+                    </p>
+                    <ul style="margin-bottom: 2rem;">
+                        <li
+                            style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px; list-style: none;">
+                            <span style="color: var(--accent-cyan);">⚡</span> Acceso inmediato e ilimitado.
+                        </li>
+                        <li
+                            style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px; list-style: none;">
+                            <span style="color: var(--accent-cyan);">⚡</span> Solo $11.99 USD por curso.
+                        </li>
+                        <li
+                            style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px; list-style: none;">
+                            <span style="color: var(--accent-cyan);">⚡</span> 6 Rutas de especialización (HSE, QA/QC,
+                            Costos, PMO...).
+                        </li>
+                    </ul>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <a href="academy.html" class="hero-cta">Ir a la Academia →</a>
+                        <a href="academy.html#diagnostico" class="hero-cta-secondary"
+                            style="font-size: 0.95rem; padding: 0.8rem 1.5rem;">Diagnóstico de Ruta</a>
+                    </div>
+                </div>
+                <div
+                    style="background: rgba(0, 212, 255, 0.05); padding: 2rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); text-align: center;">
+                    <h3 style="margin-bottom: 1.5rem; font-family: 'Space Grotesk';">Catálogo de Especialidad</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 1.5rem;">
+                        <div
+                            style="background: var(--bg-dark); padding: 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+                            <div style="font-size: 1.2rem; color: var(--accent-cyan); font-weight: 700;">20</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">Micro-Cursos</div>
+                        </div>
+                        <div
+                            style="background: var(--bg-dark); padding: 1rem; border-radius: 12px; border: 1px solid var(--accent-orange);">
+                            <div style="font-size: 1.2rem; color: var(--accent-orange); font-weight: 700;">$11.99</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">Por problema</div>
+                        </div>
+                    </div>
+                    <div style="border-radius: 12px; overflow: hidden; border: 1px solid rgba(0, 212, 255, 0.3);">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Academy Preview" style="width: 100%; filter: brightness(0.7) contrast(1.2);">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- CONSULTORÍA SECTION (CONDENSED AT THE END) -->
     <section class="section-padding" id="consultoria" style="background: rgba(15, 23, 42, 0.4);">

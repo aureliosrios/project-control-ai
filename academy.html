@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academy | Project Control AI · Micro-Cursos Asincrónicos</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #020817;
+            --bg-panel: #0a1628;
+            --border: #1e3a5f;
+            --cyan: #00d4ff;
+            --orange: #ff6b1a;
+            --gold: #fbbf24;
+            --green: #10b981;
+            --blue: #3b82f6;
+            --red: #ef4444;
+            --purple: #8b5cf6;
+            --text-main: #e2e8f0;
+            --text-muted: #64748b;
+            --glass: rgba(10, 22, 40, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* --- Grid Background Animado --- */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(30, 58, 95, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(30, 58, 95, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            pointer-events: none;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 50px 50px;
+            }
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(2, 8, 23, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            height: 80px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text {
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            color: white;
+        }
+
+        .logo-tagline {
+            font-size: 0.7rem;
+            color: var(--cyan);
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a:hover {
+            color: var(--cyan);
+        }
+
+        .btn-nav {
+            background: var(--orange);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(255, 107, 26, 0.3);
+        }
+
+        .alert-prelaunch {
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            animation: pulseAlert 2s infinite;
+        }
+
+        @keyframes pulseAlert {
+            0% {
+                box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(251, 191, 36, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(251, 191, 36, 0);
+            }
+        }
+
+        /* --- Hero --- */
+        .hero {
+            padding: 180px 0 100px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s forwards;
+        }
+
+        .badge-hero {
+            display: inline-block;
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--cyan);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-val {
+            font-size: 1.5rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--cyan);
+            color: var(--bg-dark);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--border);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .hero-visual {
+            opacity: 0;
+            transform: scale(0.9);
+            animation: scaleIn 0.8s 0.3s forwards;
+        }
+
+        .compare-card {
+            background: var(--glass);
+            border: 1px solid var(--cyan);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .compare-table th {
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        .compare-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tag-sincro {
+            color: var(--red);
+            font-weight: 700;
+        }
+
+        .tag-asincro {
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        /* --- Sections --- */
+        .section {
+            padding: 100px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .section.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* --- Diagnóstico --- */
+        .diag-container {
+            background: var(--bg-panel);
+            border-radius: 32px;
+            padding: 3rem;
+            border: 1px solid var(--border);
+            min-height: 500px;
+        }
+
+        .diag-step {
+            display: none;
+            animation: slideIn 0.5s forwards;
+        }
+
+        .diag-step.active {
+            display: block;
+        }
+
+        .diag-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .diag-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .diag-card:hover {
+            border-color: var(--cyan);
+            background: rgba(0, 212, 255, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .diag-card.selected {
+            border-color: var(--cyan);
+            background: rgba(0, 212, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+        }
+
+        .diag-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .diag-card h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .diag-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .btn-back {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 2rem;
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(139, 92, 246, 0.1));
+            border-radius: 24px;
+            padding: 3rem;
+            border: 1px solid var(--cyan);
+            animation: scaleIn 0.5s forwards;
+        }
+
+        /* --- Catalog --- */
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .filter-btn.active {
+            background: var(--cyan);
+            color: var(--bg-dark);
+            border-color: var(--cyan);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .course-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: 0.4s;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .course-num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: white;
+        }
+
+        .course-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .course-obj {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .course-badges {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .badge-s {
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .course-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .course-price {
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .btn-buy {
+            background: rgba(255, 107, 26, 0.1);
+            color: var(--orange);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border: 1px solid var(--orange);
+        }
+
+        .btn-buy:hover {
+            background: var(--orange);
+            color: white;
+        }
+
+        /* --- Escalera --- */
+        .ladder {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+            margin-top: 4rem;
+        }
+
+        .ladder-item {
+            flex: 1;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ladder-item::after {
+            content: '↓';
+            position: absolute;
+            right: -10px;
+            top: 50%;
+            font-size: 2rem;
+            color: var(--cyan);
+            opacity: 0.5;
+        }
+
+        @media (max-width: 768px) {
+            .ladder {
+                flex-direction: column;
+            }
+
+            .ladder-item::after {
+                right: 50%;
+                top: auto;
+                bottom: -20px;
+                transform: translateX(50%);
+            }
+        }
+
+        .ladder-item:last-child::after {
+            display: none;
+        }
+
+        .ladder-circle {
+            width: 60px;
+            height: 60px;
+            background: var(--bg-panel);
+            border: 2px solid var(--cyan);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-weight: 700;
+            color: var(--cyan);
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .hero-btns {
+                justify-content: center;
+            }
+
+            .courses-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .diag-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .diag-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Final CTA */
+        .final-cta {
+            background: radial-gradient(circle at center, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
+            text-align: center;
+            padding: 120px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .cta-price-tag {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            margin: 2rem 0;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .fee-breakdown {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 16px;
+            display: inline-block;
+            text-align: left;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 80px 0 40px;
+            border-top: 1px solid var(--border);
+            background: #01040a;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .footer h4 {
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer ul {
+            list-style: none;
+        }
+
+        .footer li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer a {
+            color: var(--text-muted);
+        }
+
+        .footer a:hover {
+            color: var(--cyan);
+        }
+
+        .copyright {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="grid-bg"></div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">
+                <span class="logo-text">PROJECT CONTROL AI</span>
+                <span class="logo-tagline">ACADEMY</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="index.html#cursos">Cursos en Vivo</a>
+                <a href="academy.html">Academy</a>
+                <a href="index.html#material-estudio">Recursos</a>
+                <a href="index.html#consultoria">Consultoría</a>
+                <a href="#hotmart" class="btn-nav">Ver en Hotmart →</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="container hero">
+        <div class="hero-content">
+            <div class="alert-prelaunch">
+                <span>🚀</span> NUESTRA PRIMERA PUBLICACIÓN SERÁ EL DÍA 20/03 EN HOTMART
+            </div>
+            <span class="badge-hero">⚡ ASINCRÓNICO · A TU RITMO · ACCESO ILIMITADO</span>
+            <h1 class="hero-title">Sin horarios. Sin esperar grupo. Directo a tu problema.</h1>
+            <p class="hero-subtitle">20 micro-cursos de ingeniería con IA — 2 horas cada uno, $11.99 USD, cuando tú
+                puedas. Elige tu disciplina. Resuelve hoy.</p>
+
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-val">20</span>
+                    <span class="stat-label">Micro-cursos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-val">2-3h</span>
+                    <span class="stat-label">Por curso</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-val">$11.99</span>
+                    <span class="stat-label">Inversión única</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-val">6 Rutas</span>
+                    <span class="stat-label">Especializadas</span>
+                </div>
+            </div>
+
+            <div class="hero-btns">
+                <a href="#catalogo" class="btn-primary">ENCUENTRA TU CURSO → $11.99 USD</a>
+                <a href="index.html#cursos" class="btn-outline">Ver cursos en vivo</a>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <div class="compare-card">
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th class="tag-sincro">🔴 SINCRÓNICO</th>
+                            <th class="tag-asincro">🟢 ASINCRÓNICO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Precio</td>
+                            <td>S/200–300</td>
+                            <td>$11.99 USD</td>
+                        </tr>
+                        <tr>
+                            <td>Horario</td>
+                            <td>Fijo (L/M/J 7PM)</td>
+                            <td>Cuando tú puedas</td>
+                        </tr>
+                        <tr>
+                            <td>Duración</td>
+                            <td>15 horas / 5 sesiones</td>
+                            <td>2–3 horas por curso</td>
+                        </tr>
+                        <tr>
+                            <td>Grupo mín.</td>
+                            <td>Requiere grupo</td>
+                            <td>Compra individual</td>
+                        </tr>
+                        <tr>
+                            <td>Acceso</td>
+                            <td>Temporal</td>
+                            <td>Ilimitado de por vida</td>
+                        </tr>
+                        <tr>
+                            <td>Ideal para</td>
+                            <td>Formación profunda</td>
+                            <td>Resolver un problema YA</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </header>
+
+    <!-- DIAGNÓSTICO -->
+    <section class="section container" id="diagnostico">
+        <div class="section-header">
+            <h2 class="section-title">¿DÓNDE ESTÁS TÚ?</h2>
+            <p>Selecciona tu disciplina y etapa actual para recibir una ruta de aprendizaje optimizada por IA.</p>
+        </div>
+
+        <div class="diag-container" id="diag-app">
+            <!-- Paso 1 -->
+            <div class="diag-step active" id="step-1">
+                <h3>PASO 1 — ¿Cuál es tu disciplina?</h3>
+                <div class="diag-grid">
+                    <div class="diag-card" onclick="selectDisciplina('hse', this)">
+                        <span class="diag-icon">🦺</span>
+                        <h4>HSE / Seguridad</h4>
+                        <p>Jefe HSE, Prevencionista, Supervisor SST</p>
+                    </div>
+                    <div class="diag-card" onclick="selectDisciplina('qaqc', this)">
+                        <span class="diag-icon">📋</span>
+                        <h4>QA/QC / Calidad</h4>
+                        <p>Inspector de Calidad, Jefe QA, Auditor</p>
+                    </div>
+                    <div class="diag-card" onclick="selectDisciplina('costos', this)">
+                        <span class="diag-icon">💰</span>
+                        <h4>Costos / Licitaciones</h4>
+                        <p>Presupuestador, Oficina Técnica, Licitaciones</p>
+                    </div>
+                    <div class="diag-card" onclick="selectDisciplina('comisionamiento', this)">
+                        <span class="diag-icon">⚙️</span>
+                        <h4>Commissioning / MEP</h4>
+                        <p>Ing. Comisionamiento, Supervisor MEP</p>
+                    </div>
+                    <div class="diag-card" onclick="selectDisciplina('pmo', this)">
+                        <span class="diag-icon">📊</span>
+                        <h4>PMO / Control</h4>
+                        <p>Scheduler, Jefe PMO, Gerente de Control</p>
+                    </div>
+                    <div class="diag-card" onclick="selectDisciplina('contratos', this)">
+                        <span class="diag-icon">📜</span>
+                        <h4>Contratos / Claims</h4>
+                        <p>Adm. Contratos, Claims Manager, Legal</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 2 -->
+            <div class="diag-step" id="step-2">
+                <button class="btn-back" onclick="goToStep(1)">← Volver</button>
+                <h3>PASO 2 — ¿En qué etapa del proyecto estás?</h3>
+                <div class="diag-grid">
+                    <div class="diag-card" onclick="selectEtapa('licitacion', this)">
+                        <span class="diag-icon">📁</span>
+                        <h4>Licitación / Inicio</h4>
+                    </div>
+                    <div class="diag-card" onclick="selectEtapa('planificacion', this)">
+                        <span class="diag-icon">📐</span>
+                        <h4>Planificación</h4>
+                    </div>
+                    <div class="diag-card" onclick="selectEtapa('ejecucion', this)">
+                        <span class="diag-icon">🏗️</span>
+                        <h4>Ejecución en Campo</h4>
+                    </div>
+                    <div class="diag-card" onclick="selectEtapa('control', this)">
+                        <span class="diag-icon">📈</span>
+                        <h4>Control y Seguimiento</h4>
+                    </div>
+                    <div class="diag-card" onclick="selectEtapa('cierre', this)">
+                        <span class="diag-icon">🔒</span>
+                        <h4>Cierre / Post-Obra</h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resultado -->
+            <div class="diag-step" id="step-result">
+                <button class="btn-back" onclick="goToStep(2)">← Cambiar etapa</button>
+                <div class="result-box" id="result-content">
+                    <!-- Dinámico -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CATÁLOGO -->
+    <section class="section container" id="catalogo">
+        <div class="section-header">
+            <h2 class="section-title">LOS 20 MICRO-CURSOS</h2>
+            <p>Acceso inmediato. Elige el bloque que necesitas resolver hoy.</p>
+        </div>
+
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterCursos('todos', this)">Todos</button>
+            <button class="filter-btn" onclick="filterCursos('bloque-1', this)">Bloque 1: Fundamentos</button>
+            <button class="filter-btn" onclick="filterCursos('bloque-2', this)">Bloque 2: Especialidades</button>
+            <button class="filter-btn" onclick="filterCursos('bloque-3', this)">Bloque 3: Producción</button>
+            <button class="filter-btn" onclick="filterCursos('bloque-4', this)">Bloque 4: Control</button>
+            <button class="filter-btn" onclick="filterCursos('bloque-5', this)">Bloque 5: Élite MCP</button>
+        </div>
+
+        <div class="courses-grid" id="courses-container">
+            <!-- Dinámico -->
+        </div>
+    </section>
+
+    <!-- ESCALERA DE VALOR -->
+    <section class="section container">
+        <div class="section-header">
+            <h2 class="section-title">TU ASCENSO PROFESIONAL</h2>
+            <p>Empieza por $11.99. Avanza a tu ritmo. Sin presión.</p>
+        </div>
+
+        <div class="ladder">
+            <div class="ladder-item">
+                <div class="ladder-circle">1</div>
+                <h4>Micro-curso individual</h4>
+                <p class="stat-val">$11.99 USD</p>
+                <p class="stat-label">"Resuelve un problema puntual"</p>
+            </div>
+            <div class="ladder-item">
+                <div class="ladder-circle">2</div>
+                <h4>Bundle de Ruta</h4>
+                <p class="stat-val">$49.99 USD</p>
+                <p class="stat-label">"Domina tu especialidad completa"</p>
+            </div>
+            <div class="ladder-item">
+                <div class="ladder-circle">3</div>
+                <h4>Curso Sincrónico</h4>
+                <p class="stat-val">S/200–300</p>
+                <p class="stat-label">"Formación profunda con el Ing. Aurelio"</p>
+            </div>
+            <div class="ladder-item">
+                <div class="ladder-circle">4</div>
+                <h4>Consultoría</h4>
+                <p class="stat-val">A cotizar</p>
+                <p class="stat-label">"Implementación en tu empresa"</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRÓXIMAMENTE -->
+    <section class="section container">
+        <div class="section-header">
+            <h2 class="section-title">PRÓXIMAMENTE (FASE 2)</h2>
+        </div>
+        <div class="courses-grid">
+            <div class="course-card" style="opacity: 0.6; filter: grayscale(0.5);">
+                <span class="badge-hero" style="position: absolute; top: 1rem; right: 1rem;">PRÓXIMO</span>
+                <span class="diag-icon">🏘️</span>
+                <h3>IA para RRCC — Relaciones Comunitarias</h3>
+                <p class="course-obj">Disciplina: Social/Minería</p>
+                <a href="https://wa.me/51993147501" class="btn-outline">Notificarme →</a>
+            </div>
+            <div class="course-card" style="opacity: 0.6; filter: grayscale(0.5);">
+                <span class="badge-hero" style="position: absolute; top: 1rem; right: 1rem;">PRÓXIMO</span>
+                <span class="diag-icon">📐</span>
+                <h3>Dashboard QA/QC con Power BI</h3>
+                <p class="course-obj">Disciplina: Calidad</p>
+                <a href="https://wa.me/51993147501" class="btn-outline">Notificarme →</a>
+            </div>
+            <div class="course-card" style="opacity: 0.6; filter: grayscale(0.5);">
+                <span class="badge-hero" style="position: absolute; top: 1rem; right: 1rem;">PRÓXIMO</span>
+                <span class="diag-icon">🚚</span>
+                <h3>IA para Logística de Obra</h3>
+                <p class="course-obj">Disciplina: Supply Chain</p>
+                <a href="https://wa.me/51993147501" class="btn-outline">Notificarme →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta">
+        <div class="container" style="max-width: 700px;">
+            <h2>¿CUÁL ES TU PROBLEMA HOY?</h2>
+            <p>Elige tu curso. Págalo. Resuélvelo en 2 horas.</p>
+            <div class="cta-price-tag">$11.99 USD</div>
+            <p class="hero-subtitle">Acceso ilimitado de por vida</p>
+
+            <div class="fee-breakdown">
+                <div>Price to student: <strong>$11.99</strong></div>
+                <div style="color: var(--red);">Hotmart Fee: <strong>−$1.69</strong></div>
+                <div
+                    style="color: var(--green); border-top: 1px solid var(--border); margin-top: 5px; padding-top: 5px;">
+                    Producer receives: <strong>$10.30 ✓</strong>
+                </div>
+            </div>
+
+            <div class="hero-btns" style="justify-content: center;">
+                <a href="#hotmart" class="btn-primary"
+                    style="background: var(--orange); box-shadow: 0 10px 25px rgba(255, 107, 26, 0.3);">IR A HOTMART —
+                    COMPRAR AHORA</a>
+                <a href="https://wa.me/51993147501" class="btn-outline"
+                    style="border-color: var(--cyan); color: var(--cyan);">¿Tienes dudas? WhatsApp</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="index.html" class="logo" style="margin-bottom: 2rem; display: block;">
+                        <span class="logo-text">PROJECT CONTROL AI</span>
+                        <span class="logo-tagline">ACADEMY</span>
+                    </a>
+                    <p style="font-size: 0.9rem;">POTENCIANDO LA INGENIERÍA CON INTELIGENCIA ARTIFICIAL</p>
+                    <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 2rem;">ACADEMY · HOTMART · $11.99
+                        USD</p>
+                </div>
+                <div>
+                    <h4>Explorar</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="index.html#cursos">Cursos en Vivo</a></li>
+                        <li><a href="academy.html">Academy</a></li>
+                        <li><a href="index.html#material-estudio">Recursos</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="https://wa.me/51993147501">WhatsApp</a></li>
+                        <li><a href="https://www.tiktok.com/@project.control.a">TikTok</a></li>
+                        <li><a href="mailto:contacto@projectcontrolai.com">Email</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2026 Project Control AI. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DATA DE LOS 20 CURSOS
+        const cursos = [
+            { id: 1, bloque: "bloque-1", color: "#10b981", titulo: "01 · El Despertar: Dashboards HTML y Mermaid", objetivo: "Genera activos visuales sin saber programar", nivel: "Básico", disciplina: "Transversal" },
+            { id: 2, bloque: "bloque-1", color: "#10b981", titulo: "02 · Escáner Forense con NotebookLM", objetivo: "Domina expedientes de miles de páginas en minutos", nivel: "Básico", disciplina: "Transversal" },
+            { id: 3, bloque: "bloque-1", color: "#10b981", titulo: "03 · Deep Research y Sourcing Global", objetivo: "Investiga precios y tecnologías internacionales", nivel: "Básico", disciplina: "Transversal" },
+            { id: 4, bloque: "bloque-2", color: "#3b82f6", titulo: "04 · IA para HSE — Seguridad y Salud", objetivo: "Automatiza IPERC, ATS y reportes de incidentes", nivel: "Intermedio", disciplina: "HSE" },
+            { id: 5, bloque: "bloque-2", color: "#3b82f6", titulo: "05 · IA para Gestión de Calidad", objetivo: "PETS, Planes de Inspección y Dossier QA/QC", nivel: "Intermedio", disciplina: "QA/QC" },
+            { id: 6, bloque: "bloque-2", color: "#3b82f6", titulo: "06 · IA para Administradores de Contratos", objetivo: "Claims, cláusulas y SOW automatizados", nivel: "Intermedio", disciplina: "Legal" },
+            { id: 7, bloque: "bloque-2", color: "#3b82f6", titulo: "07 · IA para Residentes y Jefes de Campo", objetivo: "Informes diarios y consultas técnicas", nivel: "Básico", disciplina: "Campo" },
+            { id: 8, bloque: "bloque-3", color: "#f97316", titulo: "08 · WBS y Metrados Inteligentes", objetivo: "EDT automatizada y sustento de cantidades", nivel: "Intermedio", disciplina: "Costos" },
+            { id: 9, bloque: "bloque-3", color: "#f97316", titulo: "09 · APU con IA Studio", objetivo: "APUs optimizados con datos históricos", nivel: "Intermedio", disciplina: "Costos" },
+            { id: 10, bloque: "bloque-3", color: "#f97316", titulo: "10 · VBA: De la IA al Formato S10", objetivo: "Exporta presupuestos listos para S10", nivel: "Avanzado", disciplina: "Costos" },
+            { id: 11, bloque: "bloque-3", color: "#f97316", titulo: "11 · Nivelación de Recursos 2D", objetivo: "Optimiza frentes y elimina picos de personal", nivel: "Avanzado", disciplina: "Planeamiento" },
+            { id: 12, bloque: "bloque-4", color: "#ef4444", titulo: "12 · Cálculo del Valor Planeado (PV) e IA", objetivo: "Planned Value automático con Curva S", nivel: "Avanzado", disciplina: "EVM" },
+            { id: 13, bloque: "bloque-4", color: "#ef4444", titulo: "13 · Dashboards en Google Stitch", objetivo: "KPIs de obra desde cualquier dispositivo", nivel: "Avanzado", disciplina: "Control" },
+            { id: 14, bloque: "bloque-4", color: "#ef4444", titulo: "14 · Reportabilidad Ejecutiva con Agentes", objetivo: "Informes Word/PPT generados por IA", nivel: "Avanzado", disciplina: "Gerencia" },
+            { id: 15, bloque: "bloque-4", color: "#ef4444", titulo: "15 · Gestión de Tokens: Pro vs Free", objetivo: "Documentos técnicos extensos con coherencia", nivel: "Intermedio", disciplina: "Transversal" },
+            { id: 16, bloque: "bloque-5", color: "#8b5cf6", titulo: "16 · Cirugía de Datos en Excel con Antigravity", objetivo: "Edición quirúrgica de archivos masivos", nivel: "Élite", disciplina: "Automatización" },
+            { id: 17, bloque: "bloque-5", color: "#8b5cf6", titulo: "17 · MCP para Primavera P6 y Power BI", objetivo: "Actualiza cronogramas en P6 desde IA", nivel: "Élite", disciplina: "Planeamiento" },
+            { id: 18, bloque: "bloque-5", color: "#8b5cf6", titulo: "18 · Diseño CAD y Civil 3D Generativo", objetivo: "Genera planos dictando parámetros", nivel: "Élite", disciplina: "Diseño" },
+            { id: 19, bloque: "bloque-5", color: "#8b5cf6", titulo: "19 · Inventor y Blender Automation", objetivo: "Modelado mecánico y renders 3D", nivel: "Élite", disciplina: "Mecánico" },
+            { id: 20, bloque: "bloque-5", color: "#8b5cf6", titulo: "20 · Arquitectura de Agentes Locales", objetivo: "IA 100% privada para datos confidenciales", nivel: "Élite", disciplina: "Automatización" }
+        ];
+
+        // LÓGICA DE RUTAS
+        const rutas = {
+            "hse-licitacion": { nombre: "Ruta HSE — Pre-Obra", cursos: [1, 2, 4], desc: "Ideal para perfiles de Licitación que necesitan análisis forense y dashboards rápidos." },
+            "hse-planificacion": { nombre: "Ruta HSE — Planificación", cursos: [1, 4, 15], desc: "Enfocado en prevención estratégica y gestión documental masiva." },
+            "hse-ejecucion": { nombre: "Ruta HSE — Ejecución", cursos: [1, 4, 7, 15], desc: "Control total en campo con IPERC y reportabilidad inmediata." },
+            "hse-control": { nombre: "Ruta HSE — Control", cursos: [4, 14, 15], desc: "Visibilidad ejecutiva y auditoría de incidentes asistida por IA." },
+            "hse-cierre": { nombre: "Ruta HSE — Cierre", cursos: [2, 14, 15], desc: "Dossier de seguridad y lecciones aprendidas automatizadas." },
+
+            "qaqc-licitacion": { nombre: "Ruta QA/QC — Pre-Obra", cursos: [2, 5, 8], desc: "Análisis de términos de referencia y metría inteligente." },
+            "qaqc-planificacion": { nombre: "Ruta QA/QC — Planificación", cursos: [1, 5, 8], desc: "Configuración de planes de inspección asistidos." },
+            "qaqc-ejecucion": { nombre: "Ruta QA/QC — Ejecución", cursos: [2, 5, 7, 14], desc: "Control de calidad en campo y reportes de no conformidad." },
+            "qaqc-control": { nombre: "Ruta QA/QC — Control", cursos: [5, 13, 14, 15], desc: "Métricas de defectología y dashboards ejecutivos." },
+            "qaqc-cierre": { nombre: "Ruta QA/QC — Cierre", cursos: [2, 5, 14, 15], desc: "Compilación de Dossier final con agentes inteligentes." },
+
+            "costos-licitacion": { nombre: "Ruta Costos — Licitación", cursos: [3, 8, 9, 10], desc: "Sourcing global, metrados y APUs ultra-rápidos para ganar." },
+            "costos-planificacion": { nombre: "Ruta Costos — Planificación", cursos: [1, 8, 9, 11], desc: "Estructura de costos y nivelación de recursos crítica." },
+            "costos-ejecucion": { nombre: "Ruta Costos — Ejecución", cursos: [8, 9, 10, 16], desc: "Gestión de adicionales y reprogramación de costos." },
+            "costos-control": { nombre: "Ruta Costos — Control", cursos: [12, 13, 14, 16], desc: "EVM 4.0: Valor ganado y proyecciones de costo real." },
+            "costos-cierre": { nombre: "Ruta Costos — Cierre", cursos: [10, 14, 15, 16], desc: "Saturación de S10 y liquidación financiera." },
+
+            "comisionamiento-licitacion": { nombre: "Ruta Commissioning — Pre-Obra", cursos: [2, 3, 7], desc: "Evaluación técnica de sistemas y sourcing de equipos." },
+            "comisionamiento-planificacion": { nombre: "Ruta Commissioning — Planificación", cursos: [1, 7, 11], desc: "Estrategia MEP y secuencia de pre-comisionamiento." },
+            "comisionamiento-ejecucion": { nombre: "Ruta Commissioning — Ejecución", cursos: [2, 7, 16, 17], desc: "Pruebas en sitio y actualización de cronogramas técnicos." },
+            "comisionamiento-control": { nombre: "Ruta Commissioning — Control", cursos: [13, 16, 17], desc: "Integración de KPIs de terminación mecánica." },
+            "comisionamiento-cierre": { nombre: "Ruta Commissioning — Cierre", cursos: [14, 15, 16], desc: "Transferencia de activos y documentación final." },
+
+            "pmo-licitacion": { nombre: "Ruta PMO — Pre-Obra", cursos: [1, 3, 12], desc: "Setup inicial de oficina técnica y control de hitos." },
+            "pmo-planificacion": { nombre: "Ruta PMO — Planificación", cursos: [1, 11, 12, 17], desc: "Master Schedule y optimización de frentes." },
+            "pmo-ejecucion": { nombre: "Ruta PMO — Ejecución", cursos: [12, 13, 16, 17], desc: "Intermediación entre planeamiento y gerencia." },
+            "pmo-control": { nombre: "Ruta PMO — Control", cursos: [12, 13, 14, 17], desc: "Reportabilidad total y gobernanza de datos." },
+            "pmo-cierre": { nombre: "Ruta PMO — Cierre", cursos: [14, 15, 16], desc: "Capitalización de activos y cierre administrativo." },
+
+            "contratos-licitacion": { nombre: "Ruta Contratos — Pre-Obra", cursos: [2, 3, 6], desc: "Auditoría de pliegos y análisis de riesgos legales." },
+            "contratos-planificacion": { nombre: "Ruta Contratos — Planificación", cursos: [1, 6, 15], desc: "Scurving de contratos y administración proactiva." },
+            "contratos-ejecucion": { nombre: "Ruta Contratos — Ejecución", cursos: [2, 6, 14, 15], desc: "Gestión de cambios (Variations) y sustento de claims." },
+            "contratos-control": { nombre: "Ruta Contratos — Control", cursos: [6, 13, 14, 15], desc: "Métricas de cumplimiento contractual y penalidades." },
+            "contratos-cierre": { nombre: "Ruta Contratos — Cierre", cursos: [2, 6, 14, 15], desc: "Claims definitivos y arbitraje asistido." }
+        };
+
+        let selectedDisciplina = "";
+        let selectedEtapa = "";
+
+        // RENDER CURSOS
+        function renderCursos(data) {
+            const container = document.getElementById('courses-container');
+            container.innerHTML = data.map(c => `
+                <div class="course-card" data-bloque="${c.bloque}">
+                    <span class="course-num" style="background: ${c.color}">${c.bloque.split('-')[1]}</span>
+                    <h3>${c.titulo}</h3>
+                    <p class="course-obj">${c.objetivo}</p>
+                    <div class="course-badges">
+                        <span class="badge-s">⭐ ${c.nivel}</span>
+                        <span class="badge-s">🔧 ${c.disciplina}</span>
+                        <span class="badge-s">⏱️ 2–3 h</span>
+                    </div>
+                    <div class="course-footer">
+                        <span class="course-price">$11.99 USD</span>
+                        <a href="#hotmart" class="btn-buy">COMPRAR →</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // FILTROS
+        function filterCursos(bloque, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            if (bloque === 'todos') {
+                renderCursos(cursos);
+            } else {
+                renderCursos(cursos.filter(c => c.bloque === bloque));
+            }
+        }
+
+        // DIAGNÓSTICO
+        function selectDisciplina(disc, el) {
+            selectedDisciplina = disc;
+            document.querySelectorAll('#step-1 .diag-card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            setTimeout(() => goToStep(2), 400);
+        }
+
+        function selectEtapa(etapa, el) {
+            selectedEtapa = etapa;
+            document.querySelectorAll('#step-2 .diag-card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            showResult();
+        }
+
+        function goToStep(step) {
+            document.querySelectorAll('.diag-step').forEach(s => s.classList.remove('active'));
+            if (step === 1) document.getElementById('step-1').classList.add('active');
+            if (step === 2) document.getElementById('step-2').classList.add('active');
+            if (step === 3) document.getElementById('step-result').classList.add('active');
+        }
+
+        function showResult() {
+            const key = `${selectedDisciplina}-${selectedEtapa}`;
+            const ruta = rutas[key];
+            const resultBox = document.getElementById('result-content');
+
+            if (ruta) {
+                const rutaCursos = ruta.cursos.map(id => cursos.find(c => c.id === id));
+                const totalPrecio = (rutaCursos.length * 11.99).toFixed(2);
+                const bundlePrecio = (totalPrecio * 0.7).toFixed(2); // 30% desc aproximado
+
+                resultBox.innerHTML = `
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <span class="badge-hero" style="background: var(--purple); color: white;">TU RUTA IA PERSONALIZADA</span>
+                        <h2 style="font-size: 2.2rem; margin: 1rem 0;">${ruta.nombre}</h2>
+                        <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">${ruta.desc}</p>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 1rem; margin-bottom: 2rem;">
+                        ${rutaCursos.map((c, i) => `
+                            <div style="background: rgba(255,255,255,0.05); padding: 1rem 1.5rem; border-radius: 12px; display: flex; align-items: center; gap: 1rem; border: 1px solid var(--border);">
+                                <span style="background: ${c.color}; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">${i + 1}</span>
+                                <div>
+                                    <h4 style="font-size: 0.95rem;">${c.titulo}</h4>
+                                    <p style="font-size: 0.8rem; color: var(--text-muted);">${c.objetivo}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <div style="background: rgba(0, 0, 0, 0.3); padding: 2rem; border-radius: 20px; text-align: center; border: 1px dashed var(--cyan);">
+                        <p style="font-size: 0.9rem; color: var(--text-muted); text-decoration: line-through;">Precio total individual: $${totalPrecio} USD</p>
+                        <h3 style="font-size: 2rem; color: var(--gold); margin: 0.5rem 0;">Precio de Ruta Bundle: $${bundlePrecio} USD</h3>
+                        <p style="font-size: 0.8rem; color: var(--green); margin-bottom: 1.5rem;">Ahorro del 30% comprando la ruta completa</p>
+                        <a href="#hotmart" class="btn-primary" style="margin: 0 auto;">COMPRAR RUTA EN HOTMART →</a>
+                    </div>
+                    
+                    <div style="margin-top: 2rem; text-align: center;">
+                        <button class="btn-back" style="display: inline-flex;" onclick="goToStep(1)">Reiniciar diagnóstico</button>
+                    </div>
+                `;
+            }
+            goToStep(3);
+        }
+
+        // INTERSECTION OBSERVER PARA REVEAL
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section').forEach(s => observer.observe(s));
+
+        // INIT
+        renderCursos(cursos);
+
+    </script>
+</body>
+
+</html>

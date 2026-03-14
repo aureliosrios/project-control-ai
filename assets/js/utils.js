@@ -56,5 +56,20 @@ const PCAI_Utils = {
         } else {
             return 'Ocurrió un error inesperado al procesar los datos. Por favor, intente de nuevo.';
         }
+    },
+
+    // --- INICIALIZACIÓN DE BOTONES DE PAGO ---
+    // Busca elementos con [data-checkout="key"] y asigna el href desde PCAI_CONFIG
+    initCheckoutLinks() {
+        const checkoutElements = document.querySelectorAll('[data-checkout]');
+        if (checkoutElements.length === 0) return;
+
+        checkoutElements.forEach(el => {
+            const key = el.getAttribute('data-checkout');
+            if (PCAI_CONFIG.hotmart[key]) {
+                el.href = PCAI_CONFIG.hotmart[key];
+                console.log(`Checkout vinculado: ${key}`);
+            }
+        });
     }
 };

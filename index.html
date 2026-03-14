@@ -861,7 +861,7 @@
                             CUPOS DISPONIBLES</p>
                         <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 1.5rem;">
 
-                            <a href="https://pay.hotmart.com/N104187999C" target="_blank" class="hero-cta"
+                            <a data-checkout="licitaciones" target="_blank" class="hero-cta"
                                 style="background: #f97316; color: white; width: 100%; text-align: center; padding: 12px; font-weight: bold;">
                                 Pago Global (Tarjetas / Efectivo)
                             </a>
@@ -943,7 +943,7 @@
                         <p style="color: var(--accent-cyan); font-weight: bold; font-size: 0.8rem; text-align: center;">
                             CUPOS DISPONIBLES</p>
                         <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 1.5rem;">
-                            <a href="https://pay.hotmart.com/N104188538H" target="_blank" class="hero-cta"
+                            <a data-checkout="evm" target="_blank" class="hero-cta"
                                 style="background: #f97316; color: white; width: 100%; text-align: center; padding: 12px; font-weight: bold;">
                                 Pago Global (Tarjetas / Efectivo)
                             </a>
@@ -1025,7 +1025,7 @@
                         <p style="color: var(--accent-cyan); font-weight: bold; font-size: 0.8rem; text-align: center;">
                             CUPOS DISPONIBLES</p>
                         <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 1.5rem;">
-                            <a href="https://pay.hotmart.com/K104218834V" target="_blank" class="hero-cta"
+                            <a data-checkout="gestion_proyectos" target="_blank" class="hero-cta"
                                 style="background: #f97316; color: white; width: 100%; text-align: center; padding: 12px; font-weight: bold;">
                                 Pago Global (Tarjetas / Efectivo)
                             </a>
@@ -1112,7 +1112,7 @@
                         <p style="color: var(--accent-cyan); font-weight: bold; font-size: 0.8rem;">CUPOS DISPONIBLES
                         </p>
                         <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 1.5rem;">
-                            <a href="https://pay.hotmart.com/I104227016S" target="_blank" class="hero-cta"
+                            <a data-checkout="automation" target="_blank" class="hero-cta"
                                 style="background: #f97316; color: white; width: 100%; text-align: center; padding: 12px; font-weight: bold;">
                                 Pago Global (Tarjetas / Efectivo)
                             </a>
@@ -1197,7 +1197,7 @@
                         </p>
 
                         <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 1.5rem;">
-                            <a href="https://pay.hotmart.com/Q104228911C" target="_blank" class="hero-cta"
+                            <a data-checkout="p6" target="_blank" class="hero-cta"
                                 style="background: #f97316; color: white; width: 100%; text-align: center; padding: 12px; font-weight: bold;">
                                 Pago Global (Tarjetas / Efectivo)
                             </a>
@@ -1314,7 +1314,7 @@
                         <h4 style="color: #0070ba;">PayPal</h4>
                         <p><strong>Pago Global</strong></p>
                         <p style="font-size: 0.7rem; opacity: 0.8;">Visa / Master / AMEX</p>
-                        <a href="https://paypal.me/ProjectControlAI" target="_blank" class="nav-inscripcion-btn"
+                        <a data-checkout="paypal_global" target="_blank" class="nav-inscripcion-btn"
                             style="margin-top: 10px; width: 100%; font-size: 0.75rem; background: #0070ba; color: white; display: flex; align-items: center; justify-content: center; gap: 5px;">
                             Ir a PayPal
                         </a>
@@ -1597,6 +1597,9 @@
 
         setInterval(updateCountdown, 1000);
         updateCountdown();
+
+        // Inicializar enlaces de pago
+        PCAI_Utils.initCheckoutLinks();
     </script>
 
     <!-- BOTÓN FLOTANTE WHATSAPP -->

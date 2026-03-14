@@ -13,6 +13,10 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
+    <!-- SHARED ASSETS -->
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/utils.js"></script>
+
     <style>
         :root {
             --bg-dark: #020817;
@@ -758,7 +762,7 @@
                 <a href="academy.html">Academy</a>
                 <a href="index.html#material-estudio">Recursos</a>
                 <a href="index.html#consultoria">Consultoría</a>
-                <a href="#hotmart" class="btn-nav">Ver en Hotmart →</a>
+                <a data-hotmart-link="true" data-checkout="academy_bundle" class="btn-nav">Ver en Hotmart →</a>
             </div>
         </div>
     </nav>
@@ -1033,7 +1037,7 @@
             </div>
 
             <div class="hero-btns" style="justify-content: center;">
-                <a href="#hotmart" class="btn-primary"
+                <a data-checkout="academy_bundle" class="btn-primary"
                     style="background: var(--orange); box-shadow: 0 10px 25px rgba(255, 107, 26, 0.3);">IR A HOTMART —
                     COMPRAR AHORA</a>
                 <a href="https://wa.me/51993147501" class="btn-outline"
@@ -1161,10 +1165,13 @@
                     </div>
                     <div class="course-footer">
                         <span class="course-price">$11.99 USD</span>
-                        <a href="#hotmart" class="btn-buy">COMPRAR →</a>
+                        <a data-checkout="micro_${c.id < 10 ? '0' + c.id : c.id}" class="btn-buy">COMPRAR →</a>
                     </div>
                 </div>
             `).join('');
+
+            // Repasar enlaces de Hotmart después de inyectar el HTML
+            PCAI_Utils.initCheckoutLinks();
         }
 
         // FILTROS
@@ -1234,7 +1241,7 @@
                         <p style="font-size: 0.9rem; color: var(--text-muted); text-decoration: line-through;">Precio total individual: $${totalPrecio} USD</p>
                         <h3 style="font-size: 2rem; color: var(--gold); margin: 0.5rem 0;">Precio de Ruta Bundle: $${bundlePrecio} USD</h3>
                         <p style="font-size: 0.8rem; color: var(--green); margin-bottom: 1.5rem;">Ahorro del 30% comprando la ruta completa</p>
-                        <a href="#hotmart" class="btn-primary" style="margin: 0 auto;">COMPRAR RUTA EN HOTMART →</a>
+                        <a data-checkout="academy_bundle" class="btn-primary" style="margin: 0 auto;">COMPRAR RUTA EN HOTMART →</a>
                     </div>
                     
                     <div style="margin-top: 2rem; text-align: center;">

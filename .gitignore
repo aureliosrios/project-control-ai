@@ -37,3 +37,6 @@ build/
 # Ignorar archivos específicos de desarrollo
 test-local.html
 pruebas-*.html
+
+# Ignorar carpeta generada por Claude Code
+.claude/

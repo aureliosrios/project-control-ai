@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Consultoría | Project Control AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = { darkMode:"class", theme:{ extend:{ colors:{ "surface-dim":"#0b1323","background":"#0b1323","surface-container-low":"#131c2b","primary-container":"#00d4ff","on-surface-variant":"#bbc9cf","secondary-container":"#f4630f","on-secondary-container":"#4d1900","surface-container-highest":"#2d3546","surface":"#0b1323","on-primary-container":"#00586b","surface-container-high":"#222a3a","primary-fixed-dim":"#3cd7ff","outline":"#859398","surface-container":"#18202f","primary":"#a8e8ff","secondary":"#ffb596","on-primary":"#003642","outline-variant":"#3c494e","surface-container-lowest":"#060e1d","on-surface":"#dbe2f8","on-background":"#dbe2f8" }, fontFamily:{ "headline":["Space Grotesk"],"body":["Inter"],"label":["Inter"] }, borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"} } } }
+</script>
+<style>
+  body{background-color:#020817}
+  .glass-card{background:rgba(45,53,70,0.4);backdrop-filter:blur(12px)}
+  .text-gradient-cyan{background:linear-gradient(to right,#a8e8ff,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .technical-grid{background-image:radial-gradient(circle at 2px 2px,rgba(0,212,255,0.05) 1px,transparent 0);background-size:40px 40px}
+</style>
+</head>
+<body class="font-body text-on-surface-variant antialiased overflow-x-hidden technical-grid">
+
+<nav class="fixed top-0 w-full z-50 bg-[#020817]/60 backdrop-blur-xl shadow-2xl shadow-cyan-900/10">
+  <div class="flex justify-between items-center px-8 py-3 max-w-7xl mx-auto">
+    <a href="index.html" class="flex items-center gap-3">
+      <img src="assets/images/Logotipo.png" alt="Logo" class="h-10 w-auto object-contain"/>
+      <div class="flex flex-col">
+        <span class="text-xl font-bold tracking-tighter text-white font-headline">PROJECT CONTROL AI</span>
+        <span class="text-xs text-cyan-400 tracking-widest uppercase">Academy & Consultoría</span>
+      </div>
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      <a class="text-slate-400 hover:text-white transition-colors" href="formacion.html">Formación</a>
+      <a class="text-cyan-400 font-bold border-b-2 border-cyan-400 pb-1" href="consultoria.html">Consultoría</a>
+      <a class="text-slate-400 hover:text-white transition-colors" href="recursos.html">Recursos</a>
+    </div>
+    <a href="https://wa.me/51993147501?text=Hola,%20quiero%20agendar%20un%20diagn%C3%B3stico%20gratuito" target="_blank" class="bg-primary-container text-on-primary font-bold px-6 py-2 rounded-full hover:scale-105 transition-all duration-300 active:scale-95">Agendar Consultoría</a>
+  </div>
+  <div class="h-[1px] w-full bg-gradient-to-r from-transparent via-slate-800/20 to-transparent"></div>
+</nav>
+
+<main class="pt-24 pb-20">
+  <!-- Hero -->
+  <section class="relative px-8 py-20 max-w-7xl mx-auto text-center lg:text-left">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high border border-outline-variant mb-6">
+          <span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_10px_rgba(244,99,15,0.8)]"></span>
+          <span class="text-xs font-label uppercase tracking-widest text-secondary">Optimización Inteligente</span>
+        </div>
+        <h1 class="text-5xl lg:text-7xl font-headline font-bold text-on-surface leading-[1.1] tracking-tight mb-8">
+          Automatización <span class="text-gradient-cyan">a medida</span> para tu empresa de construcción
+        </h1>
+        <p class="text-xl text-on-surface-variant max-w-xl mb-10 leading-relaxed">Eliminamos el error humano y aceleramos la toma de decisiones con flujos de trabajo autónomos diseñados específicamente para el sector constructor.</p>
+        <a href="https://wa.me/51993147501?text=Hola,%20quiero%20agendar%20un%20diagn%C3%B3stico%20gratuito" target="_blank" class="bg-secondary-container text-white px-8 py-4 rounded-full font-bold flex items-center justify-center lg:justify-start gap-2 transition-transform hover:scale-105 active:scale-95 w-fit">
+          Agendar Diagnóstico Gratuito — 30 min
+          <span class="material-symbols-outlined text-lg">arrow_forward</span>
+        </a>
+      </div>
+      <div class="relative">
+        <div class="absolute inset-0 bg-primary/10 blur-[100px] rounded-full"></div>
+        <div class="relative glass-card border border-outline-variant p-8 rounded-xl shadow-2xl">
+          <div class="space-y-6">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-cyan-400/20 flex items-center justify-center text-cyan-400"><span class="material-symbols-outlined">psychology</span></div>
+              <div><p class="font-bold text-on-surface">Estrategia de Datos</p><p class="text-sm text-on-surface-variant">Centralización de información crítica del proyecto.</p></div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-cyan-400/20 flex items-center justify-center text-cyan-400"><span class="material-symbols-outlined">robot_2</span></div>
+              <div><p class="font-bold text-on-surface">Agentes IA</p><p class="text-sm text-on-surface-variant">Automatización de reportes, análisis y alertas.</p></div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-cyan-400/20 flex items-center justify-center text-cyan-400"><span class="material-symbols-outlined">monitoring</span></div>
+              <div><p class="font-bold text-on-surface">Control Predictivo EVM</p><p class="text-sm text-on-surface-variant">Alertas preventivas de desviación de costo y plazo.</p></div>
+            </div>
+            <div class="pt-4 border-t border-outline-variant/20">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary-container/30">
+                  <img src="assets/images/Aurelio Solorzano.png" alt="Ing. Aurelio Solorzano Rios" class="w-full h-full object-cover"/>
+                </div>
+                <div>
+                  <div class="text-xs text-on-surface-variant font-label">Eficiencia Comprobada</div>
+                  <div class="text-xl font-headline font-bold text-on-surface">+40% ROI promedio</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Cards (sin precios) -->
+  <section class="px-8 py-20 max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl font-headline font-bold text-on-surface mb-4">Soluciones de Ingeniería Digital</h2>
+        <p class="text-on-surface-variant">Paquetes estratégicos diseñados para escalar la operatividad de tu constructora.</p>
+      </div>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+
+      <!-- Card 1: Automatización de Procesos -->
+      <div class="group relative bg-surface-container-low p-8 rounded-xl border border-transparent hover:border-primary-container/30 transition-all duration-500 hover:bg-surface-container overflow-hidden">
+        <div class="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+          <span class="material-symbols-outlined text-7xl">settings_input_component</span>
+        </div>
+        <div class="w-14 h-14 bg-surface-container-highest rounded-xl flex items-center justify-center text-primary-container mb-8 transition-transform group-hover:scale-110">
+          <span class="material-symbols-outlined text-3xl">settings_input_component</span>
+        </div>
+        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Automatización de Procesos</h3>
+        <p class="text-on-surface-variant leading-relaxed">Conectamos tus herramientas (Excel, ERP, Procore) para que los datos fluyan sin intervención manual. Reducción de errores y tiempo de reporte.</p>
+        <div class="mt-8">
+          <a href="https://wa.me/51993147501?text=Hola,%20me%20interesa%20Automatizaci%C3%B3n%20de%20Procesos" target="_blank" class="text-primary-container font-bold text-sm flex items-center gap-2 hover:gap-3 transition-all">
+            Consultar <span class="material-symbols-outlined text-sm">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 2: Dashboards de Control -->
+      <div class="group relative bg-surface-container-low p-8 rounded-xl border border-transparent hover:border-primary-container/30 transition-all duration-500 hover:bg-surface-container overflow-hidden">
+        <div class="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+          <span class="material-symbols-outlined text-7xl">monitoring</span>
+        </div>
+        <div class="w-14 h-14 bg-surface-container-highest rounded-xl flex items-center justify-center text-primary-container mb-8 transition-transform group-hover:scale-110">
+          <span class="material-symbols-outlined text-3xl">monitoring</span>
+        </div>
+        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Dashboards de Control</h3>
+        <p class="text-on-surface-variant leading-relaxed">Visualización en tiempo real de costos, avances y KPIs críticos para directivos y residentes. Decisiones rápidas basadas en datos.</p>
+        <div class="mt-8">
+          <a href="https://wa.me/51993147501?text=Hola,%20me%20interesa%20un%20Dashboard%20de%20Control" target="_blank" class="text-primary-container font-bold text-sm flex items-center gap-2 hover:gap-3 transition-all">
+            Consultar <span class="material-symbols-outlined text-sm">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 3: Control EVM con IA (Recomendado) -->
+      <div class="group relative bg-surface-container-low p-8 rounded-xl border border-primary/20 bg-primary/5 hover:border-primary-container/30 transition-all duration-500 overflow-hidden">
+        <div class="absolute top-4 right-4 bg-secondary-container px-2 py-1 rounded text-[10px] font-bold text-white uppercase tracking-widest">Recomendado</div>
+        <div class="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+          <span class="material-symbols-outlined text-7xl">psychology</span>
+        </div>
+        <div class="w-14 h-14 bg-surface-container-highest rounded-xl flex items-center justify-center text-secondary mb-8 transition-transform group-hover:scale-110">
+          <span class="material-symbols-outlined text-3xl">psychology</span>
+        </div>
+        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Control EVM con IA</h3>
+        <p class="text-on-surface-variant leading-relaxed">Predicción de desviaciones presupuestarias y de cronograma mediante IA. Forecasting automático con métricas SPI/CPI en tiempo real.</p>
+        <div class="mt-8">
+          <a href="https://wa.me/51993147501?text=Hola,%20me%20interesa%20Control%20EVM%20con%20IA" target="_blank" class="text-secondary font-bold text-sm flex items-center gap-2 hover:gap-3 transition-all">
+            Consultar <span class="material-symbols-outlined text-sm">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it Works -->
+  <section class="px-8 py-20 bg-surface-container-lowest">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-20">
+        <h2 class="text-3xl font-headline font-bold text-on-surface mb-4">El camino a la obra autónoma</h2>
+        <p class="text-on-surface-variant">Metodología ágil diseñada para no interrumpir el flujo de tu proyecto.</p>
+      </div>
+      <div class="relative grid md:grid-cols-3 gap-12">
+        <div class="hidden md:block absolute top-12 left-[15%] right-[15%] h-[2px] bg-gradient-to-r from-primary/10 via-primary-container/40 to-primary/10"></div>
+        <div class="relative flex flex-col items-center text-center">
+          <div class="w-24 h-24 rounded-full bg-surface-container-high border-2 border-primary-container/30 flex items-center justify-center mb-6 z-10 bg-surface shadow-xl">
+            <span class="material-symbols-outlined text-4xl text-primary-container">troubleshoot</span>
+          </div>
+          <h4 class="text-xl font-headline font-bold text-on-surface mb-3">Diagnóstico</h4>
+          <p class="text-sm text-on-surface-variant max-w-[240px]">Auditoría profunda de tus flujos actuales e identificación de cuellos de botella.</p>
+        </div>
+        <div class="relative flex flex-col items-center text-center">
+          <div class="w-24 h-24 rounded-full bg-surface-container-high border-2 border-primary-container/30 flex items-center justify-center mb-6 z-10 bg-surface shadow-xl">
+            <span class="material-symbols-outlined text-4xl text-primary-container">architecture</span>
+          </div>
+          <h4 class="text-xl font-headline font-bold text-on-surface mb-3">Propuesta</h4>
+          <p class="text-sm text-on-surface-variant max-w-[240px]">Diseño de la arquitectura técnica y selección de herramientas de IA adecuadas.</p>
+        </div>
+        <div class="relative flex flex-col items-center text-center">
+          <div class="w-24 h-24 rounded-full bg-surface-container-high border-2 border-primary-container/30 flex items-center justify-center mb-6 z-10 bg-surface shadow-xl">
+            <span class="material-symbols-outlined text-4xl text-primary-container">rocket_launch</span>
+          </div>
+          <h4 class="text-xl font-headline font-bold text-on-surface mb-3">Implementación</h4>
+          <p class="text-sm text-on-surface-variant max-w-[240px]">Despliegue controlado, capacitación a tu equipo y monitoreo de resultados iniciales.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Founder Block (reemplaza testimonio ficticio) -->
+  <section class="px-8 py-24 max-w-5xl mx-auto">
+    <div class="relative glass-card p-12 rounded-2xl border border-outline-variant text-center md:text-left">
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 md:left-12 md:translate-x-0">
+        <div class="w-20 h-20 rounded-full border-4 border-[#020817] overflow-hidden shadow-xl">
+          <img alt="Ing. Aurelio Solorzano Rios" class="w-full h-full object-cover" src="assets/images/Aurelio Solorzano.png"/>
+        </div>
+      </div>
+      <div class="pt-8 md:pt-0 md:pl-24">
+        <span class="material-symbols-outlined text-primary-container/40 text-6xl mb-4 block md:inline-block">format_quote</span>
+        <p class="text-2xl font-body italic text-on-surface mb-8 leading-relaxed">
+          "Democraticemos la programación — gracias a la IA, la programación puede estar en las manos de todos. Mi misión es que cada ingeniero tenga acceso a las herramientas que antes solo usaban las grandes corporaciones."
+        </p>
+        <div>
+          <div class="font-headline font-bold text-lg text-on-surface">Ing. Aurelio Solorzano Rios</div>
+          <div class="text-primary-container font-label uppercase tracking-widest text-xs">Fundador · Especialista en Gestión & Control de Proyectos con IA</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="px-8 py-20 text-center">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-4xl font-headline font-bold text-on-surface mb-6">¿Listo para digitalizar tu obra?</h2>
+      <p class="text-on-surface-variant mb-12 text-lg">Hablemos sobre tus desafíos específicos. El primer diagnóstico no tiene costo y te llevarás un mapa claro de tu potencial de automatización.</p>
+      <a href="https://wa.me/51993147501?text=Hola,%20quiero%20agendar%20un%20diagn%C3%B3stico%20gratuito" target="_blank" class="bg-secondary-container text-white px-10 py-5 rounded-full font-bold text-xl hover:shadow-[0_0_30px_rgba(244,99,15,0.4)] transition-all active:scale-95 inline-flex items-center justify-center gap-3 mx-auto">
+        Agendar Diagnóstico Gratuito — 30 min
+        <span class="material-symbols-outlined">calendar_month</span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="w-full border-t border-slate-900 bg-[#020817]">
+  <div class="flex flex-col md:flex-row justify-between items-center px-8 py-12 max-w-7xl mx-auto gap-6 text-sm">
+    <div class="flex items-center gap-3">
+      <img src="assets/images/Logotipo.png" alt="Logo" class="h-8 w-auto object-contain"/>
+      <div class="text-xl font-bold text-slate-200 font-headline">PROJECT CONTROL AI</div>
+    </div>
+    <div class="text-slate-500">© 2026 Project Control AI · Automatización de Proyectos con IA</div>
+    <div class="flex gap-8">
+      <a class="text-slate-500 hover:text-orange-500 transition-colors" href="#">Privacidad</a>
+      <a class="text-slate-500 hover:text-orange-500 transition-colors" href="#">Términos</a>
+      <a class="text-slate-500 hover:text-orange-500 transition-colors" href="https://wa.me/51993147501" target="_blank">Contacto</a>
+    </div>
+  </div>
+</footer>
+</body></html>

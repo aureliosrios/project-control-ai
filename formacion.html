@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Formación | Project Control AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = { darkMode:"class", theme:{ extend:{ colors:{ "surface-dim":"#0b1323","background":"#0b1323","surface-container-low":"#131c2b","primary-container":"#00d4ff","on-surface-variant":"#bbc9cf","secondary-container":"#f4630f","on-secondary-container":"#4d1900","surface-container-highest":"#2d3546","surface":"#0b1323","on-primary-container":"#00586b","surface-container-high":"#222a3a","primary-fixed-dim":"#3cd7ff","outline":"#859398","surface-container":"#18202f","primary":"#a8e8ff","secondary":"#ffb596","on-secondary":"#581e00","on-primary":"#003642","outline-variant":"#3c494e","surface-container-lowest":"#060e1d","on-surface":"#dbe2f8","on-background":"#dbe2f8" }, fontFamily:{ "headline":["Space Grotesk"],"body":["Inter"],"label":["Inter"] }, borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"} } } }
+</script>
+<style>
+  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24}
+  .glass-card{background:rgba(45,53,70,0.4);backdrop-filter:blur(12px)}
+  .route-card:hover .route-icon{transform:scale(1.15)}
+  .route-icon{transition:transform 0.3s ease}
+</style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+
+<!-- NavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#020817]/60 backdrop-blur-xl shadow-2xl shadow-cyan-900/10">
+  <div class="flex justify-between items-center px-8 py-3 max-w-7xl mx-auto">
+    <a href="index.html" class="flex items-center gap-3">
+      <img src="assets/images/Logotipo.png" alt="Logo" class="h-10 w-auto object-contain"/>
+      <div class="flex flex-col">
+        <span class="text-xl font-bold tracking-tighter text-white font-headline">PROJECT CONTROL AI</span>
+        <span class="text-xs text-cyan-400 tracking-widest uppercase">Academy & Consultoría</span>
+      </div>
+    </a>
+    <div class="hidden md:flex items-center space-x-8">
+      <a class="text-cyan-400 font-bold border-b-2 border-cyan-400 pb-1" href="formacion.html">Formación</a>
+      <a class="text-slate-400 hover:text-white transition-colors" href="consultoria.html">Consultoría</a>
+      <a class="text-slate-400 hover:text-white transition-colors" href="recursos.html">Recursos</a>
+    </div>
+    <a href="consultoria.html" class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-bold transition-all active:scale-95 hover:scale-105">Agendar Consultoría</a>
+  </div>
+  <div class="h-[1px] w-full bg-gradient-to-r from-transparent via-slate-800/50 to-transparent"></div>
+</nav>
+
+<main class="pt-32 pb-20 px-8 max-w-7xl mx-auto">
+
+  <!-- Header -->
+  <header class="mb-16 relative">
+    <div class="absolute -top-24 -left-24 w-64 h-64 bg-primary-fixed-dim/10 rounded-full blur-[100px]"></div>
+    <h1 class="text-5xl md:text-7xl font-headline font-bold tracking-tight mb-6 bg-gradient-to-r from-primary to-primary-container bg-clip-text text-transparent">Formación</h1>
+    <p class="text-xl md:text-2xl text-on-surface-variant max-w-2xl leading-relaxed font-light">
+      Domina la intersección entre la <span class="text-primary">Inteligencia Artificial</span> y la gestión de proyectos de construcción de alto rendimiento.
+    </p>
+  </header>
+
+  <!-- ═══════════════════════════════════════════
+       SECCIÓN 1: CURSO ASINCRÓNICO DISPONIBLE (A1)
+  ════════════════════════════════════════════ -->
+  <section class="mb-24">
+    <div class="flex items-center gap-3 mb-8">
+      <span class="w-3 h-3 rounded-full bg-green-400 shadow-[0_0_8px_rgba(74,222,128,0.8)]"></span>
+      <h2 class="text-2xl font-headline font-bold text-on-surface">Disponible Ahora</h2>
+      <span class="bg-primary-container text-on-primary-container text-xs font-bold px-3 py-1 rounded-full uppercase">Asincrónico · Hotmart</span>
+    </div>
+    <div class="relative overflow-hidden rounded-xl bg-surface-container-low border border-primary/20 p-8 md:p-12 flex flex-col md:flex-row gap-12 items-center">
+      <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary-container/5 to-transparent pointer-events-none"></div>
+      <div class="flex-1 z-10">
+        <div class="inline-flex items-center gap-2 bg-green-500/20 text-green-400 border border-green-400/30 px-3 py-1 rounded-full text-xs font-bold mb-4">
+          <span class="w-2 h-2 rounded-full bg-green-400"></span> RUTA A · CURSO A1 · PUBLICADO
+        </div>
+        <h2 class="text-3xl md:text-4xl font-headline font-bold mb-4 text-on-surface">El Despertar de la IA en la Gestión de Proyectos</h2>
+        <p class="text-on-surface-variant mb-6 text-lg max-w-lg">6 entregables reales en 2.5 horas sin escribir una sola línea de código. Reportes HTML, Mermaid.js, ATS, IPERC, Organigramas y Matrices CSV generados con IA.</p>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
+          <div class="flex items-center gap-2 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-base">check_circle</span> Reportes HTML ejecutivos</div>
+          <div class="flex items-center gap-2 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-base">check_circle</span> Flujogramas Mermaid.js</div>
+          <div class="flex items-center gap-2 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-base">check_circle</span> ATS + IPERC completos</div>
+          <div class="flex items-center gap-2 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-base">check_circle</span> Cronogramas visuales</div>
+          <div class="flex items-center gap-2 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-base">check_circle</span> Organigramas con IA</div>
+          <div class="flex items-center gap-2 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-primary text-base">check_circle</span> 28 prompts de ingeniería</div>
+        </div>
+        <div class="flex flex-wrap items-center gap-6">
+          <div class="flex flex-col">
+            <span class="text-3xl font-bold text-on-surface">$11.99 USD</span>
+            <span class="text-sm text-on-surface-variant">Acceso de por vida · Hotmart</span>
+          </div>
+          <a href="https://go.hotmart.com/I104938744G" target="_blank" class="bg-primary-container text-on-primary-container px-8 py-3 rounded-full font-bold hover:scale-105 transition-transform shadow-[0_0_20px_rgba(0,212,255,0.2)]">
+            Inscribirme Ahora
+          </a>
+        </div>
+      </div>
+      <div class="flex-1 w-full max-w-md">
+        <div class="glass-card border border-outline-variant/20 rounded-xl p-6">
+          <div class="text-xs text-primary font-bold uppercase tracking-widest mb-4">Lo que vas a crear en este curso</div>
+          <div class="space-y-3">
+            <div class="flex items-center gap-3 bg-surface-container rounded-lg p-3"><span class="material-symbols-outlined text-cyan-400 text-lg">description</span><span class="text-sm text-on-surface">Reporte ejecutivo HTML interactivo</span></div>
+            <div class="flex items-center gap-3 bg-surface-container rounded-lg p-3"><span class="material-symbols-outlined text-cyan-400 text-lg">account_tree</span><span class="text-sm text-on-surface">Flujograma Mermaid.js del proceso</span></div>
+            <div class="flex items-center gap-3 bg-surface-container rounded-lg p-3"><span class="material-symbols-outlined text-cyan-400 text-lg">shield</span><span class="text-sm text-on-surface">ATS + IPERC listos para campo</span></div>
+            <div class="flex items-center gap-3 bg-surface-container rounded-lg p-3"><span class="material-symbols-outlined text-cyan-400 text-lg">schedule</span><span class="text-sm text-on-surface">Cronograma visual automatizado</span></div>
+          </div>
+          <div class="mt-4 pt-4 border-t border-outline-variant/20 text-center">
+            <span class="text-xs text-on-surface-variant">Duración: <span class="text-on-surface font-bold">2.5 horas</span> · Sin programar</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECCIÓN 2: ECOSISTEMA 20 MICRO-CURSOS
+  ════════════════════════════════════════════ -->
+  <section class="mb-24">
+    <div class="text-center mb-16">
+      <span class="text-primary text-sm font-bold uppercase tracking-widest block mb-4">Próximamente</span>
+      <h2 class="text-3xl md:text-5xl font-headline font-bold text-on-surface mb-6">Ecosistema de Ingeniería Aumentada</h2>
+      <p class="text-on-surface-variant text-lg max-w-2xl mx-auto">20 micro-cursos especializados en 6 rutas de aprendizaje. Cada curso $11.99 USD · Asincrónico · Acceso de por vida.</p>
+    </div>
+
+    <!-- RUTA A -->
+    <div class="mb-10">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 font-headline font-bold text-lg border border-green-400/30">A</div>
+        <div>
+          <h3 class="text-xl font-headline font-bold text-on-surface">El Profesional que Despierta</h3>
+          <p class="text-sm text-on-surface-variant">"De ingeniero que chatea con IA a Arquitecto de Soluciones Automatizadas" · 4 cursos</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- A1 publicado -->
+        <div class="route-card bg-surface-container-low border border-green-400/30 rounded-xl p-5 flex flex-col relative overflow-hidden">
+          <div class="absolute top-3 right-3 w-2 h-2 rounded-full bg-green-400 shadow-[0_0_6px_rgba(74,222,128,0.8)]"></div>
+          <div class="route-icon w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center text-green-400 mb-4"><span class="material-symbols-outlined text-xl">rocket_launch</span></div>
+          <div class="text-[10px] font-bold text-green-400 uppercase tracking-widest mb-2">A1 · Publicado</div>
+          <h4 class="text-sm font-headline font-bold text-on-surface mb-2 leading-tight">El Despertar de la IA en la Gestión de Proyectos</h4>
+          <p class="text-xs text-on-surface-variant mb-4 flex-1">6 entregables reales en 2.5h sin programar.</p>
+          <a href="https://go.hotmart.com/I104938744G" target="_blank" class="text-xs bg-primary-container text-on-primary-container px-3 py-2 rounded-lg font-bold text-center hover:scale-105 transition-transform">$11.99 · Acceder</a>
+        </div>
+        <!-- A2 -->
+        <div class="route-card bg-surface-container-low border border-outline-variant/10 rounded-xl p-5 flex flex-col relative overflow-hidden opacity-70">
+          <div class="absolute top-3 right-3 text-[10px] text-on-surface-variant font-bold uppercase">Pronto</div>
+          <div class="route-icon w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant mb-4"><span class="material-symbols-outlined text-xl">manage_search</span></div>
+          <div class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-2">A2 · En Producción</div>
+          <h4 class="text-sm font-headline font-bold text-on-surface mb-2 leading-tight">Escáner Forense con NotebookLM</h4>
+          <p class="text-xs text-on-surface-variant flex-1">Audita expedientes de 500+ páginas en 30 minutos.</p>
+        </div>
+        <!-- A3 -->
+        <div class="route-card bg-surface-container-low border border-outline-variant/10 rounded-xl p-5 flex flex-col relative overflow-hidden opacity-70">
+          <div class="absolute top-3 right-3 text-[10px] text-on-surface-variant font-bold uppercase">Pronto</div>
+          <div class="route-icon w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant mb-4"><span class="material-symbols-outlined text-xl">table_chart</span></div>
+          <div class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-2">A3 · Próximamente</div>
+          <h4 class="text-sm font-headline font-bold text-on-surface mb-2 leading-tight">Automatización con Excel, VBA y Macros Sin Código</h4>
+          <p class="text-xs text-on-surface-variant flex-1">La IA como programador personal del ingeniero.</p>
+        </div>
+        <!-- A4 -->
+        <div class="route-card bg-surface-container-low border border-outline-variant/10 rounded-xl p-5 flex flex-col relative overflow-hidden opacity-70">
+          <div class="absolute top-3 right-3 text-[10px] text-on-surface-variant font-bold uppercase">Pronto</div>
+          <div class="route-icon w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant mb-4"><span class="material-symbols-outlined text-xl">travel_explore</span></div>
+          <div class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-2">A4 · Próximamente</div>
+          <h4 class="text-sm font-headline font-bold text-on-surface mb-2 leading-tight">Deep Research y Agentes de Inteligencia de Mercado</h4>
+          <p class="text-xs text-on-surface-variant flex-1">Decisiones basadas en datos — no en intuición.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RUTAS B-F: Grids compactos -->
+    <!-- RUTA B -->
+    <div class="mb-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 font-headline font-bold text-lg border border-blue-400/30">B</div>
+        <div>
+          <h3 class="text-xl font-headline font-bold text-on-surface">Especialista HSE / Calidad / Campo</h3>
+          <p class="text-sm text-on-surface-variant">"De 5 horas de oficina técnica diaria a 1 hora" · 5 cursos</p>
+        </div>
+        <span class="ml-auto text-xs text-on-surface-variant bg-surface-container px-3 py-1 rounded-full border border-outline-variant/20">Próximamente</span>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-blue-400 font-bold mb-1">B1</div><p class="text-xs font-bold text-on-surface leading-tight">IA para HSE: IPERC, ATS y Gestión de Incidentes</p></div>
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-blue-400 font-bold mb-1">B2</div><p class="text-xs font-bold text-on-surface leading-tight">IA para Gestión de Calidad: PETS, ITPs y Dossier</p></div>
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-blue-400 font-bold mb-1">B3</div><p class="text-xs font-bold text-on-surface leading-tight">IA para Residentes y Jefes de Campo</p></div>
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-blue-400 font-bold mb-1">B4</div><p class="text-xs font-bold text-on-surface leading-tight">Dashboard de Calidad QA/QC con Power BI</p></div>
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-blue-400 font-bold mb-1">B5</div><p class="text-xs font-bold text-on-surface leading-tight">Gestión de Tokens para Documentos Extensos</p></div>
+      </div>
+    </div>
+
+    <!-- RUTA C -->
+    <div class="mb-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400 font-headline font-bold text-lg border border-orange-400/30">C</div>
+        <div>
+          <h3 class="text-xl font-headline font-bold text-on-surface">Ingeniero de Costos y Licitaciones</h3>
+          <p class="text-sm text-on-surface-variant">"Un presupuesto base en 24 horas — no en 3 días" · 4 cursos</p>
+        </div>
+        <span class="ml-auto text-xs text-on-surface-variant bg-surface-container px-3 py-1 rounded-full border border-outline-variant/20">Próximamente</span>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-orange-400 font-bold mb-1">C1</div><p class="text-xs font-bold text-on-surface leading-tight">WBS y Metrados Inteligentes</p></div>
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-orange-400 font-bold mb-1">C2</div><p class="text-xs font-bold text-on-surface leading-tight">APU con IA Studio</p></div>
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-orange-400 font-bold mb-1">C3</div><p class="text-xs font-bold text-on-surface leading-tight">VBA: De la IA al Formato S10 y Costos.pe</p></div>
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-orange-400 font-bold mb-1">C4</div><p class="text-xs font-bold text-on-surface leading-tight">Nivelación de Recursos 2D</p></div>
+      </div>
+    </div>
+
+    <!-- RUTA D -->
+    <div class="mb-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center text-red-400 font-headline font-bold text-lg border border-red-400/30">D</div>
+        <div>
+          <h3 class="text-xl font-headline font-bold text-on-surface">Administrador de Contratos</h3>
+          <p class="text-sm text-on-surface-variant">"No pierdas dinero por errores contractuales" · 4 cursos</p>
+        </div>
+        <span class="ml-auto text-xs text-on-surface-variant bg-surface-container px-3 py-1 rounded-full border border-outline-variant/20">Próximamente</span>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-red-400 font-bold mb-1">D1</div><p class="text-xs font-bold text-on-surface leading-tight">Escáner Contractual: Análisis NEC/FIDIC con IA</p></div>
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-red-400 font-bold mb-1">D2</div><p class="text-xs font-bold text-on-surface leading-tight">IA para Gestión de Claims y Variaciones</p></div>
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-red-400 font-bold mb-1">D3</div><p class="text-xs font-bold text-on-surface leading-tight">Reportabilidad Ejecutiva con Agentes IA</p></div>
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-red-400 font-bold mb-1">D4</div><p class="text-xs font-bold text-on-surface leading-tight">Gestión de Contextos Largos: Documentos FIDIC/NEC</p></div>
+      </div>
+    </div>
+
+    <!-- RUTA E -->
+    <div class="mb-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 font-headline font-bold text-lg border border-purple-400/30">E</div>
+        <div>
+          <h3 class="text-xl font-headline font-bold text-on-surface">Planificador / Controller / PMO</h3>
+          <p class="text-sm text-on-surface-variant">"Deja de reportar lo que pasó — predice lo que pasará" · 5 cursos</p>
+        </div>
+        <span class="ml-auto text-xs text-on-surface-variant bg-surface-container px-3 py-1 rounded-full border border-outline-variant/20">Próximamente</span>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-purple-400 font-bold mb-1">E1</div><p class="text-xs font-bold text-on-surface leading-tight">Cálculo del Valor Planeado (PV) y Curva S con IA</p></div>
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-purple-400 font-bold mb-1">E2</div><p class="text-xs font-bold text-on-surface leading-tight">Dashboards Ejecutivos en Google Stitch</p></div>
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-purple-400 font-bold mb-1">E3</div><p class="text-xs font-bold text-on-surface leading-tight">Forecast Predictivo con EVM 4.0</p></div>
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-purple-400 font-bold mb-1">E4</div><p class="text-xs font-bold text-on-surface leading-tight">MCP para Primavera P6 y Power BI</p></div>
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-purple-400 font-bold mb-1">E5</div><p class="text-xs font-bold text-on-surface leading-tight">Reportabilidad de Gerencia con Agentes Autónomos</p></div>
+      </div>
+    </div>
+
+    <!-- RUTA F -->
+    <div class="mb-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center text-yellow-400 font-headline font-bold text-lg border border-yellow-400/30">F</div>
+        <div>
+          <h3 class="text-xl font-headline font-bold text-on-surface">Ingeniería Élite / Automatizador</h3>
+          <p class="text-sm text-on-surface-variant">"Conviértete en el experto interno que nadie más tiene" · 5 cursos</p>
+        </div>
+        <span class="ml-auto text-xs text-on-surface-variant bg-surface-container px-3 py-1 rounded-full border border-outline-variant/20">Próximamente</span>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-yellow-400 font-bold mb-1">F1</div><p class="text-xs font-bold text-on-surface leading-tight">Cirugía de Datos en Excel con Antigravity</p></div>
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-yellow-400 font-bold mb-1">F2</div><p class="text-xs font-bold text-on-surface leading-tight">Diseño CAD y Civil 3D Generativo con MCP</p></div>
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-yellow-400 font-bold mb-1">F3</div><p class="text-xs font-bold text-on-surface leading-tight">Inventor y Blender Automation</p></div>
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-yellow-400 font-bold mb-1">F4</div><p class="text-xs font-bold text-on-surface leading-tight">Arquitectura de Agentes Locales</p></div>
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-yellow-400 font-bold mb-1">F5</div><p class="text-xs font-bold text-on-surface leading-tight">Integración BIM-IA: Del Modelo al Informe Automático</p></div>
+      </div>
+    </div>
+
+    <!-- CTA notificación -->
+    <div class="mt-10 glass-card border border-outline-variant/20 rounded-xl p-8 text-center">
+      <span class="material-symbols-outlined text-primary text-4xl mb-4 block">notifications</span>
+      <h3 class="text-2xl font-headline font-bold text-on-surface mb-3">¿Quieres saber cuándo lanzamos el próximo curso?</h3>
+      <p class="text-on-surface-variant mb-6">Escríbeme al WhatsApp y te aviso antes del lanzamiento oficial con precio especial.</p>
+      <a href="https://wa.me/51993147501?text=Hola,%20quiero%20recibir%20notificaciones%20de%20nuevos%20cursos" target="_blank" class="inline-flex items-center gap-2 bg-secondary-container text-white px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform">
+        <span class="material-symbols-outlined">chat</span> Notificarme por WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECCIÓN 3: CURSOS EN VIVO (SINCRÓNICOS)
+  ════════════════════════════════════════════ -->
+  <section class="mb-16">
+    <div class="flex items-center gap-3 mb-8">
+      <span class="w-3 h-3 rounded-full bg-orange-400 shadow-[0_0_8px_rgba(251,146,60,0.8)]"></span>
+      <h2 class="text-2xl font-headline font-bold text-on-surface">Cursos En Vivo</h2>
+      <span class="bg-secondary-container text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Sincrónico · Próximas Cohortes</span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <!-- Licitaciones -->
+      <div class="group bg-surface-container-lowest border border-outline-variant/10 rounded-xl overflow-hidden hover:border-primary/40 transition-all duration-500 flex flex-col">
+        <div class="relative h-48 overflow-hidden bg-surface-container-high">
+          <img alt="Licitaciones Inteligentes con IA" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" src="assets/images/Licitaciones.png"/>
+          <div class="absolute top-4 left-4 flex flex-col gap-2">
+            <span class="bg-surface-dim/80 backdrop-blur-md text-primary text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest border border-primary/20">Intermedio</span>
+            <span class="bg-secondary-container text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">En Vivo</span>
+          </div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <h3 class="text-xl font-headline font-bold mb-3 text-on-surface group-hover:text-primary transition-colors">Licitaciones Inteligentes con IA</h3>
+          <p class="text-on-surface-variant text-sm mb-6 flex-1">Auditoría de expedientes masivos, APUs, Presupuestos y Cronogramas automáticos.</p>
+          <div class="flex flex-col gap-3 pt-6 border-t border-outline-variant/10 mt-auto">
+            <div class="flex items-center justify-between">
+              <div class="flex flex-col"><span class="text-xs text-on-surface-variant">15h · 5 sesiones</span><span class="text-lg font-bold text-on-surface">$75 USD <span class="text-sm text-on-surface-variant font-normal">/ S/200</span></span></div>
+              <a href="inscripcion.html" class="bg-surface-container-high text-on-surface px-4 py-2 rounded-lg text-sm font-bold hover:bg-primary-container hover:text-on-primary-container transition-colors active:scale-95">Inscribirme</a>
+            </div>
+            <a href="https://pay.hotmart.com/N104187999C" target="_blank" class="w-full text-center bg-orange-500 hover:bg-orange-600 text-white px-4 py-2.5 rounded-lg text-sm font-bold transition-colors active:scale-95 flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined text-sm">shopping_cart</span> Pagar en Hotmart
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Control EVM -->
+      <div class="group bg-surface-container-lowest border border-outline-variant/10 rounded-xl overflow-hidden hover:border-primary/40 transition-all duration-500 flex flex-col">
+        <div class="relative h-48 overflow-hidden bg-surface-container-high">
+          <img alt="Control y Gerencia EVM" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" src="assets/images/Control y gerencia.png"/>
+          <div class="absolute top-4 left-4 flex flex-col gap-2">
+            <span class="bg-surface-dim/80 backdrop-blur-md text-primary text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest border border-primary/20">Intermedio</span>
+            <span class="bg-secondary-container text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">En Vivo</span>
+          </div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <h3 class="text-xl font-headline font-bold mb-3 text-on-surface group-hover:text-primary transition-colors">Control y Gerencia EVM</h3>
+          <p class="text-on-surface-variant text-sm mb-6 flex-1">Gestión predictiva de proyectos. Seguimiento de costos y plazos con Valor Ganado.</p>
+          <div class="flex flex-col gap-3 pt-6 border-t border-outline-variant/10 mt-auto">
+            <div class="flex items-center justify-between">
+              <div class="flex flex-col"><span class="text-xs text-on-surface-variant">15h · 5 sesiones</span><span class="text-lg font-bold text-on-surface">$75 USD <span class="text-sm text-on-surface-variant font-normal">/ S/200</span></span></div>
+              <a href="inscripcion.html" class="bg-surface-container-high text-on-surface px-4 py-2 rounded-lg text-sm font-bold hover:bg-primary-container hover:text-on-primary-container transition-colors active:scale-95">Inscribirme</a>
+            </div>
+            <a href="https://pay.hotmart.com/N104188538H" target="_blank" class="w-full text-center bg-orange-500 hover:bg-orange-600 text-white px-4 py-2.5 rounded-lg text-sm font-bold transition-colors active:scale-95 flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined text-sm">shopping_cart</span> Pagar en Hotmart
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- GIP -->
+      <div class="group bg-surface-container-lowest border border-outline-variant/10 rounded-xl overflow-hidden hover:border-primary/40 transition-all duration-500 flex flex-col">
+        <div class="relative h-48 overflow-hidden bg-surface-container-high">
+          <img alt="Gestión Integral de Proyectos con IA" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" src="assets/images/Gestión Integral.png"/>
+          <div class="absolute top-4 left-4 flex flex-col gap-2">
+            <span class="bg-surface-dim/80 backdrop-blur-md text-primary text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest border border-primary/20">Básico</span>
+            <span class="bg-secondary-container text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">En Vivo</span>
+          </div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <h3 class="text-xl font-headline font-bold mb-3 text-on-surface group-hover:text-primary transition-colors">Gestión Integral de Proyectos con IA</h3>
+          <p class="text-on-surface-variant text-sm mb-6 flex-1">Gestión de Alcance, Contratos, Calidad y HSE potenciada por Inteligencia Artificial.</p>
+          <div class="flex flex-col gap-3 pt-6 border-t border-outline-variant/10 mt-auto">
+            <div class="flex items-center justify-between">
+              <div class="flex flex-col"><span class="text-xs text-on-surface-variant">15h · 5 sesiones</span><span class="text-lg font-bold text-on-surface">$75 USD <span class="text-sm text-on-surface-variant font-normal">/ S/200</span></span></div>
+              <a href="inscripcion.html" class="bg-surface-container-high text-on-surface px-4 py-2 rounded-lg text-sm font-bold hover:bg-primary-container hover:text-on-primary-container transition-colors active:scale-95">Inscribirme</a>
+            </div>
+            <a href="https://pay.hotmart.com/K104218834V" target="_blank" class="w-full text-center bg-orange-500 hover:bg-orange-600 text-white px-4 py-2.5 rounded-lg text-sm font-bold transition-colors active:scale-95 flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined text-sm">shopping_cart</span> Pagar en Hotmart
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Automation Engineer -->
+      <div class="group bg-surface-container-lowest border border-outline-variant/10 rounded-xl overflow-hidden hover:border-primary/40 transition-all duration-500 flex flex-col">
+        <div class="relative h-48 overflow-hidden bg-surface-container-high">
+          <img alt="Automation Engineer" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" src="assets/images/Automation.png"/>
+          <div class="absolute top-4 left-4 flex flex-col gap-2">
+            <span class="bg-surface-dim/80 backdrop-blur-md text-primary text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest border border-primary/20">Avanzado</span>
+            <span class="bg-secondary-container text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">En Vivo</span>
+          </div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <h3 class="text-xl font-headline font-bold mb-3 text-on-surface group-hover:text-primary transition-colors">Automation Engineer</h3>
+          <div class="flex items-center gap-2 mb-3"><span class="material-symbols-outlined text-yellow-400 text-sm">lock</span><span class="text-xs text-yellow-400 font-semibold">Prerrequisito: Gestión Integral con IA (Básico)</span></div>
+          <p class="text-on-surface-variant text-sm mb-6 flex-1">Automatización avanzada con Python, HTML, VBA y Agentes Autónomos.</p>
+          <div class="flex flex-col gap-3 pt-6 border-t border-outline-variant/10 mt-auto">
+            <div class="flex items-center justify-between">
+              <div class="flex flex-col"><span class="text-xs text-on-surface-variant">15h · 5 sesiones</span><span class="text-lg font-bold text-on-surface">$90 USD <span class="text-sm text-on-surface-variant font-normal">/ S/300</span></span></div>
+              <a href="inscripcion.html" class="bg-surface-container-high text-on-surface px-4 py-2 rounded-lg text-sm font-bold hover:bg-primary-container hover:text-on-primary-container transition-colors active:scale-95">Inscribirme</a>
+            </div>
+            <a href="https://pay.hotmart.com/I104227016S" target="_blank" class="w-full text-center bg-orange-500 hover:bg-orange-600 text-white px-4 py-2.5 rounded-lg text-sm font-bold transition-colors active:scale-95 flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined text-sm">shopping_cart</span> Pagar en Hotmart
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Primavera P6 -->
+      <div class="group bg-surface-container-lowest border border-outline-variant/10 rounded-xl overflow-hidden hover:border-primary/40 transition-all duration-500 flex flex-col">
+        <div class="relative h-48 overflow-hidden bg-surface-container-high">
+          <img alt="Primavera P6 Profesional" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" src="assets/images/Primavera P6.png"/>
+          <div class="absolute top-4 left-4 flex flex-col gap-2">
+            <span class="bg-surface-dim/80 backdrop-blur-md text-primary text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest border border-primary/20">Intermedio</span>
+            <span class="bg-secondary-container text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">En Vivo</span>
+          </div>
+        </div>
+        <div class="p-6 flex flex-col flex-1">
+          <h3 class="text-xl font-headline font-bold mb-3 text-on-surface group-hover:text-primary transition-colors">Primavera P6 Profesional</h3>
+          <p class="text-on-surface-variant text-sm mb-6 flex-1">Dominio completo de Oracle Primavera P6 para planificación y control de proyectos.</p>
+          <div class="flex flex-col gap-3 pt-6 border-t border-outline-variant/10 mt-auto">
+            <div class="flex items-center justify-between">
+              <div class="flex flex-col"><span class="text-xs text-on-surface-variant">15h · 5 sesiones</span><span class="text-lg font-bold text-on-surface">$75 USD <span class="text-sm text-on-surface-variant font-normal">/ S/200</span></span></div>
+              <a href="inscripcion.html" class="bg-surface-container-high text-on-surface px-4 py-2 rounded-lg text-sm font-bold hover:bg-primary-container hover:text-on-primary-container transition-colors active:scale-95">Inscribirme</a>
+            </div>
+            <a href="https://pay.hotmart.com/Q104228911C" target="_blank" class="w-full text-center bg-orange-500 hover:bg-orange-600 text-white px-4 py-2.5 rounded-lg text-sm font-bold transition-colors active:scale-95 flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined text-sm">shopping_cart</span> Pagar en Hotmart
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       MÉTODOS DE PAGO
+  ════════════════════════════════════════════ -->
+  <section class="mb-16 mt-4">
+    <div class="flex items-center gap-3 mb-8">
+      <span class="material-symbols-outlined text-cyan-400 text-2xl">payments</span>
+      <h2 class="text-2xl font-headline font-bold text-on-surface">Métodos de Pago</h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6">
+
+      <!-- Perú -->
+      <div class="bg-surface-container-low border border-outline-variant/20 rounded-xl p-8">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="text-2xl">🇵🇪</span>
+          <div>
+            <h3 class="text-lg font-headline font-bold text-on-surface">Pagos en Perú</h3>
+            <p class="text-xs text-on-surface-variant">Soles y Dólares</p>
+          </div>
+        </div>
+        <div class="space-y-4">
+
+          <!-- Yape -->
+          <div class="flex items-center gap-4 bg-surface-container rounded-xl p-4">
+            <img src="assets/images/Yape.png" alt="Yape" class="h-10 w-10 object-contain rounded-lg"/>
+            <div class="flex-1">
+              <p class="font-bold text-on-surface text-sm">Yape</p>
+              <p class="text-xs text-on-surface-variant">Pagos instantáneos en soles</p>
+            </div>
+            <a href="https://wa.me/51993147501" target="_blank"
+               class="text-xs font-bold px-3 py-1.5 rounded-full transition-all whitespace-nowrap text-green-400 border border-green-400/30 hover:bg-green-400/10 flex items-center gap-1">
+              <span class="material-symbols-outlined text-sm">phone_iphone</span> +51 993 147 501
+            </a>
+          </div>
+
+          <!-- Plin -->
+          <div class="flex items-center gap-4 bg-surface-container rounded-xl p-4">
+            <div class="h-10 w-10 rounded-lg flex items-center justify-center font-black text-white text-xs" style="background:linear-gradient(135deg,#6c1fc9,#a855f7)">PLIN</div>
+            <div class="flex-1">
+              <p class="font-bold text-on-surface text-sm">Plin</p>
+              <p class="text-xs text-on-surface-variant">Pagos instantáneos en soles</p>
+            </div>
+            <a href="https://wa.me/51993147501" target="_blank"
+               class="text-xs font-bold px-3 py-1.5 rounded-full transition-all whitespace-nowrap text-purple-400 border border-purple-400/30 hover:bg-purple-400/10 flex items-center gap-1">
+              <span class="material-symbols-outlined text-sm">phone_iphone</span> +51 993 147 501
+            </a>
+          </div>
+
+          <!-- BCP Soles -->
+          <div class="flex items-center gap-4 bg-surface-container rounded-xl p-4">
+            <img src="assets/images/BCP.png" alt="BCP" class="h-10 w-10 object-contain rounded-lg"/>
+            <div class="flex-1">
+              <p class="font-bold text-on-surface text-sm">BCP — Cuenta en Soles</p>
+              <p class="text-xs text-on-surface-variant">Transferencia bancaria</p>
+            </div>
+            <a href="https://wa.me/51993147501?text=Hola,%20quiero%20pagar%20por%20transferencia%20BCP%20soles" target="_blank"
+               class="text-xs text-cyan-400 font-bold border border-cyan-400/30 px-3 py-1.5 rounded-full hover:bg-cyan-400/10 transition-all whitespace-nowrap">
+              Consultar
+            </a>
+          </div>
+
+          <!-- BCP Dólares -->
+          <div class="flex items-center gap-4 bg-surface-container rounded-xl p-4">
+            <img src="assets/images/BCP.png" alt="BCP" class="h-10 w-10 object-contain rounded-lg"/>
+            <div class="flex-1">
+              <p class="font-bold text-on-surface text-sm">BCP — Cuenta en Dólares</p>
+              <p class="text-xs text-on-surface-variant">Transferencia bancaria USD</p>
+            </div>
+            <a href="https://wa.me/51993147501?text=Hola,%20quiero%20pagar%20por%20transferencia%20BCP%20d%C3%B3lares" target="_blank"
+               class="text-xs text-cyan-400 font-bold border border-cyan-400/30 px-3 py-1.5 rounded-full hover:bg-cyan-400/10 transition-all whitespace-nowrap">
+              Consultar
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Internacional -->
+      <div class="bg-surface-container-low border border-outline-variant/20 rounded-xl p-8">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="text-2xl">🌎</span>
+          <div>
+            <h3 class="text-lg font-headline font-bold text-on-surface">Pagos Internacionales</h3>
+            <p class="text-xs text-on-surface-variant">Desde cualquier país</p>
+          </div>
+        </div>
+        <div class="space-y-4">
+
+          <!-- PayPal -->
+          <div class="flex items-center gap-4 bg-surface-container rounded-xl p-4">
+            <div class="h-10 w-10 rounded-lg flex items-center justify-center font-black text-white text-sm" style="background:#003087">
+              <span style="color:#009cde">Pay</span><span style="color:#fff">Pal</span>
+            </div>
+            <div class="flex-1">
+              <p class="font-bold text-on-surface text-sm">PayPal</p>
+              <p class="text-xs text-on-surface-variant">Visa / Mastercard / AMEX · USD</p>
+            </div>
+            <a href="https://paypal.me/ProjectControlAI" target="_blank"
+               class="text-xs font-bold px-3 py-1.5 rounded-full transition-all whitespace-nowrap text-blue-400 border border-blue-400/30 hover:bg-blue-400/10 flex items-center gap-1">
+              <span class="material-symbols-outlined text-sm">open_in_new</span> Ir a PayPal
+            </a>
+          </div>
+
+          <!-- Hotmart (para cursos asincrónicos) -->
+          <div class="flex items-center gap-4 bg-surface-container rounded-xl p-4">
+            <div class="h-10 w-10 rounded-lg flex items-center justify-center font-black text-white text-xs" style="background:linear-gradient(135deg,#f04e23,#f8941d)">HOT</div>
+            <div class="flex-1">
+              <p class="font-bold text-on-surface text-sm">Hotmart</p>
+              <p class="text-xs text-on-surface-variant">Tarjeta de crédito/débito · Cada curso tiene su propio enlace de pago</p>
+            </div>
+            <span class="text-xs text-on-surface-variant font-medium border border-outline-variant/20 px-3 py-1.5 rounded-full whitespace-nowrap">
+              Ver botón en cada curso
+            </span>
+          </div>
+
+        </div>
+
+        <!-- Nota informativa -->
+        <div class="mt-6 p-4 bg-primary/5 border border-primary/20 rounded-xl">
+          <div class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-primary text-lg mt-0.5">info</span>
+            <p class="text-xs text-on-surface-variant leading-relaxed">
+              Para pagos vía Yape, Plin, BCP o PayPal escríbeme al WhatsApp y te envío los datos de pago.
+              Una vez confirmado el pago se te envía el acceso al curso.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Metodología -->
+  <div class="mt-8 p-10 rounded-xl glass-card border border-outline-variant/20 relative overflow-hidden group">
+    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity"><span class="material-symbols-outlined text-9xl text-primary">auto_awesome</span></div>
+    <div class="relative z-10">
+      <h4 class="text-primary font-bold text-sm tracking-[0.2em] uppercase mb-4">Metodología Project Control AI</h4>
+      <p class="text-2xl font-headline font-light text-on-surface max-w-2xl leading-relaxed">Nuestros cursos no son solo contenido. Son <span class="text-primary font-medium italic">frameworks de ejecución</span> probados en proyectos reales de construcción. Unimos experiencia táctica de campo con el poder de la Inteligencia Artificial.</p>
+      <p class="text-on-surface-variant mt-4 text-sm">— Ing. Aurelio Solorzano Rios · Fundador de Project Control AI</p>
+    </div>
+  </div>
+
+</main>
+
+<footer class="w-full border-t border-slate-900 bg-[#020817]">
+  <div class="flex flex-col md:flex-row justify-between items-center px-8 py-12 max-w-7xl mx-auto gap-6">
+    <div class="flex items-center gap-3">
+      <img src="assets/images/Logotipo.png" alt="Logo" class="h-8 w-auto object-contain"/>
+      <div class="flex flex-col gap-1">
+        <div class="text-xl font-bold text-slate-200 font-headline">PROJECT CONTROL AI</div>
+        <p class="text-slate-500 text-sm">© 2026 Project Control AI · Automatización de Proyectos con IA</p>
+      </div>
+    </div>
+    <div class="flex gap-8">
+      <a class="text-slate-500 hover:text-orange-500 transition-colors text-sm" href="#">Privacidad</a>
+      <a class="text-slate-500 hover:text-orange-500 transition-colors text-sm" href="#">Términos</a>
+      <a class="text-slate-500 hover:text-orange-500 transition-colors text-sm" href="https://wa.me/51993147501" target="_blank">Contacto</a>
+    </div>
+  </div>
+</footer>
+</body></html>

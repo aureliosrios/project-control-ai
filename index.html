@@ -1,1616 +1,314 @@
 <!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Control AI | Consultora & Academia</title>
-
-    <!-- SHARED ASSETS -->
-    <link rel="stylesheet" href="assets/css/styles-global.css">
-    <script src="assets/js/config.js?v=8.5"></script>
-    <script src="assets/js/utils.js?v=8.5"></script>
-
-    <!-- Icono Favicon -->
-    <link rel="icon" type="image/svg+xml"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
-
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            line-height: 1.6;
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-        }
-
-        h1,
-        h2,
-        h3,
-        .logo-text {
-            font-family: 'Space Grotesk', sans-serif;
-            letter-spacing: -0.02em;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        /* --- NAVBAR --- */
-        .navbar {
-            background: rgba(2, 6, 23, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 0.6rem 0;
-            transition: top 0.3s;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7);
-            }
-
-            70% {
-                transform: scale(1.05);
-                box-shadow: 0 0 0 10px rgba(249, 115, 22, 0);
-            }
-
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(249, 115, 22, 0);
-            }
-        }
-
-        .time-block {
-            background: rgba(56, 189, 248, 0.1);
-            padding: 5px 10px;
-            border-radius: 5px;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            min-width: 45px;
-            text-align: center;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo-img {
-            height: 60px;
-            width: auto;
-            object-fit: contain;
-        }
-
-        .logo-container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .logo-tagline {
-            font-size: 0.75rem;
-            color: var(--accent-cyan);
-            font-weight: 400;
-            font-style: italic;
-            /* Cursiva para dinamismo */
-            margin-top: 5px;
-            /* Separación del logo */
-            letter-spacing: 2px;
-            /* Espaciado futurista */
-            font-family: 'Space Grotesk', sans-serif;
-            text-transform: uppercase;
-            opacity: 0.9;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        .nav-link {
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-
-        .nav-link:hover {
-            color: var(--accent-cyan);
-        }
-
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: white;
-            cursor: pointer;
-        }
-
-        .whatsapp-btn {
-            background: #25D366;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: 0.3s;
-        }
-
-        .whatsapp-btn:hover {
-            background: #20bd5a;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-        }
-
-        /* --- BOTÓN INSCRIPCIÓN (NAV) --- */
-        .nav-inscripcion-btn {
-            background: var(--gradient-secondary);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.2);
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .nav-inscripcion-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4);
-            filter: brightness(1.1);
-        }
-
-        /* --- HERO --- */
-        .hero {
-            padding: 180px 0 100px;
-            text-align: center;
-            background: linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.85)), url('assets/images/hero_bg.png');
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 150px;
-            background: linear-gradient(to top, var(--bg-dark), transparent);
-            pointer-events: none;
-            /* Asegura que no bloquee clics en los botones */
-        }
-
-        .hero-title {
-            font-size: 3.5rem;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(to bottom, #ffffff 30%, #94a3b8);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-weight: 700;
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 750px;
-            margin: 0 auto 3rem;
-        }
-
-        .hero-cta-group {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .hero-cta {
-            background: var(--gradient-secondary);
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 10px 25px rgba(249, 115, 22, 0.3);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .hero-cta:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(249, 115, 22, 0.5);
-        }
-
-        .hero-cta-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: 0.3s;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .hero-cta-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--accent-cyan);
-        }
-
-        /* --- SECTION HEADERS --- */
-        .section-padding {
-            padding: 100px 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 70px;
-        }
-
-        .section-title {
-            font-size: 2.8rem;
-            color: var(--text-main);
-            margin-bottom: 1rem;
-            letter-spacing: -0.03em;
-        }
-
-        .section-header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
-
-        /* --- CONSULTANCY SERVICES --- */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background: var(--bg-card);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 2.5rem;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--gradient-primary);
-            opacity: 0;
-            transition: 0.3s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(34, 211, 238, 0.4);
-            background: rgba(30, 41, 59, 0.5);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .service-card:hover::before {
-            opacity: 1;
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-
-        .service-title {
-            font-size: 1.4rem;
-            color: white;
-            margin-bottom: 1rem;
-        }
-
-        .service-desc {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        /* --- COURSES --- */
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 3rem;
-        }
-
-        .course-card {
-            background: #0f172a;
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: all 0.4s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .course-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-cyan);
-            box-shadow: 0 20px 50px rgba(34, 211, 238, 0.1);
-        }
-
-        .course-img-container {
-            height: 240px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .course-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .course-card:hover .course-img {
-            transform: scale(1.1);
-        }
-
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to top, #0f172a, transparent);
-        }
-
-        .course-content {
-            padding: 2rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .course-meta {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 1.5rem;
-        }
-
-        .tag {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        .tag-price {
-            color: var(--accent-orange);
-            font-weight: 700;
-            background: rgba(251, 146, 60, 0.1);
-            border: 1px solid rgba(251, 146, 60, 0.2);
-        }
-
-        .course-title {
-            font-size: 1.5rem;
-            margin-bottom: 1.2rem;
-            line-height: 1.2;
-            color: white;
-            font-weight: 700;
-        }
-
-        .course-description {
-            font-size: 1rem;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-        }
-
-        .course-schedule {
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
-            color: var(--accent-orange);
-            background: rgba(251, 146, 60, 0.05);
-            padding: 12px 18px;
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .schedule-line {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .schedule-line span:first-child {
-            font-weight: 700;
-        }
-
-        .prerequisite-tag {
-            font-size: 0.8rem;
-            color: var(--accent-cyan);
-            background: rgba(34, 211, 238, 0.1);
-            padding: 4px 12px;
-            border-radius: 6px;
-            display: inline-block;
-            margin-bottom: 1rem;
-            font-weight: 600;
-            border: 1px solid rgba(34, 211, 238, 0.2);
-        }
-
-        details {
-            margin-top: auto;
-            border-top: 1px solid var(--border-color);
-            padding-top: 1.5rem;
-        }
-
-        summary {
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--accent-cyan);
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        summary::after {
-            content: '+';
-            font-size: 1.2rem;
-            transition: 0.3s;
-        }
-
-        details[open] summary::after {
-            content: '-';
-            color: var(--accent-orange);
-            transform: rotate(180deg);
-        }
-
-        .course-sessions {
-            margin-top: 1.5rem;
-            padding-left: 0;
-            animation: fadeIn 0.4s ease-out;
-        }
-
-        .session-item {
-            margin-bottom: 1.2rem;
-            padding-left: 1.2rem;
-            border-left: 2px solid var(--accent-orange);
-        }
-
-        .session-title {
-            display: block;
-            font-weight: 600;
-            color: white;
-            margin-bottom: 0.3rem;
-        }
-
-        .session-desc {
-            font-size: 0.9rem;
-            color: #94a3b8;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* --- TIKTOK SECTION --- */
-        .tiktok-section {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-            padding: 60px 0;
-            margin-top: 80px;
-        }
-
-        .tiktok-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .tiktok-title {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .tiktok-subtitle {
-            color: var(--text-muted);
-            max-width: 600px;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .tiktok-btn {
-            background-color: #000000;
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: 0.3s;
-        }
-
-        .tiktok-btn:hover {
-            background-color: #25F4EE;
-            color: black;
-            transform: translateY(-2px);
-            border-color: transparent;
-        }
-
-        /* --- FOOTER --- */
-        .footer {
-            background: #020617;
-            padding: 3rem 0;
-            padding-top: 2rem;
-            text-align: center;
-        }
-
-        /* --- PROMO & PAYMENT --- */
-        .promo-banner {
-            background: linear-gradient(90deg, rgba(56, 189, 248, 0.1), rgba(249, 115, 22, 0.1));
-            border: 1px dashed var(--accent-orange);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-top: 3rem;
-            text-align: center;
-        }
-
-        .payment-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .payment-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-color);
-            padding: 1.5rem;
-            border-radius: 10px;
-            font-size: 0.95rem;
-            display: flex;
-            /* Flexbox para poner logo a la izquierda */
-            gap: 1.5rem;
-            align-items: center;
-            transition: background 0.3s;
-        }
-
-        .payment-card:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .payment-logo {
-            height: 60px;
-            /* Más grande */
-            width: 60px;
-            object-fit: contain;
-            flex-shrink: 0;
-        }
-
-        .payment-details {
-            flex: 1;
-        }
-
-        .payment-card h4 {
-            color: var(--accent-cyan);
-            margin-bottom: 0.3rem;
-            font-size: 1.2rem;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-
-        .copy-text {
-            cursor: pointer;
-            color: var(--text-muted);
-            transition: color 0.2s;
-            display: block;
-            margin-top: 5px;
-        }
-
-        .copy-text:hover {
-            color: white;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.2rem;
-            }
-
-            .logo-img {
-                height: 50px;
-            }
-
-            .logo-tagline {
-                font-size: 0.65rem;
-            }
-
-            .nav-menu {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: var(--bg-card);
-                flex-direction: column;
-                padding: 2rem;
-                border-bottom: 1px solid var(--border-color);
-            }
-
-            .nav-menu.active {
-                display: flex;
-            }
-
-            .nav-toggle {
-                display: block;
-                margin-left: auto;
-            }
-        }
-
-        /* --- DOWNLOAD BUTTON --- */
-        .download-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(34, 211, 238, 0.1);
-            color: var(--accent-cyan);
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            border: 1px solid rgba(34, 211, 238, 0.3);
-            margin-top: 1.5rem;
-            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            width: fit-content;
-        }
-
-        .download-btn:hover {
-            background: var(--accent-cyan);
-            color: var(--bg-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(34, 211, 238, 0.2);
-        }
-
-        .download-btn svg {
-            transition: transform 0.3s;
-        }
-
-        .download-btn:hover svg {
-            transform: translateY(2px);
-        }
-    </style>
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Project Control AI | Automatiza tu Proyecto</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface-dim": "#0b1323",
+          "background": "#0b1323",
+          "surface-tint": "#3cd7ff",
+          "surface-container-low": "#131c2b",
+          "primary-container": "#00d4ff",
+          "on-surface-variant": "#bbc9cf",
+          "primary-fixed": "#b4ebff",
+          "surface-variant": "#2d3546",
+          "inverse-primary": "#00677e",
+          "surface-bright": "#31394a",
+          "on-secondary-container": "#4d1900",
+          "secondary-container": "#f4630f",
+          "tertiary-container": "#feb528",
+          "on-primary-fixed": "#001f27",
+          "surface-container-highest": "#2d3546",
+          "surface": "#0b1323",
+          "inverse-surface": "#dbe2f8",
+          "on-tertiary": "#432c00",
+          "on-primary-container": "#00586b",
+          "tertiary": "#ffd9a1",
+          "surface-container-high": "#222a3a",
+          "primary-fixed-dim": "#3cd7ff",
+          "outline": "#859398",
+          "surface-container": "#18202f",
+          "on-background": "#dbe2f8",
+          "primary": "#a8e8ff",
+          "secondary": "#ffb596",
+          "on-secondary": "#581e00",
+          "on-primary": "#003642",
+          "outline-variant": "#3c494e",
+          "surface-container-lowest": "#060e1d",
+          "on-surface": "#dbe2f8",
+        },
+        fontFamily: {
+          "headline": ["Space Grotesk"],
+          "body": ["Inter"],
+          "label": ["Inter"]
+        },
+        borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+      },
+    },
+  }
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; background-color: #0b1323; color: #dbe2f8; }
+  .font-headline { font-family: 'Space Grotesk', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .glass-panel { background: rgba(45, 53, 70, 0.4); backdrop-filter: blur(12px); }
+</style>
 </head>
-
-<body>
-
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <div class="container nav-brand">
-            <a href="#" class="logo-container">
-                <img src="assets/images/Logotipo.png" alt="Project Control AI" class="logo-img">
-                <span class="logo-tagline">Forjando a los Ingenieros de la Era IA</span>
-            </a>
-
-            <button class="nav-toggle" id="navToggle">☰</button>
-            <div class="nav-menu" id="navMenu">
-                <a href="#cursos" class="nav-link">Capacitaciones</a>
-                <a href="academy.html" class="nav-link" style="color: var(--accent-cyan); font-weight: 700;">Academy</a>
-                <a href="#material-estudio" class="nav-link">Recursos</a>
-                <a href="#consultoria" class="nav-link">Consultoría</a>
-                <a href="https://wa.me/51993147501" class="whatsapp-btn" target="_blank">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M12.031 6.172c-2.32 0-4.591.398-6.758 1.189-.306.112-.618.33-.867.556l-1.921 1.76a.915.915 0 0 0-.273.847c.143.841.214 1.285.421 2.113a.914.914 0 0 0 .845.694c.124.005.25-.003.371-.03l1.607-.354c.446-.099.637-.6.463-.997a10.26 10.26 0 0 1-.087-2.327l.1.002zM18.103 5.672c-.012-.001-.024-.001-.036 0-.012.001-.024.001-.036 0zm-.696.84c-1.506-1.503-3.606-2.432-5.922-2.432-4.632 0-8.386 3.754-8.386 8.386 0 1.576.438 3.05 1.197 4.312L3.333 21l4.47-1.176a8.347 8.347 0 0 0 4.228 1.157c4.632 0 8.386-3.754 8.386-8.386 0-2.316-.929-4.416-2.432-5.922zM12.031 18.272c-1.103 0-2.149-.258-3.074-.717l-.22-.11-2.28.6 1.171-2.2a8.318 8.318 0 0 1-.689-3.235c0-3.141 2.556-5.698 5.698-5.698 3.141 0 5.698 2.556 5.698 5.698 0 3.141-2.556 5.698-5.698 5.698z" />
-                    </svg>
-                    Chat WhatsApp
-                </a>
-                <a href="inscripcion.html" class="nav-inscripcion-btn">Matricularse</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- HERO SECTION -->
-    <section class="hero" id="inicio">
-        <div class="container">
-            <h1 class="hero-title">Forjando a los Ingenieros <br> de la Era IA</h1>
-            <p class="hero-subtitle">Transforma tu carrera con las capacitaciones más avanzadas en Agentes Autónomos,
-                Auditoría Forense y Control Predictivo.</p>
-            <div class="hero-cta-group">
-                <button class="hero-cta" onclick="document.getElementById('cursos').scrollIntoView();"
-                    style="background: var(--gradient-primary); box-shadow: 0 10px 25px rgba(34, 211, 238, 0.3);">
-                    🔴 Cursos en Vivo
-                </button>
-                <button class="hero-cta" onclick="document.getElementById('academy-appendix').scrollIntoView();">
-                    🟢 Academy Asincrónica
-                </button>
-            </div>
-        </div>
-    </section>
-
-
-
-
-
-    <!-- COURSES SECTION -->
-    <section class="section-padding" id="cursos">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Capacitaciones Especializadas</h2>
-                <p>Formación de usuario básico a Developer Engineer.</p>
-            </div>
-
-            <div class="courses-grid">
-                <!-- CURSO 1 -->
-                <div class="course-card" style="border: 2px solid var(--accent-cyan);">
-                    <div class="course-content">
-                        <div
-                            style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
-                            <span class="tag"
-                                style="background: rgba(34, 211, 238, 0.1); color: var(--accent-cyan); font-weight: bold;">INICIA:
-                                06/04</span>
-                            <span class="tag tag-price">S/ 200 | $75</span>
-                        </div>
-                        <h3 class="course-title">1. Licitaciones Inteligentes con IA</h3>
-                        <div class="course-meta" style="margin-bottom: 1rem;">
-                            <span class="tag">📅 5 Sesiones</span>
-                            <span class="tag">⏱️ 15 Horas Totales</span>
-                        </div>
-
-                        <!-- MENSAJE DE INICIO -->
-                        <div
-                            style="background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 15px; margin-bottom: 1rem; text-align: center;">
-                            <span
-                                style="color: var(--accent-cyan); font-weight: bold; font-size: 1.1rem; display: block;">🚀
-                                NUEVO GRUPO</span>
-
-                            <!-- COUNTDOWN PARA CURSO 1 -->
-                            <div
-                                style="display: flex; justify-content: center; gap: 8px; font-family: 'Space Grotesk', sans-serif; font-weight: bold; color: var(--accent-cyan); font-size: 1rem; margin-top: 10px;">
-                                <div style="background: rgba(34, 211, 238, 0.1); padding: 2px 6px; border-radius: 4px;">
-                                    <span class="days-c1">00</span><small
-                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">D</small>
-                                </div>
-                                <div style="background: rgba(34, 211, 238, 0.1); padding: 2px 6px; border-radius: 4px;">
-                                    <span class="hours-c1">00</span><small
-                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">H</small>
-                                </div>
-                                <div style="background: rgba(34, 211, 238, 0.1); padding: 2px 6px; border-radius: 4px;">
-                                    <span class="minutes-c1">00</span><small
-                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">M</small>
-                                </div>
-                                <div style="background: rgba(34, 211, 238, 0.1); padding: 2px 6px; border-radius: 4px;">
-                                    <span class="seconds-c1">00</span><small
-                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">S</small>
-                                </div>
-                            </div>
-                            <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 5px;">¡Inscripciones abiertas!</p>
-                        </div>
-
-                        <p>Auditoría de expedientes masivos, APUs, Presupuestos y Cronogramas
-                            automáticos.</p>
-
-                        <!-- HORARIO CURSO 1 -->
-                        <div class="course-schedule">
-                            <div class="schedule-line">
-                                <span>Lunes y Miércoles:</span>
-                                <span>7:00 PM - 10:00 PM</span>
-                            </div>
-                        </div>
-
-                        <p style="color: var(--accent-cyan); font-weight: bold; font-size: 0.8rem; text-align: center;">
-                            CUPOS DISPONIBLES</p>
-                        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 1.5rem;">
-
-                            <a data-checkout="licitaciones" target="_blank" class="hero-cta"
-                                style="background: #f97316; color: white; width: 100%; text-align: center; padding: 12px; font-weight: bold;">
-                                Pago Global (Tarjetas / Efectivo)
-                            </a>
-                            <a href="inscripcion.html?curso=Licitaciones Inteligentes" class="nav-link"
-                                style="text-align: center; font-size: 0.85rem; color: #22d3ee;">
-                                Inscribirme por Yape o BCP →
-                            </a>
-                            <a href="assets/brochures/Brochure_Curso_1_Licitaciones_360.pdf" download
-                                class="download-btn" style="width: 100%; justify-content: center; margin-top: 5px;">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                    <polyline points="7 10 12 15 17 10"></polyline>
-                                    <line x1="12" y1="15" x2="12" y2="3"></line>
-                                </svg>
-                                Descargar Brochure
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CURSO 2 -->
-                <div class="course-card" style="border: 2px solid var(--accent-cyan);">
-                    <div class="course-content">
-                        <div
-                            style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
-                            <span class="tag"
-                                style="background: rgba(34, 211, 238, 0.1); color: var(--accent-cyan); font-weight: bold;">INICIA:
-                                14/04</span>
-                            <span class="tag tag-price">S/ 200 | $75</span>
-                        </div>
-                        <h3 class="course-title">2. Control y Gerencia EVM</h3>
-                        <div class="course-meta" style="margin-bottom: 1rem;">
-                            <span class="tag">📅 5 Sesiones</span>
-                            <span class="tag">⏱️ 15 Horas Totales</span>
-                        </div>
-
-                        <!-- MENSAJE DE INICIO -->
-                        <div
-                            style="background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 15px; margin-bottom: 1rem; text-align: center;">
-                            <span
-                                style="color: var(--accent-cyan); font-weight: bold; font-size: 1.1rem; display: block;">🚀
-                                NUEVO GRUPO</span>
-
-                            <!-- COUNTDOWN PARA CURSO 2 -->
-                            <div
-                                style="display: flex; justify-content: center; gap: 8px; font-family: 'Space Grotesk', sans-serif; font-weight: bold; color: var(--accent-cyan); font-size: 1rem; margin-top: 10px;">
-                                <div style="background: rgba(34, 211, 238, 0.1); padding: 2px 6px; border-radius: 4px;">
-                                    <span class="days-c2">00</span><small
-                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">D</small>
-                                </div>
-                                <div style="background: rgba(34, 211, 238, 0.1); padding: 2px 6px; border-radius: 4px;">
-                                    <span class="hours-c2">00</span><small
-                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">H</small>
-                                </div>
-                                <div style="background: rgba(34, 211, 238, 0.1); padding: 2px 6px; border-radius: 4px;">
-                                    <span class="minutes-c2">00</span><small
-                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">M</small>
-                                </div>
-                                <div style="background: rgba(34, 211, 238, 0.1); padding: 2px 6px; border-radius: 4px;">
-                                    <span class="seconds-c2">00</span><small
-                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">S</small>
-                                </div>
-                            </div>
-                            <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 5px;">¡Inscripciones abiertas!</p>
-                        </div>
-
-                        <p>Gestión predictiva de proyectos. Seguimiento de costos y plazos con
-                            Valor Ganado.</p>
-
-                        <!-- HORARIO CURSO 2 -->
-                        <div class="course-schedule">
-                            <div class="schedule-line">
-                                <span>Martes y Jueves:</span>
-                                <span>7:00 PM - 10:00 PM</span>
-                            </div>
-                        </div>
-
-                        <p style="color: var(--accent-cyan); font-weight: bold; font-size: 0.8rem; text-align: center;">
-                            CUPOS DISPONIBLES</p>
-                        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 1.5rem;">
-                            <a data-checkout="evm" target="_blank" class="hero-cta"
-                                style="background: #f97316; color: white; width: 100%; text-align: center; padding: 12px; font-weight: bold;">
-                                Pago Global (Tarjetas / Efectivo)
-                            </a>
-                            <a href="inscripcion.html?curso=Control y Gerencia EVM" class="nav-link"
-                                style="text-align: center; font-size: 0.85rem; color: #22d3ee;">
-                                Inscribirme por Yape o BCP →
-                            </a>
-                            <a href="assets/brochures/Brochure_Curso_2_EVM.pdf" download class="download-btn"
-                                style="width: 100%; justify-content: center; margin-top: 5px;">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                    <polyline points="7 10 12 15 17 10"></polyline>
-                                    <line x1="12" y1="15" x2="12" y2="3"></line>
-                                </svg>
-                                Descargar Brochure
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CURSO 3 -->
-                <div class="course-card" style="border: 2px solid var(--accent-cyan);">
-                    <div class="course-content">
-                        <div
-                            style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
-                            <span class="tag"
-                                style="background: rgba(34, 211, 238, 0.1); color: var(--accent-cyan); font-weight: bold;">INICIA:
-                                19/04</span>
-                            <span class="tag tag-price">S/ 200 | $75</span>
-                        </div>
-                        <h3 class="course-title">3. Gestión Integral de Proyectos con IA</h3>
-                        <div class="course-meta" style="margin-bottom: 1rem;">
-                            <span class="tag">📅 5 Sesiones</span>
-                            <span class="tag">⏱️ 15 Horas Totales</span>
-                        </div>
-
-                        <!-- MENSAJE DE INICIO -->
-                        <div
-                            style="background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 15px; margin-bottom: 1rem; text-align: center;">
-                            <span
-                                style="color: var(--accent-cyan); font-weight: bold; font-size: 1.1rem; display: block;">🚀
-                                NUEVO GRUPO</span>
-
-                            <!-- COUNTDOWN PARA CURSO 3 -->
-                            <div
-                                style="display: flex; justify-content: center; gap: 8px; font-family: 'Space Grotesk', sans-serif; font-weight: bold; color: var(--accent-cyan); font-size: 1rem; margin-top: 10px;">
-                                <div style="background: rgba(34, 211, 238, 0.1); padding: 2px 6px; border-radius: 4px;">
-                                    <span class="days-c3">00</span><small
-                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">D</small>
-                                </div>
-                                <div style="background: rgba(34, 211, 238, 0.1); padding: 2px 6px; border-radius: 4px;">
-                                    <span class="hours-c3">00</span><small
-                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">H</small>
-                                </div>
-                                <div style="background: rgba(34, 211, 238, 0.1); padding: 2px 6px; border-radius: 4px;">
-                                    <span class="minutes-c3">00</span><small
-                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">M</small>
-                                </div>
-                                <div style="background: rgba(34, 211, 238, 0.1); padding: 2px 6px; border-radius: 4px;">
-                                    <span class="seconds-c3">00</span><small
-                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">S</small>
-                                </div>
-                            </div>
-                            <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 5px;">¡Inscripciones abiertas!</p>
-                        </div>
-
-                        <p>Gestión de Alcance, Contratos, Calidad y HSE potenciada por
-                            Inteligencia Artificial.</p>
-
-                        <!-- HORARIO CURSO 3 -->
-                        <div class="course-schedule">
-                            <div class="schedule-line">
-                                <span>Domingos:</span>
-                                <span>10:00 AM - 1:00 PM</span>
-                            </div>
-                        </div>
-
-                        <p style="color: var(--accent-cyan); font-weight: bold; font-size: 0.8rem; text-align: center;">
-                            CUPOS DISPONIBLES</p>
-                        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 1.5rem;">
-                            <a data-checkout="gestion_proyectos" target="_blank" class="hero-cta"
-                                style="background: #f97316; color: white; width: 100%; text-align: center; padding: 12px; font-weight: bold;">
-                                Pago Global (Tarjetas / Efectivo)
-                            </a>
-                            <a href="inscripcion.html?curso=Gestion Proyectos IA" class="nav-link"
-                                style="text-align: center; font-size: 0.85rem; color: #22d3ee;">
-                                Inscribirme por Yape o BCP →
-                            </a>
-                            <a href="assets/brochures/Brochure_Curso_3_IA_Despertar_Digital.pdf" download
-                                class="download-btn" style="width: 100%; justify-content: center; margin-top: 5px;">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                    <polyline points="7 10 12 15 17 10"></polyline>
-                                    <line x1="12" y1="15" x2="12" y2="3"></line>
-                                </svg>
-                                Descargar Brochure
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CURSO 4 -->
-                <div class="course-card">
-                    <div class="course-content">
-                        <div
-                            style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
-                            <span class="tag"
-                                style="background: rgba(34, 211, 238, 0.1); color: var(--accent-cyan); font-weight: bold;">INICIA:
-                                05/04</span>
-                            <span class="tag tag-price"
-                                style="color: #22d3ee; background: rgba(34, 211, 238, 0.1); border-color: rgba(34, 211, 238, 0.2);">S/
-                                300 | $90</span>
-                        </div>
-                        <h3 class="course-title">4. Automation Engineer</h3>
-                        <div class="course-meta" style="margin-bottom: 1rem;">
-                            <span class="tag">📅 5 Sesiones</span>
-                            <span class="tag">⏱️ 15 Horas Totales</span>
-                        </div>
-
-                        <!-- MENSAJE DE INICIO -->
-                        <div
-                            style="background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 15px; margin-bottom: 1rem; text-align: center;">
-                            <span
-                                style="color: var(--accent-cyan); font-weight: bold; font-size: 1.1rem; display: block;">🚀
-                                NUEVO
-                                GRUPO</span>
-
-                            <!-- COUNTDOWN PARA CURSO 4 -->
-                            <div
-                                style="display: flex; justify-content: center; gap: 8px; font-family: 'Space Grotesk', sans-serif; font-weight: bold; color: var(--accent-cyan); font-size: 1rem; margin-top: 10px;">
-                                <div style="background: rgba(34, 211, 238, 0.1); padding: 2px 6px; border-radius: 4px;">
-                                    <span class="days-c4">00</span><small
-                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">D</small>
-                                </div>
-                                <div style="background: rgba(34, 211, 238, 0.1); padding: 2px 6px; border-radius: 4px;">
-                                    <span class="hours-c4">00</span><small
-                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">H</small>
-                                </div>
-                                <div style="background: rgba(34, 211, 238, 0.1); padding: 2px 6px; border-radius: 4px;">
-                                    <span class="minutes-c4">00</span><small
-                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">M</small>
-                                </div>
-                                <div style="background: rgba(34, 211, 238, 0.1); padding: 2px 6px; border-radius: 4px;">
-                                    <span class="seconds-c4">00</span><small
-                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">S</small>
-                                </div>
-                            </div>
-                            <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 5px;">¡Inscripciones abiertas!</p>
-                        </div>
-
-                        <p>Automatizaciones avanzadas con Python, HTML, VBA y Agentes Autónomos.</p>
-
-                        <!-- HORARIO CURSO 4 -->
-                        <div class="course-schedule">
-                            <div class="schedule-line">
-                                <span>Domingos:</span>
-                                <span>3:00 PM - 6:00 PM</span>
-                            </div>
-                        </div>
-
-                        <p style="color: #94a3b8; font-size: 0.8rem; margin-bottom: 1rem;">*Requiere base de Gestión
-                            Digital (Curso 3)</p>
-
-                        <p style="color: var(--accent-cyan); font-weight: bold; font-size: 0.8rem;">CUPOS DISPONIBLES
-                        </p>
-                        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 1.5rem;">
-                            <a data-checkout="automation" target="_blank" class="hero-cta"
-                                style="background: #f97316; color: white; width: 100%; text-align: center; padding: 12px; font-weight: bold;">
-                                Pago Global (Tarjetas / Efectivo)
-                            </a>
-                            <a href="inscripcion.html?curso=Automation Engineer" class="nav-link"
-                                style="text-align: center; font-size: 0.85rem; color: #22d3ee;">
-                                Inscribirme por Yape o BCP →
-                            </a>
-                            <a href="assets/brochures/Brochure_Curso_4_Automation_Engineer.pdf" download
-                                class="download-btn" style="width: 100%; justify-content: center; margin-top: 5px;">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                    <polyline points="7 10 12 15 17 10"></polyline>
-                                    <line x1="12" y1="15" x2="12" y2="3"></line>
-                                </svg>
-                                Descargar Brochure
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CURSO 5 -->
-                <div class="course-card" style="border: 2px solid #22d3ee;">
-                    <div class="course-content">
-                        <div
-                            style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
-                            <span class="tag"
-                                style="background: rgba(34, 211, 238, 0.1); color: var(--accent-cyan); font-weight: bold;">INICIA:
-                                03/04</span>
-                            <span class="tag tag-price">S/ 200 | $75</span>
-                        </div>
-                        <h3 class="course-title">5. Primavera P6 Professional</h3>
-                        <div class="course-meta" style="margin-bottom: 1rem;">
-                            <span class="tag">📅 5 Sesiones</span>
-                            <span class="tag">⏱️ 15 Horas Totales</span>
-                        </div>
-
-                        <!-- MENSAJE DE INICIO -->
-                        <div
-                            style="background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 15px; margin-bottom: 1rem; text-align: center;">
-                            <span
-                                style="color: var(--accent-cyan); font-weight: bold; font-size: 1.1rem; display: block;">🚀
-                                NIVEL 1</span>
-                            <span style="font-size: 0.8rem; color: #94a3b8; display: block; margin-top: 2px;">(Planning
-                                Master)</span>
-
-                            <!-- COUNTDOWN PARA CURSO 5 -->
-                            <div
-                                style="display: flex; justify-content: center; gap: 8px; font-family: 'Space Grotesk', sans-serif; font-weight: bold; color: var(--accent-cyan); font-size: 1rem; margin-top: 10px;">
-                                <div style="background: rgba(34, 211, 238, 0.1); padding: 2px 6px; border-radius: 4px;">
-                                    <span class="days-c5">00</span><small
-                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">D</small>
-                                </div>
-                                <div style="background: rgba(34, 211, 238, 0.1); padding: 2px 6px; border-radius: 4px;">
-                                    <span class="hours-c5">00</span><small
-                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">H</small>
-                                </div>
-                                <div style="background: rgba(34, 211, 238, 0.1); padding: 2px 6px; border-radius: 4px;">
-                                    <span class="minutes-c5">00</span><small
-                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">M</small>
-                                </div>
-                                <div style="background: rgba(34, 211, 238, 0.1); padding: 2px 6px; border-radius: 4px;">
-                                    <span class="seconds-c5">00</span><small
-                                        style="font-size: 0.5rem; display: block; color: #94a3b8;">S</small>
-                                </div>
-                            </div>
-                            <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 5px;">¡Inscripciones abiertas!</p>
-                        </div>
-
-                        <p>Planificación de Clase mundial, EPS/OBS, Ruta Crítica (CPM), Gesti&oacute;n de Recursos y
-                            Curvas S.</p>
-
-                        <!-- HORARIO CURSO 5 -->
-                        <div class="course-schedule">
-                            <div class="schedule-line">
-                                <span>Viernes y Sábado:</span>
-                                <span>7:00 PM - 10:00 PM</span>
-                            </div>
-                        </div>
-
-                        <p style="color: var(--accent-cyan); font-weight: bold; font-size: 0.8rem;">CUPOS DISPONIBLES
-                        </p>
-
-                        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 1.5rem;">
-                            <a data-checkout="p6" target="_blank" class="hero-cta"
-                                style="background: #f97316; color: white; width: 100%; text-align: center; padding: 12px; font-weight: bold;">
-                                Pago Global (Tarjetas / Efectivo)
-                            </a>
-                            <a href="inscripcion.html?curso=Primavera P6 Professional" class="nav-link"
-                                style="text-align: center; font-size: 0.85rem; color: #22d3ee;">
-                                Inscribirme por Yape o BCP →
-                            </a>
-                            <a href="assets/brochures/Brochure_Curso_5_Primavera_P6.pdf" download class="download-btn"
-                                style="width: 100%; justify-content: center; margin-top: 0;">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                    <polyline points="7 10 12 15 17 10"></polyline>
-                                    <line x1="12" y1="15" x2="12" y2="3"></line>
-                                </svg>
-                                Descargar Brochure
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CURSO 6 -->
-                <div class="course-card" style="opacity: 0.9;">
-                    <div class="course-content">
-                        <div
-                            style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
-                            <span class="tag"
-                                style="background: var(--accent-cyan); color: #000; font-weight: bold;">PRÓXIMAMENTE</span>
-                            <span class="tag">PROX. INICIO</span>
-                        </div>
-                        <h3 class="course-title">6. Last Planner System & Lean Construction</h3>
-                        <div class="course-meta" style="margin-bottom: 1rem;">
-                            <span class="tag">📅 5 Sesiones</span>
-                            <span class="tag">⏱️ 15 Horas Totales</span>
-                        </div>
-
-                        <div style="margin-bottom: 1.5rem;">
-                            <p style="color: white; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem;">Nivel 1
-                                (Confiabilidad en Campo):</p>
-                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Implementación
-                                de LPS (Lookahead, Plan Semanal, PPC), gestión de restricciones y flujo de procesos
-                                Lean.</p>
-
-                            <p
-                                style="color: var(--accent-cyan); font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem;">
-                                Nivel 2 (Lean 4.0):</p>
-                            <p style="font-size: 0.85rem; color: var(--text-muted);">Digitalización del PPC con IA,
-                                agentes para seguimiento automático de restricciones y analítica predictiva de causas de
-                                no cumplimiento (CNC).</p>
-                        </div>
-
-                        <a href="https://wa.me/51993147501?text=Hola,%20deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20curso%20de%20Last%20Planner%20System"
-                            class="nav-link"
-                            style="color:var(--accent-cyan); font-weight:bold; margin-top: auto;">Solicitar Información
-                            →</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- PROMOS & PAYMENT -->
-            <div class="promo-banner">
-                <h3 style="color: var(--accent-orange); margin-bottom: 10px;">🎁 Promoción Especial: Red de Colegas</h3>
-                <p>Si se inscriben <strong>4 amigos o colegas para un mismo curso</strong>, ¡el 5to alumno lleva el
-                    curso completamente <strong>GRATIS</strong>!</p>
-            </div>
-
-            <div class="payment-info" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
-                <div class="payment-card">
-                    <img src="assets/images/Yape.png" alt="Yape" class="payment-logo"
-                        style="border-radius: 12px; background: white; padding: 5px;">
-                    <div class="payment-details">
-                        <h4>Yape</h4>
-                        <p><strong>993 147 501</strong></p>
-                        <p style="font-size: 0.8rem; opacity: 0.7;">Titular: Aurelio Solorzano</p>
-                        <a href="inscripcion.html" class="nav-inscripcion-btn"
-                            style="margin-top: 10px; width: 100%; font-size: 0.75rem;">Inscribirme con Yape</a>
-                    </div>
-                </div>
-                <div class="payment-card">
-                    <img src="assets/images/BCP.png" alt="BCP" class="payment-logo"
-                        style="border-radius: 12px; background: white; padding: 5px;">
-                    <div class="payment-details">
-                        <h4>BCP (Soles)</h4>
-                        <p><strong>19133177122043</strong></p>
-                        <p style="font-size: 0.75rem; opacity: 0.7;">CCI: 00219113317712204359</p>
-                        <a href="inscripcion.html" class="nav-inscripcion-btn"
-                            style="margin-top: 10px; width: 100%; font-size: 0.75rem;">Inscribirme con BCP</a>
-                    </div>
-                </div>
-                <div class="payment-card">
-                    <img src="assets/images/BCP.png" alt="BCP" class="payment-logo"
-                        style="border-radius: 12px; background: white; padding: 5px;">
-                    <div class="payment-details">
-                        <h4>BCP (Dólares)</h4>
-                        <p><strong>191-13211096-1-40</strong></p>
-                        <p style="font-size: 0.75rem; opacity: 0.7;">CCI: 00219111321109614056</p>
-                        <a href="inscripcion.html" class="nav-inscripcion-btn"
-                            style="margin-top: 10px; width: 100%; font-size: 0.75rem;">Join in Dollars</a>
-                    </div>
-                </div>
-                <!-- NUEVA TARJETA PAYPAL -->
-                <div class="payment-card" style="border: 1px solid #0070ba; background: rgba(0, 112, 186, 0.05);">
-                    <div class="payment-logo"
-                        style="display: flex; align-items: center; justify-content: center; background: white; border-radius: 10px; padding: 5px; height: 60px; width: 60px;">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="#003087">
-                            <path
-                                d="M20.067 6.378c-.281-1.465-1.071-2.585-2.316-3.328-1.066-.639-2.383-.935-4.226-.935h-5.244c-.58 0-1.066.431-1.144 1.002L5.05 18.067c-.057.417.265.795.688.795h3.047l.952-6.009c.078-.571.564-1.002 1.144-1.002h1.613c3.424 0 5.626-1.636 6.307-5.127.18-.921.164-1.69-.134-2.346zm-2.827 3.551c-.482 2.476-2.152 3.86-4.627 3.86H11.53c-.15 0-.256.082-.266.216l-.609 3.832h-1.92l1.611-10.165c.01-.064.067-.113.131-.113h2.647c.928 0 1.636.143 2.112.43.518.312.823.824.912 1.53.078.618-.035 1.258-.266 1.834l.001-.024z" />
-                            <path
-                                d="M16.513 5.378c-.281-1.465-1.071-2.585-2.316-3.328-1.066-.639-2.383-.935-4.226-.935h-5.244c-.58 0-1.066.431-1.144 1.002L1.496 17.067c-.057.417.265.795.688.795h3.047l.952-6.009C6.261 11.282 6.747 10.851 7.327 10.851h1.613c3.424 0 5.626-1.636 6.307-5.127.18-.921.164-1.69-.134-2.346zm-2.827 3.551c-.482 2.476-2.152 3.86-4.627 3.86H8.53c-.15 0-.256.082-.266.216l-.609 3.832H5.735l1.611-10.165c.01-.064.067-.113.131-.113h2.647c.928 0 1.636.143 2.112.43.518.312.823.824.912 1.53.078.618-.035 1.258-.266 1.834l.001-.024z" />
-                        </svg>
-                    </div>
-                    <div class="payment-details">
-                        <h4 style="color: #0070ba;">PayPal</h4>
-                        <p><strong>Pago Global</strong></p>
-                        <p style="font-size: 0.7rem; opacity: 0.8;">Visa / Master / AMEX</p>
-                        <a data-checkout="paypal_global" target="_blank" class="nav-inscripcion-btn"
-                            style="margin-top: 10px; width: 100%; font-size: 0.75rem; background: #0070ba; color: white; display: flex; align-items: center; justify-content: center; gap: 5px;">
-                            Ir a PayPal
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
-    </section>
-
-    <!-- MATERIAL DE ESTUDIO COMPLEMENTARIO -->
-    <section class="section-padding" id="material-estudio"
-        style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-top: 2px solid var(--border-color);">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Material de Estudio Complementario</h2>
-                <p>Recursos adicionales para potenciar tu aprendizaje y ver en acción lo que enseñamos en nuestra
-                    academia.</p>
-            </div>
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 3rem;">
-                <!-- TIKTOK SECTION -->
-                <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); border-radius: 20px; padding: 3rem; text-align: center; transition: all 0.4s ease;"
-                    onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='rgba(34, 211, 238, 0.4)';"
-                    onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)';">
-                    <div style="font-size: 4rem; margin-bottom: 1.5rem;">📱</div>
-                    <h3
-                        style="font-size: 1.8rem; color: white; margin-bottom: 1rem; font-family: 'Space Grotesk', sans-serif;">
-                        TikTok</h3>
-                    <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.7; margin-bottom: 1.5rem;">
-                        Encuentra <strong style="color: var(--accent-cyan);">cientos de videos cortos</strong> donde
-                        podrás observar lo que aprenderás en nuestra academia utilizando IA en proyectos reales.
-                        Ejemplos prácticos de 60 segundos que te mostrarán el poder de nuestras herramientas.
-                    </p>
-                    <div
-                        style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem;">
-                        <span
-                            style="background: rgba(34, 211, 238, 0.1); padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; color: var(--accent-cyan);">🎬
-                            Videos cortos</span>
-                        <span
-                            style="background: rgba(34, 211, 238, 0.1); padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; color: var(--accent-cyan);">⚡
-                            Ejemplos reales</span>
-                        <span
-                            style="background: rgba(34, 211, 238, 0.1); padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; color: var(--accent-cyan);">🤖
-                            IA en acción</span>
-                    </div>
-                    <a href="https://www.tiktok.com/@project.control.a?is_from_webapp=1&sender_device=pc"
-                        target="_blank" class="tiktok-btn"
-                        style="display: inline-flex; align-items: center; gap: 10px;">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
-                        </svg>
-                        Ver en TikTok
-                    </a>
-                </div>
-
-                <!-- YOUTUBE / CLASES GRABADAS SECTION -->
-                <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); border-radius: 20px; padding: 3rem; text-align: center; transition: all 0.4s ease;"
-                    onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='rgba(249, 115, 22, 0.4)';"
-                    onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)';">
-                    <div style="font-size: 4rem; margin-bottom: 1.5rem;">📺</div>
-                    <h3
-                        style="font-size: 1.8rem; color: white; margin-bottom: 1rem; font-family: 'Space Grotesk', sans-serif;">
-                        Clases Grabadas</h3>
-                    <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.7; margin-bottom: 1.5rem;">
-                        Accede a nuestra biblioteca completa de <strong style="color: var(--accent-orange);">clases
-                            grabadas</strong>. Ideal si no pudiste llevar las clases en vivo, quieres repasar las
-                        lecciones o necesitas profundizar en temas específicos.
-                    </p>
-                    <div
-                        style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem;">
-                        <span
-                            style="background: rgba(249, 115, 22, 0.1); padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; color: var(--accent-orange);">📚
-                            +50 Clases</span>
-                        <span
-                            style="background: rgba(249, 115, 22, 0.1); padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; color: var(--accent-orange);">🔄
-                            Acceso ilimitado</span>
-                        <span
-                            style="background: rgba(249, 115, 22, 0.1); padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; color: var(--accent-orange);">🎓
-                            Para alumnos</span>
-                    </div>
-                    <a href="clases-grabadas.html" class="hero-cta"
-                        style="display: inline-flex; align-items: center; gap: 10px; background: var(--gradient-secondary);">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
-                        </svg>
-                        Explorar Clases
-                    </a>
-                </div>
-            </div>
-
-            <div
-                style="text-align: center; margin-top: 3rem; padding: 2rem; background: rgba(56, 189, 248, 0.05); border-radius: 15px; border: 1px dashed rgba(56, 189, 248, 0.3);">
-                <p style="color: var(--text-muted); font-size: 1rem; margin: 0;">
-                    💡 <strong style="color: var(--accent-cyan);">Tip:</strong> Comienza con TikTok para ver ejemplos
-                    rápidos, luego profundiza con nuestras clases grabadas para dominar cada tema.
-                </p>
-            </div>
-        </div>
-    </section>
-
-
-
-    <!-- ACADEMY (ASINCRÓNICO) APPENDIX SECTION -->
-    <section class="section-padding" id="academy-appendix"
-        style="background: linear-gradient(to bottom, var(--bg-dark), #0a1628);">
-        <div class="container">
-            <div
-                style="background: rgba(251, 191, 36, 0.1); border: 1px solid var(--accent-orange); color: var(--accent-orange); padding: 1rem; border-radius: 12px; text-align: center; margin-bottom: 3rem; font-weight: 700; letter-spacing: 0.5px;">
-                🚀 NOTA IMPORTANTE: NUESTRA PRIMERA PUBLICACIÓN YA ESTÁ DISPONIBLE EN HOTMART (20/03)
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
-                <div>
-                    <span class="tag tag-price" style="margin-bottom: 1rem; display: inline-block;">NUEVO: ACADEMY
-                        ASINCRÓNICA</span>
-                    <h2 class="section-title">¿Problemas técnicos hoy? Resuélvelos hoy.</h2>
-                    <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem;">
-                        Hemos liberado <strong>20 Micro-Cursos</strong> intensivos de 2-3 horas. Sin esperar grupos,
-                        sin horarios fijos. Elige tu disciplina, descarga el prompt y soluciona el problema de tu obra
-                        ahora mismo.
-                    </p>
-                    <ul style="margin-bottom: 2rem;">
-                        <li
-                            style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px; list-style: none;">
-                            <span style="color: var(--accent-cyan);">⚡</span> Acceso inmediato e ilimitado.
-                        </li>
-                        <li
-                            style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px; list-style: none;">
-                            <span style="color: var(--accent-cyan);">⚡</span> Solo $11.99 USD por curso.
-                        </li>
-                        <li
-                            style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px; list-style: none;">
-                            <span style="color: var(--accent-cyan);">⚡</span> 6 Rutas de especialización (HSE, QA/QC,
-                            Costos, PMO...).
-                        </li>
-                    </ul>
-                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                        <a href="academy.html" class="hero-cta">Ir a la Academia →</a>
-                        <a href="academy.html#diagnostico" class="hero-cta-secondary"
-                            style="font-size: 0.95rem; padding: 0.8rem 1.5rem;">Diagnóstico de Ruta</a>
-                    </div>
-                </div>
-                <div
-                    style="background: rgba(0, 212, 255, 0.05); padding: 2rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); text-align: center;">
-                    <h3 style="margin-bottom: 1.5rem; font-family: 'Space Grotesk';">Catálogo de Especialidad</h3>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 1.5rem;">
-                        <div
-                            style="background: var(--bg-dark); padding: 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
-                            <div style="font-size: 1.2rem; color: var(--accent-cyan); font-weight: 700;">20</div>
-                            <div style="font-size: 0.75rem; color: var(--text-muted);">Micro-Cursos</div>
-                        </div>
-                        <div
-                            style="background: var(--bg-dark); padding: 1rem; border-radius: 12px; border: 1px solid var(--accent-orange);">
-                            <div style="font-size: 1.2rem; color: var(--accent-orange); font-weight: 700;">$11.99</div>
-                            <div style="font-size: 0.75rem; color: var(--text-muted);">Por problema</div>
-                        </div>
-                    </div>
-                    <div style="border-radius: 12px; overflow: hidden; border: 1px solid rgba(0, 212, 255, 0.3);">
-                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                            alt="Academy Preview" style="width: 100%; filter: brightness(0.7) contrast(1.2);">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CONSULTORÍA SECTION (CONDENSED AT THE END) -->
-    <section class="section-padding" id="consultoria" style="background: rgba(15, 23, 42, 0.4);">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Consultoría Estratégica</h2>
-                <p>Soluciones personalizadas y asesoría directa por el Ing. Aurelio Solorzano.</p>
-            </div>
-
-            <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
-                <div class="service-card">
-                    <h3 class="service-title">Licitaciones & PMO Digital</h3>
-                    <p class="service-desc">Optimización de propuestas y control predictivo con EVM 4.0.</p>
-                </div>
-                <div class="service-card">
-                    <h3 class="service-title">Agentes IA & Automatización</h3>
-                    <p class="service-desc">Implementación de agentes autónomos y desarrollo in-house para ingeniería.
-                    </p>
-                </div>
-                <div class="service-card">
-                    <h3 class="service-title">Gestión Contractual</h3>
-                    <p class="service-desc">Defensa de claims y auditoría técnica privada (MCP).</p>
-                </div>
-            </div>
-
-            <div
-                style="margin-top: 3rem; text-align: center; background: var(--glass-bg); padding: 2.5rem; border-radius: 20px; border: 1px solid rgba(34, 211, 238, 0.3); backdrop-filter: blur(20px);">
-                <h3 style="margin-bottom: 1rem; color: white;">¿Buscas una Consultoría Privada?</h3>
-                <p
-                    style="margin-bottom: 2rem; color: var(--text-muted); max-width: 600px; margin-left: auto; margin-right: auto;">
-                    Agenda una sesión técnica directamente con el <strong>Ing. Aurelio Solorzano</strong> para evaluar
-                    las necesidades específicas de tu proyecto u organización.
-                </p>
-                <a href="https://wa.me/51993147501" class="hero-cta"
-                    style="display: inline-flex; align-items: center; gap: 10px;">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M12.031 6.172c-2.32 0-4.591.398-6.758 1.189-.306.112-.618.33-.867.556l-1.921 1.76a.915.915 0 0 0-.273.847c.143.841.214 1.285.421 2.113a.914.914 0 0 0 .845.694c.124.005.25-.003.371-.03l1.607-.354c.446-.099.637-.6.463-.997a10.26 10.26 0 0 1-.087-2.327l.1.002zM18.103 5.672c-.012-.001-.024-.001-.036 0-.012.001-.024.001-.036 0zm-.696.84c-1.506-1.503-3.606-2.432-5.922-2.432-4.632 0-8.386 3.754-8.386 8.386 0 1.576.438 3.05 1.197 4.312L3.333 21l4.47-1.176a8.347 8.347 0 0 0 4.228 1.157c4.632 0 8.386-3.754 8.386-8.386 0-2.316-.929-4.416-2.432-5.922zM12.031 18.272c-1.103 0-2.149-.258-3.074-.717l-.22-.11-2.28.6 1.171-2.2a8.318 8.318 0 0 1-.689-3.235c0-3.141 2.556-5.698 5.698-5.698 3.141 0 5.698 2.556 5.698 5.698 0 3.141-2.556 5.698-5.698 5.698z" />
-                    </svg>
-                    Contactar al Ingeniero
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="container" style="text-align: center; padding: 4rem 0 2rem;">
-            <div style="margin-bottom: 2rem;">
-                <img src="assets/images/Logotipo.png" alt="Project Control AI" style="height: 50px; opacity: 0.8;">
-            </div>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">© 2026 Project Control AI. Todos los derechos
-                reservados.</p>
-            <p style="color: var(--accent-cyan); font-weight: 500; margin-top: 0.5rem; letter-spacing: 1px;">POTENCIANDO
-                LA INGENIERÍA CON INTELIGENCIA ARTIFICIAL</p>
-            <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 20px;">
-                <a href="https://wa.me/51993147501" style="color: var(--text-muted); font-size: 0.8rem;">WhatsApp</a>
-                <a href="https://www.tiktok.com/@project.control.a"
-                    style="color: var(--text-muted); font-size: 0.8rem;">TikTok</a>
-                <a href="#cursos" style="color: var(--text-muted); font-size: 0.8rem;">Cursos</a>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        const navToggle = document.getElementById('navToggle');
-        const navMenu = document.getElementById('navMenu');
-
-        navToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-
-        // Smooth scroll adjustment for fixed header
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const headerOffset = 150;
-                    const elementPosition = target.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: "smooth"
-                    });
-                }
-            });
-        });
-
-        // --- MOTOR DEL RELOJ DINÁMICO (Configurado en assets/config.js) ---
-        function updateCountdown() {
-            const now = new Date().getTime();
-
-            CURSOS_DISPONIBLES.forEach(curso => {
-                const targetDate = new Date(curso.fecha_inicio).getTime();
-                const distance = targetDate - now;
-
-                const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const s = Math.floor((distance % (1000 * 60)) / 1000);
-
-                const selector = `.days-${curso.id}`;
-                if (document.querySelector(selector)) {
-                    document.querySelectorAll(`.days-${curso.id}`).forEach(el => el.innerText = d < 0 ? "00" : (d < 10 ? "0" + d : d));
-                    document.querySelectorAll(`.hours-${curso.id}`).forEach(el => el.innerText = h < 0 ? "00" : (h < 10 ? "0" + h : h));
-                    document.querySelectorAll(`.minutes-${curso.id}`).forEach(el => el.innerText = m < 0 ? "00" : (m < 10 ? "0" + m : m));
-                    document.querySelectorAll(`.seconds-${curso.id}`).forEach(el => el.innerText = s < 0 ? "00" : (s < 10 ? "0" + s : s));
-                }
-            });
-        }
-
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-
-        // Inicializar enlaces de pago
-        PCAI_Utils.initCheckoutLinks();
-    </script>
-
-    <!-- BOTÓN FLOTANTE WHATSAPP -->
-    <a href="https://wa.me/51993147501?text=Hola%20Ing.%20Aurelio,%20deseo%20informaci%C3%B3n%20de%20los%20cursos%20de%20Project%20Control%20AI"
-        style="position:fixed; width:60px; height:60px; bottom:40px; right:40px; background-color:#25d366; color:#FFF; border-radius:50px; text-align:center; font-size:30px; box-shadow: 2px 2px 3px #999; z-index:2000;"
-        target="_blank">
-        <svg style="margin-top:15px;" width="30" height="30" fill="currentColor" viewBox="0 0 24 24">
-            <path
-                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.411-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-        </svg>
+<body class="bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container">
+
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#020817]/60 backdrop-blur-xl shadow-2xl shadow-cyan-900/10 transition-all duration-300">
+  <div class="flex justify-between items-center px-8 py-3 max-w-7xl mx-auto">
+    <a href="index.html" class="flex items-center gap-3">
+      <img src="assets/images/Logotipo.png" alt="Project Control AI Logo" class="h-10 w-auto object-contain"/>
+      <div class="flex flex-col">
+        <span class="text-xl font-bold tracking-tighter text-white font-headline">PROJECT CONTROL AI</span>
+        <span class="text-xs text-cyan-400 tracking-widest uppercase font-body">Academy & Consultoría</span>
+      </div>
     </a>
-</body>
+    <div class="hidden md:flex items-center space-x-8">
+      <a class="text-slate-400 hover:text-white transition-colors font-body text-sm" href="formacion.html">Formación</a>
+      <a class="text-slate-400 hover:text-white transition-colors font-body text-sm" href="consultoria.html">Consultoría</a>
+      <a class="text-slate-400 hover:text-white transition-colors font-body text-sm" href="recursos.html">Recursos</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="https://wa.me/51993147501" target="_blank" class="hidden lg:flex items-center gap-2 text-green-400 border border-green-400/30 px-4 py-2 rounded-full text-sm font-bold hover:bg-green-400/10 transition-all">
+        <span class="material-symbols-outlined text-sm">chat</span> WhatsApp
+      </a>
+      <a href="consultoria.html" class="bg-primary-container text-on-primary-container px-5 py-2 rounded-full font-bold text-sm hover:scale-105 active:scale-95 transition-all duration-150">
+        Agendar Consultoría
+      </a>
+    </div>
+  </div>
+</nav>
 
-</html>
+<main>
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-primary-container/5 to-transparent pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-8 relative z-10">
+      <div class="max-w-3xl">
+        <h1 class="text-5xl md:text-7xl font-headline font-bold tracking-tight leading-none mb-6">
+          Automatiza tu Proyecto. <br/>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-container">Controla cada Variable.</span>
+        </h1>
+        <p class="text-on-surface-variant text-lg md:text-xl font-body max-w-2xl mb-10 leading-relaxed">
+          Formación especializada y consultoría en automatización con IA para ingenieros y constructoras que quieren controlar proyectos con precisión milimétrica.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="formacion.html" class="bg-primary-container text-on-primary-container px-8 py-4 rounded-full font-bold text-base hover:shadow-[0_0_20px_rgba(0,212,255,0.3)] transition-all">
+            Ver Cursos
+          </a>
+          <a href="consultoria.html" class="border border-outline-variant text-on-surface px-8 py-4 rounded-full font-bold text-base hover:bg-surface-container-high transition-all">
+            Explorar Consultoría
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="absolute -right-20 top-20 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+  </section>
+
+  <!-- Authority Section (Pain Points) -->
+  <section class="py-20 bg-surface-container-lowest">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="group p-8 rounded-xl bg-surface-container border-l-4 border-cyan-400 shadow-xl transition-all hover:-translate-y-1">
+          <span class="material-symbols-outlined text-cyan-400 mb-4 text-3xl">schedule</span>
+          <h3 class="text-slate-400 text-sm font-bold uppercase tracking-wider mb-2">Proyectos fuera de plazo</h3>
+          <p class="text-on-surface text-xl font-headline font-semibold">Control predictivo con EVM + IA</p>
+        </div>
+        <div class="group p-8 rounded-xl bg-surface-container border-l-4 border-cyan-400 shadow-xl transition-all hover:-translate-y-1">
+          <span class="material-symbols-outlined text-cyan-400 mb-4 text-3xl">analytics</span>
+          <h3 class="text-slate-400 text-sm font-bold uppercase tracking-wider mb-2">Reportes manuales lentos</h3>
+          <p class="text-on-surface text-xl font-headline font-semibold">Dashboards automáticos en horas</p>
+        </div>
+        <div class="group p-8 rounded-xl bg-surface-container border-l-4 border-cyan-400 shadow-xl transition-all hover:-translate-y-1">
+          <span class="material-symbols-outlined text-cyan-400 mb-4 text-3xl">fact_check</span>
+          <h3 class="text-slate-400 text-sm font-bold uppercase tracking-wider mb-2">Licitaciones sin sistema</h3>
+          <p class="text-on-surface text-xl font-headline font-semibold">Auditoría masiva con IA</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Aurelio Section -->
+  <section class="py-24 max-w-7xl mx-auto px-8">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div class="relative">
+        <div class="absolute inset-0 bg-primary/5 blur-[80px] rounded-full pointer-events-none"></div>
+        <img src="assets/images/Aurelio Solorzano.png" alt="Ing. Aurelio Solorzano Rios"
+          class="relative w-full max-w-md mx-auto rounded-2xl shadow-2xl shadow-black/50 border border-outline-variant/20 object-cover"/>
+      </div>
+      <div>
+        <p class="text-cyan-400 text-sm font-bold uppercase tracking-widest mb-4">Quién está detrás de esto</p>
+        <h2 class="text-3xl md:text-4xl font-headline font-bold mb-3">Ing. Aurelio Solorzano Rios</h2>
+        <p class="text-primary text-sm font-semibold uppercase tracking-wider mb-6">Especialista en Gestión & Control de Proyectos con IA</p>
+        <p class="text-on-surface-variant text-lg leading-relaxed mb-8">
+          Ingeniero multidisciplinario con experiencia en proyectos de construcción de gran escala. Experto en automatización con IA aplicada a licitaciones, control de costos, dashboards y flujos digitales para el sector constructor.
+        </p>
+        <blockquote class="border-l-4 border-cyan-400 pl-6 mb-8">
+          <p class="text-on-surface text-xl font-headline font-light italic leading-relaxed">
+            "Democraticemos la programación — gracias a la IA, la programación puede estar en las manos de todos."
+          </p>
+        </blockquote>
+        <a href="consultoria.html" class="inline-flex items-center gap-2 text-cyan-400 font-bold hover:gap-3 transition-all">
+          Conocer los servicios de consultoría <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Courses Preview -->
+  <section class="py-24 bg-surface-container-lowest">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="flex justify-between items-end mb-12">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-headline font-bold mb-4">Formación Especializada</h2>
+          <p class="text-on-surface-variant max-w-xl">Domina las herramientas que están redefiniendo el sector de la construcción.</p>
+        </div>
+        <a class="text-cyan-400 font-bold flex items-center gap-2 hover:gap-3 transition-all" href="formacion.html">
+          Ver catálogo completo <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Course 1: Licitaciones -->
+        <div class="bg-surface-container rounded-xl overflow-hidden hover:shadow-2xl hover:shadow-cyan-900/20 transition-all border border-outline-variant/30">
+          <div class="h-48 relative overflow-hidden bg-surface-container-high flex items-center justify-center">
+            <img class="w-full h-full object-cover" alt="Licitaciones Inteligentes con IA" src="assets/images/Licitaciones.png"/>
+            <div class="absolute top-4 left-4 bg-surface-dim/80 backdrop-blur-md text-primary text-xs font-bold px-3 py-1 rounded-full uppercase border border-primary/20">Intermedio</div>
+            <div class="absolute top-4 right-4 bg-primary-container text-on-primary-container px-3 py-1 rounded-full text-xs font-bold uppercase">Asincrónico</div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-headline font-bold mb-2">Licitaciones Inteligentes con IA</h3>
+            <p class="text-on-surface-variant text-sm mb-4">Auditoría de expedientes masivos, APUs, Presupuestos y Cronogramas automáticos.</p>
+            <div class="flex justify-between items-center">
+              <div class="flex flex-col">
+                <span class="text-xl font-bold text-on-surface">$75 USD</span>
+                <span class="text-xs text-on-surface-variant">S/ 200 soles</span>
+              </div>
+              <a href="formacion.html" class="text-cyan-400 font-bold text-sm px-4 py-2 rounded-lg border border-cyan-400/30 hover:bg-cyan-400/10 transition-all">Ver Curso</a>
+            </div>
+          </div>
+        </div>
+        <!-- Course 2: EVM -->
+        <div class="bg-surface-container rounded-xl overflow-hidden hover:shadow-2xl hover:shadow-cyan-900/20 transition-all border border-outline-variant/30">
+          <div class="h-48 relative overflow-hidden bg-surface-container-high flex items-center justify-center">
+            <img class="w-full h-full object-cover" alt="Control y Gerencia EVM" src="assets/images/Control y gerencia.png"/>
+            <div class="absolute top-4 left-4 bg-surface-dim/80 backdrop-blur-md text-primary text-xs font-bold px-3 py-1 rounded-full uppercase border border-primary/20">Intermedio</div>
+            <div class="absolute top-4 right-4 bg-secondary-container text-white px-3 py-1 rounded-full text-xs font-bold uppercase">En Vivo</div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-headline font-bold mb-2">Control y Gerencia EVM</h3>
+            <p class="text-on-surface-variant text-sm mb-4">Gestión predictiva de proyectos. Seguimiento de costos y plazos con Valor Ganado.</p>
+            <div class="flex justify-between items-center">
+              <div class="flex flex-col">
+                <span class="text-xl font-bold text-on-surface">$75 USD</span>
+                <span class="text-xs text-on-surface-variant">S/ 200 soles</span>
+              </div>
+              <a href="formacion.html" class="text-cyan-400 font-bold text-sm px-4 py-2 rounded-lg border border-cyan-400/30 hover:bg-cyan-400/10 transition-all">Ver Curso</a>
+            </div>
+          </div>
+        </div>
+        <!-- Course 3: GIP -->
+        <div class="bg-surface-container rounded-xl overflow-hidden hover:shadow-2xl hover:shadow-cyan-900/20 transition-all border border-outline-variant/30">
+          <div class="h-48 relative overflow-hidden bg-surface-container-high flex items-center justify-center">
+            <img class="w-full h-full object-cover" alt="Gestión Integral de Proyectos con IA" src="assets/images/Gestión Integral.png"/>
+            <div class="absolute top-4 left-4 bg-surface-dim/80 backdrop-blur-md text-primary text-xs font-bold px-3 py-1 rounded-full uppercase border border-primary/20">Básico</div>
+            <div class="absolute top-4 right-4 bg-secondary-container text-white px-3 py-1 rounded-full text-xs font-bold uppercase">En Vivo</div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-headline font-bold mb-2">Gestión Integral de Proyectos con IA</h3>
+            <p class="text-on-surface-variant text-sm mb-4">Gestión de Alcance, Contratos, Calidad y HSE potenciada por IA.</p>
+            <div class="flex justify-between items-center">
+              <div class="flex flex-col">
+                <span class="text-xl font-bold text-on-surface">$75 USD</span>
+                <span class="text-xs text-on-surface-variant">S/ 200 soles</span>
+              </div>
+              <a href="formacion.html" class="text-cyan-400 font-bold text-sm px-4 py-2 rounded-lg border border-cyan-400/30 hover:bg-cyan-400/10 transition-all">Ver Curso</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Consulting Teaser -->
+  <section class="py-20 px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="relative overflow-hidden rounded-3xl bg-surface-container-low border border-outline-variant/20 p-8 md:p-16">
+        <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-secondary-container/10 rounded-full blur-[80px]"></div>
+        <div class="relative z-10 grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 class="text-3xl md:text-5xl font-headline font-bold mb-6">¿Necesitas automatizar tu empresa?</h2>
+            <p class="text-on-surface-variant text-lg leading-relaxed mb-8">
+              Analizamos tus flujos de trabajo actuales y diseñamos un ecosistema digital a medida que elimina tareas repetitivas y reduce el margen de error humano al mínimo.
+            </p>
+            <a href="https://wa.me/51993147501?text=Hola,%20quiero%20agendar%20un%20diagn%C3%B3stico%20gratuito" target="_blank" class="bg-secondary-container text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-[0_0_20px_rgba(244,99,15,0.4)] hover:scale-[1.02] active:scale-95 transition-all inline-block">
+              Agendar Diagnóstico Gratuito
+            </a>
+          </div>
+          <div class="hidden md:block">
+            <div class="glass-panel p-8 rounded-2xl border border-outline-variant/20">
+              <div class="space-y-6">
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-full bg-cyan-400/20 flex items-center justify-center text-cyan-400">
+                    <span class="material-symbols-outlined">psychology</span>
+                  </div>
+                  <div>
+                    <p class="font-bold">Estrategia de Datos</p>
+                    <p class="text-sm text-on-surface-variant">Centralización de información crítica.</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-full bg-cyan-400/20 flex items-center justify-center text-cyan-400">
+                    <span class="material-symbols-outlined">robot_2</span>
+                  </div>
+                  <div>
+                    <p class="font-bold">IA de Campo</p>
+                    <p class="text-sm text-on-surface-variant">Automatización de reportes y análisis.</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-full bg-cyan-400/20 flex items-center justify-center text-cyan-400">
+                    <span class="material-symbols-outlined">monitoring</span>
+                  </div>
+                  <div>
+                    <p class="font-bold">Auditoría en Tiempo Real</p>
+                    <p class="text-sm text-on-surface-variant">Alertas preventivas de desviación.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-[#020817] w-full border-t border-slate-900 mt-20">
+  <div class="flex flex-col md:flex-row justify-between items-center px-8 py-12 max-w-7xl mx-auto gap-6">
+    <div class="flex items-center gap-3">
+      <img src="assets/images/Logotipo.png" alt="Project Control AI" class="h-8 w-auto object-contain"/>
+      <div class="text-xl font-bold text-slate-200 font-headline">PROJECT CONTROL AI</div>
+    </div>
+    <div class="flex flex-wrap justify-center gap-8">
+      <a class="text-slate-500 hover:text-orange-500 transition-colors font-body text-sm" href="#">Privacidad</a>
+      <a class="text-slate-500 hover:text-orange-500 transition-colors font-body text-sm" href="#">Términos</a>
+      <a class="text-slate-500 hover:text-orange-500 transition-colors font-body text-sm" href="https://wa.me/51993147501" target="_blank">Contacto</a>
+    </div>
+    <p class="text-slate-500 font-body text-sm antialiased opacity-80">
+      © 2026 Project Control AI · Automatización de Proyectos con IA
+    </p>
+  </div>
+</footer>
+</body></html>

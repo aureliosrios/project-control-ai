@@ -49,6 +49,17 @@
     </p>
   </header>
 
+  <!-- Selector Sincrónico / Asincrónico -->
+  <div class="flex flex-wrap gap-3 mb-12">
+    <button id="btn-asinc" onclick="showView('asinc')" class="flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm transition-all bg-primary-container text-on-primary-container shadow-[0_0_20px_rgba(0,212,255,0.1)]">
+      <span class="material-symbols-outlined text-base">school</span> Asincrónico · A tu ritmo
+    </button>
+    <button id="btn-sinc" onclick="showView('sinc')" class="flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm transition-all bg-surface-container-low text-on-surface-variant border border-outline-variant/20 hover:bg-surface-container">
+      <span class="material-symbols-outlined text-base">live_tv</span> En Vivo · Sincrónico
+    </button>
+  </div>
+
+  <div id="view-asinc">
   <!-- ═══════════════════════════════════════════
        SECCIÓN 1: CURSO ASINCRÓNICO DISPONIBLE (A1)
   ════════════════════════════════════════════ -->
@@ -113,13 +124,15 @@
 
     <!-- RUTA A -->
     <div class="mb-10">
-      <div class="flex items-center gap-3 mb-6">
+      <button onclick="toggleRoute('A')" class="w-full flex items-center gap-3 mb-6 text-left hover:opacity-80 transition-opacity">
         <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 font-headline font-bold text-lg border border-green-400/30">A</div>
-        <div>
+        <div class="flex-1">
           <h3 class="text-xl font-headline font-bold text-on-surface">El Profesional que Despierta</h3>
           <p class="text-sm text-on-surface-variant">"De ingeniero que chatea con IA a Arquitecto de Soluciones Automatizadas" · 4 cursos</p>
         </div>
-      </div>
+        <span id="arrow-A" class="material-symbols-outlined text-on-surface-variant transition-transform duration-300 rotate-180">expand_more</span>
+      </button>
+      <div id="route-A">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <!-- A1 publicado -->
         <div class="route-card bg-surface-container-low border border-green-400/30 rounded-xl p-5 flex flex-col relative overflow-hidden">
@@ -155,19 +168,22 @@
           <p class="text-xs text-on-surface-variant flex-1">Decisiones basadas en datos — no en intuición.</p>
         </div>
       </div>
+      </div><!-- /route-A -->
     </div>
 
     <!-- RUTAS B-F: Grids compactos -->
     <!-- RUTA B -->
     <div class="mb-8">
-      <div class="flex items-center gap-3 mb-4">
+      <button onclick="toggleRoute('B')" class="w-full flex items-center gap-3 mb-4 text-left hover:opacity-80 transition-opacity">
         <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 font-headline font-bold text-lg border border-blue-400/30">B</div>
-        <div>
+        <div class="flex-1">
           <h3 class="text-xl font-headline font-bold text-on-surface">Especialista HSE / Calidad / Campo</h3>
           <p class="text-sm text-on-surface-variant">"De 5 horas de oficina técnica diaria a 1 hora" · 5 cursos</p>
         </div>
-        <span class="ml-auto text-xs text-on-surface-variant bg-surface-container px-3 py-1 rounded-full border border-outline-variant/20">Próximamente</span>
-      </div>
+        <span class="text-xs text-on-surface-variant bg-surface-container px-3 py-1 rounded-full border border-outline-variant/20">Próximamente</span>
+        <span id="arrow-B" class="material-symbols-outlined text-on-surface-variant transition-transform duration-300">expand_more</span>
+      </button>
+      <div id="route-B" class="hidden">
       <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
         <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-blue-400 font-bold mb-1">B1</div><p class="text-xs font-bold text-on-surface leading-tight">IA para HSE: IPERC, ATS y Gestión de Incidentes</p></div>
         <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-blue-400 font-bold mb-1">B2</div><p class="text-xs font-bold text-on-surface leading-tight">IA para Gestión de Calidad: PETS, ITPs y Dossier</p></div>
@@ -175,54 +191,63 @@
         <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-blue-400 font-bold mb-1">B4</div><p class="text-xs font-bold text-on-surface leading-tight">Dashboard de Calidad QA/QC con Power BI</p></div>
         <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-blue-400 font-bold mb-1">B5</div><p class="text-xs font-bold text-on-surface leading-tight">Gestión de Tokens para Documentos Extensos</p></div>
       </div>
+      </div><!-- /route-B -->
     </div>
 
     <!-- RUTA C -->
     <div class="mb-8">
-      <div class="flex items-center gap-3 mb-4">
+      <button onclick="toggleRoute('C')" class="w-full flex items-center gap-3 mb-4 text-left hover:opacity-80 transition-opacity">
         <div class="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400 font-headline font-bold text-lg border border-orange-400/30">C</div>
-        <div>
+        <div class="flex-1">
           <h3 class="text-xl font-headline font-bold text-on-surface">Ingeniero de Costos y Licitaciones</h3>
           <p class="text-sm text-on-surface-variant">"Un presupuesto base en 24 horas — no en 3 días" · 4 cursos</p>
         </div>
-        <span class="ml-auto text-xs text-on-surface-variant bg-surface-container px-3 py-1 rounded-full border border-outline-variant/20">Próximamente</span>
-      </div>
+        <span class="text-xs text-on-surface-variant bg-surface-container px-3 py-1 rounded-full border border-outline-variant/20">Próximamente</span>
+        <span id="arrow-C" class="material-symbols-outlined text-on-surface-variant transition-transform duration-300">expand_more</span>
+      </button>
+      <div id="route-C" class="hidden">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
         <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-orange-400 font-bold mb-1">C1</div><p class="text-xs font-bold text-on-surface leading-tight">WBS y Metrados Inteligentes</p></div>
         <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-orange-400 font-bold mb-1">C2</div><p class="text-xs font-bold text-on-surface leading-tight">APU con IA Studio</p></div>
         <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-orange-400 font-bold mb-1">C3</div><p class="text-xs font-bold text-on-surface leading-tight">VBA: De la IA al Formato S10 y Costos.pe</p></div>
         <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-orange-400 font-bold mb-1">C4</div><p class="text-xs font-bold text-on-surface leading-tight">Nivelación de Recursos 2D</p></div>
       </div>
+      </div><!-- /route-C -->
     </div>
 
     <!-- RUTA D -->
     <div class="mb-8">
-      <div class="flex items-center gap-3 mb-4">
+      <button onclick="toggleRoute('D')" class="w-full flex items-center gap-3 mb-4 text-left hover:opacity-80 transition-opacity">
         <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center text-red-400 font-headline font-bold text-lg border border-red-400/30">D</div>
-        <div>
+        <div class="flex-1">
           <h3 class="text-xl font-headline font-bold text-on-surface">Administrador de Contratos</h3>
           <p class="text-sm text-on-surface-variant">"No pierdas dinero por errores contractuales" · 4 cursos</p>
         </div>
-        <span class="ml-auto text-xs text-on-surface-variant bg-surface-container px-3 py-1 rounded-full border border-outline-variant/20">Próximamente</span>
-      </div>
+        <span class="text-xs text-on-surface-variant bg-surface-container px-3 py-1 rounded-full border border-outline-variant/20">Próximamente</span>
+        <span id="arrow-D" class="material-symbols-outlined text-on-surface-variant transition-transform duration-300">expand_more</span>
+      </button>
+      <div id="route-D" class="hidden">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
         <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-red-400 font-bold mb-1">D1</div><p class="text-xs font-bold text-on-surface leading-tight">Escáner Contractual: Análisis NEC/FIDIC con IA</p></div>
         <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-red-400 font-bold mb-1">D2</div><p class="text-xs font-bold text-on-surface leading-tight">IA para Gestión de Claims y Variaciones</p></div>
         <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-red-400 font-bold mb-1">D3</div><p class="text-xs font-bold text-on-surface leading-tight">Reportabilidad Ejecutiva con Agentes IA</p></div>
         <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-red-400 font-bold mb-1">D4</div><p class="text-xs font-bold text-on-surface leading-tight">Gestión de Contextos Largos: Documentos FIDIC/NEC</p></div>
       </div>
+      </div><!-- /route-D -->
     </div>
 
     <!-- RUTA E -->
     <div class="mb-8">
-      <div class="flex items-center gap-3 mb-4">
+      <button onclick="toggleRoute('E')" class="w-full flex items-center gap-3 mb-4 text-left hover:opacity-80 transition-opacity">
         <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 font-headline font-bold text-lg border border-purple-400/30">E</div>
-        <div>
+        <div class="flex-1">
           <h3 class="text-xl font-headline font-bold text-on-surface">Planificador / Controller / PMO</h3>
           <p class="text-sm text-on-surface-variant">"Deja de reportar lo que pasó — predice lo que pasará" · 5 cursos</p>
         </div>
-        <span class="ml-auto text-xs text-on-surface-variant bg-surface-container px-3 py-1 rounded-full border border-outline-variant/20">Próximamente</span>
-      </div>
+        <span class="text-xs text-on-surface-variant bg-surface-container px-3 py-1 rounded-full border border-outline-variant/20">Próximamente</span>
+        <span id="arrow-E" class="material-symbols-outlined text-on-surface-variant transition-transform duration-300">expand_more</span>
+      </button>
+      <div id="route-E" class="hidden">
       <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
         <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-purple-400 font-bold mb-1">E1</div><p class="text-xs font-bold text-on-surface leading-tight">Cálculo del Valor Planeado (PV) y Curva S con IA</p></div>
         <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-purple-400 font-bold mb-1">E2</div><p class="text-xs font-bold text-on-surface leading-tight">Dashboards Ejecutivos en Google Stitch</p></div>
@@ -230,18 +255,21 @@
         <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-purple-400 font-bold mb-1">E4</div><p class="text-xs font-bold text-on-surface leading-tight">MCP para Primavera P6 y Power BI</p></div>
         <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-purple-400 font-bold mb-1">E5</div><p class="text-xs font-bold text-on-surface leading-tight">Reportabilidad de Gerencia con Agentes Autónomos</p></div>
       </div>
+      </div><!-- /route-E -->
     </div>
 
     <!-- RUTA F -->
     <div class="mb-8">
-      <div class="flex items-center gap-3 mb-4">
+      <button onclick="toggleRoute('F')" class="w-full flex items-center gap-3 mb-4 text-left hover:opacity-80 transition-opacity">
         <div class="w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center text-yellow-400 font-headline font-bold text-lg border border-yellow-400/30">F</div>
-        <div>
+        <div class="flex-1">
           <h3 class="text-xl font-headline font-bold text-on-surface">Ingeniería Élite / Automatizador</h3>
           <p class="text-sm text-on-surface-variant">"Conviértete en el experto interno que nadie más tiene" · 5 cursos</p>
         </div>
-        <span class="ml-auto text-xs text-on-surface-variant bg-surface-container px-3 py-1 rounded-full border border-outline-variant/20">Próximamente</span>
-      </div>
+        <span class="text-xs text-on-surface-variant bg-surface-container px-3 py-1 rounded-full border border-outline-variant/20">Próximamente</span>
+        <span id="arrow-F" class="material-symbols-outlined text-on-surface-variant transition-transform duration-300">expand_more</span>
+      </button>
+      <div id="route-F" class="hidden">
       <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
         <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-yellow-400 font-bold mb-1">F1</div><p class="text-xs font-bold text-on-surface leading-tight">Cirugía de Datos en Excel con Antigravity</p></div>
         <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-yellow-400 font-bold mb-1">F2</div><p class="text-xs font-bold text-on-surface leading-tight">Diseño CAD y Civil 3D Generativo con MCP</p></div>
@@ -249,6 +277,7 @@
         <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-yellow-400 font-bold mb-1">F4</div><p class="text-xs font-bold text-on-surface leading-tight">Arquitectura de Agentes Locales</p></div>
         <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-yellow-400 font-bold mb-1">F5</div><p class="text-xs font-bold text-on-surface leading-tight">Integración BIM-IA: Del Modelo al Informe Automático</p></div>
       </div>
+      </div><!-- /route-F -->
     </div>
 
     <!-- CTA notificación -->
@@ -261,7 +290,9 @@
       </a>
     </div>
   </section>
+  </div><!-- /view-asinc -->
 
+  <div id="view-sinc" class="hidden">
   <!-- ═══════════════════════════════════════════
        SECCIÓN 3: CURSOS EN VIVO (SINCRÓNICOS)
   ════════════════════════════════════════════ -->
@@ -396,6 +427,7 @@
 
     </div>
   </section>
+  </div><!-- /view-sinc -->
 
   <!-- ═══════════════════════════════════════════
        MÉTODOS DE PAGO
@@ -556,4 +588,29 @@
     </div>
   </div>
 </footer>
+<script>
+  // ── Toggle Sincrónico / Asincrónico ──────────────────────────
+  function showView(view) {
+    var views = ['asinc', 'sinc'];
+    views.forEach(function(v) {
+      var el  = document.getElementById('view-' + v);
+      var btn = document.getElementById('btn-' + v);
+      if (!el || !btn) return;
+      var active   = 'flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm transition-all bg-primary-container text-on-primary-container shadow-[0_0_20px_rgba(0,212,255,0.1)]';
+      var inactive = 'flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm transition-all bg-surface-container-low text-on-surface-variant border border-outline-variant/20 hover:bg-surface-container';
+      el.classList.toggle('hidden', v !== view);
+      btn.className = (v === view) ? active : inactive;
+    });
+  }
+
+  // ── Acordeón de rutas ────────────────────────────────────────
+  function toggleRoute(r) {
+    var panel = document.getElementById('route-' + r);
+    var arrow = document.getElementById('arrow-' + r);
+    if (!panel) return;
+    var isHidden = panel.classList.contains('hidden');
+    panel.classList.toggle('hidden', !isHidden);
+    if (arrow) arrow.style.transform = isHidden ? 'rotate(180deg)' : '';
+  }
+</script>
 </body></html>

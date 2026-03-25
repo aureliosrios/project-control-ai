@@ -351,9 +351,9 @@
                 name: "Control y Gerencia EVM 4.0",
                 lessons: [
                     { id: "9JJ1GBdzxMI", num: "01", status: "PÚBLICA", title: "El Puente Estratégico y Reingeniería de Costos", desc: "Transición de Licitación a Obra, establecimiento del Presupuesto Meta y motor de rentabilidad estratégica." },
-                    { id: "zQ0aA30-1WQ", num: "02", status: "OCULTA", title: "Control de Tiempo (Scheduling) y Líneas de Balance", desc: "Programación por rendimientos, Ruta Crítica (CPM) y optimización de cronogramas." },
+                    { id: "zfVR4CPG0MQ", num: "02", status: "OCULTA", title: "Control de Tiempo (Scheduling) y Líneas de Balance", desc: "Programación por rendimientos, Ruta Crítica (CPM) y optimización de cronogramas." },
                     { id: "PjBTPXH8nU0", num: "03", status: "OCULTA", title: "El Escudo de Costos y Gestión de Contingencias", desc: "Blindaje del margen, administración de imprevistos y log de cambios automatizado." },
-                    { id: "xMLNpMt6qIM", num: "04", status: "OCULTA", title: "Valor Ganado (EVM 4.0) y Forecasting Predictivo", desc: "Integración tiempo/costo, métricas SPI/CPI y proyección de EAC/VAC mediante IA." },
+                    { id: "PjBTPXH8nU0", num: "04", status: "OCULTA", title: "Valor Ganado (EVM 4.0) y Forecasting Predictivo", desc: "Integración tiempo/costo, métricas SPI/CPI y proyección de EAC/VAC mediante IA." },
                     { id: "zfVR4CPG0MQ", num: "05", status: "OCULTA", title: "Inteligencia Gerencial y Dashboards de Élite", desc: "Storytelling de datos con Python/Plotly y presentaciones ejecutivas dinámicas." }
                 ]
             },
@@ -425,7 +425,11 @@
 
             // Update active state
             document.querySelectorAll('.lesson-item').forEach(el => el.classList.remove('active'));
-            document.getElementById(`lesson-${courseCode}-${index}`).classList.add('active');
+            const activeItem = document.getElementById(`lesson-${courseCode}-${index}`);
+            activeItem.classList.add('active');
+
+            // Scroll lesson into view inside the list panel
+            activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
             // Update Video Link and Thumbnail
             videoLink.href = `https://www.youtube.com/watch?v=${lesson.id}`;
@@ -447,7 +451,17 @@
             }
         }
 
-        window.onload = loadLessons;
+        window.onload = function() {
+            loadLessons();
+            // Leer parámetro ?curso=XX de la URL para preseleccionar el curso correcto
+            const params = new URLSearchParams(window.location.search);
+            const cursoParam = params.get('curso');
+            if (cursoParam && courses[cursoParam]) {
+                selectLesson(cursoParam, 0);
+            } else {
+                selectLesson("LIC", 0); // defecto: primera clase de Licitaciones
+            }
+        };
     </script>
 </body>
 

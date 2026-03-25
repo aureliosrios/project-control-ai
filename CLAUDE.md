@@ -300,9 +300,19 @@ tailwind.config = {
 - **Regla crítica:** Cada curso tiene su propio ID. No reutilizar IDs entre cursos.
 
 ### YouTube
+- **Canal:** `@ProjectControl_AI`
 - **Uso:** Videos de clases (unlisted/ocultos para alumnos, públicos para demos)
 - **Acceso:** Mediante videoId en `cursos.json` → campo `lecciones[].videoId`
 - **Visibilidad:** `"publica"` (visible en web) o `"oculta"` (solo con link directo)
+
+**Grabaciones Primavera P6 Professional (subidas Mar 2026):**
+| # | Título | YouTube ID | Visibilidad |
+|---|--------|-----------|-------------|
+| 1 | EPS, OBS y WBS | `3IluS5_Hw-g` | Pública |
+| 2 | Ruta Crítica (F9) | `JHUCI2dTjy8` | Unlisted |
+| 3 | Recursos y Costos | `zxLAFMmwwXA` | Unlisted |
+| 4 | Línea Base y Curva S | `AxCy_Cv2Vfs` | Unlisted |
+| 5 | EVM y Forecasting | `ELSeOBkKiVM` | Unlisted |
 
 ---
 

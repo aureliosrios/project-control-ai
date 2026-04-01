@@ -88,66 +88,187 @@
     </div>
   </section>
 
-  <!-- Service Cards (sin precios) -->
-  <section class="px-8 py-20 max-w-7xl mx-auto">
-    <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
-      <div class="max-w-2xl">
-        <h2 class="text-3xl font-headline font-bold text-on-surface mb-4">Soluciones de Ingeniería Digital</h2>
-        <p class="text-on-surface-variant">Paquetes estratégicos diseñados para escalar la operatividad de tu constructora.</p>
+  <!-- Soluciones de Ingeniería Digital -->
+  <section class="px-8 py-24 max-w-7xl mx-auto">
+    <!-- Bloque 2 — Chips de público objetivo -->
+    <div class="flex flex-wrap justify-center gap-4 mb-20">
+      <div class="bg-surface-container border border-outline-variant/30 rounded-full px-5 py-2 flex items-center gap-2">
+        <span class="material-symbols-outlined text-cyan-400">foundation</span>
+        <span class="text-on-surface text-sm font-medium">Constructoras & Contratistas Pyme</span>
+      </div>
+      <div class="bg-surface-container border border-outline-variant/30 rounded-full px-5 py-2 flex items-center gap-2">
+        <span class="material-symbols-outlined text-cyan-400">water</span>
+        <span class="text-on-surface text-sm font-medium">Plantas de Agua · PTAP · PTAR · Bombeo</span>
+      </div>
+      <div class="bg-surface-container border border-outline-variant/30 rounded-full px-5 py-2 flex items-center gap-2">
+        <span class="material-symbols-outlined text-cyan-400">storefront</span>
+        <span class="text-on-surface text-sm font-medium">Proveedores & Distribuidores Técnicos</span>
       </div>
     </div>
-    <div class="grid md:grid-cols-3 gap-8">
 
-      <!-- Card 1: Automatización de Procesos -->
-      <div class="group relative bg-surface-container-low p-8 rounded-xl border border-transparent hover:border-primary-container/30 transition-all duration-500 hover:bg-surface-container overflow-hidden">
-        <div class="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
-          <span class="material-symbols-outlined text-7xl">settings_input_component</span>
+    <!-- Bloque 3 — Grid de 3 paquetes (sin precios) -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+      <!-- Tarjeta 1 — Automatización Express -->
+      <div class="bg-surface-container rounded-xl border border-outline-variant/30 p-8 hover:-translate-y-1 hover:shadow-2xl hover:shadow-cyan-900/20 transition-all flex flex-col">
+        <div class="mb-6">
+          <span class="material-symbols-outlined text-4xl text-cyan-400 mb-4 block">build</span>
+          <div class="flex items-center gap-2 mb-4">
+            <h3 class="text-2xl font-headline font-bold">Automatización Express</h3>
+            <span class="bg-cyan-400/10 text-cyan-400 rounded-full text-xs px-3 py-1 font-bold">Starter</span>
+          </div>
+          <p class="text-on-surface-variant text-sm leading-relaxed">
+            Un proceso automatizado. Perfecto para empezar a medir el impacto de la automatización en tu operación.
+          </p>
         </div>
-        <div class="w-14 h-14 bg-surface-container-highest rounded-xl flex items-center justify-center text-primary-container mb-8 transition-transform group-hover:scale-110">
-          <span class="material-symbols-outlined text-3xl">settings_input_component</span>
-        </div>
-        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Automatización de Procesos</h3>
-        <p class="text-on-surface-variant leading-relaxed">Conectamos tus herramientas (Excel, ERP, Procore) para que los datos fluyan sin intervención manual. Reducción de errores y tiempo de reporte.</p>
-        <div class="mt-8">
-          <a href="https://wa.me/51993147501?text=Hola,%20me%20interesa%20Automatizaci%C3%B3n%20de%20Procesos" target="_blank" class="text-primary-container font-bold text-sm flex items-center gap-2 hover:gap-3 transition-all">
-            Consultar <span class="material-symbols-outlined text-sm">arrow_forward</span>
-          </a>
-        </div>
+        <ul class="space-y-4 mb-8 flex-grow">
+          <li class="flex items-start gap-3 text-sm">
+            <span class="material-symbols-outlined text-cyan-400 text-lg">check_circle</span>
+            <span>Automatización de 1 flujo clave (cotización, reporte o atención al cliente)</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm">
+            <span class="material-symbols-outlined text-cyan-400 text-lg">check_circle</span>
+            <span>Dashboard en Looker Studio o Power BI</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm">
+            <span class="material-symbols-outlined text-cyan-400 text-lg">check_circle</span>
+            <span>Configuración con N8N, Zapier o Make según el caso</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm">
+            <span class="material-symbols-outlined text-cyan-400 text-lg">check_circle</span>
+            <span>Entrega estimada: 2 semanas</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm">
+            <span class="material-symbols-outlined text-cyan-400 text-lg">check_circle</span>
+            <span>Capacitación al equipo incluida</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm">
+            <span class="material-symbols-outlined text-cyan-400 text-lg">check_circle</span>
+            <span>Soporte técnico 30 días</span>
+          </li>
+        </ul>
+        <a href="https://wa.me/51993147501?text=Hola,%20quiero%20agendar%20una%20valorizaci%C3%B3n%20para%20el%20paquete%20Starter" target="_blank" class="w-full text-center border border-cyan-400 text-cyan-400 py-4 rounded-lg font-bold hover:bg-cyan-400/10 transition-all mb-4">
+          Agendar valorización gratuita
+        </a>
+        <p class="text-xs text-on-surface-variant text-center">Ideal para: Oficinas técnicas · Proveedores · Pyme inicial</p>
       </div>
 
-      <!-- Card 2: Dashboards de Control -->
-      <div class="group relative bg-surface-container-low p-8 rounded-xl border border-transparent hover:border-primary-container/30 transition-all duration-500 hover:bg-surface-container overflow-hidden">
-        <div class="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
-          <span class="material-symbols-outlined text-7xl">monitoring</span>
+      <!-- Tarjeta 2 — Control Inteligente Pyme (destacada) -->
+      <div class="bg-surface-container rounded-xl border border-secondary-container/60 p-8 hover:-translate-y-1 hover:shadow-2xl hover:shadow-cyan-900/20 transition-all flex flex-col relative md:scale-105 z-10">
+        <div class="mb-6">
+          <span class="material-symbols-outlined text-4xl text-orange-400 mb-4 block">rocket_launch</span>
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <h3 class="text-2xl font-headline font-bold">Control Inteligente Pyme</h3>
+            <div class="flex gap-1">
+              <span class="bg-secondary-container text-white rounded-full text-[10px] px-2 py-0.5 font-bold uppercase">Más Popular</span>
+              <span class="bg-cyan-400/10 text-cyan-400 rounded-full text-[10px] px-2 py-0.5 font-bold uppercase">Pyme</span>
+            </div>
+          </div>
+          <p class="text-on-surface-variant text-sm leading-relaxed">
+            Automatización integral de tu operación. Conectamos tus herramientas, eliminamos el Excel manual y ponemos tu data a trabajar.
+          </p>
         </div>
-        <div class="w-14 h-14 bg-surface-container-highest rounded-xl flex items-center justify-center text-primary-container mb-8 transition-transform group-hover:scale-110">
-          <span class="material-symbols-outlined text-3xl">monitoring</span>
-        </div>
-        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Dashboards de Control</h3>
-        <p class="text-on-surface-variant leading-relaxed">Visualización en tiempo real de costos, avances y KPIs críticos para directivos y residentes. Decisiones rápidas basadas en datos.</p>
-        <div class="mt-8">
-          <a href="https://wa.me/51993147501?text=Hola,%20me%20interesa%20un%20Dashboard%20de%20Control" target="_blank" class="text-primary-container font-bold text-sm flex items-center gap-2 hover:gap-3 transition-all">
-            Consultar <span class="material-symbols-outlined text-sm">arrow_forward</span>
-          </a>
-        </div>
+        <ul class="space-y-4 mb-8 flex-grow">
+          <li class="flex items-start gap-3 text-sm">
+            <span class="material-symbols-outlined text-orange-400 text-lg">check_circle</span>
+            <span>Diagnóstico completo de flujos operativos</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm">
+            <span class="material-symbols-outlined text-orange-400 text-lg">check_circle</span>
+            <span>Automatización de cotizaciones y reportes de avance</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm">
+            <span class="material-symbols-outlined text-orange-400 text-lg">check_circle</span>
+            <span>Dashboard de control de proyectos con EVM básico</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm">
+            <span class="material-symbols-outlined text-orange-400 text-lg">check_circle</span>
+            <span>Atención al cliente automatizada vía WhatsApp / email</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm">
+            <span class="material-symbols-outlined text-orange-400 text-lg">check_circle</span>
+            <span>Integración con N8N, Make, Zapier o Agente IA con Python/JS</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm">
+            <span class="material-symbols-outlined text-orange-400 text-lg">check_circle</span>
+            <span>Entrega estimada: 4 semanas</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm">
+            <span class="material-symbols-outlined text-orange-400 text-lg">check_circle</span>
+            <span>Soporte 60 días + 2 sesiones de ajuste</span>
+          </li>
+        </ul>
+        <a href="https://wa.me/51993147501?text=Hola,%20quiero%20agendar%20una%20valorizaci%C3%B3n%20para%20Control%20Inteligente%20Pyme" target="_blank" class="w-full text-center bg-secondary-container text-white py-4 rounded-lg font-bold hover:shadow-[0_0_20px_rgba(244,99,15,0.4)] transition-all mb-4">
+          Agendar valorización gratuita
+        </a>
+        <p class="text-xs text-on-surface-variant text-center">Ideal para: Constructoras · PTAP · PTAR · Bombeo</p>
       </div>
 
-      <!-- Card 3: Control EVM con IA (Recomendado) -->
-      <div class="group relative bg-surface-container-low p-8 rounded-xl border border-primary/20 bg-primary/5 hover:border-primary-container/30 transition-all duration-500 overflow-hidden">
-        <div class="absolute top-4 right-4 bg-secondary-container px-2 py-1 rounded text-[10px] font-bold text-white uppercase tracking-widest">Recomendado</div>
-        <div class="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
-          <span class="material-symbols-outlined text-7xl">psychology</span>
+      <!-- Tarjeta 3 — Ecosistema Digital Técnico -->
+      <div class="bg-surface-container rounded-xl border border-outline-variant/30 p-8 hover:-translate-y-1 hover:shadow-2xl hover:shadow-cyan-900/20 transition-all flex flex-col">
+        <div class="mb-6">
+          <span class="material-symbols-outlined text-4xl text-primary mb-4 block">hub</span>
+          <div class="flex items-center gap-2 mb-4">
+            <h3 class="text-2xl font-headline font-bold">Ecosistema Digital Técnico</h3>
+            <span class="bg-primary/10 text-primary rounded-full text-xs px-3 py-1 font-bold">Premium</span>
+          </div>
+          <p class="text-on-surface-variant text-sm leading-relaxed">
+            Transformación digital completa. Agentes de IA autónomos integrados a tu data privada, desplegados en la nube, servidor o PC.
+          </p>
         </div>
-        <div class="w-14 h-14 bg-surface-container-highest rounded-xl flex items-center justify-center text-secondary mb-8 transition-transform group-hover:scale-110">
-          <span class="material-symbols-outlined text-3xl">psychology</span>
-        </div>
-        <h3 class="text-xl font-headline font-bold text-on-surface mb-4">Control EVM con IA</h3>
-        <p class="text-on-surface-variant leading-relaxed">Predicción de desviaciones presupuestarias y de cronograma mediante IA. Forecasting automático con métricas SPI/CPI en tiempo real.</p>
-        <div class="mt-8">
-          <a href="https://wa.me/51993147501?text=Hola,%20me%20interesa%20Control%20EVM%20con%20IA" target="_blank" class="text-secondary font-bold text-sm flex items-center gap-2 hover:gap-3 transition-all">
-            Consultar <span class="material-symbols-outlined text-sm">arrow_forward</span>
-          </a>
-        </div>
+        <ul class="space-y-4 mb-8 flex-grow">
+          <li class="flex items-start gap-3 text-sm">
+            <span class="material-symbols-outlined text-cyan-400 text-lg">check_circle</span>
+            <span>Auditoría forense de procesos y arquitectura de datos</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm">
+            <span class="material-symbols-outlined text-cyan-400 text-lg">check_circle</span>
+            <span>Migración Excel → base de datos relacional (Supabase / PostgreSQL)</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm">
+            <span class="material-symbols-outlined text-cyan-400 text-lg">check_circle</span>
+            <span>Dashboard ejecutivo con EVM 4.0 en tiempo real</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm">
+            <span class="material-symbols-outlined text-cyan-400 text-lg">check_circle</span>
+            <span>Agente de IA propio conectado a tu data privada (Python / JS)</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm">
+            <span class="material-symbols-outlined text-cyan-400 text-lg">check_circle</span>
+            <span>Automatización de cotizaciones, reportes y atención al cliente</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm">
+            <span class="material-symbols-outlined text-cyan-400 text-lg">check_circle</span>
+            <span>Despliegue en la nube, servidor dedicado o PC local</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm">
+            <span class="material-symbols-outlined text-cyan-400 text-lg">check_circle</span>
+            <span>Soporte extendido 90 días</span>
+          </li>
+        </ul>
+        <a href="https://wa.me/51993147501?text=Hola,%20quiero%20agendar%20una%20valorizaci%C3%B3n%20para%20Ecosistema%20Digital%20T%C3%A9cnico" target="_blank" class="w-full text-center border border-cyan-400 text-cyan-400 py-4 rounded-lg font-bold hover:bg-cyan-400/10 transition-all mb-4">
+          Agendar valorización gratuita
+        </a>
+        <p class="text-xs text-on-surface-variant text-center">Ideal para: Mineras · Municipios · Saneamiento · Operaciones críticas</p>
+      </div>
+    </div>
+
+    <!-- Bloque 4 — Stack tecnológico -->
+    <div class="mt-24 text-center">
+      <h3 class="text-on-surface-variant text-sm uppercase tracking-widest mb-10 font-bold">Tecnologías que manejamos</h3>
+      <div class="flex flex-wrap justify-center gap-3">
+        <div class="bg-surface-container-high border border-outline-variant/30 rounded-full px-4 py-2 text-sm font-medium text-on-surface">N8N</div>
+        <div class="bg-surface-container-high border border-outline-variant/30 rounded-full px-4 py-2 text-sm font-medium text-on-surface">Zapier</div>
+        <div class="bg-surface-container-high border border-outline-variant/30 rounded-full px-4 py-2 text-sm font-medium text-on-surface">Make (Integromat)</div>
+        <div class="bg-surface-container-high border border-outline-variant/30 rounded-full px-4 py-2 text-sm font-medium text-on-surface">Agentes IA con Python</div>
+        <div class="bg-surface-container-high border border-outline-variant/30 rounded-full px-4 py-2 text-sm font-medium text-on-surface">Agentes IA con JavaScript</div>
+        <div class="bg-surface-container-high border border-outline-variant/30 rounded-full px-4 py-2 text-sm font-medium text-on-surface">Supabase</div>
+        <div class="bg-surface-container-high border border-outline-variant/30 rounded-full px-4 py-2 text-sm font-medium text-on-surface">PostgreSQL</div>
+        <div class="bg-surface-container-high border border-outline-variant/30 rounded-full px-4 py-2 text-sm font-medium text-on-surface">Power BI</div>
+        <div class="bg-surface-container-high border border-outline-variant/30 rounded-full px-4 py-2 text-sm font-medium text-on-surface">Looker Studio</div>
+        <div class="bg-surface-container-high border border-outline-variant/30 rounded-full px-4 py-2 text-sm font-medium text-on-surface">CSS / HTML</div>
+        <div class="bg-surface-container-high border border-outline-variant/30 rounded-full px-4 py-2 text-sm font-medium text-on-surface">Automatización en la nube</div>
+        <div class="bg-surface-container-high border border-outline-variant/30 rounded-full px-4 py-2 text-sm font-medium text-on-surface">Servidor dedicado</div>
+        <div class="bg-surface-container-high border border-outline-variant/30 rounded-full px-4 py-2 text-sm font-medium text-on-surface">PC local</div>
       </div>
     </div>
   </section>

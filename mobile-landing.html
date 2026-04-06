@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Project Control AI | Cursos con IA para Construcción</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            surface: "#0b1323",
+            primary: "#a8e8ff",
+            "primary-container": "#00d4ff",
+            "on-primary-container": "#00586b",
+            "secondary-container": "#f4630f",
+            onSurface: "#dbe2f8",
+            "on-surface-variant": "#bbc9cf",
+          },
+          fontFamily: {
+            headline: ["Space Grotesk"],
+            body: ["Inter"]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #0b1323; color: #dbe2f8; }
+    .font-headline { font-family: 'Space Grotesk', sans-serif; }
+  </style>
+</head>
+<body class="bg-surface text-onSurface min-h-screen">
+
+  <!-- Header -->
+  <header class="bg-[#020817]/90 backdrop-blur-lg sticky top-0 z-50 px-4 py-4 border-b border-slate-800">
+    <div class="flex items-center gap-3">
+      <img src="assets/images/Logotipo.png" alt="Logo" class="h-10 w-auto"/>
+      <div>
+        <span class="text-lg font-bold text-white font-headline">PROJECT CONTROL AI</span>
+        <span class="text-xs text-cyan-400 block">Academy & Consultoría</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Título Principal -->
+  <section class="px-4 py-8">
+    <h1 class="text-2xl font-headline font-bold text-center leading-tight">
+      Cursos en Gestión de Proyectos con IA para Construcción
+    </h1>
+    <p class="text-on-surface-variant text-center mt-2 text-sm">
+      Formación especializada para ingenieros y profesionales del sector
+    </p>
+  </section>
+
+  <!-- Listado de Cursos -->
+  <main class="px-4 pb-8 space-y-6">
+
+    <!-- Curso 1: Licitaciones -->
+    <div class="bg-[#131c2b] rounded-xl p-5 border border-slate-700">
+      <div class="flex items-start justify-between mb-3">
+        <h2 class="text-lg font-headline font-bold text-white">Licitaciones Inteligentes con IA</h2>
+        <span class="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">En Vivo</span>
+      </div>
+      <div class="space-y-2 text-sm text-on-surface-variant mb-4">
+        <p><span class="text-primary font-semibold">📅 Inicio:</span> 13/04</p>
+        <p><span class="text-primary font-semibold">⏱️ Duración:</span> 05 sesiones de 3 horas cada una</p>
+        <p><span class="text-primary font-semibold">🕐 Horario:</span> Lun-Mié 7:00 PM - 10:00 PM</p>
+        <p><span class="text-primary font-semibold">💰 Precio:</span> $75 USD / S/ 200</p>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <a href="index.html" class="flex-1 text-center bg-cyan-400 text-[#00586b] font-bold text-sm py-2.5 rounded-lg hover:bg-cyan-300 transition-all">Inscribirme →</a>
+        <a href="index.html" class="flex-1 text-center border border-slate-600 text-slate-300 font-semibold text-sm py-2.5 rounded-lg hover:bg-slate-800 transition-all">Ver Brochure →</a>
+        <a href="index.html" class="flex-1 text-center bg-purple-600/20 text-purple-400 font-semibold text-sm py-2.5 rounded-lg hover:bg-purple-600/30 transition-all">Clase Asincrónica →</a>
+        <a href="index.html" class="flex-1 text-center bg-orange-500/20 text-orange-400 font-semibold text-sm py-2.5 rounded-lg hover:bg-orange-500/30 transition-all">Consultoría →</a>
+      </div>
+    </div>
+
+    <!-- Curso 2: EVM -->
+    <div class="bg-[#131c2b] rounded-xl p-5 border border-slate-700">
+      <div class="flex items-start justify-between mb-3">
+        <h2 class="text-lg font-headline font-bold text-white">Control y Gerencia EVM</h2>
+        <span class="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">En Vivo</span>
+      </div>
+      <div class="space-y-2 text-sm text-on-surface-variant mb-4">
+        <p><span class="text-primary font-semibold">📅 Inicio:</span> 14/04</p>
+        <p><span class="text-primary font-semibold">⏱️ Duración:</span> 05 sesiones de 3 horas cada una</p>
+        <p><span class="text-primary font-semibold">🕐 Horario:</span> Mar-Jue 7:00 PM - 10:00 PM</p>
+        <p><span class="text-primary font-semibold">💰 Precio:</span> $75 USD / S/ 200</p>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <a href="index.html" class="flex-1 text-center bg-cyan-400 text-[#00586b] font-bold text-sm py-2.5 rounded-lg hover:bg-cyan-300 transition-all">Inscribirme →</a>
+        <a href="index.html" class="flex-1 text-center border border-slate-600 text-slate-300 font-semibold text-sm py-2.5 rounded-lg hover:bg-slate-800 transition-all">Ver Brochure →</a>
+        <a href="index.html" class="flex-1 text-center bg-purple-600/20 text-purple-400 font-semibold text-sm py-2.5 rounded-lg hover:bg-purple-600/30 transition-all">Clase Asincrónica →</a>
+        <a href="index.html" class="flex-1 text-center bg-orange-500/20 text-orange-400 font-semibold text-sm py-2.5 rounded-lg hover:bg-orange-500/30 transition-all">Consultoría →</a>
+      </div>
+    </div>
+
+    <!-- Curso 3: GIP -->
+    <div class="bg-[#131c2b] rounded-xl p-5 border border-slate-700">
+      <div class="flex items-start justify-between mb-3">
+        <h2 class="text-lg font-headline font-bold text-white">Gestión Integral con IA (GIP)</h2>
+        <span class="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">En Vivo</span>
+      </div>
+      <div class="space-y-2 text-sm text-on-surface-variant mb-4">
+        <p><span class="text-primary font-semibold">📅 Inicio:</span> 19/04</p>
+        <p><span class="text-primary font-semibold">⏱️ Duración:</span> 05 sesiones de 3 horas cada una</p>
+        <p><span class="text-primary font-semibold">🕐 Horario:</span> Domingos 10:00 AM - 1:00 PM</p>
+        <p><span class="text-primary font-semibold">💰 Precio:</span> $75 USD / S/ 200</p>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <a href="index.html" class="flex-1 text-center bg-cyan-400 text-[#00586b] font-bold text-sm py-2.5 rounded-lg hover:bg-cyan-300 transition-all">Inscribirme →</a>
+        <a href="index.html" class="flex-1 text-center border border-slate-600 text-slate-300 font-semibold text-sm py-2.5 rounded-lg hover:bg-slate-800 transition-all">Ver Brochure →</a>
+        <a href="index.html" class="flex-1 text-center bg-purple-600/20 text-purple-400 font-semibold text-sm py-2.5 rounded-lg hover:bg-purple-600/30 transition-all">Clase Asincrónica →</a>
+        <a href="index.html" class="flex-1 text-center bg-orange-500/20 text-orange-400 font-semibold text-sm py-2.5 rounded-lg hover:bg-orange-500/30 transition-all">Consultoría →</a>
+      </div>
+    </div>
+
+    <!-- Curso 4: Automation Engineer -->
+    <div class="bg-[#131c2b] rounded-xl p-5 border border-slate-700">
+      <div class="flex items-start justify-between mb-3">
+        <h2 class="text-lg font-headline font-bold text-white">Automation Engineer</h2>
+        <span class="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">En Vivo</span>
+      </div>
+      <div class="space-y-2 text-sm text-on-surface-variant mb-4">
+        <p><span class="text-primary font-semibold">📅 Inicio:</span> 05/04</p>
+        <p><span class="text-primary font-semibold">⏱️ Duración:</span> 05 sesiones de 3 horas cada una</p>
+        <p><span class="text-primary font-semibold">🕐 Horario:</span> Domingos 3:00 PM - 6:00 PM</p>
+        <p><span class="text-primary font-semibold">💰 Precio:</span> $90 USD / S/ 300</p>
+        <p class="text-xs text-yellow-400 mt-2">⚠️ Requiere: Gestión Integral con IA como prerrequisito</p>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <a href="index.html" class="flex-1 text-center bg-cyan-400 text-[#00586b] font-bold text-sm py-2.5 rounded-lg hover:bg-cyan-300 transition-all">Inscribirme →</a>
+        <a href="index.html" class="flex-1 text-center border border-slate-600 text-slate-300 font-semibold text-sm py-2.5 rounded-lg hover:bg-slate-800 transition-all">Ver Brochure →</a>
+        <a href="index.html" class="flex-1 text-center bg-purple-600/20 text-purple-400 font-semibold text-sm py-2.5 rounded-lg hover:bg-purple-600/30 transition-all">Clase Asincrónica →</a>
+        <a href="index.html" class="flex-1 text-center bg-orange-500/20 text-orange-400 font-semibold text-sm py-2.5 rounded-lg hover:bg-orange-500/30 transition-all">Consultoría →</a>
+      </div>
+    </div>
+
+    <!-- Curso 5: Primavera P6 -->
+    <div class="bg-[#131c2b] rounded-xl p-5 border border-slate-700">
+      <div class="flex items-start justify-between mb-3">
+        <h2 class="text-lg font-headline font-bold text-white">Primavera P6 Profesional</h2>
+        <span class="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">En Vivo</span>
+      </div>
+      <div class="space-y-2 text-sm text-on-surface-variant mb-4">
+        <p><span class="text-primary font-semibold">📅 Inicio:</span> 03/04</p>
+        <p><span class="text-primary font-semibold">⏱️ Duración:</span> 05 sesiones de 3 horas cada una</p>
+        <p><span class="text-primary font-semibold">🕐 Horario:</span> Viernes 7:00 PM - 10:00 PM</p>
+        <p><span class="text-primary font-semibold">💰 Precio:</span> $75 USD / S/ 200</p>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <a href="index.html" class="flex-1 text-center bg-cyan-400 text-[#00586b] font-bold text-sm py-2.5 rounded-lg hover:bg-cyan-300 transition-all">Inscribirme →</a>
+        <a href="index.html" class="flex-1 text-center border border-slate-600 text-slate-300 font-semibold text-sm py-2.5 rounded-lg hover:bg-slate-800 transition-all">Ver Brochure →</a>
+        <a href="index.html" class="flex-1 text-center bg-purple-600/20 text-purple-400 font-semibold text-sm py-2.5 rounded-lg hover:bg-purple-600/30 transition-all">Clase Asincrónica →</a>
+        <a href="index.html" class="flex-1 text-center bg-orange-500/20 text-orange-400 font-semibold text-sm py-2.5 rounded-lg hover:bg-orange-500/30 transition-all">Consultoría →</a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#020817] px-4 py-6 border-t border-slate-800 text-center">
+    <p class="text-slate-500 text-xs">© 2026 Project Control AI</p>
+    <p class="text-slate-600 text-xs mt-1">Academy & Consultoría en IA para Construcción</p>
+  </footer>
+
+</body>
+</html>

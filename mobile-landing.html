@@ -31,6 +31,7 @@
   <style>
     body { font-family: 'Inter', sans-serif; background-color: #0b1323; color: #dbe2f8; }
     .font-headline { font-family: 'Space Grotesk', sans-serif; }
+    .hidden-view { display: none; }
   </style>
 </head>
 <body class="bg-surface text-onSurface min-h-screen">
@@ -47,18 +48,26 @@
   </header>
 
   <!-- Título Principal -->
-  <section class="px-4 py-8">
-    <h1 class="text-2xl font-headline font-bold text-center leading-tight">
+  <section class="px-4 py-6">
+    <h1 class="text-xl font-headline font-bold text-center leading-tight">
       Cursos en Gestión de Proyectos con IA para Construcción
     </h1>
-    <p class="text-on-surface-variant text-center mt-2 text-sm">
-      Formación especializada para ingenieros y profesionales del sector
-    </p>
   </section>
 
-  <!-- Listado de Cursos (Solo información) -->
-  <main class="px-4 pb-6 space-y-4">
+  <!-- Toggle Síncrono / Asincrónico -->
+  <section class="px-4 mb-4">
+    <div class="flex gap-2">
+      <button id="btn-sinc" onclick="showView('sinc')" class="flex-1 py-3 px-4 rounded-lg font-bold text-sm bg-orange-500 text-white text-center">
+        📺 Cursos Síncronos
+      </button>
+      <button id="btn-asinc" onclick="showView('asinc')" class="flex-1 py-3 px-4 rounded-lg font-bold text-sm bg-slate-700 text-slate-300 text-center border border-slate-600">
+        🎬 Cursos Asincrónicos
+      </button>
+    </div>
+  </section>
 
+  <!-- View Síncrono (Cursos En Vivo) -->
+  <main id="view-sinc" class="px-4 pb-6 space-y-4">
     <!-- Curso 1: Licitaciones -->
     <div class="bg-[#131c2b] rounded-xl p-4 border border-slate-700">
       <div class="flex items-start justify-between mb-2">
@@ -70,6 +79,10 @@
         <p><span class="text-primary font-semibold">⏱️ Duración:</span> 05 sesiones de 3 horas</p>
         <p><span class="text-primary font-semibold">🕐 Horario:</span> Lun-Mié 7:00 PM - 10:00 PM</p>
         <p><span class="text-primary font-semibold">💰 Precio:</span> $75 USD / S/ 200</p>
+      </div>
+      <div class="flex gap-2 mt-3 pt-3 border-t border-slate-700">
+        <a href="inscripcion.html" class="flex-1 text-center bg-cyan-400 text-[#00586b] font-bold text-xs py-2 rounded-lg">Inscribirme</a>
+        <a href="formacion.html" class="flex-1 text-center bg-orange-500 text-white font-bold text-xs py-2 rounded-lg">Pagos →</a>
       </div>
     </div>
 
@@ -85,6 +98,10 @@
         <p><span class="text-primary font-semibold">🕐 Horario:</span> Mar-Jue 7:00 PM - 10:00 PM</p>
         <p><span class="text-primary font-semibold">💰 Precio:</span> $75 USD / S/ 200</p>
       </div>
+      <div class="flex gap-2 mt-3 pt-3 border-t border-slate-700">
+        <a href="inscripcion.html" class="flex-1 text-center bg-cyan-400 text-[#00586b] font-bold text-xs py-2 rounded-lg">Inscribirme</a>
+        <a href="formacion.html" class="flex-1 text-center bg-orange-500 text-white font-bold text-xs py-2 rounded-lg">Pagos →</a>
+      </div>
     </div>
 
     <!-- Curso 3: GIP -->
@@ -98,6 +115,10 @@
         <p><span class="text-primary font-semibold">⏱️ Duración:</span> 05 sesiones de 3 horas</p>
         <p><span class="text-primary font-semibold">🕐 Horario:</span> Domingos 10:00 AM - 1:00 PM</p>
         <p><span class="text-primary font-semibold">💰 Precio:</span> $75 USD / S/ 200</p>
+      </div>
+      <div class="flex gap-2 mt-3 pt-3 border-t border-slate-700">
+        <a href="inscripcion.html" class="flex-1 text-center bg-cyan-400 text-[#00586b] font-bold text-xs py-2 rounded-lg">Inscribirme</a>
+        <a href="formacion.html" class="flex-1 text-center bg-orange-500 text-white font-bold text-xs py-2 rounded-lg">Pagos →</a>
       </div>
     </div>
 
@@ -114,6 +135,10 @@
         <p><span class="text-primary font-semibold">💰 Precio:</span> $90 USD / S/ 300</p>
         <p class="text-xs text-yellow-400 mt-1">⚠️ Requiere: GIP como prerrequisito</p>
       </div>
+      <div class="flex gap-2 mt-3 pt-3 border-t border-slate-700">
+        <a href="inscripcion.html" class="flex-1 text-center bg-cyan-400 text-[#00586b] font-bold text-xs py-2 rounded-lg">Inscribirme</a>
+        <a href="formacion.html" class="flex-1 text-center bg-orange-500 text-white font-bold text-xs py-2 rounded-lg">Pagos →</a>
+      </div>
     </div>
 
     <!-- Curso 5: Primavera P6 -->
@@ -128,43 +153,103 @@
         <p><span class="text-primary font-semibold">🕐 Horario:</span> Viernes 7:00 PM - 10:00 PM</p>
         <p><span class="text-primary font-semibold">💰 Precio:</span> $75 USD / S/ 200</p>
       </div>
+      <div class="flex gap-2 mt-3 pt-3 border-t border-slate-700">
+        <a href="inscripcion.html" class="flex-1 text-center bg-cyan-400 text-[#00586b] font-bold text-xs py-2 rounded-lg">Inscribirme</a>
+        <a href="formacion.html" class="flex-1 text-center bg-orange-500 text-white font-bold text-xs py-2 rounded-lg">Pagos →</a>
+      </div>
     </div>
-
   </main>
 
-  <!-- Sección de Acciones - Independiente -->
+  <!-- View Asincrónico -->
+  <main id="view-asinc" class="hidden-view px-4 pb-6 space-y-4">
+    <!-- Curso A1: El Despertar -->
+    <div class="bg-[#131c2b] rounded-xl p-4 border border-green-500/30">
+      <div class="flex items-start justify-between mb-2">
+        <h2 class="text-base font-headline font-bold text-white">El Despertar de la IA en la Gestión de Proyectos</h2>
+        <span class="bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">Asincrónico</span>
+      </div>
+      <div class="space-y-1 text-xs text-on-surface-variant">
+        <p><span class="text-green-400 font-semibold">✅ Disponible Ahora</span></p>
+        <p><span class="text-primary font-semibold">⏱️ Duración:</span> 2.5 horas</p>
+        <p><span class="text-primary font-semibold">📦 Entregables:</span> 6 proyectos reales</p>
+        <p><span class="text-primary font-semibold">💰 Precio:</span> $11.99 USD</p>
+      </div>
+      <div class="flex gap-2 mt-3 pt-3 border-t border-slate-700">
+        <a href="https://go.hotmart.com/I104938744G" target="_blank" class="flex-1 text-center bg-green-500 text-white font-bold text-xs py-2 rounded-lg">Comprar en Hotmart</a>
+      </div>
+    </div>
+
+    <!-- Ecosistema (Próximamente) -->
+    <div class="bg-[#0b1323] rounded-xl p-4 border border-cyan-500/30">
+      <h2 class="text-base font-headline font-bold text-white mb-3">🎓 Ecosistema de 20 Micro-cursos</h2>
+      <div class="space-y-2 text-xs text-on-surface-variant">
+        <p>6 rutas de aprendizaje con cursos de $11.99 USD cada uno.</p>
+        <div class="grid grid-cols-3 gap-2 mt-3">
+          <div class="bg-green-500/20 text-green-400 text-center py-2 rounded-lg">Ruta A<br><span class="text-[10px]">4 cursos</span></div>
+          <div class="bg-blue-500/20 text-blue-400 text-center py-2 rounded-lg">Ruta B<br><span class="text-[10px]">5 cursos</span></div>
+          <div class="bg-orange-500/20 text-orange-400 text-center py-2 rounded-lg">Ruta C<br><span class="text-[10px]">4 cursos</span></div>
+          <div class="bg-red-500/20 text-red-400 text-center py-2 rounded-lg">Ruta D<br><span class="text-[10px]">4 cursos</span></div>
+          <div class="bg-purple-500/20 text-purple-400 text-center py-2 rounded-lg">Ruta E<br><span class="text-[10px]">5 cursos</span></div>
+          <div class="bg-yellow-500/20 text-yellow-400 text-center py-2 rounded-lg">Ruta F<br><span class="text-[10px]">5 cursos</span></div>
+        </div>
+        <p class="text-center text-slate-500 mt-3">🚀 Próximamente</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Sección de Acciones - Fija abajo -->
   <section class="px-4 pb-8">
     <div class="bg-[#0b1323] rounded-xl p-5 border border-cyan-500/30">
-      <h3 class="text-lg font-headline font-bold text-center text-white mb-4">Acciones</h3>
+      <h3 class="text-base font-headline font-bold text-center text-white mb-4">Acciones</h3>
       <div class="grid grid-cols-2 gap-3">
-        <a href="inscripcion.html" class="flex flex-col items-center justify-center gap-2 bg-cyan-400 text-[#00586b] font-bold text-sm py-4 rounded-lg hover:bg-cyan-300 transition-all">
-          <span class="text-xl">📝</span>
+        <a href="inscripcion.html" class="flex flex-col items-center justify-center gap-1 bg-cyan-400 text-[#00586b] font-bold text-xs py-3 rounded-lg hover:bg-cyan-300 transition-all">
+          <span>📝</span>
           <span>Inscribirme</span>
         </a>
-        <a href="recursos.html" class="flex flex-col items-center justify-center gap-2 border border-slate-600 text-slate-300 font-semibold text-sm py-4 rounded-lg hover:bg-slate-800 transition-all">
-          <span class="text-xl">📄</span>
+        <a href="recursos.html" class="flex flex-col items-center justify-center gap-1 border border-slate-600 text-slate-300 font-semibold text-xs py-3 rounded-lg hover:bg-slate-800 transition-all">
+          <span>📄</span>
           <span>Ver Brochure</span>
         </a>
-        <a href="index.html" class="flex flex-col items-center justify-center gap-2 bg-purple-600/20 text-purple-400 font-semibold text-sm py-4 rounded-lg hover:bg-purple-600/30 transition-all">
-          <span class="text-xl">🎬</span>
+        <a href="formacion.html" class="flex flex-col items-center justify-center gap-1 bg-purple-600/20 text-purple-400 font-semibold text-xs py-3 rounded-lg hover:bg-purple-600/30 transition-all">
+          <span>🎬</span>
           <span>Clases Asincrónicas</span>
         </a>
-        <a href="index.html" class="flex flex-col items-center justify-center gap-2 border border-slate-600 text-slate-300 font-semibold text-sm py-4 rounded-lg hover:bg-slate-800 transition-all">
-          <span class="text-xl">💳</span>
+        <a href="formacion.html" class="flex flex-col items-center justify-center gap-1 border border-slate-600 text-slate-300 font-semibold text-xs py-3 rounded-lg hover:bg-slate-800 transition-all">
+          <span>💳</span>
           <span>Pagos</span>
         </a>
-        <a href="consultoria.html" class="flex flex-col items-center justify-center gap-2 bg-orange-500/20 text-orange-400 font-semibold text-sm py-4 rounded-lg hover:bg-orange-500/30 transition-all col-span-2">
-          <span class="text-xl">💼</span>
+        <a href="consultoria.html" class="flex flex-col items-center justify-center gap-1 bg-orange-500/20 text-orange-400 font-semibold text-xs py-3 rounded-lg hover:bg-orange-500/30 transition-all col-span-2">
+          <span>💼</span>
           <span>Consultorías</span>
         </a>
       </div>
     </div>
   </section>
 
+  <script>
+    function showView(view) {
+      const sinc = document.getElementById('view-sinc');
+      const asinc = document.getElementById('view-asinc');
+      const btnSinc = document.getElementById('btn-sinc');
+      const btnAsinc = document.getElementById('btn-asinc');
+      
+      if (view === 'sinc') {
+        sinc.classList.remove('hidden-view');
+        asinc.classList.add('hidden-view');
+        btnSinc.className = 'flex-1 py-3 px-4 rounded-lg font-bold text-sm bg-orange-500 text-white text-center';
+        btnAsinc.className = 'flex-1 py-3 px-4 rounded-lg font-bold text-sm bg-slate-700 text-slate-300 text-center border border-slate-600';
+      } else {
+        sinc.classList.add('hidden-view');
+        asinc.classList.remove('hidden-view');
+        btnSinc.className = 'flex-1 py-3 px-4 rounded-lg font-bold text-sm bg-slate-700 text-slate-300 text-center border border-slate-600';
+        btnAsinc.className = 'flex-1 py-3 px-4 rounded-lg font-bold text-sm bg-green-500 text-white text-center';
+      }
+    }
+  </script>
+
   <!-- Footer -->
-  <footer class="bg-[#020817] px-4 py-6 border-t border-slate-800 text-center">
+  <footer class="bg-[#020817] px-4 py-4 border-t border-slate-800 text-center">
     <p class="text-slate-500 text-xs">© 2026 Project Control AI</p>
-    <p class="text-slate-600 text-xs mt-1">Academy & Consultoría en IA para Construcción</p>
   </footer>
 
 </body>

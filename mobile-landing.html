@@ -1,264 +1,98 @@
 <!DOCTYPE html>
-<html class="dark" lang="es">
+<html lang="es">
 <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>Project Control AI | Cursos con IA para Construcción</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-  <script>
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            surface: "#0b1323",
-            primary: "#a8e8ff",
-            "primary-container": "#00d4ff",
-            "on-primary-container": "#00586b",
-            "secondary-container": "#f4630f",
-            onSurface: "#dbe2f8",
-            "on-surface-variant": "#bbc9cf",
-          },
-          fontFamily: {
-            headline: ["Space Grotesk"],
-            body: ["Inter"]
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    body { font-family: 'Inter', sans-serif; background-color: #0b1323; color: #dbe2f8; }
-    .font-headline { font-family: 'Space Grotesk', sans-serif; }
-    .hidden-view { display: none; }
-  </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Control AI | Contacto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        body { background-color: #020817; font-family: 'Inter', sans-serif; color: #dbe2f8; }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .glass { background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+    </style>
 </head>
-<body class="bg-surface text-onSurface min-h-screen">
+<body class="flex flex-col items-center px-4 py-8 min-h-screen relative overflow-x-hidden">
 
-  <!-- Header -->
-  <header class="bg-[#020817]/90 backdrop-blur-lg sticky top-0 z-50 px-4 py-4 border-b border-slate-800">
-    <div class="flex items-center gap-3">
-      <img src="assets/images/Logotipo.png" alt="Logo" class="h-10 w-auto"/>
-      <div>
-        <span class="text-lg font-bold text-white font-headline">PROJECT CONTROL AI</span>
-        <span class="text-xs text-cyan-400 block">Academy & Consultoría</span>
-      </div>
-    </div>
-  </header>
+    <div class="absolute top-0 w-full h-64 bg-cyan-500/10 blur-[100px] -z-10"></div>
 
-  <!-- Título Principal -->
-  <section class="px-4 py-6">
-    <h1 class="text-xl font-headline font-bold text-center leading-tight">
-      Cursos en Gestión de Proyectos con IA para Construcción
-    </h1>
-  </section>
+    <!-- Header Principal -->
+    <img src="assets/images/Logotipo.png" alt="PCAI" class="h-14 w-auto mb-3">
+    <h1 class="text-xl font-headline font-bold text-white tracking-tight">PROJECT CONTROL AI</h1>
+    <p class="text-cyan-400 text-[10px] font-bold tracking-[0.3em] uppercase mb-8">Especialización en Ingeniería & IA</p>
 
-  <!-- Toggle Síncrono / Asincrónico -->
-  <section class="px-4 mb-4">
-    <div class="flex gap-2">
-      <button id="btn-sinc" onclick="showView('sinc')" class="flex-1 py-3 px-4 rounded-lg font-bold text-sm bg-orange-500 text-white text-center">
-        📺 Cursos Síncronos
-      </button>
-      <button id="btn-asinc" onclick="showView('asinc')" class="flex-1 py-3 px-4 rounded-lg font-bold text-sm bg-slate-700 text-slate-300 text-center border border-slate-600">
-        🎬 Cursos Asincrónicos
-      </button>
-    </div>
-  </section>
-
-  <!-- View Síncrono (Cursos En Vivo) -->
-  <main id="view-sinc" class="px-4 pb-6 space-y-4">
-    <!-- Curso 1: Licitaciones -->
-    <div class="bg-[#131c2b] rounded-xl p-4 border border-slate-700">
-      <div class="flex items-start justify-between mb-2">
-        <h2 class="text-base font-headline font-bold text-white">Licitaciones Inteligentes con IA</h2>
-        <span class="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">En Vivo</span>
-      </div>
-      <div class="space-y-1 text-xs text-on-surface-variant">
-        <p><span class="text-primary font-semibold">📅 Inicio:</span> 20/04</p>
-        <p><span class="text-primary font-semibold">⏱️ Duración:</span> 05 sesiones de 3 horas</p>
-        <p><span class="text-primary font-semibold">🕐 Horario:</span> Lun-Mié 7:00 PM - 10:00 PM</p>
-        <p><span class="text-primary font-semibold">💰 Precio:</span> $75 USD / S/ 200</p>
-      </div>
-      <div class="flex gap-2 mt-3 pt-3 border-t border-slate-700">
-        <a href="inscripcion.html" class="flex-1 text-center bg-cyan-400 text-[#00586b] font-bold text-xs py-2 rounded-lg">Inscribirme</a>
-        <a href="formacion.html" class="flex-1 text-center bg-orange-500 text-white font-bold text-xs py-2 rounded-lg">Pagos →</a>
-      </div>
+    <!-- 🟢 SECCIÓN 1: CONSULTA DIRECTA (TU MARCA PERSONAL) -->
+    <div class="w-full max-w-md mb-8">
+        <a href="https://wa.me/51993147501?text=Hola%20Ing.%20Aurelio,%20necesito%20una%20consulta%20directa%20sobre%20sus%20servicios%20y%20cursos." 
+           class="flex items-center gap-4 w-full bg-white text-black p-4 rounded-2xl shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:scale-[1.02] transition-all active:scale-95">
+            <div class="relative">
+                <img src="assets/images/Aurelio Solorzano.png" class="w-12 h-12 rounded-full object-cover border-2 border-black">
+                <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></div>
+            </div>
+            <div class="text-left">
+                <span class="block text-xs font-bold text-slate-500 uppercase tracking-widest">Atención Directa</span>
+                <span class="block text-sm font-bold">Hablar con el Ing. Aurelio</span>
+            </div>
+            <span class="ml-auto text-xl">📲</span>
+        </a>
     </div>
 
-    <!-- Curso 2: EVM -->
-    <div class="bg-[#131c2b] rounded-xl p-4 border border-slate-700">
-      <div class="flex items-start justify-between mb-2">
-        <h2 class="text-base font-headline font-bold text-white">Control y Gerencia EVM</h2>
-        <span class="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">En Vivo</span>
-      </div>
-      <div class="space-y-1 text-xs text-on-surface-variant">
-        <p><span class="text-primary font-semibold">📅 Inicio:</span> 28/04</p>
-        <p><span class="text-primary font-semibold">⏱️ Duración:</span> 05 sesiones de 3 horas</p>
-        <p><span class="text-primary font-semibold">🕐 Horario:</span> Mar-Jue 7:00 PM - 10:00 PM</p>
-        <p><span class="text-primary font-semibold">💰 Precio:</span> $75 USD / S/ 200</p>
-      </div>
-      <div class="flex gap-2 mt-3 pt-3 border-t border-slate-700">
-        <a href="inscripcion.html" class="flex-1 text-center bg-cyan-400 text-[#00586b] font-bold text-xs py-2 rounded-lg">Inscribirme</a>
-        <a href="formacion.html" class="flex-1 text-center bg-orange-500 text-white font-bold text-xs py-2 rounded-lg">Pagos →</a>
-      </div>
-    </div>
-
-    <!-- Curso 3: GIP -->
-    <div class="bg-[#131c2b] rounded-xl p-4 border border-slate-700">
-      <div class="flex items-start justify-between mb-2">
-        <h2 class="text-base font-headline font-bold text-white">Gestión Integral con IA (GIP)</h2>
-        <span class="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">En Vivo</span>
-      </div>
-      <div class="space-y-1 text-xs text-on-surface-variant">
-        <p><span class="text-primary font-semibold">📅 Inicio:</span> 03/05</p>
-        <p><span class="text-primary font-semibold">⏱️ Duración:</span> 05 sesiones de 3 horas</p>
-        <p><span class="text-primary font-semibold">🕐 Horario:</span> Domingos 10:00 AM - 1:00 PM</p>
-        <p><span class="text-primary font-semibold">💰 Precio:</span> $75 USD / S/ 200</p>
-      </div>
-      <div class="flex gap-2 mt-3 pt-3 border-t border-slate-700">
-        <a href="inscripcion.html" class="flex-1 text-center bg-cyan-400 text-[#00586b] font-bold text-xs py-2 rounded-lg">Inscribirme</a>
-        <a href="formacion.html" class="flex-1 text-center bg-orange-500 text-white font-bold text-xs py-2 rounded-lg">Pagos →</a>
-      </div>
-    </div>
-
-    <!-- Curso 4: Automation Engineer -->
-    <div class="bg-[#131c2b] rounded-xl p-4 border border-slate-700">
-      <div class="flex items-start justify-between mb-2">
-        <h2 class="text-base font-headline font-bold text-white">Automation Engineer</h2>
-        <span class="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">En Vivo</span>
-      </div>
-      <div class="space-y-1 text-xs text-on-surface-variant">
-        <p><span class="text-primary font-semibold">📅 Inicio:</span> 19/04</p>
-        <p><span class="text-primary font-semibold">⏱️ Duración:</span> 05 sesiones de 3 horas</p>
-        <p><span class="text-primary font-semibold">🕐 Horario:</span> Domingos 3:00 PM - 6:00 PM</p>
-        <p><span class="text-primary font-semibold">💰 Precio:</span> $90 USD / S/ 300</p>
-        <p class="text-xs text-yellow-400 mt-1">⚠️ Requiere: GIP como prerrequisito</p>
-      </div>
-      <div class="flex gap-2 mt-3 pt-3 border-t border-slate-700">
-        <a href="inscripcion.html" class="flex-1 text-center bg-cyan-400 text-[#00586b] font-bold text-xs py-2 rounded-lg">Inscribirme</a>
-        <a href="formacion.html" class="flex-1 text-center bg-orange-500 text-white font-bold text-xs py-2 rounded-lg">Pagos →</a>
-      </div>
-    </div>
-
-    <!-- Curso 5: Primavera P6 -->
-    <div class="bg-[#131c2b] rounded-xl p-4 border border-slate-700">
-      <div class="flex items-start justify-between mb-2">
-        <h2 class="text-base font-headline font-bold text-white">Primavera P6 Profesional</h2>
-        <span class="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">En Vivo</span>
-      </div>
-      <div class="space-y-1 text-xs text-on-surface-variant">
-        <p><span class="text-primary font-semibold">📅 Inicio:</span> 17/04</p>
-        <p><span class="text-primary font-semibold">⏱️ Duración:</span> 05 sesiones de 3 horas</p>
-        <p><span class="text-primary font-semibold">🕐 Horario:</span> Viernes 7:00 PM - 10:00 PM</p>
-        <p><span class="text-primary font-semibold">💰 Precio:</span> $75 USD / S/ 200</p>
-      </div>
-      <div class="flex gap-2 mt-3 pt-3 border-t border-slate-700">
-        <a href="inscripcion.html" class="flex-1 text-center bg-cyan-400 text-[#00586b] font-bold text-xs py-2 rounded-lg">Inscribirme</a>
-        <a href="formacion.html" class="flex-1 text-center bg-orange-500 text-white font-bold text-xs py-2 rounded-lg">Pagos →</a>
-      </div>
-    </div>
-  </main>
-
-  <!-- View Asincrónico -->
-  <main id="view-asinc" class="hidden-view px-4 pb-6 space-y-4">
-    <!-- Curso A1: El Despertar -->
-    <div class="bg-[#131c2b] rounded-xl p-4 border border-green-500/30">
-      <div class="flex items-start justify-between mb-2">
-        <h2 class="text-base font-headline font-bold text-white">El Despertar de la IA en la Gestión de Proyectos</h2>
-        <span class="bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">Asincrónico</span>
-      </div>
-      <div class="space-y-1 text-xs text-on-surface-variant">
-        <p><span class="text-green-400 font-semibold">✅ Disponible Ahora</span></p>
-        <p><span class="text-primary font-semibold">⏱️ Duración:</span> 2.5 horas</p>
-        <p><span class="text-primary font-semibold">📦 Entregables:</span> 6 proyectos reales</p>
-        <p><span class="text-primary font-semibold">💰 Precio:</span> $11.99 USD</p>
-      </div>
-      <div class="flex gap-2 mt-3 pt-3 border-t border-slate-700">
-        <a href="https://go.hotmart.com/I104938744G" target="_blank" class="flex-1 text-center bg-green-500 text-white font-bold text-xs py-2 rounded-lg">Comprar en Hotmart</a>
-      </div>
-    </div>
-
-    <!-- Ecosistema (Próximamente) -->
-    <div class="bg-[#0b1323] rounded-xl p-4 border border-cyan-500/30">
-      <h2 class="text-base font-headline font-bold text-white mb-3">🎓 Ecosistema de 20 Micro-cursos</h2>
-      <div class="space-y-2 text-xs text-on-surface-variant">
-        <p>6 rutas de aprendizaje con cursos de $11.99 USD cada uno.</p>
-        <div class="grid grid-cols-3 gap-2 mt-3">
-          <div class="bg-green-500/20 text-green-400 text-center py-2 rounded-lg">Ruta A<br><span class="text-[10px]">4 cursos</span></div>
-          <div class="bg-blue-500/20 text-blue-400 text-center py-2 rounded-lg">Ruta B<br><span class="text-[10px]">5 cursos</span></div>
-          <div class="bg-orange-500/20 text-orange-400 text-center py-2 rounded-lg">Ruta C<br><span class="text-[10px]">4 cursos</span></div>
-          <div class="bg-red-500/20 text-red-400 text-center py-2 rounded-lg">Ruta D<br><span class="text-[10px]">4 cursos</span></div>
-          <div class="bg-purple-500/20 text-purple-400 text-center py-2 rounded-lg">Ruta E<br><span class="text-[10px]">5 cursos</span></div>
-          <div class="bg-yellow-500/20 text-yellow-400 text-center py-2 rounded-lg">Ruta F<br><span class="text-[10px]">5 cursos</span></div>
+    <!-- 🟠 SECCIÓN 2: PRÓXIMOS INICIOS (VENTA DE CURSOS) -->
+    <div class="w-full max-w-md space-y-3">
+        <div class="flex items-center gap-2 mb-2">
+            <span class="h-[1px] flex-1 bg-slate-800"></span>
+            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Cursos en Vivo esta semana</span>
+            <span class="h-[1px] flex-1 bg-slate-800"></span>
         </div>
-        <p class="text-center text-slate-500 mt-3">🚀 Próximamente</p>
-      </div>
+
+        <!-- CURSO 1 -->
+        <a href="formacion.html" 
+           class="glass block w-full rounded-2xl p-4 border-l-4 border-cyan-500 hover:bg-slate-800/50 transition-all">
+            <div class="flex justify-between items-center">
+                <div>
+                    <span class="text-[10px] font-bold text-cyan-400">INICIA: 17 ABRIL</span>
+                    <h2 class="text-base font-bold text-white">Primavera P6 Profesional</h2>
+                </div>
+                <span class="text-xs font-bold text-slate-400">Info →</span>
+            </div>
+        </a>
+
+        <!-- CURSO 2 -->
+        <a href="formacion.html" 
+           class="glass block w-full rounded-2xl p-4 border-l-4 border-blue-500 hover:bg-slate-800/50 transition-all">
+            <div class="flex justify-between items-center">
+                <div>
+                    <span class="text-[10px] font-bold text-blue-400">INICIA: 19 ABRIL</span>
+                    <h2 class="text-base font-bold text-white">Automation Engineer IA</h2>
+                </div>
+                <span class="text-xs font-bold text-slate-400">Info →</span>
+            </div>
+        </a>
+
+        <!-- CURSO 3 -->
+        <a href="formacion.html" 
+           class="glass block w-full rounded-2xl p-4 border-l-4 border-orange-500 hover:bg-slate-800/50 transition-all">
+            <div class="flex justify-between items-center">
+                <div>
+                    <span class="text-[10px] font-bold text-orange-400">INICIA: 20 ABRIL</span>
+                    <h2 class="text-base font-bold text-white">Licitaciones Inteligentes</h2>
+                </div>
+                <span class="text-xs font-bold text-slate-400">Info →</span>
+            </div>
+        </a>
     </div>
-  </main>
 
-  <!-- Sección de Acciones - Fija abajo -->
-  <section class="px-4 pb-8">
-    <div class="bg-[#0b1323] rounded-xl p-5 border border-cyan-500/30">
-      <h3 class="text-base font-headline font-bold text-center text-white mb-4">Acciones</h3>
-      <div class="grid grid-cols-2 gap-3">
-        <a href="inscripcion.html" class="flex flex-col items-center justify-center gap-1 bg-cyan-400 text-[#00586b] font-bold text-xs py-3 rounded-lg hover:bg-cyan-300 transition-all">
-          <span>📝</span>
-          <span>Inscribirme</span>
+    <!-- 🔵 SECCIÓN 3: COMUNIDAD Y WEB -->
+    <div class="w-full max-w-md mt-8 space-y-3">
+        <a href="https://chat.whatsapp.com/H0lG0T5yLAVB0qGRBhpBsT" 
+           class="flex items-center justify-center gap-2 w-full bg-green-600/10 border border-green-600/30 text-green-400 rounded-xl p-3 text-sm font-bold">
+            👥 Grupo de WhatsApp (Gratis)
         </a>
-        <a href="recursos.html" class="flex flex-col items-center justify-center gap-1 border border-slate-600 text-slate-300 font-semibold text-xs py-3 rounded-lg hover:bg-slate-800 transition-all">
-          <span>📄</span>
-          <span>Ver Brochure</span>
+        <a href="index.html" 
+           class="flex items-center justify-center gap-2 w-full text-slate-500 text-[10px] font-bold uppercase tracking-widest hover:text-white transition-colors">
+            🌐 Visitar Web Principal
         </a>
-        <a href="formacion.html#view-sinc" class="flex flex-col items-center justify-center gap-1 bg-orange-500/20 text-orange-400 font-semibold text-xs py-3 rounded-lg hover:bg-orange-500/30 transition-all">
-          <span>📺</span>
-          <span>Clases Síncronas</span>
-        </a>
-        <a href="formacion.html#view-asinc" class="flex flex-col items-center justify-center gap-1 bg-purple-600/20 text-purple-400 font-semibold text-xs py-3 rounded-lg hover:bg-purple-600/30 transition-all">
-          <span>🎬</span>
-          <span>Clases Asincrónicas</span>
-        </a>
-        <a href="formacion.html#view-sinc" class="flex flex-col items-center justify-center gap-1 border border-slate-600 text-slate-300 font-semibold text-xs py-3 rounded-lg hover:bg-slate-800 transition-all">
-          <span>💳</span>
-          <span>Pagos</span>
-        </a>
-        <a href="consultoria.html" class="flex flex-col items-center justify-center gap-1 border border-slate-600 text-slate-300 font-semibold text-xs py-3 rounded-lg hover:bg-slate-800 transition-all">
-          <span>💼</span>
-          <span>Consultorías</span>
-        </a>
-        <a href="index.html" class="flex flex-col items-center justify-center gap-1 bg-blue-600/20 text-blue-400 font-semibold text-xs py-3 rounded-lg hover:bg-blue-600/30 transition-all col-span-2">
-          <span>🏠</span>
-          <span>Ir a Página Principal</span>
-        </a>
-      </div>
     </div>
-  </section>
-
-  <script>
-    function showView(view) {
-      const sinc = document.getElementById('view-sinc');
-      const asinc = document.getElementById('view-asinc');
-      const btnSinc = document.getElementById('btn-sinc');
-      const btnAsinc = document.getElementById('btn-asinc');
-      
-      if (view === 'sinc') {
-        sinc.classList.remove('hidden-view');
-        asinc.classList.add('hidden-view');
-        btnSinc.className = 'flex-1 py-3 px-4 rounded-lg font-bold text-sm bg-orange-500 text-white text-center';
-        btnAsinc.className = 'flex-1 py-3 px-4 rounded-lg font-bold text-sm bg-slate-700 text-slate-300 text-center border border-slate-600';
-      } else {
-        sinc.classList.add('hidden-view');
-        asinc.classList.remove('hidden-view');
-        btnSinc.className = 'flex-1 py-3 px-4 rounded-lg font-bold text-sm bg-slate-700 text-slate-300 text-center border border-slate-600';
-        btnAsinc.className = 'flex-1 py-3 px-4 rounded-lg font-bold text-sm bg-green-500 text-white text-center';
-      }
-    }
-  </script>
-
-  <!-- Footer -->
-  <footer class="bg-[#020817] px-4 py-4 border-t border-slate-800 text-center">
-    <p class="text-slate-500 text-xs">© 2026 Project Control AI</p>
-  </footer>
 
 </body>
 </html>

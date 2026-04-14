@@ -33,7 +33,7 @@ try {
 // Template HTML base
 function generarPaginaCurso(curso) {
     const lecciones = curso.lecciones.map((leccion, index) => {
-        return `{ id: "${leccion.videoId}", num: "${leccion.numero}", codigo: "${leccion.codigo}", status: "${leccion.visibilidad === 'publica' ? 'GRATUITA' : 'PREMIUM'}", title: "${leccion.titulo}", desc: "${leccion.descripcion}", locked: ${leccion.visibilidad !== 'publica'} }`;
+        return `{ id: ${JSON.stringify(leccion.videoId)}, num: ${JSON.stringify(leccion.numero)}, codigo: ${JSON.stringify(leccion.codigo)}, status: "${leccion.visibilidad === 'publica' ? 'GRATUITA' : 'PREMIUM'}", title: ${JSON.stringify(leccion.titulo)}, desc: ${JSON.stringify(leccion.descripcion)}, locked: ${leccion.visibilidad !== 'publica'} }`;
     }).join(',\n            ');
 
     return `<!DOCTYPE html>

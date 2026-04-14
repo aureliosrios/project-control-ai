@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdate": "2026-03-06",
+  "lastUpdate": "2026-04-14",
   "cursos": [
     {
       "id": "LIC",
@@ -13,9 +13,8 @@
         "soles": 200,
         "dolares": 75
       },
-      "fechaInicio": "2026-04-13",
+      "fechaInicio": "2026-04-20",
       "horario": "Lunes y Miércoles: 7:00 PM - 10:00 PM",
-      "nivel": "Intermedio",
       "brochure": "Brochure_Curso_1_Licitaciones_360.pdf",
       "imagen": "Curso 1.png",
       "linkPagoGlobal": "https://pay.hotmart.com/N104187999C",
@@ -29,7 +28,8 @@
         {
           "numero": "01",
           "codigo": "LIC-01",
-          "titulo": "Configuración de Cerebros Digitales con NotebookLM",
+          "titulo": "Cerebros Digitales con NotebookLM",
+          "fecha": "20 de Abril",
           "descripcion": "Aprende a configurar tu primer cerebro digital utilizando NotebookLM para gestionar información de proyectos.",
           "videoId": "2QxbQ8IY0Zc",
           "duracion": "3 horas",
@@ -51,6 +51,7 @@
           "numero": "02",
           "codigo": "LIC-02",
           "titulo": "Generación Dinámica del WBS y Visualización HTML",
+          "fecha": "22 de Abril",
           "descripcion": "Técnicas avanzadas para generar estructuras de desglose de trabajo (WBS) dinámicas y visualizarlas profesionalmente.",
           "videoId": "QhgXgxZFmCY",
           "duracion": "3 horas",
@@ -61,6 +62,7 @@
           "numero": "03",
           "codigo": "LIC-03",
           "titulo": "Refinamiento de Alcances y Frentes de Trabajo",
+          "fecha": "27 de Abril",
           "descripcion": "Cómo utilizar IA para detallar alcances y definir frentes de trabajo con precisión milimétrica.",
           "videoId": "DQuA1ZFOXNQ",
           "duracion": "3 horas",
@@ -71,6 +73,7 @@
           "numero": "04",
           "codigo": "LIC-04",
           "titulo": "Ingeniería de Metrados Automática y \"Gemas\"",
+          "fecha": "29 de Abril",
           "descripcion": "Automatización de metrados y extracción de 'gemas' informativas para auditorías y presupuestos.",
           "videoId": "R_LgivWPH30",
           "duracion": "3 horas",
@@ -81,6 +84,7 @@
           "numero": "05",
           "codigo": "LIC-05",
           "titulo": "Automatización de APUs con Scripts VBA",
+          "fecha": "04 de Mayo",
           "descripcion": "Integración de scripts VBA para automatizar el análisis de precios unitarios (APU) en proyectos de construcción.",
           "videoId": "y7p_4U-rTEA",
           "duracion": "3 horas",
@@ -91,6 +95,7 @@
           "numero": "06",
           "codigo": "LIC-06",
           "titulo": "Elaboración de Oferta Técnica y Mermaid",
+          "fecha": "06 de Mayo",
           "descripcion": "Creación de diagramas Mermaid y elaboración de ofertas técnicas ganadoras asistidas por agentes IA.",
           "videoId": "SXJ8Be4nhMU",
           "duracion": "3 horas",
@@ -110,9 +115,9 @@
         "soles": 200,
         "dolares": 75
       },
-      "fechaInicio": "2026-04-14",
+      "fechaInicio": "2026-04-28",
       "horario": "Martes y Jueves: 7:00 PM - 10:00 PM",
-      "nivel": "Avanzado",
+      "nivel": "Intermedio",
       "brochure": "Brochure_Curso_2_EVM.pdf",
       "imagen": "Curso 2.png",
       "linkPagoGlobal": "https://pay.hotmart.com/N104188538H",
@@ -122,12 +127,58 @@
         "url": "https://www.youtube.com/playlist?list=PLxxxxxx",
         "visibilidad": "oculta"
       },
-      "lecciones": []
+      "lecciones": [
+        {
+          "numero": "01",
+          "codigo": "GIP-01",
+          "titulo": "El Puente Estratégico y Reingeniería de Costos",
+          "fecha": "28 de Abril",
+          "descripcion": "Transición de Licitación a Obra, establecimiento del Presupuesto Meta.",
+          "videoId": "9JJ1GBdzxMI",
+          "visibilidad": "publica"
+        },
+        {
+          "numero": "02",
+          "codigo": "GIP-02",
+          "titulo": "Baseline Dinámica y Curva S en HTML/JS",
+          "fecha": "30 de Abril",
+          "descripcion": "Generación de curvas S interactivas.",
+          "videoId": "zQ0aA30-1WQ",
+          "visibilidad": "oculta"
+        },
+        {
+          "numero": "03",
+          "codigo": "GIP-03",
+          "titulo": "Cálculo Automatizado de Índices EVM",
+          "fecha": "05 de Mayo",
+          "descripcion": "Automatización de CPI, SPI y variaciones.",
+          "videoId": "PjBTPXH8nU0",
+          "visibilidad": "oculta"
+        },
+        {
+          "numero": "04",
+          "codigo": "GIP-04",
+          "titulo": "Forecasting y Proyecciones Predictivas",
+          "fecha": "07 de Mayo",
+          "descripcion": "Uso de IA para predecir el cierre del proyecto.",
+          "videoId": "xMLNpMt6qIM",
+          "visibilidad": "oculta"
+        },
+        {
+          "numero": "05",
+          "codigo": "GIP-05",
+          "titulo": "Reportabilidad de Gerencia y Accionables AI",
+          "fecha": "12 de Mayo",
+          "descripcion": "Dashboards ejecutivos y toma de decisiones.",
+          "videoId": "zfVR4CPG0MQ",
+          "visibilidad": "oculta"
+        }
+      ]
     },
     {
       "id": "IAD",
-      "codigo": "GIP",
-      "nombre": "Gestión Integral de Proyectos con IA (GIP)",
+      "codigo": "IAD",
+      "nombre": "Gestión Integral de Proyectos con IA",
       "descripcion": "Gestión de Alcance, Contratos, Calidad y HSE potenciada por Inteligencia Artificial.",
       "duracion": "15 horas",
       "sesiones": 5,
@@ -135,7 +186,7 @@
         "soles": 200,
         "dolares": 75
       },
-      "fechaInicio": "2026-04-19",
+      "fechaInicio": "2026-05-03",
       "horario": "Domingos: 10:00 AM - 1:00 PM",
       "nivel": "Básico",
       "brochure": "Brochure_Curso_3_IA_Despertar_Digital.pdf",
@@ -150,41 +201,46 @@
       "lecciones": [
         {
           "numero": "01",
-          "codigo": "GIP-01",
+          "codigo": "IAD-01",
           "titulo": "El Arte del Prompt Engineering para Ingenieros",
+          "fecha": "03 de Mayo",
           "descripcion": "Sesión Gratuita: Domina las técnicas de prompting aplicadas a la ingeniería.",
           "videoId": "e7I-HLme2aA",
           "visibilidad": "publica"
         },
         {
           "numero": "02",
-          "codigo": "GIP-02",
-          "titulo": "Auditoría Forense de Contratos y Riesgos",
-          "descripcion": "Contenido Exclusivo: Técnicas de auditoría asistidas por IA.",
+          "codigo": "IAD-02",
+          "titulo": "Gestión de Alcance y WBS con IA",
+          "fecha": "10 de Mayo",
+          "descripcion": "Definición de alcances y estructuras WBS asistidas.",
           "videoId": "VkI5DaT23eo",
           "visibilidad": "oculta"
         },
         {
           "numero": "03",
-          "codigo": "GIP-03",
-          "titulo": "Deep Research y Arquitectura de Datos en Excel",
-          "descripcion": "Contenido Exclusivo: Investigación profunda y estructuración de datos.",
+          "codigo": "IAD-03",
+          "titulo": "Control de Contratos y Análisis Contractual",
+          "fecha": "17 de Mayo",
+          "descripcion": "Auditoría de contratos con agentes IA.",
           "videoId": "jXKeAhJD0A4",
           "visibilidad": "oculta"
         },
         {
           "numero": "04",
-          "codigo": "GIP-04",
-          "titulo": "Creación de Chatbots en Excel con IA",
-          "descripcion": "Contenido Exclusivo: Implementación de chatbots funcionales en hojas de cálculo.",
+          "codigo": "IAD-04",
+          "titulo": "Gestión de Calidad y Dossier Automático",
+          "fecha": "24 de Mayo",
+          "descripcion": "Generación de documentación de calidad.",
           "videoId": "gf4_1sXfv8E",
           "visibilidad": "oculta"
         },
         {
           "numero": "05",
-          "codigo": "GIP-05",
-          "titulo": "Automatización VBA y Dashboards de Control",
-          "descripcion": "Contenido Exclusivo: Dashboards dinámicos y automatización avanzada.",
+          "codigo": "IAD-05",
+          "titulo": "HSE: IPERC y Reportes de Seguridad con IA",
+          "fecha": "31 de Mayo",
+          "descripcion": "Seguridad y salud con soporte de inteligencia artificial.",
           "videoId": "G6Pgy4nsGPA",
           "visibilidad": "oculta"
         }
@@ -201,9 +257,9 @@
         "soles": 300,
         "dolares": 100
       },
-      "fechaInicio": "2026-04-05",
+      "fechaInicio": "2026-04-19",
       "horario": "Domingos: 3:00 PM - 6:00 PM",
-      "nivel": "Intermedio",
+      "nivel": "Avanzado",
       "brochure": "#",
       "imagen": "Curso 4.png",
       "linkPagoGlobal": "#",
@@ -213,20 +269,56 @@
         "url": "https://www.youtube.com/playlist?list=PLxxxxxx",
         "visibilidad": "oculta"
       },
-      "lecciones": []
+      "lecciones": [
+        {
+          "numero": "01",
+          "codigo": "PRO-01",
+          "titulo": "Arquitectura de Agentes y Flujos Digitales",
+          "fecha": "19 de Abril",
+          "descripcion": "Diseño de flujos de trabajo autónomos."
+        },
+        {
+          "numero": "02",
+          "codigo": "PRO-02",
+          "titulo": "Python para Ingenieros: Cirugía de Datos",
+          "fecha": "26 de Abril",
+          "descripcion": "Manipulación avanzada de datos con Python."
+        },
+        {
+          "numero": "03",
+          "codigo": "PRO-03",
+          "titulo": "Integración HTML/JS para Dashboards de Obra",
+          "fecha": "03 de Mayo",
+          "descripcion": "Visualización personalizada en la web."
+        },
+        {
+          "numero": "04",
+          "codigo": "PRO-04",
+          "titulo": "VBA Aumentado: Aplicaciones Corporativas",
+          "fecha": "10 de Mayo",
+          "descripcion": "Macros inteligentes para la empresa."
+        },
+        {
+          "numero": "05",
+          "codigo": "PRO-05",
+          "titulo": "Despliegue de Asistentes IA en Producción",
+          "fecha": "17 de Mayo",
+          "descripcion": "Puesta en marcha de asistentes reales."
+        }
+      ]
     },
     {
       "id": "P6",
       "codigo": "P6",
       "nombre": "Primavera P6 Profesional",
-      "descripcion": "Dominio completo de Oracle Primavera P6 para planificación y control de proyectos de gran escala.",
+      "descripcion": "Dominio completo de Oracle Primavera P6 para planificación y control de proyectos.",
       "duracion": "15 horas",
       "sesiones": 5,
       "precio": {
         "soles": 200,
         "dolares": 75
       },
-      "fechaInicio": "2026-04-03",
+      "fechaInicio": "2026-04-17",
       "horario": "Viernes: 7:00 PM - 10:00 PM",
       "nivel": "Intermedio",
       "brochure": "Brochure_Curso_5_Primavera_P6.pdf",
@@ -238,84 +330,45 @@
         "url": "https://www.youtube.com/playlist?list=PLxxxxxx",
         "visibilidad": "oculta"
       },
-      "lecciones": []
-    },
-    {
-      "id": "EVM",
-      "codigo": "EVM",
-      "nombre": "Control y Gerencia EVM 4.0: Ingeniería de Costos & Control Predictivo",
-      "descripcion": "Especialización avanzada en control predictivo, reingeniería de costos y dashboards de élite con IA.",
-      "duracion": "15 horas",
-      "sesiones": 5,
-      "precio": {
-        "soles": 200,
-        "dolares": 75
-      },
-      "fechaInicio": "2026-03-25",
-      "horario": "Sábados y Domingos: 7:00 PM - 10:00 PM",
-      "nivel": "Experto",
-      "brochure": "#",
-      "imagen": "#",
-      "linkPagoGlobal": "#",
-      "linkInscripcion": "inscripcion.html",
-      "playlist": {
-        "id": "PLxxxxxx",
-        "url": "https://www.youtube.com/playlist?list=PLxxxxxx",
-        "visibilidad": "oculta"
-      },
       "lecciones": [
         {
           "numero": "01",
-          "codigo": "EVM-01",
-          "titulo": "El Puente Estratégico y Reingeniería de Costos",
-          "descripcion": "Transición de Licitación a Obra, establecimiento del Presupuesto Meta y motor de rentabilidad estratégica.",
-          "videoId": "9JJ1GBdzxMI",
-          "visibilidad": "publica"
+          "codigo": "P6-01",
+          "titulo": "EPS, OBS y Estructura del Proyecto (WBS)",
+          "fecha": "17 de Abril"
         },
         {
           "numero": "02",
-          "codigo": "EVM-02",
-          "titulo": "Control de Tiempo (Scheduling) y Líneas de Balance",
-          "descripcion": "Programación por rendimientos, Ruta Crítica (CPM) y optimización de cronogramas.",
-          "videoId": "zQ0aA30-1WQ",
-          "visibilidad": "oculta"
+          "codigo": "P6-02",
+          "titulo": "Calendarios, Actividades y Ruta Crítica (F9)",
+          "fecha": "24 de Abril"
         },
         {
           "numero": "03",
-          "codigo": "EVM-03",
-          "titulo": "El Escudo de Costos y Gestión de Contingencias",
-          "descripcion": "Blindaje del margen, administración de imprevistos y log de cambios automatizado.",
-          "videoId": "PjBTPXH8nU0",
-          "visibilidad": "oculta"
+          "codigo": "P6-03",
+          "titulo": "Recursos, Roles y Diccionario de Costos",
+          "fecha": "01 de Mayo"
         },
         {
           "numero": "04",
-          "codigo": "EVM-04",
-          "titulo": "Valor Ganado (EVM 4.0) y Forecasting Predictivo",
-          "descripcion": "Integración tiempo/costo, métricas SPI/CPI y proyección de EAC/VAC mediante IA.",
-          "videoId": "xMLNpMt6qIM",
-          "visibilidad": "oculta"
+          "codigo": "P6-04",
+          "titulo": "Línea Base y Visualización de Curva S",
+          "fecha": "08 de Mayo"
         },
         {
           "numero": "05",
-          "codigo": "EVM-05",
-          "titulo": "Inteligencia Gerencial y Dashboards de Élite",
-          "descripcion": "Storytelling de datos con Python/Plotly y presentaciones ejecutivas dinámicas.",
-          "videoId": "zfVR4CPG0MQ",
-          "visibilidad": "oculta"
+          "codigo": "P6-05",
+          "titulo": "Actualización, EVM y Forecasting",
+          "fecha": "15 de Mayo"
         }
       ]
     }
   ],
   "nomenclatura": {
     "LIC": "Licitaciones Inteligentes con IA",
-    "GIP": "Gestión Integral de Proyectos con IA (GIP)",
-    "ECV": "Control y Gerencia EVM",
-    "PRO": "Productividad con Agentes IA",
-    "P6": "Primavera P6 Profesional",
-    "AUT": "Automation Engineering (Futuro)",
-    "BIM": "BIM y Modelado Digital (Futuro)"
-  },
-  "formatoTitulo": "[CODIGO-##] Nombre del Curso - Clase ##: Título de la Lección",
-  "ejemploTitulo": "[LIC-01] Licitaciones Inteligentes - Clase 01: Configuración de Cerebros Digitales"
+    "GIP": "Control y Gerencia EVM",
+    "IAD": "Gestión Integral de Proyectos con IA",
+    "PRO": "Automation Engineer",
+    "P6": "Primavera P6 Profesional"
+  }
 }

@@ -6,6 +6,7 @@
       "id": "LIC",
       "codigo": "LIC",
       "nombre": "Licitaciones Inteligentes con IA",
+      "status": "cerrado",
       "descripcion": "Auditoría de expedientes masivos, APUs, Presupuestos y Cronogramas automáticos.",
       "duracion": "15 horas",
       "sesiones": 5,
@@ -108,6 +109,7 @@
       "id": "GIP",
       "codigo": "GIP",
       "nombre": "Control y Gerencia EVM",
+      "status": "retirado",
       "descripcion": "Gestión predictiva de proyectos. Seguimiento de costos y plazos con Valor Ganado.",
       "duracion": "15 horas",
       "sesiones": 5,
@@ -179,6 +181,7 @@
       "id": "IAD",
       "codigo": "IAD",
       "nombre": "Gestión Integral de Proyectos con IA",
+      "status": "potenciar",
       "descripcion": "Gestión de Alcance, Contratos, Calidad y HSE potenciada por Inteligencia Artificial.",
       "duracion": "15 horas",
       "sesiones": 5,
@@ -250,6 +253,7 @@
       "id": "PRO",
       "codigo": "PRO",
       "nombre": "Automation Engineer",
+      "status": "cerrado",
       "descripcion": "Automatización avanzada con Python, HTML, VBA y Agentes Autónomos.",
       "duracion": "15 horas",
       "sesiones": 5,
@@ -311,6 +315,7 @@
       "id": "P6",
       "codigo": "P6",
       "nombre": "Primavera P6 Profesional",
+      "status": "cerrado",
       "descripcion": "Dominio completo de Oracle Primavera P6 para planificación y control de proyectos.",
       "duracion": "15 horas",
       "sesiones": 5,
@@ -359,6 +364,10 @@
           "numero": "05",
           "codigo": "P6-05",
           "titulo": "Actualización, EVM y Forecasting",
+          "fecha": "15 de Mayo"
+        }
+      ]
+    }casting",
           "fecha": "15 de Mayo"
         }
       ]

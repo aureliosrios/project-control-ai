@@ -15,15 +15,16 @@ const PCAI_CONFIG = {
         contactNumber: '51993147501',
         defaultMessage: 'Hola Ing. Aurelio, deseo información de los cursos de Project Control AI'
     },
-    // --- ENLACES DE PAGO HOTMART (Checkout Centralizado) ---
-    hotmart: {
+    // --- ENLACES DE PAGO (Checkout Centralizado) ---
+    checkouts: {
         licitaciones: 'https://pay.hotmart.com/N104187999C',
         evm: 'https://pay.hotmart.com/N104188538H',
         gestion_proyectos: 'https://pay.hotmart.com/K104218834V',
         automation: 'https://pay.hotmart.com/I104227016S',
         p6: 'https://pay.hotmart.com/Q104228911C',
         paypal_global: 'https://paypal.me/ProjectControlAI',
-        academy_bundle: 'https://pay.hotmart.com/ACADEMY_BUNDLE_ID' // Ejemplo para el lanzamiento 20/03
+        academy_bundle: 'https://pay.hotmart.com/ACADEMY_BUNDLE_ID', // Ejemplo para el lanzamiento 20/03
+        forense: 'https://pay.hotmart.com/O105604032H'
     }
 };
 

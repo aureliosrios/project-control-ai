@@ -60,7 +60,13 @@
   .font-headline { font-family: 'Space Grotesk', sans-serif; }
   .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
   .glass-panel { background: rgba(45, 53, 70, 0.4); backdrop-filter: blur(12px); }
+  :root {
+    --accent-orange: #f97316;
+    --gradient-secondary: linear-gradient(135deg, #f97316, #fb923c);
+  }
 </style>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/utils.js"></script>
 </head>
 <body class="bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container">
 
@@ -226,6 +232,35 @@
             </div>
           </div>
         </div>
+
+        <!-- CURSO: ESCÁNER FORENSE -->
+        <div class="bg-surface-container rounded-xl overflow-hidden hover:shadow-2xl hover:shadow-orange-900/20 transition-all border-2 border-[var(--accent-orange)]">
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="text-[10px] bg-orange-500/10 text-orange-400 font-bold px-2 py-1 rounded uppercase tracking-wider">NUEVO LANZAMIENTO</span>
+                    <span class="text-xs font-bold bg-surface-container-high px-2 py-1 rounded text-white">S/ 45 | $11.99</span>
+                </div>
+                <h3 class="text-xl font-headline font-bold mb-2 text-white">Escáner Forense con NotebookLM</h3>
+                <p class="text-on-surface-variant text-sm mb-4">Extracción de información técnica y gestión administrativa para proyectos de construcción, licitaciones y obra.</p>
+                
+                <ul class="space-y-2 mb-6">
+                  <li class="flex items-center gap-2 text-xs text-on-surface-variant"><span class="material-symbols-outlined text-orange-400 text-sm">check_circle</span> Auditoría legal y técnica</li>
+                  <li class="flex items-center gap-2 text-xs text-on-surface-variant"><span class="material-symbols-outlined text-orange-400 text-sm">check_circle</span> 10 prompts estratégicos</li>
+                  <li class="flex items-center gap-2 text-xs text-on-surface-variant"><span class="material-symbols-outlined text-orange-400 text-sm">check_circle</span> Generación multimedia para obra</li>
+                </ul>
+
+                <div class="flex flex-col gap-3">
+                    <!-- BOTÓN DINÁMICO QUE SE CONECTA CON CONFIG.JS -->
+                    <a href="#" data-hotmart="forense" target="_blank" class="w-full text-center bg-gradient-to-r from-orange-500 to-orange-400 text-white py-3 font-bold rounded-lg hover:scale-[1.02] transition-transform">
+                        Comprar el curso
+                    </a>
+                    
+                    <a href="https://wa.me/51993147501?text=Deseo%20información%20del%20Escáner%20Forense" class="text-center text-xs font-bold text-cyan-400 hover:text-cyan-300 transition-colors">
+                        Consultar por WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
       </div>
     </div>
   </section>
@@ -306,4 +341,12 @@
     </p>
   </div>
 </footer>
+<script>
+  // Inicializar links de pago
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof PCAI_Utils !== 'undefined') {
+      PCAI_Utils.initCheckoutLinks();
+    }
+  });
+</script>
 </body></html>

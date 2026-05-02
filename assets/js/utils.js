@@ -61,13 +61,13 @@ const PCAI_Utils = {
     // --- INICIALIZACIÓN DE BOTONES DE PAGO ---
     // Busca elementos con [data-checkout="key"] y asigna el href desde PCAI_CONFIG
     initCheckoutLinks() {
-        const checkoutElements = document.querySelectorAll('[data-checkout]');
+        const checkoutElements = document.querySelectorAll('[data-checkout], [data-hotmart]');
         if (checkoutElements.length === 0) return;
 
         checkoutElements.forEach(el => {
-            const key = el.getAttribute('data-checkout');
-            if (PCAI_CONFIG.hotmart[key]) {
-                el.href = PCAI_CONFIG.hotmart[key];
+            const key = el.getAttribute('data-checkout') || el.getAttribute('data-hotmart');
+            if (PCAI_CONFIG.checkouts && PCAI_CONFIG.checkouts[key]) {
+                el.href = PCAI_CONFIG.checkouts[key];
                 console.log(`Checkout vinculado: ${key}`);
             }
         });

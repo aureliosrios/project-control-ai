@@ -173,7 +173,9 @@
     <div class="text-center mb-16">
       <span class="text-primary text-sm font-bold uppercase tracking-widest block mb-4">Próximamente</span>
       <h2 class="text-3xl md:text-5xl font-headline font-bold text-on-surface mb-6">Ecosistema de Ingeniería Aumentada</h2>
-      <p class="text-on-surface-variant text-lg max-w-2xl mx-auto">20 micro-cursos especializados en 6 rutas de aprendizaje. Cada curso $11.99 USD · Asincrónico · Acceso de por vida.</p>
+      <p class="text-on-surface-variant text-lg max-w-2xl mx-auto">
+        Los cursos <span class="text-primary font-bold">A1 y A2</span> son fundamentales para todo profesional de la construcción. A partir de ahí, especialízate según tu área de conocimiento.
+      </p>
     </div>
 
     <!-- RUTA A -->
@@ -181,20 +183,20 @@
       <button onclick="toggleRoute('A')" class="w-full flex items-center gap-3 mb-6 text-left hover:opacity-80 transition-opacity">
         <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 font-headline font-bold text-lg border border-green-400/30">A</div>
         <div class="flex-1">
-          <h3 class="text-xl font-headline font-bold text-on-surface">El Profesional que Despierta</h3>
-          <p class="text-sm text-on-surface-variant">"De ingeniero que chatea con IA a Arquitecto de Soluciones Automatizadas" · 4 cursos</p>
+          <h3 class="text-xl font-headline font-bold text-on-surface">Fundamentos Transversales</h3>
+          <p class="text-sm text-on-surface-variant">"Indispensables para todo profesional: El despertar y herramientas base" · 2 cursos</p>
         </div>
         <span id="arrow-A" class="material-symbols-outlined text-on-surface-variant transition-transform duration-300 rotate-180">expand_more</span>
       </button>
       <div id="route-A">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <!-- A1 publicado -->
         <div class="route-card bg-surface-container-low border border-green-400/30 rounded-xl p-5 flex flex-col relative overflow-hidden">
           <div class="absolute top-3 right-3 w-2 h-2 rounded-full bg-green-400 shadow-[0_0_6px_rgba(74,222,128,0.8)]"></div>
           <div class="route-icon w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center text-green-400 mb-4"><span class="material-symbols-outlined text-xl">rocket_launch</span></div>
           <div class="text-[10px] font-bold text-green-400 uppercase tracking-widest mb-2">A1 · Publicado</div>
           <h4 class="text-sm font-headline font-bold text-on-surface mb-2 leading-tight">El Despertar de la IA en la Gestión de Proyectos</h4>
-          <p class="text-xs text-on-surface-variant mb-4 flex-1">6 entregables reales en 2.5h sin programar.</p>
+          <p class="text-xs text-on-surface-variant mb-4 flex-1">6 entregables reales en 2.5h sin programar. Base para todas las especialidades.</p>
           <a href="https://go.hotmart.com/I104938744G" target="_blank" class="text-xs bg-primary-container text-on-primary-container px-3 py-2 rounded-lg font-bold text-center hover:scale-105 transition-transform">$11.99 · Acceder</a>
         </div>
         <!-- A2 publicado -->
@@ -203,24 +205,8 @@
           <div class="route-icon w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center text-green-400 mb-4"><span class="material-symbols-outlined text-xl">manage_search</span></div>
           <div class="text-[10px] font-bold text-green-400 uppercase tracking-widest mb-2">A2 · Publicado</div>
           <h4 class="text-sm font-headline font-bold text-on-surface mb-2 leading-tight">Escáner Forense con NotebookLM</h4>
-          <p class="text-xs text-on-surface-variant mb-4 flex-1">Auditoría técnica de expedientes de construcción, licitaciones y presupuestos en minutos.</p>
+          <p class="text-xs text-on-surface-variant mb-4 flex-1">Auditoría técnica de expedientes en minutos. Herramienta transversal de control.</p>
           <a href="#" data-hotmart="forense" target="_blank" class="text-xs bg-primary-container text-on-primary-container px-3 py-2 rounded-lg font-bold text-center hover:scale-105 transition-transform">$11.99 · Acceder</a>
-        </div>
-        <!-- A3 -->
-        <div class="route-card bg-surface-container-low border border-outline-variant/10 rounded-xl p-5 flex flex-col relative overflow-hidden opacity-70">
-          <div class="absolute top-3 right-3 text-[10px] text-on-surface-variant font-bold uppercase">Pronto</div>
-          <div class="route-icon w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant mb-4"><span class="material-symbols-outlined text-xl">table_chart</span></div>
-          <div class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-2">A3 · Próximamente</div>
-          <h4 class="text-sm font-headline font-bold text-on-surface mb-2 leading-tight">Automatización con Excel, VBA y Macros Sin Código</h4>
-          <p class="text-xs text-on-surface-variant flex-1">La IA como programador personal del ingeniero.</p>
-        </div>
-        <!-- A4 -->
-        <div class="route-card bg-surface-container-low border border-outline-variant/10 rounded-xl p-5 flex flex-col relative overflow-hidden opacity-70">
-          <div class="absolute top-3 right-3 text-[10px] text-on-surface-variant font-bold uppercase">Pronto</div>
-          <div class="route-icon w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant mb-4"><span class="material-symbols-outlined text-xl">travel_explore</span></div>
-          <div class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-2">A4 · Próximamente</div>
-          <h4 class="text-sm font-headline font-bold text-on-surface mb-2 leading-tight">Deep Research y Agentes de Inteligencia de Mercado</h4>
-          <p class="text-xs text-on-surface-variant flex-1">Decisiones basadas en datos — no en intuición.</p>
         </div>
       </div>
       </div><!-- /route-A -->
@@ -239,12 +225,15 @@
         <span id="arrow-B" class="material-symbols-outlined text-on-surface-variant transition-transform duration-300">expand_more</span>
       </button>
       <div id="route-B" class="hidden">
-      <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
-        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-blue-400 font-bold mb-1">B1</div><p class="text-xs font-bold text-on-surface leading-tight">IA para HSE: IPERC, ATS y Gestión de Incidentes</p></div>
-        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-blue-400 font-bold mb-1">B2</div><p class="text-xs font-bold text-on-surface leading-tight">IA para Gestión de Calidad: PETS, ITPs y Dossier</p></div>
-        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-blue-400 font-bold mb-1">B3</div><p class="text-xs font-bold text-on-surface leading-tight">IA para Residentes y Jefes de Campo</p></div>
-        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-blue-400 font-bold mb-1">B4</div><p class="text-xs font-bold text-on-surface leading-tight">Dashboard de Calidad QA/QC con Power BI</p></div>
-        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-blue-400 font-bold mb-1">B5</div><p class="text-xs font-bold text-on-surface leading-tight">Gestión de Tokens para Documentos Extensos</p></div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div class="bg-surface-container-lowest border border-orange-500/30 rounded-lg p-4 relative overflow-hidden shadow-[0_0_15px_rgba(251,146,60,0.05)]">
+          <div class="absolute top-2 right-2 text-[8px] text-orange-400 font-bold uppercase">En Diseño</div>
+          <div class="text-[10px] text-blue-400 font-bold mb-1">B1</div>
+          <p class="text-xs font-bold text-on-surface leading-tight">Entregables de Obra: Plan de Calidad, PETS e IPERC con Agentes</p>
+          <p class="text-[10px] text-on-surface-variant mt-2">Documentación técnica masiva integrando Skills y MCP.</p>
+        </div>
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-blue-400 font-bold mb-1">B2</div><p class="text-xs font-bold text-on-surface leading-tight">IA para Residentes y Jefes de Campo</p></div>
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-blue-400 font-bold mb-1">B3</div><p class="text-xs font-bold text-on-surface leading-tight">Dashboard de Calidad QA/QC con Power BI</p></div>
       </div>
       </div><!-- /route-B -->
     </div>
@@ -261,11 +250,15 @@
         <span id="arrow-C" class="material-symbols-outlined text-on-surface-variant transition-transform duration-300">expand_more</span>
       </button>
       <div id="route-C" class="hidden">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-orange-400 font-bold mb-1">C1</div><p class="text-xs font-bold text-on-surface leading-tight">WBS y Metrados Inteligentes</p></div>
-        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-orange-400 font-bold mb-1">C2</div><p class="text-xs font-bold text-on-surface leading-tight">APU con IA Studio</p></div>
-        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-orange-400 font-bold mb-1">C3</div><p class="text-xs font-bold text-on-surface leading-tight">VBA: De la IA al Formato S10 y Costos.pe</p></div>
-        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-orange-400 font-bold mb-1">C4</div><p class="text-xs font-bold text-on-surface leading-tight">Nivelación de Recursos 2D</p></div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div class="bg-surface-container-lowest border border-primary/40 rounded-lg p-4 relative overflow-hidden shadow-[0_0_15px_rgba(0,212,255,0.1)]">
+          <div class="absolute top-2 right-2 text-[8px] text-primary font-bold uppercase animate-pulse">En Producción</div>
+          <div class="text-[10px] text-orange-400 font-bold mb-1">C1</div>
+          <p class="text-xs font-bold text-on-surface leading-tight">Presupuestos, APU y Recursos con Agentes y MCP</p>
+          <p class="text-[10px] text-on-surface-variant mt-2">Generación directa desde expediente técnico con formatos establecidos.</p>
+        </div>
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-orange-400 font-bold mb-1">C2</div><p class="text-xs font-bold text-on-surface leading-tight">WBS y Metrados Inteligentes</p></div>
+        <div class="bg-surface-container-lowest border border-outline-variant/10 rounded-lg p-4 opacity-60"><div class="text-[10px] text-orange-400 font-bold mb-1">C3</div><p class="text-xs font-bold text-on-surface leading-tight">VBA: De la IA al Formato S10</p></div>
       </div>
       </div><!-- /route-C -->
     </div>

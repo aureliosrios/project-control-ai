@@ -24,7 +24,8 @@ const PCAI_CONFIG = {
         p6: 'https://pay.hotmart.com/Q104228911C',
         paypal_global: 'https://paypal.me/ProjectControlAI',
         academy_bundle: 'https://pay.hotmart.com/ACADEMY_BUNDLE_ID', // Ejemplo para el lanzamiento 20/03
-        forense: 'https://pay.hotmart.com/O105604032H'
+        forense: 'https://pay.hotmart.com/O105604032H',
+        presupuestos: 'https://pay.hotmart.com/H105703259M'
     }
 };
 

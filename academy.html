@@ -450,9 +450,9 @@
                     <p class="route-for"><strong>Para:</strong> Presupuestadores y Oficina Técnica.</p>
                     <p class="route-meta-info">~4 Cursos · $11.99 USD (ref)</p>
                     <ul class="route-cursos-list">
-                        <li>• WBS y Metrados Inteligentes</li>
-                        <li>• APU con IA Studio</li>
-                        <li>• VBA: De IA al Formato S10</li>
+                        <li><span class="item-check">✅</span> 1. Automatización de Presupuestos</li>
+                        <li><span class="item-next">🔜</span> 2. WBS y Metrados Inteligentes</li>
+                        <li><span class="item-next">🔜</span> 3. APU con IA Studio</li>
                     </ul>
                     <div class="nota-provisional">⚠️ PROVISIONAL — Contenidos sujetos a cambios según el mercado.</div>
                 </div>
@@ -517,13 +517,9 @@
         </div>
 
         <div class="filters">
-            <button class="filter-btn active" onclick="filterCursos('todos', this)">Todos</button>
-            <button class="filter-btn special" onclick="filterCursos('ruta-a', this)">RUTA A ✅</button>
-            <button class="filter-btn" onclick="filterCursos('bloque-1', this)">Bloque 1</button>
-            <button class="filter-btn" onclick="filterCursos('bloque-2', this)">Bloque 2</button>
-            <button class="filter-btn" onclick="filterCursos('bloque-3', this)">Bloque 3</button>
-            <button class="filter-btn" onclick="filterCursos('bloque-4', this)">Bloque 4</button>
-            <button class="filter-btn" onclick="filterCursos('bloque-5', this)">Bloque 5</button>
+            <button class="filter-btn active" onclick="filterCursos('todos', this)">Todos los Cursos</button>
+            <button class="filter-btn special" onclick="filterCursos('transversal', this)">Transversales (Indispensables)</button>
+            <button class="filter-btn" onclick="filterCursos('especialidad', this)">De Especialidad</button>
         </div>
 
         <div class="courses-grid" id="courses-container">
@@ -651,16 +647,19 @@
 
     <script>
         const dataCursos = [
-            // RUTA A
-            { id: 1, ruta: "ruta-a", bloque: "bloque-1", estado: "PUBLICADO", titulo: "01 · El Despertar: Dashboards HTML y Mermaid", objetivo: "Genera reportes y flujos automáticos sin saber programar.", hotmart_url: "https://go.hotmart.com/I104938744G" },
-            { id: 2, ruta: "ruta-a", bloque: "bloque-2", estado: "PROXIMO", titulo: "02 · Documentación de Campo (IPERC, ATS)", objetivo: "Automatiza la burocracia de campo con precisión IA." },
-            { id: 3, ruta: "ruta-a", bloque: "bloque-1", estado: "PUBLICADO", titulo: "03 · Escáner Forense con NotebookLM", objetivo: "Extracción técnica y gestión administrativa para proyectos de construcción y obra.", hotmart_id: "forense" },
-            { id: 4, ruta: "ruta-a", bloque: "bloque-5", estado: "PROXIMO", titulo: "04 · Automatización Excel y VBA", objetivo: "Transforma tus hojas de cálculo en motores de IA." },
-            { id: 5, ruta: "ruta-a", bloque: "bloque-1", estado: "PROXIMO", titulo: "05 · Deep Research y Agentes", objetivo: "Inteligencia de mercado y sourcing automatizado." },
+            // RUTA A (Transversales)
+            { id: 1, categoria: "transversal", ruta: "ruta-a", bloque: "bloque-1", estado: "PUBLICADO", titulo: "01 · El Despertar: Dashboards HTML y Mermaid", objetivo: "Genera reportes y flujos automáticos sin saber programar.", hotmart_url: "https://go.hotmart.com/I104938744G" },
+            { id: 2, categoria: "transversal", ruta: "ruta-a", bloque: "bloque-2", estado: "PROXIMO", titulo: "02 · Documentación de Campo (IPERC, ATS)", objetivo: "Automatiza la burocracia de campo con precisión IA." },
+            { id: 3, categoria: "transversal", ruta: "ruta-a", bloque: "bloque-1", estado: "PUBLICADO", titulo: "03 · Escáner Forense con NotebookLM", objetivo: "Extracción técnica y gestión administrativa para proyectos de construcción y obra.", hotmart_id: "forense" },
+            { id: 4, categoria: "transversal", ruta: "ruta-a", bloque: "bloque-5", estado: "PROXIMO", titulo: "04 · Automatización Excel y VBA", objetivo: "Transforma tus hojas de cálculo en motores de IA." },
+            { id: 5, categoria: "transversal", ruta: "ruta-a", bloque: "bloque-1", estado: "PROXIMO", titulo: "05 · Deep Research y Agentes", objetivo: "Inteligencia de mercado y sourcing automatizado." },
+            
+            // RUTA C (Especialidad)
+            { id: 8, categoria: "especialidad", ruta: "ruta-c", bloque: "bloque-1", estado: "PUBLICADO", launch: true, titulo: "01 · Automatización de Presupuestos con IA: Ingeniería de Costos Aumentada", objetivo: "Transforma tu flujo operativo con Python, Agentes y SkillPro v4 para presupuestos de alta velocidad.", hotmart_id: "presupuestos" },
             
             //OTROS (EJEM)
-            { id: 6, ruta: "ruta-b", bloque: "bloque-2", estado: "ANUNCIADO", titulo: "06 · IA para HSE Avanzado", objetivo: "Gestión de riesgos predictivos." },
-            { id: 7, ruta: "ruta-c", bloque: "bloque-2", estado: "ANUNCIADO", titulo: "07 · APU Inteligente", objetivo: "Presupuestos optimizados con datos históricos." }
+            { id: 6, categoria: "especialidad", ruta: "ruta-b", bloque: "bloque-2", estado: "ANUNCIADO", titulo: "06 · IA para HSE Avanzado", objetivo: "Gestión de riesgos predictivos." },
+            { id: 7, categoria: "especialidad", ruta: "ruta-c", bloque: "bloque-2", estado: "ANUNCIADO", titulo: "07 · APU Inteligente", objetivo: "Presupuestos optimizados con datos históricos." }
         ];
 
         function renderBoton(curso) {
@@ -681,8 +680,9 @@
         function renderCursos(data) {
             const container = document.getElementById('courses-container');
             container.innerHTML = data.map(c => `
-                <div class="course-card">
-                    <span style="font-size: 0.7rem; color: var(--cyan); font-weight: 700; text-transform: uppercase;">ID: ${c.id} · ${c.ruta.replace('-', ' ')}</span>
+                <div class="course-card relative">
+                    ${c.launch ? '<div class="absolute -top-2 -right-2 bg-primary text-on-primary-container text-[10px] font-black px-3 py-1 rounded-full animate-pulse shadow-lg z-10">LANZAMIENTO</div>' : ''}
+                    <span style="font-size: 0.7rem; color: var(--cyan); font-weight: 700; text-transform: uppercase;">ID: ${c.id} · ${c.categoria}</span>
                     <h3 style="font-size: 1.2rem; margin: 0.5rem 0 1rem;">${c.titulo}</h3>
                     <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 2rem; flex-grow: 1;">${c.objetivo}</p>
                     ${renderBoton(c)}
@@ -696,10 +696,8 @@
 
             if (filtro === 'todos') {
                 renderCursos(dataCursos);
-            } else if (filtro === 'ruta-a') {
-                renderCursos(dataCursos.filter(c => c.ruta === 'ruta-a'));
             } else {
-                renderCursos(dataCursos.filter(c => c.bloque === filtro));
+                renderCursos(dataCursos.filter(c => c.categoria === filtro));
             }
         }
 

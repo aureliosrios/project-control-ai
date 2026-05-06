@@ -18,10 +18,8 @@ const PCAI_CONFIG = {
     // --- ENLACES DE PAGO (Checkout Centralizado) ---
     checkouts: {
         licitaciones: 'https://pay.hotmart.com/N104187999C',
-        evm: 'https://pay.hotmart.com/N104188538H',
         gestion_proyectos: 'https://pay.hotmart.com/K104218834V',
         automation: 'https://pay.hotmart.com/I104227016S',
-        p6: 'https://pay.hotmart.com/Q104228911C',
         paypal_global: 'https://paypal.me/ProjectControlAI',
         academy_bundle: 'https://pay.hotmart.com/ACADEMY_BUNDLE_ID', // Ejemplo para el lanzamiento 20/03
         forense: 'https://pay.hotmart.com/O105604032H',
@@ -41,27 +39,23 @@ const PLANTILLAS_CURSOS = {
     "Gestión Proyectos IA": "cert_gestion_integral.pdf",
     "Gestion de Proyectos con IA": "cert_gestion_integral.pdf",
     "Gestión de Proyectos con IA": "cert_gestion_integral.pdf",
+    "El Despertar de la IA para la Gestión de Proyectos": "cert_gestion_integral.pdf",
 
-    // EVM
-    "Control y Gerencia EVM": "cert_control_evm.pdf",
-    "Control y Gerencia (EVM 4.0)": "cert_control_evm.pdf",
 
-    // Automation
+    // Automatización
     "Automation Engineer": "cert_automation_engineer.pdf",
     "Automation Engineer (Python/VBA)": "cert_automation_engineer.pdf",
+    "Automatización en la Ingeniería": "cert_automation_engineer.pdf",
+    "Ingeniería Aumentada: Automatización con Agentes de IA": "cert_automation_engineer.pdf",
 
-    // Primavera & Webinar
-    "Primavera P6 Professional": "cert_primavera_p6.pdf",
 
 };
 
 // --- LISTA DE CURSOS (Single Source of Truth) ---
 const CURSOS_DISPONIBLES = [
-    { id: 'c1', nombre: 'Licitaciones Inteligentes con IA', fecha_inicio: 'Apr 20, 2026 19:00:00' },
-    { id: 'c2', nombre: 'Control y Gerencia EVM', fecha_inicio: 'Apr 28, 2026 19:00:00' },
-    { id: 'c3', nombre: 'Gestión de Proyectos con IA', fecha_inicio: 'May 03, 2026 10:00:00' },
-    { id: 'c4', nombre: 'Automation Engineer', fecha_inicio: 'Apr 19, 2026 15:00:00' },
-    { id: 'c5', nombre: 'Primavera P6 Professional', fecha_inicio: 'Apr 17, 2026 19:00:00' },
+    { id: 'c3', nombre: 'El Despertar de la IA para la Gestión de Proyectos', fecha_inicio: 'May 24, 2026 10:00:00' },
+    { id: 'c4', nombre: 'Ingeniería Aumentada: Automatización con Agentes de IA', fecha_inicio: 'May 31, 2026 15:00:00' },
+    { id: 'c1', nombre: 'Licitaciones Inteligentes con IA', fecha_inicio: 'May 25, 2026 19:00:00' },
 
 ];
 

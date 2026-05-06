@@ -48,11 +48,9 @@ Para más detalles, consulta [`docs/ESTRUCTURA_PROYECTO.md`](docs/ESTRUCTURA_PRO
 
 ## 📚 Cursos Disponibles
 
-1. **Licitaciones Inteligentes con IA** - Automatización de expedientes y presupuestos
-2. **Control y Gerencia EVM** - Gestión predictiva con Valor Ganado
-3. **IA para el Despertar Digital** - Introducción práctica a IA
-4. **Productividad con Agentes IA** - Automatización de workflows
-5. **Primavera P6 Profesional** - Planificación de proyectos
+1. **El Despertar de la IA para la Gestión de Proyectos** (Curso 1) - Gestión de Proyectos con lenguajes nativos de IA (HTML, Mermaid, MD, CSV).
+2. **Ingeniería Aumentada: Automatización con Agentes de IA** (Curso 2) - Python, VBA y Scripts MCP para ecosistemas agénticos y dashboards avanzados.
+3. **Licitaciones Inteligentes con IA** (Avanzado) - Automatización de expedientes con MCP, Skills y Python (Análisis masivo de documentos).
 
 ## 🎯 Características
 

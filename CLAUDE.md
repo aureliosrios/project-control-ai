@@ -95,18 +95,14 @@ project-control-ai/
 │   │   ├── Aurelio Solorzano.png
 │   │   ├── hero_bg.png
 │   │   ├── Licitaciones.png
-│   │   ├── Control y gerencia.png
 │   │   ├── Gestión Integral.png
 │   │   ├── Automation.png
-│   │   ├── Primavera P6.png
 │   │   ├── BCP.png
 │   │   └── Yape.png
 │   └── brochures/
 │       ├── Brochure_Curso_1_Licitaciones_360.pdf
-│       ├── Brochure_Curso_2_EVM.pdf
 │       ├── Brochure_Curso_3_IA_Despertar_Digital.pdf
-│       ├── Brochure_Curso_4_Automation_Engineer.pdf
-│       └── Brochure_Curso_5_Primavera_P6.pdf
+│       └── Brochure_Curso_4_Automation_Engineer.pdf
 │
 ├── scripts/
 │   └── generar-cursos.js        ← Genera páginas HTML de cursos desde cursos.json
@@ -139,10 +135,8 @@ PCAI_CONFIG = {
   },
   hotmart: {
     licitaciones:      'https://pay.hotmart.com/N104187999C',
-    evm:               'https://pay.hotmart.com/N104188538H',
     gestion_proyectos: 'https://pay.hotmart.com/K104218834V',
     automation:        'https://pay.hotmart.com/I104227016S',
-    p6:                'https://pay.hotmart.com/Q104228911C',
     paypal_global:     'https://paypal.me/ProjectControlAI',
     academy_bundle:    'https://pay.hotmart.com/ACADEMY_BUNDLE_ID'  // pendiente ID real
   }
@@ -159,14 +153,12 @@ PCAI_CONFIG = {
 
 | ID | Nombre | Precio | Inicio | Horario | Nivel |
 |----|--------|--------|--------|---------|-------|
-| LIC | Licitaciones Inteligentes con IA | $75 / S/200 | 06 Abr 2026 | Lun-Mié 7-10 PM | Intermedio |
-| GIP | Control y Gerencia EVM | $75 / S/200 | 14 Abr 2026 | Mar-Jue 7-10 PM | Intermedio |
-| IAD | Gestión Integral de Proyectos con IA | $75 / S/200 | 19 Abr 2026 | Domingos 10 AM - 1 PM | Básico |
-| PRO | Automation Engineer | $90 / S/300 | 05 Abr 2026 | Domingos 3-6 PM | Avanzado |
-| P6  | Primavera P6 Profesional | $75 / S/200 | 03 Abr 2026 | Viernes 7-10 PM | Intermedio |
-| EVM | Control y Gerencia EVM 4.0 | $75 / S/200 | 25 Mar 2026 | Sáb-Dom 7-10 PM | Experto |
+| IAD | El Despertar de la IA para la Gestión de Proyectos | $75 / S/200 | 24 May 2026 | Domingos 10 AM - 1 PM | Básico |
+| PRO | Ingeniería Aumentada: Automatización con Agentes de IA | $100 / S/300 | 31 May 2026 | Domingos 3-6 PM | Avanzado |
+| LIC | Licitaciones Inteligentes con IA | $100 / S/300 | 25 May 2026 | Lun-Mié 7-10 PM | Avanzado |
 
-**Automation Engineer requiere haber cursado Gestión Integral (IAD) como prerrequisito.**
+**Los cursos IAD y PRO están orientados a todos los ingenieros de construcción para dominar lenguajes de IA (HTML, Mermaid, MD, CSV), Python, VBA, Skills y Scripts MCP.**
+**Ingeniería Aumentada: Automatización con Agentes de IA (PRO) requiere haber cursado El Despertar de la IA (IAD) como prerrequisito.**
 
 ### 6B. Curso Asincrónico Publicado — Hotmart
 
@@ -305,14 +297,6 @@ tailwind.config = {
 - **Acceso:** Mediante videoId en `cursos.json` → campo `lecciones[].videoId`
 - **Visibilidad:** `"publica"` (visible en web) o `"oculta"` (solo con link directo)
 
-**Grabaciones Primavera P6 Professional (subidas Mar 2026):**
-| # | Título | YouTube ID | Visibilidad |
-|---|--------|-----------|-------------|
-| 1 | EPS, OBS y WBS | `3IluS5_Hw-g` | Pública |
-| 2 | Ruta Crítica (F9) | `JHUCI2dTjy8` | Unlisted |
-| 3 | Recursos y Costos | `zxLAFMmwwXA` | Unlisted |
-| 4 | Línea Base y Curva S | `AxCy_Cv2Vfs` | Unlisted |
-| 5 | EVM y Forecasting | `ELSeOBkKiVM` | Unlisted |
 
 ---
 

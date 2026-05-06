@@ -194,13 +194,6 @@
           "titulo": "Automatización de APUs con Scripts VBA",
           "fecha": "04 de Mayo",
           "descripcion": "Integración de scripts VBA para automatizar el análisis de precios unitarios (APU) en proyectos de construcción."
-        },
-        {
-          "numero": "06",
-          "codigo": "LIC-06",
-          "titulo": "Elaboración de Oferta Técnica y Mermaid",
-          "fecha": "06 de Mayo",
-          "descripcion": "Creación de diagramas Mermaid y elaboración de ofertas técnicas ganadoras asistidas por agentes IA."
         }
       ]
     }

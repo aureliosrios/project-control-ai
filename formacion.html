@@ -754,10 +754,17 @@
     panel.classList.toggle('hidden', !isHidden);
     if (arrow) arrow.style.transform = isHidden ? 'rotate(180deg)' : '';
   }
-  // Inicializar links de pago
+  // Inicializar links de pago y vista por parámetro
   document.addEventListener('DOMContentLoaded', () => {
     if (typeof PCAI_Utils !== 'undefined') {
       PCAI_Utils.initCheckoutLinks();
+    }
+
+    // Manejar vista por parámetro URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const view = urlParams.get('view');
+    if (view === 'sinc' || view === 'asinc') {
+      showView(view);
     }
   });
 </script>

@@ -6,6 +6,7 @@
     <title>Project Control AI | Contacto</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <style>
         body { background-color: #020817; font-family: 'Inter', sans-serif; color: #dbe2f8; }
         .font-headline { font-family: 'Space Grotesk', sans-serif; }
@@ -39,41 +40,35 @@
         </a>
     </div>
 
-    <!-- 🟠 SECCIÓN 2: PRÓXIMOS INICIOS (VENTA DE CURSOS) -->
+    <!-- 🟠 SECCIÓN 2: CATÁLOGO DE FORMACIÓN -->
     <div class="w-full max-w-md space-y-3">
         <div class="flex items-center gap-2 mb-2">
             <span class="h-[1px] flex-1 bg-slate-800"></span>
-            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Cursos en Vivo esta semana</span>
+            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Catálogo de Formación</span>
             <span class="h-[1px] flex-1 bg-slate-800"></span>
         </div>
 
-        <!-- CURSO 1: GIP (PROXIMO) -->
-        <a href="formacion.html" 
-           class="bg-cyan-500/10 block w-full rounded-2xl p-4 border-2 border-cyan-500/50 hover:bg-cyan-500/20 transition-all relative overflow-hidden group">
+        <!-- CATEGORÍA 1: SINCRÓNICO -->
+        <a href="formacion.html?view=sinc" 
+           class="bg-cyan-500/10 block w-full rounded-2xl p-5 border-2 border-cyan-500/50 hover:bg-cyan-500/20 transition-all relative overflow-hidden group text-center">
             <div class="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity">
-                <span class="material-symbols-outlined text-4xl">star</span>
+                <span class="material-symbols-outlined text-4xl">live_tv</span>
             </div>
-            <div class="flex justify-between items-center">
-                <div>
-                    <span class="text-[10px] font-bold text-cyan-400 animate-pulse">🔥 PRÓXIMO INICIO: 03 MAYO</span>
-                    <h2 class="text-base font-bold text-white">Gestión Integral con IA</h2>
-                </div>
-                <span class="text-xs font-bold text-cyan-400 bg-cyan-400/10 px-2 py-1 rounded-lg">Comprar el curso</span>
+            <div class="flex flex-col items-center">
+                <span class="text-[10px] font-bold text-cyan-400 mb-1 uppercase tracking-tighter">Próximos Inicios</span>
+                <h2 class="text-lg font-bold text-white font-headline">Cursos en Vivo Sincrónico</h2>
             </div>
         </a>
 
-        <!-- CURSO: ESCÁNER FORENSE -->
-        <a href="#" data-hotmart="forense" target="_blank"
-           class="bg-orange-500/10 block w-full rounded-2xl p-4 border-2 border-orange-500/50 hover:bg-orange-500/20 transition-all relative overflow-hidden group">
+        <!-- CATEGORÍA 2: ASINCRÓNICO -->
+        <a href="formacion.html?view=asinc" 
+           class="bg-orange-500/10 block w-full rounded-2xl p-5 border-2 border-orange-500/50 hover:bg-orange-500/20 transition-all relative overflow-hidden group text-center">
             <div class="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity">
-                <span class="material-symbols-outlined text-4xl text-orange-400">new_releases</span>
+                <span class="material-symbols-outlined text-4xl text-orange-400">school</span>
             </div>
-            <div class="flex justify-between items-center">
-                <div>
-                    <span class="text-[10px] font-bold text-orange-400">✨ NUEVO LANZAMIENTO</span>
-                    <h2 class="text-base font-bold text-white">Escáner Forense (Construcción)</h2>
-                </div>
-                <span class="text-xs font-bold text-orange-400 bg-orange-400/10 px-2 py-1 rounded-lg">$11.99</span>
+            <div class="flex flex-col items-center">
+                <span class="text-[10px] font-bold text-orange-400 mb-1 uppercase tracking-tighter">A tu propio ritmo</span>
+                <h2 class="text-lg font-bold text-white font-headline">Cursos Online Asincrónico</h2>
             </div>
         </a>
 

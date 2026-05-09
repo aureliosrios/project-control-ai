@@ -107,7 +107,10 @@ export default function Home() {
               <p className="text-slate-400 leading-relaxed">{item.desc}</p>
             </div>
           ))}
-        </section>
+        {/* Version Marker */}
+        <div className="mt-20 text-[10px] text-slate-800 font-mono text-center tracking-[0.5em]">
+          PCAI_SYSTEM_CORE_v1.1.2_DEPLOYED
+        </div>
       </main>
     </div>
   );

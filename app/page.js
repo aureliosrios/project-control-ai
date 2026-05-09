@@ -3,67 +3,88 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-200 selection:bg-cyan-500/30">
-      {/* Background Decor */}
-      <div className="fixed inset-0 cyber-grid pointer-events-none opacity-40" />
-      <div className="fixed top-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="fixed bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
+    <div className="relative min-h-screen bg-[#020617] overflow-hidden">
+      {/* Background Technical Elements */}
+      <div className="absolute inset-0 cyber-grid pointer-events-none" />
+      <div className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-cyan-500/10 blur-[150px] rounded-full animate-pulse" />
+      <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-blue-600/10 blur-[150px] rounded-full animate-pulse" />
 
-      <main className="relative pt-32 pb-20 px-6">
-        {/* Hero */}
-        <section className="max-w-7xl mx-auto text-center md:text-left py-20">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-bold uppercase tracking-wider">
-                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                Nueva Era de Ingeniería
+      {/* Hero Section */}
+      <main className="relative pt-40 pb-20 px-6 max-w-7xl mx-auto">
+        <section className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="space-y-10">
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-cyan-500/5 border border-cyan-500/20 text-cyan-400 text-xs font-bold uppercase tracking-[0.3em]">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+              </span>
+              Industrial AI Systems v4.0
+            </div>
+            
+            <h1 className="text-6xl md:text-8xl font-black text-white leading-[0.95] tracking-tighter">
+              CONTROL DE <br />
+              <span className="text-gradient">PROYECTOS</span> <br />
+              <span className="text-slate-600 italic">AUMENTADO</span>
+            </h1>
+
+            <p className="text-xl text-slate-400 max-w-xl leading-relaxed font-light">
+              Democraticemos la programación. Implementamos agentes de IA autónomos que gestionan el <span className="text-cyan-400 font-medium italic">costo, plazo y calidad</span> de tus obras mientras tú duermes.
+            </p>
+
+            <div className="flex flex-wrap gap-6 pt-4">
+              <Link href="/formacion" className="group relative px-10 py-5 bg-cyan-500 text-slate-950 rounded-2xl font-black text-xl hover:bg-cyan-400 transition-all shadow-[0_0_40px_rgba(6,182,212,0.4)] hover:scale-105 active:scale-95 overflow-hidden">
+                <span className="relative z-10">EXPLORAR ACADEMY</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+              </Link>
+              <Link href="/consultoria" className="px-10 py-5 bg-white/5 border border-white/10 text-white rounded-2xl font-black text-xl hover:bg-white/10 transition-all backdrop-blur-md">
+                DIAGNÓSTICO
+              </Link>
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-8 pt-12 border-t border-white/5">
+              <div>
+                <p className="text-3xl font-black text-white">40%</p>
+                <p className="text-[10px] text-slate-500 uppercase tracking-widest">+ ROI Operativo</p>
               </div>
-              <h1 className="text-5xl md:text-7xl font-bold leading-[1.1] tracking-tight text-white">
-                Automatiza tu <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 neon-text">Control de Proyectos</span>
-              </h1>
-              <p className="text-lg md:text-xl text-slate-400 max-w-xl leading-relaxed">
-                Democraticemos la programación. Gracias a la IA, la automatización avanzada está ahora al alcance de todos los ingenieros de construcción.
-              </p>
-              <div className="flex flex-wrap gap-4 pt-4">
-                <Link href="/formacion" className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all text-center min-w-[200px]">
-                  Explorar Cursos
-                </Link>
-                <Link href="/consultoria" className="glass-card px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/5 transition-all text-center min-w-[200px]">
-                  Agendar Diagnóstico
-                </Link>
+              <div>
+                <p className="text-3xl font-black text-white">0.02s</p>
+                <p className="text-[10px] text-slate-500 uppercase tracking-widest">Latencia de Alertas</p>
+              </div>
+              <div>
+                <p className="text-3xl font-black text-white">100%</p>
+                <p className="text-[10px] text-slate-500 uppercase tracking-widest">Data Auditada</p>
               </div>
             </div>
-            <div className="relative hidden md:block">
-              <div className="absolute inset-0 bg-cyan-500/20 blur-[100px] rounded-full animate-glow" />
-              <div className="glass-card p-8 rounded-3xl relative z-10 border-white/10">
-                <div className="space-y-6">
-                  <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10">
-                    <div className="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center text-cyan-400">
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                    </div>
-                    <div>
-                      <p className="font-bold text-white">Velocidad Extrema</p>
-                      <p className="text-xs text-slate-400">Reportes en minutos, no días.</p>
-                    </div>
+          </div>
+
+          {/* Visual Element */}
+          <div className="relative lg:block hidden animate-float">
+            <div className="absolute inset-0 bg-cyan-500/20 blur-[120px] rounded-full" />
+            <div className="glass-card p-12 rounded-[40px] border-white/10 relative z-10 rotate-3 hover:rotate-0 transition-transform duration-700">
+              <div className="space-y-8">
+                <div className="flex items-center justify-between">
+                  <div className="w-12 h-2 bg-cyan-500 rounded-full" />
+                  <div className="w-4 h-4 rounded-full bg-white/10" />
+                </div>
+                <div className="h-64 bg-slate-800/50 rounded-3xl border border-white/5 relative overflow-hidden">
+                  {/* Mock Chart lines */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <svg width="100%" height="100%" className="opacity-30">
+                      <path d="M0 100 Q 50 20, 100 80 T 200 40" stroke="cyan" fill="transparent" strokeWidth="2" />
+                      <path d="M0 120 Q 80 50, 150 100 T 300 60" stroke="#f4630f" fill="transparent" strokeWidth="2" />
+                    </svg>
                   </div>
-                  <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 translate-x-6">
-                    <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400">
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
-                    </div>
-                    <div>
-                      <p className="font-bold text-white">Precisión Milimétrica</p>
-                      <p className="text-xs text-slate-400">Elimina el error humano con Agentes.</p>
-                    </div>
+                  <div className="absolute top-4 left-4 text-[10px] font-bold text-cyan-400 uppercase tracking-widest">Live Forensics</div>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="p-4 bg-white/5 rounded-2xl border border-white/5">
+                    <p className="text-[10px] text-slate-500 font-bold uppercase mb-1">Costo (AC)</p>
+                    <p className="text-xl font-bold text-white tracking-tight">$1.2M</p>
                   </div>
-                  <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 translate-x-12">
-                    <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-400">
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
-                    </div>
-                    <div>
-                      <p className="font-bold text-white">Control Total</p>
-                      <p className="text-xs text-slate-400">Visibilidad 360° de tus variables.</p>
-                    </div>
+                  <div className="p-4 bg-white/5 rounded-2xl border border-white/5">
+                    <p className="text-[10px] text-slate-500 font-bold uppercase mb-1">SPI / CPI</p>
+                    <p className="text-xl font-bold text-emerald-400 tracking-tight">1.05 / 0.98</p>
                   </div>
                 </div>
               </div>
@@ -71,33 +92,21 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Feature Grid Summary */}
-        <section className="max-w-7xl mx-auto py-20">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-white mb-4">Ecosistema de Formación</h2>
-            <p className="text-slate-400 max-w-2xl mx-auto">De cero a experto en automatización con IA aplicada a la construcción.</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { title: "Fundamentos Transversales", level: "Ruta A", desc: "El Despertar de la IA y Escáner Forense. Base para todo ingeniero." },
-              { title: "Especialidad en Costos", level: "Ruta C", desc: "Automatización de Presupuestos y APUs con Python." },
-              { title: "Administración Contractual", level: "Ruta D", desc: "Análisis NEC/FIDIC y Gestión de Claims con Agentes." }
-            ].map((course, i) => (
-              <div key={i} className="glass-card p-8 rounded-3xl border-white/5 hover:border-cyan-500/30 transition-all group">
-                <div className="w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-6 group-hover:scale-110 transition-transform">
-                  {i + 1}
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">{course.title}</h3>
-                <p className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest mb-4">{course.level}</p>
-                <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                  {course.desc}
-                </p>
-                <Link href="/formacion" className="block w-full py-3 rounded-xl bg-white/5 border border-white/10 font-bold text-center hover:bg-cyan-500 hover:text-slate-950 transition-all">
-                  Ver Formación
-                </Link>
+        {/* Feature Sections */}
+        <section className="mt-40 grid md:grid-cols-3 gap-12">
+          {[
+            { title: "Control de Costos", desc: "Monitoreo en tiempo real de valorizaciones y APUs con IA." },
+            { title: "Ingeniería Forense", desc: "Auditoría automática de contratos y gestión de claims con Agentes." },
+            { title: "Reportabilidad 4.0", desc: "Dashboards predictivos que se actualizan solos cada minuto." }
+          ].map((item, i) => (
+            <div key={i} className="glass-card p-10 rounded-3xl group hover:border-cyan-500/40 transition-all">
+              <div className="text-cyan-400 mb-6 group-hover:scale-110 transition-transform">
+                <span className="material-symbols-outlined text-4xl">analytics</span>
               </div>
-            ))}
-          </div>
+              <h3 className="text-2xl font-bold text-white mb-4">{item.title}</h3>
+              <p className="text-slate-400 leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
         </section>
       </main>
     </div>

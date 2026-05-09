@@ -1,47 +1,60 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  --background: #020617;
-  --foreground: #f8fafc;
-  --primary: #0ea5e9;
-  --primary-glow: rgba(14, 165, 233, 0.3);
-  --accent: #00f2ff;
+@theme {
+  --color-brand-cyan: #00f2ff;
+  --color-brand-orange: #f4630f;
+  --color-deep-blue: #020617;
 }
 
 @layer base {
   body {
-    background-color: var(--background);
-    color: var(--foreground);
-    font-family: 'Inter', system-ui, sans-serif;
+    @apply bg-deep-blue text-slate-200 antialiased;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02";
   }
 }
 
 @layer components {
-  .glass-card {
-    background: rgba(15, 23, 42, 0.6);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  
-  .neon-text {
-    text-shadow: 0 0 10px var(--primary-glow), 0 0 20px var(--primary-glow);
-  }
-  
   .cyber-grid {
     background-image: 
-      linear-gradient(rgba(14, 165, 233, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(14, 165, 233, 0.05) 1px, transparent 1px);
-    background-size: 50px 50px;
+      linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse at center, black, transparent 80%);
+  }
+
+  .glass-card {
+    @apply bg-slate-900/40 backdrop-blur-xl border border-white/10;
+  }
+
+  .neon-glow-cyan {
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+  }
+
+  .industrial-border {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+  }
+
+  .industrial-border::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 20px;
+    right: 20px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 242, 255, 0.5), transparent);
   }
 }
 
-@keyframes pulse-glow {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
-.animate-glow {
-  animation: pulse-glow 3s infinite ease-in-out;
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-cyan to-blue-500;
 }

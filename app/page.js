@@ -9,29 +9,6 @@ export default function Home() {
       <div className="fixed top-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="fixed bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
 
-      {/* Navbar */}
-      <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-[#020617]/80 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <div className="relative w-10 h-10">
-              <Image src="/images/logo.png" alt="PCAI Logo" fill className="object-contain" />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-lg font-bold tracking-tighter text-white">PROJECT CONTROL AI</span>
-              <span className="text-[10px] text-cyan-400 tracking-[0.2em] uppercase font-medium">Engineering Intelligence</span>
-            </div>
-          </div>
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
-            <Link href="#" className="hover:text-cyan-400 transition-colors">Formación</Link>
-            <Link href="#" className="hover:text-cyan-400 transition-colors">Consultoría</Link>
-            <Link href="#" className="hover:text-cyan-400 transition-colors">Recursos</Link>
-            <button className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 px-5 py-2 rounded-full font-bold transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(6,182,212,0.3)]">
-              Acceso Alumnos
-            </button>
-          </div>
-        </div>
-      </nav>
-
       <main className="relative pt-32 pb-20 px-6">
         {/* Hero */}
         <section className="max-w-7xl mx-auto text-center md:text-left py-20">
@@ -41,7 +18,7 @@ export default function Home() {
                 <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
                 Nueva Era de Ingeniería
               </div>
-              <h1 className="text-5xl md:text-7xl font-bold leading-[1.1] tracking-tight">
+              <h1 className="text-5xl md:text-7xl font-bold leading-[1.1] tracking-tight text-white">
                 Automatiza tu <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 neon-text">Control de Proyectos</span>
               </h1>
@@ -49,12 +26,12 @@ export default function Home() {
                 Democraticemos la programación. Gracias a la IA, la automatización avanzada está ahora al alcance de todos los ingenieros de construcción.
               </p>
               <div className="flex flex-wrap gap-4 pt-4">
-                <button className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all">
+                <Link href="/formacion" className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all text-center min-w-[200px]">
                   Explorar Cursos
-                </button>
-                <button className="glass-card px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/5 transition-all">
+                </Link>
+                <Link href="/consultoria" className="glass-card px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/5 transition-all text-center min-w-[200px]">
                   Agendar Diagnóstico
-                </button>
+                </Link>
               </div>
             </div>
             <div className="relative hidden md:block">
@@ -94,7 +71,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Feature Grid */}
+        {/* Feature Grid Summary */}
         <section className="max-w-7xl mx-auto py-20">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-white mb-4">Ecosistema de Formación</h2>
@@ -102,43 +79,27 @@ export default function Home() {
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { title: "El Despertar de la IA", level: "Básico", desc: "Domina los lenguajes nativos de la IA: HTML, Mermaid, MD y CSV." },
-              { title: "Ingeniería Aumentada", level: "Avanzado", desc: "Python, VBA y Scripts MCP para dashboards agénticos." },
-              { title: "Licitaciones Inteligentes", level: "Elite", desc: "Automatización de expedientes técnicos masivos con Python." }
+              { title: "Fundamentos Transversales", level: "Ruta A", desc: "El Despertar de la IA y Escáner Forense. Base para todo ingeniero." },
+              { title: "Especialidad en Costos", level: "Ruta C", desc: "Automatización de Presupuestos y APUs con Python." },
+              { title: "Administración Contractual", level: "Ruta D", desc: "Análisis NEC/FIDIC y Gestión de Claims con Agentes." }
             ].map((course, i) => (
               <div key={i} className="glass-card p-8 rounded-3xl border-white/5 hover:border-cyan-500/30 transition-all group">
                 <div className="w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-6 group-hover:scale-110 transition-transform">
                   {i + 1}
                 </div>
                 <h3 className="text-xl font-bold text-white mb-2">{course.title}</h3>
-                <p className="text-xs font-bold text-cyan-400 uppercase tracking-widest mb-4">{course.level}</p>
+                <p className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest mb-4">{course.level}</p>
                 <p className="text-slate-400 text-sm leading-relaxed mb-6">
                   {course.desc}
                 </p>
-                <button className="w-full py-3 rounded-xl bg-white/5 border border-white/10 font-bold hover:bg-cyan-500 hover:text-slate-950 transition-all">
-                  Ver Detalles
-                </button>
+                <Link href="/formacion" className="block w-full py-3 rounded-xl bg-white/5 border border-white/10 font-bold text-center hover:bg-cyan-500 hover:text-slate-950 transition-all">
+                  Ver Formación
+                </Link>
               </div>
             ))}
           </div>
         </section>
       </main>
-
-      <footer className="border-t border-white/5 py-12 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex items-center gap-3 grayscale opacity-50">
-            <Image src="/images/logo.png" alt="PCAI Logo" width={30} height={30} />
-            <span className="text-sm font-bold tracking-tighter text-white">PROJECT CONTROL AI</span>
-          </div>
-          <p className="text-xs text-slate-500 font-mono">
-            © 2026 PROJECT CONTROL AI · ENGINEERING INTELLIGENCE PROTOCOL
-          </p>
-          <div className="flex gap-6 text-slate-500 text-xs font-medium uppercase tracking-widest">
-            <Link href="#" className="hover:text-white transition-colors">Privacidad</Link>
-            <Link href="#" className="hover:text-white transition-colors">Términos</Link>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

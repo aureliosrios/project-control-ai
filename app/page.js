@@ -98,11 +98,20 @@ export default function Home() {
             { title: "Control de Costos", desc: "Monitoreo en tiempo real de valorizaciones y APUs con IA." },
             { title: "Ingeniería Forense", desc: "Auditoría automática de contratos y gestión de claims con Agentes." },
             { title: "Reportabilidad 4.0", desc: "Dashboards predictivos que se actualizan solos cada minuto." }
+          ].map((item, i) => (
+            <div key={i} className="glass-card p-10 rounded-3xl group hover:border-cyan-500/40 transition-all">
+              <div className="text-cyan-400 mb-6 group-hover:scale-110 transition-transform">
+                <span className="material-symbols-outlined text-4xl">analytics</span>
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-4">{item.title}</h3>
+              <p className="text-slate-400 leading-relaxed">{item.desc}</p>
+            </div>
           ))}
         </section>
+
         {/* Version Marker */}
         <div className="mt-20 text-[10px] text-slate-800 font-mono text-center tracking-[0.5em]">
-          PCAI_SYSTEM_CORE_v1.1.2_DEPLOYED
+          PCAI_SYSTEM_CORE_v1.1.3_STABLE
         </div>
       </main>
     </div>

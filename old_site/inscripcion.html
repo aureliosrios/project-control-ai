@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscripción | Project Control AI</title>
+
+    <!-- SHARED ASSETS -->
+    <link rel="stylesheet" href="assets/css/styles-global.css">
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/utils.js"></script>
+
+    <!-- EXTERNAL LIBRARIES -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- PAGE-SPECIFIC STYLES -->
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .form-container {
+            background: var(--bg-card-glass);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            max-width: 550px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .logo {
+            max-height: 80px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            margin-bottom: 8px;
+            background: linear-gradient(to right, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+
+
+        .success-msg {
+            display: none;
+            text-align: center;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .wa-button {
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 16px 30px;
+            border-radius: var(--radius-md);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-container">
+        <div id="formSection">
+            <div class="header">
+                <img src="assets/images/Logotipo.png" alt="PCAI" class="logo">
+                <h2>Ficha de Inscripción</h2>
+                <p class="subtitle">Academia de Ingeniería & Construcción</p>
+            </div>
+
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label>Nombre(s)</label>
+                    <input type="text" name="nombre" class="input-standard" required placeholder="Ej. Aurelio">
+                </div>
+
+                <div class="form-group">
+                    <label>Apellidos</label>
+                    <input type="text" name="apellido" class="input-standard" required placeholder="Ej. Rios">
+                </div>
+
+                <div class="form-group">
+                    <label>DNI / Cedula / Pasaporte</label>
+                    <input type="text" name="dni" class="input-standard" required placeholder="Número de identidad">
+                </div>
+
+                <div class="form-group">
+                    <label>Profesión / Cargo Actual</label>
+                    <input type="text" name="profesion" class="input-standard" required placeholder="Ej. Ing. Civil">
+                </div>
+
+                <div class="form-group">
+                    <label>Número de WhatsApp (con código de país)</label>
+                    <input type="tel" name="telefono" class="input-standard" required placeholder="Ej. +51 987654321">
+                </div>
+
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" name="email" class="input-standard" required placeholder="ejemplo@correo.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Curso a Inscribirse</label>
+                    <select name="curso" class="input-standard" required>
+                        <option value="" disabled selected>Seleccione curso...</option>
+                        <option value="Gestion Proyectos IA">1. El Despertar de la IA para la Gestión de Proyectos</option>
+                        <option value="Automation Engineer">2. Ingeniería Aumentada: Automatización con Agentes de IA</option>
+                        <option value="Licitaciones Inteligentes">3. Licitaciones Inteligentes con IA</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Medio de Pago</label>
+                    <select name="metodo_pago" class="input-standard" required>
+                        <option value="Yape / Plin">Yape / Plin</option>
+                        <option value="Transferencia BCP">Transferencia BCP</option>
+                        <option value="Paypal / Tarjeta">Paypal / Tarjeta</option>
+                        <option value="Hotmart">Hotmart</option>
+                    </select>
+                </div>
+
+                <button type="submit" id="submitBtn" class="btn-primary" style="width: 100%; margin-top: 20px;">
+                    FINALIZAR INSCRIPCIÓN
+                </button>
+            </form>
+        </div>
+
+        <div id="successMsg" class="success-msg">
+            <h3 style="color:var(--success-green); font-size: 2rem;">✓</h3>
+            <h3>¡Registro Exitoso!</h3>
+            <p style="color:var(--text-muted); margin: 20px 0;">Para validar tu vacante, envía tu voucher por WhatsApp.
+            </p>
+            <a id="waLink" href="#" class="wa-button" target="_blank">Enviar Voucher</a>
+        </div>
+    </div>
+
+    <script>
+        // --- PRE-SELECCIÓN DE CURSO DESDE URL ---
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const cursoParam = urlParams.get('curso');
+            if (cursoParam) {
+                const selectCurso = document.querySelector('select[name="curso"]');
+                if (selectCurso) {
+                    selectCurso.value = cursoParam;
+                    // Disparar evento de cambio para activar lógica de UI
+                    selectCurso.dispatchEvent(new Event('change'));
+                }
+            }
+        });
+
+        document.getElementById('registrationForm').addEventListener('submit', async e => {
+            e.preventDefault();
+
+            const _supabase = initSupabase();
+            if (!_supabase) return PCAI_Utils.mostrarNotificacion("Error de conexión", "error");
+
+            const btn = document.getElementById('submitBtn');
+            const formSection = document.getElementById('formSection');
+            const successBox = document.getElementById('successMsg');
+
+            btn.disabled = true;
+            btn.innerText = "PROCESANDO...";
+
+            const formData = new FormData(e.target);
+            const dni = formData.get('dni');
+
+            // --- VALIDACIÓN ---
+            if (!PCAI_Utils.validarDNI(dni)) {
+                btn.disabled = false;
+                btn.innerText = "FINALIZAR INSCRIPCIÓN";
+                return PCAI_Utils.mostrarNotificacion("DNI inválido. Debe tener entre 8 y 15 dígitos.", "warning");
+            }
+
+            // 1. Datos del Estudiante (Persona)
+            const datosEstudiante = {
+                dni: dni,
+                nombre: formData.get('nombre'),
+                apellido: formData.get('apellido'),
+                profesion: formData.get('profesion'),
+                telefono: formData.get('telefono'),
+                email: formData.get('email')
+            };
+
+            // 2. Datos de la Matrícula (Curso)
+            const datosMatricula = {
+                fecha: new Date().toLocaleString('es-PE', { timeZone: 'America/Lima' }),
+                curso: formData.get('curso'),
+                metodo_pago: formData.get('metodo_pago') || 'GRATUITO',
+                pago_realizado: 'NO',
+                validado_director: false,
+                edicion_curso: 'AUTO-REGISTRO'
+            };
+
+            try {
+                // PASO A: Verificar si el estudiante ya existe
+                let { data: estudianteExistente } = await _supabase
+                    .from('estudiantes')
+                    .select('id')
+                    .eq('dni', dni)
+                    .maybeSingle();
+
+                let estudianteId;
+
+                if (estudianteExistente) {
+                    // Ya existe: Usamos su ID y actualizamos sus datos
+                    estudianteId = estudianteExistente.id;
+                    await _supabase.from('estudiantes').update(datosEstudiante).eq('id', estudianteId);
+                } else {
+                    // No existe: Lo creamos
+                    const { data: nuevoEstudiante, error: errorCreacion } = await _supabase
+                        .from('estudiantes')
+                        .insert([datosEstudiante])
+                        .select()
+                        .single();
+
+                    if (errorCreacion) throw new Error("Error creando estudiante: " + errorCreacion.message);
+                    estudianteId = nuevoEstudiante.id;
+                }
+
+                // PASO B: Crear la Matrícula vinculada al Estudiante
+                const payloadMatricula = {
+                    ...datosMatricula,
+                    estudiante_id: estudianteId,
+                    dni: dni,
+                    nombre: datosEstudiante.nombre,
+                    apellido: datosEstudiante.apellido,
+                    profesion: datosEstudiante.profesion,
+                    telefono: datosEstudiante.telefono,
+                    email: datosEstudiante.email
+                };
+
+                console.log("📤 Registrando en Supabase y Google Sheets:", payloadMatricula);
+
+                const { error: errorMatricula } = await _supabase
+                    .from('matriculas')
+                    .insert([payloadMatricula]);
+
+                if (errorMatricula) throw new Error("Error en matrícula: " + errorMatricula.message);
+
+                // --- ENVIAR A GOOGLE SHEETS ---
+                fetch(PCAI_CONFIG.googleSheets.scriptUrl, {
+                    method: 'POST',
+                    body: new URLSearchParams(payloadMatricula),
+                    mode: 'no-cors'
+                });
+
+                // --- ÉXITO ---
+                formSection.style.display = 'none';
+                successBox.style.display = 'block';
+
+                // Personalizar mensaje de WhatsApp
+                const waMsg = `Hola Ing. Aurelio, soy ${datosEstudiante.nombre}. Me inscribí al ${datosMatricula.curso}.
+                Adjunto mi voucher.`;
+                document.getElementById('waLink').href = PCAI_Utils.generarLinkWhatsApp(waMsg);
+
+            } catch (error) {
+                console.error('Error Crítico:', error);
+                alert("Ocurrió un error: " + error.message);
+                btn.disabled = false;
+                btn.innerText = "INTENTAR DE NUEVO";
+            }
+        });
+    </script>
+</body>
+
+</html>

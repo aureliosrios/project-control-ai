@@ -1,14 +1,16 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme {
-  --color-brand-cyan: #00f2ff;
-  --color-brand-orange: #f4630f;
-  --color-deep-blue: #020617;
+:root {
+  --brand-cyan: #00f2ff;
+  --brand-orange: #f4630f;
+  --deep-blue: #020617;
 }
 
 @layer base {
   body {
-    @apply bg-deep-blue text-slate-200 antialiased;
+    @apply bg-[#020617] text-slate-200 antialiased;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02";
   }
 }
@@ -19,7 +21,6 @@
       linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px),
       linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
     background-size: 40px 40px;
-    mask-image: radial-gradient(ellipse at center, black, transparent 80%);
   }
 
   .glass-card {
@@ -44,6 +45,10 @@
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(0, 242, 255, 0.5), transparent);
   }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500;
+  }
 }
 
 .animate-float {
@@ -53,8 +58,4 @@
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-20px); }
-}
-
-.text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-cyan to-blue-500;
 }

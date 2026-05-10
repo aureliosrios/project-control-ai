@@ -58,16 +58,16 @@ export default function MobileLanding() {
           <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-white/10" />
         </div>
 
-        <Link href="/formacion" className="block w-full glass-panel p-7 rounded-3xl border-white/10 hover:border-cyan-500/50 transition-all text-center relative overflow-hidden group">
-          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-cyan-500/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-          <span className="block text-[10px] font-black text-cyan-400 uppercase tracking-[0.3em] mb-2">Academy</span>
-          <span className="block text-2xl font-black text-white tracking-tighter">EXPLORAR CURSOS</span>
-        </Link>
-
         <Link href="/consultoria" className="block w-full glass-panel p-7 rounded-3xl border-white/10 hover:border-purple-500/50 transition-all text-center relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/5 to-purple-500/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
           <span className="block text-[10px] font-black text-purple-400 uppercase tracking-[0.3em] mb-2">B2B Systems</span>
           <span className="block text-2xl font-black text-white tracking-tighter">CONSULTORÍA IA</span>
+        </Link>
+
+        <Link href="/formacion" className="block w-full glass-panel p-7 rounded-3xl border-white/10 hover:border-cyan-500/50 transition-all text-center relative overflow-hidden group">
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-cyan-500/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+          <span className="block text-[10px] font-black text-cyan-400 uppercase tracking-[0.3em] mb-2">Academy</span>
+          <span className="block text-2xl font-black text-white tracking-tighter">EXPLORAR CURSOS</span>
         </Link>
 
         <Link href="/" className="block w-full glass-panel p-7 rounded-3xl border-white/10 hover:border-blue-500/50 transition-all text-center group">

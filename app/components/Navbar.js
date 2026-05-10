@@ -22,8 +22,8 @@ export default function Navbar() {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-10">
           <div className="flex items-center gap-8 text-[11px] font-bold text-slate-400 uppercase tracking-widest">
-            <Link href="/formacion" className="hover:text-cyan-400 transition-colors">Formación</Link>
             <Link href="/consultoria" className="hover:text-cyan-400 transition-colors">Consultoría</Link>
+            <Link href="/formacion" className="hover:text-cyan-400 transition-colors">Formación</Link>
             <Link href="/recursos" className="hover:text-cyan-400 transition-colors">Recursos</Link>
           </div>
           <Link href="/inscripcion" className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 px-6 py-3 rounded-xl font-black text-xs uppercase tracking-widest transition-all hover:scale-105 shadow-[0_0_20px_rgba(6,182,212,0.3)]">
@@ -43,8 +43,8 @@ export default function Navbar() {
       {/* Mobile Menu Overlay */}
       {isOpen && (
         <div className="md:hidden absolute top-full left-0 w-full bg-[#020617] border-b border-white/10 p-8 flex flex-col gap-6 animate-in slide-in-from-top duration-300">
-          <Link href="/formacion" onClick={() => setIsOpen(false)} className="text-lg font-black text-white uppercase tracking-tighter">Formación</Link>
           <Link href="/consultoria" onClick={() => setIsOpen(false)} className="text-lg font-black text-white uppercase tracking-tighter">Consultoría</Link>
+          <Link href="/formacion" onClick={() => setIsOpen(false)} className="text-lg font-black text-white uppercase tracking-tighter">Formación</Link>
           <Link href="/recursos" onClick={() => setIsOpen(false)} className="text-lg font-black text-white uppercase tracking-tighter">Recursos</Link>
           <Link href="/inscripcion" onClick={() => setIsOpen(false)} className="bg-cyan-500 text-slate-950 px-6 py-4 rounded-xl font-black text-center uppercase tracking-widest text-xs">
             Inscripción

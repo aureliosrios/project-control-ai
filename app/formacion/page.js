@@ -3,154 +3,183 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Formacion() {
-  const [view, setView] = useState("asinc");
+const asincronicos = [
+  {
+    id: "A1",
+    nombre: "El Despertar de la IA en la Gestión de Proyectos",
+    precio: "$11.99 USD",
+    tag: "CURSO A1 · PUBLICADO",
+    desc: "6 entregables reales en 2.5h sin programar. Reportes HTML, Mermaid.js, ATS, IPERC, Organigramas y Matrices CSV generados con IA.",
+    link: "https://go.hotmart.com/I104938744G",
+    color: "cyan",
+    pilares: ["Reportes HTML interactivos", "Flujogramas Mermaid.js", "ATS + IPERC inteligentes", "Cronogramas visuales"]
+  },
+  {
+    id: "A2",
+    nombre: "Escáner Forense con NotebookLM",
+    precio: "$11.99 USD",
+    tag: "CURSO A2 · PUBLICADO",
+    desc: "Gestión documental masiva para proyectos. Auditoría legal y técnica, extracción de actividades e informes de movilización en minutos.",
+    link: "https://pay.hotmart.com/O105604032H",
+    color: "orange",
+    pilares: ["Auditoría Forense IA", "Plan Logístico (Gemini)", "Checklist de Recursos", "Narrativa Multimedia"]
+  },
+  {
+    id: "C1",
+    nombre: "Automatización de Presupuestos con IA",
+    precio: "$11.99 USD",
+    tag: "CURSO C1 · ESPECIALIDAD",
+    desc: "Ingeniería de Costos Aumentada (Python + Agentes). Reduce el tiempo operativo de licitación en un 90% delegando tareas a la IA.",
+    link: "https://pay.hotmart.com/H105703259M",
+    color: "blue",
+    pilares: ["Infraestructura Python", "IA para EETT y WBS", "Visión Artificial Planos", "SkillPro v4: Lógica APU"]
+  }
+];
 
-  const toggleRoute = (id) => {
-    const el = document.getElementById(id);
-    const arrow = document.getElementById(`arrow-${id}`);
-    if (el) el.classList.toggle("hidden");
-    if (arrow) arrow.classList.toggle("rotate-180");
-  };
+const rutas = [
+  {
+    letra: "A",
+    titulo: "Fundamentos Transversales",
+    desc: "Indispensables para todo profesional de la construcción.",
+    cursos: ["A1: El Despertar Digital", "A2: Escáner Forense", "A3: Prompt Engineering Pro", "A4: Python for Engineers"]
+  },
+  {
+    letra: "B",
+    titulo: "Gestión y Control de Proyectos",
+    desc: "Optimización de cronogramas y administración contractual.",
+    cursos: ["B1: Planificación Agéntica", "B2: Control de Costos (EVM)", "B3: Gestión de Riesgos IA", "B4: Dashboards HTML"]
+  },
+  {
+    letra: "C",
+    titulo: "Especialidades de Ingeniería",
+    desc: "Herramientas de élite para áreas específicas.",
+    cursos: ["C1: Presupuestos IA", "C2: Licitaciones 360", "C3: Auditoría Técnica", "C4: Agentes Autónomos"]
+  }
+];
+
+export default function Formacion() {
+  const [activeTab, setActiveTab] = useState("asinc");
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-200 selection:bg-cyan-500/30 pt-32 pb-20">
-      {/* Background Decor */}
-      <div className="fixed inset-0 cyber-grid pointer-events-none opacity-20" />
-      
-      <main className="relative max-w-7xl mx-auto px-6">
-        {/* Header */}
-        <header className="mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-bold uppercase tracking-wider mb-6">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-            Academy & Training
-          </div>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 text-white">
-            Ecosistema de <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Formación</span>
+    <div className="min-h-screen bg-[#020617] text-slate-100 selection:bg-cyan-500/30">
+      <div className="fixed inset-0 tech-grid opacity-30 pointer-events-none" />
+
+      <main className="relative z-10 pt-32 pb-32 px-8 max-w-7xl mx-auto">
+        <header className="mb-20">
+          <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-6 uppercase">
+            SISTEMA DE <br />
+            <span className="text-neon">FORMACIÓN</span>
           </h1>
-          <p className="text-xl text-slate-400 max-w-3xl leading-relaxed">
-            Domina la intersección entre la <span className="text-cyan-400 font-medium">Inteligencia Artificial</span> y la gestión de proyectos de construcción de alto rendimiento.
+          <p className="text-xl text-slate-400 font-light max-w-2xl leading-relaxed">
+            Domina la intersección entre la <span className="text-white font-bold italic">IA de Élite</span> y la Ingeniería de alto rendimiento.
           </p>
         </header>
 
-        {/* View Selector */}
-        <div className="flex flex-wrap gap-4 mb-12">
+        {/* Tab Selector */}
+        <div className="flex gap-4 mb-16 border-b border-white/5 pb-8">
           <button 
-            onClick={() => setView("asinc")}
-            className={`flex items-center gap-2 px-8 py-3 rounded-full font-bold text-sm transition-all ${
-              view === "asinc" 
-              ? "bg-cyan-500 text-slate-950 shadow-[0_0_20px_rgba(6,182,212,0.3)]" 
-              : "bg-white/5 text-slate-400 border border-white/10 hover:bg-white/10"
-            }`}
+            onClick={() => setActiveTab("asinc")}
+            className={`px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all ${activeTab === 'asinc' ? 'bg-cyan-500 text-slate-950 shadow-[0_0_30px_rgba(6,182,212,0.4)]' : 'bg-white/5 text-slate-500 hover:text-white'}`}
           >
-            <span className="material-symbols-outlined text-lg">school</span> Asincrónico · A tu ritmo
+            A tu ritmo (Asincrónico)
           </button>
           <button 
-            onClick={() => setView("sinc")}
-            className={`flex items-center gap-2 px-8 py-3 rounded-full font-bold text-sm transition-all ${
-              view === "sinc" 
-              ? "bg-cyan-500 text-slate-950 shadow-[0_0_20px_rgba(6,182,212,0.3)]" 
-              : "bg-white/5 text-slate-400 border border-white/10 hover:bg-white/10"
-            }`}
+            onClick={() => setActiveTab("sinc")}
+            className={`px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all ${activeTab === 'sinc' ? 'bg-orange-500 text-slate-950 shadow-[0_0_30px_rgba(244,99,15,0.4)]' : 'bg-white/5 text-slate-500 hover:text-white'}`}
           >
-            <span className="material-symbols-outlined text-lg">live_tv</span> En Vivo · Sincrónico
+            En Vivo (Sincrónico)
           </button>
         </div>
 
-        {view === "asinc" ? (
-          <div className="space-y-20">
-            {/* Cursos Transversales */}
-            <section>
-              <div className="flex flex-col mb-12">
-                <h2 className="text-3xl font-bold text-white mb-4">Cursos Transversales</h2>
-                <p className="text-slate-400 max-w-2xl">Fundamentos indispensables para ingenieros de todas las especialidades. El punto de partida de tu transformación digital.</p>
-              </div>
+        {activeTab === "asinc" ? (
+          <div className="space-y-24">
+            {/* Top 3 Courses */}
+            <div className="grid lg:grid-cols-3 gap-8">
+              {asincronicos.map((curso) => (
+                <div key={curso.id} className="glass-panel p-8 rounded-[40px] flex flex-col group border-white/5 hover:border-cyan-500/30 transition-all relative overflow-hidden">
+                  <div className={`absolute top-0 right-0 w-32 h-32 bg-${curso.color}-500/10 blur-[60px]`} />
+                  
+                  <span className={`text-[10px] font-black tracking-[0.3em] uppercase mb-4 text-${curso.color}-400`}>
+                    {curso.tag}
+                  </span>
+                  <h3 className="text-2xl font-black text-white mb-6 uppercase tracking-tighter leading-tight">
+                    {curso.nombre}
+                  </h3>
+                  <p className="text-slate-400 font-light mb-8 flex-1 leading-relaxed">
+                    {curso.desc}
+                  </p>
 
-              {/* Curso A1 */}
-              <div className="glass-card rounded-3xl border-white/5 p-8 md:p-12 relative overflow-hidden group hover:border-cyan-500/20 transition-all mb-12">
-                <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-cyan-500/5 to-transparent pointer-events-none" />
-                <div className="grid md:grid-cols-2 gap-12 items-center relative z-10">
-                  <div>
-                    <div className="inline-flex items-center gap-2 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full text-[10px] font-bold mb-4 uppercase tracking-widest">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /> RUTA A · CURSO A1 · PUBLICADO
-                    </div>
-                    <h3 className="text-3xl font-bold text-white mb-4">El Despertar de la IA en la Gestión de Proyectos</h3>
-                    <p className="text-slate-400 mb-6 leading-relaxed">
-                      6 entregables reales en 2.5 horas sin escribir una sola línea de código. Reportes HTML, Mermaid.js, ATS, IPERC y Matrices generados con IA.
-                    </p>
-                    <div className="grid grid-cols-2 gap-3 mb-8 text-sm text-slate-400">
-                      <div className="flex items-center gap-2"><span className="text-cyan-400">✓</span> Reportes HTML</div>
-                      <div className="flex items-center gap-2"><span className="text-cyan-400">✓</span> Flujogramas Mermaid</div>
-                      <div className="flex items-center gap-2"><span className="text-cyan-400">✓</span> ATS + IPERC</div>
-                      <div className="flex items-center gap-2"><span className="text-cyan-400">✓</span> 28 Prompts Élite</div>
-                    </div>
-                    <div className="flex flex-wrap items-center gap-6">
-                      <div className="flex flex-col">
-                        <span className="text-3xl font-bold text-white">$11.99 USD</span>
-                        <span className="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Acceso de por vida · Hotmart</span>
+                  <div className="space-y-3 mb-10">
+                    {curso.pilares.map((p, i) => (
+                      <div key={i} className="flex items-center gap-3 text-xs text-slate-300">
+                        <span className={`material-symbols-outlined text-[16px] text-${curso.color}-500`}>verified</span>
+                        {p}
                       </div>
-                      <Link href="https://go.hotmart.com/I104938744G" target="_blank" className="bg-cyan-500 text-slate-950 px-8 py-3 rounded-xl font-bold hover:scale-105 transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)]">
-                        Comprar ahora
-                      </Link>
-                    </div>
+                    ))}
                   </div>
-                  <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                    <div className="text-xs text-cyan-400 font-bold uppercase tracking-widest mb-4">Resultados del Curso</div>
-                    <ul className="space-y-4">
-                      {["Reporte ejecutivo interactivo", "Diagramas de flujo automáticos", "Plan de seguridad inteligente", "Cronograma visual sin P6"].map((item, i) => (
-                        <li key={i} className="flex items-center gap-3 text-sm text-slate-300">
-                          <span className="w-5 h-5 rounded bg-cyan-500/10 flex items-center justify-center text-[10px] text-cyan-400 font-bold">{i+1}</span>
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
+
+                  <div className="pt-8 border-t border-white/5 flex items-center justify-between">
+                    <div className="flex flex-col">
+                      <span className="text-2xl font-black text-white">{curso.precio}</span>
+                      <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Hotmart Access</span>
+                    </div>
+                    <Link href={curso.link} target="_blank" className={`px-6 py-3 bg-${curso.color}-500 text-slate-950 rounded-xl font-black text-xs uppercase tracking-widest hover:scale-105 transition-all`}>
+                      Comprar
+                    </Link>
                   </div>
                 </div>
+              ))}
+            </div>
+
+            {/* Ecosystem Plan */}
+            <section className="pt-20">
+              <div className="text-center mb-16">
+                <span className="text-cyan-400 text-[10px] font-black tracking-[0.5em] uppercase mb-4 block">Ecosistema 2026</span>
+                <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase mb-6">Plan de Micro-Especialización</h2>
+                <p className="text-slate-500 max-w-2xl mx-auto font-light leading-relaxed">
+                  Un ecosistema diseñado para escalar desde los fundamentos transversales hasta la maestría en agentes autónomos.
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-8">
+                {rutas.map((ruta) => (
+                  <div key={ruta.letra} className="p-10 rounded-[40px] bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-all">
+                    <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-xl font-black text-white mb-6">
+                      {ruta.letra}
+                    </div>
+                    <h3 className="text-xl font-black text-white mb-4 uppercase">{ruta.titulo}</h3>
+                    <p className="text-sm text-slate-500 mb-8 font-light">{ruta.desc}</p>
+                    <div className="space-y-4">
+                      {ruta.cursos.map((c, i) => (
+                        <div key={i} className="flex items-center gap-4 text-sm text-slate-400 group">
+                          <span className="w-1 h-1 rounded-full bg-slate-700 group-hover:bg-cyan-500 transition-colors" />
+                          {c}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
             </section>
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Cursos Sincrónicos */}
-            {[
-              { 
-                title: "El Despertar de la IA (En Vivo)", 
-                level: "Curso 1 · Básico", 
-                date: "24 de mayo, 2026", 
-                price: "$75 USD",
-                desc: "15h de formación en vivo. Domina el alcance, contratos y calidad con lenguajes nativos de IA."
-              },
-              { 
-                title: "Ingeniería Aumentada", 
-                level: "Curso 2 · Avanzado", 
-                date: "31 de mayo, 2026", 
-                price: "$100 USD",
-                desc: "Python, VBA y Agentes Autónomos. Crea tus propios Skills y Scripts MCP para dashboards."
-              }
-            ].map((course, i) => (
-              <div key={i} className="glass-card rounded-3xl border-white/5 overflow-hidden flex flex-col hover:border-cyan-500/30 transition-all group">
-                <div className="h-48 bg-white/5 relative">
-                  <div className="absolute top-4 left-4 flex flex-col gap-2">
-                    <span className="bg-cyan-500 text-slate-950 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">En Vivo</span>
-                  </div>
-                </div>
-                <div className="p-8 flex-1 flex flex-col">
-                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">{course.title}</h3>
-                  <p className="text-[10px] text-cyan-400 font-bold uppercase tracking-widest mb-4">{course.level}</p>
-                  <p className="text-slate-400 text-sm mb-6 flex-1">{course.desc}</p>
-                  <div className="space-y-2 mb-8 text-xs text-slate-500 font-medium">
-                    <div className="flex items-center gap-2"><span className="text-cyan-500">📅</span> Inicio: {course.date}</div>
-                    <div className="flex items-center gap-2"><span className="text-cyan-500">⏰</span> Domingos · 10AM - 1PM</div>
-                  </div>
-                  <div className="pt-6 border-t border-white/5 flex items-center justify-between">
-                    <span className="text-2xl font-bold text-white">{course.price}</span>
-                    <Link href="/inscripcion" className="bg-white/10 hover:bg-cyan-500 hover:text-slate-950 px-4 py-2 rounded-lg font-bold text-xs transition-all">
-                      Inscribirme
-                    </Link>
-                  </div>
-                </div>
+          <div className="py-20 text-center glass-panel rounded-[40px] p-20">
+            <span className="material-symbols-outlined text-6xl text-orange-500 mb-8 animate-pulse">broadcast_on_home</span>
+            <h2 className="text-4xl font-black text-white uppercase tracking-tighter mb-4">Próximas Cohortes en Vivo</h2>
+            <p className="text-slate-400 max-w-md mx-auto font-light leading-relaxed mb-12">
+              Nuestras sesiones sincrónicas están en fase de preparación para el lanzamiento de Mayo 2026.
+            </p>
+            <div className="inline-flex gap-8">
+              <div className="text-left">
+                <p className="text-2xl font-black text-white">24 Mayo</p>
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">El Despertar de la IA</p>
               </div>
-            ))}
+              <div className="w-[1px] bg-white/10" />
+              <div className="text-left">
+                <p className="text-2xl font-black text-white">31 Mayo</p>
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Ingeniería Aumentada</p>
+              </div>
+            </div>
           </div>
         )}
       </main>

@@ -40,7 +40,8 @@ const sincronicos = [
   {
     id: "S1",
     nombre: "El Despertar de la IA para la Gestión de Proyectos",
-    precio: "$67.00 USD",
+    precio: "$75.00 USD",
+    precioSoles: "S/. 200",
     tag: "EN VIVO · COHORTE 1",
     desc: "Sesiones en vivo donde implementamos agentes de IA para el control de cronogramas y riesgos. Incluye acceso a herramientas exclusivas.",
     link: "/inscripcion",
@@ -51,6 +52,7 @@ const sincronicos = [
     id: "S2",
     nombre: "Ingeniería Aumentada: Automatización con Agentes",
     precio: "$97.00 USD",
+    precioSoles: "S/. 300",
     tag: "EN VIVO · ESPECIALIZACIÓN",
     desc: "Dominio avanzado de Python y Agentes Autónomos para ingenieros. Crea tus propios sistemas de control operativo.",
     link: "/inscripcion",
@@ -60,7 +62,8 @@ const sincronicos = [
   {
     id: "S3",
     nombre: "Licitaciones Inteligentes con IA",
-    precio: "$67.00 USD",
+    precio: "$97.00 USD",
+    precioSoles: "S/. 300",
     tag: "EN VIVO · COHORTE 1",
     desc: "Automatización total de propuestas técnicas y económicas. Gana licitaciones con la velocidad de la inteligencia artificial.",
     link: "/inscripcion",
@@ -231,7 +234,7 @@ export default function Formacion() {
                   <div className="pt-8 border-t border-white/5 flex items-center justify-between">
                     <div className="flex flex-col">
                       <span className="text-2xl font-black text-white">{curso.precio}</span>
-                      <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Acceso Directo</span>
+                      <span className="text-[10px] text-cyan-400 font-bold uppercase tracking-widest">{curso.precioSoles}</span>
                     </div>
                     <Link 
                       href={curso.link} 

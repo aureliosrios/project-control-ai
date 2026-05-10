@@ -64,6 +64,12 @@ export default function MobileLanding() {
           <span className="block text-2xl font-black text-white tracking-tighter">EXPLORAR CURSOS</span>
         </Link>
 
+        <Link href="/consultoria" className="block w-full glass-panel p-7 rounded-3xl border-white/10 hover:border-purple-500/50 transition-all text-center relative overflow-hidden group">
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/5 to-purple-500/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+          <span className="block text-[10px] font-black text-purple-400 uppercase tracking-[0.3em] mb-2">B2B Systems</span>
+          <span className="block text-2xl font-black text-white tracking-tighter">CONSULTORÍA IA</span>
+        </Link>
+
         <Link href="/" className="block w-full glass-panel p-7 rounded-3xl border-white/10 hover:border-blue-500/50 transition-all text-center group">
           <span className="block text-[10px] font-black text-blue-400 uppercase tracking-[0.3em] mb-2">Global System</span>
           <span className="block text-2xl font-black text-white tracking-tighter">WEB PRINCIPAL</span>

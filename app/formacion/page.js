@@ -36,6 +36,39 @@ const asincronicos = [
   }
 ];
 
+const sincronicos = [
+  {
+    id: "S1",
+    nombre: "El Despertar de la IA para la Gestión de Proyectos",
+    precio: "$67.00 USD",
+    tag: "EN VIVO · COHORTE 1",
+    desc: "Sesiones en vivo donde implementamos agentes de IA para el control de cronogramas y riesgos. Incluye acceso a herramientas exclusivas.",
+    link: "/inscripcion",
+    color: "cyan",
+    pilares: ["Sesiones Mentoría en Vivo", "Agentes de Control Real", "Plantillas de Ingeniería", "Soporte VIP WhatsApp"]
+  },
+  {
+    id: "S2",
+    nombre: "Ingeniería Aumentada: Automatización con Agentes",
+    precio: "$97.00 USD",
+    tag: "EN VIVO · ESPECIALIZACIÓN",
+    desc: "Dominio avanzado de Python y Agentes Autónomos para ingenieros. Crea tus propios sistemas de control operativo.",
+    link: "/inscripcion",
+    color: "blue",
+    pilares: ["Desarrollo Python para Ing.", "Creación Agentes Autónomos", "Integración API / Vercel", "Arquitectura de Software"]
+  },
+  {
+    id: "S3",
+    nombre: "Licitaciones Inteligentes con IA",
+    precio: "$67.00 USD",
+    tag: "EN VIVO · COHORTE 1",
+    desc: "Automatización total de propuestas técnicas y económicas. Gana licitaciones con la velocidad de la inteligencia artificial.",
+    link: "/inscripcion",
+    color: "orange",
+    pilares: ["Estandarización de Partidas", "Análisis de EETT Masivo", "Generación Propuesta Econ.", "Estrategia de Ganancia"]
+  }
+];
+
 const rutas = [
   {
     letra: "A",
@@ -170,22 +203,48 @@ export default function Formacion() {
             </section>
           </div>
         ) : (
-          <div className="py-20 text-center glass-panel rounded-[40px] p-20">
-            <span className="material-symbols-outlined text-6xl text-orange-500 mb-8 animate-pulse">broadcast_on_home</span>
-            <h2 className="text-4xl font-black text-white uppercase tracking-tighter mb-4">Próximas Cohortes en Vivo</h2>
-            <p className="text-slate-400 max-w-md mx-auto font-light leading-relaxed mb-12">
-              Nuestras sesiones sincrónicas están en fase de preparación para el lanzamiento de Mayo 2026.
-            </p>
-            <div className="inline-flex gap-8">
-              <div className="text-left">
-                <p className="text-2xl font-black text-white">24 Mayo</p>
-                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">El Despertar de la IA</p>
-              </div>
-              <div className="w-[1px] bg-white/10" />
-              <div className="text-left">
-                <p className="text-2xl font-black text-white">31 Mayo</p>
-                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Ingeniería Aumentada</p>
-              </div>
+          <div className="space-y-24">
+            <div className="grid lg:grid-cols-3 gap-8">
+              {sincronicos.map((curso) => (
+                <div key={curso.id} className="glass-panel p-8 rounded-[40px] flex flex-col group border-white/5 hover:border-orange-500/30 transition-all relative overflow-hidden">
+                  <div className={`absolute top-0 right-0 w-32 h-32 bg-${curso.color === 'cyan' ? 'cyan' : curso.color === 'blue' ? 'indigo' : 'orange'}-500/10 blur-[60px]`} />
+                  
+                  <span className={`text-[10px] font-black tracking-[0.3em] uppercase mb-4 text-${curso.color === 'cyan' ? 'cyan' : curso.color === 'blue' ? 'indigo' : 'orange'}-400`}>
+                    {curso.tag}
+                  </span>
+                  <h3 className="text-2xl font-black text-white mb-6 uppercase tracking-tighter leading-tight">
+                    {curso.nombre}
+                  </h3>
+                  <p className="text-slate-400 font-light mb-8 flex-1 leading-relaxed">
+                    {curso.desc}
+                  </p>
+
+                  <div className="space-y-3 mb-10">
+                    {curso.pilares.map((p, i) => (
+                      <div key={i} className="flex items-center gap-3 text-xs text-slate-300">
+                        <span className={`material-symbols-outlined text-[16px] text-${curso.color === 'cyan' ? 'cyan' : curso.color === 'blue' ? 'indigo' : 'orange'}-500`}>verified</span>
+                        {p}
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="pt-8 border-t border-white/5 flex items-center justify-between">
+                    <div className="flex flex-col">
+                      <span className="text-2xl font-black text-white">{curso.precio}</span>
+                      <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Acceso Directo</span>
+                    </div>
+                    <Link 
+                      href={curso.link} 
+                      className={`px-8 py-4 bg-${curso.color === 'cyan' ? 'cyan' : curso.color === 'blue' ? 'indigo' : 'orange'}-500 text-slate-950 rounded-xl font-black text-xs uppercase tracking-widest hover:scale-110 transition-all shadow-[0_0_20px_rgba(var(--tw-shadow-color),0.4)]`}
+                      style={{
+                        boxShadow: `0 0 25px ${curso.color === 'cyan' ? '#06b6d4' : curso.color === 'orange' ? '#f97316' : '#6366f1'}66`
+                      }}
+                    >
+                      Inscribirse
+                    </Link>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         )}

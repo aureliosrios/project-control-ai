@@ -215,6 +215,7 @@ export default function Formacion() {
             </section>
           </div>
         ) : (
+          <div className="space-y-24">
             <div className="grid lg:grid-cols-3 gap-8">
               {sincronicos.map((curso) => (
                 <div key={curso.id} className="glass-panel p-8 rounded-[40px] flex flex-col group border-white/5 hover:border-orange-500/30 transition-all relative overflow-hidden">

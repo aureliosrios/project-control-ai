@@ -1,7 +1,11 @@
+"use client";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
 export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <nav className="fixed top-0 w-full z-[100] border-b border-white/10 bg-[#020617]/90 backdrop-blur-2xl">
       <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
@@ -29,10 +33,26 @@ export default function Navbar() {
         </div>
 
         {/* Mobile menu trigger */}
-        <button className="md:hidden text-cyan-400">
-          <span className="material-symbols-outlined text-3xl">menu</span>
+        <button 
+          className="md:hidden text-cyan-400"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <span className="material-symbols-outlined text-3xl">{isOpen ? 'close' : 'menu'}</span>
         </button>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      {isOpen && (
+        <div className="md:hidden absolute top-full left-0 w-full bg-[#020617] border-b border-white/10 p-8 flex flex-col gap-6 animate-in slide-in-from-top duration-300">
+          <Link href="/formacion" onClick={() => setIsOpen(false)} className="text-lg font-black text-white uppercase tracking-tighter">Formación</Link>
+          <Link href="/consultoria" onClick={() => setIsOpen(false)} className="text-lg font-black text-white uppercase tracking-tighter">Consultoría</Link>
+          <Link href="/recursos" onClick={() => setIsOpen(false)} className="text-lg font-black text-white uppercase tracking-tighter">Recursos</Link>
+          <Link href="/clases-grabadas" onClick={() => setIsOpen(false)} className="text-lg font-black text-white uppercase tracking-tighter">Grabaciones</Link>
+          <Link href="/inscripcion" onClick={() => setIsOpen(false)} className="bg-cyan-500 text-slate-950 px-6 py-4 rounded-xl font-black text-center uppercase tracking-widest text-xs">
+            Inscripción
+          </Link>
+        </div>
+      )}
     </nav>
   );
 }

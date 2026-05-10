@@ -61,7 +61,7 @@ const sincronicos = [
     inicio: "31 de Mayo, 2026",
     sesiones: "15h · 5 sesiones",
     link: "/inscripcion",
-    hotmart: "https://pay.hotmart.com/H105703259M",
+    hotmart: "https://pay.hotmart.com/I104227016S",
     paypal: "https://paypal.me/ProjectControlAI",
     color: "blue"
   },
@@ -75,7 +75,7 @@ const sincronicos = [
     inicio: "25 de Mayo, 2026",
     sesiones: "15h · 5 sesiones",
     link: "/inscripcion",
-    hotmart: "https://pay.hotmart.com/H105703259M",
+    hotmart: "https://pay.hotmart.com/N104187999C",
     paypal: "https://paypal.me/ProjectControlAI",
     color: "orange"
   }

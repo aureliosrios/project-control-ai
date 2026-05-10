@@ -249,6 +249,23 @@ export default function Formacion() {
                 </div>
               ))}
             </div>
+
+            {/* Payment Methods Bar */}
+            <div className="glass-panel p-8 rounded-[30px] border-white/5 flex flex-wrap items-center justify-center gap-12 opacity-80">
+              <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em]">Métodos de Pago:</span>
+              <div className="flex items-center gap-3">
+                <span className="material-symbols-outlined text-cyan-400">qr_code_2</span>
+                <span className="text-xs font-bold text-white uppercase tracking-widest">Yape / Plin</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="material-symbols-outlined text-cyan-400">account_balance</span>
+                <span className="text-xs font-bold text-white uppercase tracking-widest">Transferencia BCP</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="material-symbols-outlined text-cyan-400">credit_card</span>
+                <span className="text-xs font-bold text-white uppercase tracking-widest">PayPal / Tarjeta</span>
+              </div>
+            </div>
           </div>
         )}
       </main>

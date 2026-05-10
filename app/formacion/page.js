@@ -42,39 +42,42 @@ const sincronicos = [
     nombre: "El Despertar de la IA para la Gestión de Proyectos",
     precio: "$75.00 USD",
     precioSoles: "S/. 200",
-    tag: "EN VIVO · COHORTE 1",
-    desc: "Sesiones en vivo donde implementamos agentes de IA para el control de cronogramas y riesgos. Incluye acceso a herramientas exclusivas.",
+    tag: "CURSO 1 · BÁSICO",
+    desc: "El inicio de la era digital para ingenieros. Domina la Gestión de Alcance, Contratos, Calidad y HSE mediante informes en HTML, flujogramas en Mermaid y documentos en MD/CSV.",
+    inicio: "24 de Mayo, 2026",
+    sesiones: "15h · 5 sesiones",
     link: "/inscripcion",
-    hotmart: "https://go.hotmart.com/I104938744G",
-    paypal: "https://paypal.me/aureliosrios",
-    color: "cyan",
-    pilares: ["Sesiones Mentoría en Vivo", "Agentes de Control Real", "Plantillas de Ingeniería", "Soporte VIP WhatsApp"]
+    hotmart: "https://pay.hotmart.com/K104218834V",
+    paypal: "https://paypal.me/ProjectControlAI",
+    color: "cyan"
   },
   {
     id: "S2",
     nombre: "Ingeniería Aumentada: Automatización con Agentes",
     precio: "$97.00 USD",
     precioSoles: "S/. 300",
-    tag: "EN VIVO · ESPECIALIZACIÓN",
-    desc: "Dominio avanzado de Python y Agentes Autónomos para ingenieros. Crea tus propios sistemas de control operativo.",
+    tag: "CURSO 2 · AVANZADO",
+    desc: "Domina la automatización avanzada con Python, HTML, VBA y Agentes Autónomos. Aprende a desarrollar Skills y Scripts MCP dentro de ecosistemas agénticos.",
+    inicio: "31 de Mayo, 2026",
+    sesiones: "15h · 5 sesiones",
     link: "/inscripcion",
     hotmart: "https://pay.hotmart.com/H105703259M",
-    paypal: "https://paypal.me/aureliosrios",
-    color: "blue",
-    pilares: ["Desarrollo Python para Ing.", "Creación Agentes Autónomos", "Integración API / Vercel", "Arquitectura de Software"]
+    paypal: "https://paypal.me/ProjectControlAI",
+    color: "blue"
   },
   {
     id: "S3",
     nombre: "Licitaciones Inteligentes con IA",
     precio: "$97.00 USD",
     precioSoles: "S/. 300",
-    tag: "EN VIVO · COHORTE 1",
-    desc: "Automatización total de propuestas técnicas y económicas. Gana licitaciones con la velocidad de la inteligencia artificial.",
+    tag: "CURSO 3 · AVANZADO",
+    desc: "Nivel Avanzado: Domina MCP, Skills y Scripts Python para automatizar APUs y cronogramas. Análisis masivo de expedientes técnicos de miles de páginas.",
+    inicio: "25 de Mayo, 2026",
+    sesiones: "15h · 5 sesiones",
     link: "/inscripcion",
     hotmart: "https://pay.hotmart.com/H105703259M",
-    paypal: "https://paypal.me/aureliosrios",
-    color: "orange",
-    pilares: ["Estandarización de Partidas", "Análisis de EETT Masivo", "Generación Propuesta Econ.", "Estrategia de Ganancia"]
+    paypal: "https://paypal.me/ProjectControlAI",
+    color: "orange"
   }
 ];
 
@@ -212,29 +215,34 @@ export default function Formacion() {
             </section>
           </div>
         ) : (
-          <div className="space-y-24">
             <div className="grid lg:grid-cols-3 gap-8">
               {sincronicos.map((curso) => (
                 <div key={curso.id} className="glass-panel p-8 rounded-[40px] flex flex-col group border-white/5 hover:border-orange-500/30 transition-all relative overflow-hidden">
                   <div className={`absolute top-0 right-0 w-32 h-32 bg-${curso.color === 'cyan' ? 'cyan' : curso.color === 'blue' ? 'indigo' : 'orange'}-500/10 blur-[60px]`} />
                   
-                  <span className={`text-[10px] font-black tracking-[0.3em] uppercase mb-4 text-${curso.color === 'cyan' ? 'cyan' : curso.color === 'blue' ? 'indigo' : 'orange'}-400`}>
-                    {curso.tag}
-                  </span>
+                  <div className="flex justify-between items-start mb-6">
+                    <span className={`text-[10px] font-black tracking-[0.3em] uppercase text-${curso.color === 'cyan' ? 'cyan' : curso.color === 'blue' ? 'indigo' : 'orange'}-400`}>
+                      {curso.tag}
+                    </span>
+                    <span className="bg-orange-500 text-slate-950 text-[8px] font-black px-2 py-1 rounded-full uppercase tracking-widest animate-pulse">En Vivo</span>
+                  </div>
+
                   <h3 className="text-2xl font-black text-white mb-6 uppercase tracking-tighter leading-tight">
                     {curso.nombre}
                   </h3>
-                  <p className="text-slate-400 font-light mb-8 flex-1 leading-relaxed">
+                  <p className="text-slate-400 font-light mb-8 flex-1 text-sm leading-relaxed">
                     {curso.desc}
                   </p>
 
                   <div className="space-y-3 mb-10">
-                    {curso.pilares.map((p, i) => (
-                      <div key={i} className="flex items-center gap-3 text-xs text-slate-300">
-                        <span className={`material-symbols-outlined text-[16px] text-${curso.color === 'cyan' ? 'cyan' : curso.color === 'blue' ? 'indigo' : 'orange'}-500`}>verified</span>
-                        {p}
-                      </div>
-                    ))}
+                    <div className="flex items-center gap-3 text-xs text-slate-300">
+                      <span className="material-symbols-outlined text-[16px] text-orange-500">calendar_today</span>
+                      <span><strong className="text-white">Inicio:</strong> {curso.inicio}</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-xs text-slate-300">
+                      <span className="material-symbols-outlined text-[16px] text-orange-500">schedule</span>
+                      <span>{curso.sesiones}</span>
+                    </div>
                   </div>
 
                   <div className="pt-8 border-t border-white/5">
@@ -247,7 +255,7 @@ export default function Formacion() {
                         href={curso.link} 
                         className={`px-6 py-3 bg-white/5 border border-white/10 text-white rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-white/10 transition-all`}
                       >
-                        Ficha Registro
+                        Inscribirme
                       </Link>
                     </div>
                     
@@ -282,24 +290,84 @@ export default function Formacion() {
               ))}
             </div>
 
-            {/* Payment Methods Bar */}
-            <div className="glass-panel p-8 rounded-[30px] border-white/5 flex flex-wrap items-center justify-center gap-10 opacity-90">
-              <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em] w-full text-center mb-4 md:w-auto md:mb-0">Vías de Pago:</span>
-              <div className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-cyan-400">qr_code_2</span>
-                <span className="text-xs font-bold text-white uppercase tracking-widest">Yape / Plin</span>
+            {/* Detailed Payment Methods - Replicating Old Site Organization */}
+            <div className="grid md:grid-cols-2 gap-8 mt-12">
+              {/* Perú Section */}
+              <div className="glass-panel p-10 rounded-[40px] border-white/5 relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-8 opacity-5"><span className="material-symbols-outlined text-8xl text-white">account_balance</span></div>
+                <div className="flex items-center gap-4 mb-10">
+                  <span className="text-3xl">🇵🇪</span>
+                  <div>
+                    <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Pagos en Perú</h3>
+                    <p className="text-xs text-slate-500 font-bold uppercase tracking-widest">Soles y Dólares</p>
+                  </div>
+                </div>
+                
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between p-5 rounded-2xl bg-white/5 border border-white/5 group hover:border-cyan-500/30 transition-all">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center text-cyan-400 font-black">Y/P</div>
+                      <div>
+                        <p className="font-bold text-white text-sm">Yape / Plin</p>
+                        <p className="text-[10px] text-slate-500 uppercase tracking-widest">Pagos instantáneos</p>
+                      </div>
+                    </div>
+                    <Link href="https://wa.me/51993147501" target="_blank" className="text-[10px] font-black text-cyan-400 border border-cyan-400/30 px-4 py-2 rounded-full hover:bg-cyan-400/10 transition-all">
+                      +51 993 147 501
+                    </Link>
+                  </div>
+
+                  <div className="flex items-center justify-between p-5 rounded-2xl bg-white/5 border border-white/5 group hover:border-blue-500/30 transition-all">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400 font-black">BCP</div>
+                      <div>
+                        <p className="font-bold text-white text-sm">Transferencia BCP</p>
+                        <p className="text-[10px] text-slate-500 uppercase tracking-widest">Soles y Dólares</p>
+                      </div>
+                    </div>
+                    <Link href="https://wa.me/51993147501?text=Hola,%20solicito%20número%20de%20cuenta%20BCP" target="_blank" className="text-[10px] font-black text-blue-400 border border-blue-400/30 px-4 py-2 rounded-full hover:bg-blue-400/10 transition-all">
+                      Consultar
+                    </Link>
+                  </div>
+                </div>
               </div>
-              <Link 
-                href="https://wa.me/51993147501?text=Hola,%20solicito%20número%20de%20cuenta%20para%20transferencia%20BCP."
-                target="_blank"
-                className="flex items-center gap-3 hover:text-cyan-400 transition-colors"
-              >
-                <span className="material-symbols-outlined text-cyan-400">account_balance</span>
-                <span className="text-xs font-bold text-white uppercase tracking-widest">Solicitar Cta. BCP</span>
-              </Link>
-              <div className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-cyan-400">credit_card</span>
-                <span className="text-xs font-bold text-white uppercase tracking-widest">PayPal / Hotmart</span>
+
+              {/* International Section */}
+              <div className="glass-panel p-10 rounded-[40px] border-white/5 relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-8 opacity-5"><span className="material-symbols-outlined text-8xl text-white">public</span></div>
+                <div className="flex items-center gap-4 mb-10">
+                  <span className="text-3xl">🌎</span>
+                  <div>
+                    <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Internacional</h3>
+                    <p className="text-xs text-slate-500 font-bold uppercase tracking-widest">Global Access</p>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between p-5 rounded-2xl bg-white/5 border border-white/5 group hover:border-indigo-500/30 transition-all">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-indigo-500/20 flex items-center justify-center text-indigo-400 font-black">PP</div>
+                      <div>
+                        <p className="font-bold text-white text-sm">PayPal</p>
+                        <p className="text-[10px] text-slate-500 uppercase tracking-widest">Visa / Mastercard</p>
+                      </div>
+                    </div>
+                    <Link href="https://paypal.me/ProjectControlAI" target="_blank" className="text-[10px] font-black text-indigo-400 border border-indigo-400/30 px-4 py-2 rounded-full hover:bg-indigo-400/10 transition-all">
+                      Pagar
+                    </Link>
+                  </div>
+
+                  <div className="flex items-center justify-between p-5 rounded-2xl bg-white/5 border border-white/5 group hover:border-orange-500/30 transition-all">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-orange-500/20 flex items-center justify-center text-orange-400 font-black">HT</div>
+                      <div>
+                        <p className="font-bold text-white text-sm">Hotmart</p>
+                        <p className="text-[10px] text-slate-500 uppercase tracking-widest">Checkout Seguro</p>
+                      </div>
+                    </div>
+                    <span className="text-[9px] text-slate-600 font-black uppercase tracking-tighter">Links en cursos</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

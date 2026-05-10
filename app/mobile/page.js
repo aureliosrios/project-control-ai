@@ -10,10 +10,19 @@ export default function MobileLanding() {
 
       {/* Profile Header */}
       <div className="relative mt-10 mb-12 flex flex-col items-center">
-        <div className="relative w-32 h-32 mb-6 p-1 rounded-full bg-gradient-to-tr from-cyan-500 via-blue-600 to-purple-600">
-          <div className="w-full h-full rounded-full bg-[#020617] p-4 flex items-center justify-center">
+        <div className="relative w-32 h-32 mb-6 p-1 rounded-full bg-gradient-to-tr from-cyan-500 via-blue-600 to-purple-600 shadow-[0_0_30px_rgba(6,182,212,0.3)]">
+          <div className="w-full h-full rounded-full bg-gradient-to-b from-slate-800 to-[#020617] p-5 flex items-center justify-center overflow-hidden">
             <div className="relative w-full h-full">
-              <Image src="/images/logo.png" alt="Logo" fill className="object-contain" />
+              <Image 
+                src="/images/logo.png" 
+                alt="Logo" 
+                fill 
+                className="object-contain filter contrast-[1.1]" 
+                style={{
+                  maskImage: 'radial-gradient(circle, black 60%, transparent 100%)',
+                  WebkitMaskImage: 'radial-gradient(circle, black 60%, transparent 100%)'
+                }}
+              />
             </div>
           </div>
         </div>

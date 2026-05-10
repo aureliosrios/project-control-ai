@@ -123,7 +123,14 @@ export default function Formacion() {
                       <span className="text-2xl font-black text-white">{curso.precio}</span>
                       <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Hotmart Access</span>
                     </div>
-                    <Link href={curso.link} target="_blank" className={`px-6 py-3 bg-${curso.color}-500 text-slate-950 rounded-xl font-black text-xs uppercase tracking-widest hover:scale-105 transition-all`}>
+                    <Link 
+                      href={curso.link} 
+                      target="_blank" 
+                      className={`px-8 py-4 bg-${curso.color === 'blue' ? 'indigo' : curso.color}-500 text-slate-950 rounded-xl font-black text-xs uppercase tracking-widest hover:scale-110 transition-all shadow-[0_0_20px_rgba(var(--tw-shadow-color),0.4)]`}
+                      style={{
+                        boxShadow: `0 0 25px ${curso.color === 'cyan' ? '#06b6d4' : curso.color === 'orange' ? '#f97316' : '#6366f1'}66`
+                      }}
+                    >
                       Comprar
                     </Link>
                   </div>

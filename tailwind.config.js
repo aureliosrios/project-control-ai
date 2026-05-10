@@ -18,4 +18,17 @@ module.exports = {
     },
   },
   plugins: [],
+  safelist: [
+    'bg-cyan-500',
+    'bg-orange-500',
+    'bg-blue-500',
+    'bg-indigo-500',
+    'text-cyan-400',
+    'text-orange-400',
+    'text-blue-400',
+    'text-indigo-400',
+    'shadow-[0_0_30px_rgba(6,182,212,0.4)]',
+    'shadow-[0_0_30px_rgba(244,99,15,0.4)]',
+    'shadow-[0_0_30px_rgba(59,130,246,0.4)]',
+  ]
 }

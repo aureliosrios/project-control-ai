@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "framework": "nextjs",
+  "cleanUrls": true,
+  "routes": [
+    { "src": "/mobile-landing.html", "dest": "/mobile" },
+    { "src": "/formacion.html", "dest": "/formacion" },
+    { "src": "/inscripcion.html", "dest": "/inscripcion" },
+    { "src": "/clases-grabadas.html", "dest": "/clases-grabadas" },
+    { "src": "/consultoria.html", "dest": "/consultoria" },
+    { "src": "/recursos.html", "dest": "/recursos" }
+  ]
+}

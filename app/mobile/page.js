@@ -61,14 +61,39 @@ export default function MobileLanding() {
         </Link>
 
         {/* Secondary Links */}
-        <div className="grid grid-cols-2 gap-4 pt-4">
-          <Link href="https://www.linkedin.com/company/112620972/" target="_blank" className="flex items-center justify-center p-5 glass-panel rounded-3xl border-[#0077b5]/20 text-[#0077b5] hover:bg-[#0077b5]/5 transition-all">
-            <Image src="/images/Logotipo.png" alt="In" width={24} height={24} className="opacity-70 group-hover:opacity-100" />
-          </Link>
-          <Link href="https://chat.whatsapp.com/H0lG0T5yLAVB0qGRBhpBsT" target="_blank" className="flex items-center justify-center p-5 glass-panel rounded-3xl border-emerald-500/20 text-emerald-500 hover:bg-emerald-500/5 transition-all">
-            <span className="material-symbols-outlined text-2xl">group</span>
-          </Link>
+        <div className="flex items-center gap-4 py-2 pt-8">
+          <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-white/10" />
+          <span className="text-[9px] font-black text-slate-500 uppercase tracking-[0.4em]">Community</span>
+          <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-white/10" />
         </div>
+
+        <Link 
+          href="https://chat.whatsapp.com/H0lG0T5yLAVB0qGRBhpBsT" 
+          target="_blank" 
+          className="flex items-center gap-4 w-full glass-panel p-5 rounded-3xl border-emerald-500/20 hover:border-emerald-500/50 transition-all group"
+        >
+          <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-500 group-hover:scale-110 transition-transform">
+            <span className="material-symbols-outlined text-2xl">group</span>
+          </div>
+          <div className="text-left">
+            <span className="block text-[10px] font-black text-emerald-500 uppercase tracking-widest mb-1">WhatsApp Group</span>
+            <span className="block text-sm font-bold text-white">Únete a la comunidad gratuita</span>
+          </div>
+        </Link>
+
+        <Link 
+          href="https://www.linkedin.com/company/112620972/" 
+          target="_blank" 
+          className="flex items-center gap-4 w-full glass-panel p-5 rounded-3xl border-[#0077b5]/20 hover:border-[#0077b5]/50 transition-all group"
+        >
+          <div className="w-12 h-12 rounded-2xl bg-[#0077b5]/10 flex items-center justify-center text-[#0077b5] group-hover:scale-110 transition-transform">
+            <Image src="/images/Logotipo.png" alt="In" width={20} height={20} className="opacity-70 group-hover:opacity-100" />
+          </div>
+          <div className="text-left">
+            <span className="block text-[10px] font-black text-[#0077b5] uppercase tracking-widest mb-1">LinkedIn</span>
+            <span className="block text-sm font-bold text-white">Síguenos para más contenido</span>
+          </div>
+        </Link>
       </div>
 
       {/* Footer Version */}

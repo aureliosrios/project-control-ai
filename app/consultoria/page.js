@@ -3,40 +3,28 @@ import Image from "next/image";
 
 const soluciones = [
   {
-    title: "Reportabilidad Automática",
-    desc: "Adiós al ingreso manual. Sistemas de captura de datos que generan reportes de campo y gabinete en tiempo real.",
-    icon: "analytics",
-    features: ["Dashboards gerenciales automáticos", "Sincronización con Google Sheets", "Alertas de desviación inmediata"]
+    title: "Reportabilidad Móvil a Gerencial",
+    desc: "Captura de datos en el frente de trabajo mediante smartphone (Capataz/Maestro). Información procesada al instante para que Gerencia visualice riesgos y desviaciones en tiempo real.",
+    icon: "smartphone",
+    features: ["Reporte nativo desde campo", "Dashboard gerencial automático", "Análisis de riesgos inmediato"]
   },
   {
-    title: "Extracción P6 & Seguimiento",
-    desc: "Extraemos información de Primavera P6 automáticamente para preparar informes de seguimiento sin error humano.",
+    title: "Sincronización P6 & Lookahead",
+    desc: "Transformamos la data de Primavera P6 en un entregable dinámico. Generación automática de Lookahead semanal sin intervención manual, extrayendo la ruta crítica directo a tu panel.",
     icon: "account_tree",
-    features: ["Carga masiva de actividades", "Actualización de cronogramas", "Análisis de ruta crítica IA"]
+    features: ["Extracción automatizada de P6", "Lookahead dinámico", "Sincronización de hitos"]
   },
   {
-    title: "Lookahead & Valor Ganado",
-    desc: "Cálculo automático de Lookahead y EVM (Valor Ganado) directamente desde la reportabilidad diaria.",
-    icon: "trending_up",
-    features: ["Proyección de hitos", "Curva S automática", "Análisis de productividad"]
+    title: "Control de Costos (AC vs EV)",
+    desc: "Cálculo preciso del Costo Actual (AC) basado en personal en campo y consumo de almacén, comparado automáticamente contra el Valor Ganado (EV) del proyecto.",
+    icon: "payments",
+    features: ["Costo Actual automatizado", "Análisis de Valor Ganado", "Conciliación Almacén vs RRHH"]
   },
   {
-    title: "Cotizaciones con IA",
-    desc: "Prepara presupuestos y licitaciones en minutos utilizando Agentes de IA que analizan planos y EETT.",
-    icon: "description",
-    features: ["Análisis masivo de ítems", "Cálculo de APU asistido", "Generación de propuestas técnica"]
-  },
-  {
-    title: "Cruce Almacén vs RRHH",
-    desc: "Control total de costos comparando el consumo real de almacén y mano de obra contra el presupuesto.",
-    icon: "inventory_2",
-    features: ["Auditoría de recursos", "Detección de mermas", "Conciliación de costos actuales"]
-  },
-  {
-    title: "Agentes Autónomos",
-    desc: "Desplegamos instancias de Antigravity y Claude Code para gestionar tus flujos de trabajo en la nube.",
-    icon: "precision_manufacturing",
-    features: ["Infraestructura Supabase + Vercel", "Integración con GitHub", "Flujos MCP personalizados"]
+    title: "Estandarización de Propuestas",
+    desc: "Utilizamos Agentes de IA para estandarizar tus propuestas económicas. Obtén cotizaciones competitivas y estructuradas con una velocidad de respuesta sin precedentes.",
+    icon: "assignment",
+    features: ["Propuestas económicas rápidas", "Estandarización de partidas", "Optimización de licitaciones"]
   }
 ];
 
@@ -50,28 +38,28 @@ export default function Consultoria() {
         <section className="text-center mb-24">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[10px] font-black uppercase tracking-[0.4em] mb-8">
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_10px_rgba(0,242,255,0.8)]"></span>
-            Engineering Intelligence Division
+            Operational Intelligence System
           </div>
           <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-white mb-10 uppercase leading-[0.9]">
-            ELIMINAMOS EL <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">TRABAJO MANUAL</span>
+            MÁXIMA <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">EFICIENCIA OPERATIVA</span>
           </h1>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto font-light leading-relaxed mb-12">
-            Especialistas en automatizar constructoras y consultoras con cuellos de botella. 
-            Transformamos procesos de días en segundos mediante Agentes de IA y Arquitectura de Datos de Élite.
+            Especialistas en eliminar el trabajo manual en empresas constructoras. 
+            Digitalizamos el frente de obra y automatizamos el control de proyectos con precisión quirúrgica.
           </p>
           <Link 
             href="https://wa.me/51993147501?text=Hola,%20necesito%20automatizar%20mis%20procesos%20de%20ingenier%C3%ADa." 
             target="_blank"
             className="bg-cyan-500 text-slate-950 px-10 py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:scale-105 transition-all shadow-[0_0_40px_rgba(6,182,212,0.3)] inline-flex items-center gap-4 group"
           >
-            Agendar Auditoría de Procesos
+            Agendar Diagnóstico Operativo
             <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">bolt</span>
           </Link>
         </section>
 
         {/* Services Grid */}
-        <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-32">
+        <section className="grid md:grid-cols-2 gap-8 mb-32">
           {soluciones.map((sol, i) => (
             <div key={i} className="glass-panel p-10 rounded-[40px] border-white/5 hover:border-cyan-500/30 transition-all group">
               <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center text-cyan-400 mb-8 group-hover:scale-110 transition-transform">
@@ -91,16 +79,40 @@ export default function Consultoria() {
           ))}
         </section>
 
-        {/* Tech Stack Banner */}
-        <section className="glass-panel p-12 rounded-[50px] border-white/5 text-center mb-32 relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600" />
-          <p className="text-cyan-400 text-[10px] font-black tracking-[0.6em] uppercase mb-10">Our Technology Stack</p>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-10 opacity-60">
-            {["Claude Code", "Antigravity", "Supabase", "Vercel", "GitHub", "Google Sheets"].map((tech) => (
-              <div key={tech} className="text-sm font-black text-white uppercase tracking-tighter">
-                {tech}
+        {/* Metodología & Agentes */}
+        <section className="mb-32">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-black text-white uppercase tracking-tighter mb-4">Nuestra Infraestructura</h2>
+            <p className="text-slate-500 font-light max-w-xl mx-auto">Utilizamos el stack tecnológico más avanzado del mercado para dar vida a nuestras soluciones.</p>
+          </div>
+          
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
+            <div className="glass-panel p-12 rounded-[50px] border-white/5 relative overflow-hidden h-full">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600" />
+              <div className="flex flex-col gap-8">
+                <div>
+                  <h4 className="text-white font-black uppercase text-xl mb-4">Arquitectura Agéntica</h4>
+                  <p className="text-slate-400 text-sm font-light leading-relaxed">
+                    Nuestras soluciones son impulsadas por motores de IA especializados como <span className="text-cyan-400 font-bold">Claude Code</span> y <span className="text-cyan-400 font-bold">Antigravity</span>. 
+                    No instalamos software genérico; desplegamos agentes autónomos entrenados en tu lógica de negocio.
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-4 pt-4">
+                  {["Supabase", "Vercel", "GitHub", "Google Sheets", "Python Core"].map((tech) => (
+                    <span key={tech} className="bg-white/5 border border-white/10 px-4 py-2 rounded-lg text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
-            ))}
+            </div>
+            
+            <div className="glass-panel p-12 rounded-[50px] border-white/5 h-full flex items-center justify-center bg-gradient-to-br from-cyan-500/5 to-transparent">
+               <div className="text-center">
+                 <span className="material-symbols-outlined text-6xl text-cyan-500 mb-6 animate-spin-slow">hub</span>
+                 <p className="text-white font-black uppercase text-2xl tracking-tighter">Sincronización <br /> Total</p>
+               </div>
+            </div>
           </div>
         </section>
 
@@ -108,7 +120,7 @@ export default function Consultoria() {
         <section className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-black text-white mb-6 uppercase tracking-tighter">¿Listo para escalar tu rentabilidad?</h2>
           <p className="text-slate-400 mb-12 font-light italic">
-            "No vendemos software, vendemos tiempo y precisión para ingenieros que quieren liderar la era de la IA."
+            "No vendemos herramientas aisladas, entregamos sistemas de control que permiten a los ingenieros volver a hacer ingeniería."
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link 
@@ -123,4 +135,5 @@ export default function Consultoria() {
     </div>
   );
 }
+
 

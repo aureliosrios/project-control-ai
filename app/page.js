@@ -21,39 +21,39 @@ export default function Home() {
               Neural Engineering Systems v5.1
             </div>
 
-            <div className="space-y-4">
-              <h1 className="text-7xl md:text-9xl font-black text-white leading-none tracking-tighter">
+            <div className="space-y-6">
+              <h1 className="text-5xl md:text-9xl font-black text-white leading-[0.8] tracking-tighter uppercase">
                 INGENIERÍA <br />
                 <span className="text-neon">AUMENTADA</span>
               </h1>
-              <p className="text-2xl text-slate-400 font-light max-w-xl leading-relaxed">
+              <p className="text-lg md:text-2xl text-slate-400 font-light max-w-xl leading-relaxed">
                 Reinventamos el <span className="text-white font-bold italic">Control de Proyectos</span> con Agentes de IA que operan en el núcleo de tus datos.
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-8">
-              <Link href="/formacion" className="neon-button text-lg uppercase tracking-widest">
+            <div className="flex flex-col sm:flex-row gap-6">
+              <Link href="/formacion" className="neon-button text-lg uppercase tracking-widest text-center py-6 px-10">
                 Iniciar Formación
               </Link>
-              <Link href="/consultoria" className="px-10 py-5 bg-white/5 border border-white/10 text-white rounded-xl font-bold hover:bg-white/10 transition-all flex items-center gap-3">
+              <Link href="/consultoria" className="px-10 py-6 bg-white/5 border border-white/10 text-white rounded-xl font-bold hover:bg-white/10 transition-all flex items-center justify-center gap-3 text-sm uppercase tracking-widest">
                 Agendar Diagnóstico
                 <span className="material-symbols-outlined text-sm">bolt</span>
               </Link>
             </div>
 
             {/* Industrial Metrics */}
-            <div className="grid grid-cols-3 gap-12 pt-16 border-t border-white/10 cyber-border">
-              <div>
-                <p className="text-4xl font-black text-white">+40%</p>
-                <p className="text-[11px] text-slate-500 font-bold uppercase tracking-widest mt-2">Eficiencia Operativa</p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 pt-16 border-t border-white/10 cyber-border">
+              <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+                <p className="text-5xl font-black text-white">+40%</p>
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-2">Eficiencia Operativa</p>
               </div>
-              <div>
-                <p className="text-4xl font-black text-white">0.05s</p>
-                <p className="text-[11px] text-slate-500 font-bold uppercase tracking-widest mt-2">Detección de Riesgos</p>
+              <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+                <p className="text-5xl font-black text-white">0.05s</p>
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-2">Detección de Riesgos</p>
               </div>
-              <div>
-                <p className="text-4xl font-black text-white">100%</p>
-                <p className="text-[11px] text-slate-500 font-bold uppercase tracking-widest mt-2">Precisión Auditada</p>
+              <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+                <p className="text-5xl font-black text-white">100%</p>
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-2">Precisión Auditada</p>
               </div>
             </div>
           </div>

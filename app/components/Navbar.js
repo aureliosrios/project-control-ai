@@ -25,6 +25,7 @@ export default function Navbar() {
             <Link href="/consultoria" className="hover:text-cyan-400 transition-colors">Consultoría</Link>
             <Link href="/formacion" className="hover:text-cyan-400 transition-colors">Formación</Link>
             <Link href="/recursos" className="hover:text-cyan-400 transition-colors">Recursos</Link>
+            <Link href="/verificar" className="hover:text-cyan-400 transition-colors">Verificar</Link>
           </div>
           <Link href="/inscripcion" className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 px-6 py-3 rounded-xl font-black text-xs uppercase tracking-widest transition-all hover:scale-105 shadow-[0_0_20px_rgba(6,182,212,0.3)]">
             Inscripción
@@ -46,6 +47,7 @@ export default function Navbar() {
           <Link href="/consultoria" onClick={() => setIsOpen(false)} className="text-lg font-black text-white uppercase tracking-tighter">Consultoría</Link>
           <Link href="/formacion" onClick={() => setIsOpen(false)} className="text-lg font-black text-white uppercase tracking-tighter">Formación</Link>
           <Link href="/recursos" onClick={() => setIsOpen(false)} className="text-lg font-black text-white uppercase tracking-tighter">Recursos</Link>
+          <Link href="/verificar" onClick={() => setIsOpen(false)} className="text-lg font-black text-white uppercase tracking-tighter">Verificar</Link>
           <Link href="/inscripcion" onClick={() => setIsOpen(false)} className="bg-cyan-500 text-slate-950 px-6 py-4 rounded-xl font-black text-center uppercase tracking-widest text-xs">
             Inscripción
           </Link>

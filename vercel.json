@@ -8,6 +8,7 @@
     { "source": "/inscripcion.html", "destination": "/inscripcion" },
     { "source": "/clases-grabadas.html", "destination": "/clases-grabadas" },
     { "source": "/consultoria.html", "destination": "/consultoria" },
-    { "source": "/recursos.html", "destination": "/recursos" }
+    { "source": "/recursos.html", "destination": "/recursos" },
+    { "source": "/verificar.html", "destination": "/verificar" }
   ]
 }

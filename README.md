@@ -1,75 +1,41 @@
-# Project Control AI - Sitio Web Oficial
+# PCAI System v5.2 | Ingeniería Aumentada
 
-[![Deploy Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)]()
+![Status](https://img.shields.io/badge/Status-Active-cyan)
+![Framework](https://img.shields.io/badge/Framework-Next.js%2014-black)
+![Deployment](https://img.shields.io/badge/Deploy-Vercel-black)
 
-## 🎓 Descripción
+## 🎓 El Ecosistema de Project Control AI
+Plataforma industrial de alto impacto diseñada para la formación de ingenieros en la era de la Inteligencia Artificial. Especializados en automatización de procesos, licitaciones inteligentes y control de proyectos avanzado.
 
-Sitio web oficial de **Project Control AI**, academia especializada en formación de ingenieros en gestión de proyectos, licitaciones y herramientas de IA aplicadas a la construcción.
+## 🚀 Arquitectura Técnica
+Este proyecto ha evolucionado de una versión estática a una aplicación robusta basada en **Next.js**:
 
-## 🚀 Tecnologías
+- **Core**: Next.js 14 (App Router)
+- **Estilos**: Tailwind CSS con estética NASA-Punk (Industrial Dark)
+- **Base de Datos**: Supabase (Gestión de inscritos y recursos)
+- **Deployment**: Vercel (CI/CD automático desde GitHub)
 
-- **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
-- **Backend**: Supabase (Base de datos y autenticación)
-- **Generación dinámica**: Node.js para scripts de automatización
-- **Hosting**: GitHub Pages / Netlify
+## 🌐 Enlaces Oficiales
+- **Producción**: [https://project-control-ai-one.vercel.app](https://project-control-ai-one.vercel.app)
+- **TikTok (Link Bio)**: [PCAI Official](https://www.tiktok.com/@aureliosrios)
 
-## 📁 Estructura del Proyecto
+## 📁 Estructura del Sistema
+- `app/`: Lógica de páginas y rutas (App Router).
+- `components/`: Componentes modulares (Navbar, Footer, CourseCards).
+- `lib/`: Configuraciones de clientes (Supabase).
+- `public/`: Activos estáticos (imágenes, logos).
+- `docs/`: Documentación técnica y guías de mantenimiento.
 
+## 🛠️ Desarrollo y Mantenimiento
+Para correr el proyecto localmente:
+```bash
+npm install
+npm run dev
 ```
-📦 Pagina WEB Project Control AI/
-├── assets/          # Recursos estáticos (CSS, JS, imágenes, PDFs)
-├── scripts/         # Scripts de desarrollo y generación
-├── docs/            # Documentación técnica
-├── *.html           # Páginas del sitio
-└── cursos.json      # Base de datos de cursos
-```
 
-Para más detalles, consulta [`docs/ESTRUCTURA_PROYECTO.md`](docs/ESTRUCTURA_PROYECTO.md)
+Para actualizar contenido (precios, links de Hotmart), consulta la [Guía de Mantenimiento](docs/GUIA_MANTENIMIENTO.md).
 
-## 🛠️ Desarrollo Local
-
-### Requisitos
-- **Navegador web moderno** (Chrome, Firefox, Edge)
-- **Node.js** (opcional, solo para generar páginas de curso)
-
-### Pasos
-1. Clona el repositorio:
-   ```bash
-   git clone https://github.com/tu-usuario/pagina-web-project-control-ai.git
-   ```
-
-2. Abre `index.html` en tu navegador
-
-3. (Opcional) Para generar páginas de curso:
-   ```bash
-   node scripts/generar-cursos.js
-   ```
-
-## 📚 Cursos Disponibles
-
-1. **El Despertar de la IA para la Gestión de Proyectos** (Curso 1) - Gestión de Proyectos con lenguajes nativos de IA (HTML, Mermaid, MD, CSV).
-2. **Ingeniería Aumentada: Automatización con Agentes de IA** (Curso 2) - Python, VBA y Scripts MCP para ecosistemas agénticos y dashboards avanzados.
-3. **Licitaciones Inteligentes con IA** (Avanzado) - Automatización de expedientes con MCP, Skills y Python (Análisis masivo de documentos).
-
-## 🎯 Características
-
-✅ Sistema de inscripción integrado con Supabase  
-✅ Portal de certificados con validación QR  
-✅ Reproductor de clases grabadas con miniaturas  
-✅ Generador automático de páginas de curso  
-✅ Diseño responsive y moderno  
-
-## 📝 Licencia
-
-Este proyecto es propiedad de **Project Control AI**. Todos los derechos reservados.
-
-## 📧 Contacto
-
-- **Web**: [projectcontrolai.com](https://projectcontrolai.com)
-- **Email**: info@projectcontrolai.com
-- **WhatsApp**: +51 993 147 501
-
----
-
-**© 2025 Project Control AI - Forjando a los Ingenieros de la Era IA**
+## 📝 Licencia y Contacto
+Propiedad de **Project Control AI**. Todos los derechos reservados 2025.
+- WhatsApp: +51 993 147 501
+- Web: [projectcontrolai.com](https://projectcontrolai.com)

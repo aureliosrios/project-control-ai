@@ -21,7 +21,13 @@ Los links de inscripción se gestionan directamente en los componentes de págin
 - Todas las imágenes nuevas deben subirse a `public/images/`.
 - Referéncialas en el código como `/images/tu-imagen.png` (Next.js resuelve la carpeta public automáticamente).
 
-## 4. Despliegue (Deploy)
+## 4. Sistema de Certificación (Verificar)
+El sistema de descarga de diplomas es automático y consume datos de Supabase.
+- **Link Oficial**: [https://project-control-ai-one.vercel.app/verificar](https://project-control-ai-one.vercel.app/verificar)
+- **Límite de Descarga**: Por seguridad, los certificados tienen un límite de **1 descarga**.
+- **Coordenadas PDF**: Si cambias la plantilla del certificado, debes ajustar las coordenadas en `app/verificar/page.js`.
+
+## 5. Despliegue (Deploy)
 El sistema está configurado con **CI/CD** (Integración Continua).
 - Cada vez que haces un `git push origin main`, Vercel detecta el cambio y actualiza el sitio en segundos.
 - **Link de Producción**: [https://project-control-ai-one.vercel.app](https://project-control-ai-one.vercel.app)

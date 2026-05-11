@@ -2,12 +2,12 @@
   "version": 2,
   "framework": "nextjs",
   "cleanUrls": true,
-  "routes": [
-    { "src": "/mobile-landing.html", "dest": "/mobile" },
-    { "src": "/formacion.html", "dest": "/formacion" },
-    { "src": "/inscripcion.html", "dest": "/inscripcion" },
-    { "src": "/clases-grabadas.html", "dest": "/clases-grabadas" },
-    { "src": "/consultoria.html", "dest": "/consultoria" },
-    { "src": "/recursos.html", "dest": "/recursos" }
+  "rewrites": [
+    { "source": "/mobile-landing.html", "destination": "/mobile" },
+    { "source": "/formacion.html", "destination": "/formacion" },
+    { "source": "/inscripcion.html", "destination": "/inscripcion" },
+    { "source": "/clases-grabadas.html", "destination": "/clases-grabadas" },
+    { "source": "/consultoria.html", "destination": "/consultoria" },
+    { "source": "/recursos.html", "destination": "/recursos" }
   ]
 }

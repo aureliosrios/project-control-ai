@@ -6,8 +6,8 @@ import Footer from "./components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Project Control AI | Automatización de Proyectos",
-  description: "Democraticemos la programación. Automatización avanzada para ingenieros de construcción.",
+  title: "PCAI System v5.2 | Ingeniería Aumentada",
+  description: "Sistema de Control de Proyectos impulsado por IA de Élite.",
 };
 
 export default function RootLayout({ children }) {

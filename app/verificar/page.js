@@ -112,15 +112,25 @@ export default function Verificar() {
         color: rgb(0.2, 0.2, 0.2) 
       });
 
+      const isPrimavera = (cert.nombre_curso_oficial || cert.nombre_curso_inscrito || "").toLowerCase().includes("primavera");
+      
+      const pNombre = cert.prof_nombre || (isPrimavera ? "Mario" : "Aurelio");
+      const pApellido = cert.prof_apellido || (isPrimavera ? "Huilca Ayma" : "Solórzano Ríos");
+      const pCIP = cert.prof_cip || (isPrimavera ? "186892" : "76508");
+      const pFirma = cert.prof_firma || (isPrimavera 
+        ? "https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/Firmas/firma_mario_186892.png" 
+        : "https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/Firmas/firma_aurelio_76508.png"
+      );
+
       // Instructor
-      if (cert.prof_firma) {
+      if (pFirma) {
         try {
-          const fImg = await pdfDoc.embedPng(await (await fetch(cert.prof_firma)).arrayBuffer());
+          const fImg = await pdfDoc.embedPng(await (await fetch(pFirma)).arrayBuffer());
           page1.drawImage(fImg, { x: 437, y: 120, width: 120, height: 120 });
         } catch (e) { console.warn("Error cargando firma", e); }
       }
-      page1.drawText(`Ing. ${cert.prof_nombre} ${cert.prof_apellido}`, { x: 448, y: 74, size: 10, font: fontB });
-      page1.drawText(`CIP: ${cert.prof_cip || ''}`, { x: 448, y: 64, size: 9, font: fontR });
+      page1.drawText(`Ing. ${pNombre} ${pApellido}`, { x: 448, y: 76, size: 10, font: fontB });
+      page1.drawText(`CIP: ${pCIP}`, { x: 448, y: 66, size: 9, font: fontR });
 
       // Página 2 (Reverso)
       if (pdfDoc.getPages().length > 1) {

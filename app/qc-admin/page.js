@@ -36,10 +36,15 @@ export default function QCDashboard() {
     setSelectedCert(cert);
     if (mode === 'preview') setLoading(true);
     try {
-      // FORZADO DE DATOS (Si la vista falla, usamos los del Director)
-      const pNombre = cert.prof_nombre || "Aurelio";
-      const pApellido = cert.prof_apellido || "Solórzano Ríos";
-      const pFirma = cert.prof_firma || "https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/Firmas/firma_aurelio_76508.png";
+      const isPrimavera = (cert.nombre_curso_oficial || cert.nombre_curso_inscrito || "").toLowerCase().includes("primavera");
+      
+      const pNombre = cert.prof_nombre || (isPrimavera ? "Mario" : "Aurelio");
+      const pApellido = cert.prof_apellido || (isPrimavera ? "Huilca Ayma" : "Solórzano Ríos");
+      const pCIP = cert.prof_cip || (isPrimavera ? "186892" : "76508");
+      const pFirma = cert.prof_firma || (isPrimavera 
+        ? "https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/Firmas/firma_mario_186892.png" 
+        : "https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/Firmas/firma_aurelio_76508.png"
+      );
       
       const slug = (cert.nombre_curso_oficial || cert.nombre_curso_inscrito || "").toLowerCase();
       let plantilla = "cert_gestion_integral.pdf";
@@ -66,8 +71,8 @@ export default function QCDashboard() {
         page1.drawImage(fImg, { x: 437, y: 120, width: 120, height: 120 });
       } catch (e) {}
       
-      page1.drawText(`Ing. ${pNombre} ${pApellido}`, { x: 448, y: 74, size: 10, font: fontB });
-      page1.drawText(`CIP: ${cert.prof_cip || ''}`, { x: 448, y: 64, size: 9, font: fontR });
+      page1.drawText(`Ing. ${pNombre} ${pApellido}`, { x: 448, y: 76, size: 10, font: fontB });
+      page1.drawText(`CIP: ${pCIP}`, { x: 448, y: 66, size: 9, font: fontR });
 
       const qrUrl = `https://projectcontrolai.com/academia/validar.html?v=${cert.codigo_verificacion}`;
       const qrDataUrl = await QRCode.toDataURL(qrUrl, { margin: 1, width: 300 });

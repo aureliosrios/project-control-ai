@@ -1,6 +1,6 @@
-// QC Dashboard v1.3 - Fixed Layout (No overlap)
+// QC Dashboard v1.4 - Auto-Preview & Improved UX
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import QRCode from "qrcode";
@@ -23,17 +23,27 @@ export default function QCDashboard() {
     setLoading(true);
     setResultados([]);
     setPreviewUrl(null);
+    setSelectedCert(null);
+
     try {
       const { data, error } = await supabase.from('vw_certificados_publicos').select('*').eq('dni', dni);
       if (error) throw error;
-      setResultados(data || []);
+      
+      const res = data || [];
+      setResultados(res);
+      
+      // AUTO-PREVIEW: Si hay resultados, cargar el primero automáticamente
+      if (res.length > 0) {
+        generarCertificado(res[0], 'preview');
+      }
     } catch (e) { alert("Error: " + e.message); }
     finally { setLoading(false); }
   }
 
   async function generarCertificado(cert, mode = 'preview') {
     setSelectedCert(cert);
-    setLoading(true);
+    if (mode === 'preview') setLoading(true);
+    
     try {
       const slug = (cert.nombre_curso_oficial || cert.nombre_curso_inscrito || "").toLowerCase();
       let archivo = "cert_gestion_integral.pdf";
@@ -100,12 +110,12 @@ export default function QCDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-100 font-sans p-8 pt-32"> {/* pt-32 para bajar el contenido debajo del Navbar */}
+    <div className="min-h-screen bg-[#020617] text-slate-100 font-sans p-8 pt-32">
       <div className="max-w-7xl mx-auto">
-        <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-6 bg-white/5 p-8 rounded-[32px] border border-white/10">
+        <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-6 bg-white/5 p-8 rounded-[32px] border border-white/10 shadow-2xl">
           <div>
             <h1 className="text-4xl font-black uppercase text-white tracking-tighter">QC <span className="text-cyan-400">ADMIN PANEL</span></h1>
-            <p className="text-slate-500 text-[10px] font-black tracking-[0.3em] mt-1 uppercase">Sistema de Validación de Certificados</p>
+            <p className="text-slate-500 text-[10px] font-black tracking-[0.3em] mt-1 uppercase">Control de Calidad v1.4</p>
           </div>
           <div className="flex gap-4 w-full md:w-auto">
             <input 
@@ -114,9 +124,9 @@ export default function QCDashboard() {
               onChange={(e) => setDni(e.target.value)} 
               onKeyDown={(e)=>e.key==='Enter' && buscarCertificados()} 
               placeholder="Ingrese DNI..." 
-              className="bg-black/50 border border-white/20 rounded-2xl px-6 py-4 text-white outline-none w-full md:w-64 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/50 transition-all" 
+              className="bg-black/50 border border-white/20 rounded-2xl px-6 py-4 text-white outline-none w-full md:w-64 focus:border-cyan-500 transition-all" 
             />
-            <button onClick={buscarCertificados} className="bg-cyan-500 text-black px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-cyan-400 active:scale-95 transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)]">
+            <button onClick={buscarCertificados} className="bg-cyan-500 text-black px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-cyan-400 transition-all">
               BUSCAR
             </button>
           </div>
@@ -124,26 +134,20 @@ export default function QCDashboard() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           <div className="space-y-6">
-            <h2 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em] px-4">Resultados de Búsqueda</h2>
-            {resultados.length === 0 && !loading && (
-              <div className="text-slate-700 text-xs font-bold px-4">No hay resultados. Ingrese un DNI arriba.</div>
-            )}
+            <h2 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em] px-4">Resultados</h2>
             {resultados.map(cert => (
-              <div key={cert.certificado_id} onClick={() => generarCertificado(cert, 'preview')} className={`p-8 rounded-[40px] border transition-all cursor-pointer group ${selectedCert?.certificado_id === cert.certificado_id ? 'bg-cyan-500/10 border-cyan-500/50 shadow-[0_20px_50px_rgba(0,0,0,0.5)]' : 'bg-white/5 border-white/5 hover:border-white/20 hover:bg-white/[0.07]'}`}>
-                <div className="text-[10px] font-black text-cyan-400 mb-3 uppercase tracking-widest">{cert.curso_nombre}</div>
+              <div 
+                key={cert.certificado_id} 
+                onClick={() => generarCertificado(cert, 'preview')} 
+                className={`p-8 rounded-[40px] border transition-all cursor-pointer group ${selectedCert?.certificado_id === cert.certificado_id ? 'bg-cyan-500/15 border-cyan-500/50' : 'bg-white/5 border-white/5 hover:border-white/20'}`}
+              >
                 <div className="text-white font-bold text-lg mb-6 leading-tight">{cert.nombre_completo}</div>
-                
                 <div className="grid grid-cols-1 gap-3">
-                  <button onClick={(e) => { e.stopPropagation(); resetearContador(cert.id); }} className="w-full py-4 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/20 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all">
-                    Habilitar Alumno (Reseteo)
-                  </button>
-                  <button onClick={(e) => { e.stopPropagation(); generarCertificado(cert, 'download'); }} className="w-full py-4 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all">
-                    Descarga Admin (Sin Contador)
-                  </button>
+                  <button onClick={(e) => { e.stopPropagation(); resetearContador(cert.id); }} className="w-full py-4 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/20 rounded-2xl text-[10px] font-black uppercase tracking-widest">Habilitar Alumno</button>
+                  <button onClick={(e) => { e.stopPropagation(); generarCertificado(cert, 'download'); }} className="w-full py-4 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-2xl text-[10px] font-black uppercase tracking-widest">Descarga Admin</button>
                 </div>
-                
                 <div className="mt-8 pt-6 border-t border-white/5 flex justify-between items-center text-[9px] font-bold text-slate-500 uppercase tracking-widest">
-                   <span>Descargas: <span className={cert.descargas_count > 0 ? 'text-orange-400' : 'text-emerald-400'}>{cert.descargas_count}</span></span>
+                   <span>Descargas: {cert.descargas_count}</span>
                    <span>Folio: {cert.codigo_verificacion}</span>
                 </div>
               </div>
@@ -153,17 +157,19 @@ export default function QCDashboard() {
           <div className="lg:col-span-2">
             <div className="bg-black/60 rounded-[50px] border border-white/5 min-h-[700px] flex items-center justify-center relative overflow-hidden backdrop-blur-3xl shadow-2xl">
               {previewUrl ? (
-                <iframe src={previewUrl} className="w-full h-[700px] rounded-[50px]" title="Vista Previa" />
+                <iframe src={previewUrl} className="w-full h-[700px] rounded-[50px] border-none" title="Vista Previa" />
               ) : (
-                <div className="text-center opacity-30 group">
-                  <div className="text-7xl mb-6 grayscale group-hover:grayscale-0 transition-all duration-700">📜</div>
-                  <p className="text-[10px] font-black tracking-[0.5em] uppercase text-slate-400">Seleccione un certificado para previsualizar</p>
+                <div className="text-center opacity-30">
+                  <div className="text-7xl mb-6">📜</div>
+                  <p className="text-[10px] font-black tracking-[0.5em] uppercase text-slate-400">
+                    {loading ? "Generando Vista Previa..." : "Seleccione un certificado"}
+                  </p>
                 </div>
               )}
               {loading && (
                 <div className="absolute inset-0 bg-[#020617]/90 flex flex-col items-center justify-center gap-4 backdrop-blur-md">
                   <div className="w-12 h-12 border-4 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin"></div>
-                  <div className="text-cyan-400 font-black text-xs uppercase tracking-[0.4em]">Procesando Certificado...</div>
+                  <div className="text-cyan-400 font-black text-xs uppercase tracking-[0.4em]">Cargando PDF...</div>
                 </div>
               )}
             </div>

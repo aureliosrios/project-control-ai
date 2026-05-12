@@ -120,8 +120,7 @@ export default function Verificar() {
         } catch (e) { console.warn("Error cargando firma", e); }
       }
       page1.drawText(`Ing. ${cert.prof_nombre} ${cert.prof_apellido}`, { x: 448, y: 74, size: 10, font: fontB });
-      const offsetE = fontB.widthOfTextAtSize("Ing. Aur", 10);
-      page1.drawText(`CIP: ${cert.prof_cip || ''}`, { x: 448 + offsetE, y: 61, size: 9, font: fontR });
+      page1.drawText(`CIP: ${cert.prof_cip || ''}`, { x: 448, y: 64, size: 9, font: fontR });
 
       // Página 2 (Reverso)
       if (pdfDoc.getPages().length > 1) {
@@ -231,31 +230,47 @@ export default function Verificar() {
                   const curso = item.nombre_curso_oficial || item.nombre_curso_inscrito;
                   const yaDescargado = (item.descargas_count >= 1);
                   const graduado = (item.estado_academico === 'GRADUADO');
+                  
+                  // Lógica de Estado Visual
+                  let statusLabel = "⏳ PROCESO";
+                  let statusClass = "bg-orange-500/20 text-orange-400";
+                  
+                  if (yaDescargado) {
+                    statusLabel = "🔒 CERRADO";
+                    statusClass = "bg-red-500/20 text-red-400";
+                  } else if (graduado) {
+                    statusLabel = "✅ DISPONIBLE";
+                    statusClass = "bg-emerald-500/20 text-emerald-400";
+                  }
 
                   return (
-                    <div key={item.certificado_id} className="p-6 rounded-3xl bg-white/[0.03] border border-white/5">
+                    <div key={item.certificado_id} className="p-6 rounded-3xl bg-white/[0.03] border border-white/5 transition-all hover:bg-white/[0.05]">
                       <div className="flex justify-between items-start mb-4">
-                        <div className="text-white font-bold text-sm leading-tight max-w-[70%]">{curso}</div>
-                        <span className={`text-[8px] font-black px-2 py-1 rounded-md ${graduado ? 'bg-emerald-500/20 text-emerald-400' : 'bg-orange-500/20 text-orange-400'}`}>
-                          {graduado ? "✅ GRADUADO" : "⏳ PROCESO"}
+                        <div className="text-white font-bold text-sm leading-tight max-w-[70%] uppercase tracking-tighter">{curso}</div>
+                        <span className={`text-[8px] font-black px-2 py-1 rounded-md tracking-widest ${statusClass}`}>
+                          {statusLabel}
                         </span>
                       </div>
 
                       {graduado ? (
                         yaDescargado ? (
-                          <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-[9px] font-black p-3 rounded-xl text-center uppercase tracking-widest">
-                            ⚠️ LÍMITE DE DESCARGA AGOTADO
+                          <div className="bg-white/5 border border-white/10 text-slate-500 text-[9px] font-black p-3 rounded-xl text-center uppercase tracking-widest">
+                            Certificado ya descargado
                           </div>
                         ) : (
                           <button 
                             onClick={() => procesarDiploma(item)}
                             disabled={loading}
-                            className="w-full py-3 bg-white/5 hover:bg-cyan-500 hover:text-slate-950 border border-white/10 rounded-xl text-[10px] font-black text-white uppercase tracking-widest transition-all"
+                            className="w-full py-3 bg-cyan-500/10 hover:bg-cyan-500 hover:text-slate-950 border border-cyan-500/30 rounded-xl text-[10px] font-black text-cyan-400 uppercase tracking-widest transition-all"
                           >
                             📥 DESCARGAR DIPLOMA
                           </button>
                         )
-                      ) : null}
+                      ) : (
+                        <div className="bg-white/5 border border-dashed border-white/10 text-slate-600 text-[9px] font-black p-3 rounded-xl text-center uppercase tracking-widest">
+                          Curso en dictado / Evaluación pendiente
+                        </div>
+                      )}
                     </div>
                   );
                 })}

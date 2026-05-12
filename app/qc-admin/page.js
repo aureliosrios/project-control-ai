@@ -67,6 +67,7 @@ export default function QCDashboard() {
       } catch (e) {}
       
       page1.drawText(`Ing. ${pNombre} ${pApellido}`, { x: 448, y: 74, size: 10, font: fontB });
+      page1.drawText(`CIP: ${cert.prof_cip || ''}`, { x: 448, y: 64, size: 9, font: fontR });
 
       const qrUrl = `https://projectcontrolai.com/academia/validar.html?v=${cert.codigo_verificacion}`;
       const qrDataUrl = await QRCode.toDataURL(qrUrl, { margin: 1, width: 300 });

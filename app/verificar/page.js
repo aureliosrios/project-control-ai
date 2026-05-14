@@ -14,12 +14,16 @@ export default function Verificar() {
   const [confirmName, setConfirmName] = useState("");
   const [titulo, setTitulo] = useState("Ing.");
   const [errorQR, setErrorQR] = useState("");
+  const [isValidating, setIsValidating] = useState(false);
 
   // Soporte para validación automática vía QR (?v=CODIGO)
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const v = params.get('v');
-    if (v) buscarPorCodigo(v);
+    if (v) {
+      setIsValidating(true);
+      buscarPorCodigo(v);
+    }
   }, []);
 
   async function buscarPorCodigo(codigo) {
@@ -32,7 +36,6 @@ export default function Verificar() {
         .single();
       if (error) throw error;
       if (data) {
-        setDni(data.dni);
         setAlumno(data);
         setConfirmName(data.nombre_completo.toUpperCase());
         setResultados([data]);
@@ -194,7 +197,7 @@ export default function Verificar() {
           const twImparticion = fontB.widthOfTextAtSize(textImparticion, 11);
           p2.drawText(textImparticion, {
             x: (w2 / 2) - (twImparticion / 2),
-            y: 118,
+            y: 77,
             size: 11,
             font: fontB,
             color: rgb(0.2, 0.2, 0.2)
@@ -308,6 +311,80 @@ export default function Verificar() {
     } finally {
       setLoading(false);
     }
+  }
+
+  // --- VISTA DE DECLARACIÓN JURADA (Para QR) ---
+  if (isValidating && searchDone && alumno) {
+    const slug = (alumno.nombre_curso_oficial || alumno.nombre_curso_inscrito || "").toLowerCase();
+    const isAsinc = slug.includes("despertar") || slug.includes("forense") || slug.includes("presupuesto") || alumno.edicion_grupo?.toUpperCase().includes("ASINCRONICO");
+
+    return (
+      <div className="min-h-screen bg-slate-100 flex items-center justify-center p-6 text-slate-900 font-sans">
+        <div className="w-full max-w-xl bg-white rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] p-10 border-t-[10px] border-cyan-500 overflow-hidden relative">
+          <div className="text-center mb-10 border-b border-slate-100 pb-8">
+            <div className="relative w-32 h-16 mx-auto mb-4">
+              <Image src="/images/logo.png" alt="PCAI" fill className="object-contain" />
+            </div>
+            <h1 className="text-2xl font-black text-slate-900 uppercase tracking-tighter">Declaración Jurada de Validez</h1>
+            <div className="inline-block bg-emerald-100 text-emerald-700 px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest mt-4">
+              ✓ Documento Auténtico PCAI
+            </div>
+          </div>
+          
+          <p className="text-sm text-slate-500 mb-8 leading-relaxed text-center px-4">
+            Project Control AI certifica la veracidad de la siguiente información académica registrada en nuestros sistemas oficiales:
+          </p>
+          
+          <div className="space-y-4">
+            <div className="bg-slate-50 p-5 rounded-2xl border-l-4 border-cyan-500">
+              <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Profesional Certificado</span>
+              <span className="text-lg font-bold text-slate-900 uppercase">{alumno.nombre_completo}</span>
+            </div>
+            <div className="bg-slate-50 p-5 rounded-2xl border-l-4 border-cyan-500">
+              <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Documento de Identidad</span>
+              <span className="text-lg font-bold text-slate-900">{alumno.dni}</span>
+            </div>
+            <div className="bg-slate-50 p-5 rounded-2xl border-l-4 border-cyan-500">
+              <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Programa Académico</span>
+              <span className="text-lg font-bold text-slate-900 uppercase">{alumno.nombre_curso_oficial || alumno.nombre_curso_inscrito}</span>
+            </div>
+            <div className="bg-slate-50 p-5 rounded-2xl border-l-4 border-cyan-500 flex justify-between items-center">
+              <div>
+                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Modalidad</span>
+                <span className="text-sm font-bold text-slate-900">{isAsinc ? "Asincrónica Autogestionada" : "Online en Vivo"}</span>
+              </div>
+              <div className="text-right">
+                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Duración</span>
+                <span className="text-sm font-bold text-slate-900">{isAsinc ? "12 Horas Académicas" : "45 Horas Académicas"}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 pt-10 border-t border-slate-100 flex justify-between items-end">
+            <div>
+              <div className="text-[10px] font-black text-slate-300 tracking-[0.2em] uppercase mb-1">Código de Folio</div>
+              <div className="text-xs font-bold text-slate-400">{alumno.codigo_verificacion}</div>
+            </div>
+            <div className="text-right">
+              {alumno.prof_firma && (
+                <div className="relative w-28 h-16 ml-auto mb-2">
+                  <img src={alumno.prof_firma} alt="Firma" className="object-contain h-full ml-auto" />
+                </div>
+              )}
+              <div className="text-sm font-black text-slate-900 uppercase tracking-tighter">Ing. {alumno.prof_nombre} {alumno.prof_apellido}</div>
+              <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">CIP: {alumno.prof_cip}</div>
+            </div>
+          </div>
+          
+          <button 
+            onClick={() => window.location.href = '/verificar'}
+            className="mt-10 w-full py-5 bg-slate-900 text-white rounded-3xl text-xs font-black uppercase tracking-widest hover:bg-cyan-500 hover:text-slate-950 transition-all shadow-[0_15px_40px_rgba(0,0,0,0.2)]"
+          >
+            ← Regresar al Portal
+          </button>
+        </div>
+      </div>
+    );
   }
 
   return (

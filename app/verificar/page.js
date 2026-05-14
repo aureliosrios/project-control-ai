@@ -180,12 +180,12 @@ export default function Verificar() {
           color: rgb(0.3, 0.3, 0.3)
         });
 
-        // QR Code - Apuntando al nuevo portal con parámetro de validación
-        const qrUrl = `https://project-control-ai-one.vercel.app/verificar?v=${cert.codigo_verificacion}`;
-        const qrDataUrl = await QRCode.toDataURL(qrUrl, { margin: 2, width: 300, errorCorrectionLevel: 'M' });
+        // QR Code - Optimizado para apertura directa (Nivel L + Margen 4)
+        const qrUrl = `https://project-control-ai-one.vercel.app/verificar?v=${cert.codigo_verificacion}`.trim();
+        const qrDataUrl = await QRCode.toDataURL(qrUrl, { margin: 4, width: 400, errorCorrectionLevel: 'L' });
         const qrImg = await pdfDoc.embedPng(qrDataUrl);
-        page1.drawRectangle({ x: 710, y: 83, width: 88, height: 88, color: rgb(1, 1, 1) });
-        page1.drawImage(qrImg, { x: 714, y: 87, width: 80, height: 80 });
+        page1.drawRectangle({ x: 706, y: 80, width: 94, height: 94, color: rgb(1, 1, 1) });
+        page1.drawImage(qrImg, { x: 710, y: 84, width: 86, height: 86 });
 
         // Página 2: contenido dinámico
         if (pdfDoc.getPages().length > 1) {

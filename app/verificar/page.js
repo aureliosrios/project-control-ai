@@ -122,11 +122,11 @@ export default function Verificar() {
           color: rgb(0.2, 0.2, 0.2)
         });
 
-        // Firma del instructor (Aurelio Solórzano) - REDUCIDA (60x60)
+        // Firma del instructor (Aurelio Solórzano) - ESCALADA +30% (78x78)
         try {
           const firmaUrl = "https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/Firmas/firma_aurelio_76508.png";
           const fImg = await pdfDoc.embedPng(await (await fetch(firmaUrl)).arrayBuffer());
-          page1.drawImage(fImg, { x: 467, y: 120, width: 60, height: 60 });
+          page1.drawImage(fImg, { x: 458, y: 116, width: 78, height: 78 });
         } catch (e) { console.warn("Error cargando firma", e); }
         
         // Instructor y CIP centrados
@@ -135,21 +135,11 @@ export default function Verificar() {
         page1.drawText(instNombre, { x: 442, y: 76, size: 10, font: fontB });
         page1.drawText(instCIP, { x: 442 + (fontB.widthOfTextAtSize(instNombre, 10)/2) - (fontR.widthOfTextAtSize(instCIP, 9)/2), y: 66, size: 9, font: fontR });
 
-        // --- CORRECCIÓN DE FECHAS ---
-        // 1. "Borrar" fecha que choca con el logo (Parche blanco)
-        page1.drawRectangle({
-          x: (width / 2) - 100,
-          y: 35,
-          width: 200,
-          height: 15,
-          color: rgb(1, 1, 1)
-        });
-
-        // 2. Nueva Fecha en esquina inferior derecha (Límite A4)
+        // Fecha de emisión: debajo del CIP, zona inferior derecha
         const labelFechaFinal = `Fecha de emisión: ${fechaEmision}`;
         page1.drawText(labelFechaFinal, {
-          x: width - 190,
-          y: 20,
+          x: width - 195,
+          y: 55,
           size: 8,
           font: fontR,
           color: rgb(0.3, 0.3, 0.3)
@@ -168,6 +158,14 @@ export default function Verificar() {
         const qrImg = await pdfDoc.embedPng(qrDataUrl);
         page1.drawRectangle({ x: 710, y: 83, width: 88, height: 88, color: rgb(1, 1, 1) });
         page1.drawImage(qrImg, { x: 714, y: 87, width: 80, height: 80 });
+
+        // Página 2: Fecha de emisión (igual que sincrónicos)
+        if (pdfDoc.getPages().length > 1) {
+          const p2 = pdfDoc.getPages()[1];
+          const { width: w2 } = p2.getSize();
+          const emisionP2 = `Fecha de Emisión: ${new Date().toLocaleDateString('es-PE')} ${new Date().toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit', hour12: true })}`;
+          p2.drawText(emisionP2, { x: w2 - fontR.widthOfTextAtSize(emisionP2, 8) - 50, y: 45, size: 8, font: fontR, color: rgb(0.3, 0.3, 0.3) });
+        }
 
         // Descargar
         const pdfBytes = await pdfDoc.save();

@@ -145,22 +145,9 @@ export default function Verificar() {
           color: rgb(0.3, 0.3, 0.3)
         });
 
-        // QR con formato de Declaración Jurada
-        const qrText = [
-          `DECLARACION JURADA DE VALIDEZ ACADEMICA`,
-          `PROJECT CONTROL AI - ACADEMIA DIGITAL`,
-          `---------------------------------------`,
-          `ESTUDIANTE: ${nombreFull}`,
-          `CURSO: ${nombreCurso}`,
-          `MODALIDAD: ASINCRONICA AUTOGESTIONADA`,
-          `DURACION: 12 HORAS ACADEMICAS`,
-          `FECHA DE EMISION: ${fechaEmision}`,
-          `CODIGO VERIFICACION: ${cert.codigo_verificacion}`,
-          `---------------------------------------`,
-          `Este documento certifica el cumplimiento`,
-          `satisfactorio de los objetivos academicos.`
-        ].join('\n');
-        const qrDataUrl = await QRCode.toDataURL(qrText, { margin: 1, width: 300 });
+        // QR Code - Imitando cursos sincrónicos
+        const qrUrl = `https://projectcontrolai.com/academia/validar.html?v=${cert.codigo_verificacion}`;
+        const qrDataUrl = await QRCode.toDataURL(qrUrl, { margin: 1, width: 300 });
         const qrImg = await pdfDoc.embedPng(qrDataUrl);
         page1.drawRectangle({ x: 710, y: 83, width: 88, height: 88, color: rgb(1, 1, 1) });
         page1.drawImage(qrImg, { x: 714, y: 87, width: 80, height: 80 });
@@ -172,12 +159,12 @@ export default function Verificar() {
 
           // Texto de modalidad en la zona de "Fechas de impartición"
           const textImparticion = `Modalidad Asincrónica autogestionada. Fecha de culminación: ${fechaEmision}`;
-          const twImparticion = fontR.widthOfTextAtSize(textImparticion, 11);
+          const twImparticion = fontB.widthOfTextAtSize(textImparticion, 11);
           p2.drawText(textImparticion, {
             x: (w2 / 2) - (twImparticion / 2),
-            y: 35,
+            y: 60,
             size: 11,
-            font: fontR,
+            font: fontB,
             color: rgb(0.2, 0.2, 0.2)
           });
 

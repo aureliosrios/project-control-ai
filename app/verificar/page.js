@@ -102,33 +102,32 @@ export default function Verificar() {
         const nombreCurso = (cert.nombre_curso_oficial || cert.nombre_curso_inscrito || "").toUpperCase();
         const fechaEmision = new Date().toLocaleDateString('es-PE', { day: 'numeric', month: 'long', year: 'numeric' });
 
-        // Nombre del alumno
-        const nWidth = fontB.widthOfTextAtSize(nombreFull, 21);
+        // Nombre del alumno (Coordenadas sincrónicas exactas)
         page1.drawText(nombreFull, {
-          x: (width / 2) - (nWidth / 2),
+          x: (width / 2) - 257,
           y: 430,
           size: 21,
           font: fontB,
           color: rgb(0.98, 0.75, 0.14)
         });
 
-        // Detalle modalidad asincrónica
+        // Detalle modalidad asincrónica (Bajado 10mm para evitar superposición)
         const detalle = `con una duración de 12 horas académicas en modalidad asincrónica autogestionada.`;
         const dWidth = fontR.widthOfTextAtSize(detalle, 11);
         page1.drawText(detalle, {
           x: (width / 2) - (dWidth / 2) - 85,
-          y: 278,
+          y: 250,
           size: 11,
           font: fontR,
           color: rgb(0.2, 0.2, 0.2)
         });
 
-        // Fecha de emisión (dinámica - día de descarga)
+        // Fecha de emisión (Dinámica - Movida para no chocar con el logo)
         const labelFecha = `Fecha de emisión: ${fechaEmision}`;
         const fWidth = fontR.widthOfTextAtSize(labelFecha, 9);
         page1.drawText(labelFecha, {
           x: (width / 2) - (fWidth / 2) - 85,
-          y: 258,
+          y: 235,
           size: 9,
           font: fontR,
           color: rgb(0.3, 0.3, 0.3)
@@ -140,8 +139,12 @@ export default function Verificar() {
           const fImg = await pdfDoc.embedPng(await (await fetch(firmaUrl)).arrayBuffer());
           page1.drawImage(fImg, { x: 437, y: 120, width: 120, height: 120 });
         } catch (e) { console.warn("Error cargando firma", e); }
-        page1.drawText(`Ing. Aurelio Solórzano Ríos`, { x: 448, y: 76, size: 10, font: fontB });
-        page1.drawText(`CIP: 76508`, { x: 448, y: 66, size: 9, font: fontR });
+        
+        // Instructor y CIP centrados
+        const instNombre = `Ing. Aurelio Solórzano Ríos`;
+        const instCIP = `CIP: 76508`;
+        page1.drawText(instNombre, { x: 442, y: 76, size: 10, font: fontB });
+        page1.drawText(instCIP, { x: 442 + (fontB.widthOfTextAtSize(instNombre, 10)/2) - (fontR.widthOfTextAtSize(instCIP, 9)/2), y: 66, size: 9, font: fontR });
 
         // QR con información de modalidad asincrónica
         const qrText = [

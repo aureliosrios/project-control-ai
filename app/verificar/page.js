@@ -13,6 +13,38 @@ export default function Verificar() {
   const [searchDone, setSearchDone] = useState(false);
   const [confirmName, setConfirmName] = useState("");
   const [titulo, setTitulo] = useState("Ing.");
+  const [errorQR, setErrorQR] = useState("");
+
+  // Soporte para validación automática vía QR (?v=CODIGO)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const v = params.get('v');
+    if (v) buscarPorCodigo(v);
+  }, []);
+
+  async function buscarPorCodigo(codigo) {
+    setLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from('vw_certificados_publicos')
+        .select('*')
+        .eq('codigo_verificacion', codigo)
+        .single();
+      if (error) throw error;
+      if (data) {
+        setDni(data.dni);
+        setAlumno(data);
+        setConfirmName(data.nombre_completo.toUpperCase());
+        setResultados([data]);
+        setSearchDone(true);
+      }
+    } catch (e) {
+      console.error("QR Error:", e);
+      setErrorQR("No se pudo validar el código del QR.");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   const formatearFecha = (fecha) => {
     if (!fecha) return "---";
@@ -145,8 +177,8 @@ export default function Verificar() {
           color: rgb(0.3, 0.3, 0.3)
         });
 
-        // QR Code - Optimizado para lectura (Margen 2, Nivel M)
-        const qrUrl = `https://projectcontrolai.com/academia/validar.html?v=${cert.codigo_verificacion}`;
+        // QR Code - Apuntando al nuevo portal con parámetro de validación
+        const qrUrl = `https://project-control-ai-one.vercel.app/verificar?v=${cert.codigo_verificacion}`;
         const qrDataUrl = await QRCode.toDataURL(qrUrl, { margin: 2, width: 300, errorCorrectionLevel: 'M' });
         const qrImg = await pdfDoc.embedPng(qrDataUrl);
         page1.drawRectangle({ x: 710, y: 83, width: 88, height: 88, color: rgb(1, 1, 1) });
@@ -162,7 +194,7 @@ export default function Verificar() {
           const twImparticion = fontB.widthOfTextAtSize(textImparticion, 11);
           p2.drawText(textImparticion, {
             x: (w2 / 2) - (twImparticion / 2),
-            y: 85,
+            y: 118,
             size: 11,
             font: fontB,
             color: rgb(0.2, 0.2, 0.2)

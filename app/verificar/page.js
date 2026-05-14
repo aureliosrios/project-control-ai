@@ -135,10 +135,10 @@ export default function Verificar() {
         page1.drawText(instNombre, { x: 442, y: 76, size: 10, font: fontB });
         page1.drawText(instCIP, { x: 442 + (fontB.widthOfTextAtSize(instNombre, 10)/2) - (fontR.widthOfTextAtSize(instCIP, 9)/2), y: 66, size: 9, font: fontR });
 
-        // Fecha de emisión: ajustada 3mm abajo y 60mm a la izquierda
+        // Fecha de emisión: ajustada 15mm a la derecha
         const labelFechaFinal = `Fecha de emisión: ${fechaEmision}`;
         page1.drawText(labelFechaFinal, {
-          x: width - 365,
+          x: width - 322,
           y: 47,
           size: 8,
           font: fontR,
@@ -164,7 +164,7 @@ export default function Verificar() {
           const p2 = pdfDoc.getPages()[1];
           const { width: w2 } = p2.getSize();
           const emisionP2 = `Fecha de Emisión: ${new Date().toLocaleDateString('es-PE')} ${new Date().toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit', hour12: true })}`;
-          p2.drawText(emisionP2, { x: w2 - fontR.widthOfTextAtSize(emisionP2, 8) - 50, y: 45, size: 8, font: fontR, color: rgb(0.3, 0.3, 0.3) });
+          p2.drawText(emisionP2, { x: w2 - fontR.widthOfTextAtSize(emisionP2, 8) - 8, y: 45, size: 8, font: fontR, color: rgb(0.3, 0.3, 0.3) });
         }
 
         // Descargar

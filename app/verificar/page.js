@@ -73,8 +73,104 @@ export default function Verificar() {
 
       // 3. Selección de Plantilla
       const slug = (cert.nombre_curso_oficial || cert.nombre_curso_inscrito || "").toLowerCase();
-      let archivo = "cert_gestion_integral.pdf";
 
+      // Detectar si es curso ASINCRÓNICO por palabras clave del nombre
+      const isAsincronico = (
+        slug.includes("despertar") ||
+        slug.includes("forense") ||
+        slug.includes("presupuesto") ||
+        slug.includes("asincronico") ||
+        cert.edicion_grupo?.toUpperCase().includes("ASINCRONICO")
+      );
+
+      // --- RAMA ASINCRÓNICA ---
+      if (isAsincronico) {
+        let archivoAsinc = "asinc_despertar.pdf";
+        if (slug.includes("forense")) archivoAsinc = "asinc_forense.pdf";
+        else if (slug.includes("presupuesto")) archivoAsinc = "asinc_presupuestos.pdf";
+
+        const templateUrl = `https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/academia/${archivoAsinc}`;
+        const response = await fetch(templateUrl);
+        if (!response.ok) throw new Error("No se pudo cargar la plantilla asincrónica. Contacte al administrador.");
+        const pdfDoc = await PDFDocument.load(await response.arrayBuffer());
+        const fontB = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+        const fontR = await pdfDoc.embedFont(StandardFonts.Helvetica);
+        const page1 = pdfDoc.getPages()[0];
+        const { width } = page1.getSize();
+
+        const nombreFull = (titulo + " " + confirmName).trim().toUpperCase();
+        const nombreCurso = (cert.nombre_curso_oficial || cert.nombre_curso_inscrito || "").toUpperCase();
+        const fechaEmision = new Date().toLocaleDateString('es-PE', { day: 'numeric', month: 'long', year: 'numeric' });
+
+        // Nombre del alumno
+        const nWidth = fontB.widthOfTextAtSize(nombreFull, 21);
+        page1.drawText(nombreFull, {
+          x: (width / 2) - (nWidth / 2),
+          y: 430,
+          size: 21,
+          font: fontB,
+          color: rgb(0.98, 0.75, 0.14)
+        });
+
+        // Detalle modalidad asincrónica
+        const detalle = `con una duración de 12 horas académicas en modalidad asincrónica autogestionada.`;
+        const dWidth = fontR.widthOfTextAtSize(detalle, 11);
+        page1.drawText(detalle, {
+          x: (width / 2) - (dWidth / 2) - 85,
+          y: 278,
+          size: 11,
+          font: fontR,
+          color: rgb(0.2, 0.2, 0.2)
+        });
+
+        // Fecha de emisión (dinámica - día de descarga)
+        const labelFecha = `Fecha de emisión: ${fechaEmision}`;
+        const fWidth = fontR.widthOfTextAtSize(labelFecha, 9);
+        page1.drawText(labelFecha, {
+          x: (width / 2) - (fWidth / 2) - 85,
+          y: 258,
+          size: 9,
+          font: fontR,
+          color: rgb(0.3, 0.3, 0.3)
+        });
+
+        // Firma del instructor (Aurelio Solórzano)
+        try {
+          const firmaUrl = "https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/Firmas/firma_aurelio_76508.png";
+          const fImg = await pdfDoc.embedPng(await (await fetch(firmaUrl)).arrayBuffer());
+          page1.drawImage(fImg, { x: 437, y: 120, width: 120, height: 120 });
+        } catch (e) { console.warn("Error cargando firma", e); }
+        page1.drawText(`Ing. Aurelio Solórzano Ríos`, { x: 448, y: 76, size: 10, font: fontB });
+        page1.drawText(`CIP: 76508`, { x: 448, y: 66, size: 9, font: fontR });
+
+        // QR con información de modalidad asincrónica
+        const qrText = [
+          `CERTIFICADO ASINCRONICO - PROJECT CONTROL AI`,
+          `Curso: ${nombreCurso}`,
+          `Alumno: ${nombreFull}`,
+          `Modalidad: Autogestionada | 12h (3h Video + 9h Practica)`,
+          `Emitido: ${fechaEmision}`,
+          `Codigo: ${cert.codigo_verificacion}`
+        ].join('\n');
+        const qrDataUrl = await QRCode.toDataURL(qrText, { margin: 1, width: 300 });
+        const qrImg = await pdfDoc.embedPng(qrDataUrl);
+        page1.drawRectangle({ x: 710, y: 83, width: 88, height: 88, color: rgb(1, 1, 1) });
+        page1.drawImage(qrImg, { x: 714, y: 87, width: 80, height: 80 });
+
+        // Descargar
+        const pdfBytes = await pdfDoc.save();
+        const blob = new Blob([pdfBytes], { type: "application/pdf" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = `Certificado_Asincronico_${cert.codigo_verificacion}.pdf`;
+        link.click();
+        alert("¡Descarga exitosa! Certificado Asincrónico generado.");
+        window.location.reload();
+        return; // Salir — no ejecutar la lógica sincrónica
+      }
+
+      // --- RAMA SINCRÓNICA (lógica existente) ---
+      let archivo = "cert_gestion_integral.pdf";
       if (slug.includes("licitaciones")) archivo = "cert_licitaciones_ia.pdf";
       else if (slug.includes("evm") || slug.includes("control")) archivo = "cert_control_evm.pdf";
       else if (slug.includes("gerencia") || slug.includes("gestion")) archivo = "cert_gestion_integral.pdf";

@@ -145,9 +145,9 @@ export default function Verificar() {
           color: rgb(0.3, 0.3, 0.3)
         });
 
-        // QR Code - Imitando cursos sincrónicos
+        // QR Code - Optimizado para lectura (Margen 2, Nivel M)
         const qrUrl = `https://projectcontrolai.com/academia/validar.html?v=${cert.codigo_verificacion}`;
-        const qrDataUrl = await QRCode.toDataURL(qrUrl, { margin: 1, width: 300 });
+        const qrDataUrl = await QRCode.toDataURL(qrUrl, { margin: 2, width: 300, errorCorrectionLevel: 'M' });
         const qrImg = await pdfDoc.embedPng(qrDataUrl);
         page1.drawRectangle({ x: 710, y: 83, width: 88, height: 88, color: rgb(1, 1, 1) });
         page1.drawImage(qrImg, { x: 714, y: 87, width: 80, height: 80 });
@@ -162,7 +162,7 @@ export default function Verificar() {
           const twImparticion = fontB.widthOfTextAtSize(textImparticion, 11);
           p2.drawText(textImparticion, {
             x: (w2 / 2) - (twImparticion / 2),
-            y: 60,
+            y: 85,
             size: 11,
             font: fontB,
             color: rgb(0.2, 0.2, 0.2)

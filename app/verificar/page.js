@@ -122,22 +122,11 @@ export default function Verificar() {
           color: rgb(0.2, 0.2, 0.2)
         });
 
-        // Fecha de emisión (Dinámica - Movida para no chocar con el logo)
-        const labelFecha = `Fecha de emisión: ${fechaEmision}`;
-        const fWidth = fontR.widthOfTextAtSize(labelFecha, 9);
-        page1.drawText(labelFecha, {
-          x: (width / 2) - (fWidth / 2) - 85,
-          y: 235,
-          size: 9,
-          font: fontR,
-          color: rgb(0.3, 0.3, 0.3)
-        });
-
-        // Firma del instructor (Aurelio Solórzano)
+        // Firma del instructor (Aurelio Solórzano) - REDUCIDA 30% (84x84)
         try {
           const firmaUrl = "https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/Firmas/firma_aurelio_76508.png";
           const fImg = await pdfDoc.embedPng(await (await fetch(firmaUrl)).arrayBuffer());
-          page1.drawImage(fImg, { x: 437, y: 120, width: 120, height: 120 });
+          page1.drawImage(fImg, { x: 455, y: 120, width: 84, height: 84 });
         } catch (e) { console.warn("Error cargando firma", e); }
         
         // Instructor y CIP centrados
@@ -145,6 +134,26 @@ export default function Verificar() {
         const instCIP = `CIP: 76508`;
         page1.drawText(instNombre, { x: 442, y: 76, size: 10, font: fontB });
         page1.drawText(instCIP, { x: 442 + (fontB.widthOfTextAtSize(instNombre, 10)/2) - (fontR.widthOfTextAtSize(instCIP, 9)/2), y: 66, size: 9, font: fontR });
+
+        // --- CORRECCIÓN DE FECHAS ---
+        // 1. "Borrar" fecha que choca con el logo (Parche blanco)
+        page1.drawRectangle({
+          x: (width / 2) - 100,
+          y: 35,
+          width: 200,
+          height: 15,
+          color: rgb(1, 1, 1)
+        });
+
+        // 2. Nueva Fecha en esquina inferior derecha (Límite A4)
+        const labelFechaFinal = `Fecha de emisión: ${fechaEmision}`;
+        page1.drawText(labelFechaFinal, {
+          x: width - 190,
+          y: 20,
+          size: 8,
+          font: fontR,
+          color: rgb(0.3, 0.3, 0.3)
+        });
 
         // QR con información de modalidad asincrónica
         const qrText = [

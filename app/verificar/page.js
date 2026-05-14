@@ -159,10 +159,23 @@ export default function Verificar() {
         page1.drawRectangle({ x: 710, y: 83, width: 88, height: 88, color: rgb(1, 1, 1) });
         page1.drawImage(qrImg, { x: 714, y: 87, width: 80, height: 80 });
 
-        // Página 2: Fecha de emisión (igual que sincrónicos)
+        // Página 2: contenido dinámico
         if (pdfDoc.getPages().length > 1) {
           const p2 = pdfDoc.getPages()[1];
           const { width: w2 } = p2.getSize();
+
+          // Texto de modalidad en la zona de "Fechas de impartición"
+          const textImparticion = `Modalidad Asincrónica autogestionada. Fecha de culminación: ${fechaEmision}`;
+          const twImparticion = fontR.widthOfTextAtSize(textImparticion, 11);
+          p2.drawText(textImparticion, {
+            x: (w2 / 2) - (twImparticion / 2),
+            y: 120,
+            size: 11,
+            font: fontR,
+            color: rgb(0.2, 0.2, 0.2)
+          });
+
+          // Fecha de emisión en el pie (igual que sincrónicos)
           const emisionP2 = `Fecha de Emisión: ${new Date().toLocaleDateString('es-PE')} ${new Date().toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit', hour12: true })}`;
           p2.drawText(emisionP2, { x: w2 - fontR.widthOfTextAtSize(emisionP2, 8) - 8, y: 45, size: 8, font: fontR, color: rgb(0.3, 0.3, 0.3) });
         }

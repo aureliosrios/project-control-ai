@@ -122,11 +122,11 @@ export default function Verificar() {
           color: rgb(0.2, 0.2, 0.2)
         });
 
-        // Firma del instructor (Aurelio Solórzano) - REDUCIDA 30% (84x84)
+        // Firma del instructor (Aurelio Solórzano) - REDUCIDA (60x60)
         try {
           const firmaUrl = "https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/Firmas/firma_aurelio_76508.png";
           const fImg = await pdfDoc.embedPng(await (await fetch(firmaUrl)).arrayBuffer());
-          page1.drawImage(fImg, { x: 455, y: 120, width: 84, height: 84 });
+          page1.drawImage(fImg, { x: 467, y: 120, width: 60, height: 60 });
         } catch (e) { console.warn("Error cargando firma", e); }
         
         // Instructor y CIP centrados

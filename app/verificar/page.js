@@ -135,11 +135,11 @@ export default function Verificar() {
         page1.drawText(instNombre, { x: 442, y: 76, size: 10, font: fontB });
         page1.drawText(instCIP, { x: 442 + (fontB.widthOfTextAtSize(instNombre, 10)/2) - (fontR.widthOfTextAtSize(instCIP, 9)/2), y: 66, size: 9, font: fontR });
 
-        // Fecha de emisión: debajo del CIP, zona inferior derecha
+        // Fecha de emisión: ajustada 3mm abajo y 60mm a la izquierda
         const labelFechaFinal = `Fecha de emisión: ${fechaEmision}`;
         page1.drawText(labelFechaFinal, {
-          x: width - 195,
-          y: 55,
+          x: width - 365,
+          y: 47,
           size: 8,
           font: fontR,
           color: rgb(0.3, 0.3, 0.3)

@@ -145,14 +145,20 @@ export default function Verificar() {
           color: rgb(0.3, 0.3, 0.3)
         });
 
-        // QR con información de modalidad asincrónica
+        // QR con formato de Declaración Jurada
         const qrText = [
-          `CERTIFICADO ASINCRONICO - PROJECT CONTROL AI`,
-          `Curso: ${nombreCurso}`,
-          `Alumno: ${nombreFull}`,
-          `Modalidad: Autogestionada | 12h (3h Video + 9h Practica)`,
-          `Emitido: ${fechaEmision}`,
-          `Codigo: ${cert.codigo_verificacion}`
+          `DECLARACION JURADA DE VALIDEZ ACADEMICA`,
+          `PROJECT CONTROL AI - ACADEMIA DIGITAL`,
+          `---------------------------------------`,
+          `ESTUDIANTE: ${nombreFull}`,
+          `CURSO: ${nombreCurso}`,
+          `MODALIDAD: ASINCRONICA AUTOGESTIONADA`,
+          `DURACION: 12 HORAS ACADEMICAS`,
+          `FECHA DE EMISION: ${fechaEmision}`,
+          `CODIGO VERIFICACION: ${cert.codigo_verificacion}`,
+          `---------------------------------------`,
+          `Este documento certifica el cumplimiento`,
+          `satisfactorio de los objetivos academicos.`
         ].join('\n');
         const qrDataUrl = await QRCode.toDataURL(qrText, { margin: 1, width: 300 });
         const qrImg = await pdfDoc.embedPng(qrDataUrl);
@@ -169,7 +175,7 @@ export default function Verificar() {
           const twImparticion = fontR.widthOfTextAtSize(textImparticion, 11);
           p2.drawText(textImparticion, {
             x: (w2 / 2) - (twImparticion / 2),
-            y: 77,
+            y: 35,
             size: 11,
             font: fontR,
             color: rgb(0.2, 0.2, 0.2)

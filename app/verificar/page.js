@@ -169,7 +169,7 @@ export default function Verificar() {
           const twImparticion = fontR.widthOfTextAtSize(textImparticion, 11);
           p2.drawText(textImparticion, {
             x: (w2 / 2) - (twImparticion / 2),
-            y: 120,
+            y: 77,
             size: 11,
             font: fontR,
             color: rgb(0.2, 0.2, 0.2)

@@ -278,8 +278,21 @@ export default function Verificar() {
           page1.drawImage(fImg, { x: 437, y: 120, width: 120, height: 120 });
         } catch (e) { console.warn("Error cargando firma", e); }
       }
-      page1.drawText(`Ing. ${pNombre} ${pApellido}`, { x: 448, y: 76, size: 10, font: fontB });
-      page1.drawText(`CIP: ${pCIP}`, { x: 448, y: 66, size: 9, font: fontR });
+      const instNombre = `Ing. ${pNombre} ${pApellido}`;
+      const instCIP = `CIP: ${pCIP}`;
+      page1.drawText(instNombre, { x: 442, y: 76, size: 10, font: fontB });
+      page1.drawText(instCIP, {
+        x: 442 + (fontB.widthOfTextAtSize(instNombre, 10) / 2) - (fontR.widthOfTextAtSize(instCIP, 9) / 2),
+        y: 66, size: 9, font: fontR
+      });
+
+      // Fecha de emisión en primera página (Replicado de asincrónico)
+      const fechaEmision = new Date().toLocaleDateString('es-PE', { day: 'numeric', month: 'long', year: 'numeric' });
+      const labelFecha = `Fecha de emisión: ${fechaEmision}`;
+      page1.drawText(labelFecha, {
+        x: width - 322, y: 47, size: 8,
+        font: fontR, color: rgb(0.3, 0.3, 0.3)
+      });
 
       // Página 2 (Reverso)
       if (pdfDoc.getPages().length > 1) {

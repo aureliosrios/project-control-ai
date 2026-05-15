@@ -14,8 +14,7 @@ export default function Inscripcion() {
     profesion: "",
     telefono: "",
     email: "",
-    curso: "",
-    metodo_pago: "Yape / Plin"
+    curso: ""
   });
 
   const handleChange = (e) => {
@@ -29,9 +28,6 @@ export default function Inscripcion() {
     try {
       const payload = {
         ...formData,
-        fecha: new Date().toLocaleString('es-PE', { timeZone: 'America/Lima' }),
-        pago_realizado: 'NO',
-        validado_director: false,
         edicion_curso: 'AUTO-REGISTRO'
       };
 
@@ -147,15 +143,7 @@ export default function Inscripcion() {
               </select>
             </div>
 
-            <div>
-              <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Medio de Pago</label>
-              <select name="metodo_pago" required value={formData.metodo_pago} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 transition-all outline-none">
-                <option value="Yape / Plin">Yape / Plin</option>
-                <option value="Transferencia BCP">Transferencia BCP</option>
-                <option value="Paypal / Tarjeta">Paypal / Tarjeta</option>
-                <option value="Hotmart">Hotmart</option>
-              </select>
-            </div>
+
 
             <button 
               type="submit" 

@@ -64,8 +64,7 @@ export default function Verificar() {
       const { data, error } = await supabase
         .from('vw_certificados_publicos')
         .select('*')
-        .eq('dni', dni)
-        .order('fecha_inscripcion', { ascending: false });
+        .eq('dni', dni);
 
       if (error) throw error;
       if (!data || data.length === 0) {
@@ -96,8 +95,11 @@ export default function Verificar() {
         .single();
 
       if (fetchErr || !currentCert) throw new Error("No se hallaron los datos del folio.");
-      if (currentCert.descargas_count >= 1) {
-        throw new Error("LÍMITE DE DESCARGA AGOTADO: Este certificado ya ha sido descargado previamente.");
+      
+      const isAutomation = (currentCert.nombre_curso_oficial || currentCert.nombre_curso_inscrito || "").toLowerCase().includes("automation");
+
+      if (!isAutomation && (currentCert.descargas_count || 0) >= 1) {
+        throw new Error("LÍMITE DE DESCARGA AGOTADO: Este certificado ya ha sido descargado previamente. Contacte a soporte para una nueva copia.");
       }
 
       // 2. Incrementar descarga (RPC)
@@ -458,8 +460,9 @@ export default function Verificar() {
               <div className="space-y-4 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
                 {resultados.map((item) => {
                   if (item.estado_academico === 'ARCHIVADO') return null;
-                  const curso = item.nombre_curso_oficial || item.nombre_curso_inscrito;
-                  const yaDescargado = (item.descargas_count >= 1);
+                  const curso = item.nombre_curso_oficial || item.nombre_curso_inscrito || "";
+                  const isAutomation = curso.toLowerCase().includes("automation");
+                  const yaDescargado = !isAutomation && (item.descargas_count >= 1);
                   const graduado = (item.estado_academico === 'GRADUADO');
                   
                   // Lógica de Estado Visual

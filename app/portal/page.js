@@ -25,12 +25,11 @@ export default function StudentPortal() {
         return;
       }
 
-      // 2. Obtener sus matrículas validadas
+      // 2. Obtener sus matrículas
       const { data: enrollments, error: enrollError } = await supabase
         .from('matriculas')
         .select('*')
-        .eq('dni', dniValue.trim())
-        .eq('validado_director', true);
+        .eq('dni', dniValue.trim());
 
       setStudentData(student);
       setMatriculas(enrollments || []);
@@ -142,7 +141,7 @@ export default function StudentPortal() {
                   </div>
                 )) : (
                   <div className="col-span-full p-8 rounded-2xl bg-white/5 border border-dashed border-white/10 text-center">
-                    <p className="text-slate-500 text-sm">No tienes cursos activos validados por el director.</p>
+                    <p className="text-slate-500 text-sm">No tienes cursos activos.</p>
                   </div>
                 )}
               </div>
@@ -194,8 +193,8 @@ export default function StudentPortal() {
                 Mis Certificados
               </h2>
               <div className="space-y-4">
-                {matriculas.filter(m => m.validado_director).length > 0 ? (
-                  matriculas.filter(m => m.validado_director).map((m, i) => (
+                {matriculas.length > 0 ? (
+                  matriculas.map((m, i) => (
                     <div key={i} className="flex justify-between items-center p-4 rounded-xl bg-white/5 border border-white/5">
                       <div>
                         <p className="text-xs font-bold uppercase tracking-wider">{m.curso}</p>

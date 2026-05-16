@@ -1,7 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Sidebar from "../portal/components/Sidebar";
+import SecurityOverlay from "../portal/components/SecurityOverlay";
+import { supabase } from "@/lib/supabase";
 
 const courses = {
   "GIP": {
@@ -26,96 +29,134 @@ const courses = {
 export default function ClasesGrabadas() {
   const [selectedLesson, setSelectedLesson] = useState(courses["GIP"].lessons[0]);
   const [activeCourse, setActiveCourse] = useState("GIP");
+  const [studentData, setStudentData] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const savedDni = localStorage.getItem("pcai_student_dni");
+    if (savedDni) {
+      fetchStudent(savedDni);
+    } else {
+      window.location.href = "/portal";
+    }
+  }, []);
+
+  const fetchStudent = async (dni) => {
+    const { data } = await supabase.from('estudiantes').select('*').eq('dni', dni).single();
+    if (data) {
+      setStudentData(data);
+      setIsLoggedIn(true);
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("pcai_student_dni");
+    window.location.href = "/portal";
+  };
+
+  if (!isLoggedIn) return <div className="min-h-screen bg-[#020617]" />;
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-200 pt-32 pb-20 selection:bg-cyan-500/30">
-      <div className="fixed inset-0 cyber-grid pointer-events-none opacity-20" />
+    <div className="min-h-screen bg-[#020617] text-white flex">
+      <Sidebar studentName={studentData?.nombre} onLogout={handleLogout} />
 
-      <main className="relative max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Main Player Column */}
-          <div className="lg:col-span-2 space-y-8">
-            <div className="aspect-video bg-black rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative">
-              <iframe 
-                src={`https://www.youtube.com/embed/${selectedLesson.id}`}
-                className="w-full h-full"
-                allowFullScreen
-                title={selectedLesson.title}
-              />
-            </div>
-            
-            <div className="space-y-4">
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                <div>
-                  <span className={`inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-2 ${
-                    selectedLesson.status === 'PÚBLICA' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-orange-500/20 text-orange-400'
-                  }`}>
-                    {selectedLesson.status}
-                  </span>
-                  <h1 className="text-3xl font-bold text-white">{selectedLesson.title}</h1>
-                </div>
-                <Link 
-                  href={`https://www.youtube.com/watch?v=${selectedLesson.id}`}
-                  target="_blank"
-                  className="flex items-center gap-2 px-6 py-3 rounded-xl bg-red-500/10 text-red-500 border border-red-500/20 font-bold text-sm hover:bg-red-500 hover:text-white transition-all"
-                >
-                  Ver en YouTube
-                </Link>
+      <main className="flex-1 p-8 md:p-12 relative overflow-y-auto h-screen">
+        <div className="absolute inset-0 tech-grid pointer-events-none opacity-10" />
+        
+        <div className="max-w-7xl mx-auto relative z-10">
+          <header className="mb-12">
+            <h1 className="text-4xl font-black uppercase tracking-tighter">
+              Biblioteca de <span className="text-cyan-400">Clases</span>
+            </h1>
+          </header>
+
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Main Player Column */}
+            <div className="lg:col-span-2 space-y-8">
+              <div className="aspect-video bg-black rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative group">
+                <iframe 
+                  src={`https://www.youtube.com/embed/${selectedLesson.id}?modestbranding=1&rel=0`}
+                  className="w-full h-full"
+                  allowFullScreen
+                  title={selectedLesson.title}
+                />
+                
+                {/* EL STICKER DE SEGURIDAD */}
+                <SecurityOverlay 
+                  studentName={studentData?.nombre} 
+                  studentDni={studentData?.dni} 
+                />
               </div>
-              <p className="text-slate-400 text-lg leading-relaxed max-w-3xl">
-                {selectedLesson.desc}
-              </p>
-            </div>
-
-            <div className="p-8 rounded-3xl bg-cyan-500/5 border border-cyan-500/20 flex flex-col md:flex-row items-center gap-6 justify-between">
-              <div>
-                <h3 className="text-xl font-bold text-cyan-400 mb-2">🔥 ¿Quieres participar en vivo?</h3>
-                <p className="text-sm text-slate-400">Material exclusivo, plantillas y consultas directas con el Ing. Aurelio.</p>
-              </div>
-              <Link href="/inscripcion" className="bg-cyan-500 text-slate-950 px-8 py-3 rounded-xl font-bold hover:scale-105 transition-all">
-                Ver Próximos Inicios
-              </Link>
-            </div>
-          </div>
-
-          {/* Playlist Column */}
-          <div className="glass-card rounded-3xl border-white/5 p-6 h-fit max-h-[800px] overflow-y-auto">
-            <h2 className="text-xl font-bold text-white mb-6 sticky top-0 bg-[#020617]/80 backdrop-blur pb-4 border-b border-white/10 z-10">Contenido del Curso</h2>
-            <div className="space-y-8">
-              {Object.keys(courses).map(courseKey => (
-                <div key={courseKey}>
-                  <div className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest mb-4 px-2">{courses[courseKey].name}</div>
-                  <div className="space-y-2">
-                    {courses[courseKey].lessons.map((lesson, idx) => (
-                      <button 
-                        key={idx}
-                        onClick={() => {
-                          setSelectedLesson(lesson);
-                          setActiveCourse(courseKey);
-                        }}
-                        className={`w-full flex gap-4 p-3 rounded-2xl transition-all text-left group ${
-                          selectedLesson.id === lesson.id ? 'bg-cyan-500/10 border border-cyan-500/30' : 'hover:bg-white/5 border border-transparent'
-                        }`}
-                      >
-                        <div className="relative w-24 aspect-video rounded-lg overflow-hidden flex-shrink-0 bg-white/10">
-                          <Image 
-                            src={`https://img.youtube.com/vi/${lesson.id}/mqdefault.jpg`}
-                            alt="thumb"
-                            fill
-                            className="object-cover group-hover:scale-110 transition-transform"
-                          />
-                        </div>
-                        <div className="flex flex-col justify-center">
-                          <span className="text-[10px] font-bold text-slate-500 uppercase mb-1">Lección {lesson.num}</span>
-                          <span className={`text-sm font-bold leading-tight ${selectedLesson.id === lesson.id ? 'text-cyan-400' : 'text-slate-300'}`}>
-                            {lesson.title}
-                          </span>
-                        </div>
-                      </button>
-                    ))}
+              
+              <div className="space-y-4">
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                  <div>
+                    <span className={`inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-2 ${
+                      selectedLesson.status === 'PÚBLICA' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-orange-500/20 text-orange-400'
+                    }`}>
+                      {selectedLesson.status}
+                    </span>
+                    <h2 className="text-3xl font-black text-white uppercase tracking-tight">{selectedLesson.title}</h2>
                   </div>
                 </div>
-              ))}
+                <p className="text-slate-400 text-lg leading-relaxed max-w-3xl font-light">
+                  {selectedLesson.desc}
+                </p>
+              </div>
+
+              <div className="p-8 rounded-[32px] bg-cyan-500/5 border border-cyan-500/20 flex flex-col md:flex-row items-center gap-6 justify-between">
+                <div>
+                  <h3 className="text-xl font-black text-cyan-400 mb-2 uppercase tracking-tight">📂 Material de Clase</h3>
+                  <p className="text-sm text-slate-400">Descarga las plantillas y recursos utilizados en esta sesión.</p>
+                </div>
+                <button className="bg-cyan-500 text-black px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:scale-105 transition-all">
+                  Descargar Recursos
+                </button>
+              </div>
+            </div>
+
+            {/* Playlist Column */}
+            <div className="glass-panel rounded-[32px] border-white/5 p-6 h-fit max-h-[800px] overflow-y-auto">
+              <h2 className="text-sm font-black text-slate-400 mb-6 uppercase tracking-[0.2em] px-2">Contenido del Curso</h2>
+              <div className="space-y-8">
+                {Object.keys(courses).map(courseKey => (
+                  <div key={courseKey}>
+                    <div className="text-[10px] font-black text-cyan-400 uppercase tracking-widest mb-4 px-2">{courses[courseKey].name}</div>
+                    <div className="space-y-2">
+                      {courses[courseKey].lessons.map((lesson, idx) => (
+                        <button 
+                          key={idx}
+                          onClick={() => {
+                            setSelectedLesson(lesson);
+                            setActiveCourse(courseKey);
+                          }}
+                          className={`w-full flex gap-4 p-3 rounded-2xl transition-all text-left group ${
+                            selectedLesson.id === lesson.id ? 'bg-cyan-500/10 border border-cyan-500/20' : 'hover:bg-white/5 border border-transparent'
+                          }`}
+                        >
+                          <div className="relative w-24 aspect-video rounded-xl overflow-hidden flex-shrink-0 bg-white/10">
+                            <Image 
+                              src={`https://img.youtube.com/vi/${lesson.id}/mqdefault.jpg`}
+                              alt="thumb"
+                              fill
+                              className="object-cover group-hover:scale-110 transition-transform opacity-60"
+                            />
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <span className="material-symbols-outlined text-white/50 text-sm">play_arrow</span>
+                            </div>
+                          </div>
+                          <div className="flex flex-col justify-center">
+                            <span className="text-[9px] font-black text-slate-500 uppercase mb-1 tracking-widest text-wrap">L{lesson.num}</span>
+                            <span className={`text-xs font-bold leading-tight uppercase tracking-tight ${selectedLesson.id === lesson.id ? 'text-cyan-400' : 'text-slate-300'}`}>
+                              {lesson.title}
+                            </span>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

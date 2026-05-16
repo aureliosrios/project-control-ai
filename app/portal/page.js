@@ -52,8 +52,18 @@ export default function StudentPortal() {
       const processedEnrollments = enrollments.map(enroll => {
         const cert = certificates?.find(c => c.curso === enroll.curso);
         let status = cert ? "GRADUADO" : "INSCRITO";
-        let daysLeft = 999; // Acceso total si es inscrito
+        let daysLeft = 999; 
         let accessExpired = false;
+
+        // LÓGICA VIP (Llave Maestra del Director)
+        if (enroll.acceso_vip === true) {
+          return {
+            ...enroll,
+            status: "VIP",
+            daysLeft: "∞",
+            accessExpired: false
+          };
+        }
 
         if (status === "GRADUADO" && cert.fecha) {
           const fechaCert = new Date(cert.fecha);
@@ -188,14 +198,16 @@ export default function StudentPortal() {
                       <div className="relative z-10">
                         <div className="flex justify-between items-start mb-6">
                           <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${
-                            m.status === 'INSCRITO' 
-                              ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' 
-                              : 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20'
+                            m.status === 'VIP'
+                              ? 'bg-amber-500/10 text-amber-400 border-amber-500/20'
+                              : m.status === 'INSCRITO' 
+                                ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' 
+                                : 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20'
                           }`}>
-                            {m.status === 'INSCRITO' ? 'En Dictado' : 'Graduado'}
+                            {m.status === 'VIP' ? '💎 Acceso VIP' : m.status === 'INSCRITO' ? 'En Dictado' : 'Graduado'}
                           </span>
                           <span className="text-[10px] text-slate-500 font-bold uppercase">
-                            {m.status === 'INSCRITO' ? 'Acceso Ilimitado' : `${m.daysLeft} días de acceso`}
+                            {m.status === 'VIP' ? 'Acceso Ilimitado' : m.status === 'INSCRITO' ? 'Acceso Ilimitado' : `${m.daysLeft} días de acceso`}
                           </span>
                         </div>
                         <h3 className="text-xl font-black text-white mb-6 uppercase leading-tight">{m.curso}</h3>

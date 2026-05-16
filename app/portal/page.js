@@ -22,30 +22,74 @@ export default function StudentPortal() {
   const fetchStudentData = async (dniValue) => {
     setLoading(true);
     try {
+      const trimmedDni = dniValue.trim();
+      
+      // 1. Obtener datos del estudiante
       const { data: student, error: studentError } = await supabase
         .from('estudiantes')
         .select('*')
-        .eq('dni', dniValue.trim())
+        .eq('dni', trimmedDni)
         .single();
 
       if (studentError || !student) {
-        alert("DNI no encontrado");
+        alert("DNI no encontrado en el sistema.");
         localStorage.removeItem("pcai_student_dni");
         return;
       }
 
-      const { data: enrollments, error: enrollError } = await supabase
+      // 2. Obtener sus matrículas y sus certificados (si existen)
+      const { data: enrollments } = await supabase
         .from('matriculas')
         .select('*')
-        .eq('dni', dniValue.trim());
+        .eq('dni', trimmedDni);
+
+      const { data: certificates } = await supabase
+        .from('certificados')
+        .select('*')
+        .eq('dni', trimmedDni);
+
+      // 3. Procesar lógica de acceso por curso
+      const processedEnrollments = enrollments.map(enroll => {
+        const cert = certificates?.find(c => c.curso === enroll.curso);
+        let status = cert ? "GRADUADO" : "INSCRITO";
+        let daysLeft = 999; // Acceso total si es inscrito
+        let accessExpired = false;
+
+        if (status === "GRADUADO" && cert.fecha) {
+          const fechaCert = new Date(cert.fecha);
+          const hoy = new Date();
+          const diffTime = hoy - fechaCert;
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+          
+          daysLeft = 60 - diffDays;
+          if (daysLeft < 0) {
+            accessExpired = true;
+            daysLeft = 0;
+          }
+        }
+
+        return {
+          ...enroll,
+          status,
+          daysLeft,
+          accessExpired
+        };
+      });
+
+      // 4. Filtrar solo los que tienen acceso (Inscritos o Graduados < 60 días)
+      const activeEnrollments = processedEnrollments.filter(e => !e.accessExpired);
+
+      if (activeEnrollments.length === 0 && enrollments.length > 0) {
+        alert("Tu periodo de acceso a clases ha finalizado (60 días post-graduación). Aún puedes descargar tus certificados en la sección correspondiente.");
+      }
 
       setStudentData(student);
-      setMatriculas(enrollments || []);
+      setMatriculas(activeEnrollments);
       setIsLoggedIn(true);
-      localStorage.setItem("pcai_student_dni", dniValue.trim());
+      localStorage.setItem("pcai_student_dni", trimmedDni);
     } catch (err) {
       console.error(err);
-      alert("Error al conectar con la base de datos");
+      alert("Error de comunicación con el servidor central.");
     } finally {
       setLoading(false);
     }
@@ -143,16 +187,25 @@ export default function StudentPortal() {
                       
                       <div className="relative z-10">
                         <div className="flex justify-between items-start mb-6">
-                          <span className="px-3 py-1 bg-cyan-500/10 text-cyan-400 rounded-full text-[9px] font-black uppercase tracking-widest border border-cyan-500/20">
-                            Activo
+                          <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${
+                            m.status === 'INSCRITO' 
+                              ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' 
+                              : 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20'
+                          }`}>
+                            {m.status === 'INSCRITO' ? 'En Dictado' : 'Graduado'}
                           </span>
-                          <span className="text-[10px] text-slate-500 font-bold uppercase">{calculateDaysLeft(m)} días restantes</span>
+                          <span className="text-[10px] text-slate-500 font-bold uppercase">
+                            {m.status === 'INSCRITO' ? 'Acceso Ilimitado' : `${m.daysLeft} días de acceso`}
+                          </span>
                         </div>
                         <h3 className="text-xl font-black text-white mb-6 uppercase leading-tight">{m.curso}</h3>
                         <div className="flex gap-4">
-                          <button className="flex-1 bg-white/5 border border-white/10 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-white/10 transition-all">
+                          <a 
+                            href="/clases-grabadas" 
+                            className="flex-1 bg-white/5 border border-white/10 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-white/10 transition-all text-center"
+                          >
                             Ver Clases
-                          </button>
+                          </a>
                         </div>
                       </div>
                     </div>

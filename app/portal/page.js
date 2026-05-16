@@ -160,27 +160,30 @@ export default function StudentPortal() {
                 </div>
               </section>
 
-              {/* Acceso Directo Zoom */}
-              <section className="p-8 rounded-[40px] bg-gradient-to-br from-cyan-500/20 via-transparent to-transparent border border-cyan-500/20 relative group">
-                  <div className="relative z-10 space-y-4">
-                    <div>
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="flex h-2 w-2 relative">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-                        </span>
-                        <p className="text-red-500 text-[10px] font-black uppercase tracking-widest">En Vivo Ahora</p>
-                      </div>
-                      <h3 className="text-2xl font-black uppercase tracking-tighter">Sala de Conferencias PCAI</h3>
-                      <p className="text-slate-400 text-sm max-w-sm">Conexión directa establecida. Haz clic abajo para entrar a la clase desde tu dispositivo.</p>
+              {/* Acceso Directo Zoom - CORREGIDO PARA MÓVIL */}
+              <section className="relative overflow-hidden rounded-[40px] border border-cyan-500/30 bg-gradient-to-br from-cyan-500/20 to-transparent p-8">
+                  <div className="relative z-50 space-y-6">
+                    <div className="flex items-center gap-2">
+                      <span className="flex h-3 w-3 relative">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                      </span>
+                      <p className="text-red-500 text-[10px] font-black uppercase tracking-[0.2em]">Sesión Sincrónica Activa</p>
                     </div>
+                    
+                    <div>
+                      <h3 className="text-3xl font-black uppercase tracking-tighter text-white">Sala de Conferencias</h3>
+                      <p className="text-slate-400 text-sm mt-2 max-w-sm">La clase está en curso. Toca el botón de abajo para unirte desde tu celular.</p>
+                    </div>
+
                     <a 
                       href="https://us06web.zoom.us/j/86185157182?pwd=G5xWITtBxY0aQ98oJ04rq8C69KxLwf.1"
                       target="_blank"
-                      className="inline-flex items-center gap-4 bg-white text-black px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:scale-105 transition-all shadow-[0_0_40px_rgba(255,255,255,0.1)]"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-4 w-full md:w-auto bg-white text-black px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-cyan-400 transition-all shadow-[0_0_50px_rgba(255,255,255,0.2)] active:scale-95 cursor-pointer"
                     >
-                      Entrar a la Clase Ahora
-                      <span className="material-symbols-outlined text-sm">open_in_new</span>
+                      INGRESAR A ZOOM AHORA
+                      <span className="material-symbols-outlined">open_in_new</span>
                     </a>
                   </div>
               </section>

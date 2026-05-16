@@ -23,6 +23,13 @@ const courses = {
       { id: "2QxbQ8IY0Zc", num: "01", status: "PÚBLICA", title: "Configuración de Cerebros Digitales con NotebookLM", desc: "Aprende a configurar tu primer cerebro digital utilizando NotebookLM." },
       { id: "QhgXgxZFmCY", num: "02", status: "OCULTA", title: "Generación Dinámica del WBS y Visualización HTML", desc: "Técnicas avanzadas para generar estructuras de desglose de trabajo." }
     ]
+  },
+  "AE": {
+    name: "Automation Engineer (Sesiones en Vivo)",
+    lessons: [
+      { id: "PLACEHOLDER_1", num: "01", status: "OCULTA", title: "Introducción a la Automatización de Procesos", desc: "Fundamentos y herramientas clave para el ingeniero de automatización moderno." },
+      { id: "PLACEHOLDER_2", num: "02", status: "OCULTA", title: "Arquitectura de Agentes y Workflows", desc: "Diseño de flujos de trabajo inteligentes y orquestación de agentes." }
+    ]
   }
 };
 

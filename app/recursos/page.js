@@ -5,9 +5,7 @@ import Link from "next/link";
 
 const resources = [
   { id: 1, type: "brochure", title: "Licitaciones Inteligentes con IA", desc: "Auditoría de expedientes masivos, APUs, Presupuestos y Cronogramas automáticos.", img: "/images/Licitaciones.png", link: "/brochures/Brochure_Curso_1_Licitaciones_360.pdf" },
-  { id: 2, type: "brochure", title: "El Despertar de la IA", desc: "Alcance, Contratos, Calidad y HSE potenciados por Inteligencia Artificial.", img: "/images/Gestión Integral.png", link: "/brochures/Brochure_Curso_3_IA_Despertar_Digital.pdf" },
-  { id: 3, type: "video", title: "Clases Licitaciones (Grabaciones)", desc: "Repaso de las 6 sesiones del curso. Clase 1 pública disponible.", img: "https://img.youtube.com/vi/2QxbQ8IY0Zc/maxresdefault.jpg", link: "/clases-grabadas?curso=LIC" },
-  { id: 4, type: "video", title: "Clases GIP (Grabaciones)", desc: "Repaso de las 5 sesiones del curso. El inicio de la era digital.", img: "https://img.youtube.com/vi/e7I-HLme2aA/maxresdefault.jpg", link: "/clases-grabadas?curso=GIP" }
+  { id: 2, type: "brochure", title: "El Despertar de la IA", desc: "Alcance, Contratos, Calidad y HSE potenciados por Inteligencia Artificial.", img: "/images/Gestión Integral.png", link: "/brochures/Brochure_Curso_3_IA_Despertar_Digital.pdf" }
 ];
 
 export default function Recursos() {
@@ -25,13 +23,13 @@ export default function Recursos() {
             Librería de <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Recursos Técnicos</span>
           </h1>
           <p className="text-xl text-slate-400 max-w-2xl leading-relaxed">
-            Brochures de cursos, grabaciones de clases en vivo para ex-alumnos y material asincrónico.
+            Brochures técnicos, catálogos de formación y material de consulta para ingeniería.
           </p>
         </header>
 
         {/* Filter Tabs */}
         <div className="flex flex-wrap gap-3 mb-12">
-          {["todos", "brochure", "video"].map(f => (
+          {["todos", "brochure"].map(f => (
             <button 
               key={f}
               onClick={() => setFilter(f)}
@@ -39,7 +37,7 @@ export default function Recursos() {
                 filter === f ? 'bg-cyan-500 text-slate-950' : 'bg-white/5 text-slate-400 border border-white/10 hover:bg-white/10'
               }`}
             >
-              {f === 'todos' ? 'Todos' : f === 'brochure' ? 'Brochures' : 'Grabaciones'}
+              {f === 'todos' ? 'Todos' : 'Brochures'}
             </button>
           ))}
         </div>

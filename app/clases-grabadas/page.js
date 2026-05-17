@@ -187,7 +187,7 @@ export default function ClasesGrabadas() {
                       : 'text-slate-400 hover:text-white'
                   }`}
                 >
-                  {c.key === "AE" ? "AE" : c.key === "GIP" ? "El Despertar" : "Licitaciones"}
+                  {c.key === "AE" ? "Automation Engineer" : c.key === "GIP" ? "El Despertar de la IA" : "Licitaciones Inteligentes"}
                 </button>
               ))}
             </div>

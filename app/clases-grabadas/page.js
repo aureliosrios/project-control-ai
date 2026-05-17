@@ -63,11 +63,16 @@ export default function ClasesGrabadas() {
         return;
       }
 
-      // 2. Obtener matrículas del estudiante
-      const { data: enrollments } = await supabase
+      // 2. Obtener matrículas del estudiante (excluyendo alumnos retirados)
+      const { data: rawEnrollments } = await supabase
         .from('matriculas')
         .select('*')
         .eq('dni', dni);
+
+      const enrollments = (rawEnrollments || []).filter(enroll => {
+        const edicion = enroll.edicion_curso || "";
+        return !edicion.toUpperCase().includes("RETIRADO");
+      });
 
       // 3. Obtener certificados para verificar expiraciones (60 días post-graduación)
       const { data: certificates } = await supabase

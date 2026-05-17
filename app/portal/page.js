@@ -49,8 +49,13 @@ export default function StudentPortal() {
         .select('*')
         .eq('dni', trimmedDni);
 
-      // 3. Procesar lógica de acceso por curso
-      const processedEnrollments = enrollments.map(enroll => {
+      // 3. Procesar lógica de acceso por curso (excluyendo alumnos retirados)
+      const activeEnrollmentsOnly = (enrollments || []).filter(enroll => {
+        const edicion = enroll.edicion_curso || "";
+        return !edicion.toUpperCase().includes("RETIRADO");
+      });
+
+      const processedEnrollments = activeEnrollmentsOnly.map(enroll => {
         const cert = certificates?.find(c => c.curso === enroll.curso);
         let status = cert ? "GRADUADO" : "INSCRITO";
         let daysLeft = 999; 

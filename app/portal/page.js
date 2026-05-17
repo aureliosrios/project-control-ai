@@ -171,6 +171,8 @@ export default function StudentPortal() {
     );
   }
 
+  const hasAEAccess = matriculas.some(m => m.curso === "Automation Engineer");
+
   return (
     <div className="min-h-screen bg-[#020617] text-white flex">
       <Sidebar studentName={studentData.nombre} onLogout={handleLogout} />
@@ -240,32 +242,34 @@ export default function StudentPortal() {
               </section>
 
               {/* Acceso Directo Zoom - CORREGIDO PARA MÓVIL */}
-              <section className="relative overflow-hidden rounded-[40px] border border-cyan-500/30 bg-gradient-to-br from-cyan-500/20 to-transparent p-8">
-                  <div className="relative z-50 space-y-6">
-                    <div className="flex items-center gap-2">
-                      <span className="flex h-3 w-3 relative">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-                      </span>
-                      <p className="text-red-500 text-[10px] font-black uppercase tracking-[0.2em]">Sesión Sincrónica Activa</p>
-                    </div>
-                    
-                    <div>
-                      <h3 className="text-3xl font-black uppercase tracking-tighter text-white">Sala de Conferencias</h3>
-                      <p className="text-slate-400 text-sm mt-2 max-w-sm">La clase está en curso. Toca el botón de abajo para unirte desde tu celular.</p>
-                    </div>
+              {hasAEAccess && (
+                <section className="relative overflow-hidden rounded-[40px] border border-cyan-500/30 bg-gradient-to-br from-cyan-500/20 to-transparent p-8">
+                    <div className="relative z-50 space-y-6">
+                      <div className="flex items-center gap-2">
+                        <span className="flex h-3 w-3 relative">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                        </span>
+                        <p className="text-red-500 text-[10px] font-black uppercase tracking-[0.2em]">Sesión Sincrónica Activa</p>
+                      </div>
+                      
+                      <div>
+                        <h3 className="text-3xl font-black uppercase tracking-tighter text-white">Sala de Conferencias</h3>
+                        <p className="text-slate-400 text-sm mt-2 max-w-sm">La clase está en curso. Toca el botón de abajo para unirte desde tu celular.</p>
+                      </div>
 
-                    <a 
-                      href="https://us06web.zoom.us/j/89278943716?pwd=AQbn3eCCxhaLU4zr1zuabDwJwdSnsm.1"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-4 w-full md:w-auto bg-white text-black px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-cyan-400 transition-all shadow-[0_0_50px_rgba(255,255,255,0.2)] active:scale-95 cursor-pointer"
-                    >
-                      INGRESAR A ZOOM AHORA
-                      <span className="material-symbols-outlined">open_in_new</span>
-                    </a>
-                  </div>
-              </section>
+                      <a 
+                        href="https://us06web.zoom.us/j/89278943716?pwd=AQbn3eCCxhaLU4zr1zuabDwJwdSnsm.1"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-4 w-full md:w-auto bg-white text-black px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-cyan-400 transition-all shadow-[0_0_50px_rgba(255,255,255,0.2)] active:scale-95 cursor-pointer"
+                      >
+                        INGRESAR A ZOOM AHORA
+                        <span className="material-symbols-outlined">open_in_new</span>
+                      </a>
+                    </div>
+                </section>
+              )}
             </div>
 
             {/* Columna Derecha */}

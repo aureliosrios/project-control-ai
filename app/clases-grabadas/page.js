@@ -53,10 +53,71 @@ export default function ClasesGrabadas() {
   }, []);
 
   const fetchStudent = async (dni) => {
-    const { data } = await supabase.from('estudiantes').select('*').eq('dni', dni).single();
-    if (data) {
-      setStudentData(data);
+    try {
+      // 1. Obtener datos del estudiante
+      const { data: student, error: studentError } = await supabase
+        .from('estudiantes')
+        .select('*')
+        .eq('dni', dni)
+        .single();
+
+      if (studentError || !student) {
+        localStorage.removeItem("pcai_student_dni");
+        window.location.href = "/portal";
+        return;
+      }
+
+      // 2. Obtener matrículas del estudiante para el curso "Automation Engineer"
+      const { data: enrollments } = await supabase
+        .from('matriculas')
+        .select('*')
+        .eq('dni', dni)
+        .eq('curso', 'Automation Engineer');
+
+      // 3. Obtener certificados para ver si se ha graduado hace más de 60 días
+      const { data: certificates } = await supabase
+        .from('certificados')
+        .select('*')
+        .eq('dni', dni)
+        .eq('curso', 'Automation Engineer');
+
+      if (!enrollments || enrollments.length === 0) {
+        alert("Acceso Restringido: No cuentas con una matrícula activa para el curso 'Automation Engineer'.");
+        window.location.href = "/portal";
+        return;
+      }
+
+      // 4. Verificar si tiene acceso activo
+      const hasAccess = enrollments.some(enroll => {
+        // Acceso VIP permanente
+        if (enroll.acceso_vip === true) return true;
+
+        // Verificar si está graduado y su acceso expiró (> 60 días)
+        const cert = certificates?.find(c => c.curso === enroll.curso);
+        if (cert && cert.fecha) {
+          const fechaCert = new Date(cert.fecha);
+          const hoy = new Date();
+          const diffTime = hoy - fechaCert;
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+          if (diffDays > 60) {
+            return false; // Expirado
+          }
+        }
+        return true; // Inscrito activo o Graduado < 60 días
+      });
+
+      if (!hasAccess) {
+        alert("Tu periodo de acceso a las clases de 'Automation Engineer' ha finalizado (60 días post-graduación). Aún puedes descargar tu certificado en la sección correspondiente.");
+        window.location.href = "/portal";
+        return;
+      }
+
+      setStudentData(student);
       setIsLoggedIn(true);
+    } catch (err) {
+      console.error(err);
+      alert("Error verificando credenciales.");
+      window.location.href = "/portal";
     }
   };
 

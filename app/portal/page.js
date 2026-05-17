@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import Sidebar from "./components/Sidebar";
+import Image from "next/image";
 
 export default function StudentPortal() {
   const [dni, setDni] = useState("");
@@ -130,11 +131,16 @@ export default function StudentPortal() {
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
         
         <div className="glass-panel p-12 rounded-[40px] border border-white/10 max-w-md w-full relative z-10">
-          <div className="mb-8 text-center">
-            <h1 className="text-3xl font-black text-white uppercase tracking-tighter">
-              PCAI <span className="text-cyan-400">Portal</span>
-            </h1>
-            <p className="text-[10px] text-slate-500 font-bold uppercase tracking-[0.2em] mt-2">Acceso Exclusivo para Alumnos</p>
+          <div className="mb-8 flex flex-col items-center justify-center">
+            <Image 
+              src="/images/logo.png" 
+              alt="Project Control AI Logo" 
+              width={220} 
+              height={55} 
+              className="h-12 w-auto object-contain"
+              priority
+            />
+            <p className="text-[10px] text-slate-500 font-bold uppercase tracking-[0.2em] mt-4">Acceso Exclusivo para Alumnos</p>
           </div>
 
           <div className="space-y-6">

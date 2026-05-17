@@ -1,6 +1,7 @@
 "use client";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 
 const menuItems = [
   { name: 'Inicio', icon: 'home', path: '/portal' },
@@ -15,10 +16,15 @@ export default function Sidebar({ studentName, onLogout }) {
   return (
     <aside className="w-64 bg-[#020617] border-r border-white/10 h-screen sticky top-0 hidden lg:flex flex-col p-6 z-40">
       <div className="mb-12">
-        <h1 className="text-xl font-black text-white tracking-tighter uppercase">
-          PCAI <span className="text-cyan-400">Portal</span>
-        </h1>
-        <p className="text-[10px] text-slate-500 font-bold tracking-[0.2em] mt-1">SISTEMA v6.0</p>
+        <Image 
+          src="/images/logo.png" 
+          alt="Project Control AI Logo" 
+          width={150} 
+          height={38} 
+          className="h-8 w-auto object-contain"
+          priority
+        />
+        <p className="text-[10px] text-slate-500 font-bold tracking-[0.2em] mt-3">SISTEMA v6.0</p>
       </div>
 
       <nav className="flex-1 space-y-2">

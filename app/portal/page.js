@@ -256,7 +256,7 @@ export default function StudentPortal() {
                     </div>
 
                     <a 
-                      href="https://us06web.zoom.us/j/86185157182?pwd=G5xWITtBxY0aQ98oJ04rq8C69KxLwf.1"
+                      href="https://us06web.zoom.us/j/89278943716?pwd=AQbn3eCCxhaLU4zr1zuabDwJwdSnsm.1"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center gap-4 w-full md:w-auto bg-white text-black px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-cyan-400 transition-all shadow-[0_0_50px_rgba(255,255,255,0.2)] active:scale-95 cursor-pointer"

@@ -93,13 +93,23 @@ export default function ClasesGrabadas() {
 
         const cert = certificates?.find(c => c.curso === enroll.curso);
         let isExpired = false;
-        if (cert && cert.fecha && enroll.acceso_vip !== true) {
-          const fechaCert = new Date(cert.fecha);
-          const hoy = new Date();
-          const diffTime = hoy - fechaCert;
-          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-          if (diffDays > 60) {
-            isExpired = true;
+        if (enroll.acceso_vip !== true) {
+          if (cert && cert.fecha) {
+            const fechaCert = new Date(cert.fecha);
+            const hoy = new Date();
+            const diffTime = hoy - fechaCert;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            if (diffDays > 60) {
+              isExpired = true;
+            }
+          } else if (enroll.created_at) {
+            const fechaMatricula = new Date(enroll.created_at);
+            const hoy = new Date();
+            const diffTime = hoy - fechaMatricula;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            if (diffDays > 60) {
+              isExpired = true;
+            }
           }
         }
 

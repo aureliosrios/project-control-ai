@@ -82,6 +82,20 @@ export default function StudentPortal() {
             accessExpired = true;
             daysLeft = 0;
           }
+        } else {
+          // INSCRITO: 60 días desde la fecha de matrícula (created_at)
+          if (enroll.created_at) {
+            const fechaMatricula = new Date(enroll.created_at);
+            const hoy = new Date();
+            const diffTime = hoy - fechaMatricula;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            daysLeft = 60 - diffDays;
+            if (daysLeft < 0) {
+              accessExpired = true;
+              daysLeft = 0;
+            }
+          }
         }
 
         return {

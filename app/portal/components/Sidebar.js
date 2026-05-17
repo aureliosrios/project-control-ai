@@ -19,12 +19,12 @@ export default function Sidebar({ studentName, onLogout }) {
         <Image 
           src="/images/logo.png" 
           alt="Project Control AI Logo" 
-          width={150} 
-          height={38} 
-          className="h-8 w-auto object-contain"
+          width={220} 
+          height={55} 
+          className="h-14 w-auto object-contain"
           priority
         />
-        <p className="text-[10px] text-slate-500 font-bold tracking-[0.2em] mt-3">SISTEMA v6.0</p>
+        <p className="text-[10px] text-slate-500 font-bold tracking-[0.2em] mt-4">SISTEMA v6.0</p>
       </div>
 
       <nav className="flex-1 space-y-2">

@@ -178,6 +178,14 @@ export default function StudentPortal() {
       <main className="flex-1 p-8 md:p-12 relative overflow-y-auto h-screen">
         <div className="absolute inset-0 tech-grid pointer-events-none opacity-10" />
         
+        {/* Brand Tag Flotante */}
+        <div className="absolute top-8 right-8 flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full backdrop-blur-md z-30">
+          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+          <span className="text-[9px] font-black uppercase tracking-[0.25em] text-slate-300 font-sans">
+            PROJECT CONTROL <span className="text-cyan-400">AI</span>
+          </span>
+        </div>
+        
         <div className="max-w-6xl mx-auto relative z-10">
           <header className="mb-12">
             <div className="flex items-center gap-2 mb-2">

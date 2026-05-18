@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCAI | Resumen Interactivo de la 4ª Clase - Automation Engineer</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Reset & Variable Tokens */
+        :root {
+            --bg-dark: #070913;
+            --bg-card: rgba(13, 17, 39, 0.6);
+            --bg-card-hover: rgba(20, 27, 61, 0.8);
+            --border-glass: rgba(255, 255, 255, 0.05);
+            --border-glow: rgba(0, 242, 254, 0.15);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --primary: #00f2fe;
+            --primary-glow: rgba(0, 242, 254, 0.4);
+            --secondary: #4facfe;
+            --accent: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --font-header: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 60%, rgba(0, 242, 254, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 50% -10%, rgba(79, 172, 254, 0.15) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* Ambient Glow Blobs */
+        .glow-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .blob-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary);
+            top: 20%;
+            left: -10%;
+        }
+
+        .blob-2 {
+            width: 500px;
+            height: 500px;
+            background: var(--accent);
+            bottom: 10%;
+            right: -10%;
+        }
+
+        /* Typography & Utility Classes */
+        h1, h2, h3, h4 {
+            font-family: var(--font-header);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .glass {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 20px;
+            transition: var(--transition-smooth);
+        }
+
+        .glass:hover {
+            border-color: rgba(0, 242, 254, 0.2);
+            background: var(--bg-card-hover);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 30px -10px var(--primary-glow);
+            transform: translateY(-4px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-glass);
+            background: rgba(7, 9, 19, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 16px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-symbol {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: #070913;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition-smooth);
+            position: relative;
+            padding: 4px 0;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition-smooth);
+            box-shadow: 0 0 8px var(--primary-glow);
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        header {
+            padding: 100px 0 60px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .pill-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 100px;
+            background: rgba(0, 242, 254, 0.08);
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px rgba(0, 242, 254, 0.05);
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(0.98); }
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 680px;
+            margin: 0 auto 32px auto;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            color: #070913;
+            box-shadow: 0 4px 20px rgba(0, 242, 254, 0.3), inset 0 2px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 12px 30px rgba(0, 242, 254, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-glass);
+            margin-left: 16px;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            background: rgba(0, 242, 254, 0.05);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Section Global Settings */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.25rem;
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Objectives Section */
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            align-items: stretch;
+        }
+
+        .obj-card {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .obj-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+        }
+
+        .obj-card.danger-left::before { background: var(--danger); }
+        .obj-card.success-left::before { background: var(--success); }
+
+        .obj-badge {
+            align-self: flex-start;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-danger { background: rgba(239, 68, 68, 0.1); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.2); }
+        .badge-success { background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.2); }
+
+        .obj-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .obj-card p {
+            color: var(--text-secondary);
+            font-size: 0.98rem;
+            margin-bottom: 24px;
+            font-weight: 300;
+        }
+
+        .obj-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .obj-step {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            font-size: 0.92rem;
+        }
+
+        .obj-step-num {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .step-danger { background: rgba(239, 68, 68, 0.15); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.3); }
+        .step-success { background: rgba(16, 185, 129, 0.15); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.3); }
+
+        /* Interactive Chronology Timeline */
+        .timeline-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary) 0%, var(--accent) 100%);
+            transform: translateX(-50%);
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            margin-bottom: 40px;
+            width: 100%;
+            position: relative;
+        }
+
+        .timeline-left {
+            width: 45%;
+            text-align: right;
+            padding-right: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .timeline-center {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+
+        .timeline-node {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-dark);
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .timeline-node:hover {
+            transform: scale(1.15);
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+            color: var(--accent);
+        }
+
+        .timeline-right {
+            width: 45%;
+            padding-left: 30px;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-item:nth-child(even) .timeline-left {
+            text-align: left;
+            padding-left: 30px;
+            padding-right: 0;
+        }
+
+        .timeline-item:nth-child(even) .timeline-right {
+            padding-right: 30px;
+            padding-left: 0;
+        }
+
+        .timeline-time {
+            font-family: var(--font-header);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .timeline-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        .timeline-card {
+            padding: 24px;
+            cursor: pointer;
+        }
+
+        .timeline-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+        }
+
+        .timeline-card-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            border-top: 1px solid transparent;
+            padding-top: 0;
+            margin-top: 0;
+        }
+
+        .timeline-card.active .timeline-card-details {
+            max-height: 250px;
+            border-top-color: var(--border-glass);
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+
+        .timeline-card-details ul {
+            list-style: none;
+            padding-left: 4px;
+        }
+
+        .timeline-card-details li {
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 14px;
+        }
+
+        .timeline-card-details li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        /* Student Interactions Q&A Hub */
+        .qa-search-box {
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            position: relative;
+        }
+
+        .qa-search-box input {
+            width: 100%;
+            padding: 16px 20px 16px 50px;
+            border-radius: 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: var(--transition-smooth);
+        }
+
+        .qa-search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.15);
+            background: var(--bg-card-hover);
+        }
+
+        .qa-search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            pointer-events: none;
+        }
+
+        .qa-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .qa-card {
+            padding: 30px;
+            position: relative;
+        }
+
+        .qa-avatar-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .qa-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #070913;
+            box-shadow: 0 4px 10px rgba(139, 92, 246, 0.2);
+        }
+
+        .qa-student-info h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+
+        .qa-student-info p {
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .qa-question {
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+            padding-left: 8px;
+            border-left: 2px solid var(--primary);
+        }
+
+        .qa-answer {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 16px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+        }
+
+        .qa-answer strong {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        /* Real-World Impact Cards */
+        .impact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        .impact-card {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .impact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #070913;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .impact-card h3 {
+            font-size: 1.4rem;
+        }
+
+        .impact-card p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            font-weight: 300;
+        }
+
+        .impact-card ul {
+            list-style: none;
+        }
+
+        .impact-card li {
+            margin-bottom: 8px;
+            font-size: 0.88rem;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .impact-card li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        /* Prompt Vault */
+        .prompt-vault-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .prompt-card {
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .prompt-info {
+            flex-grow: 1;
+        }
+
+        .prompt-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            font-size: 0.75rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-weight: 600;
+            border: 1px solid var(--border-glass);
+        }
+
+        .prompt-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .prompt-code {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-glass);
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            max-height: 80px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .prompt-card.expanded .prompt-code {
+            white-space: normal;
+            max-height: none;
+            overflow: visible;
+        }
+
+        .prompt-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .btn-icon {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-icon:hover {
+            background: var(--primary);
+            color: #070913;
+            box-shadow: 0 0 15px var(--primary-glow);
+            border-color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-glass);
+            padding: 40px 0;
+            background: rgba(5, 7, 15, 0.9);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        footer .logo {
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        /* Responsive Design Rules */
+        @media (max-width: 992px) {
+            .objectives-grid, .qa-grid, .impact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-line {
+                left: 20px;
+            }
+
+            .timeline-center {
+                left: 20px;
+            }
+
+            .timeline-left {
+                width: 100%;
+                text-align: left;
+                padding-left: 50px;
+                padding-right: 0;
+                margin-bottom: 12px;
+            }
+
+            .timeline-right {
+                width: 100%;
+                padding-left: 50px;
+            }
+
+            .timeline-item, .timeline-item:nth-child(even) {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .timeline-item:nth-child(even) .timeline-left {
+                padding-left: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Blobs -->
+    <div class="glow-blob blob-1"></div>
+    <div class="glow-blob blob-2"></div>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <img src="Logotipo rev1.png" alt="Project Control AI Logo" style="height: 36px; width: auto; object-fit: contain; border-radius: 4px;">
+                <span class="gradient-text" style="font-family: 'Outfit', sans-serif; font-weight: 800; letter-spacing: -0.01em;">Project Control AI</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#hero" class="active">Inicio</a></li>
+                <li><a href="#objetivos">Objetivos</a></li>
+                <li><a href="#cronologia">Cronología</a></li>
+                <li><a href="#alumnos">Interacciones</a></li>
+                <li><a href="#casos">Casos Reales</a></li>
+                <li><a href="#prompts">Vault</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header id="hero" class="container">
+        <div class="pill-badge">🎓 Automation Engineer - Clase 4</div>
+        <h1>Reportes Diarios en la Nube con <span class="gradient-text">Ingeniería Aumentada</span></h1>
+        <p>Transición disruptiva de procesos locales y manuales a ecosistemas móviles colaborativos en tiempo real integrados con Inteligencia Artificial.</p>
+        <div>
+            <a href="#objetivos" class="btn btn-primary gradient-bg">Explorar Clase</a>
+            <a href="#prompts" class="btn btn-secondary">Copiar Prompts</a>
+        </div>
+    </header>
+
+    <!-- Section 1: Objectives -->
+    <section id="objetivos" class="container">
+        <div class="section-header">
+            <h2>El Salto de lo Local a la Nube</h2>
+            <p>El objetivo central de la sesión es simplificar radicalmente la captura de datos en campo y optimizar la toma de decisiones gerenciales.</p>
+        </div>
+        <div class="objectives-grid">
+            <!-- Bottleneck Card -->
+            <div class="glass obj-card danger-left">
+                <div>
+                    <div class="obj-badge badge-danger">El Cuello de Botella Tradicional</div>
+                    <h3>
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                        Gestión Inconexa en Obra
+                    </h3>
+                    <p>Los métodos antiguos de control de proyectos consumen valiosas horas de mano de obra en tareas de digitación redundantes y limitan la velocidad del negocio.</p>
+                </div>
+                <div class="obj-steps">
+                    <div class="obj-step">
+                        <div class="obj-step-num step-danger">1</div>
+                        <span>Capataces anotando personal, cuadrillas y materiales en cuadernos o papeles físicos expuestos a pérdidas.</span>
+                    </div>
+                    <div class="obj-step">
+                        <div class="obj-step-num step-danger">2</div>
+                        <span>Ingenieros de campo digitando y consolidando manualmente datos de 7:00 PM a 11:00 PM después de la jornada.</span>
+                    </div>
+                    <div class="obj-step">
+                        <div class="obj-step-num step-danger">3</div>
+                        <span>Jefe de Obra y Directores reciben informes aislados tarde en la noche, imposibilitando la reacción inmediata.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Solution Card -->
+            <div class="glass obj-card success-left">
+                <div>
+                    <div class="obj-badge badge-success">La Innovación Colaborativa</div>
+                    <h3>
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                        Flujo Inteligente PCAI
+                    </h3>
+                    <p>La digitalización directa desde el punto de origen (campo) automatiza el procesamiento y visibiliza el estado del proyecto al instante.</p>
+                </div>
+                <div class="obj-steps">
+                    <div class="obj-step">
+                        <div class="obj-step-num step-success">1</div>
+                        <span>Formulario web móvil responsivo (9:16) cargado en los smartphones de los capataces en obra.</span>
+                    </div>
+                    <div class="obj-step">
+                        <div class="obj-step-num step-success">2</div>
+                        <span>Envío en tiempo real a una base de datos de Google Sheets mediante un script gratuito de Google Apps Script.</span>
+                    </div>
+                    <div class="obj-step">
+                        <div class="obj-step-num step-success">3</div>
+                        <span>Procesamiento local con Python y Antigravity en segundos para la toma de decisiones inmediata de la gerencia.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Chronology Timeline -->
+    <section id="cronologia" style="background: rgba(255,255,255,0.01); border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Cronología Detallada de la Clase</h2>
+                <p>El desarrollo práctico paso a paso de la sesión. Haz clic en las tarjetas para desplegar los detalles técnicos de cada fase.</p>
+            </div>
+            
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                
+                <!-- Timeline Item 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-left">
+                        <div class="timeline-time">Minuto 32:00 - 37:30</div>
+                        <div class="timeline-title">Estructura & Interfaz Móvil</div>
+                        <div class="timeline-desc">Creación del directorio de trabajo e inicio del primer prompt del cliente móvil responsivo.</div>
+                    </div>
+                    <div class="timeline-center">
+                        <div class="timeline-node">1</div>
+                    </div>
+                    <div class="timeline-right">
+                        <div class="glass timeline-card" onclick="toggleTimeline(this)">
+                            <h4>
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                                Estructura Inicial del Formulario 9:16
+                            </h4>
+                            <p>Desarrollo del maquetado HTML adaptado a teléfonos inteligentes.</p>
+                            <div class="timeline-card-details">
+                                <ul>
+                                    <li>Creación de directorio local <code>Automation Engineer > 4ta Clase > Reporte diario</code>.</li>
+                                    <li>Carga de carpeta en <strong>Antigravity</strong> con la función <code>Open Folder</code>.</li>
+                                    <li>Ejecución del <strong>Prompt 1</strong> para maquetar el HTML en formato vertical 9:16.</li>
+                                    <li>Generación de cabecera con metadatos de obra y responsable de control.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-left">
+                        <div class="timeline-time">Minuto 37:30 - 53:00</div>
+                        <div class="timeline-title">Validación Local & Lógica</div>
+                        <div class="timeline-desc">Pruebas en el navegador local, recomendación de Gemini Flash y manejo de errores.</div>
+                    </div>
+                    <div class="timeline-center">
+                        <div class="timeline-node">2</div>
+                    </div>
+                    <div class="timeline-right">
+                        <div class="glass timeline-card" onclick="toggleTimeline(this)">
+                            <h4>
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                Aseguramiento de Calidad Visual
+                            </h4>
+                            <p>Revisión e interactividad del primer entregable generado por la IA.</p>
+                            <div class="timeline-card-details">
+                                <ul>
+                                    <li>Visualización local del formulario mediante sub-agente navegador de Antigravity.</li>
+                                    <li>Consejo clave de Aurelio: Usar <strong>Gemini 3 Flash</strong> para ahorrar tokens y optimizar velocidad.</li>
+                                    <li>Validación de componentes: Contador de cuadrillas, clima, sliders de avance e incidentes.</li>
+                                    <li>Incorporación del lienzo interactivo <strong>Canvas HTML5</strong> para capturar firmas digitales.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-left">
+                        <div class="timeline-time">Minuto 53:00 - 01:21:00</div>
+                        <div class="timeline-title">Free Backend con Google</div>
+                        <div class="timeline-desc">Migración inteligente de un esquema con API de pago a Google Apps Script gratuito.</div>
+                    </div>
+                    <div class="timeline-center">
+                        <div class="timeline-node">3</div>
+                    </div>
+                    <div class="timeline-right">
+                        <div class="glass timeline-card" onclick="toggleTimeline(this)">
+                            <h4>
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                                Implementación de Google Apps Script
+                            </h4>
+                            <p>Evitando costos de APIs en la nube mediante tuberías de datos estructuradas.</p>
+                            <div class="timeline-card-details">
+                                <ul>
+                                    <li>Aurelio detecta que la API de Google Cloud propuesta tiene costos y es compleja de registrar.</li>
+                                    <li>Ingreso del <strong>Prompt 2</strong> para solicitar integración con <strong>Google Apps Script</strong>.</li>
+                                    <li>Generación de <code>google_apps_script.gs</code> para recibir datos vía HTTP POST.</li>
+                                    <li>Explicación técnica: API (IA interpretativa) vs Script (código estructurado rígido gratuito).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 4 -->
+                <div class="timeline-item">
+                    <div class="timeline-left">
+                        <div class="timeline-time">Minuto 01:21:00 - 02:22:00</div>
+                        <div class="timeline-title">GitHub Pages & Despliegue</div>
+                        <div class="timeline-desc">Alojamiento gratuito del portal de control y resolución de errores de enrutamiento.</div>
+                    </div>
+                    <div class="timeline-center">
+                        <div class="timeline-node">4</div>
+                    </div>
+                    <div class="timeline-right">
+                        <div class="glass timeline-card" onclick="toggleTimeline(this)">
+                            <h4>
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h2m4-3.5a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                Despliegue Universal del Enlace Web
+                            </h4>
+                            <p>Creación del repositorio, carga de archivos y activación del servidor gratuito.</p>
+                            <div class="timeline-card-details">
+                                <ul>
+                                    <li>Consulta en Antigravity (Prompt 3) para guiar la creación de la cuenta de GitHub.</li>
+                                    <li>Creación de repositorio público <code>reporte-diario-obra</code> en GitHub.</li>
+                                    <li>Norma de Oro: Subir el archivo principal estrictamente como <code>index.html</code> (minúsculas).</li>
+                                    <li>Configuración de GitHub Pages (Settings > Pages > Branch: main > Save).</li>
+                                    <li>Resolución del error 404 de Guillermo explicando las convenciones de enrutamiento web.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 5 -->
+                <div class="timeline-item">
+                    <div class="timeline-left">
+                        <div class="timeline-time">Minuto 02:22:00 - 02:49:00</div>
+                        <div class="timeline-title">WBS Genérico desde Excel</div>
+                        <div class="timeline-desc">Desvinculación del HTML para alimentar dinámicamente las partidas desde plantilla_wbs.xlsx.</div>
+                    </div>
+                    <div class="timeline-center">
+                        <div class="timeline-node">5</div>
+                    </div>
+                    <div class="timeline-right">
+                        <div class="glass timeline-card" onclick="toggleTimeline(this)">
+                            <h4>
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                                Modularización e Integración con Excel
+                            </h4>
+                            <p>Haciendo la aplicación reutilizable en diferentes proyectos modificando solo celdas.</p>
+                            <div class="timeline-card-details">
+                                <ul>
+                                    <li>Guillermo sugiere desacoplar las actividades del HTML para evitar editar código en cada obra.</li>
+                                    <li>Ejecución del <strong>Prompt 4</strong> solicitando la integración de la librería CDN <code>xlsx.js</code>.</li>
+                                    <li>Generación automática de <code>plantilla_wbs.xlsx</code> con la base de datos de partidas.</li>
+                                    <li>Carga conjunta en GitHub Pages; el menú de actividades ahora se lee dinámicamente desde Excel.</li>
+                                    <li>Aurelio explica el límite de 3-5 MB para lectura local antes de requerir un servidor en Python.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Student Interactions Q&A Hub -->
+    <section id="alumnos" class="container">
+        <div class="section-header">
+            <h2>Interacciones y Dudas de los Alumnos</h2>
+            <p>La ingeniería aumentada se aprende resolviendo problemas reales. Filtra las consultas planteadas en clase en tiempo real.</p>
+        </div>
+
+        <!-- Search Box -->
+        <div class="qa-search-box">
+            <svg class="qa-search-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input type="text" id="qa-search" placeholder="Filtra por nombre, tema o palabra clave (ej: 404, firma, offline...)" onkeyup="filterQA()">
+        </div>
+
+        <!-- QA Grid -->
+        <div class="qa-grid" id="qa-container">
+            
+            <!-- Card Cesar -->
+            <div class="glass qa-card" data-keywords="cesar aguedo error agent terminated reinicio instalacion">
+                <div class="qa-avatar-row">
+                    <div class="qa-avatar">CA</div>
+                    <div class="qa-student-info">
+                        <h4>César Aguedo</h4>
+                        <p>Error de Ejecución</p>
+                    </div>
+                </div>
+                <div class="qa-question">
+                    "En mi Antigravity me aparece un aviso que dice: Agent Terminated with Error. ¿Por qué sale esto?"
+                </div>
+                <div class="qa-answer">
+                    <strong>Solución:</strong> Aurelio le enseñó a utilizar el **botón azul de retroceso (Undo/Reciclar)** en el panel de chat del agente para eliminar el caché del prompt fallido y limpiar la cola de comandos del sub-agente. Si el error persistía debido a puertos locales bloqueados, recomendó reiniciar el programa o reinstalarlo.
+                </div>
+            </div>
+
+            <!-- Card Luis 1 -->
+            <div class="glass qa-card" data-keywords="luis pariona firma canvas layout estocastico ia">
+                <div class="qa-avatar-row">
+                    <div class="qa-avatar">LP</div>
+                    <div class="qa-student-info">
+                        <h4>Luis Pariona</h4>
+                        <p>Variación de Código</p>
+                    </div>
+                </div>
+                <div class="qa-question">
+                    "A mí no me salió el detalle del lienzo de la firma digital como le salió a usted en su pantalla. ¿Por qué ocurre?"
+                </div>
+                <div class="qa-answer">
+                    <strong>Solución:</strong> El profesor explicó que los Modelos de Lenguaje (LLMs) tienen un **carácter estocástico** (aleatoriedad creativa). Aunque se use el mismo prompt, el layout puede variar ligeramente de un computador a otro. Esto se soluciona fácilmente pidiéndole un ajuste específico al agente: *"Agrega una firma canvas interactiva"*.
+                </div>
+            </div>
+
+            <!-- Card Guillermo 1 -->
+            <div class="glass qa-card" data-keywords="guillermo franleo 404 index html minusculas paginas settings">
+                <div class="qa-avatar-row">
+                    <div class="qa-avatar">GF</div>
+                    <div class="qa-student-info">
+                        <h4>Guillermo Franleo</h4>
+                        <p>Error 404 Despliegue</p>
+                    </div>
+                </div>
+                <div class="qa-question">
+                    "Ya guardé los cambios en GitHub y configuré la rama principal, pero al abrir el enlace web me sale un error 404."
+                </div>
+                <div class="qa-answer">
+                    <strong>Solución:</strong> Aurelio detectó que Guillermo había subido su archivo web con mayúsculas y con un nombre diferente. Le explicó que **los servidores de GitHub Pages buscan estrictamente un archivo llamado 'index.html' en minúsculas**. Le enseñó a subir el archivo corregido a la carpeta raíz de GitHub y borrar el anterior.
+                </div>
+            </div>
+
+            <!-- Card Luis 2 -->
+            <div class="glass qa-card" data-keywords="luis pariona link largo estetico vercel netlify acortador hosting">
+                <div class="qa-avatar-row">
+                    <div class="qa-avatar">LP</div>
+                    <div class="qa-student-info">
+                        <h4>Luis Pariona</h4>
+                        <p>Estética del Enlace</p>
+                    </div>
+                </div>
+                <div class="qa-question">
+                    "¿Hay forma de optimizar y acortar el largo de la URL de GitHub Pages? Es muy largo por estética."
+                </div>
+                <div class="qa-answer">
+                    <strong>Solución:</strong> Aurelio explicó que la estructura de dominio de GitHub Pages es rígida por defecto. Sin embargo, para fines profesionales, recomendó dos soluciones: comprar un hosting/dominio propio y vincularlo, o desplegar el repositorio gratis en **Vercel** o **Netlify**, que otorgan nombres de subdominio personalizables mucho más limpios.
+                </div>
+            </div>
+
+            <!-- Card Wilber 1 -->
+            <div class="glass qa-card" data-keywords="wilber carbajal offline internet campo capataz whatsapp local">
+                <div class="qa-avatar-row">
+                    <div class="qa-avatar">WC</div>
+                    <div class="qa-student-info">
+                        <h4>Wilber Carbajal</h4>
+                        <p>Operación Offline</p>
+                    </div>
+                </div>
+                <div class="qa-question">
+                    "En caso de que en la obra estemos trabajando en zonas rurales sin conexión a Internet, ¿cuál es la solución para usar la app?"
+                </div>
+                <div class="qa-answer">
+                    <strong>Solución:</strong> Al ser un archivo HTML puro, **los capataces pueden abrir el archivo index.html en el celular sin conexión a Internet** (se puede enviar por WhatsApp y guardar de forma local). Pueden llenar los datos y realizar cálculos locales; el navegador retendrá el reporte en espera de señal para ejecutar la llamada del script de Google.
+                </div>
+            </div>
+
+            <!-- Card Guillermo 2 -->
+            <div class="glass qa-card" data-keywords="guillermo franleo modular excel partidas wbs index desacoplar">
+                <div class="qa-avatar-row">
+                    <div class="qa-avatar">GF</div>
+                    <div class="qa-student-info">
+                        <h4>Guillermo Franleo</h4>
+                        <p>Modularización de Obra</p>
+                    </div>
+                </div>
+                <div class="qa-question">
+                    "¿Cómo podemos evitar cambiar el código HTML de la aplicación móvil cada vez que cambiemos las actividades de una obra?"
+                </div>
+                <div class="qa-answer">
+                    <strong>Solución:</strong> Aurelio elogió la pregunta e implementó el Prompt 4, que reescribe el HTML para conectarse a un Excel externo (<code>plantilla_wbs.xlsx</code>). Así, los ingenieros solo deben abrir el Excel, modificar las actividades o tareas del presupuesto y guardarlo, adaptándose la aplicación de forma automática y transparente.
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Section 4: Real World Cases -->
+    <section id="casos" style="background: rgba(255,255,255,0.01); border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Monetización y Casos de Negocio en la Vida Real</h2>
+                <p>Las automatizaciones vistas en clase son herramientas reales de alto valor comercial. Mira cómo los ingenieros proponen soluciones comerciales.</p>
+            </div>
+            
+            <div class="impact-grid">
+                <!-- Case Wilber -->
+                <div class="glass impact-card">
+                    <div class="impact-icon gradient-bg">📝</div>
+                    <h3>Auditoría de Valorizaciones de Obra Pública</h3>
+                    <p><strong>El Problema de Wilber Carbajal:</strong> Bajo la Directiva 17 de obras públicas de administración directa, cada mes se deben sustentar metrados contra el **Cuaderno de Obra Digital (plataforma InfoObras)**. Dicha plataforma exporta diariamente reportes en PDF. Wilber pasa días enteros abriendo los 30 PDFs diarios del mes para digitar, verificar consistencias y armar la valorización mensual.</p>
+                    <p><strong>La Solución PCAI con IA:</strong></p>
+                    <ul>
+                        <li>Un portal web donde el usuario sube los 30 PDFs diarios en bloque.</li>
+                        <li>Un agente inteligente (Gemini API) lee el texto y cuadros de cada PDF.</li>
+                        <li>Estructura los metrados ejecutados día por día y por partida de presupuesto.</li>
+                        <li>Genera automáticamente la hoja de metrados sustentada y el acumulado mensual auditado en Excel.</li>
+                    </ul>
+                </div>
+
+                <!-- Case Roberto -->
+                <div class="glass impact-card">
+                    <div class="impact-icon gradient-bg" style="box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);">📐</div>
+                    <h3>Control y Cruce de Protocolos y Blueprints en 3D</h3>
+                    <p><strong>El Problema de Roberto Loayza:</strong> Como parte de la Supervisión de Obra, Roberto revisa 21 valorizaciones mensuales. Pasa de 5 a 6 días cruzando metrados declarados por los contratistas contra protocolos físicos de calidad firmados y planos marcados (*Redlines*).</p>
+                    <p><strong>La Revolución Multimodal (Gemini Multimodal Live / Robotic):</strong></p>
+                    <ul>
+                        <li>Los protocolos escaneados se leen con OCR con IA para verificar firmas e importes de metrados autorizados.</li>
+                        <li><strong>Gemini Multimodal</strong> tiene capacidades de razonamiento espacial: Aurelio demostró en vivo cómo, subiendo un plano en planta (2D) y un corte de elevación, la IA comprendió la volumetría tridimensional.</li>
+                        <li>La IA analizó e interpretó el plano físico, detectando alineaciones estructurales y calculando el cómputo de metrados directamente del dibujo con precisión.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Prompt Vault -->
+    <section id="prompts" class="container">
+        <div class="section-header">
+            <h2>Prompt Vault de la Clase</h2>
+            <p>Accede, visualiza y copia con un solo clic los prompts exactos y verbatim utilizados en Antigravity durante el desarrollo de la sesión.</p>
+        </div>
+
+        <div class="prompt-vault-grid">
+            
+            <!-- Prompt 1 -->
+            <div class="glass prompt-card">
+                <div class="prompt-info">
+                    <div class="prompt-tag">Fase 1: Maquetado UI</div>
+                    <h4>Generación Inicial del Formulario 9:16</h4>
+                    <div class="prompt-code" id="code-p1">Requiero hacer un reporte diario del avance de obra para un proyecto de edificación de vivienda unifamiliar. La idea es que este reporte sea en HTML y esté diseñado para los smartphones (celulares) de los colaboradores que están en obra. La información se vincule y descargue en Google Drive (Google Sheet). Por ahora, genera primero el archivo HTML con formato profesional, estructurado para celulares en formato 9:16.</div>
+                </div>
+                <div class="prompt-actions">
+                    <button class="btn-icon" onclick="copyPrompt('code-p1', this)" title="Copiar Prompt">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+                    </button>
+                    <button class="btn-icon" onclick="toggleExpand('code-p1', this)" title="Expandir Prompt">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Prompt 2 -->
+            <div class="glass prompt-card">
+                <div class="prompt-info">
+                    <div class="prompt-tag">Fase 2: Conexión Sheets</div>
+                    <h4>Integración de Backend con Google Apps Script</h4>
+                    <div class="prompt-code" id="code-p2">No quiero vincular a una API de pago. Solo quiero que uses Google Apps Script para pasar la información directamente desde el HTML index de GitHub a Google Sheets.</div>
+                </div>
+                <div class="prompt-actions">
+                    <button class="btn-icon" onclick="copyPrompt('code-p2', this)" title="Copiar Prompt">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+                    </button>
+                    <button class="btn-icon" onclick="toggleExpand('code-p2', this)" title="Expandir Prompt">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Prompt 3 -->
+            <div class="glass prompt-card">
+                <div class="prompt-info">
+                    <div class="prompt-tag">Fase 3: Git & Hosting</div>
+                    <h4>Creación de Cuenta y Repositorio en GitHub</h4>
+                    <div class="prompt-code" id="code-p3">¿Puedes ayudarme a crear mi cuenta en GitHub y también a crear mi primer repositorio?</div>
+                </div>
+                <div class="prompt-actions">
+                    <button class="btn-icon" onclick="copyPrompt('code-p3', this)" title="Copiar Prompt">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+                    </button>
+                    <button class="btn-icon" onclick="toggleExpand('code-p3', this)" title="Expandir Prompt">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Prompt 4 -->
+            <div class="glass prompt-card">
+                <div class="prompt-info">
+                    <div class="prompt-tag">Fase 4: Modularización</div>
+                    <h4>Vinculación Dinámica a Excel WBS Externo</h4>
+                    <div class="prompt-code" id="code-p4">Deseo que el archivo index trabaje conjuntamente con un archivo Excel (plantilla_wbs.xlsx). Es decir, la aplicación debe ser genérica. En el archivo Excel se tiene que definir el WBS (EDT) y la descripción de las actividades, y el archivo index debe tomar dicha información y mostrarla al equipo del proyecto. De modo que si cambio de proyecto, solo tengo que actualizar el archivo Excel y el index se adaptará a otro proyecto similar. Como entregable, deseo el index actualizado y el Excel formateado (plantilla_wbs.xlsx).</div>
+                </div>
+                <div class="prompt-actions">
+                    <button class="btn-icon" onclick="copyPrompt('code-p4', this)" title="Copiar Prompt">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+                    </button>
+                    <button class="btn-icon" onclick="toggleExpand('code-p4', this)" title="Expandir Prompt">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <a href="#" class="logo">
+                <img src="Logotipo rev1.png" alt="Project Control AI Logo" style="height: 36px; width: auto; object-fit: contain; border-radius: 4px;">
+                <span class="gradient-text" style="font-family: 'Outfit', sans-serif; font-weight: 800; letter-spacing: -0.01em;">Project Control AI</span>
+            </a>
+            <p>© 2026 Project Control AI. Ingeniería Aumentada y de Control. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Timeline accordion expand/collapse logic
+        function toggleTimeline(cardElement) {
+            const isActive = cardElement.classList.contains('active');
+            
+            // Close all timeline cards first
+            document.querySelectorAll('.timeline-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            
+            // If the card was not active, expand it
+            if (!isActive) {
+                cardElement.classList.add('active');
+            }
+        }
+
+        // Q&A card filtering engine
+        function filterQA() {
+            const input = document.getElementById('qa-search');
+            const filter = input.value.toLowerCase().trim();
+            const cards = document.querySelectorAll('#qa-container .qa-card');
+            
+            cards.forEach(card => {
+                const keywords = card.getAttribute('data-keywords').toLowerCase();
+                const questionText = card.querySelector('.qa-question').textContent.toLowerCase();
+                const answerText = card.querySelector('.qa-answer').textContent.toLowerCase();
+                const studentName = card.querySelector('.qa-student-info h4').textContent.toLowerCase();
+
+                if (keywords.includes(filter) || questionText.includes(filter) || answerText.includes(filter) || studentName.includes(filter)) {
+                    card.style.display = 'block';
+                    card.style.opacity = '1';
+                    card.style.transform = 'scale(1)';
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        if (card.style.opacity === '0') {
+                            card.style.display = 'none';
+                        }
+                    }, 200);
+                }
+            });
+        }
+
+        // Copy text clipboard API
+        function copyPrompt(codeId, buttonElement) {
+            const codeText = document.getElementById(codeId).textContent;
+            navigator.clipboard.writeText(codeText).then(() => {
+                // Change copy icon to Check
+                const originalSvg = buttonElement.innerHTML;
+                buttonElement.style.background = 'var(--success)';
+                buttonElement.style.borderColor = 'var(--success)';
+                buttonElement.style.color = '#070913';
+                buttonElement.innerHTML = `<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>`;
+                
+                setTimeout(() => {
+                    buttonElement.style.background = 'rgba(255, 255, 255, 0.03)';
+                    buttonElement.style.borderColor = 'var(--border-glass)';
+                    buttonElement.style.color = 'var(--text-primary)';
+                    buttonElement.innerHTML = originalSvg;
+                }, 2000);
+            }).catch(err => {
+                console.error('Error al copiar: ', err);
+            });
+        }
+
+        // Expand/Collapse prompt code
+        function toggleExpand(codeId, buttonElement) {
+            const promptCard = document.getElementById(codeId).closest('.prompt-card');
+            const isExpanded = promptCard.classList.contains('expanded');
+            
+            if (isExpanded) {
+                promptCard.classList.remove('expanded');
+                buttonElement.innerHTML = `<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>`;
+                buttonElement.title = "Expandir Prompt";
+            } else {
+                promptCard.classList.add('expanded');
+                buttonElement.innerHTML = `<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 15l7-7 7 7"/></svg>`;
+                buttonElement.title = "Colapsar Prompt";
+            }
+        }
+    </script>
+</body>
+</html>

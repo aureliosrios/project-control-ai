@@ -12,7 +12,17 @@ const courses = {
       { id: "BHYaeOX97Mc", num: "01", status: "OCULTA", title: "Introducción a la Automatización de Procesos", desc: "Clase del 19 de Abril: Fundamentos y herramientas clave para el ingeniero de automatización moderno." },
       { id: "9vvyQFfvOGo", num: "02", status: "OCULTA", title: "Arquitectura de Agentes y Workflows", desc: "Clase del 26 de Abril: Diseño de flujos de trabajo inteligentes y orquestación de agentes." },
       { id: "BqV82NdFt_k", num: "03", status: "OCULTA", title: "Integración Avanzada y Sistemas Autónomos", desc: "Clase del 03 de Mayo: Integración y orquestación avanzada en producción con casos prácticos reales." },
-      { id: "EHxM2Q4Sp-M", num: "04", status: "OCULTA", title: "Despliegue y Orquestación de Agentes en Producción", desc: "Clase del 17 de Mayo: Implementación práctica de agentes autónomos, pipelines de automatización y resolución de problemas en entornos reales." }
+      { 
+        id: "EHxM2Q4Sp-M", 
+        num: "04", 
+        status: "OCULTA", 
+        title: "Despliegue y Orquestación de Agentes en Producción", 
+        desc: "Clase del 17 de Mayo: Implementación práctica de agentes autónomos, pipelines de automatización y resolución de problemas en entornos reales.",
+        resources: [
+          { title: "Manual de la Clase 4 (PDF)", type: "pdf", url: "/manuales/Manual_Clase_4_Colaborativo.pdf" },
+          { title: "Resumen de la Clase 4 (HTML)", type: "html", url: "/manuales/resumen_clase_4.html" }
+        ]
+      }
     ]
   },
   "GIP": {
@@ -269,16 +279,47 @@ export default function ClasesGrabadas() {
                 </>
               ) : null}
 
-              {/* Recursos del curso */}
-              {!activeCourse?.isExpired && (
-                <div className="p-8 rounded-[32px] bg-cyan-500/5 border border-cyan-500/20 flex flex-col md:flex-row items-center gap-6 justify-between">
+              {/* Recursos de la Lección Seleccionada */}
+              {!activeCourse?.isExpired && selectedLesson && (
+                <div className="p-8 rounded-[32px] bg-cyan-500/5 border border-cyan-500/20 space-y-6">
                   <div>
-                    <h3 className="text-xl font-black text-cyan-400 mb-2 uppercase tracking-tight">📂 Material de Clase</h3>
-                    <p className="text-sm text-slate-400">Descarga las plantillas y recursos oficiales del curso activo.</p>
+                    <h3 className="text-xl font-black text-cyan-400 mb-1 uppercase tracking-tight flex items-center gap-2">
+                      <span className="material-symbols-outlined">folder_open</span>
+                      Recursos de la Clase {selectedLesson.num}
+                    </h3>
+                    <p className="text-xs text-slate-400">Descarga el material de lectura y resúmenes oficiales exclusivos de esta sesión.</p>
                   </div>
-                  <button className="bg-cyan-500 text-black px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:scale-105 transition-all">
-                    Descargar Recursos
-                  </button>
+                  
+                  {selectedLesson.resources && selectedLesson.resources.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {selectedLesson.resources.map((res, idx) => (
+                        <a 
+                          key={idx}
+                          href={res.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-between p-4 rounded-2xl bg-black/40 border border-white/10 hover:border-cyan-500/40 hover:bg-cyan-950/20 transition-all group"
+                        >
+                          <div className="flex items-center gap-3">
+                            <span className={`material-symbols-outlined ${res.type === 'pdf' ? 'text-red-400' : 'text-cyan-400'}`}>
+                              {res.type === 'pdf' ? 'picture_as_pdf' : 'html'}
+                            </span>
+                            <div className="text-left">
+                              <p className="text-xs font-bold text-white uppercase tracking-wider group-hover:text-cyan-400 transition-colors">{res.title}</p>
+                              <p className="text-[10px] text-slate-500 uppercase tracking-widest">{res.type === 'pdf' ? 'Documento PDF' : 'Resumen Interactivo (HTML)'}</p>
+                            </div>
+                          </div>
+                          <span className="material-symbols-outlined text-sm text-slate-400 group-hover:text-cyan-400 group-hover:translate-y-0.5 transition-all">
+                            download
+                          </span>
+                        </a>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-slate-500 text-xs italic p-4 rounded-xl border border-white/5 bg-black/20 text-center">
+                      No hay recursos específicos cargados para esta clase aún. Revisa más tarde.
+                    </div>
+                  )}
                 </div>
               )}
             </div>

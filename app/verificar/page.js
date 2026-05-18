@@ -453,13 +453,13 @@ export default function Verificar() {
                     onChange={(e) => setTitulo(e.target.value)}
                     className="bg-[#020617] border border-white/10 rounded-xl px-3 py-3 text-xs font-bold text-white outline-none focus:border-cyan-500"
                   >
-                    <option value="Ing.">Ing.</option>
-                    <option value="Arq.">Arq.</option>
-                    <option value="Lic.">Lic.</option>
-                    <option value="Mag.">Mag.</option>
-                    <option value="Dr.">Dr.</option>
-                    <option value="Sr.">Sr.</option>
-                    <option value="">---</option>
+                    <option value="Ing." className="bg-[#020617] text-white">Ing.</option>
+                    <option value="Arq." className="bg-[#020617] text-white">Arq.</option>
+                    <option value="Lic." className="bg-[#020617] text-white">Lic.</option>
+                    <option value="Mag." className="bg-[#020617] text-white">Mag.</option>
+                    <option value="Dr." className="bg-[#020617] text-white">Dr.</option>
+                    <option value="Sr." className="bg-[#020617] text-white">Sr.</option>
+                    <option value="" className="bg-[#020617] text-white">---</option>
                   </select>
                   <input 
                     type="text"

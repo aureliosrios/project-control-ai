@@ -135,11 +135,17 @@ export default function Inscripcion() {
 
             <div>
               <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Curso a Inscribirse</label>
-              <select name="curso" required value={formData.curso} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 transition-all outline-none appearance-none">
-                <option value="" disabled>Seleccione curso...</option>
-                <option value="Gestion Proyectos IA">1. El Despertar de la IA para la Gestión de Proyectos</option>
-                <option value="Automation Engineer">2. Ingeniería Aumentada: Automatización con Agentes de IA</option>
-                <option value="Licitaciones Inteligentes">3. Licitaciones Inteligentes con IA</option>
+              <select 
+                name="curso" 
+                required 
+                value={formData.curso} 
+                onChange={handleChange} 
+                className="w-full bg-[#0f172a] text-white border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 transition-all outline-none"
+              >
+                <option value="" disabled className="bg-[#0f172a] text-slate-400">Seleccione curso...</option>
+                <option value="Gestion Proyectos IA" className="bg-[#0f172a] text-white">1. El Despertar de la IA para la Gestión de Proyectos</option>
+                <option value="Automation Engineer" className="bg-[#0f172a] text-white">2. Ingeniería Aumentada: Automatización con Agentes de IA</option>
+                <option value="Licitaciones Inteligentes" className="bg-[#0f172a] text-white">3. Licitaciones Inteligentes con IA</option>
               </select>
             </div>
 

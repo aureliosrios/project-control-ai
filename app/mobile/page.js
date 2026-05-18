@@ -84,25 +84,24 @@ export default function MobileLanding() {
         >
           {/* Neon Glow Shift */}
           <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/5 to-emerald-500/0 -translate-x-full group-hover:translate-x-full transition-transform duration-[1200ms]" />
-          
-          {/* Glowing Top Badge */}
-          <div className="absolute top-0 right-6 -translate-y-1/2">
-            <span className="bg-gradient-to-r from-emerald-600 to-emerald-400 text-[#020617] text-[8px] font-black tracking-[0.2em] uppercase px-3 py-1 rounded-full shadow-[0_0_15px_rgba(16,185,129,0.4)] flex items-center gap-1">
-              <span className="w-1 h-1 rounded-full bg-slate-950 animate-ping" />
-              ÚNETE GRATIS
-            </span>
-          </div>
 
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform flex-shrink-0">
               <span className="material-symbols-outlined text-2xl font-bold">group</span>
             </div>
             <div className="text-left">
-              <span className="block text-xl font-black text-white tracking-tight mb-1 group-hover:text-emerald-300 transition-colors">
-                GRUPO DE WHATSAPP
-              </span>
+              {/* Title with Inline Glowing Badge */}
+              <div className="flex flex-wrap items-center gap-2 mb-1">
+                <span className="text-xl font-black text-white tracking-tight group-hover:text-emerald-300 transition-colors">
+                  GRUPO DE WHATSAPP
+                </span>
+                <span className="bg-gradient-to-r from-emerald-600 to-emerald-400 text-[#020617] text-[8px] font-black tracking-widest uppercase px-2 py-0.5 rounded shadow-[0_0_10px_rgba(16,185,129,0.3)] inline-flex items-center gap-1">
+                  <span className="w-1 h-1 rounded-full bg-slate-950 animate-ping" />
+                  GRATIS
+                </span>
+              </div>
               <p className="text-xs text-slate-300 leading-relaxed font-medium">
-                Únete a nuestra comunidad global y recibe **plantillas de control, scripts de Python, guías exclusivas** y accesos a talleres gratuitos de Ingeniería & IA.
+                Únete a nuestra comunidad. Recibe plantillas de control, scripts de Python y lecciones exclusivas sin costo.
               </p>
             </div>
           </div>
@@ -121,23 +120,23 @@ export default function MobileLanding() {
           className="block w-full bg-[#070b14]/75 backdrop-blur-xl p-6 rounded-3xl border border-cyan-500/30 hover:border-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.08)] hover:shadow-[0_0_35px_rgba(6,182,212,0.25)] transition-all duration-300 relative overflow-hidden group hover:scale-[1.02] active:scale-95"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-cyan-500/0 -translate-x-full group-hover:translate-x-full transition-transform duration-[1200ms]" />
-          
-          <div className="absolute top-0 right-6 -translate-y-1/2">
-            <span className="bg-gradient-to-r from-cyan-600 to-cyan-400 text-[#020617] text-[8px] font-black tracking-[0.2em] uppercase px-3 py-1 rounded-full shadow-[0_0_15px_rgba(6,182,212,0.3)]">
-              ACADEMIA ÉLITE
-            </span>
-          </div>
 
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform flex-shrink-0">
               <span className="material-symbols-outlined text-2xl font-bold">school</span>
             </div>
             <div className="text-left">
-              <span className="block text-xl font-black text-white tracking-tight mb-1 group-hover:text-cyan-300 transition-colors">
-                EXPLORAR CURSOS
-              </span>
+              {/* Title with Inline Glowing Badge */}
+              <div className="flex flex-wrap items-center gap-2 mb-1">
+                <span className="text-xl font-black text-white tracking-tight group-hover:text-cyan-300 transition-colors">
+                  EXPLORAR CURSOS
+                </span>
+                <span className="bg-gradient-to-r from-cyan-600 to-cyan-400 text-[#020617] text-[8px] font-black tracking-widest uppercase px-2 py-0.5 rounded shadow-[0_0_10px_rgba(6,182,212,0.3)]">
+                  ACADEMIA
+                </span>
+              </div>
               <p className="text-xs text-slate-300 leading-relaxed font-medium">
-                Domina automatización avanzada en construcción, **Python para ingenieros, Primavera P6 con IA** y conviértete en un **Automation Engineer**.
+                Python para ingenieros, Primavera P6 con Inteligencia Artificial y agentes para control de proyectos.
               </p>
             </div>
           </div>
@@ -149,23 +148,23 @@ export default function MobileLanding() {
           className="block w-full bg-[#070b14]/75 backdrop-blur-xl p-6 rounded-3xl border border-purple-500/30 hover:border-purple-400 shadow-[0_0_20px_rgba(139,92,246,0.08)] hover:shadow-[0_0_35px_rgba(139,92,246,0.25)] transition-all duration-300 relative overflow-hidden group hover:scale-[1.02] active:scale-95"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/5 to-purple-500/0 -translate-x-full group-hover:translate-x-full transition-transform duration-[1200ms]" />
-          
-          <div className="absolute top-0 right-6 -translate-y-1/2">
-            <span className="bg-gradient-to-r from-purple-600 to-purple-400 text-[#020617] text-[8px] font-black tracking-[0.2em] uppercase px-3 py-1 rounded-full shadow-[0_0_15px_rgba(139,92,246,0.3)]">
-              B2B SYSTEMS
-            </span>
-          </div>
 
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform flex-shrink-0">
               <span className="material-symbols-outlined text-2xl font-bold">psychology</span>
             </div>
             <div className="text-left">
-              <span className="block text-xl font-black text-white tracking-tight mb-1 group-hover:text-purple-300 transition-colors">
-                CONSULTORÍA IA
-              </span>
+              {/* Title with Inline Glowing Badge */}
+              <div className="flex flex-wrap items-center gap-2 mb-1">
+                <span className="text-xl font-black text-white tracking-tight group-hover:text-purple-300 transition-colors">
+                  CONSULTORÍA IA
+                </span>
+                <span className="bg-gradient-to-r from-purple-600 to-purple-400 text-[#020617] text-[8px] font-black tracking-widest uppercase px-2 py-0.5 rounded shadow-[0_0_10px_rgba(139,92,246,0.3)]">
+                  B2B SYSTEMS
+                </span>
+              </div>
               <p className="text-xs text-slate-300 leading-relaxed font-medium">
-                Sistemas cognitivos a medida y **agentes de IA autónomos** para optimizar presupuestos, licitaciones e ingeniería en tu constructora o empresa.
+                Implementación de agentes autónomos y sistemas cognitivos a medida para constructoras y empresas.
               </p>
             </div>
           </div>

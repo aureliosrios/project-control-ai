@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase";
+// import { supabase } from "@/lib/supabase";
 
 export default function Inscripcion() {
   const [loading, setLoading] = useState(false);
@@ -26,42 +26,35 @@ export default function Inscripcion() {
     setLoading(true);
 
     try {
-      const payload = {
-        ...formData,
-        edicion_curso: 'AUTO-REGISTRO'
+      // 1. Datos a enviar a Google Sheets
+      const sheetsPayload = {
+        dni: String(formData.dni),
+        nombre: String(formData.nombre),
+        apellido: String(formData.apellido),
+        profesion: String(formData.profesion),
+        telefono: String(formData.telefono),
+        email: String(formData.email),
+        curso: String(formData.curso),
+        metodo_pago: 'GRATUITO',
+        pago_realizado: 'NO',
+        validado_director: 'false',
+        edicion_curso: 'AUTO-REGISTRO',
+        fecha: new Date().toLocaleString('es-PE', { timeZone: 'America/Lima' }),
+        estudiante_id: '' // Se deja vacío para el filtro humano inicial
       };
 
-      // Check if student exists
-      let { data: existingStudent } = await supabase
-        .from('estudiantes')
-        .select('id')
-        .eq('dni', formData.dni)
-        .maybeSingle();
-
-      let studentId;
-      if (existingStudent) {
-        studentId = existingStudent.id;
-        await supabase.from('estudiantes').update(formData).eq('id', studentId);
-      } else {
-        const { data: newStudent, error } = await supabase
-          .from('estudiantes')
-          .insert([formData])
-          .select()
-          .single();
-        if (error) throw error;
-        studentId = newStudent.id;
-      }
-
-      // Create enrollment
-      const { error: enrollError } = await supabase
-        .from('matriculas')
-        .insert([{ ...payload, estudiante_id: studentId }]);
+      // 2. Enviar a Google Sheets (Webhook de Apps Script)
+      const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbwPvR7sL6JQMM9EEs-X9jHGB-JL93U4sxpN9YR-pxcdcFKza5wxxfrtteU9O19lBiftzA/exec';
       
-      if (enrollError) throw enrollError;
+      await fetch(googleSheetsUrl, {
+        method: 'POST',
+        body: new URLSearchParams(sheetsPayload),
+        mode: 'no-cors'
+      });
 
       setSuccess(true);
     } catch (error) {
-      alert("Error: " + error.message);
+      alert("Error al registrar: " + error.message);
     } finally {
       setLoading(false);
     }

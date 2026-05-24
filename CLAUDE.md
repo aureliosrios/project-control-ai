@@ -155,7 +155,7 @@ PCAI_CONFIG = {
 |----|--------|--------|--------|---------|-------|
 | IAD | El Despertar de la IA para la Gestión de Proyectos | $75 / S/200 | 31 May 2026 | Domingos 10 AM - 1 PM | Básico |
 | PRO | Ingeniería Aumentada: Automatización con Agentes de IA | $100 / S/300 | 31 May 2026 | Domingos 3-6 PM | Avanzado |
-| LIC | Licitaciones Inteligentes con IA | $100 / S/300 | 25 May 2026 | Lun-Mié 7-10 PM | Avanzado |
+| LIC | Licitaciones Inteligentes con IA (Cupos Agotados) | $100 / S/300 | 25 May 2026 | Lun-Mié 7-10 PM | Avanzado |
 
 **Los cursos IAD y PRO están orientados a todos los ingenieros de construcción para dominar lenguajes de IA (HTML, Mermaid, MD, CSV), Python, VBA, Skills y Scripts MCP.**
 **Ingeniería Aumentada: Automatización con Agentes de IA (PRO) requiere haber cursado El Despertar de la IA (IAD) como prerrequisito.**

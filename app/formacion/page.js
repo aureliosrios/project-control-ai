@@ -45,6 +45,7 @@ const sincronicos = [
     tag: "CURSO 1 · BÁSICO",
     desc: "El inicio de la era digital para ingenieros. Domina la Gestión de Alcance, Contratos, Calidad y HSE mediante informes en HTML, flujogramas en Mermaid y documentos en MD/CSV.",
     inicio: "31 de Mayo, 2026",
+    horario: "Domingos · 10:00 AM – 1:00 PM",
     sesiones: "15h · 5 sesiones",
     link: "/inscripcion",
     hotmart: "https://pay.hotmart.com/K104218834V",
@@ -59,6 +60,7 @@ const sincronicos = [
     tag: "CURSO 2 · AVANZADO",
     desc: "Domina la automatización avanzada con Python, HTML, VBA y Agentes Autónomos. Aprende a desarrollar Skills y Scripts MCP dentro de ecosistemas agénticos.",
     inicio: "31 de Mayo, 2026",
+    horario: "Domingos · 3:00 PM – 6:00 PM",
     sesiones: "15h · 5 sesiones",
     link: "/inscripcion",
     hotmart: "https://pay.hotmart.com/I104227016S",
@@ -73,11 +75,13 @@ const sincronicos = [
     tag: "CURSO 3 · AVANZADO",
     desc: "Nivel Avanzado: Domina MCP, Skills y Scripts Python para automatizar APUs y cronogramas. Análisis masivo de expedientes técnicos de miles de páginas.",
     inicio: "25 de Mayo, 2026",
+    horario: "Lunes y Miércoles · 7:00 PM – 10:00 PM",
     sesiones: "15h · 5 sesiones",
     link: "/inscripcion",
     hotmart: "https://pay.hotmart.com/N104187999C",
     paypal: "https://paypal.me/ProjectControlAI",
-    color: "orange"
+    color: "orange",
+    cerrado: true
   }
 ];
 
@@ -225,7 +229,11 @@ export default function Formacion() {
                     <span className={`text-[10px] font-black tracking-[0.3em] uppercase text-${curso.color === 'cyan' ? 'cyan' : curso.color === 'blue' ? 'indigo' : 'orange'}-400`}>
                       {curso.tag}
                     </span>
-                    <span className="bg-orange-500 text-slate-950 text-[8px] font-black px-2 py-1 rounded-full uppercase tracking-widest animate-pulse">En Vivo</span>
+                    {curso.cerrado ? (
+                      <span className="bg-red-500/20 text-red-400 border border-red-500/30 text-[8px] font-black px-2 py-1 rounded-full uppercase tracking-widest">Agotado</span>
+                    ) : (
+                      <span className="bg-orange-500 text-slate-950 text-[8px] font-black px-2 py-1 rounded-full uppercase tracking-widest animate-pulse">En Vivo</span>
+                    )}
                   </div>
 
                   <h3 className="text-2xl font-black text-white mb-6 uppercase tracking-tighter leading-tight">
@@ -240,52 +248,85 @@ export default function Formacion() {
                       <span className="material-symbols-outlined text-[16px] text-orange-500">calendar_today</span>
                       <span><strong className="text-white">Inicio:</strong> {curso.inicio}</span>
                     </div>
+                    {curso.horario && (
+                      <div className="flex items-center gap-3 text-xs text-slate-300">
+                        <span className="material-symbols-outlined text-[16px] text-orange-500">schedule</span>
+                        <span>{curso.horario}</span>
+                      </div>
+                    )}
                     <div className="flex items-center gap-3 text-xs text-slate-300">
-                      <span className="material-symbols-outlined text-[16px] text-orange-500">schedule</span>
+                      <span className="material-symbols-outlined text-[16px] text-orange-500">more_time</span>
                       <span>{curso.sesiones}</span>
                     </div>
                   </div>
 
                   <div className="pt-8 border-t border-white/5">
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="flex flex-col">
-                        <span className="text-2xl font-black text-white">{curso.precio}</span>
-                        <span className="text-[10px] text-cyan-400 font-bold uppercase tracking-widest">{curso.precioSoles}</span>
+                    {curso.cerrado ? (
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex flex-col">
+                            <span className="text-2xl font-black text-slate-500 line-through">{curso.precio}</span>
+                            <span className="text-[10px] text-red-500 font-bold uppercase tracking-widest">Matrículas Cerradas</span>
+                          </div>
+                          <button 
+                            disabled
+                            className="px-6 py-3 bg-red-950/20 border border-red-500/20 text-red-400 rounded-xl font-bold text-[10px] uppercase tracking-widest cursor-not-allowed"
+                          >
+                            Cupos Agotados
+                          </button>
+                        </div>
+                        <Link 
+                          href={`https://wa.me/51993147501?text=Hola,%20deseo%20entrar%20a%20la%20lista%20de%20espera%20para%20el%20curso%20de%20Licitaciones%20Inteligentes.`} 
+                          target="_blank"
+                          className="flex items-center justify-center gap-2 py-3.5 bg-white/5 border border-white/10 rounded-xl text-[10px] font-black text-slate-300 uppercase tracking-widest hover:bg-white/10 transition-all"
+                        >
+                          <span className="material-symbols-outlined text-sm">chat</span>
+                          Lista de Espera (WhatsApp)
+                        </Link>
                       </div>
-                      <Link 
-                        href={curso.link} 
-                        className={`px-6 py-3 bg-white/5 border border-white/10 text-white rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-white/10 transition-all`}
-                      >
-                        Inscribirme
-                      </Link>
-                    </div>
-                    
-                    <div className="grid grid-cols-2 gap-3">
-                      <Link 
-                        href={curso.hotmart} 
-                        target="_blank"
-                        className="flex items-center justify-center gap-2 py-3 bg-orange-500/10 border border-orange-500/20 rounded-xl text-[9px] font-black text-orange-400 uppercase tracking-widest hover:bg-orange-500/20 transition-all"
-                      >
-                        <span className="material-symbols-outlined text-sm">shopping_cart</span>
-                        Hotmart
-                      </Link>
-                      <Link 
-                        href={curso.paypal} 
-                        target="_blank"
-                        className="flex items-center justify-center gap-2 py-3 bg-blue-500/10 border border-blue-500/20 rounded-xl text-[9px] font-black text-blue-400 uppercase tracking-widest hover:bg-blue-500/20 transition-all"
-                      >
-                        <span className="material-symbols-outlined text-sm">payments</span>
-                        PayPal
-                      </Link>
-                      <Link 
-                        href={`https://wa.me/51993147501?text=Hola,%20quiero%20pagar%20el%20curso%20${curso.nombre}%20por%20Yape/Plin.`} 
-                        target="_blank"
-                        className="col-span-2 flex items-center justify-center gap-2 py-3 bg-cyan-500 text-slate-950 rounded-xl text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)]"
-                      >
-                        <span className="material-symbols-outlined text-sm">qr_code_2</span>
-                        Pagar con Yape / Plin
-                      </Link>
-                    </div>
+                    ) : (
+                      <>
+                        <div className="flex items-center justify-between mb-6">
+                          <div className="flex flex-col">
+                            <span className="text-2xl font-black text-white">{curso.precio}</span>
+                            <span className="text-[10px] text-cyan-400 font-bold uppercase tracking-widest">{curso.precioSoles}</span>
+                          </div>
+                          <Link 
+                            href={curso.link} 
+                            className={`px-6 py-3 bg-white/5 border border-white/10 text-white rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-white/10 transition-all`}
+                          >
+                            Inscribirme
+                          </Link>
+                        </div>
+                        
+                        <div className="grid grid-cols-2 gap-3">
+                          <Link 
+                            href={curso.hotmart} 
+                            target="_blank"
+                            className="flex items-center justify-center gap-2 py-3 bg-orange-500/10 border border-orange-500/20 rounded-xl text-[9px] font-black text-orange-400 uppercase tracking-widest hover:bg-orange-500/20 transition-all"
+                          >
+                            <span className="material-symbols-outlined text-sm">shopping_cart</span>
+                            Hotmart
+                          </Link>
+                          <Link 
+                            href={curso.paypal} 
+                            target="_blank"
+                            className="flex items-center justify-center gap-2 py-3 bg-blue-500/10 border border-blue-500/20 rounded-xl text-[9px] font-black text-blue-400 uppercase tracking-widest hover:bg-blue-500/20 transition-all"
+                          >
+                            <span className="material-symbols-outlined text-sm">payments</span>
+                            PayPal
+                          </Link>
+                          <Link 
+                            href={`https://wa.me/51993147501?text=Hola,%20quiero%20pagar%20el%20curso%20${curso.nombre}%20por%20Yape/Plin.`} 
+                            target="_blank"
+                            className="col-span-2 flex items-center justify-center gap-2 py-3 bg-cyan-500 text-slate-950 rounded-xl text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)]"
+                          >
+                            <span className="material-symbols-outlined text-sm">qr_code_2</span>
+                            Pagar con Yape / Plin
+                          </Link>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               ))}

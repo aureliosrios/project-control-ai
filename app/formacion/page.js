@@ -44,7 +44,7 @@ const sincronicos = [
     precioSoles: "S/. 200",
     tag: "CURSO 1 · BÁSICO",
     desc: "El inicio de la era digital para ingenieros. Domina la Gestión de Alcance, Contratos, Calidad y HSE mediante informes en HTML, flujogramas en Mermaid y documentos en MD/CSV.",
-    inicio: "24 de Mayo, 2026",
+    inicio: "31 de Mayo, 2026",
     sesiones: "15h · 5 sesiones",
     link: "/inscripcion",
     hotmart: "https://pay.hotmart.com/K104218834V",

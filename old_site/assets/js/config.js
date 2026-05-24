@@ -53,7 +53,7 @@ const PLANTILLAS_CURSOS = {
 
 // --- LISTA DE CURSOS (Single Source of Truth) ---
 const CURSOS_DISPONIBLES = [
-    { id: 'c3', nombre: 'El Despertar de la IA para la Gestión de Proyectos', fecha_inicio: 'May 24, 2026 10:00:00' },
+    { id: 'c3', nombre: 'El Despertar de la IA para la Gestión de Proyectos', fecha_inicio: 'May 31, 2026 10:00:00' },
     { id: 'c4', nombre: 'Ingeniería Aumentada: Automatización con Agentes de IA', fecha_inicio: 'May 31, 2026 15:00:00' },
     { id: 'c1', nombre: 'Licitaciones Inteligentes con IA', fecha_inicio: 'May 25, 2026 19:00:00' },
 

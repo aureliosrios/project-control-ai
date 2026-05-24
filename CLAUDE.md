@@ -153,7 +153,7 @@ PCAI_CONFIG = {
 
 | ID | Nombre | Precio | Inicio | Horario | Nivel |
 |----|--------|--------|--------|---------|-------|
-| IAD | El Despertar de la IA para la Gestión de Proyectos | $75 / S/200 | 24 May 2026 | Domingos 10 AM - 1 PM | Básico |
+| IAD | El Despertar de la IA para la Gestión de Proyectos | $75 / S/200 | 31 May 2026 | Domingos 10 AM - 1 PM | Básico |
 | PRO | Ingeniería Aumentada: Automatización con Agentes de IA | $100 / S/300 | 31 May 2026 | Domingos 3-6 PM | Avanzado |
 | LIC | Licitaciones Inteligentes con IA | $100 / S/300 | 25 May 2026 | Lun-Mié 7-10 PM | Avanzado |
 

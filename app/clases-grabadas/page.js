@@ -28,7 +28,11 @@ const courses = {
         num: "05",
         status: "OCULTA",
         title: "Monitoreo, Escalabilidad y Mantenimiento de Agentes",
-        desc: "Clase del 24 de Mayo: Estrategias avanzadas para el monitoreo, optimización de costos, seguridad y escalabilidad de agentes en producción."
+        desc: "Clase del 24 de Mayo: Estrategias avanzadas para el monitoreo, optimización de costos, seguridad y escalabilidad de agentes en producción.",
+        resources: [
+          { title: "Manual de la Clase 5 (PDF)", type: "pdf", url: "/manuales/Manual_Clase_5_Conectividad.pdf" },
+          { title: "Ficha Resumen del Valor Ganado (PDF)", type: "pdf", url: "/manuales/Resumen_Clase_5_Valor_Ganado.pdf" }
+        ]
       }
     ]
   },

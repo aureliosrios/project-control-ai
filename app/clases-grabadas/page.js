@@ -32,7 +32,8 @@ const courses = {
         resources: [
           { title: "Manual de la Clase 5 (PDF)", type: "pdf", url: "/manuales/Manual_Clase_5_Conectividad.pdf" },
           { title: "Ficha Resumen del Valor Ganado (PDF)", type: "pdf", url: "/manuales/Resumen_Clase_5_Valor_Ganado.pdf" },
-          { title: "Resumen Interactivo de la Clase 5 (HTML)", type: "html", url: "/manuales/resumen_clase_5.html" }
+          { title: "Resumen Interactivo de la Clase 5 (HTML)", type: "html", url: "/manuales/resumen_clase_5.html" },
+          { title: "Manual Avanzado de Soporte y EVM (PDF)", type: "pdf", url: "/manuales/Manual_Soporte_y_EVM_Clase_5.pdf" }
         ]
       }
     ]

@@ -22,6 +22,13 @@ const courses = {
           { title: "Manual de la Clase 4 (PDF)", type: "pdf", url: "/manuales/Manual_Clase_4_Colaborativo.pdf" },
           { title: "Resumen de la Clase 4 (HTML)", type: "html", url: "/manuales/resumen_clase_4.html" }
         ]
+      },
+      {
+        id: "FY_-Vq-bKjc",
+        num: "05",
+        status: "OCULTA",
+        title: "Monitoreo, Escalabilidad y Mantenimiento de Agentes",
+        desc: "Clase del 24 de Mayo: Estrategias avanzadas para el monitoreo, optimización de costos, seguridad y escalabilidad de agentes en producción."
       }
     ]
   },

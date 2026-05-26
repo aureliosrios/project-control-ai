@@ -31,7 +31,8 @@ const courses = {
         desc: "Clase del 24 de Mayo: Estrategias avanzadas para el monitoreo, optimización de costos, seguridad y escalabilidad de agentes en producción.",
         resources: [
           { title: "Manual de la Clase 5 (PDF)", type: "pdf", url: "/manuales/Manual_Clase_5_Conectividad.pdf" },
-          { title: "Ficha Resumen del Valor Ganado (PDF)", type: "pdf", url: "/manuales/Resumen_Clase_5_Valor_Ganado.pdf" }
+          { title: "Ficha Resumen del Valor Ganado (PDF)", type: "pdf", url: "/manuales/Resumen_Clase_5_Valor_Ganado.pdf" },
+          { title: "Resumen Interactivo de la Clase 5 (HTML)", type: "html", url: "/manuales/resumen_clase_5.html" }
         ]
       }
     ]

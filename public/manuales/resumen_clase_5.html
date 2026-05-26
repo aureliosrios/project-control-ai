@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCAI | Resumen Interactivo de la 5ª Clase - Automation Engineer</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Reset & Variable Tokens */
+        :root {
+            --bg-dark: #070913;
+            --bg-card: rgba(13, 17, 39, 0.6);
+            --bg-card-hover: rgba(20, 27, 61, 0.8);
+            --border-glass: rgba(255, 255, 255, 0.05);
+            --border-glow: rgba(0, 242, 254, 0.15);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --primary: #00f2fe;
+            --primary-glow: rgba(0, 242, 254, 0.4);
+            --secondary: #4facfe;
+            --accent: #0d9488;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --font-header: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(13, 148, 136, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 60%, rgba(0, 242, 254, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 50% -10%, rgba(79, 172, 254, 0.15) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* Ambient Glow Blobs */
+        .glow-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .blob-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary);
+            top: 20%;
+            left: -10%;
+        }
+
+        .blob-2 {
+            width: 500px;
+            height: 500px;
+            background: var(--accent);
+            bottom: 10%;
+            right: -10%;
+        }
+
+        /* Typography & Utility Classes */
+        h1, h2, h3, h4 {
+            font-family: var(--font-header);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .glass {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 20px;
+            transition: var(--transition-smooth);
+        }
+
+        .glass:hover {
+            border-color: rgba(0, 242, 254, 0.2);
+            background: var(--bg-card-hover);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 30px -10px var(--primary-glow);
+            transform: translateY(-4px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-glass);
+            background: rgba(7, 9, 19, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 16px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-primary);
+        }
+
+        .logo-symbol {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: #070913;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition-smooth);
+            position: relative;
+            padding: 4px 0;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition-smooth);
+            box-shadow: 0 0 8px var(--primary-glow);
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        header {
+            padding: 80px 0 50px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .pill-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 100px;
+            background: rgba(0, 242, 254, 0.08);
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px rgba(0, 242, 254, 0.05);
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(0.98); }
+        }
+
+        header h1 {
+            font-size: 3.2rem;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 720px;
+            margin: 0 auto 32px auto;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: #070913;
+            box-shadow: 0 4px 20px rgba(0, 242, 254, 0.3);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 12px 30px rgba(0, 242, 254, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Section Global Settings */
+        section {
+            padding: 60px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 2.1rem;
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Objectives Section */
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            align-items: stretch;
+        }
+
+        .obj-card {
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .obj-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+        }
+
+        .obj-card.danger-left::before { background: var(--secondary); }
+        .obj-card.success-left::before { background: var(--success); }
+
+        .obj-badge {
+            align-self: flex-start;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-danger { background: rgba(79, 172, 254, 0.1); color: var(--secondary); border: 1px solid rgba(79, 172, 254, 0.2); }
+        .badge-success { background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.2); }
+
+        .obj-card h3 {
+            font-size: 1.45rem;
+            margin-bottom: 16px;
+        }
+
+        .obj-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            font-weight: 300;
+        }
+
+        .obj-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .obj-step {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            font-size: 0.92rem;
+        }
+
+        .obj-step-num {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .step-danger { background: rgba(79, 172, 254, 0.15); color: var(--secondary); border: 1px solid rgba(79, 172, 254, 0.3); }
+        .step-success { background: rgba(16, 185, 129, 0.15); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.3); }
+
+        /* Interactive Chronology Timeline */
+        .timeline-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary) 0%, var(--accent) 100%);
+            transform: translateX(-50%);
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            margin-bottom: 40px;
+            width: 100%;
+            position: relative;
+        }
+
+        .timeline-left {
+            width: 45%;
+            text-align: right;
+            padding-right: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .timeline-center {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+
+        .timeline-node {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-dark);
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .timeline-node:hover {
+            transform: scale(1.15);
+            border-color: var(--secondary);
+            box-shadow: 0 0 20px rgba(79, 172, 254, 0.6);
+            color: var(--secondary);
+        }
+
+        .timeline-right {
+            width: 45%;
+            padding-left: 30px;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-item:nth-child(even) .timeline-left {
+            text-align: left;
+            padding-left: 30px;
+            padding-right: 0;
+        }
+
+        .timeline-item:nth-child(even) .timeline-right {
+            padding-right: 30px;
+            padding-left: 0;
+        }
+
+        .timeline-time {
+            font-family: var(--font-header);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .timeline-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .timeline-desc {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            font-weight: 300;
+        }
+
+        .timeline-card {
+            padding: 24px;
+            cursor: pointer;
+        }
+
+        .timeline-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+        }
+
+        .timeline-card-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            border-top: 1px solid transparent;
+            padding-top: 0;
+            margin-top: 0;
+        }
+
+        .timeline-card.active .timeline-card-details {
+            max-height: 350px;
+            border-top-color: var(--border-glass);
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+
+        .timeline-card-details ul {
+            list-style: none;
+            padding-left: 4px;
+        }
+
+        .timeline-card-details li {
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 14px;
+        }
+
+        .timeline-card-details li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        /* Student Interactions Q&A Hub */
+        .qa-search-box {
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            position: relative;
+        }
+
+        .qa-search-box input {
+            width: 100%;
+            padding: 16px 20px 16px 50px;
+            border-radius: 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: var(--transition-smooth);
+        }
+
+        .qa-search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.15);
+            background: var(--bg-card-hover);
+        }
+
+        .qa-search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            pointer-events: none;
+        }
+
+        .qa-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .qa-card {
+            padding: 30px;
+            position: relative;
+        }
+
+        .qa-avatar-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .qa-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #070913;
+            box-shadow: 0 4px 10px rgba(13, 148, 136, 0.2);
+        }
+
+        .qa-student-info h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+
+        .qa-student-info p {
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .qa-question {
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+            padding-left: 8px;
+            border-left: 2px solid var(--primary);
+        }
+
+        .qa-answer {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 16px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+        }
+
+        .qa-answer strong {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        /* Real-World Impact Cards */
+        .impact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        .impact-card {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .impact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #070913;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .impact-card h3 {
+            font-size: 1.4rem;
+        }
+
+        .impact-card p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            font-weight: 300;
+        }
+
+        .impact-card ul {
+            list-style: none;
+        }
+
+        .impact-card li {
+            margin-bottom: 8px;
+            font-size: 0.88rem;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .impact-card li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        /* Prompt Vault */
+        .prompt-vault-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .prompt-card {
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .prompt-info {
+            flex-grow: 1;
+            width: calc(100% - 140px);
+        }
+
+        .prompt-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            font-size: 0.75rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-weight: 600;
+            border: 1px solid var(--border-glass);
+        }
+
+        .prompt-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .prompt-code {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-glass);
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            max-height: 120px;
+            overflow-y: auto;
+        }
+
+        .prompt-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .btn-icon {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-icon:hover {
+            background: var(--primary);
+            color: #070913;
+            box-shadow: 0 0 15px var(--primary-glow);
+            border-color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-glass);
+            padding: 40px 0;
+            background: rgba(5, 7, 15, 0.9);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        footer .logo {
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        /* Responsive Design Rules */
+        @media (max-width: 992px) {
+            .objectives-grid, .qa-grid, .impact-grid {
+                grid-template-columns: 1fr;
+            }
+            .timeline-line {
+                left: 16px;
+            }
+            .timeline-item {
+                flex-direction: row-reverse;
+                margin-bottom: 30px;
+            }
+            .timeline-left {
+                display: none;
+            }
+            .timeline-center {
+                left: 16px;
+                top: 24px;
+                transform: translate(-50%, 0);
+            }
+            .timeline-right {
+                width: 100%;
+                padding-left: 45px;
+            }
+            header h1 {
+                font-size: 2.3rem;
+            }
+            .prompt-card {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .prompt-info {
+                width: 100%;
+            }
+            .prompt-actions {
+                flex-direction: row;
+                justify-content: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-blob blob-1"></div>
+    <div class="glow-blob blob-2"></div>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <div class="logo-symbol">A</div>
+                PROJECT CONTROL <span class="gradient-text">AI</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#objetivos" class="active">Objetivos</a></li>
+                <li><a href="#cronologia">Sesión</a></li>
+                <li><a href="#preguntas">Soporte Q&A</a></li>
+                <li><a href="#codigo">Plantillas</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <header>
+            <div class="pill-badge">
+                <span style="width: 6px; height: 6px; background-color: var(--primary); border-radius: 50%;"></span>
+                Sesión 05 - Automation Engineer
+            </div>
+            <h1>Resumen Interactivo: <span class="gradient-text">Conectividad de Obra</span></h1>
+            <p>Aprende a conectar un frontend de Reporte Diario de Obra desplegado en GitHub Pages con Google Sheets mediante un middleware seguro y libre de CORS en Google Apps Script.</p>
+            <div>
+                <a href="#cronologia" class="btn btn-primary">Explorar Temario</a>
+                <a href="#codigo" class="btn btn-secondary">Ver Plantillas</a>
+            </div>
+        </header>
+
+        <!-- Objectives Section -->
+        <section id="objetivos">
+            <div class="section-header">
+                <h2>Objetivos Estratégicos de la Sesión</h2>
+                <p>La combinación óptima de ingeniería de software ligera y control de proyectos.</p>
+            </div>
+            
+            <div class="objectives-grid">
+                <!-- Card 1 -->
+                <div class="obj-card glass danger-left">
+                    <div>
+                        <div class="obj-badge badge-danger">Lógica Técnica</div>
+                        <h3>Conectividad Robusta & Segura</h3>
+                        <p>Desplegar una Web App serverless que reciba partes de obra dinámicos sin necesidad de servidores dedicados.</p>
+                    </div>
+                    <div class="obj-steps">
+                        <div class="obj-step">
+                            <div class="obj-step-num step-danger">1</div>
+                            <div>Construcción de un webhook receptor en Google Apps Script que maneje CORS.</div>
+                        </div>
+                        <div class="obj-step">
+                            <div class="obj-step-num step-danger">2</div>
+                            <div>Eliminación de dependencias de archivos CSV locales para evitar errores de carga en red.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="obj-card glass success-left">
+                    <div>
+                        <div class="obj-badge badge-success">Control de Obra</div>
+                        <h3>Estructura y Valor Ganado</h3>
+                        <p>Modelar y desglosar actividades bajo el EDT para capturar horas y avances alineados a buenas prácticas del EVM.</p>
+                    </div>
+                    <div class="obj-steps">
+                        <div class="obj-step">
+                            <div class="obj-step-num step-success">1</div>
+                            <div>Incrustar un modelo estructurado de EDT y actividades de control síncronas en el frontend.</div>
+                        </div>
+                        <div class="obj-step">
+                            <div class="obj-step-num step-success">2</div>
+                            <div>Recopilar datos diarios limpios (Horas Hombre, Avances Físicos) para calcular de forma objetiva las varianzas.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chronology Section -->
+        <section id="cronologia">
+            <div class="section-header">
+                <h2>Cronología y Hoja de Ruta de la Clase</h2>
+                <p>Haz clic en cada nodo del flujo interactivo para revelar los detalles y buenas prácticas explicadas por el instructor.</p>
+            </div>
+
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+
+                <!-- Item 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-left">
+                        <div class="timeline-time">Bloque 01</div>
+                        <div class="timeline-title">Ecosistema Serverless</div>
+                        <div class="timeline-desc">Introducción a la arquitectura de 02 plataformas de PCAI.</div>
+                    </div>
+                    <div class="timeline-center">
+                        <div class="timeline-node" onclick="toggleTimeline(this)">01</div>
+                    </div>
+                    <div class="timeline-right">
+                        <div class="timeline-card glass active" onclick="toggleCard(this)">
+                            <h4>Conceptos de Backend Ligero</h4>
+                            <p>Análisis de cómo migrar del control tradicional en archivos de Excel locales a formularios web en la nube.</p>
+                            <div class="timeline-card-details">
+                                <ul>
+                                    <li><b>Por qué usar Web Apps:</b> Automatiza la transcripción, elimina el "opinómetro" y centraliza la reportabilidad.</li>
+                                    <li><b>Arquitectura:</b> GitHub Pages (Frontend) ➡️ Google Apps Script (Middleware) ➡️ Sheets (Base de Datos).</li>
+                                    <li><b>Ventajas:</b> 100% gratuito, cero costos de hosting y mantenimiento nulo.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-left">
+                        <div class="timeline-time">Bloque 02</div>
+                        <div class="timeline-title">La API en Apps Script</div>
+                        <div class="timeline-desc">Diseño del puente receptor e inyección a Sheets.</div>
+                    </div>
+                    <div class="timeline-center">
+                        <div class="timeline-node" onclick="toggleTimeline(this)">02</div>
+                    </div>
+                    <div class="timeline-right">
+                        <div class="timeline-card glass" onclick="toggleCard(this)">
+                            <h4>Macro Receptora y CORS</h4>
+                            <p>Creación de los manejadores doPost e interceptación de solicitudes OPTIONS para habilitar CORS.</p>
+                            <div class="timeline-card-details">
+                                <ul>
+                                    <li><b>Manejador doPost(e):</b> Lee los contenidos del JSON enviado, parsea campos y hace append a la hoja.</li>
+                                    <li><b>doOptions(e):</b> Indispensable para responder con códigos de éxito a las peticiones preflight del navegador.</li>
+                                    <li><b>Publicación:</b> Web App publicada bajo permisos de acceso "Cualquiera" (indispensable para interactuar).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-left">
+                        <div class="timeline-time">Bloque 03</div>
+                        <div class="timeline-title">Estructura del EDT</div>
+                        <div class="timeline-desc">Integración del listado de actividades de prueba síncronas.</div>
+                    </div>
+                    <div class="timeline-center">
+                        <div class="timeline-node" onclick="toggleTimeline(this)">03</div>
+                    </div>
+                    <div class="timeline-right">
+                        <div class="timeline-card glass" onclick="toggleCard(this)">
+                            <h4>Estructuración y Modelo de Datos</h4>
+                            <p>Remoción de la dependencia de archivos CSV externos e incrustación dinámica del EDT en el JS local.</p>
+                            <div class="timeline-card-details">
+                                <ul>
+                                    <li><b>Por qué falló el CSV:</b> Errores de carga y bloqueo de CORS local.</li>
+                                    <li><b>EDT Embebido:</b> Permite poblar los selectores del frente de trabajo de forma síncrona y segura.</li>
+                                    <li><b>Desglose en Cascada:</b> El selector de Actividades se habilita y filtra dinámicamente según el EDT seleccionado.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="timeline-item">
+                    <div class="timeline-left">
+                        <div class="timeline-time">Bloque 04</div>
+                        <div class="timeline-title">Despliegue Git</div>
+                        <div class="timeline-desc">Secuencia de consola PowerShell para producción.</div>
+                    </div>
+                    <div class="timeline-center">
+                        <div class="timeline-node" onclick="toggleTimeline(this)">04</div>
+                    </div>
+                    <div class="timeline-right">
+                        <div class="timeline-card glass" onclick="toggleCard(this)">
+                            <h4>Git Push a Producción</h4>
+                            <p>Comandos ordenados de Git para conectar la carpeta local de trabajo a GitHub Pages.</p>
+                            <div class="timeline-card-details">
+                                <ul>
+                                    <li><b>Inicialización:</b> Uso de <code>git init</code> y vinculación del origen remoto.</li>
+                                    <li><b>Publicación:</b> <code>git push -u origin main</code> para subir los datos e index.html estático.</li>
+                                    <li><b>GitHub Pages:</b> Habilitación de la rama principal en los ajustes del repositorio para levantar la URL.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Student Q&A Section -->
+        <section id="preguntas">
+            <div class="section-header">
+                <h2>Soporte & Consultas del Alumno (Q&A Hub)</h2>
+                <p>Las dudas reales y resoluciones técnicas surgidas durante la clase en vivo del 24/05.</p>
+            </div>
+
+            <div class="qa-search-box">
+                <span class="qa-search-icon">🔍</span>
+                <input type="text" id="qa-search" oninput="filterQA()" placeholder="Buscar por tema (CORS, CSV, Actividad, Git, EDT)...">
+            </div>
+
+            <div class="qa-grid" id="qa-grid-container">
+                <!-- Q1 -->
+                <div class="qa-card glass" data-tags="csv,edt,actividad,cargar">
+                    <div class="qa-avatar-row">
+                        <div class="qa-avatar">AE</div>
+                        <div class="qa-student-info">
+                            <h4>Alumno PCAI</h4>
+                            <p>Soporte Técnico de Obra</p>
+                        </div>
+                    </div>
+                    <div class="qa-question">
+                        "No se cargan las actividades ni el EDT. Si el index requiere un archivo externo CSV, ¿cómo lo soluciono para mis pruebas?"
+                    </div>
+                    <div class="qa-answer">
+                        <strong>Solución:</strong> Para hacer pruebas rápidas y estables, <strong>elimina el vínculo externo al CSV</strong>. En su lugar, incrusta la información de prueba de las actividades directamente dentro del objeto JavaScript en tu <code>index.html</code>. Esto evita bloqueos de red y fallos de carga iniciales.
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="qa-card glass" data-tags="actividad,desglose,edt,elegir">
+                    <div class="qa-avatar-row">
+                        <div class="qa-avatar">AE</div>
+                        <div class="qa-student-info">
+                            <h4>Alumno PCAI</h4>
+                            <p>Ingeniero de Planificación</p>
+                        </div>
+                    </div>
+                    <div class="qa-question">
+                        "Cuando desgloso el EDT y deseo elegir la actividad, no hay información de elección. Deseo que incluyas algunas de prueba."
+                    </div>
+                    <div class="qa-answer">
+                        <strong>Solución:</strong> Se definió una base de datos local llamada <code>baseDatosEDT</code>. Al seleccionar un EDT, se dispara el evento <code>onchange</code>, el cual limpia el selector de actividades e inserta dinámicamente únicamente las tareas correspondientes a ese frente de trabajo (ej. Excavación en cimientos, montaje de columnas).
+                    </div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="qa-card glass" data-tags="git,github,powershell,despliegues">
+                    <div class="qa-avatar-row">
+                        <div class="qa-avatar">AE</div>
+                        <div class="qa-student-info">
+                            <h4>Alumno PCAI</h4>
+                            <p>Control de Proyectos</p>
+                        </div>
+                    </div>
+                    <div class="qa-question">
+                        "¿Cómo conecto mi espacio de trabajo local con el repositorio remoto de GitHub usando PowerShell?"
+                    </div>
+                    <div class="qa-answer">
+                        <strong>Solución:</strong> Ejecuta secuencialmente en tu terminal:<br/>
+                        1. <code>git init</code><br/>
+                        2. <code>git remote add origin [TU_URL_DE_GITHUB]</code><br/>
+                        3. <code>git fetch origin</code><br/>
+                        4. <code>git checkout -b main</code> (o checkout main)<br/>
+                        5. <code>git add .</code> y haz tu <code>git commit</code> y <code>git push -u origin main</code>.
+                    </div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="qa-card glass" data-tags="cors,script,google,doPost">
+                    <div class="qa-avatar-row">
+                        <div class="qa-avatar">AE</div>
+                        <div class="qa-student-info">
+                            <h4>Alumno PCAI</h4>
+                            <p>Automation Engineer</p>
+                        </div>
+                    </div>
+                    <div class="qa-question">
+                        "Al enviar los datos desde mi web en GitHub Pages hacia Google Sheets me da error de red/bloqueo de CORS."
+                    </div>
+                    <div class="qa-answer">
+                        <strong>Solución:</strong> Asegúrate de que tu macro de Google Apps Script devuelva las cabeceras CORS en el objeto response, y que implementes una función <code>doOptions(e)</code> que responda a los preflights. Adicionalmente, publica tu Web App con acceso para <strong>"Cualquiera" (Anyone)</strong> en los ajustes de implementación.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Code Snippets Vault -->
+        <section id="codigo">
+            <div class="section-header">
+                <h2>Bóveda de Códigos y Plantillas (Templates)</h2>
+                <p>Copia las estructuras oficiales de código utilizadas en el curso para aplicarlas directamente en tus propios entregables.</p>
+            </div>
+
+            <div class="prompt-vault-grid">
+                <!-- Prompt 1 -->
+                <div class="prompt-card glass">
+                    <div class="prompt-info">
+                        <div class="prompt-tag">Google Apps Script</div>
+                        <h4>Webhook Receptor con Cabeceras CORS Soportadas</h4>
+                        <p>Macro para Google Apps Script que procesa el JSON del formulario y hace append seguro a Google Sheets.</p>
+                        <pre class="prompt-code" id="code-script">
+function doPost(e) {
+  var corsHeaders = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type"
+  };
+  
+  if (e === undefined) {
+    return ContentService.createTextOutput("OPTIONS OK").setHeaders(corsHeaders);
+  }
+
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var data = JSON.parse(e.postData.contents);
+  
+  sheet.appendRow([
+    new Date(),
+    data.supervisor,
+    data.edt,
+    data.actividad,
+    data.horas,
+    data.avance,
+    data.observaciones
+  ]);
+
+  return ContentService.createTextOutput(JSON.stringify({status: "success"}))
+                       .setMimeType(ContentService.MimeType.JSON)
+                       .setHeaders(corsHeaders);
+}
+
+function doOptions(e) {
+  return ContentService.createTextOutput("")
+                       .setHeaders({
+                         "Access-Control-Allow-Origin": "*",
+                         "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+                         "Access-Control-Allow-Headers": "Content-Type"
+                       });
+}
+                        </pre>
+                    </div>
+                    <div class="prompt-actions">
+                        <button class="btn-icon" onclick="copyText('code-script')" title="Copiar código">📋</button>
+                    </div>
+                </div>
+
+                <!-- Prompt 2 -->
+                <div class="prompt-card glass">
+                    <div class="prompt-info">
+                        <div class="prompt-tag">JavaScript / HTML</div>
+                        <h4>Modelo de Datos del EDT e Inserción Dinámica</h4>
+                        <p>Estructura de datos embebida en JavaScript para poblar los selectores en cascada (EDT ➡️ Actividad) libre de archivos CSV externos.</p>
+                        <pre class="prompt-code" id="code-js">
+const baseDatosEDT = {
+  "EDT-01: Cimentaciones y Obras Civiles": [
+    { codigo: "ACT-101", nombre: "Excavación masiva y perfilado de terreno" },
+    { codigo: "ACT-102", nombre: "Habilitado de acero estructural de refuerzo" },
+    { codigo: "ACT-103", nombre: "Encofrado y vaciado de concreto premezclado" }
+  ],
+  "EDT-02: Estructuras Metálicas": [
+    { codigo: "ACT-201", nombre: "Montaje mecánico de columnas estructurales" },
+    { codigo: "ACT-202", nombre: "Alineamiento y torqueado de pernos" }
+  ]
+};
+
+function actualizarActividades() {
+  const edtSelect = document.getElementById('select-edt');
+  const actSelect = document.getElementById('select-actividad');
+  const seleccionado = edtSelect.value;
+
+  actSelect.innerHTML = '<option value="">-- Seleccione Actividad --</option>';
+  
+  if (seleccionado && baseDatosEDT[seleccionado]) {
+    baseDatosEDT[seleccionado].forEach(act => {
+      let option = document.createElement('option');
+      option.value = act.codigo + " - " + act.nombre;
+      option.textContent = act.codigo + " - " + act.nombre;
+      actSelect.appendChild(option);
+    });
+    actSelect.disabled = false;
+  } else {
+    actSelect.disabled = true;
+  }
+}
+                        </pre>
+                    </div>
+                    <div class="prompt-actions">
+                        <button class="btn-icon" onclick="copyText('code-js')" title="Copiar código">📋</button>
+                    </div>
+                </div>
+
+                <!-- Prompt 3 -->
+                <div class="prompt-card glass">
+                    <div class="prompt-info">
+                        <div class="prompt-tag">PowerShell / Git</div>
+                        <h4>Secuencia de Terminal para Despliegues</h4>
+                        <p>Línea secuencial de comandos para inicializar, configurar el repositorio remoto en GitHub y subir el index.html.</p>
+                        <pre class="prompt-code" id="code-git">
+# 1. Inicializar repositorio local
+git init
+
+# 2. Agregar origen remoto
+git remote add origin https://github.com/aureliosrios/Clase_5.git
+
+# 3. Descargar referencias de ramas
+git fetch origin
+
+# 4. Crear y apuntar a la rama main
+git checkout -b main
+
+# 5. Agregar y confirmar cambios
+git add .
+git commit -m "feat: implementar index.html con EDT embebido y conexión a Google Sheets"
+
+# 6. Desplegar
+git push -u origin main
+                        </pre>
+                    </div>
+                    <div class="prompt-actions">
+                        <button class="btn-icon" onclick="copyText('code-git')" title="Copiar código">📋</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Real-World Impact Section -->
+        <section style="padding-bottom: 100px;">
+            <div class="section-header">
+                <h2>Impacto en Control de Proyectos</h2>
+                <p>Las ventajas prácticas de implementar este flujo serverless automatizado en tus obras.</p>
+            </div>
+
+            <div class="impact-grid">
+                <div class="impact-card glass">
+                    <div class="impact-icon">📈</div>
+                    <h3>Control de Valor Ganado (EVM) Eficiente</h3>
+                    <p>Al capturar de forma síncrona el parte diario bajo las actividades del EDT, el sistema calcula de forma instantánea:</p>
+                    <ul>
+                        <li>Varianza de Costo (CV) y Varianza de Plazo (SV).</li>
+                        <li>Índice de Desempeño de Costo (CPI) y Plazo (SPI).</li>
+                        <li>Eliminación de desviaciones por transcripciones erróneas.</li>
+                    </ul>
+                </div>
+
+                <div class="impact-card glass">
+                    <div class="impact-icon">⚡</div>
+                    <h3>Ecosistema Ágil Zero-Touch</h3>
+                    <p>La combinación de plataformas estáticas en la nube representa el estado de arte del desarrollo ligero:</p>
+                    <ul>
+                        <li>Despliegue inmediato a través de git push en menos de 5 segundos.</li>
+                        <li>Cero costo de servidores o bases de datos relacionales tradicionales.</li>
+                        <li>Excelente compatibilidad móvil para reportes directamente en el campo.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="logo">
+            <div class="logo-symbol">A</div>
+            PROJECT CONTROL <span class="gradient-text">AI</span>
+        </div>
+        <p>Material elaborado oficialmente para el curso Automation Engineer - Sesión 05.</p>
+        <p style="font-size: 0.8rem; margin-top: 8px;">© 2026 Academia PCAI. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- JS Scripts for Interactivity -->
+    <script>
+        // Expand/Collapse Timeline Cards
+        function toggleCard(cardElement) {
+            // Cerrar las demás primero
+            const allCards = document.querySelectorAll('.timeline-card');
+            allCards.forEach(c => {
+                if (c !== cardElement) c.classList.remove('active');
+            });
+            // Activar/desactivar la actual
+            cardElement.classList.toggle('active');
+        }
+
+        function toggleTimeline(nodeElement) {
+            const card = nodeElement.closest('.timeline-item').querySelector('.timeline-card');
+            toggleCard(card);
+        }
+
+        // Q&A Filtering System
+        function filterQA() {
+            const query = document.getElementById('qa-search').value.toLowerCase();
+            const cards = document.querySelectorAll('#qa-grid-container .qa-card');
+            
+            cards.forEach(card => {
+                const tags = card.getAttribute('data-tags') || '';
+                const question = card.querySelector('.qa-question').textContent.toLowerCase();
+                const answer = card.querySelector('.qa-answer').textContent.toLowerCase();
+                
+                if (tags.includes(query) || question.includes(query) || answer.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Copy Text Function
+        function copyText(elementId) {
+            const codeEl = document.getElementById(elementId);
+            const textToCopy = codeEl.textContent.trim().replace(/&nbsp;/g, ' ').replace(/<br\s*\/?>/mg, '\n');
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                alert("📋 ¡Código copiado al portapapeles exitosamente!");
+            }).catch(err => {
+                console.error("No se pudo copiar: ", err);
+            });
+        }
+    </script>
+</body>
+</html>

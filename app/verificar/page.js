@@ -304,7 +304,7 @@ export default function Verificar() {
       }
 
       // 5. QR Code
-      const qrUrl = `https://projectcontrolai.com/academia/validar.html?v=${cert.codigo_verificacion}`;
+      const qrUrl = `https://project-control-ai-one.vercel.app/verificar?v=${cert.codigo_verificacion}`;
       const qrDataUrl = await QRCode.toDataURL(qrUrl, { margin: 1, width: 300 });
       const qrImg = await pdfDoc.embedPng(qrDataUrl);
       page1.drawRectangle({ x: 710, y: 83, width: 88, height: 88, color: rgb(1, 1, 1) });

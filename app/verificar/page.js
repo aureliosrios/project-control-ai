@@ -102,9 +102,17 @@ export default function Verificar() {
         throw new Error("LÍMITE DE DESCARGA AGOTADO: Este certificado ya ha sido descargado previamente. Contacte a soporte para una nueva copia.");
       }
 
-      // 2. Incrementar descarga (RPC)
-      const { error: rpcError } = await supabase.rpc('incrementar_descarga', { cert_id: certId });
-      if (rpcError) throw new Error("No se pudo validar la descarga. Límite alcanzado.");
+      // 2. Incrementar descarga (RPC) - Bypass total si es Automation para permitir descargas ilimitadas
+      if (!isAutomation) {
+        const { error: rpcError } = await supabase.rpc('incrementar_descarga', { cert_id: certId });
+        if (rpcError) throw new Error("No se pudo validar la descarga. Límite alcanzado.");
+      } else {
+        // En Automation incrementamos con update simple sin bloquear
+        await supabase
+          .from('certificados')
+          .update({ descargas_count: (currentCert.descargas_count || 0) + 1 })
+          .eq('id', certId);
+      }
 
       setLoading(true);
 

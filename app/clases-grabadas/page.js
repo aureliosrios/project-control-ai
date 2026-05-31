@@ -49,12 +49,18 @@ const courses = {
 };
 
 const getCourseKey = (dbCursoName) => {
-  const name = dbCursoName?.toLowerCase();
-  if (name?.includes("automation") || name?.includes("ingenieria") || name?.includes("automatizacion")) return "AE";
-  if (name?.includes("licitacion")) return "LIC";
-  if (name?.includes("despertar") || name?.includes("gestion proyectos ia") || name?.includes("gip")) return "GIP";
+  if (!dbCursoName) return null;
+  const name = dbCursoName
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+    
+  if (name.includes("automation") || name.includes("ingenieria") || name.includes("automatizacion")) return "AE";
+  if (name.includes("licitacion")) return "LIC";
+  if (name.includes("despertar") || name.includes("gestion proyectos ia") || name.includes("gip") || name.includes("el despertar") || name.includes("gestion integral")) return "GIP";
   return null;
 };
+
 
 export default function ClasesGrabadas() {
   const [studentCourses, setStudentCourses] = useState([]);
@@ -146,13 +152,28 @@ export default function ClasesGrabadas() {
         };
       }).filter(Boolean);
 
-      if (processed.length === 0) {
+      // Deduplicar en memoria por clave de curso para evitar duplicidad de pestañas
+      const uniqueProcessedMap = {};
+      processed.forEach(item => {
+        const existing = uniqueProcessedMap[item.key];
+        if (!existing) {
+          uniqueProcessedMap[item.key] = item;
+        } else {
+          if (item.acceso_vip === true) {
+            uniqueProcessedMap[item.key] = item;
+          }
+        }
+      });
+
+      const uniqueProcessed = Object.values(uniqueProcessedMap);
+
+      if (uniqueProcessed.length === 0) {
         alert("Acceso Restringido: Tus cursos actuales no requieren acceso a la biblioteca de clases grabadas.");
         window.location.href = "/portal";
         return;
       }
 
-      setStudentCourses(processed);
+      setStudentCourses(uniqueProcessed);
       setStudentData(student);
       setIsLoggedIn(true);
 

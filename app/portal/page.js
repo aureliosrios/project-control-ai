@@ -55,7 +55,40 @@ export default function StudentPortal() {
         return !edicion.toUpperCase().includes("RETIRADO");
       });
 
-      const processedEnrollments = activeEnrollmentsOnly.map(enroll => {
+      // Homogeneizar nombres de cursos en memoria para evitar errores de duplicación en DB
+      const homogenizedEnrollments = activeEnrollmentsOnly.map(enroll => {
+        let cursoHomogeneizado = enroll.curso;
+        const cursoLower = enroll.curso?.trim().toLowerCase();
+        
+        if (
+          cursoLower?.includes("gestion proyectos ia") || 
+          cursoLower?.includes("gestión integral de proyectos con ia") ||
+          cursoLower?.includes("gestion integral de proyectos con ia")
+        ) {
+          cursoHomogeneizado = "Gestión Integral de Proyectos con IA";
+        }
+        
+        return {
+          ...enroll,
+          curso: cursoHomogeneizado
+        };
+      });
+
+      // Fusionar duplicados en memoria conservando el acceso VIP si existe
+      const uniqueEnrollmentsMap = {};
+      homogenizedEnrollments.forEach(enroll => {
+        const key = enroll.curso;
+        if (!uniqueEnrollmentsMap[key]) {
+          uniqueEnrollmentsMap[key] = enroll;
+        } else {
+          // Si ya existe una matrícula, conservamos la que tenga VIP
+          if (enroll.acceso_vip === true) {
+            uniqueEnrollmentsMap[key] = enroll;
+          }
+        }
+      });
+
+      const processedEnrollments = Object.values(uniqueEnrollmentsMap).map(enroll => {
         const cert = certificates?.find(c => c.curso === enroll.curso);
         let status = cert ? "GRADUADO" : "INSCRITO";
         let daysLeft = 999; 
@@ -190,7 +223,39 @@ export default function StudentPortal() {
     );
   }
 
-  const hasAEAccess = matriculas.some(m => m.curso === "Automation Engineer");
+  const getCourseKey = (dbCursoName) => {
+    if (!dbCursoName) return null;
+    const name = dbCursoName
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+      
+    if (name.includes("automation") || name.includes("ingenieria") || name.includes("automatizacion")) return "AE";
+    if (name.includes("licitacion")) return "LIC";
+    if (name.includes("despertar") || name.includes("gestion proyectos ia") || name.includes("gip") || name.includes("el despertar") || name.includes("gestion integral")) return "GIP";
+    return null;
+  };
+
+
+
+  const activeZoomSessions = [
+    {
+      courseKey: "AE",
+      zoomUrl: "https://us06web.zoom.us/j/89278943716?pwd=AQbn3eCCxhaLU4zr1zuabDwJwdSnsm.1",
+      title: "Automation Engineer",
+      message: "La clase está en curso. Toca el botón de abajo para unirte desde tu celular."
+    },
+    {
+      courseKey: "GIP",
+      zoomUrl: "https://us06web.zoom.us/j/82338486465?pwd=kBVuLWZgYxA2WOzMVjCM6tqM47GA5g.1",
+      title: "Gestión de Proyectos: El Despertar",
+      message: "¡Hoy inicia el curso! La sesión sincrónica está activa. Toca el botón de abajo para ingresar a tu clase de hoy."
+    }
+  ];
+
+  const studentZoomSessions = activeZoomSessions.filter(session => 
+    matriculas.some(m => getCourseKey(m.curso) === session.courseKey)
+  );
 
   return (
     <div className="min-h-screen bg-[#020617] text-white flex">
@@ -260,25 +325,25 @@ export default function StudentPortal() {
                 </div>
               </section>
 
-              {/* Acceso Directo Zoom - CORREGIDO PARA MÓVIL */}
-              {hasAEAccess && (
-                <section className="relative overflow-hidden rounded-[40px] border border-cyan-500/30 bg-gradient-to-br from-cyan-500/20 to-transparent p-8">
+              {/* Acceso Directo Zoom Dinámico */}
+              {studentZoomSessions.map((session, idx) => (
+                <section key={idx} className="relative overflow-hidden rounded-[40px] border border-cyan-500/30 bg-gradient-to-br from-cyan-500/20 to-transparent p-8">
                     <div className="relative z-50 space-y-6">
                       <div className="flex items-center gap-2">
                         <span className="flex h-3 w-3 relative">
                           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                           <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
                         </span>
-                        <p className="text-red-500 text-[10px] font-black uppercase tracking-[0.2em]">Sesión Sincrónica Activa</p>
+                        <p className="text-red-500 text-[10px] font-black uppercase tracking-[0.2em]">Clase en Vivo Activa ({session.title})</p>
                       </div>
                       
                       <div>
                         <h3 className="text-3xl font-black uppercase tracking-tighter text-white">Sala de Conferencias</h3>
-                        <p className="text-slate-400 text-sm mt-2 max-w-sm">La clase está en curso. Toca el botón de abajo para unirte desde tu celular.</p>
+                        <p className="text-slate-400 text-sm mt-2 max-w-sm">{session.message}</p>
                       </div>
 
                       <a 
-                        href="https://us06web.zoom.us/j/89278943716?pwd=AQbn3eCCxhaLU4zr1zuabDwJwdSnsm.1"
+                        href={session.zoomUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center justify-center gap-4 w-full md:w-auto bg-white text-black px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-cyan-400 transition-all shadow-[0_0_50px_rgba(255,255,255,0.2)] active:scale-95 cursor-pointer"
@@ -288,7 +353,7 @@ export default function StudentPortal() {
                       </a>
                     </div>
                 </section>
-              )}
+              ))}
             </div>
 
             {/* Columna Derecha */}

@@ -63,9 +63,10 @@ export default function StudentPortal() {
         if (
           cursoLower?.includes("gestion proyectos ia") || 
           cursoLower?.includes("gestión integral de proyectos con ia") ||
-          cursoLower?.includes("gestion integral de proyectos con ia")
+          cursoLower?.includes("gestion integral de proyectos con ia") ||
+          cursoLower?.includes("el despertar de la ia")
         ) {
-          cursoHomogeneizado = "Gestión Integral de Proyectos con IA";
+          cursoHomogeneizado = "El Despertar de la IA para la Gestión de Proyectos";
         }
         
         return {

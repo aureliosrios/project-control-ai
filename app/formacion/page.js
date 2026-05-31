@@ -59,7 +59,7 @@ const sincronicos = [
     precioSoles: "S/. 300",
     tag: "CURSO 2 · AVANZADO",
     desc: "Domina la automatización avanzada con Python, HTML, VBA y Agentes Autónomos. Aprende a desarrollar Skills y Scripts MCP dentro de ecosistemas agénticos.",
-    inicio: "31 de Mayo, 2026",
+    inicio: "14 de Junio, 2026",
     horario: "Domingos · 3:00 PM – 6:00 PM",
     sesiones: "15h · 5 sesiones",
     link: "/inscripcion",

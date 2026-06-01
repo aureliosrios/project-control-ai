@@ -40,7 +40,15 @@ const courses = {
   },
   "GIP": {
     name: "El Despertar de la IA para la Gestión de Proyectos",
-    lessons: [] // Próximamente se añadirán clases grabadas
+    lessons: [
+      {
+        id: "5rvU9Tk0aEw",
+        num: "01",
+        status: "OCULTA",
+        title: "El Despertar: Dashboards HTML y Mermaid",
+        desc: "Clase del 31 de Mayo: Generación de reportes interactivos, diagramas de flujo de trabajo profesionales con Mermaid y bases de la IA aplicada a la gestión de proyectos sin saber programar."
+      }
+    ]
   },
   "LIC": {
     name: "Licitaciones Inteligentes con IA",

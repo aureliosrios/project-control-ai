@@ -140,7 +140,7 @@
       "id": "LIC",
       "codigo": "LIC",
       "nombre": "Licitaciones Inteligentes con IA",
-      "status": "agotado",
+      "status": "potenciar",
       "descripcion": "Curso 3: Nivel Avanzado. Domina MCP, Skills y Scripts Python para la automatización de APUs y cronogramas. Análisis masivo de expedientes técnicos de miles de páginas con Agentes IA de élite. Nueva cohorte en preparación.",
       "duracion": "15 horas",
       "sesiones": 5,
@@ -148,7 +148,7 @@
         "soles": 300,
         "dolares": 100
       },
-      "fechaInicio": "2026-05-25",
+      "fechaInicio": "2026-06-28",
       "horario": "Lunes y Miércoles: 7:00 PM - 10:00 PM",
       "brochure": "Brochure_Curso_1_Licitaciones_360.pdf",
       "imagen": "Curso 1.png",

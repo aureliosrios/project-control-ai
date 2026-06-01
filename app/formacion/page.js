@@ -74,14 +74,13 @@ const sincronicos = [
     precioSoles: "S/. 300",
     tag: "CURSO 3 · AVANZADO",
     desc: "Nivel Avanzado: Domina MCP, Skills y Scripts Python para automatizar APUs y cronogramas. Análisis masivo de expedientes técnicos de miles de páginas.",
-    inicio: "25 de Mayo, 2026",
+    inicio: "28 de Junio, 2026",
     horario: "Lunes y Miércoles · 7:00 PM – 10:00 PM",
     sesiones: "15h · 5 sesiones",
     link: "/inscripcion",
     hotmart: "https://pay.hotmart.com/N104187999C",
     paypal: "https://paypal.me/ProjectControlAI",
-    color: "orange",
-    cerrado: true
+    color: "orange"
   }
 ];
 

@@ -16,7 +16,7 @@ const asincronicos = [
   },
   {
     id: "A2",
-    nombre: "Escáner Forense con NotebookLM",
+    nombre: "Gestión de Documentos Contractuales en la Gestión de Construcción",
     precio: "$15.99 USD",
     tag: "CURSO A2 · PUBLICADO",
     desc: "Gestión documental masiva para proyectos. Auditoría legal y técnica, extracción de actividades e informes de movilización en minutos.",
@@ -89,7 +89,7 @@ const rutas = [
     letra: "A",
     titulo: "Fundamentos Transversales",
     desc: "Indispensables para todo profesional de la construcción.",
-    cursos: ["A1: El Despertar Digital", "A2: Escáner Forense", "A3: Prompt Engineering Pro", "A4: Python for Engineers"]
+    cursos: ["A1: El Despertar Digital", "A2: Gestión Contractual", "A3: Prompt Engineering Pro", "A4: Python for Engineers"]
   },
   {
     letra: "B",

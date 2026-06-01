@@ -153,8 +153,8 @@ PCAI_CONFIG = {
 
 | ID | Nombre | Precio | Inicio | Horario | Nivel |
 |----|--------|--------|--------|---------|-------|
-| IAD | El Despertar de la IA para la Gestión de Proyectos | $75 / S/200 | 31 May 2026 | Domingos 10 AM - 1 PM | Básico |
-| PRO | Ingeniería Aumentada: Automatización con Agentes de IA | $100 / S/300 | 31 May 2026 | Domingos 3-6 PM | Avanzado |
+| IAD | El Despertar de la IA para la Gestión de Proyectos | $75 / S/200 | 14 Jun 2026 | Domingos 10 AM - 1 PM | Básico |
+| PRO | Ingeniería Aumentada: Automatización con Agentes de IA | $100 / S/300 | 14 Jun 2026 | Domingos 3-6 PM | Avanzado |
 | LIC | Licitaciones Inteligentes con IA (Cupos Agotados) | $100 / S/300 | 25 May 2026 | Lun-Mié 7-10 PM | Avanzado |
 
 **Los cursos IAD y PRO están orientados a todos los ingenieros de construcción para dominar lenguajes de IA (HTML, Mermaid, MD, CSV), Python, VBA, Skills y Scripts MCP.**
@@ -164,11 +164,11 @@ PCAI_CONFIG = {
 
 | Curso | Link | Precio |
 |-------|------|--------|
-| El Despertar de la IA en la Gestión de Proyectos (A1) | `https://go.hotmart.com/I104938744G` | $11.99 USD |
+| El Despertar de la IA en la Gestión de Proyectos (A1) | `https://go.hotmart.com/I104938744G` | $14.99 USD |
 
 ### 6C. Ecosistema Asincrónico — 20 Micro-cursos (Plan futuro)
 
-6 rutas de aprendizaje, $11.99 USD cada micro-curso. Solo A1 publicado.
+6 rutas de aprendizaje, $14.99 USD para El Despertar y $15.99 USD para cada otro micro-curso. Solo A1 publicado.
 
 | Ruta | Nombre | Cursos | Color |
 |------|--------|--------|-------|

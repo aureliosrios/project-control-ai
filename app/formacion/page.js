@@ -7,7 +7,7 @@ const asincronicos = [
   {
     id: "A1",
     nombre: "El Despertar de la IA en la Gestión de Proyectos",
-    precio: "$11.99 USD",
+    precio: "$14.99 USD",
     tag: "CURSO A1 · PUBLICADO",
     desc: "6 entregables reales en 2.5h sin programar. Reportes HTML, Mermaid.js, ATS, IPERC, Organigramas y Matrices CSV generados con IA.",
     link: "https://go.hotmart.com/I104938744G",
@@ -17,7 +17,7 @@ const asincronicos = [
   {
     id: "A2",
     nombre: "Escáner Forense con NotebookLM",
-    precio: "$11.99 USD",
+    precio: "$15.99 USD",
     tag: "CURSO A2 · PUBLICADO",
     desc: "Gestión documental masiva para proyectos. Auditoría legal y técnica, extracción de actividades e informes de movilización en minutos.",
     link: "https://pay.hotmart.com/O105604032H",
@@ -27,7 +27,7 @@ const asincronicos = [
   {
     id: "C1",
     nombre: "Automatización de Presupuestos con IA",
-    precio: "$11.99 USD",
+    precio: "$15.99 USD",
     tag: "CURSO C1 · ESPECIALIDAD",
     desc: "Ingeniería de Costos Aumentada (Python + Agentes). Reduce el tiempo operativo de licitación en un 90% delegando tareas a la IA.",
     link: "https://pay.hotmart.com/H105703259M",
@@ -44,7 +44,7 @@ const sincronicos = [
     precioSoles: "S/. 200",
     tag: "CURSO 1 · BÁSICO",
     desc: "El inicio de la era digital para ingenieros. Domina la Gestión de Alcance, Contratos, Calidad y HSE mediante informes en HTML, flujogramas en Mermaid y documentos en MD/CSV.",
-    inicio: "31 de Mayo, 2026",
+    inicio: "14 de Junio, 2026",
     horario: "Domingos · 10:00 AM – 1:00 PM",
     sesiones: "15h · 5 sesiones",
     link: "/inscripcion",

@@ -46,7 +46,10 @@ const courses = {
         num: "01",
         status: "OCULTA",
         title: "El Despertar: Dashboards HTML y Mermaid",
-        desc: "Clase del 31 de Mayo: Generación de reportes interactivos, diagramas de flujo de trabajo profesionales con Mermaid y bases de la IA aplicada a la gestión de proyectos sin saber programar."
+        desc: "Clase del 31 de Mayo: Generación de reportes interactivos, diagramas de flujo de trabajo profesionales con Mermaid y bases de la IA aplicada a la gestión de proyectos sin saber programar.",
+        resources: [
+          { title: "Resumen Interactivo de la Clase 1 (HTML)", type: "html", url: "/manuales/resumen_clase_1.html" }
+        ]
       }
     ]
   },

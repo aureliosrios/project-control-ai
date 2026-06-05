@@ -13,7 +13,7 @@ const resources = [
     title: "Licitaciones de Construcción con IA (Licitaciones Inteligentes)", 
     desc: "Auditoría de expedientes masivos, APUs, Presupuestos y Cronogramas automáticos.", 
     img: "/images/Licitaciones.png", 
-    link: "/brochures/Brochure_Curso_1_Licitaciones_360.pdf" 
+    link: "/brochures/Brochure_Curso_3_IA_Licitaciones_Inteligentes.pdf" 
   },
   { 
     id: 2, 

@@ -7,10 +7,10 @@ import { supabase } from "@/lib/supabase";
 
 const courses = {
   "AE": {
-    name: "Automation Engineer (Sesiones en Vivo)",
+    name: "Automatización de Obras con Agentes de IA (Ingeniería Aumentada) (Sesiones en Vivo)",
     lessons: [
       { id: "BHYaeOX97Mc", num: "01", status: "OCULTA", title: "Introducción a la Automatización de Procesos", desc: "Clase del 19 de Abril: Fundamentos y herramientas clave para el ingeniero de automatización moderno." },
-      { id: "9vvyQFfvOGo", num: "02", status: "OCULTA", title: "Arquitectura de Agentes y Workflows", desc: "Clase del 26 de Abril: Diseño de flujos de trabajo inteligentes y orquestación de agentes." },
+      { id: "9vvyQFfvOGo", num: "02", status: "OCULTA", title: "Arquitectura de Agentes and Workflows", desc: "Clase del 26 de Abril: Diseño de flujos de trabajo inteligentes y orquestación de agentes." },
       { id: "BqV82NdFt_k", num: "03", status: "OCULTA", title: "Integración Avanzada y Sistemas Autónomos", desc: "Clase del 03 de Mayo: Integración y orquestación avanzada en producción con casos prácticos reales." },
       { 
         id: "EHxM2Q4Sp-M", 
@@ -39,7 +39,7 @@ const courses = {
     ]
   },
   "GIP": {
-    name: "El Despertar de la IA para la Gestión de Proyectos",
+    name: "Gestión de Construcción con IA (El Despertar Digital)",
     lessons: [
       {
         id: "5rvU9Tk0aEw",
@@ -54,7 +54,7 @@ const courses = {
     ]
   },
   "LIC": {
-    name: "Licitaciones Inteligentes con IA",
+    name: "Licitaciones de Construcción con IA (Licitaciones Inteligentes)",
     lessons: [] // Próximamente se añadirán clases grabadas
   }
 };
@@ -258,7 +258,7 @@ export default function ClasesGrabadas() {
                       : 'text-slate-400 hover:text-white'
                   }`}
                 >
-                  {c.key === "AE" ? "Automation Engineer" : c.key === "GIP" ? "El Despertar de la IA" : "Licitaciones Inteligentes"}
+                  {c.key === "AE" ? "Automatización de Obras con Agentes de IA (Ingeniería Aumentada)" : c.key === "GIP" ? "Gestión de Construcción con IA (El Despertar Digital)" : "Licitaciones de Construcción con IA (Licitaciones Inteligentes)"}
                 </button>
               ))}
             </div>

@@ -136,9 +136,9 @@ export default function Inscripcion() {
                 className="w-full bg-[#0f172a] text-white border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 transition-all outline-none"
               >
                 <option value="" disabled className="bg-[#0f172a] text-slate-400">Seleccione curso...</option>
-                <option value="Gestion Proyectos IA" className="bg-[#0f172a] text-white">1. El Despertar de la IA para la Gestión de Proyectos</option>
-                <option value="Automation Engineer" className="bg-[#0f172a] text-white">2. Ingeniería Aumentada: Automatización con Agentes de IA</option>
-                <option value="Licitaciones Inteligentes" className="bg-[#0f172a] text-white">3. Licitaciones Inteligentes con IA</option>
+                <option value="Gestion Proyectos IA" className="bg-[#0f172a] text-white">1. Gestión de Construcción con IA (El Despertar Digital)</option>
+                <option value="Automation Engineer" className="bg-[#0f172a] text-white">2. Automatización de Obras con Agentes de IA (Ingeniería Aumentada)</option>
+                <option value="Licitaciones Inteligentes" className="bg-[#0f172a] text-white">3. Licitaciones de Construcción con IA (Licitaciones Inteligentes)</option>
               </select>
             </div>
 

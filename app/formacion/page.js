@@ -39,7 +39,7 @@ const asincronicos = [
 const sincronicos = [
   {
     id: "S1",
-    nombre: "El Despertar de la IA para la Gestión de Proyectos",
+    nombre: "Gestión de Construcción con IA (El Despertar Digital)",
     precio: "$75.00 USD",
     precioSoles: "S/. 200",
     tag: "CURSO 1 · BÁSICO",
@@ -54,7 +54,7 @@ const sincronicos = [
   },
   {
     id: "S2",
-    nombre: "Ingeniería Aumentada: Automatización con Agentes",
+    nombre: "Automatización de Obras con Agentes de IA (Ingeniería Aumentada)",
     precio: "$97.00 USD",
     precioSoles: "S/. 300",
     tag: "CURSO 2 · AVANZADO",
@@ -69,7 +69,7 @@ const sincronicos = [
   },
   {
     id: "S3",
-    nombre: "Licitaciones Inteligentes con IA",
+    nombre: "Licitaciones de Construcción con IA (Licitaciones Inteligentes)",
     precio: "$97.00 USD",
     precioSoles: "S/. 300",
     tag: "CURSO 3 · AVANZADO",

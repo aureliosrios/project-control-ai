@@ -10,7 +10,7 @@ const resources = [
     id: 1, 
     type: "brochure", 
     courseKey: "LIC", 
-    title: "Licitaciones Inteligentes con IA", 
+    title: "Licitaciones de Construcción con IA (Licitaciones Inteligentes)", 
     desc: "Auditoría de expedientes masivos, APUs, Presupuestos y Cronogramas automáticos.", 
     img: "/images/Licitaciones.png", 
     link: "/brochures/Brochure_Curso_1_Licitaciones_360.pdf" 
@@ -19,7 +19,7 @@ const resources = [
     id: 2, 
     type: "brochure", 
     courseKey: "GIP", 
-    title: "El Despertar de la IA", 
+    title: "Gestión de Construcción con IA (El Despertar Digital)", 
     desc: "Alcance, Contratos, Calidad y HSE potenciados por Inteligencia Artificial.", 
     img: "/images/Gestión Integral.png", 
     link: "/brochures/Brochure_Curso_3_IA_Despertar_Digital.pdf" 
@@ -28,7 +28,7 @@ const resources = [
     id: 3, 
     type: "brochure", 
     courseKey: "AE", 
-    title: "Automation Engineer", 
+    title: "Automatización de Obras con Agentes de IA (Ingeniería Aumentada)", 
     desc: "Orquestación de agentes autónomos, flujos colaborativos y monitoreo avanzado con IA.", 
     img: "/images/Automation.png", 
     link: "/brochures/Brochure_Curso_4_Automation_Engineer.pdf" 

@@ -149,16 +149,16 @@ PCAI_CONFIG = {
 
 ## 6. CATÁLOGO DE CURSOS
 
-### 6A. Cursos En Vivo (Sincrónicos) — `cursos.json`
+### 6A. Cursos En Vivo (Sincrónicos)
 
 | ID | Nombre | Precio | Inicio | Horario | Nivel |
 |----|--------|--------|--------|---------|-------|
-| IAD | El Despertar de la IA para la Gestión de Proyectos | $75 / S/200 | 14 Jun 2026 | Domingos 10 AM - 1 PM | Básico |
-| PRO | Ingeniería Aumentada: Automatización con Agentes de IA | $100 / S/300 | 14 Jun 2026 | Domingos 3-6 PM | Avanzado |
-| LIC | Licitaciones Inteligentes con IA (Cupos Agotados) | $100 / S/300 | 25 May 2026 | Lun-Mié 7-10 PM | Avanzado |
+| IAD | Gestión de Construcción con IA (El Despertar Digital) | $75 / S/200 | 14 Jun 2026 | Domingos 10 AM - 1 PM | Básico |
+| PRO | Automatización de Obras con Agentes de IA (Ingeniería Aumentada) | $100 / S/300 | 14 Jun 2026 | Domingos 3-6 PM | Avanzado |
+| LIC | Licitaciones de Construcción con IA (Licitaciones Inteligentes) (Cupos Agotados) | $100 / S/300 | 25 May 2026 | Lun-Mié 7-10 PM | Avanzado |
 
 **Los cursos IAD y PRO están orientados a todos los ingenieros de construcción para dominar lenguajes de IA (HTML, Mermaid, MD, CSV), Python, VBA, Skills y Scripts MCP.**
-**Ingeniería Aumentada: Automatización con Agentes de IA (PRO) requiere haber cursado El Despertar de la IA (IAD) como prerrequisito.**
+**Automatización de Obras con Agentes de IA (Ingeniería Aumentada) (PRO) requiere haber cursado Gestión de Construcción con IA (El Despertar Digital) (IAD) como prerrequisito.**
 
 ### 6B. Curso Asincrónico Publicado — Hotmart
 
@@ -310,7 +310,7 @@ tailwind.config = {
 6. **La carpeta `.claude/`** está en `.gitignore` — nunca commitearla.
 7. **Supabase key es pública** (`sb_publishable_*`) — no tratarla como secreto, pero RLS debe estar activo.
 8. **Imágenes de cursos tienen espacios** en el nombre: `"Control y gerencia.png"` — usar comillas en HTML.
-9. **Automation Engineer** tiene prerrequisito: debe haber cursado GIP (Gestión Integral).
+9. **Automatización de Obras con Agentes de IA (Ingeniería Aumentada)** tiene prerrequisito: debe haber cursado **Gestión de Construcción con IA (El Despertar Digital)**.
 10. **Hotmart en sección pagos** = solo referencia informativa. Los botones de pago van en cada tarjeta de curso.
 
 ---

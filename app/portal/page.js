@@ -64,15 +64,29 @@ export default function StudentPortal() {
           cursoLower?.includes("gestion proyectos ia") || 
           cursoLower?.includes("gestión integral de proyectos con ia") ||
           cursoLower?.includes("gestion integral de proyectos con ia") ||
-          cursoLower?.includes("el despertar de la ia")
+          cursoLower?.includes("el despertar de la ia") ||
+          cursoLower?.includes("despertar digital") ||
+          cursoLower?.includes("construcción con ia") ||
+          cursoLower?.includes("construccion con ia")
         ) {
-          cursoHomogeneizado = "El Despertar de la IA para la Gestión de Proyectos";
+          cursoHomogeneizado = "Gestión de Construcción con IA (El Despertar Digital)";
+        } else if (
+          cursoLower?.includes("automation") || 
+          cursoLower?.includes("ingenieria") || 
+          cursoLower?.includes("automatizacion") || 
+          cursoLower?.includes("obras con agentes")
+        ) {
+          cursoHomogeneizado = "Automatización de Obras con Agentes de IA (Ingeniería Aumentada)";
+        } else if (
+          cursoLower?.includes("licitacio")
+        ) {
+          cursoHomogeneizado = "Licitaciones de Construcción con IA (Licitaciones Inteligentes)";
         }
 
         // Forzar privilegios VIP/Normal en el frontend para evitar restricciones de RLS
         let vipOverride = enroll.acceso_vip;
         const studentDni = enroll.dni?.trim();
-        if (cursoHomogeneizado === "El Despertar de la IA para la Gestión de Proyectos") {
+        if (cursoHomogeneizado === "Gestión de Construcción con IA (El Despertar Digital)") {
           const vipDnis = ["47812821", "10740454"]; // Esther y Aurelio
           const normalDnis = ["40253671", "19082488", "10516759", "32983297"]; // Daniel, Ronal, Pavel, Victor
           
@@ -258,13 +272,13 @@ export default function StudentPortal() {
     {
       courseKey: "AE",
       zoomUrl: "https://us06web.zoom.us/j/89278943716?pwd=AQbn3eCCxhaLU4zr1zuabDwJwdSnsm.1",
-      title: "Automation Engineer",
+      title: "Automatización de Obras con Agentes de IA (Ingeniería Aumentada)",
       message: "La clase está en curso. Toca el botón de abajo para unirte desde tu celular."
     },
     {
       courseKey: "GIP",
       zoomUrl: "https://us06web.zoom.us/j/82338486465?pwd=kBVuLWZgYxA2WOzMVjCM6tqM47GA5g.1",
-      title: "Gestión de Proyectos: El Despertar",
+      title: "Gestión de Construcción con IA (El Despertar Digital)",
       message: "¡Hoy inicia el curso! La sesión sincrónica está activa. Toca el botón de abajo para ingresar a tu clase de hoy."
     }
   ];

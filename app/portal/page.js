@@ -88,7 +88,7 @@ export default function StudentPortal() {
         const studentDni = enroll.dni?.trim();
         if (cursoHomogeneizado === "Gestión de Construcción con IA (El Despertar Digital)") {
           const vipDnis = ["47812821", "10740454"]; // Esther y Aurelio
-          const normalDnis = ["40253671", "19082488", "10516759", "32983297"]; // Daniel, Ronal, Pavel, Victor
+          const normalDnis = ["40253671", "19082488", "10516759", "32983297", "41192079"]; // Daniel, Ronal, Pavel, Victor, Jhimy
           
           if (vipDnis.includes(studentDni)) {
             vipOverride = true;

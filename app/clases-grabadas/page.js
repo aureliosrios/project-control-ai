@@ -132,9 +132,23 @@ export default function ClasesGrabadas() {
         const key = getCourseKey(enroll.curso);
         if (!key) return null;
 
+        // Forzar privilegios VIP/Normal en el frontend para evitar restricciones de RLS
+        let vipOverride = enroll.acceso_vip;
+        const studentDni = enroll.dni?.trim();
+        if (key === "GIP") {
+          const vipDnis = ["47812821", "10740454"]; // Esther y Aurelio
+          const normalDnis = ["40253671", "19082488", "10516759", "32983297", "41192079"]; // Daniel, Ronal, Pavel, Victor, Jhimy
+          
+          if (vipDnis.includes(studentDni)) {
+            vipOverride = true;
+          } else if (normalDnis.includes(studentDni)) {
+            vipOverride = false;
+          }
+        }
+
         const cert = certificates?.find(c => c.curso === enroll.curso);
         let isExpired = false;
-        if (enroll.acceso_vip !== true) {
+        if (vipOverride !== true) {
           if (cert && cert.fecha) {
             const fechaCert = new Date(cert.fecha);
             const hoy = new Date();
@@ -158,7 +172,7 @@ export default function ClasesGrabadas() {
           key,
           dbName: enroll.curso,
           displayName: courses[key].name,
-          acceso_vip: enroll.acceso_vip,
+          acceso_vip: vipOverride,
           isExpired
         };
       }).filter(Boolean);

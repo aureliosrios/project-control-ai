@@ -271,7 +271,7 @@ export default function StudentPortal() {
   const activeZoomSessions = [
     {
       courseKey: "AE",
-      zoomUrl: "https://us06web.zoom.us/j/89278943716?pwd=AQbn3eCCxhaLU4zr1zuabDwJwdSnsm.1",
+      zoomUrl: "https://us06web.zoom.us/j/82973721151?pwd=1x6ebtWbhanU26CWSrvVJZNSLzNi7C.1",
       title: "Automatización de Obras con Agentes de IA (Ingeniería Aumentada)",
       message: "La clase está en curso. Toca el botón de abajo para unirte desde tu celular."
     },

@@ -169,7 +169,7 @@
                     <select name="curso" class="input-standard" required>
                         <option value="" disabled selected>Seleccione curso...</option>
                         <option value="Gestion Proyectos IA">1. El Despertar de la IA para la Gestión de Proyectos</option>
-                        <option value="Automation Engineer">2. Ingeniería Aumentada: Automatización con Agentes de IA</option>
+                        <option value="Ingeniería Aumentada: Automatización con Agentes de IA">2. Ingeniería Aumentada: Automatización con Agentes de IA</option>
                         <option value="Licitaciones Inteligentes">3. Licitaciones Inteligentes con IA</option>
                     </select>
                 </div>
@@ -203,8 +203,11 @@
         // --- PRE-SELECCIÓN DE CURSO DESDE URL ---
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
-            const cursoParam = urlParams.get('curso');
+            let cursoParam = urlParams.get('curso');
             if (cursoParam) {
+                if (cursoParam === 'Automation Engineer' || cursoParam === 'automation') {
+                    cursoParam = 'Ingeniería Aumentada: Automatización con Agentes de IA';
+                }
                 const selectCurso = document.querySelector('select[name="curso"]');
                 if (selectCurso) {
                     selectCurso.value = cursoParam;

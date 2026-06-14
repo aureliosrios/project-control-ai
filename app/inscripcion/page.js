@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 // import { supabase } from "@/lib/supabase";
@@ -16,6 +16,19 @@ export default function Inscripcion() {
     email: "",
     curso: ""
   });
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      let cursoParam = params.get('curso');
+      if (cursoParam) {
+        if (cursoParam === 'Automation Engineer' || cursoParam === 'automation') {
+          cursoParam = 'Ingeniería Aumentada: Automatización con Agentes de IA';
+        }
+        setFormData(prev => ({ ...prev, curso: cursoParam }));
+      }
+    }
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -137,7 +150,7 @@ export default function Inscripcion() {
               >
                 <option value="" disabled className="bg-[#0f172a] text-slate-400">Seleccione curso...</option>
                 <option value="Gestion Construccion IA" className="bg-[#0f172a] text-white">1. Gestión de la Construcción con IA</option>
-                <option value="Automation Engineer" className="bg-[#0f172a] text-white">2. Automatización de Obras con Agentes de IA (Ingeniería Aumentada)</option>
+                <option value="Ingeniería Aumentada: Automatización con Agentes de IA" className="bg-[#0f172a] text-white">2. Automatización de Obras con Agentes de IA (Ingeniería Aumentada)</option>
                 <option value="Licitaciones Inteligentes" className="bg-[#0f172a] text-white">3. Licitaciones de Construcción con IA (Licitaciones Inteligentes)</option>
               </select>
             </div>

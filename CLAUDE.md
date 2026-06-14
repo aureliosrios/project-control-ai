@@ -312,6 +312,8 @@ tailwind.config = {
 8. **Imágenes de cursos tienen espacios** en el nombre: `"Control y gerencia.png"` — usar comillas en HTML.
 9. **Automatización de Obras con Agentes de IA (Ingeniería Aumentada)** tiene prerrequisito: debe haber cursado **Gestión de Construcción con IA (El Despertar Digital)**.
 10. **Hotmart en sección pagos** = solo referencia informativa. Los botones de pago van en cada tarjeta de curso.
+11. **Filtro por Edición**: Siempre filtrar y diferenciar los alumnos por cohorte/edición (`edicion_curso`) para evitar mezclar alumnos históricos con cohortes activas (por ejemplo, la cohorte que inicia el 14 de Junio de 2026).
+12. **Guía de Estándar**: Seguir los lineamientos de [ESTANDAR_GESTION_ALUMNOS.md](file:///d:/Project%20Control%20AI/Administraci%C3%B3n%20de%20datos/ESTANDAR_GESTION_ALUMNOS.md) al gestionar alumnos.
 
 ---
 

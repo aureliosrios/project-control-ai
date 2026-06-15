@@ -51,7 +51,7 @@ export default function AdminQCDashboard() {
       const slug = (cert.nombre_curso_oficial || cert.nombre_curso_inscrito || "").toLowerCase();
       let archivo = "cert_gestion_integral.pdf";
 
-      if (slug.includes("automation") || slug.includes("automatizacion") || slug.includes("automatización")) archivo = "cert_automation_engineer.pdf";
+      if (slug.includes("automation") || slug.includes("automatizacion") || slug.includes("automatización")) archivo = "cert_automatizacion.pdf";
       else if (slug.includes("licitaciones")) archivo = "cert_licitaciones_ia.pdf";
       else if (slug.includes("evm") || slug.includes("control")) archivo = "cert_control_evm.pdf";
       else if (slug.includes("gerencia") || slug.includes("gestion")) archivo = "cert_gestion_integral.pdf";

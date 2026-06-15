@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCAI | Resumen Clase 2: Procesamiento de Documentos y Modelos de IA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        :root {
+            --bg-primary: #020617;
+            --bg-secondary: #0b1528;
+            --accent-cyan: #22d3ee;
+            --accent-cyan-glow: rgba(34, 211, 238, 0.15);
+            --accent-gold: #f59e0b;
+            --accent-gold-glow: rgba(245, 158, 11, 0.15);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-glow: rgba(255, 255, 255, 0.08);
+            --glass-card: rgba(15, 23, 42, 0.65);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background grid effects */
+        .tech-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(34, 211, 238, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(245, 158, 11, 0.03) 0%, transparent 40%),
+                linear-gradient(rgba(255,255,255,0.007) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.007) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header design */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .brand-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glow);
+            border-radius: 100px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.25em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .brand-tag span {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-cyan);
+            animation: pulse 2s infinite;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            margin-bottom: 15px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 30%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* Class metadata panel */
+        .meta-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            background: var(--glass-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(16px);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .meta-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--accent-cyan);
+            border: 1px solid var(--border-glow);
+        }
+
+        .meta-content p:first-child {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+        }
+
+        .meta-content p:last-child {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* Tab Navigation */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-glow);
+            color: var(--text-muted);
+            padding: 12px 24px;
+            border-radius: 16px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            border-color: var(--accent-cyan);
+        }
+
+        .tab-btn.active {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+        }
+
+        /* Section layout */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 968px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Glassmorphism Cards */
+        .card {
+            background: var(--glass-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 32px;
+            padding: 35px;
+            backdrop-filter: blur(16px);
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--border-glow);
+            padding-bottom: 15px;
+            color: var(--accent-cyan);
+        }
+
+        /* List elements styling */
+        .tool-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .tool-item {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .tool-item:hover {
+            border-color: rgba(34, 211, 238, 0.3);
+            background: rgba(34, 211, 238, 0.02);
+            transform: translateY(-2px);
+        }
+
+        .tool-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tool-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tool-badge {
+            background: var(--accent-cyan-glow);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            font-size: 0.65rem;
+            padding: 4px 10px;
+            border-radius: 100px;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .tool-badge.free {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+
+        .tool-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .tool-link:hover {
+            gap: 8px;
+            text-decoration: underline;
+        }
+
+        .tool-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        /* Prompt Box */
+        .prompt-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .prompt-card {
+            background: rgba(2, 6, 23, 0.5);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .prompt-header {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 15px 20px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-glow);
+        }
+
+        .prompt-header span:first-child {
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.75rem;
+            transition: color 0.2s;
+        }
+
+        .copy-btn:hover {
+            color: var(--accent-cyan);
+        }
+
+        .prompt-body {
+            padding: 20px;
+            font-family: 'Consolas', 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            color: #e2e8f0;
+            background: #030712;
+            white-space: pre-wrap;
+            border-bottom: 1px solid var(--border-glow);
+        }
+
+        .prompt-footer {
+            padding: 15px 20px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.01);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Conceptual cards */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .concept-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .concept-card {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(245, 158, 11, 0.2);
+        }
+
+        .concept-icon {
+            color: var(--accent-gold);
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .concept-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        /* Interactive Section */
+        .interactive-section {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(34, 211, 238, 0.2);
+            border-radius: 32px;
+            padding: 35px;
+            box-shadow: 0 0 40px rgba(34, 211, 238, 0.05);
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .calc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        select, input[type="number"] {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-glow);
+            border-radius: 12px;
+            color: white;
+            padding: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+        }
+
+        select:focus, input[type="number"]:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            background: rgba(34, 211, 238, 0.05);
+        }
+
+        .calc-result {
+            background: #030712;
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .result-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            color: var(--accent-cyan);
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .recommendation-badge {
+            display: inline-block;
+            background: var(--accent-gold-glow);
+            color: var(--accent-gold);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 15px;
+            width: fit-content;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 10px rgba(34, 211, 238, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(34, 211, 238, 0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="tech-bg"></div>
+    <div class="container">
+        
+        <!-- Header Section -->
+        <header>
+            <div class="brand-tag">
+                <span></span>
+                Project Control AI
+            </div>
+            <h1>Resumen de la Clase 2: <br><span class="gradient-text">Modelos y Procesamiento de Documentos</span></h1>
+            <p class="subtitle">Estructuración y optimización de expedientes de construcción masivos usando Markdown, análisis comparativo de modelos LLM y uso avanzado de laboratorios de Google.</p>
+        </header>
+
+        <!-- Metadata Bar -->
+        <div class="meta-bar">
+            <div class="meta-item">
+                <div class="meta-icon">
+                    <span class="material-symbols-outlined">calendar_today</span>
+                </div>
+                <div class="meta-content">
+                    <p>Fecha de Clase</p>
+                    <p>14 de Junio, 2026</p>
+                </div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-icon">
+                    <span class="material-symbols-outlined">school</span>
+                </div>
+                <div class="meta-content">
+                    <p>Docente</p>
+                    <p>Ing. Aurelio Solórzano</p>
+                </div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-icon">
+                    <span class="material-symbols-outlined">description</span>
+                </div>
+                <div class="meta-content">
+                    <p>Proyecto Base</p>
+                    <p>Conversión a Markdown / Licitaciones</p>
+                </div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-icon">
+                    <span class="material-symbols-outlined">integration_instructions</span>
+                </div>
+                <div class="meta-content">
+                    <p>Entregables Clave</p>
+                    <p>Markdown Pipeline & Doc Tokenizer</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('temario')">Temario & Conceptos</button>
+            <button class="tab-btn" onclick="switchTab('herramientas')">Herramientas & IA</button>
+            <button class="tab-btn" onclick="switchTab('prompts')">Prompts del Curso</button>
+            <button class="tab-btn" onclick="switchTab('ejercicio')">Calculadora de Tokens</button>
+        </div>
+
+        <!-- TAB: TEMARIO & CONCEPTOS -->
+        <div id="temario" class="tab-content active">
+            <div class="grid-layout">
+                <div class="card">
+                    <h2 class="card-title">
+                        <span class="material-symbols-outlined">menu_book</span>
+                        Temario Tratado en la Clase
+                    </h2>
+                    <div class="tool-list">
+                        <div class="tool-item">
+                            <div class="tool-header">
+                                <span class="tool-name">1. El Ecosistema de Modelos de Google AI Studio</span>
+                                <span class="tool-badge">Concepto base</span>
+                            </div>
+                            <p class="tool-desc">
+                                Análisis detallado del laboratorio de desarrollo de Google. Se revisó cómo Google publica sus modelos más avanzados (Gemini 1.5/3.5 Flash y Pro) de forma gratuita para pruebas antes de su comercialización. También se revisaron los modelos especializados en generación de imágenes (Imagen 3), video (Veo) y audio, así como el uso de Gemini Live para compartir pantalla interactiva.
+                            </p>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-header">
+                                <span class="tool-name">2. Preparación de Expedientes: Markdown vs. PDF</span>
+                                <span class="tool-badge">Técnica clave</span>
+                            </div>
+                            <p class="tool-desc">
+                                Se demostró por qué los PDF extensos (más de 50 o 100 páginas) suelen saturar a los modelos de lenguaje o forzarlos a "alucinar" detalles. Convertir los expedientes a Markdown (.md) permite conservar la estructura jerárquica de títulos, anotaciones manuales y tablas de forma sumamente liviana para que el modelo procese el contenido con total fidelidad.
+                            </p>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-header">
+                                <span class="tool-name">3. Pipelines de Conversión con Python</span>
+                                <span class="tool-badge">Desarrollo práctico</span>
+                            </div>
+                            <p class="tool-desc">
+                                Se introdujo el uso de scripts en Python y extensiones específicas para automatizar la extracción de texto, tablas e imágenes desde archivos de expedientes técnicos. Dependiendo del tipo de PDF (con muchas tablas, escaneados u OCR), se seleccionan librerías que garantizan una conversión a Markdown limpia y sin pérdida de datos.
+                            </p>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-header">
+                                <span class="tool-name">4. Enfoque Práctico de la Metodología Vial</span>
+                                <span class="tool-badge">Casos reales</span>
+                            </div>
+                            <p class="tool-desc">
+                                Discusión del caso vial planteado por los ingenieros: seguimiento de cronogramas y diseño geométrico/pavimentos en proyectos viales. Se analizó cómo estructurar las secuencias de trabajo e interactuar con AutoCAD y Civil 3D mediante programación ágil y APIs de inteligencia artificial.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conceptual Cards Column -->
+                <div>
+                    <div class="card" style="padding: 25px;">
+                        <h3 class="card-title" style="font-size: 1.25rem; margin-bottom: 20px; padding-bottom: 10px;">
+                            <span class="material-symbols-outlined">psychology</span>
+                            Conceptos Clave
+                        </h3>
+                        <div style="display: flex; flex-direction: column; gap: 20px;">
+                            <div class="concept-card">
+                                <span class="material-symbols-outlined concept-icon">api</span>
+                                <h4 class="concept-title">¿Qué es una API y un Conector?</h4>
+                                <p class="concept-desc">Se explicaron los conceptos fundamentales de interfaces de programación (APIs) y conectores (como MCP - Model Context Protocol) para conectar las IAs directamente con software de diseño (Civil 3D) y hojas de cálculo locales.</p>
+                            </div>
+                            <div class="concept-card">
+                                <span class="material-symbols-outlined concept-icon">description</span>
+                                <h4 class="concept-title">Visualización de Markdown</h4>
+                                <p class="concept-desc">Los archivos Markdown (.md) se pueden abrir y visualizar con cualquier editor de texto plano (WordPad, Bloc de Notas, VS Code) y son ideales para alimentar el contexto de cualquier LLM.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: HERRAMIENTAS -->
+        <div id="herramientas" class="tab-content">
+            <div class="card">
+                <h2 class="card-title">
+                    <span class="material-symbols-outlined">construction</span>
+                    Aplicaciones y Herramientas Utilizadas
+                </h2>
+                <div class="tool-list">
+                    
+                    <!-- Google AI Studio -->
+                    <div class="tool-item">
+                        <div class="tool-header">
+                            <span class="tool-name">
+                                <span class="material-symbols-outlined" style="color: var(--accent-cyan)">labs</span>
+                                Google AI Studio
+                            </span>
+                            <span class="tool-badge">Ecosistema Principal</span>
+                        </div>
+                        <p class="tool-desc">
+                            Entorno de experimentación técnica de Google. Se utiliza para testear modelos Gemini 1.5/3.5 Flash y Pro de forma gratuita. Ofrece una ventana de contexto masiva de hasta 2 millones de tokens para procesamiento de expedientes viales.
+                        </p>
+                        <div style="display:flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                            <a href="https://aistudio.google.com/" target="_blank" class="tool-link">
+                                Ir a Google AI Studio
+                                <span class="material-symbols-outlined" style="font-size: 1rem">open_in_new</span>
+                            </a>
+                            <span class="tool-badge free">Gratuito</span>
+                        </div>
+                    </div>
+
+                    <!-- NotebookLM -->
+                    <div class="tool-item">
+                        <div class="tool-header">
+                            <span class="tool-name">
+                                <span class="material-symbols-outlined" style="color: var(--accent-gold)">description</span>
+                                NotebookLM
+                            </span>
+                            <span class="tool-badge">Investigación Documental</span>
+                        </div>
+                        <p class="tool-desc">
+                            Herramienta de Google basada en fuentes locales cargadas por el usuario. Permite interactuar con especificaciones viales, manuales de diseño geométrico de carreteras y pavimentos, evitando alucinaciones al responder estrictamente según los documentos provistos.
+                        </p>
+                        <div>
+                            <a href="https://notebooklm.google/" target="_blank" class="tool-link">
+                                Ir a NotebookLM
+                                <span class="material-symbols-outlined" style="font-size: 1rem">open_in_new</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Python Libraries -->
+                    <div class="tool-item">
+                        <div class="tool-header">
+                            <span class="tool-name">
+                                <span class="material-symbols-outlined" style="color: #10b981">code</span>
+                                Librerías de Python para Markdown (pymupdf / markitdown)
+                            </span>
+                            <span class="tool-badge">Conversión Local</span>
+                        </div>
+                        <p class="tool-desc">
+                            Extensiones y scripts locales que permiten tomar un archivo PDF y exportarlo a Markdown. Muy útiles para automatizar el procesamiento de especificaciones técnicas y convertirlas a un formato ligero que cualquier LLM comprende a la perfección.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: PROMPTS -->
+        <div id="prompts" class="tab-content">
+            <div class="card">
+                <h2 class="card-title">
+                    <span class="material-symbols-outlined">terminal</span>
+                    Biblioteca de Prompts de la Clase
+                </h2>
+                <div class="prompt-container">
+                    
+                    <!-- Prompt 1 -->
+                    <div class="prompt-card">
+                        <div class="prompt-header">
+                            <span><span class="material-symbols-outlined">label</span>Prompt 1: Explicación de APIs e Integración</span>
+                            <button class="copy-btn" onclick="copyPrompt(1)">
+                                <span class="material-symbols-outlined" style="font-size: 0.9rem">content_copy</span>Copiar
+                            </button>
+                        </div>
+                        <div class="prompt-body" id="p1">Explícame de forma sencilla y con analogías para ingeniería civil cómo funciona una API, qué es un conector y cómo podemos conectar un LLM con Civil 3D.</div>
+                        <div class="prompt-footer">
+                            <span class="material-symbols-outlined" style="font-size: 0.95rem">info</span>
+                            Excelente para obtener analogías claras sobre desarrollo de software enfocado a ingenieros civiles.
+                        </div>
+                    </div>
+
+                    <!-- Prompt 2 -->
+                    <div class="prompt-card">
+                        <div class="prompt-header">
+                            <span><span class="material-symbols-outlined">label</span>Prompt 2: Planificación de Secuencia Vial</span>
+                            <button class="copy-btn" onclick="copyPrompt(2)">
+                                <span class="material-symbols-outlined" style="font-size: 0.9rem">content_copy</span>Copiar
+                            </button>
+                        </div>
+                        <div class="prompt-body" id="p2">Tengo un proyecto de diseño vial que sigue una secuencia ramificada. Ayúdame a estructurar una lista detallada de actividades en formato WBS/EDT (Work Breakdown Structure) de nivel 3 para estudios de trazo vial, diseño geométrico y diseño de pavimentos.</div>
+                        <div class="prompt-footer">
+                            <span class="material-symbols-outlined" style="font-size: 0.95rem">info</span>
+                            Ideal para estructurar cronogramas viales complejos considerando las fases lógicas del diseño geométrico.
+                        </div>
+                    </div>
+
+                    <!-- Prompt 3 -->
+                    <div class="prompt-card">
+                        <div class="prompt-header">
+                            <span><span class="material-symbols-outlined">label</span>Prompt 3: Conversión de PDF a Markdown en Python</span>
+                            <button class="copy-btn" onclick="copyPrompt(3)">
+                                <span class="material-symbols-outlined" style="font-size: 0.9rem">content_copy</span>Copiar
+                            </button>
+                        </div>
+                        <div class="prompt-body" id="p3">Escribe un script en Python usando PyMuPDF que tome un archivo de especificaciones técnicas en PDF, extraiga el texto de forma limpia estructurando los encabezados (H1, H2) con sintaxis Markdown y lo guarde en un archivo .md.</div>
+                        <div class="prompt-footer">
+                            <span class="material-symbols-outlined" style="font-size: 0.95rem">info</span>
+                            Genera un script básico en Python para convertir archivos locales de forma directa y sin depender de internet.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: EJERCICIO INTERACTIVO -->
+        <div id="ejercicio" class="tab-content">
+            <div class="card interactive-section">
+                <h2 class="card-title">
+                    <span class="material-symbols-outlined">calculate</span>
+                    Calculadora de Tokens y Ventana de Contexto para Expedientes
+                </h2>
+                <p style="margin-bottom: 25px; color: var(--text-muted);">
+                    Simula la carga de tus expedientes en el LLM. Elige la cantidad de páginas y el formato de archivo para ver cuántos tokens consumiría y la recomendación de optimización para evitar alucinaciones.
+                </p>
+                
+                <div class="calc-grid">
+                    <div>
+                        <div class="form-group">
+                            <label for="pageCount">Cantidad de páginas del PDF:</label>
+                            <input type="number" id="pageCount" value="50" min="1" max="1000" onchange="runCalculator()" oninput="runCalculator()">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="docFormat">Formato del expediente:</label>
+                            <select id="docFormat" onchange="runCalculator()">
+                                <option value="pdf-image">PDF Escaneado (Imagen Completa)</option>
+                                <option value="pdf-ocr" selected>PDF con Texto (OCR estándar)</option>
+                                <option value="markdown">Markdown Optimizado (.md)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tableCount">Tablas técnicas estimadas:</label>
+                            <input type="number" id="tableCount" value="10" min="0" max="200" onchange="runCalculator()" oninput="runCalculator()">
+                        </div>
+                    </div>
+                    
+                    <div class="calc-result">
+                        <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 5px;">Tokens Estimados</p>
+                        <div class="result-number" id="tokenOutput">25,000</div>
+                        
+                        <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 5px; margin-top: 15px;">Uso de Ventana de Contexto (Gemini 1.5/3.5 Flash)</p>
+                        <div style="width: 100%; bg: rgba(255,255,255,0.05); height: 10px; border-radius: 5px; overflow: hidden; border: 1px solid var(--border-glow); margin-bottom: 10px;">
+                            <div id="progressBar" style="width: 2.5%; height: 100%; background: var(--accent-cyan); box-shadow: 0 0 10px var(--accent-cyan);"></div>
+                        </div>
+                        <p style="font-size: 0.85rem;" id="progressText">2.5% de 1,000,000 tokens</p>
+                        
+                        <div class="recommendation-badge" id="recommendationOutput">Formato aceptable. Procede con prompts de calidad.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.currentTarget.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        function copyPrompt(num) {
+            const text = document.getElementById('p' + num).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Prompt copiado al portapapeles exitosamente.');
+            });
+        }
+
+        function runCalculator() {
+            const pages = parseInt(document.getElementById('pageCount').value) || 0;
+            const format = document.getElementById('docFormat').value;
+            const tables = parseInt(document.getElementById('tableCount').value) || 0;
+            
+            let tokensPerPage = 0;
+            if (format === 'pdf-image') {
+                tokensPerPage = 1200; // image models context
+            } else if (format === 'pdf-ocr') {
+                tokensPerPage = 450;
+            } else {
+                tokensPerPage = 250; // markdown is highly compressed
+            }
+            
+            let totalTokens = (pages * tokensPerPage) + (tables * 350);
+            
+            // Format number
+            document.getElementById('tokenOutput').innerText = totalTokens.toLocaleString();
+            
+            // Update progress bar (compared to 1M context windows)
+            const pct = Math.min(100, (totalTokens / 1000000) * 100);
+            document.getElementById('progressBar').style.width = pct + '%';
+            document.getElementById('progressText').innerText = pct.toFixed(2) + '% de 1,000,000 tokens';
+            
+            // Set recommendation badge
+            const badge = document.getElementById('recommendationOutput');
+            if (format === 'pdf-image') {
+                badge.innerText = "⚠ PDF de Imagen. Se recomienda aplicar OCR o convertir a Markdown primero.";
+                badge.className = "recommendation-badge";
+                badge.style.color = "var(--accent-gold)";
+                badge.style.borderColor = "rgba(245, 158, 11, 0.3)";
+                badge.style.background = "var(--accent-gold-glow)";
+            } else if (totalTokens > 150000 && format === 'pdf-ocr') {
+                badge.innerText = "⚠ Contexto elevado. Se recomienda convertir a Markdown para evitar latencia.";
+                badge.className = "recommendation-badge";
+                badge.style.color = "var(--accent-gold)";
+                badge.style.borderColor = "rgba(245, 158, 11, 0.3)";
+                badge.style.background = "var(--accent-gold-glow)";
+            } else if (format === 'markdown') {
+                badge.innerText = "✓ Formato Optimizado en Markdown. Procesamiento rápido y exactitud máxima.";
+                badge.className = "recommendation-badge";
+                badge.style.color = "#10b981";
+                badge.style.borderColor = "rgba(16, 185, 129, 0.3)";
+                badge.style.background = "rgba(16, 185, 129, 0.1)";
+            } else {
+                badge.innerText = "✓ Tamaño y formato adecuados. Listo para procesar.";
+                badge.className = "recommendation-badge";
+                badge.style.color = "#22d3ee";
+                badge.style.borderColor = "rgba(34, 211, 238, 0.3)";
+                badge.style.background = "var(--accent-cyan-glow)";
+            }
+        }
+
+        // Run once on load
+        window.onload = runCalculator;
+    </script>
+</body>
+</html>

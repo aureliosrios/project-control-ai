@@ -35,6 +35,16 @@ const courses = {
           { title: "Resumen Interactivo de la Clase 5 (HTML)", type: "html", url: "/manuales/resumen_clase_5.html" },
           { title: "Manual Avanzado de Soporte y EVM (PDF)", type: "pdf", url: "/manuales/Manual_Soporte_y_EVM_Clase_5.pdf" }
         ]
+      },
+      {
+        id: "RlbF2QcvRR8",
+        num: "06",
+        status: "OCULTA",
+        title: "AE Lección 06: Automatización de Procesos de Construcción",
+        desc: "Clase del 14 de Junio: Fundamentos de la automatización en obras, integración de software y desarrollo de herramientas ágiles.",
+        resources: [
+          { title: "Resumen Interactivo de la Clase 6 (HTML)", type: "html", url: "/manuales/resumen_clase_6.html" }
+        ]
       }
     ]
   },
@@ -49,6 +59,16 @@ const courses = {
         desc: "Clase del 31 de Mayo: Generación de reportes interactivos, diagramas de flujo de trabajo profesionales con Mermaid y bases de la IA aplicada a la gestión de proyectos sin saber programar.",
         resources: [
           { title: "Resumen Interactivo de la Clase 1 (HTML)", type: "html", url: "/manuales/resumen_clase_1.html" }
+        ]
+      },
+      {
+        id: "GN57dq1N7Rg",
+        num: "02",
+        status: "OCULTA",
+        title: "GIP Lección 02: Modelos de IA y Procesamiento de Documentos",
+        desc: "Clase del 14 de Junio: Uso y configuración del ecosistema de modelos de Google AI Studio, metodologías ante límites de tokens y pipelines prácticos para convertir expedientes PDF a Markdown.",
+        resources: [
+          { title: "Resumen Interactivo de la Clase 2 (HTML)", type: "html", url: "/manuales/resumen_clase_2.html" }
         ]
       }
     ]

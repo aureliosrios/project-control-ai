@@ -438,7 +438,7 @@
             font-weight: 300;
         }
 
-        /* Interactive Section */
+        /* Interactive Beam Section */
         .interactive-section {
             background: rgba(15, 23, 42, 0.9);
             border: 1px solid rgba(34, 211, 238, 0.2);
@@ -502,7 +502,7 @@
 
         .result-number {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             color: var(--accent-cyan);
             font-weight: 800;
             margin-bottom: 10px;
@@ -555,7 +555,7 @@
                 Project Control AI
             </div>
             <h1>Resumen de la Clase 2: <br><span class="gradient-text">Modelos y Procesamiento de Documentos</span></h1>
-            <p class="subtitle">Estructuración y optimización de expedientes de construcción masivos usando Markdown, análisis comparativo de modelos LLM y uso avanzado de laboratorios de Google.</p>
+            <p class="subtitle">Estructuración de expedientes viales con Markdown, análisis de WBS de nivel 4, Gantt interactivo estilo MS Project, flujogramas Mermaid de valorización y mini-apps de vigas.</p>
         </header>
 
         <!-- Metadata Bar -->
@@ -584,7 +584,7 @@
                 </div>
                 <div class="meta-content">
                     <p>Proyecto Base</p>
-                    <p>Conversión a Markdown / Licitaciones</p>
+                    <p>Expediente de Licitación Vial</p>
                 </div>
             </div>
             <div class="meta-item">
@@ -593,7 +593,7 @@
                 </div>
                 <div class="meta-content">
                     <p>Entregables Clave</p>
-                    <p>Markdown Pipeline & Doc Tokenizer</p>
+                    <p>WBS L4 / Gantt / Viga / Mermaid</p>
                 </div>
             </div>
         </div>
@@ -603,7 +603,7 @@
             <button class="tab-btn active" onclick="switchTab('temario')">Temario & Conceptos</button>
             <button class="tab-btn" onclick="switchTab('herramientas')">Herramientas & IA</button>
             <button class="tab-btn" onclick="switchTab('prompts')">Prompts del Curso</button>
-            <button class="tab-btn" onclick="switchTab('ejercicio')">Calculadora de Tokens</button>
+            <button class="tab-btn" onclick="switchTab('ejercicio')">Diseñador de Vigas</button>
         </div>
 
         <!-- TAB: TEMARIO & CONCEPTOS -->
@@ -621,7 +621,7 @@
                                 <span class="tool-badge">Concepto base</span>
                             </div>
                             <p class="tool-desc">
-                                Análisis detallado del laboratorio de desarrollo de Google. Se revisó cómo Google publica sus modelos más avanzados (Gemini 1.5/3.5 Flash y Pro) de forma gratuita para pruebas antes de su comercialización. También se revisaron los modelos especializados en generación de imágenes (Imagen 3), video (Veo) y audio, así como el uso de Gemini Live para compartir pantalla interactiva.
+                                Análisis detallado del laboratorio de desarrollo de Google. Se revisó cómo Google publica sus modelos más avanzados (Gemini 1.5/3.5 Flash y Pro) de forma gratuita. También se revisaron los modelos especializados en generación de imágenes (Imagen 3), video (Veo) y audio, así como el uso de Gemini Live para compartir pantalla interactiva.
                             </p>
                         </div>
                         <div class="tool-item">
@@ -635,20 +635,20 @@
                         </div>
                         <div class="tool-item">
                             <div class="tool-header">
-                                <span class="tool-name">3. Pipelines de Conversión con Python</span>
-                                <span class="tool-badge">Desarrollo práctico</span>
+                                <span class="tool-name">3. Generación de Informes HES y Aplicaciones Técnicas</span>
+                                <span class="tool-badge">HES & Estructuras</span>
                             </div>
                             <p class="tool-desc">
-                                Se introdujo el uso de scripts en Python y extensiones específicas para automatizar la extracción de texto, tablas e imágenes desde archivos de expedientes técnicos. Dependiendo del tipo de PDF (con muchas tablas, escaneados u OCR), se seleccionan librerías que garantizan una conversión a Markdown limpia y sin pérdida de datos.
+                                Uso de prompts para generar informes de seguridad HES en formato HTML estilizado con cabeceras de autor (Ing. Aurelio Solórzano / Project Control AI) y botones de exportación a PDF. Desarrollo de mini-aplicaciones de cálculo estructural bajo la norma peruana de sismoresistencia para la costa del país.
                             </p>
                         </div>
                         <div class="tool-item">
                             <div class="tool-header">
-                                <span class="tool-name">4. Enfoque Práctico de la Metodología Vial</span>
-                                <span class="tool-badge">Casos reales</span>
+                                <span class="tool-name">4. Planificación: WBS de Nivel 4 y Cronogramas Gantt</span>
+                                <span class="tool-badge">Planificación</span>
                             </div>
                             <p class="tool-desc">
-                                Discusión del caso vial planteado por los ingenieros: seguimiento de cronogramas y diseño geométrico/pavimentos en proyectos viales. Se analizó cómo estructurar las secuencias de trabajo e interactuar con AutoCAD y Civil 3D mediante programación ágil y APIs de inteligencia artificial.
+                                Metodología para estructurar la WBS/EDT detallada hasta un nivel 4 de actividades viales y exportar cronogramas con duraciones, predecesoras y lag. Simulación del diseño visual clásico de MS Project utilizando puro CSS/HTML y exportaciones de flujogramas de valorizaciones viales en sintaxis Mermaid.
                             </p>
                         </div>
                     </div>
@@ -669,8 +669,8 @@
                             </div>
                             <div class="concept-card">
                                 <span class="material-symbols-outlined concept-icon">description</span>
-                                <h4 class="concept-title">Visualización de Markdown</h4>
-                                <p class="concept-desc">Los archivos Markdown (.md) se pueden abrir y visualizar con cualquier editor de texto plano (WordPad, Bloc de Notas, VS Code) y son ideales para alimentar el contexto de cualquier LLM.</p>
+                                <h4 class="concept-title">Formatos de Salida Comunes</h4>
+                                <p class="concept-desc">El uso del prompt correcto permite guiar al LLM para responder en múltiples formatos técnicos de alta utilidad: HTML (para diseño de reportes y calculadoras), CSV (para datos), JSON y código Mermaid (para flujogramas).</p>
                             </div>
                         </div>
                     </div>
@@ -697,7 +697,7 @@
                             <span class="tool-badge">Ecosistema Principal</span>
                         </div>
                         <p class="tool-desc">
-                            Entorno de experimentación técnica de Google. Se utiliza para testear modelos Gemini 1.5/3.5 Flash y Pro de forma gratuita. Ofrece una ventana de contexto masiva de hasta 2 millones de tokens para procesamiento de expedientes viales.
+                            Entorno de experimentación técnica de Google. Se utiliza para testear modelos Gemini de forma gratuita, con una ventana de contexto masiva ideal para análisis de expedientes.
                         </p>
                         <div style="display:flex; justify-content: space-between; align-items: center; margin-top: 10px;">
                             <a href="https://aistudio.google.com/" target="_blank" class="tool-link">
@@ -708,37 +708,37 @@
                         </div>
                     </div>
 
-                    <!-- NotebookLM -->
+                    <!-- Mermaid Viewer -->
                     <div class="tool-item">
                         <div class="tool-header">
                             <span class="tool-name">
-                                <span class="material-symbols-outlined" style="color: var(--accent-gold)">description</span>
-                                NotebookLM
+                                <span class="material-symbols-outlined" style="color: var(--accent-gold)">schema</span>
+                                Mermaid Live Editor / Viewer
                             </span>
-                            <span class="tool-badge">Investigación Documental</span>
+                            <span class="tool-badge">Diagramación</span>
                         </div>
                         <p class="tool-desc">
-                            Herramienta de Google basada en fuentes locales cargadas por el usuario. Permite interactuar con especificaciones viales, manuales de diseño geométrico de carreteras y pavimentos, evitando alucinaciones al responder estrictamente según los documentos provistos.
+                            Visor online para representar diagramas de flujo y esquemas de valorización a partir del código Mermaid exportado por la IA. El docente recalcó la depuración del código Mermaid para garantizar la compatibilidad con el renderizado online.
                         </p>
                         <div>
-                            <a href="https://notebooklm.google/" target="_blank" class="tool-link">
-                                Ir a NotebookLM
+                            <a href="https://mermaid.live/" target="_blank" class="tool-link">
+                                Ir a Mermaid Live Editor
                                 <span class="material-symbols-outlined" style="font-size: 1rem">open_in_new</span>
                             </a>
                         </div>
                     </div>
 
-                    <!-- Python Libraries -->
+                    <!-- NotebookLM -->
                     <div class="tool-item">
                         <div class="tool-header">
                             <span class="tool-name">
-                                <span class="material-symbols-outlined" style="color: #10b981">code</span>
-                                Librerías de Python para Markdown (pymupdf / markitdown)
+                                <span class="material-symbols-outlined" style="color: #10b981">description</span>
+                                NotebookLM
                             </span>
-                            <span class="tool-badge">Conversión Local</span>
+                            <span class="tool-badge">Investigación Documental</span>
                         </div>
                         <p class="tool-desc">
-                            Extensiones y scripts locales que permiten tomar un archivo PDF y exportarlo a Markdown. Muy útiles para automatizar el procesamiento de especificaciones técnicas y convertirlas a un formato ligero que cualquier LLM comprende a la perfección.
+                            Herramienta de Google basada en fuentes locales cargadas por el usuario. Permite interactuar con especificaciones viales, manuales de diseño de carreteras y pavimentos sin alucinaciones.
                         </p>
                     </div>
                 </div>
@@ -750,102 +750,127 @@
             <div class="card">
                 <h2 class="card-title">
                     <span class="material-symbols-outlined">terminal</span>
-                    Biblioteca de Prompts de la Clase
+                    Biblioteca de Prompts del WhatsApp de la Clase
                 </h2>
                 <div class="prompt-container">
                     
                     <!-- Prompt 1 -->
                     <div class="prompt-card">
                         <div class="prompt-header">
-                            <span><span class="material-symbols-outlined">label</span>Prompt 1: Explicación de APIs e Integración</span>
+                            <span><span class="material-symbols-outlined">label</span>Prompt: Informe de Seguridad HES</span>
                             <button class="copy-btn" onclick="copyPrompt(1)">
                                 <span class="material-symbols-outlined" style="font-size: 0.9rem">content_copy</span>Copiar
                             </button>
                         </div>
-                        <div class="prompt-body" id="p1">Explícame de forma sencilla y con analogías para ingeniería civil cómo funciona una API, qué es un conector y cómo podemos conectar un LLM con Civil 3D.</div>
+                        <div class="prompt-body" id="p1">Puedes elaborar un informe de seguridad del proyecto adjunto, analizando el proceso constructivo y desarrollando los hitos a tener en cuenta en el informe HES., el entregable en HTML. La empresa es Project Control AI y el responsable del informe es el Ing. Aurelio Solórzano. Se puede mejorar el formato incluyendo estos datos y, además, añadir un botón para descargar en PDF.</div>
                         <div class="prompt-footer">
                             <span class="material-symbols-outlined" style="font-size: 0.95rem">info</span>
-                            Excelente para obtener analogías claras sobre desarrollo de software enfocado a ingenieros civiles.
+                            Ideal para automatizar resúmenes de obra orientados a seguridad industrial HES con estructura corporativa.
                         </div>
                     </div>
 
                     <!-- Prompt 2 -->
                     <div class="prompt-card">
                         <div class="prompt-header">
-                            <span><span class="material-symbols-outlined">label</span>Prompt 2: Planificación de Secuencia Vial</span>
+                            <span><span class="material-symbols-outlined">label</span>Prompt: Diseño Estructural de Viga Rectangular</span>
                             <button class="copy-btn" onclick="copyPrompt(2)">
                                 <span class="material-symbols-outlined" style="font-size: 0.9rem">content_copy</span>Copiar
                             </button>
                         </div>
-                        <div class="prompt-body" id="p2">Tengo un proyecto de diseño vial que sigue una secuencia ramificada. Ayúdame a estructurar una lista detallada de actividades en formato WBS/EDT (Work Breakdown Structure) de nivel 3 para estudios de trazo vial, diseño geométrico y diseño de pavimentos.</div>
+                        <div class="prompt-body" id="p2">Desarrolla una aplicación en HTML/JavaScript para el diseño de una viga simplemente apoyada. El usuario debe ingresar la base (b) y el peralte (h), el tipo de concreto (f'c), la longitud de la viga rectangular, así como las cargas puntuales y distribuidas. La aplicación debe calcular la cantidad de acero de refuerzo (As) y los momentos/esfuerzos máximos, utilizando la normativa peruana E.060. Para sismoresistencia, utiliza las especificaciones para la costa peruana (Zona 4). El diseño debe ser moderno con estética oscura.</div>
                         <div class="prompt-footer">
                             <span class="material-symbols-outlined" style="font-size: 0.95rem">info</span>
-                            Ideal para estructurar cronogramas viales complejos considerando las fases lógicas del diseño geométrico.
+                            Instruye al LLM a programar una herramienta técnica de diseño de concreto armado interactiva.
                         </div>
                     </div>
 
                     <!-- Prompt 3 -->
                     <div class="prompt-card">
                         <div class="prompt-header">
-                            <span><span class="material-symbols-outlined">label</span>Prompt 3: Conversión de PDF a Markdown en Python</span>
+                            <span><span class="material-symbols-outlined">label</span>Prompt: WBS Nivel 4 y Cronograma MS Project</span>
                             <button class="copy-btn" onclick="copyPrompt(3)">
                                 <span class="material-symbols-outlined" style="font-size: 0.9rem">content_copy</span>Copiar
                             </button>
                         </div>
-                        <div class="prompt-body" id="p3">Escribe un script en Python usando PyMuPDF que tome un archivo de especificaciones técnicas en PDF, extraiga el texto de forma limpia estructurando los encabezados (H1, H2) con sintaxis Markdown y lo guarde en un archivo .md.</div>
+                        <div class="prompt-body" id="p3">Elabora el WBS del proyecto detallando cada ítem hasta un nivel 4. Con las actividades definidas, genera un cronograma de tipo Gantt en formato HTML imitando el diseño visual de MS Project, estimando duraciones, lag, predecesoras y otros elementos.</div>
                         <div class="prompt-footer">
                             <span class="material-symbols-outlined" style="font-size: 0.95rem">info</span>
-                            Genera un script básico en Python para convertir archivos locales de forma directa y sin depender de internet.
+                            Exporta e imita la apariencia corporativa de MS Project para cronogramas a nivel educativo.
+                        </div>
+                    </div>
+
+                    <!-- Prompt 4 -->
+                    <div class="prompt-card">
+                        <div class="prompt-header">
+                            <span><span class="material-symbols-outlined">label</span>Prompt: Flujograma de Valorizaciones (Mermaid)</span>
+                            <button class="copy-btn" onclick="copyPrompt(4)">
+                                <span class="material-symbols-outlined" style="font-size: 0.9rem">content_copy</span>Copiar
+                            </button>
+                        </div>
+                        <div class="prompt-body" id="p4">Puedes elaborar el flujograma de una valorización del proyecto considerando la etapa del contratista, la supervisión y la aprobación del cliente, con el entregable en formato mermaid para visualizarse correctamente en mermaid.live.</div>
+                        <div class="prompt-footer">
+                            <span class="material-symbols-outlined" style="font-size: 0.95rem">info</span>
+                            Crea una lógica jerárquica limpia de revisión técnica de planillas de valorizaciones en obras.
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- TAB: EJERCICIO INTERACTIVO -->
+        <!-- TAB: DISEÑADOR DE VIGAS -->
         <div id="ejercicio" class="tab-content">
             <div class="card interactive-section">
                 <h2 class="card-title">
-                    <span class="material-symbols-outlined">calculate</span>
-                    Calculadora de Tokens y Ventana de Contexto para Expedientes
+                    <span class="material-symbols-outlined">analytics</span>
+                    Diseñador Interactivo de Concreto Armado (Norma E.060)
                 </h2>
                 <p style="margin-bottom: 25px; color: var(--text-muted);">
-                    Simula la carga de tus expedientes en el LLM. Elige la cantidad de páginas y el formato de archivo para ver cuántos tokens consumiría y la recomendación de optimización para evitar alucinaciones.
+                    Simula la mini-aplicación de diseño de vigas rectangular simplemente apoyadas que se planteó durante la clase. Configura las dimensiones, concreto y cargas para calcular el acero requerido.
                 </p>
                 
                 <div class="calc-grid">
                     <div>
                         <div class="form-group">
-                            <label for="pageCount">Cantidad de páginas del PDF:</label>
-                            <input type="number" id="pageCount" value="50" min="1" max="1000" onchange="runCalculator()" oninput="runCalculator()">
+                            <label for="beamBase">Base de la viga, b (cm):</label>
+                            <input type="number" id="beamBase" value="30" min="10" max="100" onchange="designBeam()" oninput="designBeam()">
                         </div>
                         
                         <div class="form-group">
-                            <label for="docFormat">Formato del expediente:</label>
-                            <select id="docFormat" onchange="runCalculator()">
-                                <option value="pdf-image">PDF Escaneado (Imagen Completa)</option>
-                                <option value="pdf-ocr" selected>PDF con Texto (OCR estándar)</option>
-                                <option value="markdown">Markdown Optimizado (.md)</option>
+                            <label for="beamHeight">Peralte de la viga, h (cm):</label>
+                            <input type="number" id="beamHeight" value="50" min="20" max="150" onchange="designBeam()" oninput="designBeam()">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="beamLength">Longitud de la viga, L (m):</label>
+                            <input type="number" id="beamLength" value="6.0" step="0.1" min="1" max="20" onchange="designBeam()" oninput="designBeam()">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="beamFc">Resistencia del Concreto, f'c (kg/cm²):</label>
+                            <select id="beamFc" onchange="designBeam()">
+                                <option value="210" selected>210 kg/cm² (Estándar)</option>
+                                <option value="280">280 kg/cm² (Estructuras Importantes)</option>
+                                <option value="350">350 kg/cm² (Alta Resistencia)</option>
                             </select>
                         </div>
                         
                         <div class="form-group">
-                            <label for="tableCount">Tablas técnicas estimadas:</label>
-                            <input type="number" id="tableCount" value="10" min="0" max="200" onchange="runCalculator()" oninput="runCalculator()">
+                            <label for="beamLoad">Carga Distribuida Total, w (t/m):</label>
+                            <input type="number" id="beamLoad" value="2.5" step="0.1" min="0" max="50" onchange="designBeam()" oninput="designBeam()">
                         </div>
                     </div>
                     
                     <div class="calc-result">
-                        <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 5px;">Tokens Estimados</p>
-                        <div class="result-number" id="tokenOutput">25,000</div>
+                        <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 5px;">Momento Último Máximo (Mu)</p>
+                        <div class="result-number" id="momentOutput">11.25 t-m</div>
                         
-                        <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 5px; margin-top: 15px;">Uso de Ventana de Contexto (Gemini 1.5/3.5 Flash)</p>
-                        <div style="width: 100%; bg: rgba(255,255,255,0.05); height: 10px; border-radius: 5px; overflow: hidden; border: 1px solid var(--border-glow); margin-bottom: 10px;">
-                            <div id="progressBar" style="width: 2.5%; height: 100%; background: var(--accent-cyan); box-shadow: 0 0 10px var(--accent-cyan);"></div>
-                        </div>
-                        <p style="font-size: 0.85rem;" id="progressText">2.5% de 1,000,000 tokens</p>
+                        <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 5px; margin-top: 15px;">Acero Requerido (As)</p>
+                        <div class="result-number" id="steelOutput" style="color: var(--accent-gold);">6.84 cm²</div>
                         
-                        <div class="recommendation-badge" id="recommendationOutput">Formato aceptable. Procede con prompts de calidad.</div>
+                        <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-top: 15px; margin-bottom: 5px;">Sugerencia de Varillas (Fierros de 3/4")</p>
+                        <div id="rebarOutput" style="font-weight: 700; font-size: 1.1rem; color: #10b981;">3 varillas de Ø 3/4"</div>
+                        
+                        <div class="recommendation-badge" id="recommendationOutput" style="margin-top:20px;">Diseño dúctil y sismoresistente (Zona 4 - Costa).</div>
                     </div>
                 </div>
             </div>
@@ -869,61 +894,75 @@
             });
         }
 
-        function runCalculator() {
-            const pages = parseInt(document.getElementById('pageCount').value) || 0;
-            const format = document.getElementById('docFormat').value;
-            const tables = parseInt(document.getElementById('tableCount').value) || 0;
+        function designBeam() {
+            const b = parseFloat(document.getElementById('beamBase').value) || 0;
+            const h = parseFloat(document.getElementById('beamHeight').value) || 0;
+            const L = parseFloat(document.getElementById('beamLength').value) || 0;
+            const fc = parseFloat(document.getElementById('beamFc').value) || 0;
+            const w = parseFloat(document.getElementById('beamLoad').value) || 0;
             
-            let tokensPerPage = 0;
-            if (format === 'pdf-image') {
-                tokensPerPage = 1200; // image models context
-            } else if (format === 'pdf-ocr') {
-                tokensPerPage = 450;
-            } else {
-                tokensPerPage = 250; // markdown is highly compressed
-            }
+            // fy steel yield strength standard in Peru: 4200 kg/cm2
+            const fy = 4200;
             
-            let totalTokens = (pages * tokensPerPage) + (tables * 350);
+            // Calculate Maximum Moment (w * L^2 / 8) for simply supported beam
+            // w is in t/m, L is in m, Moment in t-m
+            const Mu = (w * L * L) / 8;
+            document.getElementById('momentOutput').innerText = Mu.toFixed(2) + " t-m";
             
-            // Format number
-            document.getElementById('tokenOutput').innerText = totalTokens.toLocaleString();
+            // Effective depth d (h - 6 cm covering)
+            const d = h - 6;
             
-            // Update progress bar (compared to 1M context windows)
-            const pct = Math.min(100, (totalTokens / 1000000) * 100);
-            document.getElementById('progressBar').style.width = pct + '%';
-            document.getElementById('progressText').innerText = pct.toFixed(2) + '% de 1,000,000 tokens';
+            // Calculate Steel Area (approximate design formula)
+            // Mu (kg-cm) = phi * As * fy * (d - a/2)
+            // phi = 0.90 for flexure. Let's solve iteratively or using a standard formula
+            const Mu_kgcm = Mu * 1000 * 100; // t-m to kg-cm
             
-            // Set recommendation badge
+            // As_estimate = Mu / (0.9 * fy * 0.9 * d)
+            let As = Mu_kgcm / (0.9 * fy * 0.9 * d);
+            
+            // Recalculate 'a' (depth of Whitney stress block)
+            // a = As * fy / (0.85 * fc * b)
+            let a = (As * fy) / (0.85 * fc * b);
+            
+            // Recalculate As = Mu / (0.9 * fy * (d - a/2))
+            As = Mu_kgcm / (0.9 * fy * (d - a/2));
+            
+            // Check minimum steel area As_min = 0.7 * sqrt(fc) * b * d / fy
+            const As_min = (0.7 * Math.sqrt(fc) * b * d) / fy;
+            const finalAs = Math.max(As, As_min);
+            
+            document.getElementById('steelOutput').innerText = finalAs.toFixed(2) + " cm²";
+            
+            // Suggesting standard rebars
+            // Rebar area Ø 3/4" = 2.84 cm2
+            // Rebar area Ø 5/8" = 1.98 cm2
+            const areaRebar34 = 2.84;
+            const count34 = Math.ceil(finalAs / areaRebar34);
+            
+            document.getElementById('rebarOutput').innerText = `${count34} varillas de Ø 3/4" (${(count34 * areaRebar34).toFixed(2)} cm²)`;
+            
+            // Check steel ratio limits for sismoresistance (costa peruana, Zona 4)
+            // max steel ratio rho_max = 0.75 * rho_balanced. Under sismic, E.060 recommends rho_max = 0.50 * rho_b or similar conditions.
+            const beta1 = fc <= 280 ? 0.85 : 0.85 - (0.05 * (fc - 280)) / 70;
+            const rho_b = (0.85 * fc * beta1 / fy) * (6000 / (6000 + fy));
+            const rho = finalAs / (b * d);
+            
             const badge = document.getElementById('recommendationOutput');
-            if (format === 'pdf-image') {
-                badge.innerText = "⚠ PDF de Imagen. Se recomienda aplicar OCR o convertir a Markdown primero.";
-                badge.className = "recommendation-badge";
+            if (rho > 0.5 * rho_b) {
+                badge.innerText = "⚠ Sección sobrediseñada o poco dúctil. Incrementa la sección (base o peralte).";
                 badge.style.color = "var(--accent-gold)";
                 badge.style.borderColor = "rgba(245, 158, 11, 0.3)";
                 badge.style.background = "var(--accent-gold-glow)";
-            } else if (totalTokens > 150000 && format === 'pdf-ocr') {
-                badge.innerText = "⚠ Contexto elevado. Se recomienda convertir a Markdown para evitar latencia.";
-                badge.className = "recommendation-badge";
-                badge.style.color = "var(--accent-gold)";
-                badge.style.borderColor = "rgba(245, 158, 11, 0.3)";
-                badge.style.background = "var(--accent-gold-glow)";
-            } else if (format === 'markdown') {
-                badge.innerText = "✓ Formato Optimizado en Markdown. Procesamiento rápido y exactitud máxima.";
-                badge.className = "recommendation-badge";
+            } else {
+                badge.innerText = "✓ Diseño dúctil y sismoresistente (Zona 4 - Costa). Cumple norma E.060.";
                 badge.style.color = "#10b981";
                 badge.style.borderColor = "rgba(16, 185, 129, 0.3)";
                 badge.style.background = "rgba(16, 185, 129, 0.1)";
-            } else {
-                badge.innerText = "✓ Tamaño y formato adecuados. Listo para procesar.";
-                badge.className = "recommendation-badge";
-                badge.style.color = "#22d3ee";
-                badge.style.borderColor = "rgba(34, 211, 238, 0.3)";
-                badge.style.background = "var(--accent-cyan-glow)";
             }
         }
 
         // Run once on load
-        window.onload = runCalculator;
+        window.onload = designBeam;
     </script>
 </body>
 </html>

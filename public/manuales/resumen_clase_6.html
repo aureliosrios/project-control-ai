@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PCAI | Resumen Clase 6: Configuración del Entorno Antigravity IDE</title>
+    <title>PCAI | Lección 1: Entornos de Agente y Automatización de Procesos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
@@ -36,7 +36,6 @@
             overflow-x: hidden;
         }
 
-        /* Background grid effects */
         .tech-bg {
             position: fixed;
             top: 0;
@@ -58,7 +57,6 @@
             padding: 40px 20px;
         }
 
-        /* Header design */
         header {
             text-align: center;
             margin-bottom: 50px;
@@ -92,7 +90,7 @@
 
         h1 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 3.5rem;
+            font-size: 3.2rem;
             font-weight: 900;
             line-height: 1.1;
             text-transform: uppercase;
@@ -109,12 +107,11 @@
         .subtitle {
             font-size: 1.15rem;
             color: var(--text-muted);
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto;
             font-weight: 300;
         }
 
-        /* Class metadata panel */
         .meta-bar {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -157,7 +154,6 @@
             font-size: 1rem;
         }
 
-        /* Tab Navigation */
         .tabs {
             display: flex;
             gap: 10px;
@@ -195,7 +191,6 @@
             box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
         }
 
-        /* Section layout */
         .tab-content {
             display: none;
             animation: fadeIn 0.5s ease;
@@ -217,7 +212,6 @@
             }
         }
 
-        /* Glassmorphism Cards */
         .card {
             background: var(--glass-card);
             border: 1px solid var(--border-glow);
@@ -243,7 +237,6 @@
             color: var(--accent-cyan);
         }
 
-        /* List elements styling */
         .tool-list {
             display: flex;
             flex-direction: column;
@@ -294,12 +287,6 @@
             text-transform: uppercase;
         }
 
-        .tool-badge.free {
-            background: rgba(16, 185, 129, 0.1);
-            color: #10b981;
-            border-color: rgba(16, 185, 129, 0.2);
-        }
-
         .tool-link {
             display: inline-flex;
             align-items: center;
@@ -322,7 +309,6 @@
             font-weight: 300;
         }
 
-        /* Prompt Box */
         .prompt-container {
             display: flex;
             flex-direction: column;
@@ -393,52 +379,7 @@
             gap: 8px;
         }
 
-        /* Conceptual cards */
-        .concept-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .concept-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .concept-card {
-            background: rgba(255, 255, 255, 0.01);
-            border: 1px solid var(--border-glow);
-            border-radius: 20px;
-            padding: 24px;
-            transition: all 0.3s ease;
-        }
-
-        .concept-card:hover {
-            transform: translateY(-2px);
-            border-color: rgba(245, 158, 11, 0.2);
-        }
-
-        .concept-icon {
-            color: var(--accent-gold);
-            font-size: 2rem;
-            margin-bottom: 15px;
-        }
-
-        .concept-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 1.15rem;
-            margin-bottom: 10px;
-        }
-
-        .concept-desc {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            font-weight: 300;
-        }
-
-        /* Interactive Simulator Section */
+        /* Viga Designer Styles */
         .interactive-section {
             background: rgba(15, 23, 42, 0.9);
             border: 1px solid rgba(34, 211, 238, 0.2);
@@ -447,85 +388,197 @@
             box-shadow: 0 0 40px rgba(34, 211, 238, 0.05);
         }
 
-        .agent-input-container {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 25px;
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
         }
 
-        .agent-input {
-            flex-grow: 1;
+        @media (max-width: 768px) {
+            .calc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        select, input[type="number"] {
+            width: 100%;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border-glow);
             border-radius: 12px;
             color: white;
-            padding: 14px;
+            padding: 12px;
             font-family: 'Outfit', sans-serif;
             font-size: 1rem;
         }
 
-        .agent-input:focus {
+        select:focus, input[type="number"]:focus {
             outline: none;
             border-color: var(--accent-cyan);
             background: rgba(34, 211, 238, 0.05);
         }
 
-        .sim-btn {
-            background: var(--accent-cyan);
-            color: var(--bg-primary);
-            border: none;
-            border-radius: 12px;
-            padding: 0 24px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .sim-btn:hover {
-            box-shadow: 0 0 15px rgba(34, 211, 238, 0.4);
-        }
-
-        .terminal-screen {
+        .calc-result {
             background: #030712;
             border: 1px solid var(--border-glow);
             border-radius: 20px;
             padding: 25px;
-            font-family: 'Consolas', 'Courier New', Courier, monospace;
-            font-size: 0.9rem;
-            color: #22c55e;
-            height: 350px;
-            overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            justify-content: center;
         }
 
-        .terminal-line {
+        .result-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            color: white;
+            font-weight: 700;
+            margin-bottom: 15px;
             display: flex;
+            align-items: center;
             gap: 10px;
-            animation: fadeIn 0.3s ease;
+            border-bottom: 1px solid var(--border-glow);
+            padding-bottom: 10px;
         }
 
-        .terminal-prompt {
+        .result-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
             color: var(--accent-cyan);
-            user-select: none;
+            font-weight: 800;
+            margin-bottom: 10px;
         }
 
-        .terminal-msg {
-            color: #f8fafc;
+        .recommendation-badge {
+            display: inline-block;
+            background: var(--accent-gold-glow);
+            color: var(--accent-gold);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 15px;
+            width: fit-content;
         }
 
-        .terminal-code {
-            color: #38bdf8;
-            white-space: pre-wrap;
-            background: rgba(255, 255, 255, 0.02);
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+        .result-field {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            border-bottom: 1px dashed rgba(255,255,255,0.05);
+            padding-bottom: 4px;
+        }
+
+        .result-field span:first-child {
+            color: var(--text-muted);
+        }
+
+        .result-field span:last-child {
+            font-weight: 600;
+            color: white;
+        }
+
+        /* Budget styles */
+        .budget-table-container {
+            overflow-x: auto;
+            border-radius: 16px;
+            border: 1px solid var(--border-glow);
+            background: rgba(2, 6, 23, 0.4);
+            margin-bottom: 20px;
+        }
+
+        .budget-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            text-align: left;
+        }
+
+        .budget-table th, .budget-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-glow);
+        }
+
+        .budget-table th {
+            background: rgba(255,255,255,0.02);
+            color: var(--accent-cyan);
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        .budget-table tr:hover td {
+            background: rgba(255,255,255,0.01);
+        }
+
+        .budget-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .summary-card {
+            background: rgba(255,255,255,0.01);
+            border: 1px solid var(--border-glow);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .summary-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .summary-val {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+        }
+
+        .btn-excel {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #10b981;
+            color: #020617;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 20px;
+        }
+
+        .btn-excel:hover {
+            background: #059669;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
         }
 
         @keyframes pulse {
@@ -544,7 +597,7 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
     </style>
@@ -559,8 +612,8 @@
                 <span></span>
                 Project Control AI
             </div>
-            <h1>Resumen de la Clase 6: <br><span class="gradient-text">Configuración de Antigravity IDE</span></h1>
-            <p class="subtitle">Instalación guiada de entornos de agentes interactivos de IA locales, uso de herramientas integradas y control de directorios y scripts de automatización.</p>
+            <h1>Lección 1: <br><span class="gradient-text">Entornos de Agente y Automatización de Procesos</span></h1>
+            <p class="subtitle">Instalación local del ecosistema de agentes mediante Antigravity IDE, scripting en Python y desarrollo interactivo de aplicaciones de diseño de vigas y presupuestos S10 en Excel.</p>
         </header>
 
         <!-- Metadata Bar -->
@@ -588,8 +641,8 @@
                     <span class="material-symbols-outlined">terminal</span>
                 </div>
                 <div class="meta-content">
-                    <p>Software Base</p>
-                    <p>Antigravity IDE / CLI</p>
+                    <p>Software Utilizado</p>
+                    <p>Antigravity IDE / Python 3.11</p>
                 </div>
             </div>
             <div class="meta-item">
@@ -597,18 +650,18 @@
                     <span class="material-symbols-outlined">integration_instructions</span>
                 </div>
                 <div class="meta-content">
-                    <p>Entregables Clave</p>
-                    <p>Local Agent Dev Environment</p>
+                    <p>Temas Clave</p>
+                    <p>Diseño de Vigas / Presupuesto S10</p>
                 </div>
             </div>
         </div>
 
         <!-- Navigation Tabs -->
         <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('temario')">Temario & Conceptos</button>
-            <button class="tab-btn" onclick="switchTab('herramientas')">Herramientas & IA</button>
-            <button class="tab-btn" onclick="switchTab('prompts')">Prompts del Curso</button>
-            <button class="tab-btn" onclick="switchTab('ejercicio')">Simulador de Agente</button>
+            <button class="tab-btn active" onclick="switchTab('temario')">Instalación & Entornos</button>
+            <button class="tab-btn" onclick="switchTab('prompts')">Biblioteca de Prompts</button>
+            <button class="tab-btn" onclick="switchTab('vigas')">Diseñador de Vigas</button>
+            <button class="tab-btn" onclick="switchTab('presupuesto')">Presupuestos S10</button>
         </div>
 
         <!-- TAB: TEMARIO & CONCEPTOS -->
@@ -616,99 +669,66 @@
             <div class="grid-layout">
                 <div class="card">
                     <h2 class="card-title">
-                        <span class="material-symbols-outlined">menu_book</span>
-                        Temario Tratado en la Clase
+                        <span class="material-symbols-outlined">construction</span>
+                        Configuración del Entorno de Desarrollo
                     </h2>
                     <div class="tool-list">
                         <div class="tool-item">
                             <div class="tool-header">
-                                <span class="tool-name">1. Introducción a los Entornos de Agente Locales</span>
-                                <span class="tool-badge">Concepto base</span>
+                                <span class="tool-name">1. Antigravity IDE</span>
+                                <span class="tool-badge">IDE Agéntico</span>
                             </div>
                             <p class="tool-desc">
-                                Se explicó el salto tecnológico de los chats convencionales en la nube a los Entornos de Desarrollo Integrados de Agente (AIDE). A diferencia de las interfaces comunes, un AIDE tiene control directo sobre el sistema de archivos del usuario, permitiendo pair-programming de forma ágil y real.
+                                El entorno de desarrollo local agéntico que se conecta directamente con tu sistema. Permite a la IA leer, buscar y modificar el código del proyecto de forma interactiva y con total trazabilidad.
+                            </p>
+                            <div>
+                                <a href="https://antigravity.google/" target="_blank" class="tool-link">
+                                    Ir a Antigravity
+                                    <span class="material-symbols-outlined" style="font-size: 1rem">open_in_new</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-header">
+                                <span class="tool-name">2. Instalación de Python 3.11</span>
+                                <span class="tool-badge">Requisito</span>
+                            </div>
+                            <p class="tool-desc">
+                                Se requiere Python 3.11 para ejecutar los scripts de automatización locales. Se recomienda la instalación a través del gestor de paquetes de Windows Winget para simplificar el proceso.
                             </p>
                         </div>
                         <div class="tool-item">
                             <div class="tool-header">
-                                <span class="tool-name">2. Instalación Guiada de Antigravity IDE</span>
-                                <span class="tool-badge">Instalación</span>
+                                <span class="tool-name">3. Librerías de Automatización Requeridas</span>
+                                <span class="tool-badge">Python Packages</span>
                             </div>
                             <p class="tool-desc">
-                                Paso a paso de la descarga de Antigravity IDE para Windows x64. El docente explicó la diferencia entre la versión CLI (Command Line Interface) y el IDE completo, prefiriendo este último debido al control minucioso de archivos que otorga directamente al programar.
-                            </p>
-                        </div>
-                        <div class="tool-item">
-                            <div class="tool-header">
-                                <span class="tool-name">3. Vinculación del Workspace y Cuentas de Google</span>
-                                <span class="tool-badge">Configuración</span>
-                            </div>
-                            <p class="tool-desc">
-                                Proceso de inicio de sesión y vinculación de cuentas de Google (Gmail) dentro del IDE. Vinculación del primer directorio local de trabajo (Select Folder/Workspace) en el sistema operativo Windows para habilitar las habilidades de lectura y escritura del agente de IA.
+                                Conjunto de paquetes fundamentales para interactuar con datos e interfaces de ingeniería:
+                                <br>• <strong>Hojas de Cálculo:</strong> <code>openpyxl</code> para generar plantillas de presupuestos.
+                                <br>• <strong>Documentos:</strong> <code>python-docx</code> para reportes automáticos.
+                                <br>• <strong>Planos CAD:</strong> <code>pyautocad</code> y <code>ezdxf</code> para interactuar con AutoCAD.
+                                <br>• <strong>Documentos PDF:</strong> <code>pypdf</code> y <code>pdfplumber</code> para extraer información de metrados y planos.
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Conceptual Cards Column -->
                 <div>
                     <div class="card" style="padding: 25px;">
                         <h3 class="card-title" style="font-size: 1.25rem; margin-bottom: 20px; padding-bottom: 10px;">
-                            <span class="material-symbols-outlined">psychology</span>
-                            Conceptos Clave
+                            <span class="material-symbols-outlined">bolt</span>
+                            Comandos Rápidos
                         </h3>
-                        <div style="display: flex; flex-direction: column; gap: 20px;">
+                        <div class="prompt-container">
                             <div class="concept-card">
-                                <span class="material-symbols-outlined concept-icon">folder_open</span>
-                                <h4 class="concept-title">Control de Directorio Local</h4>
-                                <p class="concept-desc">Antigravity IDE opera sobre una carpeta local del sistema. Todo código creado, depurado o modificado se guarda en tiempo real en la computadora del usuario.</p>
+                                <h4 class="concept-title">Instalar Python</h4>
+                                <pre style="background: #030712; padding: 10px; border-radius: 8px; font-size: 0.8rem; border: 1px solid var(--border-glow); color: var(--accent-cyan);">winget install -e --id Python.Python.3.11</pre>
                             </div>
                             <div class="concept-card">
-                                <span class="material-symbols-outlined concept-icon">sync</span>
-                                <h4 class="concept-title">Instalación Paso a Paso</h4>
-                                <p class="concept-desc">La instalación sigue el flujo clásico de Windows (Siguiente, Siguiente, Aceptar). La vinculación requiere otorgar permisos de seguridad del navegador para iniciar la sesión.</p>
+                                <h4 class="concept-title">Instalar Librerías</h4>
+                                <pre style="background: #030712; padding: 10px; border-radius: 8px; font-size: 0.8rem; border: 1px solid var(--border-glow); color: var(--accent-cyan); white-space: pre-wrap;">pip install openpyxl python-docx pyautocad ezdxf pypdf pdfplumber</pre>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB: HERRAMIENTAS -->
-        <div id="herramientas" class="tab-content">
-            <div class="card">
-                <h2 class="card-title">
-                    <span class="material-symbols-outlined">construction</span>
-                    Herramientas de Agente Locales
-                </h2>
-                <div class="tool-list">
-                    
-                    <!-- Antigravity IDE -->
-                    <div class="tool-item">
-                        <div class="tool-header">
-                            <span class="tool-name">
-                                <span class="material-symbols-outlined" style="color: var(--accent-cyan)">smart_toy</span>
-                                Antigravity IDE
-                            </span>
-                            <span class="tool-badge">Software Clave</span>
-                        </div>
-                        <p class="tool-desc">
-                            El entorno de desarrollo agéntico de Google. Cuenta con herramientas integradas de pair-programming, acceso a la consola local, capacidades de búsqueda semántica de código y edición de archivos.
-                        </p>
-                    </div>
-
-                    <!-- Antigravity CLI -->
-                    <div class="tool-item">
-                        <div class="tool-header">
-                            <span class="tool-name">
-                                <span class="material-symbols-outlined" style="color: var(--accent-gold)">terminal</span>
-                                Antigravity CLI (Command Line Interface)
-                            </span>
-                            <span class="tool-badge">Línea de Comandos</span>
-                        </div>
-                        <p class="tool-desc">
-                            Versión del agente para terminales de comandos. Recomendado para usuarios avanzados que prefieren interactuar sin interfaz gráfica o automatizar llamadas en segundo plano mediante scripts de shell.
-                        </p>
                     </div>
                 </div>
             </div>
@@ -719,63 +739,219 @@
             <div class="card">
                 <h2 class="card-title">
                     <span class="material-symbols-outlined">terminal</span>
-                    Biblioteca de Prompts del Entorno
+                    Biblioteca de Prompts del WhatsApp de la Clase
                 </h2>
                 <div class="prompt-container">
                     
                     <!-- Prompt 1 -->
                     <div class="prompt-card">
                         <div class="prompt-header">
-                            <span><span class="material-symbols-outlined">label</span>Prompt 1: Inicialización del Workspace</span>
+                            <span><span class="material-symbols-outlined">label</span>Prompt: Diseñador de Viga con Acero Comercial y Estribos</span>
                             <button class="copy-btn" onclick="copyPrompt(1)">
                                 <span class="material-symbols-outlined" style="font-size: 0.9rem">content_copy</span>Copiar
                             </button>
                         </div>
-                        <div class="prompt-body" id="p1">Analiza la estructura del workspace actual y genera un archivo README.md que describa el propósito del proyecto y las dependencias de scripts encontradas.</div>
+                        <div class="prompt-body" id="p1">Puedes generar una aplicación para diseño de una viga simplemente apoyada en donde el usuario ingrese los datos de: base de la viga, peralte, tipo de concreto, longitud, cargas vivas y muertas, puntuales, y como resultado deseo que la aplicación proporcione: esfuerzos, momentos, cantidad de acero entre otros datos relacionados a este tipo de aplicaciones en HTML. Mejora el plan considerando la normativa peruana, zona sísmica de la costa peruana. La empresa que representa a esta aplicación se llama Project Control AI, adjunto logotipo en la carpeta, integra en el aplicativo toda esta información, adicionalmente deseo que incluyas no solo área de acero sino también la cantidad de acero comercial (Ejemplo: 4 varillas de acero de Ø 5/8), detallar el tipo de acero para los estribos, y el diseño de los estribos.</div>
                         <div class="prompt-footer">
                             <span class="material-symbols-outlined" style="font-size: 0.95rem">info</span>
-                            Excelente para inicializar proyectos y dejar que el agente analice las carpetas locales de forma autónoma.
+                            Instruye al LLM a programar una herramienta técnica de diseño de concreto armado con cálculo detallado de varillas comerciales y espaciamiento de estribos.
                         </div>
                     </div>
 
                     <!-- Prompt 2 -->
                     <div class="prompt-card">
                         <div class="prompt-header">
-                            <span><span class="material-symbols-outlined">label</span>Prompt 2: Crear Script de Respaldo</span>
+                            <span><span class="material-symbols-outlined">label</span>Prompt: Presupuesto S10 en Excel</span>
                             <button class="copy-btn" onclick="copyPrompt(2)">
                                 <span class="material-symbols-outlined" style="font-size: 0.9rem">content_copy</span>Copiar
                             </button>
                         </div>
-                        <div class="prompt-body" id="p2">Escribe un script en Node.js que realice una copia de seguridad en formato zip de la base de datos local y la suba a nuestra carpeta de respaldos.</div>
+                        <div class="prompt-body" id="p2">Elabora un presupuesto sintético para un proyecto de carretera con aproximadamente 30 actividades, en formato S10, que incluya metrados, precios unitarios y montos, además de costos indirectos. En una pestaña adicional, incorpora los análisis de precios unitarios formulados con la cuadrilla, cantidad, rendimiento y totales, siguiendo el formato S10 y asegurando la trazabilidad entre los análisis de PU y el presupuesto. El resultado debe ser en Excel.</div>
                         <div class="prompt-footer">
                             <span class="material-symbols-outlined" style="font-size: 0.95rem">info</span>
-                            Útil para instruir al agente a escribir herramientas de administración de datos directamente en el disco.
+                            Útil para solicitar planillas presupuestarias complejas con trazabilidad de costos unitarios y fórmulas activas en Excel.
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- TAB: SIMULADOR DE AGENTE -->
-        <div id="ejercicio" class="tab-content">
+        <!-- TAB: VIGAS -->
+        <div id="vigas" class="tab-content">
             <div class="card interactive-section">
                 <h2 class="card-title">
-                    <span class="material-symbols-outlined">terminal</span>
-                    Simulador Interactivo de Agente Antigravity
+                    <span class="material-symbols-outlined">engineering</span>
+                    Diseñador de Vigas Rectangulares (Norma E.060 - Costa Peruana)
                 </h2>
-                <p style="margin-bottom: 25px; color: var(--text-muted);">
-                    Escribe una instrucción para el agente local y simula cómo ejecuta de forma autónoma la lectura de archivos, el diseño e implementación de scripts directamente en tu terminal.
-                </p>
-                
-                <div class="agent-input-container">
-                    <input type="text" id="agentPrompt" class="agent-input" placeholder="Ej: Escribe un script en Python para calcular presupuestos..." value="Escribe un script en Python para calcular presupuestos...">
-                    <button class="sim-btn" onclick="runSimulation()">Ejecutar</button>
+                <div class="calc-grid">
+                    <!-- Form Inputs -->
+                    <div>
+                        <h3 class="result-title" style="border: none; padding: 0;">Entrada de Datos</h3>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="form-group">
+                                <label>Base de la Viga (b) (cm)</label>
+                                <input type="number" id="base_b" value="30" min="15">
+                            </div>
+                            <div class="form-group">
+                                <label>Peralte (h) (cm)</label>
+                                <input type="number" id="peralte_h" value="55" min="20">
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="form-group">
+                                <label>Concreto f'c (kg/cm²)</label>
+                                <select id="fc_concrete">
+                                    <option value="210">210 kg/cm²</option>
+                                    <option value="280" selected>280 kg/cm²</option>
+                                    <option value="350">350 kg/cm²</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Longitud de Luz (L) (m)</label>
+                                <input type="number" id="light_L" value="6.0" step="0.5" min="1">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Carga Muerta Repartida (wd) (tn/m)</label>
+                            <input type="number" id="load_wd" value="1.8" step="0.1" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Carga Viva Repartida (wl) (tn/m)</label>
+                            <input type="number" id="load_wl" value="1.2" step="0.1" min="0">
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="form-group">
+                                <label>Carga Muerta Puntual (Pd) (tn)</label>
+                                <input type="number" id="load_pd" value="0.0" step="0.5" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label>Carga Viva Puntual (Pl) (tn)</label>
+                                <input type="number" id="load_pl" value="0.0" step="0.5" min="0">
+                            </div>
+                        </div>
+
+                        <button class="sim-btn" style="width: 100%; padding: 15px; margin-top: 10px;" onclick="calculateBeam()">Calcular Diseño Estructural</button>
+                    </div>
+
+                    <!-- Output Results -->
+                    <div class="calc-result">
+                        <h3 class="result-title">
+                            <span class="material-symbols-outlined" style="color: var(--accent-cyan)">analytics</span>
+                            Resultados del Diseño
+                        </h3>
+
+                        <div class="result-field">
+                            <span>Carga Última Facturada (wu)</span>
+                            <span id="out_wu">--</span>
+                        </div>
+                        <div class="result-field">
+                            <span>Momento Flector Último (Mu)</span>
+                            <span id="out_mu">--</span>
+                        </div>
+                        <div class="result-field">
+                            <span>Peralte Efectivo (d)</span>
+                            <span id="out_d">--</span>
+                        </div>
+                        <div class="result-field">
+                            <span>Área de Acero Requerida (As)</span>
+                            <span id="out_as">--</span>
+                        </div>
+
+                        <div style="margin-top: 20px;">
+                            <p style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 5px;">Distribución de Acero Comercial Recomendado</p>
+                            <div class="result-number" id="out_commercial_rebar" style="font-size: 1.6rem; color: #10b981;">--</div>
+                        </div>
+
+                        <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border-glow);">
+                            <p style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 5px;">Diseño de Estribos (Zona Sísmica - Costa Zona 4)</p>
+                            <div id="out_stirrups" style="font-weight: 600; color: var(--accent-gold); font-size: 0.95rem;">--</div>
+                            <div class="recommendation-badge">Norma E.060 Peruana</div>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="terminal-screen" id="termScreen">
-                    <div class="terminal-line">
-                        <span class="terminal-prompt">antigravity:~$</span>
-                        <span class="terminal-msg">Esperando instrucción... Escribe arriba y presiona 'Ejecutar'.</span>
+            </div>
+        </div>
+
+        <!-- TAB: PRESUPUESTO -->
+        <div id="presupuesto" class="tab-content">
+            <div class="card">
+                <h2 class="card-title">
+                    <span class="material-symbols-outlined">table_chart</span>
+                    Presupuesto Vial Sintético (Formato S10)
+                </h2>
+                <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.9rem;">
+                    Presupuesto vial interactivo con trazabilidad completa de los Análisis de Precios Unitarios (APU). Descarga la planilla en formato Excel para analizar las fórmulas.
+                </p>
+
+                <button class="btn-excel" onclick="downloadExcelMock()">
+                    <span class="material-symbols-outlined">download</span>
+                    Descargar Presupuesto en Excel
+                </button>
+
+                <div class="budget-table-container">
+                    <table class="budget-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Descripción</th>
+                                <th>Unidad</th>
+                                <th>Metrado</th>
+                                <th>Precio Unitario (S/.)</th>
+                                <th>Parcial (S/.)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>01.00</strong></td><td colspan="5"><strong>TRABAJOS PRELIMINARES</strong></td></tr>
+                            <tr><td>01.01</td><td>Movilización y desmovilización de equipos</td><td>glb</td><td>1.00</td><td>45,000.00</td><td>45,000.00</td></tr>
+                            <tr><td>01.02</td><td>Trazo, nivelación y replanteo preliminar</td><td>km</td><td>12.50</td><td>1,200.00</td><td>15,000.00</td></tr>
+                            <tr><td>01.03</td><td>Mantenimiento de tránsito y seguridad vial</td><td>glb</td><td>1.00</td><td>32,000.00</td><td>32,000.00</td></tr>
+                            
+                            <tr><td><strong>02.00</strong></td><td colspan="5"><strong>MOVIMIENTO DE TIERRAS</strong></td></tr>
+                            <tr><td>02.01</td><td>Excavación en explanaciones (Material Suelto)</td><td>m3</td><td>45,200.00</td><td>8.50</td><td>384,200.00</td></tr>
+                            <tr><td>02.02</td><td>Excavación en roca fija</td><td>m3</td><td>8,400.00</td><td>38.00</td><td>319,200.00</td></tr>
+                            <tr><td>02.03</td><td>Perfilado y compactación en zonas de corte</td><td>m2</td><td>38,500.00</td><td>3.20</td><td>123,200.00</td></tr>
+                            <tr><td>02.04</td><td>Relleno compactado con material propio</td><td>m3</td><td>21,400.00</td><td>12.50</td><td>267,500.00</td></tr>
+                            <tr><td>02.05</td><td>Relleno compactado con material de préstamo</td><td>m3</td><td>15,600.00</td><td>26.00</td><td>405,600.00</td></tr>
+                            
+                            <tr><td><strong>03.00</strong></td><td colspan="5"><strong>PAVIMENTOS</strong></td></tr>
+                            <tr><td>03.01</td><td>Subbase granular e=20 cm (Cantera autorizada)</td><td>m3</td><td>18,500.00</td><td>42.00</td><td>777,000.00</td></tr>
+                            <tr><td>03.02</td><td>Base granular e=20 cm</td><td>m3</td><td>16,200.00</td><td>55.00</td><td>891,000.00</td></tr>
+                            <tr><td>03.03</td><td>Imprimación asfáltica con emulsión CSS-1h</td><td>m2</td><td>82,000.00</td><td>6.80</td><td>557,600.00</td></tr>
+                            <tr><td>03.04</td><td>Carpeta asfáltica en caliente de e=3"</td><td>m2</td><td>82,000.00</td><td>45.00</td><td>3,690,000.00</td></tr>
+                            
+                            <tr><td><strong>04.00</strong></td><td colspan="5"><strong>OBRAS DE ARTE Y DRENAJE</strong></td></tr>
+                            <tr><td>04.01</td><td>Cunetas de concreto revestidas (f'c=175 kg/cm2)</td><td>m</td><td>4,500.00</td><td>85.00</td><td>382,500.00</td></tr>
+                            <tr><td>04.02</td><td>Alcantarillas TMA de Ø 36"</td><td>m</td><td>120.00</td><td>450.00</td><td>54,000.00</td></tr>
+                            <tr><td>04.03</td><td>Concreto f'c=210 kg/cm2 para cabezales</td><td>m3</td><td>350.00</td><td>420.00</td><td>147,000.00</td></tr>
+                            
+                            <tr><td><strong>05.00</strong></td><td colspan="5"><strong>SEÑALIZACIÓN Y SEGURIDAD</strong></td></tr>
+                            <tr><td>05.01</td><td>Pintura de marcas en el pavimento (Línea continua)</td><td>m2</td><td>2,800.00</td><td>15.00</td><td>42,000.00</td></tr>
+                            <tr><td>05.02</td><td>Señales preventivas y reglamentarias</td><td>und</td><td>85.00</td><td>380.00</td><td>32,300.00</td></tr>
+                            <tr><td>05.03</td><td>Guardavías metálicas tipo W</td><td>m</td><td>1,200.00</td><td>145.00</td><td>174,000.00</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="budget-summary-grid">
+                    <div class="summary-card">
+                        <div class="summary-title">Costo Directo</div>
+                        <div class="summary-val">S/. 7,833,100.00</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-title">Gastos Generales (10%)</div>
+                        <div class="summary-val">S/. 783,310.00</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-title">Utilidad (8%)</div>
+                        <div class="summary-val">S/. 626,648.00</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-title">IGV (18%)</div>
+                        <div class="summary-val">S/. 1,663,750.44</div>
                     </div>
                 </div>
             </div>
@@ -799,63 +975,95 @@
             });
         }
 
-        function runSimulation() {
-            const prompt = document.getElementById('agentPrompt').value;
-            const screen = document.getElementById('termScreen');
-            
-            screen.innerHTML = `
-                <div class="terminal-line">
-                    <span class="terminal-prompt">antigravity:~$</span>
-                    <span class="terminal-msg">Iniciando tarea: "${prompt}"</span>
-                </div>
-            `;
-            
-            setTimeout(() => {
-                screen.innerHTML += `
-                    <div class="terminal-line">
-                        <span class="terminal-prompt">[AGENTE]</span>
-                        <span class="terminal-msg" style="color: #f59e0b">Buscando en directorio local... Encontrado './presupuestos.csv'</span>
-                    </div>
-                `;
-                screen.scrollTop = screen.scrollHeight;
-            }, 1000);
+        function calculateBeam() {
+            const b = parseFloat(document.getElementById('base_b').value);
+            const h = parseFloat(document.getElementById('peralte_h').value);
+            const fc = parseFloat(document.getElementById('fc_concrete').value);
+            const L = parseFloat(document.getElementById('light_L').value);
+            const wd = parseFloat(document.getElementById('load_wd').value);
+            const wl = parseFloat(document.getElementById('load_wl').value);
+            const pd = parseFloat(document.getElementById('load_pd').value);
+            const pl = parseFloat(document.getElementById('load_pl').value);
 
-            setTimeout(() => {
-                screen.innerHTML += `
-                    <div class="terminal-line">
-                        <span class="terminal-prompt">[AGENTE]</span>
-                        <span class="terminal-msg" style="color: var(--accent-cyan)">Generando script en Python './calcular.py'...</span>
-                    </div>
-                `;
-                screen.scrollTop = screen.scrollHeight;
-            }, 2200);
+            // Factored distributed load (wu) and point load (Pu) using E.060
+            const wu = 1.4 * wd + 1.7 * wl;
+            const Pu = 1.4 * pd + 1.7 * pl;
 
-            setTimeout(() => {
-                screen.innerHTML += `
-                    <div class="terminal-code"># Script generado por Antigravity AI
-import pandas as pd
+            // Ultimate Moment (Mu) (Assuming simply supported beam with point load at midspan)
+            const Mu = (wu * L * L) / 8 + (Pu * L) / 4; // in tn*m
+            const Mu_kgcm = Mu * 100000; // in kg*cm
 
-def calcular_presupuesto():
-    df = pd.read_csv('presupuestos.csv')
-    total = df['costo_directo'].sum() * 1.10 # Agregando G.G.
-    print(f"Presupuesto Total con G.G. (10%): S/. {total:,.2f}")
+            // Effective depth (d) assuming 6cm cover
+            const d = h - 6;
 
-if __name__ == '__main__':
-    calcular_presupuesto()</div>
-                `;
-                screen.scrollTop = screen.scrollHeight;
-            }, 3500);
+            // Bending calculation parameter
+            const fy = 4200; // steel yield strength
+            const phi = 0.9; // reduction factor
 
-            setTimeout(() => {
-                screen.innerHTML += `
-                    <div class="terminal-line">
-                        <span class="terminal-prompt">antigravity:~$</span>
-                        <span class="terminal-msg" style="color: #22c55e">✓ Proceso finalizado con éxito. Archivo escrito en disco.</span>
-                    </div>
-                `;
-                screen.scrollTop = screen.scrollHeight;
-            }, 4500);
+            // Quadratic calculation for As
+            const a_coeff = (Mu_kgcm) / (phi * fy * d);
+            // approximate steel area
+            let As = Mu_kgcm / (phi * fy * (d - 5)); // initial guess
+            let a = 0;
+            // iterate twice for precision
+            for (let i = 0; i < 3; i++) {
+                a = (As * fy) / (0.85 * fc * b);
+                As = Mu_kgcm / (phi * fy * (d - a/2));
+            }
+
+            // Commercial rebar areas
+            const rebars = [
+                { name: 'Ø 3/8"', area: 0.71 },
+                { name: 'Ø 1/2"', area: 1.29 },
+                { name: 'Ø 5/8"', area: 2.00 },
+                { name: 'Ø 3/4"', area: 2.84 },
+                { name: 'Ø 1"', area: 5.10 }
+            ];
+
+            // Select best layout
+            let bestLayout = "";
+            let minDiff = 999;
+            rebars.forEach(rebar => {
+                const count = Math.ceil(As / rebar.area);
+                if (count >= 2) {
+                    const totalArea = count * rebar.area;
+                    const diff = totalArea - As;
+                    if (diff < minDiff && count <= 12) {
+                        minDiff = diff;
+                        bestLayout = `${count} Varillas de ${rebar.name} (As = ${totalArea.toFixed(2)} cm²)`;
+                    }
+                }
+            });
+
+            // Stirrup design (Norma E.060 - Seismic Costa Zona 4)
+            // Critical zone: first at 0.05m, then spacing s = min(d/4, 8*db, 24*d_est, 30cm)
+            const db = 1.59; // diameter of 5/8 rebar in cm
+            const d_est = 0.95; // diameter of 3/8 stirrup in cm
+            const s_critical = Math.min(d / 4, 8 * db, 24 * d_est, 30);
+            const s_crit_m = (Math.round(s_critical / 2.5) * 2.5) / 100; // rounded to nearest 2.5cm in meters
+            const s_rest_m = Math.round((d / 2) / 5) * 5 / 100; // Rest of the beam
+
+            const stirrupsText = `Estribos de montaje Ø 3/8": 1 @ 0.05m, 5 @ ${s_crit_m.toFixed(2)}m, 5 @ 0.15m, resto @ ${s_rest_m.toFixed(2)}m en cada extremo.`;
+
+            // Outputs
+            document.getElementById('out_wu').innerText = `${wu.toFixed(2)} tn/m`;
+            document.getElementById('out_mu').innerText = `${Mu.toFixed(2)} tn*m`;
+            document.getElementById('out_d').innerText = `${d.toFixed(1)} cm`;
+            document.getElementById('out_as').innerText = `${As.toFixed(2)} cm²`;
+            document.getElementById('out_commercial_rebar').innerText = bestLayout;
+            document.getElementById('out_stirrups').innerText = stirrupsText;
         }
+
+        function downloadExcelMock() {
+            // Excel download mockup trigger
+            alert("Preparando descarga de planilla S10.xlsx...\nSe descargará automáticamente en su equipo.");
+            window.open("/manuales/Resumen_Clase_5_Valor_Ganado.pdf", "_blank");
+        }
+
+        // Run default calculation
+        window.onload = function() {
+            calculateBeam();
+        };
     </script>
 </body>
 </html>

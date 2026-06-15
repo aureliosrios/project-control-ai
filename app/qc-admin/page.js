@@ -149,7 +149,7 @@ export default function QCDashboard() {
       );
 
       let plantilla = "cert_gestion_integral.pdf";
-      if (slug.includes("automation")) plantilla = "cert_automation_engineer.pdf";
+      if (slug.includes("automation") || slug.includes("automatizacion") || slug.includes("automatización")) plantilla = "cert_automation_engineer.pdf";
       else if (slug.includes("licitaciones")) plantilla = "cert_licitaciones_ia.pdf";
       else if (slug.includes("evm") || slug.includes("control")) plantilla = "cert_control_evm.pdf";
       else if (slug.includes("p6") || slug.includes("primavera")) plantilla = "cert_primavera_p6.pdf";

@@ -224,11 +224,11 @@ export default function Verificar() {
 
       // --- RAMA SINCRÓNICA (lógica existente) ---
       let archivo = "cert_gestion_integral.pdf";
-      if (slug.includes("licitaciones")) archivo = "cert_licitaciones_ia.pdf";
+      if (slug.includes("automation") || slug.includes("automatizacion") || slug.includes("automatización")) archivo = "cert_automation_engineer.pdf";
+      else if (slug.includes("licitaciones")) archivo = "cert_licitaciones_ia.pdf";
       else if (slug.includes("evm") || slug.includes("control")) archivo = "cert_control_evm.pdf";
       else if (slug.includes("gerencia") || slug.includes("gestion")) archivo = "cert_gestion_integral.pdf";
       else if (slug.includes("p6")) archivo = "cert_primavera_p6.pdf";
-      else if (slug.includes("automation")) archivo = "cert_automation_engineer.pdf";
 
       const templateUrl = `https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/academia/${archivo}`;
       const response = await fetch(templateUrl);

@@ -35,15 +35,20 @@ const courses = {
           { title: "Resumen Interactivo de la Clase 5 (HTML)", type: "html", url: "/manuales/resumen_clase_5.html" },
           { title: "Manual Avanzado de Soporte y EVM (PDF)", type: "pdf", url: "/manuales/Manual_Soporte_y_EVM_Clase_5.pdf" }
         ]
-      },
+      }
+    ]
+  },
+  "AUT_CONST": {
+    name: "Automatización y Soluciones de IA para la Gestión de Construcción (Sesiones en Vivo)",
+    lessons: [
       {
         id: "RlbF2QcvRR8",
-        num: "06",
+        num: "01",
         status: "OCULTA",
-        title: "AE Lección 06: Automatización de Procesos de Construcción",
+        title: "Lección 01: Automatización de Procesos de Construcción",
         desc: "Clase del 14 de Junio: Fundamentos de la automatización en obras, integración de software y desarrollo de herramientas ágiles.",
         resources: [
-          { title: "Resumen Interactivo de la Clase 6 (HTML)", type: "html", url: "/manuales/resumen_clase_6.html" }
+          { title: "Resumen Interactivo de la Clase 1 (HTML)", type: "html", url: "/manuales/resumen_clase_6.html" }
         ]
       }
     ]
@@ -86,7 +91,8 @@ const getCourseKey = (dbCursoName) => {
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
     
-  if (name.includes("automation") || name.includes("ingenieria") || name.includes("automatizacion")) return "AE";
+  if (name.includes("automation engineer")) return "AE";
+  if (name.includes("automatizacion y soluciones") || name.includes("soluciones de ia")) return "AUT_CONST";
   if (name.includes("licitacion")) return "LIC";
   if (name.includes("despertar") || name.includes("gestion proyectos ia") || name.includes("gip") || name.includes("el despertar") || name.includes("gestion integral")) return "GIP";
   return null;
@@ -292,7 +298,7 @@ export default function ClasesGrabadas() {
                       : 'text-slate-400 hover:text-white'
                   }`}
                 >
-                  {c.key === "AE" ? "Automatización de Obras con Agentes de IA (Ingeniería Aumentada)" : c.key === "GIP" ? "Gestión de Construcción con IA (El Despertar Digital)" : "Licitaciones de Construcción con IA (Licitaciones Inteligentes)"}
+                  {c.key === "AE" ? "Automatización de Obras con Agentes de IA (Ingeniería Aumentada)" : c.key === "GIP" ? "Gestión de Construcción con IA (El Despertar Digital)" : c.key === "AUT_CONST" ? "Automatización y Soluciones de IA para la Gestión de Construcción" : "Licitaciones de Construcción con IA (Licitaciones Inteligentes)"}
                 </button>
               ))}
             </div>

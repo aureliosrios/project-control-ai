@@ -50,7 +50,8 @@ const sincronicos = [
     link: "/inscripcion",
     hotmart: "https://pay.hotmart.com/K104218834V",
     paypal: "https://paypal.me/ProjectControlAI",
-    color: "cyan"
+    color: "cyan",
+    cerrado: true
   },
   {
     id: "S2",
@@ -59,7 +60,7 @@ const sincronicos = [
     precioSoles: "S/. 300",
     tag: "CURSO 2 · AVANZADO",
     desc: "Domina la automatización avanzada con Python, HTML, VBA y Agentes Autónomos. Aprende a desarrollar Skills y Scripts MCP dentro de ecosistemas agénticos.",
-    inicio: "14 de Junio, 2026",
+    inicio: "28 de Junio, 2026",
     horario: "Domingos · 3:00 PM – 6:00 PM",
     sesiones: "15h · 5 sesiones",
     link: "/inscripcion",
@@ -74,7 +75,7 @@ const sincronicos = [
     precioSoles: "S/. 300",
     tag: "CURSO 3 · AVANZADO",
     desc: "Nivel Avanzado: Domina MCP, Skills y Scripts Python para automatizar APUs y cronogramas. Análisis masivo de expedientes técnicos de miles de páginas.",
-    inicio: "28 de Junio, 2026",
+    inicio: "29 de Junio, 2026",
     horario: "Lunes y Miércoles · 7:00 PM – 10:00 PM",
     sesiones: "15h · 5 sesiones",
     link: "/inscripcion",

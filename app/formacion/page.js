@@ -10,7 +10,8 @@ const asincronicos = [
     precio: "$14.99 USD",
     tag: "CURSO A1 · PUBLICADO",
     desc: "6 entregables reales en 2.5h sin programar. Reportes HTML, Mermaid.js, ATS, IPERC, Organigramas y Matrices CSV generados con IA.",
-    link: "https://go.hotmart.com/I104938744G",
+    link: "https://pay.hotmart.com/I104938744G",
+    brochure: "https://go.hotmart.com/I104938744G?dp=1",
     color: "cyan",
     pilares: ["Reportes HTML interactivos", "Flujogramas Mermaid.js", "ATS + IPERC inteligentes", "Cronogramas visuales"]
   },
@@ -21,6 +22,7 @@ const asincronicos = [
     tag: "CURSO A2 · PUBLICADO",
     desc: "Gestión documental masiva para proyectos. Auditoría legal y técnica, extracción de actividades e informes de movilización en minutos.",
     link: "https://pay.hotmart.com/O105604032H",
+    brochure: "https://go.hotmart.com/O105604032H?dp=1",
     color: "orange",
     pilares: ["Auditoría Forense IA", "Plan Logístico (Gemini)", "Checklist de Recursos", "Narrativa Multimedia"]
   },
@@ -31,6 +33,7 @@ const asincronicos = [
     tag: "CURSO C1 · ESPECIALIDAD",
     desc: "Ingeniería de Costos Aumentada (Python + Agentes). Reduce el tiempo operativo de licitación en un 90% delegando tareas a la IA.",
     link: "https://pay.hotmart.com/H105703259M",
+    brochure: "https://go.hotmart.com/H105703259M?dp=1",
     color: "blue",
     pilares: ["Infraestructura Python", "IA para EETT y WBS", "Visión Artificial Planos", "SkillPro v4: Lógica APU"]
   }
@@ -167,21 +170,30 @@ export default function Formacion() {
                     ))}
                   </div>
 
-                  <div className="pt-8 border-t border-white/5 flex items-center justify-between">
+                  <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="flex flex-col">
                       <span className="text-2xl font-black text-white">{curso.precio}</span>
                       <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Hotmart Access</span>
                     </div>
-                    <Link 
-                      href={curso.link} 
-                      target="_blank" 
-                      className={`px-8 py-4 bg-${curso.color === 'blue' ? 'indigo' : curso.color}-500 text-slate-950 rounded-xl font-black text-xs uppercase tracking-widest hover:scale-110 transition-all shadow-[0_0_20px_rgba(var(--tw-shadow-color),0.4)]`}
-                      style={{
-                        boxShadow: `0 0 25px ${curso.color === 'cyan' ? '#06b6d4' : curso.color === 'orange' ? '#f97316' : '#6366f1'}66`
-                      }}
-                    >
-                      Comprar
-                    </Link>
+                    <div className="flex gap-2 w-full sm:w-auto">
+                      <Link 
+                        href={curso.brochure}
+                        target="_blank"
+                        className="flex-1 sm:flex-initial px-4 py-3.5 bg-white/5 border border-white/10 text-slate-300 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-white/10 text-center transition-all"
+                      >
+                        Temario
+                      </Link>
+                      <Link 
+                        href={curso.link} 
+                        target="_blank" 
+                        className={`flex-1 sm:flex-initial px-6 py-3.5 bg-${curso.color === 'blue' ? 'indigo' : curso.color}-500 text-slate-950 rounded-xl font-black text-[10px] uppercase tracking-widest hover:scale-105 transition-all text-center`}
+                        style={{
+                          boxShadow: `0 0 20px ${curso.color === 'cyan' ? '#06b6d4' : curso.color === 'orange' ? '#f97316' : '#6366f1'}66`
+                        }}
+                      >
+                        Comprar
+                      </Link>
+                    </div>
                   </div>
                 </div>
               ))}

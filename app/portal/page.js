@@ -27,7 +27,7 @@ export default function StudentPortal() {
       
       // 1. Obtener datos del estudiante
       const { data: student, error: studentError } = await supabase
-        .from('estudiantes')
+        .from('vw_estudiantes_publicos')
         .select('*')
         .eq('dni', trimmedDni)
         .single();

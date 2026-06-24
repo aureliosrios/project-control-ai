@@ -65,7 +65,7 @@ export default function Recursos() {
     try {
       // 1. Obtener estudiante
       const { data: student } = await supabase
-        .from('estudiantes')
+        .from('vw_estudiantes_publicos')
         .select('*')
         .eq('dni', dni)
         .maybeSingle();

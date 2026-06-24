@@ -151,7 +151,7 @@ export default function Inscripcion() {
                 <option value="" disabled className="bg-[#0f172a] text-slate-400">Seleccione curso...</option>
                 <option value="Gestion Construccion IA" disabled className="bg-[#0f172a] text-slate-500">1. Gestión de la Construcción con IA (Cupos Agotados)</option>
                 <option value="Ingeniería Aumentada: Automatización con Agentes de IA" className="bg-[#0f172a] text-white">2. Automatización de Obras con Agentes de IA (Ingeniería Aumentada)</option>
-                <option value="Licitaciones Inteligentes" className="bg-[#0f172a] text-white">3. Licitaciones de Construcción con IA (Licitaciones Inteligentes)</option>
+                <option value="Licitaciones Inteligentes" disabled className="bg-[#0f172a] text-slate-500">3. Licitaciones de Construcción con IA (Cupos Agotados)</option>
               </select>
             </div>
 

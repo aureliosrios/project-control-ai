@@ -3,28 +3,28 @@ import Image from "next/image";
 
 const soluciones = [
   {
-    title: "Reportabilidad Móvil a Gerencial",
-    desc: "Captura de datos en el frente de trabajo mediante smartphone (Capataz/Maestro). Información procesada al instante para que Gerencia visualice riesgos y desviaciones en tiempo real.",
-    icon: "smartphone",
-    features: ["Reporte nativo desde campo", "Dashboard gerencial automático", "Análisis de riesgos inmediato"]
-  },
-  {
-    title: "Sincronización P6 & Lookahead",
-    desc: "Transformamos la data de Primavera P6 en un entregable dinámico. Generación automática de Lookahead semanal sin intervención manual, extrayendo la ruta crítica directo a tu panel.",
-    icon: "account_tree",
-    features: ["Extracción automatizada de P6", "Lookahead dinámico", "Sincronización de hitos"]
-  },
-  {
-    title: "Control de Costos (AC vs EV)",
-    desc: "Cálculo preciso del Costo Actual (AC) basado en personal en campo y consumo de almacén, comparado automáticamente contra el Valor Ganado (EV) del proyecto.",
+    title: "APUs y Presupuestos con IA (Formato S10)",
+    desc: "Creación rápida de presupuestos, análisis de precios unitarios (APU) y listado de recursos estructurados similar al formato S10, con trazabilidad de fórmulas y estudio automático de precios de mercado.",
     icon: "payments",
-    features: ["Costo Actual automatizado", "Análisis de Valor Ganado", "Conciliación Almacén vs RRHH"]
+    features: ["Estructuración tipo S10 automatizada", "Trazabilidad de fórmulas y rendimientos", "Estudio de precios de mercado con agentes de IA"]
   },
   {
-    title: "Estandarización de Propuestas",
-    desc: "Utilizamos Agentes de IA para estandarizar tus propuestas económicas. Obtén cotizaciones competitivas y estructuradas con una velocidad de respuesta sin precedentes.",
+    title: "Generación e Ingeniería Forense de EETT",
+    desc: "Generación y revisión de Especificaciones Técnicas (EETT) utilizando agentes de IA para analizar estudios de suelos, diseños, logística y bases, eliminando vicios ocultos y riesgos.",
     icon: "assignment",
-    features: ["Propuestas económicas rápidas", "Estandarización de partidas", "Optimización de licitaciones"]
+    features: ["Generación rápida de EETT consistentes", "Auditoría automatizada de bases y TDRs", "Optimización logística y normativa"]
+  },
+  {
+    title: "Planificación y Nivelación de Recursos",
+    desc: "Generación acelerada de cronogramas y nivelación óptima de recursos (personal, equipos y materiales) con IA para proteger los plazos y márgenes del proyecto.",
+    icon: "account_tree",
+    features: ["Cronogramas lógicos automáticos", "Nivelación inteligente de recursos", "Exportación a Primavera P6 y MS Project"]
+  },
+  {
+    title: "Sistemas Operativos a Medida (Premium B2B)",
+    desc: "Digitalización completa del frente de obra y automatización avanzada (reportabilidad móvil, dashboards gerenciales en tiempo real y conciliación automatizada de costos AC vs EV).",
+    icon: "smartphone",
+    features: ["Reportabilidad móvil desde campo", "Conciliación automática Costo Actual vs Valor Ganado", "Dashboards gerenciales en tiempo real"]
   }
 ];
 

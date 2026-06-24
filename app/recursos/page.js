@@ -97,9 +97,9 @@ export default function Recursos() {
     window.location.href = "/portal";
   };
 
-  // Filtrar recursos según cursos del alumno si está logueado
+  // Filtrar recursos: Los brochures siempre son públicos. Otros recursos se filtran por curso si está logueado.
   const coursesFilteredResources = isLoggedIn
-    ? resources.filter(r => studentCourses.includes(r.courseKey))
+    ? resources.filter(r => r.type === 'brochure' || studentCourses.includes(r.courseKey))
     : resources;
 
   const filtered = filter === "todos" 

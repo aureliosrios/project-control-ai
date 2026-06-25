@@ -24,7 +24,8 @@ const soluciones = [
     title: "Sistemas Operativos a Medida (Premium B2B)",
     desc: "Digitalización completa del frente de obra y automatización avanzada (reportabilidad móvil, dashboards gerenciales en tiempo real y conciliación automatizada de costos AC vs EV).",
     icon: "smartphone",
-    features: ["Reportabilidad móvil desde campo", "Conciliación automática Costo Actual vs Valor Ganado", "Dashboards gerenciales en tiempo real"]
+    features: ["Reportabilidad móvil desde campo", "Conciliación automática Costo Actual vs Valor Ganado", "Dashboards gerenciales en tiempo real"],
+    isPremium: true
   }
 ];
 
@@ -61,8 +62,22 @@ export default function Consultoria() {
         {/* Services Grid */}
         <section className="grid md:grid-cols-2 gap-8 mb-32">
           {soluciones.map((sol, i) => (
-            <div key={i} className="glass-panel p-10 rounded-[40px] border-white/5 hover:border-cyan-500/30 transition-all group">
-              <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center text-cyan-400 mb-8 group-hover:scale-110 transition-transform">
+            <div 
+              key={i} 
+              className={`glass-panel p-10 rounded-[40px] border-white/5 transition-all group relative ${
+                sol.isPremium 
+                  ? 'hover:border-amber-500/40 bg-gradient-to-br from-amber-500/5 to-transparent border-amber-500/10' 
+                  : 'hover:border-cyan-500/30'
+              }`}
+            >
+              {sol.isPremium && (
+                <span className="absolute top-8 right-8 bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[8px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full">
+                  PREMIUM B2B
+                </span>
+              )}
+              <div className={`w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform ${
+                sol.isPremium ? 'text-amber-400' : 'text-cyan-400'
+              }`}>
                 <span className="material-symbols-outlined text-4xl">{sol.icon}</span>
               </div>
               <h3 className="text-2xl font-black text-white mb-4 uppercase tracking-tighter">{sol.title}</h3>
@@ -70,7 +85,7 @@ export default function Consultoria() {
               <ul className="space-y-3">
                 {sol.features.map((f, j) => (
                   <li key={j} className="flex items-center gap-3 text-[11px] font-bold text-slate-500 uppercase tracking-widest">
-                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
+                    <span className={`w-1.5 h-1.5 rounded-full ${sol.isPremium ? 'bg-amber-500' : 'bg-cyan-500'}`} />
                     {f}
                   </li>
                 ))}

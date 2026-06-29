@@ -45,11 +45,18 @@ const courses = {
         id: "RlbF2QcvRR8",
         num: "01",
         status: "OCULTA",
-        title: "Lección 01: Automatización de Procesos de Construcción",
+        title: "Lección 01: Automatización de Procesos de Construcción (Introducción)",
         desc: "Clase del 14 de Junio: Fundamentos de la automatización en obras, integración de software y desarrollo de herramientas ágiles.",
         resources: [
           { title: "Resumen Interactivo de la Clase 1 (HTML)", type: "html", url: "/manuales/resumen_clase_6.html" }
         ]
+      },
+      {
+        id: "VN0_UzmTXa0",
+        num: "02",
+        status: "OCULTA",
+        title: "Lección 02: Automatización de Procesos - Clase 1",
+        desc: "Clase del 28 de Junio: Primera sesión del curso enfocado en automatización de procesos de construcción con agentes de IA."
       }
     ]
   },
@@ -75,6 +82,13 @@ const courses = {
         resources: [
           { title: "Resumen Interactivo de la Clase 2 (HTML)", type: "html", url: "/manuales/resumen_clase_2.html" }
         ]
+      },
+      {
+        id: "FQSC2S43oe4",
+        num: "03",
+        status: "OCULTA",
+        title: "GIP Lección 03: Gestión de Proyectos El despertar - Clase 2",
+        desc: "Clase del 28 de Junio: Segunda clase oficial sobre el uso avanzado de modelos de IA y flujos de automatización para la gestión de proyectos."
       }
     ]
   },

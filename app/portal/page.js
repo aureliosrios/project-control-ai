@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import Sidebar from "./components/Sidebar";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function StudentPortal() {
   const [dni, setDni] = useState("");
@@ -398,13 +399,13 @@ export default function StudentPortal() {
                     </div>
                     <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                   </a>
-                  <div className="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all group cursor-pointer">
+                  <Link href="/recursos" className="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all group cursor-pointer">
                     <div className="flex items-center gap-4">
                       <span className="material-symbols-outlined text-orange-400 text-lg">folder</span>
                       <span className="text-[10px] font-black uppercase tracking-widest">Materiales de Clase</span>
                     </div>
                     <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                  </div>
+                  </Link>
                 </div>
               </section>
 

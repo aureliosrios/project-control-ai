@@ -88,7 +88,11 @@ const courses = {
         num: "03",
         status: "OCULTA",
         title: "GIP Lección 03: Gestión de Proyectos El despertar - Clase 2",
-        desc: "Clase del 28 de Junio: Segunda clase oficial sobre el uso avanzado de modelos de IA y flujos de automatización para la gestión de proyectos."
+        desc: "Clase del 28 de Junio: Segunda clase oficial sobre el uso avanzado de modelos de IA y flujos de automatización para la gestión de proyectos.",
+        resources: [
+          { title: "Especificaciones Técnicas Civiles (PDF)", type: "pdf", url: "/manuales/06_EETT Civiles_Rv01.pdf" },
+          { title: "Especificaciones Técnicas Civiles (Markdown)", type: "md", url: "/manuales/06_EETT Civiles_Rv01.md" }
+        ]
       }
     ]
   },
@@ -400,12 +404,16 @@ export default function ClasesGrabadas() {
                           className="flex items-center justify-between p-4 rounded-2xl bg-black/40 border border-white/10 hover:border-cyan-500/40 hover:bg-cyan-950/20 transition-all group"
                         >
                           <div className="flex items-center gap-3">
-                            <span className={`material-symbols-outlined ${res.type === 'pdf' ? 'text-red-400' : 'text-cyan-400'}`}>
-                              {res.type === 'pdf' ? 'picture_as_pdf' : 'html'}
+                            <span className={`material-symbols-outlined ${
+                              res.type === 'pdf' ? 'text-red-400' : res.type === 'md' || res.type === 'markdown' ? 'text-emerald-400' : 'text-cyan-400'
+                            }`}>
+                              {res.type === 'pdf' ? 'picture_as_pdf' : res.type === 'md' || res.type === 'markdown' ? 'description' : 'html'}
                             </span>
                             <div className="text-left">
                               <p className="text-xs font-bold text-white uppercase tracking-wider group-hover:text-cyan-400 transition-colors">{res.title}</p>
-                              <p className="text-[10px] text-slate-500 uppercase tracking-widest">{res.type === 'pdf' ? 'Documento PDF' : 'Resumen Interactivo (HTML)'}</p>
+                              <p className="text-[10px] text-slate-500 uppercase tracking-widest">
+                                {res.type === 'pdf' ? 'Documento PDF' : res.type === 'md' || res.type === 'markdown' ? 'Documento Markdown' : 'Resumen Interactivo (HTML)'}
+                              </p>
                             </div>
                           </div>
                           <span className="material-symbols-outlined text-sm text-slate-400 group-hover:text-cyan-400 group-hover:translate-y-0.5 transition-all">

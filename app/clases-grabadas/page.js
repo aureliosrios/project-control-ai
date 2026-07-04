@@ -84,7 +84,7 @@ const courses = {
         ]
       },
       {
-        id: "Al_YR8emFCc",
+        id: "vrnFxsbH8kE",
         num: "03",
         status: "OCULTA",
         title: "GIP Lección 03: Gestión de Proyectos El despertar - Clase 2",

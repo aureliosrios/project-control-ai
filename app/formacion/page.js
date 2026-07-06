@@ -20,11 +20,11 @@ const asincronicos = [
     nombre: "Gestión de Documentos Contractuales en la Gestión de Construcción",
     precio: "$15.99 USD",
     tag: "CURSO A2 · PUBLICADO",
-    desc: "Gestión documental masiva para proyectos. Auditoría legal y técnica, extracción de actividades e informes de movilización en minutos.",
+    desc: "Aprovecha las fortalezas de NotebookLM y Gemini para la gestión y control masivo de documentación contractual. Realiza auditorías forenses legales y técnicas, y genera planes e informes en minutos.",
     link: "https://pay.hotmart.com/O105604032H",
     brochure: "https://go.hotmart.com/O105604032H?dp=1",
     color: "orange",
-    pilares: ["Auditoría Forense IA", "Plan Logístico (Gemini)", "Checklist de Recursos", "Narrativa Multimedia"]
+    pilares: ["Análisis masivo con NotebookLM", "Prompts Contractuales para Gemini", "Auditoría Forense Legal-Técnica", "Análisis de Riesgos y Reclamos"]
   },
   {
     id: "B1",

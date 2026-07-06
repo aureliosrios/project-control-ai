@@ -27,6 +27,17 @@ const asincronicos = [
     pilares: ["Auditoría Forense IA", "Plan Logístico (Gemini)", "Checklist de Recursos", "Narrativa Multimedia"]
   },
   {
+    id: "B1",
+    nombre: "Planificación de Obras con IA: del Presupuesto al Cronograma Nivelado",
+    precio: "$15.99 USD",
+    tag: "CURSO B1 · PUBLICADO",
+    desc: "Transforma un presupuesto de obra en un cronograma nivelado. Analiza APU y recursos, define trenes de trabajo, calcula duraciones y nivela cuadrillas con IA.",
+    link: "https://pay.hotmart.com/L106624764I",
+    brochure: "https://go.hotmart.com/L106624764I?dp=1",
+    color: "orange",
+    pilares: ["Análisis de APU y Recursos", "Definición de Trenes de Trabajo", "Cálculo de Productividad", "Nivelación de Cuadrillas con IA"]
+  },
+  {
     id: "C1",
     nombre: "Automatización de Presupuestos con IA",
     precio: "$15.99 USD",
@@ -146,58 +157,170 @@ export default function Formacion() {
 
         {activeTab === "asinc" ? (
           <div className="space-y-24">
-            {/* Top 3 Courses */}
-            <div className="grid lg:grid-cols-3 gap-8">
-              {asincronicos.map((curso) => (
-                <div key={curso.id} className="glass-panel p-8 rounded-[40px] flex flex-col group border-white/5 hover:border-cyan-500/30 transition-all relative overflow-hidden">
-                  <div className={`absolute top-0 right-0 w-32 h-32 bg-${curso.color}-500/10 blur-[60px]`} />
-                  
-                  <span className={`text-[10px] font-black tracking-[0.3em] uppercase mb-4 text-${curso.color}-400`}>
-                    {curso.tag}
-                  </span>
-                  <h3 className="text-2xl font-black text-white mb-6 uppercase tracking-tighter leading-tight">
-                    {curso.nombre}
-                  </h3>
-                  <p className="text-slate-400 font-light mb-8 flex-1 leading-relaxed">
-                    {curso.desc}
-                  </p>
+            {/* Sección: Fundamento Transversal */}
+            <div>
+              <div className="mb-10">
+                <span className="text-cyan-400 text-[10px] font-black tracking-[0.3em] uppercase block mb-2">Paso 1: Fundamento Transversal</span>
+                <h2 className="text-3xl font-black text-white uppercase tracking-tighter">Cursos Generales</h2>
+                <p className="text-slate-400 font-light text-sm max-w-2xl mt-2">
+                  Recomendado para todas las especialidades y profesionales de la construcción que inician su digitalización con IA.
+                </p>
+              </div>
 
-                  <div className="space-y-3 mb-10">
-                    {curso.pilares.map((p, i) => (
-                      <div key={i} className="flex items-center gap-3 text-xs text-slate-300">
-                        <span className={`material-symbols-outlined text-[16px] text-${curso.color}-500`}>verified</span>
-                        {p}
+              <div className="grid md:grid-cols-2 gap-8">
+                {asincronicos.filter(c => c.id === "A1").map((curso) => (
+                  <div key={curso.id} className="glass-panel p-8 rounded-[40px] flex flex-col group border-white/5 hover:border-cyan-500/30 transition-all relative overflow-hidden md:col-span-2 max-w-3xl">
+                    <div className={`absolute top-0 right-0 w-32 h-32 bg-${curso.color}-500/10 blur-[60px]`} />
+                    
+                    <span className={`text-[10px] font-black tracking-[0.3em] uppercase mb-4 text-${curso.color}-400`}>
+                      {curso.tag}
+                    </span>
+                    <h3 className="text-2xl font-black text-white mb-6 uppercase tracking-tighter leading-tight">
+                      {curso.nombre}
+                    </h3>
+                    <p className="text-slate-400 font-light mb-8 flex-1 leading-relaxed">
+                      {curso.desc}
+                    </p>
+
+                    {/* Recomendación de Perfil Destinado */}
+                    <div className="mb-6 p-4 bg-cyan-500/5 border border-cyan-500/10 rounded-2xl">
+                      <span className="text-[9px] font-black text-cyan-400 uppercase tracking-widest block mb-1">Destinado a:</span>
+                      <p className="text-[11px] text-slate-300 font-medium">
+                        Profesionales de la construcción que se integran al mundo de la IA desde lo más básico. Este curso te preparará y dará la base técnica necesaria para llevar todos los demás cursos de la academia.
+                      </p>
+                    </div>
+
+                    <div className="space-y-3 mb-10">
+                      {curso.pilares.map((p, i) => (
+                        <div key={i} className="flex items-center gap-3 text-xs text-slate-300">
+                          <span className={`material-symbols-outlined text-[16px] text-${curso.color}-500`}>verified</span>
+                          {p}
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                      <div className="flex flex-col">
+                        <span className="text-2xl font-black text-white">{curso.precio}</span>
+                        <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Hotmart Access</span>
                       </div>
-                    ))}
+                      <div className="flex gap-2 w-full sm:w-auto">
+                        <Link 
+                          href={curso.brochure}
+                          target="_blank"
+                          className="flex-1 sm:flex-initial px-4 py-3.5 bg-white/5 border border-white/10 text-slate-300 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-white/10 text-center transition-all"
+                        >
+                          Temario
+                        </Link>
+                        <Link 
+                          href={curso.link} 
+                          target="_blank" 
+                          className={`flex-1 sm:flex-initial px-6 py-3.5 bg-${curso.color === 'blue' ? 'indigo' : curso.color}-500 text-slate-950 rounded-xl font-black text-[10px] uppercase tracking-widest hover:scale-105 transition-all text-center`}
+                          style={{
+                            boxShadow: `0 0 20px ${curso.color === 'cyan' ? '#06b6d4' : curso.color === 'orange' ? '#f97316' : '#6366f1'}66`
+                          }}
+                        >
+                          Comprar
+                        </Link>
+                      </div>
+                    </div>
                   </div>
+                ))}
+              </div>
+            </div>
 
-                  <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div className="flex flex-col">
-                      <span className="text-2xl font-black text-white">{curso.precio}</span>
-                      <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Hotmart Access</span>
+            {/* Sección: Especialidades */}
+            <div className="pt-10 border-t border-white/5">
+              <div className="mb-10">
+                <span className="text-orange-400 text-[10px] font-black tracking-[0.3em] uppercase block mb-2">Paso 2: Especialización de Élite</span>
+                <h2 className="text-3xl font-black text-white uppercase tracking-tighter">Cursos de Especialidad</h2>
+                <p className="text-slate-400 font-light text-sm max-w-2xl mt-2">
+                  Herramientas y metodologías de élite diseñadas para áreas técnicas y roles específicos del proyecto.
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                {asincronicos.filter(c => c.id !== "A1").map((curso) => (
+                  <div key={curso.id} className="glass-panel p-8 rounded-[40px] flex flex-col group border-white/5 hover:border-cyan-500/30 transition-all relative overflow-hidden">
+                    <div className={`absolute top-0 right-0 w-32 h-32 bg-${curso.color === 'blue' ? 'indigo' : curso.color}-500/10 blur-[60px]`} />
+                    
+                    <div className="flex justify-between items-start mb-4">
+                      <span className={`text-[10px] font-black tracking-[0.3em] uppercase text-${curso.color === 'blue' ? 'indigo' : curso.color}-400`}>
+                        {curso.tag}
+                      </span>
+                      {curso.id === "B1" && (
+                        <span className="bg-orange-500/10 text-orange-400 border border-orange-500/20 text-[8px] font-black px-2 py-1 rounded-full uppercase tracking-widest">
+                          ★ Recom. Haber Llevado C1
+                        </span>
+                      )}
                     </div>
-                    <div className="flex gap-2 w-full sm:w-auto">
-                      <Link 
-                        href={curso.brochure}
-                        target="_blank"
-                        className="flex-1 sm:flex-initial px-4 py-3.5 bg-white/5 border border-white/10 text-slate-300 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-white/10 text-center transition-all"
-                      >
-                        Temario
-                      </Link>
-                      <Link 
-                        href={curso.link} 
-                        target="_blank" 
-                        className={`flex-1 sm:flex-initial px-6 py-3.5 bg-${curso.color === 'blue' ? 'indigo' : curso.color}-500 text-slate-950 rounded-xl font-black text-[10px] uppercase tracking-widest hover:scale-105 transition-all text-center`}
-                        style={{
-                          boxShadow: `0 0 20px ${curso.color === 'cyan' ? '#06b6d4' : curso.color === 'orange' ? '#f97316' : '#6366f1'}66`
-                        }}
-                      >
-                        Comprar
-                      </Link>
+
+                    <h3 className="text-2xl font-black text-white mb-6 uppercase tracking-tighter leading-tight">
+                      {curso.nombre}
+                    </h3>
+                    <p className="text-slate-400 font-light mb-8 flex-1 leading-relaxed">
+                      {curso.desc}
+                    </p>
+
+                    {/* Recomendación de Perfil Destinado */}
+                    {curso.id === "A2" && (
+                      <div className="mb-6 p-4 bg-orange-500/5 border border-orange-500/10 rounded-2xl">
+                        <span className="text-[9px] font-black text-orange-400 uppercase tracking-widest block mb-1">Destinado a:</span>
+                        <p className="text-[11px] text-slate-300 font-medium">Administradores de Contratos, Gerentes de Obra, Jefes de Calidad y Jefes de Seguridad.</p>
+                      </div>
+                    )}
+
+                    {curso.id === "B1" && (
+                      <div className="mb-6 p-4 bg-orange-500/5 border border-orange-500/10 rounded-2xl">
+                        <span className="text-[9px] font-black text-orange-400 uppercase tracking-widest block mb-1">Destinado a:</span>
+                        <p className="text-[11px] text-slate-300 font-medium">Planificadores de Obra, Ingenieros de Oficina Técnica y Jefes de Producción.</p>
+                      </div>
+                    )}
+
+                    {curso.id === "C1" && (
+                      <div className="mb-6 p-4 bg-indigo-500/5 border border-indigo-500/10 rounded-2xl">
+                        <span className="text-[9px] font-black text-indigo-400 uppercase tracking-widest block mb-1">Destinado a:</span>
+                        <p className="text-[11px] text-slate-300 font-medium">Ingenieros de Costos, Valorizadores y Licitadores de Proyectos.</p>
+                      </div>
+                    )}
+
+                    <div className="space-y-3 mb-10">
+                      {curso.pilares.map((p, i) => (
+                        <div key={i} className="flex items-center gap-3 text-xs text-slate-300">
+                          <span className={`material-symbols-outlined text-[16px] text-${curso.color === 'blue' ? 'indigo' : curso.color}-500`}>verified</span>
+                          {p}
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                      <div className="flex flex-col">
+                        <span className="text-2xl font-black text-white">{curso.precio}</span>
+                        <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Hotmart Access</span>
+                      </div>
+                      <div className="flex gap-2 w-full sm:w-auto">
+                        <Link 
+                          href={curso.brochure}
+                          target="_blank"
+                          className="flex-1 sm:flex-initial px-4 py-3.5 bg-white/5 border border-white/10 text-slate-300 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-white/10 text-center transition-all"
+                        >
+                          Temario
+                        </Link>
+                        <Link 
+                          href={curso.link} 
+                          target="_blank" 
+                          className={`flex-1 sm:flex-initial px-6 py-3.5 bg-${curso.color === 'blue' ? 'indigo' : curso.color}-500 text-slate-950 rounded-xl font-black text-[10px] uppercase tracking-widest hover:scale-105 transition-all text-center`}
+                          style={{
+                            boxShadow: `0 0 20px ${curso.color === 'cyan' ? '#06b6d4' : curso.color === 'orange' ? '#f97316' : '#6366f1'}66`
+                          }}
+                        >
+                          Comprar
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
             {/* Ecosystem Plan */}

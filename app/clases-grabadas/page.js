@@ -57,6 +57,13 @@ const courses = {
         status: "OCULTA",
         title: "Lección 02: Automatización de Procesos - Clase 1",
         desc: "Clase del 28 de Junio: Primera sesión del curso enfocado en automatización de procesos de construcción con agentes de IA."
+      },
+      {
+        id: "Ta5nO3LpWuU",
+        num: "03",
+        status: "OCULTA",
+        title: "Lección 03: Automatización de Procesos - Clase 2",
+        desc: "Clase del 05 de Julio: Segunda sesión del curso enfocado en automatización de procesos de construcción con agentes de IA."
       }
     ]
   },
@@ -93,6 +100,13 @@ const courses = {
           { title: "Especificaciones Técnicas Civiles (PDF)", type: "pdf", url: "/manuales/06_EETT Civiles_Rv01.pdf" },
           { title: "Especificaciones Técnicas Civiles (Markdown)", type: "md", url: "/manuales/06_EETT Civiles_Rv01.md" }
         ]
+      },
+      {
+        id: "qyX4p5Ze03Q",
+        num: "04",
+        status: "OCULTA",
+        title: "GIP Lección 04: Gestión de Proyectos El despertar - Clase 3",
+        desc: "Clase del 05 de Julio: Tercera clase oficial sobre el uso avanzado de modelos de IA y flujos de automatización para la gestión de proyectos."
       }
     ]
   },

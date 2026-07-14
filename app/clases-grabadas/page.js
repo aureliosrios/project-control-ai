@@ -73,7 +73,7 @@ const courses = {
         id: "5rvU9Tk0aEw",
         num: "01",
         status: "OCULTA",
-        title: "El Despertar: Dashboards HTML y Mermaid",
+        title: "GIP Lección 01: El Despertar: Dashboards HTML y Mermaid (Introducción)",
         desc: "Clase del 31 de Mayo: Generación de reportes interactivos, diagramas de flujo de trabajo profesionales con Mermaid y bases de la IA aplicada a la gestión de proyectos sin saber programar.",
         resources: [
           { title: "Resumen Interactivo de la Clase 1 (HTML)", type: "html", url: "/manuales/resumen_clase_1.html" }
@@ -83,7 +83,7 @@ const courses = {
         id: "GN57dq1N7Rg",
         num: "02",
         status: "OCULTA",
-        title: "GIP Lección 02: Modelos de IA y Procesamiento de Documentos",
+        title: "GIP Lección 02: Modelos de IA y Procesamiento de Documentos (Clase 1)",
         desc: "Clase del 14 de Junio: Uso y configuración del ecosistema de modelos de Google AI Studio, metodologías ante límites de tokens y pipelines prácticos para convertir expedientes PDF a Markdown.",
         resources: [
           { title: "Resumen Interactivo de la Clase 2 (HTML)", type: "html", url: "/manuales/resumen_clase_2.html" }

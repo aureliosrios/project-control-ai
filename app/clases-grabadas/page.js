@@ -69,8 +69,7 @@ const courses = {
   },
   "GIP": {
     name: "Gestión de Construcción con IA (El Despertar Digital)",
-    lessons: [
-      {
+    lessons: [{
         id: "5rvU9Tk0aEw",
         num: "01",
         status: "OCULTA",
@@ -107,8 +106,17 @@ const courses = {
         status: "OCULTA",
         title: "GIP Lección 04: Gestión de Proyectos El despertar - Clase 3",
         desc: "Clase del 05 de Julio: Tercera clase oficial sobre el uso avanzado de modelos de IA y flujos de automatización para la gestión de proyectos."
-      }
-    ]
+      },
+      {
+        id: "z4oJM3JKXqQ",
+        num: "05",
+        status: "OCULTA",
+        title: "GIP Lección 05: El Despertar Digital y Supervisión de Hitos",
+        desc: "Clase del 12 de Julio: Uso de NotebookLM para inspección de hitos en carreteras, densímetros nucleares, topografía y auditorías de planillas de construcción civil. Migración avanzada de HTML a Word.",
+        resources: [
+          { title: "Resumen Interactivo de la Clase 5 (HTML)", type: "html", url: "/manuales/resumen_clase_5.html" }
+        ]
+      }]
   },
   "LIC": {
     name: "Licitaciones de Construcción con IA (Licitaciones Inteligentes)",

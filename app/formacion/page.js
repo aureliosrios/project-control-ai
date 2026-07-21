@@ -47,6 +47,17 @@ const asincronicos = [
     brochure: "https://go.hotmart.com/H105703259M?dp=1",
     color: "blue",
     pilares: ["Infraestructura Python", "IA para EETT y WBS", "Visión Artificial Planos", "SkillPro v4: Lógica APU"]
+  },
+  {
+    id: "C2",
+    nombre: "Generar EETT con agentes de AI",
+    precio: "$15.99 USD",
+    tag: "CURSO C2 · PUBLICADO",
+    desc: "Aprende a automatizar la elaboración de Especificaciones Técnicas (EETT) de proyectos de construcción mediante NotebookLM, Gemini y agentes de IA, exportando entregables profesionales a Microsoft Word sin errores de formato.",
+    link: "https://pay.hotmart.com/D106788121M",
+    brochure: "https://go.hotmart.com/D106788121M?dp=1",
+    color: "blue",
+    pilares: ["NotebookLM como Fuente de Verdad", "Índice Vectorial de Normativa", "Agentes y Skills Personalizadas", "Conversión a Word Profesional"]
   }
 ];
 
@@ -117,7 +128,7 @@ const rutas = [
     letra: "C",
     titulo: "Especialidades de Ingeniería",
     desc: "Herramientas de élite para áreas específicas.",
-    cursos: ["C1: Presupuestos IA", "C2: Licitaciones 360", "C3: Auditoría Técnica", "C4: Agentes Autónomos"]
+    cursos: ["C1: Presupuestos IA", "C2: EETT con Agentes", "C3: Auditoría Técnica", "C4: Agentes Autónomos"]
   }
 ];
 
@@ -281,6 +292,13 @@ export default function Formacion() {
                       <div className="mb-6 p-4 bg-indigo-500/5 border border-indigo-500/10 rounded-2xl">
                         <span className="text-[9px] font-black text-indigo-400 uppercase tracking-widest block mb-1">Destinado a:</span>
                         <p className="text-[11px] text-slate-300 font-medium">Ingenieros de Costos, Valorizadores y Licitadores de Proyectos.</p>
+                      </div>
+                    )}
+
+                    {curso.id === "C2" && (
+                      <div className="mb-6 p-4 bg-indigo-500/5 border border-indigo-500/10 rounded-2xl">
+                        <span className="text-[9px] font-black text-indigo-400 uppercase tracking-widest block mb-1">Destinado a:</span>
+                        <p className="text-[11px] text-slate-300 font-medium">Ingenieros de Oficina Técnica, Diseñadores de Proyectos, Revisores de Expedientes y Consultores.</p>
                       </div>
                     )}
 

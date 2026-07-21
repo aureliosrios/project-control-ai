@@ -116,6 +116,20 @@ const courses = {
         resources: [
           { title: "Resumen Interactivo de la Clase 4 (HTML)", type: "html", url: "/manuales/resumen_clase_5.html" }
         ]
+      },
+      {
+        id: "-qJS3nmWZuA",
+        num: "06-A",
+        status: "OCULTA",
+        title: "GIP Lección 05 (Parte 1): Gestión de Proyectos El Despertar - 6ta Sesión",
+        desc: "Clase del 19 de Julio (10:00 a.m. - Parte 1): Flujos avanzados de automatización y gestión de datos en proyectos de ingeniería y construcción."
+      },
+      {
+        id: "HgttITI9PU0",
+        num: "06-B",
+        status: "OCULTA",
+        title: "GIP Lección 05 (Parte 2): Gestión de Proyectos El Despertar - 6ta Sesión",
+        desc: "Clase del 19 de Julio (11:09 a.m. - Parte 2): Flujos avanzados de automatización y gestión de datos en proyectos de ingeniería y construcción."
       }]
   },
   "LIC": {

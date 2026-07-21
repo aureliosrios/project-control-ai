@@ -119,17 +119,17 @@ const courses = {
       },
       {
         id: "-qJS3nmWZuA",
-        num: "05-A",
+        num: "06-A",
         status: "OCULTA",
-        title: "GIP Lección 05 (Parte 1): Gestión de Proyectos El Despertar - 6ta Sesión",
-        desc: "Clase del 19 de Julio (10:00 a.m. - Parte 1): Flujos avanzados de automatización y gestión de datos en proyectos de ingeniería y construcción."
+        title: "GIP Lección 06: Gestión de Proyectos El Despertar - Clase 5 (Parte 1)",
+        desc: "Clase del 19 de Julio (10:00 a.m. - Parte 1): Quinta clase oficial sobre el uso avanzado de modelos de IA y flujos de automatización para la gestión de proyectos."
       },
       {
         id: "HgttITI9PU0",
-        num: "05-B",
+        num: "06-B",
         status: "OCULTA",
-        title: "GIP Lección 05 (Parte 2): Gestión de Proyectos El Despertar - 6ta Sesión",
-        desc: "Clase del 19 de Julio (11:09 a.m. - Parte 2): Flujos avanzados de automatización y gestión de datos en proyectos de ingeniería y construcción."
+        title: "GIP Lección 06: Gestión de Proyectos El Despertar - Clase 5 (Parte 2)",
+        desc: "Clase del 19 de Julio (11:09 a.m. - Parte 2): Quinta clase oficial sobre el uso avanzado de modelos de IA y flujos de automatización para la gestión de proyectos."
       }]
   },
   "LIC": {

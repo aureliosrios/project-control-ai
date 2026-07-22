@@ -83,54 +83,7 @@ const courses = {
   },
   "GIP": {
     name: "Gestión de Construcción con IA (El Despertar Digital)",
-    lessons: [{
-        id: "5rvU9Tk0aEw",
-        num: "01",
-        status: "OCULTA",
-        title: "GIP Lección 01: El Despertar: Dashboards HTML y Mermaid (Introducción)",
-        desc: "Clase del 31 de Mayo: Generación de reportes interactivos, diagramas de flujo de trabajo profesionales con Mermaid y bases de la IA aplicada a la gestión de proyectos sin saber programar.",
-        resources: [
-          { title: "Resumen Interactivo de la Clase 1 (HTML)", type: "html", url: "/manuales/resumen_clase_1.html" }
-        ]
-      },
-      {
-        id: "GN57dq1N7Rg",
-        num: "02",
-        status: "OCULTA",
-        title: "GIP Lección 02: Modelos de IA y Procesamiento de Documentos (Clase 1)",
-        desc: "Clase del 14 de Junio: Uso y configuración del ecosistema de modelos de Google AI Studio, metodologías ante límites de tokens y pipelines prácticos para convertir expedientes PDF a Markdown.",
-        resources: [
-          { title: "Resumen Interactivo de la Clase 2 (HTML)", type: "html", url: "/manuales/resumen_clase_2.html" }
-        ]
-      },
-      {
-        id: "vrnFxsbH8kE",
-        num: "03",
-        status: "OCULTA",
-        title: "GIP Lección 03: Gestión de Proyectos El despertar - Clase 2",
-        desc: "Clase del 28 de Junio: Segunda clase oficial sobre el uso avanzado de modelos de IA y flujos de automatización para la gestión de proyectos.",
-        resources: [
-          { title: "Especificaciones Técnicas Civiles (PDF)", type: "pdf", url: "/manuales/06_EETT Civiles_Rv01.pdf" },
-          { title: "Especificaciones Técnicas Civiles (Markdown)", type: "md", url: "/manuales/06_EETT Civiles_Rv01.md" }
-        ]
-      },
-      {
-        id: "qyX4p5Ze03Q",
-        num: "04",
-        status: "OCULTA",
-        title: "GIP Lección 04: Gestión de Proyectos El despertar - Clase 3",
-        desc: "Clase del 05 de Julio: Tercera clase oficial sobre el uso avanzado de modelos de IA y flujos de automatización para la gestión de proyectos."
-      },
-      {
-        id: "z4oJM3JKXqQ",
-        num: "05",
-        status: "OCULTA",
-        title: "GIP Lección 05: El Despertar Digital y Supervisión de Hitos (Clase 4)",
-        desc: "Clase 4 (12 de Julio): Uso de NotebookLM para inspección de hitos en carreteras, densímetros nucleares, topografía y auditorías de planillas de construcción civil. Migración avanzada de HTML a Word.",
-        resources: [
-          { title: "Resumen Interactivo de la Clase 4 (HTML)", type: "html", url: "/manuales/resumen_clase_5.html" }
-        ]
-      },
+    lessons: [
       {
         id: "-qJS3nmWZuA",
         num: "06-A",
@@ -144,7 +97,56 @@ const courses = {
         status: "OCULTA",
         title: "GIP Lección 06: Gestión de Proyectos El Despertar - Clase 5 (Parte 2)",
         desc: "Clase del 19 de Julio (11:09 a.m. - Parte 2): Quinta clase oficial sobre el uso avanzado de modelos de IA y flujos de automatización para la gestión de proyectos."
-      }]
+      },
+      {
+        id: "z4oJM3JKXqQ",
+        num: "05",
+        status: "OCULTA",
+        title: "GIP Lección 05: El Despertar Digital y Supervisión de Hitos (Clase 4)",
+        desc: "Clase 4 (12 de Julio): Uso de NotebookLM para inspección de hitos en carreteras, densímetros nucleares, topografía y auditorías de planillas de construcción civil. Migración avanzada de HTML a Word.",
+        resources: [
+          { title: "Resumen Interactivo de la Clase 4 (HTML)", type: "html", url: "/manuales/resumen_clase_5.html" }
+        ]
+      },
+      {
+        id: "qyX4p5Ze03Q",
+        num: "04",
+        status: "OCULTA",
+        title: "GIP Lección 04: Gestión de Proyectos El despertar - Clase 3",
+        desc: "Clase del 05 de Julio: Tercera clase oficial sobre el uso avanzado de modelos de IA y flujos de automatización para la gestión de proyectos."
+      },
+      {
+        id: "vrnFxsbH8kE",
+        num: "03",
+        status: "OCULTA",
+        title: "GIP Lección 03: Gestión de Proyectos El despertar - Clase 2",
+        desc: "Clase del 28 de Junio: Segunda clase oficial sobre el uso avanzado de modelos de IA y flujos de automatización para la gestión de proyectos.",
+        resources: [
+          { title: "Especificaciones Técnicas Civiles (PDF)", type: "pdf", url: "/manuales/06_EETT Civiles_Rv01.pdf" },
+          { title: "Especificaciones Técnicas Civiles (Markdown)", type: "md", url: "/manuales/06_EETT Civiles_Rv01.md" }
+        ]
+      },
+      {
+        id: "GN57dq1N7Rg",
+        num: "02",
+        status: "OCULTA",
+        title: "GIP Lección 02: Modelos de IA y Procesamiento de Documentos (Clase 1)",
+        desc: "Clase del 14 de Junio: Uso y configuración del ecosistema de modelos de Google AI Studio, metodologías ante límites de tokens y pipelines prácticos para convertir expedientes PDF a Markdown.",
+        resources: [
+          { title: "Resumen Interactivo de la Clase 2 (HTML)", type: "html", url: "/manuales/resumen_clase_2.html" }
+        ]
+      },
+      {
+        id: "5rvU9Tk0aEw",
+        num: "01",
+        status: "OCULTA",
+        title: "GIP Lección 01: El Despertar: Dashboards HTML y Mermaid (Introducción)",
+        desc: "Clase del 31 de Mayo: Generación de reportes interactivos, diagramas de flujo de trabajo profesionales con Mermaid y bases de la IA aplicada a la gestión de proyectos sin saber programar.",
+        resources: [
+          { title: "Resumen Interactivo de la Clase 1 (HTML)", type: "html", url: "/manuales/resumen_clase_1.html" }
+        ]
+      }
+    ]
   },
   "LIC": {
     name: "Licitaciones de Construcción con IA (Licitaciones Inteligentes)",

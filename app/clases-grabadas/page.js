@@ -478,7 +478,7 @@ export default function ClasesGrabadas() {
             </div>
 
             {/* Playlist Sidebar Column */}
-            <div className="glass-panel rounded-[32px] border-white/5 p-6 h-fit max-h-[800px] overflow-y-auto">
+            <div className="glass-panel rounded-[32px] border-white/5 p-6 h-fit max-h-[800px] overflow-y-auto scrollbar-thin scrollbar-thumb-cyan-500/30 scrollbar-track-transparent hover:scrollbar-thumb-cyan-400">
               <h2 className="text-sm font-black text-slate-400 mb-6 uppercase tracking-[0.2em] px-2">Contenido de {courses[activeCourseKey]?.name}</h2>
               <div className="space-y-2">
                 {lessons.length === 0 ? (

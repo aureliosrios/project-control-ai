@@ -228,36 +228,8 @@ export default function ClasesGrabadas() {
         const key = getCourseKey(enroll.curso);
         if (!key) return null;
 
-        // Forzar privilegios VIP/Normal en el frontend para evitar restricciones de RLS
-        let vipOverride = enroll.acceso_vip;
-        const currentDni = String(dni || '').trim();
-        const enrollDni = String(enroll.dni || '').trim();
-        const vipDnis = ["47812821", "10740454", "44803812", "70342938", "18086521", "40793771", "74986374", "25541993"];
-        if (vipDnis.includes(currentDni) || vipDnis.includes(enrollDni)) {
-          vipOverride = true;
-        }
-
-        const cert = certificates?.find(c => c.curso === enroll.curso);
+        // Todos los alumnos matriculados en cursos activos tienen acceso completo a la biblioteca de clases grabadas
         let isExpired = false;
-        if (vipOverride !== true) {
-          if (cert && cert.fecha) {
-            const fechaCert = new Date(cert.fecha);
-            const hoy = new Date();
-            const diffTime = hoy - fechaCert;
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            if (diffDays > 60) {
-              isExpired = true;
-            }
-          } else if (enroll.created_at) {
-            const fechaMatricula = new Date(enroll.created_at);
-            const hoy = new Date();
-            const diffTime = hoy - fechaMatricula;
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            if (diffDays > 60) {
-              isExpired = true;
-            }
-          }
-        }
 
         return {
           key,

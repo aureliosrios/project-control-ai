@@ -230,9 +230,10 @@ export default function ClasesGrabadas() {
 
         // Forzar privilegios VIP/Normal en el frontend para evitar restricciones de RLS
         let vipOverride = enroll.acceso_vip;
-        const studentDni = enroll.dni?.trim();
+        const currentDni = String(dni || '').trim();
+        const enrollDni = String(enroll.dni || '').trim();
         const vipDnis = ["47812821", "10740454", "44803812", "70342938", "18086521", "40793771", "74986374", "25541993"];
-        if (vipDnis.includes(studentDni)) {
+        if (vipDnis.includes(currentDni) || vipDnis.includes(enrollDni)) {
           vipOverride = true;
         }
 

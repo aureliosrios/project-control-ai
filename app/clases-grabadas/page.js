@@ -292,8 +292,9 @@ export default function ClasesGrabadas() {
       setStudentData(student);
       setIsLoggedIn(true);
 
-      // Seleccionar curso por defecto (primero con grabaciones activas y no vencido)
-      const defaultCourse = processed.find(c => courses[c.key].lessons.length > 0 && !c.isExpired) || processed[0];
+      // Seleccionar curso por defecto (priorizar GIP si existe, o el primero disponible)
+      const gipCourse = processed.find(c => c.key === "GIP" && !c.isExpired);
+      const defaultCourse = gipCourse || processed.find(c => courses[c.key].lessons.length > 0 && !c.isExpired) || processed[0];
       
       setActiveCourseKey(defaultCourse.key);
       if (courses[defaultCourse.key].lessons.length > 0 && !defaultCourse.isExpired) {

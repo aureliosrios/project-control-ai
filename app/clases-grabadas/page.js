@@ -242,7 +242,7 @@ export default function ClasesGrabadas() {
           key,
           dbName: enroll.curso,
           displayName: courses[key].name,
-          acceso_vip: vipOverride,
+          acceso_vip: false,
           isExpired
         };
       }).filter(Boolean);

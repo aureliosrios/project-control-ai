@@ -78,6 +78,13 @@ const courses = {
         status: "OCULTA",
         title: "Automatización para Construcción (Parte 2) - 19/07/2026",
         desc: "Clase del 19 de Julio (11:09 a.m. - Parte 2): Flujos avanzados de automatización y soluciones de IA para la gestión de construcción."
+      },
+      {
+        id: "yO7yivEBf0k",
+        num: "05",
+        status: "OCULTA",
+        title: "Lección 05: Automatización de Procesos - Clase 3",
+        desc: "Clase del 26 de Julio (03:00 p.m. - 06:00 p.m.): Tercera sesión del curso enfocado en automatización de procesos de construcción con agentes de IA."
       }
     ]
   },

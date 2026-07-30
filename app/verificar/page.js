@@ -103,10 +103,10 @@ export default function Verificar() {
       //   throw new Error("LÍMITE DE DESCARGA AGOTADO: Este certificado ya ha sido descargado previamente. Contacte a soporte para una nueva copia.");
       // }
 
-      // 2. Incrementar descarga (RPC - Opcional)
-      try {
-        await supabase.rpc('incrementar_descarga', { cert_id: certId });
-      } catch (e) {}
+      // 2. Incrementar descarga (DESACTIVADO TEMPORALMENTE - DESCARGAS ILIMITADAS)
+      // try {
+      //   await supabase.rpc('incrementar_descarga', { cert_id: certId });
+      // } catch (e) {}
 
       setLoading(true);
 

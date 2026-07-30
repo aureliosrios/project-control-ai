@@ -113,11 +113,14 @@ export default function Verificar() {
 
       // Detectar si es curso ASINCRÓNICO por palabras clave del nombre
       const isAsincronico = (
-        slug.includes("despertar") ||
-        slug.includes("forense") ||
-        slug.includes("presupuesto") ||
-        slug.includes("asincronico") ||
-        cert.edicion_grupo?.toUpperCase().includes("ASINCRONICO")
+        !slug.includes("construccion") &&
+        !slug.includes("construcción") &&
+        (
+          (cert.edicion_grupo || "").toUpperCase().includes("ASINCRONICO") ||
+          slug.includes("forense") ||
+          slug.includes("presupuesto") ||
+          slug.includes("asincronico")
+        )
       );
 
       // --- RAMA ASINCRÓNICA ---
@@ -139,11 +142,18 @@ export default function Verificar() {
         const nombreCurso = (cert.nombre_curso_oficial || cert.nombre_curso_inscrito || "").toUpperCase();
         const fechaEmision = new Date().toLocaleDateString('es-PE', { day: 'numeric', month: 'long', year: 'numeric' });
 
-        // Nombre del alumno (Coordenadas sincrónicas exactas)
+        // Nombre del alumno con Auto-Fit dinámico y centrado
+        let fontSizeName = 21;
+        if (nombreFull.length > 28) {
+          fontSizeName = Math.max(12, 21 - (nombreFull.length - 28) * 0.45);
+        }
+        const textWidthName = fontB.widthOfTextAtSize(nombreFull, fontSizeName);
+        const xPosName = 331.5 - (textWidthName / 2);
+
         page1.drawText(nombreFull, {
-          x: (width / 2) - 257,
+          x: xPosName,
           y: 430,
-          size: 21,
+          size: fontSizeName,
           font: fontB,
           color: rgb(0.98, 0.75, 0.14)
         });
@@ -227,6 +237,7 @@ export default function Verificar() {
       if (slug.includes("automation") || slug.includes("automatizacion") || slug.includes("automatización")) archivo = "cert_automatizacion.pdf";
       else if (slug.includes("licitaciones")) archivo = "cert_licitaciones_ia.pdf";
       else if (slug.includes("evm") || slug.includes("control")) archivo = "cert_control_evm.pdf";
+      else if (slug.includes("construccion") || slug.includes("construcción")) archivo = "cert_gestion_construccion.pdf";
       else if (slug.includes("gerencia") || slug.includes("gestion")) archivo = "cert_gestion_integral.pdf";
       else if (slug.includes("p6")) archivo = "cert_primavera_p6.pdf";
 
@@ -242,11 +253,19 @@ export default function Verificar() {
       const detalle = `con una duración de 45 horas académicas, impartidas del ${formatearFecha(cert.fecha_inicio_clases)} al ${formatearFecha(cert.fecha_fin_clases)} en modalidad online.`;
 
       // 4. Estampado (COORDENADAS v11.8)
-      // Nombre
-      page1.drawText(nombreFull.toUpperCase(), { 
-        x: (width / 2) - 257, 
+      // Nombre con Auto-Fit dinámico y centrado
+      const nameUpper = nombreFull.toUpperCase();
+      let fontSizeName = 21;
+      if (nameUpper.length > 28) {
+        fontSizeName = Math.max(12, 21 - (nameUpper.length - 28) * 0.45);
+      }
+      const textWidthName = fontB.widthOfTextAtSize(nameUpper, fontSizeName);
+      const xPosName = 331.5 - (textWidthName / 2);
+
+      page1.drawText(nameUpper, { 
+        x: xPosName, 
         y: 430, 
-        size: 21, 
+        size: fontSizeName, 
         font: fontB, 
         color: rgb(0.98, 0.75, 0.14) 
       });

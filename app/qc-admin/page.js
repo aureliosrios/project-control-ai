@@ -40,11 +40,14 @@ export default function QCDashboard() {
 
       // Detectar si es ASINCRÓNICO
       const isAsincronico = (
-        slug.includes("despertar") ||
-        slug.includes("forense") ||
-        slug.includes("presupuesto") ||
-        slug.includes("asincronico") ||
-        (cert.edicion_grupo || "").toUpperCase().includes("ASINCRONICO")
+        !slug.includes("construccion") &&
+        !slug.includes("construcción") &&
+        (
+          (cert.edicion_grupo || "").toUpperCase().includes("ASINCRONICO") ||
+          slug.includes("forense") ||
+          slug.includes("presupuesto") ||
+          slug.includes("asincronico")
+        )
       );
 
       // ── RAMA ASINCRÓNICA ──────────────────────────────────────────
@@ -65,9 +68,16 @@ export default function QCDashboard() {
         const nombreFull = ("Ing. " + (cert.nombre_completo || "")).toUpperCase();
         const fechaEmision = new Date().toLocaleDateString('es-PE', { day: 'numeric', month: 'long', year: 'numeric' });
 
-        // Nombre del alumno
+        // Nombre del alumno con Auto-Fit dinámico y centrado
+        let fontSizeName = 21;
+        if (nombreFull.length > 28) {
+          fontSizeName = Math.max(12, 21 - (nombreFull.length - 28) * 0.45);
+        }
+        const textWidthName = fontB.widthOfTextAtSize(nombreFull, fontSizeName);
+        const xPosName = 331.5 - (textWidthName / 2);
+
         page1.drawText(nombreFull, {
-          x: (width / 2) - 257, y: 430, size: 21,
+          x: xPosName, y: 430, size: fontSizeName,
           font: fontB, color: rgb(0.98, 0.75, 0.14)
         });
 
@@ -152,6 +162,7 @@ export default function QCDashboard() {
       if (slug.includes("automation") || slug.includes("automatizacion") || slug.includes("automatización")) plantilla = "cert_automatizacion.pdf";
       else if (slug.includes("licitaciones")) plantilla = "cert_licitaciones_ia.pdf";
       else if (slug.includes("evm") || slug.includes("control")) plantilla = "cert_control_evm.pdf";
+      else if (slug.includes("construccion") || slug.includes("construcción")) plantilla = "cert_gestion_construccion.pdf";
       else if (slug.includes("p6") || slug.includes("primavera")) plantilla = "cert_primavera_p6.pdf";
 
       const response = await fetch(`https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/academia/${plantilla}`);
@@ -162,8 +173,15 @@ export default function QCDashboard() {
       const { width } = page1.getSize();
 
       const nombreFull = "Ing. " + (cert.nombre_completo || "").toUpperCase();
+      let fontSizeName = 21;
+      if (nombreFull.length > 28) {
+        fontSizeName = Math.max(12, 21 - (nombreFull.length - 28) * 0.45);
+      }
+      const textWidthName = fontB.widthOfTextAtSize(nombreFull, fontSizeName);
+      const xPosName = 331.5 - (textWidthName / 2);
+
       page1.drawText(nombreFull, {
-        x: (width / 2) - 257, y: 430, size: 21,
+        x: xPosName, y: 430, size: fontSizeName,
         font: fontB, color: rgb(0.98, 0.75, 0.14)
       });
 
@@ -248,7 +266,7 @@ export default function QCDashboard() {
           <div className="space-y-4">
             {resultados.map(cert => {
               const slug = (cert.nombre_curso_oficial || cert.nombre_curso_inscrito || "").toLowerCase();
-              const isAsinc = slug.includes("despertar") || slug.includes("forense") || slug.includes("presupuesto") || (cert.edicion_grupo || "").toUpperCase().includes("ASINCRONICO");
+              const isAsinc = !slug.includes("construccion") && !slug.includes("construcción") && (slug.includes("forense") || slug.includes("presupuesto") || (cert.edicion_grupo || "").toUpperCase().includes("ASINCRONICO"));
               return (
                 <div
                   key={cert.certificado_id}

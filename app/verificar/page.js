@@ -222,13 +222,24 @@ export default function Verificar() {
           p2.drawText(emisionP2, { x: w2 - fontR.widthOfTextAtSize(emisionP2, 8) - 8, y: 45, size: 8, font: fontR, color: rgb(0.3, 0.3, 0.3) });
         }
 
-        // Descargar
+        // Descargar (Forzar extensión .pdf y compatibilidad Chrome/Edge)
         const pdfBytes = await pdfDoc.save();
+        const fileName = `Certificado_Asincronico_${(cert.codigo_verificacion || cert.certificado_id || 'PCAI').replace(/[^a-zA-Z0-9_-]/g, '_')}.pdf`;
         const blob = new Blob([pdfBytes], { type: "application/pdf" });
+        const fileUrl = URL.createObjectURL(blob);
+
         const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = `Certificado_Asincronico_${cert.codigo_verificacion}.pdf`;
+        link.href = fileUrl;
+        link.setAttribute("download", fileName);
+        link.style.display = "none";
+        document.body.appendChild(link);
         link.click();
+
+        setTimeout(() => {
+          try { document.body.removeChild(link); } catch (e) {}
+          URL.revokeObjectURL(fileUrl);
+        }, 1000);
+
         alert("¡Descarga exitosa!");
         return; // Salir — no ejecutar la lógica sincrónica
       }
@@ -333,13 +344,23 @@ export default function Verificar() {
       page1.drawRectangle({ x: 710, y: 83, width: 88, height: 88, color: rgb(1, 1, 1) });
       page1.drawImage(qrImg, { x: 714, y: 87, width: 80, height: 80 });
 
-      // 6. Descargar
+      // 6. Descargar (Forzar extensión .pdf y compatibilidad Chrome/Edge)
       const pdfBytes = await pdfDoc.save();
+      const fileName = `Certificado_PCAI_${(cert.codigo_verificacion || cert.certificado_id || 'PCAI').replace(/[^a-zA-Z0-9_-]/g, '_')}.pdf`;
       const blob = new Blob([pdfBytes], { type: "application/pdf" });
+      const fileUrl = URL.createObjectURL(blob);
+
       const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = `Certificado_PCAI_${cert.codigo_verificacion}.pdf`;
+      link.href = fileUrl;
+      link.setAttribute("download", fileName);
+      link.style.display = "none";
+      document.body.appendChild(link);
       link.click();
+
+      setTimeout(() => {
+        try { document.body.removeChild(link); } catch (e) {}
+        URL.revokeObjectURL(fileUrl);
+      }, 1000);
 
       alert("¡Descarga exitosa!");
 

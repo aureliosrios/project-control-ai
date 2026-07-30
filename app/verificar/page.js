@@ -229,8 +229,7 @@ export default function Verificar() {
         link.href = URL.createObjectURL(blob);
         link.download = `Certificado_Asincronico_${cert.codigo_verificacion}.pdf`;
         link.click();
-        alert("¡Descarga exitosa! Certificado Asincrónico generado.");
-        window.location.reload();
+        alert("¡Descarga exitosa!");
         return; // Salir — no ejecutar la lógica sincrónica
       }
 
@@ -342,8 +341,7 @@ export default function Verificar() {
       link.download = `Certificado_PCAI_${cert.codigo_verificacion}.pdf`;
       link.click();
 
-      alert("¡Descarga exitosa! Registro oficial completado.");
-      window.location.reload();
+      alert("¡Descarga exitosa!");
 
     } catch (err) {
       alert("Aviso: " + err.message);

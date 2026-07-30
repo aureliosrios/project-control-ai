@@ -198,7 +198,7 @@ export default function QCDashboard() {
 
       try {
         const fImg = await pdfDoc.embedPng(await (await fetch(pFirma)).arrayBuffer());
-        page1.drawImage(fImg, { x: 437, y: 120, width: 120, height: 120 });
+        page1.drawImage(fImg, { x: 455, y: 110, width: 84, height: 84 });
       } catch (e) {}
 
       const instNombre = `Ing. ${pNombre} ${pApellido}`;

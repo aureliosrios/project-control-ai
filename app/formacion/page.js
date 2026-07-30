@@ -40,7 +40,7 @@ const asincronicos = [
   {
     id: "B2",
     nombre: "Automatización de Cronogramas con IA (Antigravity) y MS Project",
-    precio: "$15.99 USD",
+    precio: "$9.99 USD",
     tag: "CURSO B2 · PUBLICADO",
     desc: "Transforma presupuestos no estructurados en PDF (Túneles e Hidroeléctricas) en programaciones ejecutables de MS Project con WBS, Diagrama de Gantt y APUs en minutos usando Antigravity AI.",
     link: "https://pay.hotmart.com/O106954282N",

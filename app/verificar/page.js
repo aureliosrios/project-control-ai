@@ -251,8 +251,11 @@ export default function Verificar() {
       const page1 = pdfDoc.getPages()[0];
       const { width } = page1.getSize();
 
-      const nombreFull = (titulo + " " + confirmName).trim();
-      const detalle = `con una duración de 45 horas académicas, impartidas del ${formatearFecha(cert.fecha_inicio_clases)} al ${formatearFecha(cert.fecha_fin_clases)} en modalidad online.`;
+      const isConstruccion = slug.includes("construccion") || slug.includes("construcción");
+      const horasVal = isConstruccion ? "15" : "45";
+      const yDetalle = isConstruccion ? 250 : 278;
+
+      const detalle = `con una duración de ${horasVal} horas académicas, impartidas del ${formatearFecha(cert.fecha_inicio_clases)} al ${formatearFecha(cert.fecha_fin_clases)} en modalidad online.`;
 
       // 4. Estampado (COORDENADAS v11.8)
       // Nombre con Auto-Fit dinámico y centrado
@@ -276,7 +279,7 @@ export default function Verificar() {
       const dWidth = fontR.widthOfTextAtSize(detalle, 11);
       page1.drawText(detalle, { 
         x: (width / 2) - (dWidth / 2) - 85, 
-        y: 278, 
+        y: yDetalle, 
         size: 11, 
         font: fontR, 
         color: rgb(0.2, 0.2, 0.2) 

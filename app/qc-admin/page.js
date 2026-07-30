@@ -185,10 +185,14 @@ export default function QCDashboard() {
         font: fontB, color: rgb(0.98, 0.75, 0.14)
       });
 
-      const detalle = `con una duración de 45 horas académicas, impartidas del ${formatearFecha(cert.fecha_inicio_clases)} al ${formatearFecha(cert.fecha_fin_clases)} en modalidad online.`;
+      const isConstruccion = slug.includes("construccion") || slug.includes("construcción");
+      const horasVal = isConstruccion ? "15" : "45";
+      const yDetalle = isConstruccion ? 250 : 278;
+
+      const detalle = `con una duración de ${horasVal} horas académicas, impartidas del ${formatearFecha(cert.fecha_inicio_clases)} al ${formatearFecha(cert.fecha_fin_clases)} en modalidad online.`;
       const dWidth = fontR.widthOfTextAtSize(detalle, 11);
       page1.drawText(detalle, {
-        x: (width / 2) - (dWidth / 2) - 85, y: 278, size: 11,
+        x: (width / 2) - (dWidth / 2) - 85, y: yDetalle, size: 11,
         font: fontR, color: rgb(0.2, 0.2, 0.2)
       });
 

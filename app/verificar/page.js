@@ -98,15 +98,18 @@ export default function Verificar() {
       
       const isAutomation = (currentCert.nombre_curso_oficial || currentCert.nombre_curso_inscrito || "").toLowerCase().includes("automation");
 
-      // Temporalmente descargas ilimitadas
-      // if ((currentCert.descargas_count || 0) >= 1) {
-      //   throw new Error("LÍMITE DE DESCARGA AGOTADO: Este certificado ya ha sido descargado previamente. Contacte a soporte para una nueva copia.");
-      // }
+      // 1. Enforzar Límite de 1 descarga por folio
+      if ((currentCert.descargas_count || 0) >= 1) {
+        throw new Error("LÍMITE DE DESCARGA AGOTADO: Este certificado ya ha sido descargado previamente. Contacte a soporte para una nueva copia.");
+      }
 
-      // 2. Incrementar descarga (DESACTIVADO TEMPORALMENTE - DESCARGAS ILIMITADAS)
-      // try {
-      //   await supabase.rpc('incrementar_descarga', { cert_id: certId });
-      // } catch (e) {}
+      // 2. Incrementar descarga en Supabase (RPC)
+      try {
+        await supabase.rpc('incrementar_descarga', { cert_id: certId });
+      } catch (e) {}
+
+      // 3. Actualizar estado local para mostrar CERRADO inmediatamente
+      setResultados(prev => prev.map(r => r.certificado_id === certId ? { ...r, descargas_count: 1 } : r));
 
       setLoading(true);
 
@@ -525,7 +528,7 @@ export default function Verificar() {
                   if (item.estado_academico === 'ARCHIVADO') return null;
                   const curso = item.nombre_curso_oficial || item.nombre_curso_inscrito || "";
                   const isAutomation = curso.toLowerCase().includes("automation");
-                  const yaDescargado = false; // Temporalmente descargas ilimitadas
+                  const yaDescargado = (item.descargas_count || 0) >= 1;
                   const graduado = (item.estado_academico === 'GRADUADO');
                   
                   // Lógica de Estado Visual

@@ -98,13 +98,15 @@ export default function Verificar() {
       
       const isAutomation = (currentCert.nombre_curso_oficial || currentCert.nombre_curso_inscrito || "").toLowerCase().includes("automation");
 
-      if ((currentCert.descargas_count || 0) >= 1) {
-        throw new Error("LÍMITE DE DESCARGA AGOTADO: Este certificado ya ha sido descargado previamente. Contacte a soporte para una nueva copia.");
-      }
+      // Temporalmente descargas ilimitadas
+      // if ((currentCert.descargas_count || 0) >= 1) {
+      //   throw new Error("LÍMITE DE DESCARGA AGOTADO: Este certificado ya ha sido descargado previamente. Contacte a soporte para una nueva copia.");
+      // }
 
-      // 2. Incrementar descarga (RPC)
-      const { error: rpcError } = await supabase.rpc('incrementar_descarga', { cert_id: certId });
-      if (rpcError) throw new Error("No se pudo validar la descarga. Límite alcanzado.");
+      // 2. Incrementar descarga (RPC - Opcional)
+      try {
+        await supabase.rpc('incrementar_descarga', { cert_id: certId });
+      } catch (e) {}
 
       setLoading(true);
 
@@ -494,7 +496,7 @@ export default function Verificar() {
                   if (item.estado_academico === 'ARCHIVADO') return null;
                   const curso = item.nombre_curso_oficial || item.nombre_curso_inscrito || "";
                   const isAutomation = curso.toLowerCase().includes("automation");
-                  const yaDescargado = item.descargas_count >= 1;
+                  const yaDescargado = false; // Temporalmente descargas ilimitadas
                   const graduado = (item.estado_academico === 'GRADUADO');
                   
                   // Lógica de Estado Visual

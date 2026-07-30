@@ -160,15 +160,16 @@ PCAI_CONFIG = {
 **Los cursos IAD y PRO están orientados a todos los ingenieros de construcción para dominar lenguajes de IA (HTML, Mermaid, MD, CSV), Python, VBA, Skills y Scripts MCP.**
 **Automatización de Obras con Agentes de IA (Ingeniería Aumentada) (PRO) requiere haber cursado Gestión de Construcción con IA (El Despertar Digital) (IAD) como prerrequisito.**
 
-### 6B. Curso Asincrónico Publicado — Hotmart
+### 6B. Cursos Asincrónicos Publicados — Hotmart
 
-| Curso | Link | Precio |
-|-------|------|--------|
-| El Despertar de la IA en la Gestión de Proyectos (A1) | `https://go.hotmart.com/I104938744G` | $14.99 USD |
-
-### 6C. Ecosistema Asincrónico — 20 Micro-cursos (Plan futuro)
-
-6 rutas de aprendizaje, $14.99 USD para El Despertar y $15.99 USD para cada otro micro-curso. Solo A1 publicado.
+| Curso | Link Checkout | Link Temario / Producto | Precio |
+|-------|---------------|-------------------------|--------|
+| El Despertar de la IA en la Gestión de Proyectos (A1) | `https://pay.hotmart.com/I104938744G` | `https://go.hotmart.com/I104938744G?dp=1` | $14.99 USD |
+| Gestión de Documentos Contractuales en Construcción (A2) | `https://pay.hotmart.com/O105604032H` | `https://go.hotmart.com/O105604032H?dp=1` | $15.99 USD |
+| Planificación de Obras con IA (B1) | `https://pay.hotmart.com/L106624764I` | `https://go.hotmart.com/L106624764I?dp=1` | $15.99 USD |
+| Automatización de Cronogramas con IA y MS Project (B2) | `https://pay.hotmart.com/O106954282N` | `https://go.hotmart.com/O106954282N?dp=1` | $15.99 USD |
+| Automatización de Presupuestos con IA (C1) | `https://pay.hotmart.com/H105703259M` | `https://go.hotmart.com/H105703259M?dp=1` | $15.99 USD |
+| Generar EETT con Agentes de AI (C2) | `https://pay.hotmart.com/D106788121M` | `https://go.hotmart.com/D106788121M?dp=1` | $15.99 USD |
 
 | Ruta | Nombre | Cursos | Color |
 |------|--------|--------|-------|

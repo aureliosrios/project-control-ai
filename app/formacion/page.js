@@ -38,6 +38,23 @@ const asincronicos = [
     pilares: ["Análisis de APU y Recursos", "Definición de Trenes de Trabajo", "Cálculo de Productividad", "Nivelación de Cuadrillas con IA"]
   },
   {
+    id: "B2",
+    nombre: "Automatización de Cronogramas con IA (Antigravity) y MS Project",
+    precio: "$15.99 USD",
+    tag: "CURSO B2 · PUBLICADO",
+    desc: "Transforma presupuestos no estructurados en PDF (Túneles e Hidroeléctricas) en programaciones ejecutables de MS Project con WBS, Diagrama de Gantt y APUs en minutos usando Antigravity AI.",
+    link: "https://pay.hotmart.com/O106954282N",
+    brochure: "https://go.hotmart.com/O106954282N?dp=1",
+    color: "orange",
+    pilares: [
+      "Configuración de Antigravity IDE en Ingeniería Civil",
+      "Generación de código VBA (.bas) sin saber programar",
+      "Conversión de presupuestos PDF a JSON estructurado",
+      "Casos Reales: Obras de Túneles y Central Hidroeléctrica",
+      "Carga masiva de APUs, mano de obra, equipos y materiales"
+    ]
+  },
+  {
     id: "C1",
     nombre: "Automatización de Presupuestos con IA",
     precio: "$15.99 USD",
@@ -122,7 +139,7 @@ const rutas = [
     letra: "B",
     titulo: "Gestión y Control de Proyectos",
     desc: "Optimización de cronogramas y administración contractual.",
-    cursos: ["B1: Planificación Agéntica", "B2: Control de Costos (EVM)", "B3: Gestión de Riesgos IA", "B4: Dashboards HTML"]
+    cursos: ["B1: Planificación Agéntica", "B2: Automatización MS Project", "B3: Control de Costos (EVM)", "B4: Dashboards HTML"]
   },
   {
     letra: "C",
@@ -285,6 +302,13 @@ export default function Formacion() {
                       <div className="mb-6 p-4 bg-orange-500/5 border border-orange-500/10 rounded-2xl">
                         <span className="text-[9px] font-black text-orange-400 uppercase tracking-widest block mb-1">Destinado a:</span>
                         <p className="text-[11px] text-slate-300 font-medium">Planificadores de Obra, Ingenieros de Oficina Técnica y Jefes de Producción.</p>
+                      </div>
+                    )}
+
+                    {curso.id === "B2" && (
+                      <div className="mb-6 p-4 bg-orange-500/5 border border-orange-500/10 rounded-2xl">
+                        <span className="text-[9px] font-black text-orange-400 uppercase tracking-widest block mb-1">Destinado a:</span>
+                        <p className="text-[11px] text-slate-300 font-medium">Ingenieros Civiles, Residentes de Obra, Ingenieros de Planeamiento y Control de Proyectos, Arquitectos y Consultores (Licitaciones, Factibilidad e Ingenierías Conceptuales).</p>
                       </div>
                     )}
 

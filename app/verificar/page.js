@@ -269,6 +269,7 @@ export default function Verificar() {
 
       // 4. Estampado (COORDENADAS v11.8)
       // Nombre con Auto-Fit dinámico y centrado
+      const nombreFull = (titulo + " " + confirmName).trim();
       const nameUpper = nombreFull.toUpperCase();
       let fontSizeName = 21;
       if (nameUpper.length > 28) {

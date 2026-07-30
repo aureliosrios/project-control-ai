@@ -375,7 +375,13 @@ export default function Verificar() {
   // --- VISTA DE DECLARACIÓN JURADA (Para QR) ---
   if (isValidating && searchDone && alumno) {
     const slug = (alumno.nombre_curso_oficial || alumno.nombre_curso_inscrito || "").toLowerCase();
-    const isAsinc = slug.includes("despertar") || slug.includes("forense") || slug.includes("presupuesto") || alumno.edicion_grupo?.toUpperCase().includes("ASINCRONICO");
+    const isConstruccion = slug.includes("construccion") || slug.includes("construcción");
+    const isAsinc = !isConstruccion && (
+      (alumno.edicion_grupo || "").toUpperCase().includes("ASINCRONICO") ||
+      slug.includes("forense") ||
+      slug.includes("presupuesto") ||
+      slug.includes("asincronico")
+    );
 
     return (
       <div className="min-h-screen bg-slate-100 flex items-center justify-center p-6 text-slate-900 font-sans">
@@ -414,7 +420,7 @@ export default function Verificar() {
               </div>
               <div className="text-right">
                 <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Duración</span>
-                <span className="text-sm font-bold text-slate-900">{isAsinc ? "12 Horas Académicas" : "45 Horas Académicas"}</span>
+                <span className="text-sm font-bold text-slate-900">{isAsinc ? "12 Horas Académicas" : (isConstruccion ? "15 Horas Lectivas" : "45 Horas Académicas")}</span>
               </div>
             </div>
           </div>

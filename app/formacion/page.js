@@ -184,189 +184,84 @@ export default function Formacion() {
         </div>
 
         {activeTab === "asinc" ? (
-          <div className="space-y-24">
-            {/* Sección: Fundamento Transversal */}
+          <div className="space-y-16">
+            {/* Sección: Cursos Asincrónicos */}
             <div>
-              <div className="mb-10">
-                <span className="text-cyan-400 text-[10px] font-black tracking-[0.3em] uppercase block mb-2">Paso 1: Fundamento Transversal</span>
-                <h2 className="text-3xl font-black text-white uppercase tracking-tighter">Cursos Generales</h2>
-                <p className="text-slate-400 font-light text-sm max-w-2xl mt-2">
-                  Recomendado para todas las especialidades y profesionales de la construcción que inician su digitalización con IA.
+              <div className="mb-8">
+                <span className="text-cyan-400 text-[10px] font-black tracking-[0.3em] uppercase block mb-1">A tu propio ritmo</span>
+                <h2 className="text-3xl font-black text-white uppercase tracking-tighter">Cursos Asincrónicos</h2>
+                <p className="text-slate-400 font-light text-sm max-w-2xl mt-1">
+                  Capacitación especializada en IA para ingeniería y construcción con acceso inmediato.
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-8">
-                {asincronicos.filter(c => c.id === "A1").map((curso) => (
-                  <div key={curso.id} className="glass-panel p-8 rounded-[40px] flex flex-col group border-white/5 hover:border-cyan-500/30 transition-all relative overflow-hidden md:col-span-2 max-w-3xl">
-                    <div className={`absolute top-0 right-0 w-32 h-32 bg-${curso.color}-500/10 blur-[60px]`} />
-                    
-                    <span className={`text-[10px] font-black tracking-[0.3em] uppercase mb-4 text-${curso.color}-400`}>
-                      {curso.tag}
-                    </span>
-                    <h3 className="text-2xl font-black text-white mb-6 uppercase tracking-tighter leading-tight">
-                      {curso.nombre}
-                    </h3>
-                    <p className="text-slate-400 font-light mb-8 flex-1 leading-relaxed">
-                      {curso.desc}
-                    </p>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {asincronicos.map((curso) => {
+                  const masVendido = [
+                    "El Despertar de la IA en la Gestión de Proyectos",
+                    "Planificación de Obras con IA: del Presupuesto al Cronograma Nivelado",
+                    "Automatización de Presupuestos con IA"
+                  ].includes(curso.nombre);
 
-                    {/* Recomendación de Perfil Destinado */}
-                    <div className="mb-6 p-4 bg-cyan-500/5 border border-cyan-500/10 rounded-2xl">
-                      <span className="text-[9px] font-black text-cyan-400 uppercase tracking-widest block mb-1">Destinado a:</span>
-                      <p className="text-[11px] text-slate-300 font-medium">
-                        Profesionales de la construcción que se integran al mundo de la IA desde lo más básico. Este curso te preparará y dará la base técnica necesaria para llevar todos los demás cursos de la academia.
-                      </p>
-                    </div>
-
-                    <div className="space-y-3 mb-10">
-                      {curso.pilares.map((p, i) => (
-                        <div key={i} className="flex items-center gap-3 text-xs text-slate-300">
-                          <span className={`material-symbols-outlined text-[16px] text-${curso.color}-500`}>verified</span>
-                          {p}
+                  return (
+                    <div key={curso.id} className="glass-panel p-5 rounded-3xl flex flex-col justify-between group border-white/5 hover:border-cyan-500/30 transition-all relative overflow-hidden">
+                      <div className={`absolute top-0 right-0 w-24 h-24 bg-${curso.color === 'blue' ? 'indigo' : curso.color}-500/10 blur-[40px]`} />
+                      
+                      <div>
+                        <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                          <span className={`text-[9px] font-black tracking-[0.25em] uppercase text-${curso.color === 'blue' ? 'indigo' : curso.color}-400`}>
+                            {curso.tag}
+                          </span>
+                          {masVendido && (
+                            <span className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-300 border border-amber-500/40 text-[9px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider flex items-center gap-1 shadow-[0_0_12px_rgba(245,158,11,0.2)]">
+                              <span className="material-symbols-outlined text-[12px] text-amber-400">local_fire_department</span>
+                              MÁS VENDIDO
+                            </span>
+                          )}
                         </div>
-                      ))}
-                    </div>
 
-                    <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                      <div className="flex flex-col">
-                        <span className="text-2xl font-black text-white">{curso.precio}</span>
-                        <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Hotmart Access</span>
+                        <h3 className="text-lg font-black text-white mb-2 uppercase tracking-tighter leading-snug group-hover:text-cyan-300 transition-colors">
+                          {curso.nombre}
+                        </h3>
+
+                        <p className="text-slate-400 font-light text-xs mb-4 line-clamp-2 leading-relaxed">
+                          {curso.desc}
+                        </p>
                       </div>
-                      <div className="flex gap-2 w-full sm:w-auto">
-                        <Link 
-                          href={curso.brochure}
-                          target="_blank"
-                          className="flex-1 sm:flex-initial px-4 py-3.5 bg-white/5 border border-white/10 text-slate-300 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-white/10 text-center transition-all"
-                        >
-                          Temario
-                        </Link>
-                        <Link 
-                          href={curso.link} 
-                          target="_blank" 
-                          className={`flex-1 sm:flex-initial px-6 py-3.5 bg-${curso.color === 'blue' ? 'indigo' : curso.color}-500 text-slate-950 rounded-xl font-black text-[10px] uppercase tracking-widest hover:scale-105 transition-all text-center`}
-                          style={{
-                            boxShadow: `0 0 20px ${curso.color === 'cyan' ? '#06b6d4' : curso.color === 'orange' ? '#f97316' : '#6366f1'}66`
-                          }}
-                        >
-                          Comprar
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
 
-            {/* Sección: Especialidades */}
-            <div className="pt-10 border-t border-white/5">
-              <div className="mb-10">
-                <span className="text-orange-400 text-[10px] font-black tracking-[0.3em] uppercase block mb-2">Paso 2: Especialización de Élite</span>
-                <h2 className="text-3xl font-black text-white uppercase tracking-tighter">Cursos de Especialidad</h2>
-                <p className="text-slate-400 font-light text-sm max-w-2xl mt-2">
-                  Herramientas y metodologías de élite diseñadas para áreas técnicas y roles específicos del proyecto.
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-8">
-                {asincronicos.filter(c => c.id !== "A1").map((curso) => (
-                  <div key={curso.id} className="glass-panel p-8 rounded-[40px] flex flex-col group border-white/5 hover:border-cyan-500/30 transition-all relative overflow-hidden">
-                    <div className={`absolute top-0 right-0 w-32 h-32 bg-${curso.color === 'blue' ? 'indigo' : curso.color}-500/10 blur-[60px]`} />
-                    
-                    <div className="flex justify-between items-start mb-4">
-                      <span className={`text-[10px] font-black tracking-[0.3em] uppercase text-${curso.color === 'blue' ? 'indigo' : curso.color}-400`}>
-                        {curso.tag}
-                      </span>
-                      {curso.id === "B1" && (
-                        <span className="bg-orange-500/10 text-orange-400 border border-orange-500/20 text-[8px] font-black px-2 py-1 rounded-full uppercase tracking-widest">
-                          ★ Recom. Haber Llevado C1
-                        </span>
-                      )}
-                    </div>
-
-                    <h3 className="text-2xl font-black text-white mb-6 uppercase tracking-tighter leading-tight">
-                      {curso.nombre}
-                    </h3>
-                    <p className="text-slate-400 font-light mb-8 flex-1 leading-relaxed">
-                      {curso.desc}
-                    </p>
-
-                    {/* Recomendación de Perfil Destinado */}
-                    {curso.id === "A2" && (
-                      <div className="mb-6 p-4 bg-orange-500/5 border border-orange-500/10 rounded-2xl">
-                        <span className="text-[9px] font-black text-orange-400 uppercase tracking-widest block mb-1">Destinado a:</span>
-                        <p className="text-[11px] text-slate-300 font-medium">Administradores de Contratos, Gerentes de Obra, Jefes de Calidad y Jefes de Seguridad.</p>
-                      </div>
-                    )}
-
-                    {curso.id === "B1" && (
-                      <div className="mb-6 p-4 bg-orange-500/5 border border-orange-500/10 rounded-2xl">
-                        <span className="text-[9px] font-black text-orange-400 uppercase tracking-widest block mb-1">Destinado a:</span>
-                        <p className="text-[11px] text-slate-300 font-medium">Planificadores de Obra, Ingenieros de Oficina Técnica y Jefes de Producción.</p>
-                      </div>
-                    )}
-
-                    {curso.id === "B2" && (
-                      <div className="mb-6 p-4 bg-orange-500/5 border border-orange-500/10 rounded-2xl">
-                        <span className="text-[9px] font-black text-orange-400 uppercase tracking-widest block mb-1">Destinado a:</span>
-                        <p className="text-[11px] text-slate-300 font-medium">Ingenieros Civiles, Residentes de Obra, Ingenieros de Planeamiento y Control de Proyectos, Arquitectos y Consultores (Licitaciones, Factibilidad e Ingenierías Conceptuales).</p>
-                      </div>
-                    )}
-
-                    {curso.id === "C1" && (
-                      <div className="mb-6 p-4 bg-indigo-500/5 border border-indigo-500/10 rounded-2xl">
-                        <span className="text-[9px] font-black text-indigo-400 uppercase tracking-widest block mb-1">Destinado a:</span>
-                        <p className="text-[11px] text-slate-300 font-medium">Ingenieros de Costos, Valorizadores y Licitadores de Proyectos.</p>
-                      </div>
-                    )}
-
-                    {curso.id === "C2" && (
-                      <div className="mb-6 p-4 bg-indigo-500/5 border border-indigo-500/10 rounded-2xl">
-                        <span className="text-[9px] font-black text-indigo-400 uppercase tracking-widest block mb-1">Destinado a:</span>
-                        <p className="text-[11px] text-slate-300 font-medium">Ingenieros de Oficina Técnica, Diseñadores de Proyectos, Revisores de Expedientes y Consultores.</p>
-                      </div>
-                    )}
-
-                    <div className="space-y-3 mb-10">
-                      {curso.pilares.map((p, i) => (
-                        <div key={i} className="flex items-center gap-3 text-xs text-slate-300">
-                          <span className={`material-symbols-outlined text-[16px] text-${curso.color === 'blue' ? 'indigo' : curso.color}-500`}>verified</span>
-                          {p}
+                      <div className="pt-4 border-t border-white/5 flex items-center justify-between gap-3 mt-2">
+                        <div className="flex flex-col">
+                          <span className="text-lg font-black text-white">{curso.precio}</span>
+                          <span className="text-[8px] text-slate-500 font-bold uppercase tracking-widest">Hotmart</span>
                         </div>
-                      ))}
-                    </div>
-
-                    <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                      <div className="flex flex-col">
-                        <span className="text-2xl font-black text-white">{curso.precio}</span>
-                        <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Hotmart Access</span>
-                      </div>
-                      <div className="flex gap-2 w-full sm:w-auto">
-                        <Link 
-                          href={curso.brochure}
-                          target="_blank"
-                          className="flex-1 sm:flex-initial px-4 py-3.5 bg-white/5 border border-white/10 text-slate-300 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-white/10 text-center transition-all"
-                        >
-                          Temario
-                        </Link>
-                        <Link 
-                          href={curso.link} 
-                          target="_blank" 
-                          className={`flex-1 sm:flex-initial px-6 py-3.5 bg-${curso.color === 'blue' ? 'indigo' : curso.color}-500 text-slate-950 rounded-xl font-black text-[10px] uppercase tracking-widest hover:scale-105 transition-all text-center`}
-                          style={{
-                            boxShadow: `0 0 20px ${curso.color === 'cyan' ? '#06b6d4' : curso.color === 'orange' ? '#f97316' : '#6366f1'}66`
-                          }}
-                        >
-                          Comprar
-                        </Link>
+                        <div className="flex gap-2">
+                          <Link 
+                            href={curso.brochure}
+                            target="_blank"
+                            className="px-3 py-2 bg-white/5 border border-white/10 text-slate-300 rounded-lg font-bold text-[9px] uppercase tracking-wider hover:bg-white/10 hover:text-white text-center transition-all"
+                          >
+                            Temario
+                          </Link>
+                          <Link 
+                            href={curso.link} 
+                            target="_blank" 
+                            className={`px-4 py-2 bg-${curso.color === 'blue' ? 'indigo' : curso.color}-500 text-slate-950 rounded-lg font-black text-[9px] uppercase tracking-wider hover:scale-105 transition-all text-center`}
+                            style={{
+                              boxShadow: `0 0 15px ${curso.color === 'cyan' ? '#06b6d4' : curso.color === 'orange' ? '#f97316' : '#6366f1'}55`
+                            }}
+                          >
+                            Comprar
+                          </Link>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
             {/* Ecosystem Plan */}
-            <section className="pt-20">
+            <section className="pt-12 border-t border-white/5">
               <div className="text-center mb-16">
                 <span className="text-cyan-400 text-[10px] font-black tracking-[0.5em] uppercase mb-4 block">Ecosistema 2026</span>
                 <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase mb-6">Plan de Micro-Especialización</h2>

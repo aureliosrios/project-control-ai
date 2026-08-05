@@ -1,25 +1,17 @@
 import requests
 import re
 
-url = "https://project-control-ai-one.vercel.app/formacion"
-r = requests.get(url, timeout=10)
-print("Page status:", r.status_code)
+url = "https://project-control-ai-one.vercel.app/clases-grabadas"
+r = requests.get(url)
+chunks = re.findall(r'/_next/static/chunks/[^"\']+\.js', r.text)
 
-# Find all script src
-scripts = re.findall(r'src="(/_next/static/chunks/[^"]+)"', r.text)
-print("Script src found:", scripts)
-
-for s in scripts:
-    s_url = f"https://project-control-ai-one.vercel.app{s}"
-    s_res = requests.get(s_url, timeout=10)
-    print(f"--- Chunk: {s} (size: {len(s_res.text)}) ---")
-    if "B1" in s_res.text:
-        print("  [FOUND B1]")
-    if "B2" in s_res.text:
-        print("  [FOUND B2]")
-    if "O106954282N" in s_res.text:
-        print("  [FOUND HOTMART ID O106954282N!]")
-    if "Automatización de Cronogramas" in s_res.text:
-        print("  [FOUND CURSO TITLE!]")
-    if "Cronogramas" in s_res.text:
-        print("  [FOUND 'Cronogramas']")
+print(f"Chunks encontrados en HTML: {len(chunks)}")
+for c in chunks:
+    chunk_url = f"https://project-control-ai-one.vercel.app{c}"
+    content = requests.get(chunk_url).text
+    if "AUT_CONST" in content or "02/08/2026" in content or "I72FS-n0bPo" in content:
+        print(f"Match en {c}:")
+        if "I72FS-n0bPo" in content:
+            print("  - Contiene ID del 02/08: I72FS-n0bPo")
+        if "-qJS3nmWZuA" in content:
+            print("  - Contiene ID antiguo del 19/07: -qJS3nmWZuA")

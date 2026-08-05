@@ -66,31 +66,17 @@ const courses = {
         desc: "Clase del 05 de Julio: Segunda sesión del curso enfocado en automatización de procesos de construcción con agentes de IA."
       },
       {
-        id: "-qJS3nmWZuA",
-        num: "04-A",
-        status: "OCULTA",
-        title: "Automatización para Construcción (Parte 1) - 19/07/2026",
-        desc: "Clase del 19 de Julio (10:00 a.m. - Parte 1): Flujos avanzados de automatización y soluciones de IA para la gestión de construcción."
-      },
-      {
-        id: "HgttITI9PU0",
-        num: "04-B",
-        status: "OCULTA",
-        title: "Automatización para Construcción (Parte 2) - 19/07/2026",
-        desc: "Clase del 19 de Julio (11:09 a.m. - Parte 2): Flujos avanzados de automatización y soluciones de IA para la gestión de construcción."
-      },
-      {
         id: "yO7yivEBf0k",
-        num: "05",
+        num: "04",
         status: "OCULTA",
-        title: "Lección 05: Automatización de Procesos - Clase 3",
+        title: "Lección 04: Automatización de Procesos - Clase 3",
         desc: "Clase del 26 de Julio (03:00 p.m. - 06:00 p.m.): Tercera sesión del curso enfocado en automatización de procesos de construcción con agentes de IA."
       },
       {
         id: "I72FS-n0bPo",
-        num: "06",
+        num: "05",
         status: "OCULTA",
-        title: "Lección 06: Automatización de Procesos - Clase 4 (02/08/2026)",
+        title: "Lección 05: Automatización de Procesos - Clase 4 (02/08/2026)",
         desc: "Clase del 02 de Agosto (03:00 p.m. - 06:16 p.m.): Cuarta sesión del curso enfocado en automatización de procesos de construcción con agentes de IA (Duración: 3h 16m)."
       }
     ]

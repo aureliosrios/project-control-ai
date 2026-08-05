@@ -195,7 +195,7 @@ export default function Formacion() {
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {asincronicos.map((curso) => {
                   const masVendido = [
                     "El Despertar de la IA en la Gestión de Proyectos",
@@ -203,51 +203,111 @@ export default function Formacion() {
                     "Automatización de Presupuestos con IA"
                   ].includes(curso.nombre);
 
+                  // Definición de paletas de color únicas por curso para máxima diferenciación visual
+                  const themeMap = {
+                    A1: {
+                      border: "hover:border-cyan-500/50 border-cyan-500/20",
+                      glow: "bg-cyan-500/10",
+                      tagText: "text-cyan-400",
+                      badgeBg: "from-cyan-500/20 to-blue-500/20 text-cyan-300 border-cyan-500/40",
+                      btnBg: "bg-cyan-500 text-slate-950 hover:bg-cyan-400",
+                      btnShadow: "0 0 15px rgba(6, 182, 212, 0.4)",
+                      priceGlow: "text-cyan-400"
+                    },
+                    A2: {
+                      border: "hover:border-amber-500/50 border-amber-500/20",
+                      glow: "bg-amber-500/10",
+                      tagText: "text-amber-400",
+                      badgeBg: "from-amber-500/20 to-orange-500/20 text-amber-300 border-amber-500/40",
+                      btnBg: "bg-amber-500 text-slate-950 hover:bg-amber-400",
+                      btnShadow: "0 0 15px rgba(245, 158, 11, 0.4)",
+                      priceGlow: "text-amber-400"
+                    },
+                    B1: {
+                      border: "hover:border-orange-500/50 border-orange-500/20",
+                      glow: "bg-orange-500/10",
+                      tagText: "text-orange-400",
+                      badgeBg: "from-orange-500/20 to-red-500/20 text-orange-300 border-orange-500/40",
+                      btnBg: "bg-orange-500 text-slate-950 hover:bg-orange-400",
+                      btnShadow: "0 0 15px rgba(249, 115, 22, 0.4)",
+                      priceGlow: "text-orange-400"
+                    },
+                    B2: {
+                      border: "hover:border-emerald-500/50 border-emerald-500/20",
+                      glow: "bg-emerald-500/10",
+                      tagText: "text-emerald-400",
+                      badgeBg: "from-emerald-500/20 to-teal-500/20 text-emerald-300 border-emerald-500/40",
+                      btnBg: "bg-emerald-500 text-slate-950 hover:bg-emerald-400",
+                      btnShadow: "0 0 15px rgba(16, 185, 129, 0.4)",
+                      priceGlow: "text-emerald-400"
+                    },
+                    C1: {
+                      border: "hover:border-indigo-500/50 border-indigo-500/20",
+                      glow: "bg-indigo-500/10",
+                      tagText: "text-indigo-400",
+                      badgeBg: "from-indigo-500/20 to-purple-500/20 text-indigo-300 border-indigo-500/40",
+                      btnBg: "bg-indigo-500 text-white hover:bg-indigo-400",
+                      btnShadow: "0 0 15px rgba(99, 102, 241, 0.4)",
+                      priceGlow: "text-indigo-400"
+                    },
+                    C2: {
+                      border: "hover:border-purple-500/50 border-purple-500/20",
+                      glow: "bg-purple-500/10",
+                      tagText: "text-purple-400",
+                      badgeBg: "from-purple-500/20 to-pink-500/20 text-purple-300 border-purple-500/40",
+                      btnBg: "bg-purple-500 text-white hover:bg-purple-400",
+                      btnShadow: "0 0 15px rgba(168, 85, 247, 0.4)",
+                      priceGlow: "text-purple-400"
+                    }
+                  };
+
+                  const theme = themeMap[curso.id] || themeMap.A1;
+
                   return (
-                    <div key={curso.id} className="glass-panel p-5 rounded-3xl flex flex-col justify-between group border-white/5 hover:border-cyan-500/30 transition-all relative overflow-hidden">
-                      <div className={`absolute top-0 right-0 w-24 h-24 bg-${curso.color === 'blue' ? 'indigo' : curso.color}-500/10 blur-[40px]`} />
+                    <div key={curso.id} className={`glass-panel p-6 rounded-3xl flex flex-col justify-between group transition-all duration-300 relative overflow-hidden bg-slate-900/60 backdrop-blur-xl border ${theme.border}`}>
+                      <div className={`absolute top-0 right-0 w-32 h-32 ${theme.glow} blur-[50px] pointer-events-none`} />
                       
                       <div>
-                        <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                          <span className={`text-[9px] font-black tracking-[0.25em] uppercase text-${curso.color === 'blue' ? 'indigo' : curso.color}-400`}>
+                        <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                          <span className={`text-[10px] font-black tracking-[0.2em] uppercase ${theme.tagText}`}>
                             {curso.tag}
                           </span>
                           {masVendido && (
-                            <span className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-300 border border-amber-500/40 text-[9px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider flex items-center gap-1 shadow-[0_0_12px_rgba(245,158,11,0.2)]">
-                              <span className="material-symbols-outlined text-[12px] text-amber-400">local_fire_department</span>
+                            <span className={`bg-gradient-to-r ${theme.badgeBg} border text-[9px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider flex items-center gap-1 shadow-[0_0_12px_rgba(245,158,11,0.15)]`}>
+                              <span className="material-symbols-outlined text-[12px]">local_fire_department</span>
                               MÁS VENDIDO
                             </span>
                           )}
                         </div>
 
-                        <h3 className="text-lg font-black text-white mb-2 uppercase tracking-tighter leading-snug group-hover:text-cyan-300 transition-colors">
+                        <h3 className="text-base md:text-lg font-bold text-slate-100 mb-3 leading-snug tracking-normal group-hover:text-white transition-colors">
                           {curso.nombre}
                         </h3>
 
-                        <p className="text-slate-400 font-light text-xs mb-4 line-clamp-2 leading-relaxed">
+                        <p className="text-slate-400 font-normal text-xs mb-5 line-clamp-3 leading-relaxed">
                           {curso.desc}
                         </p>
                       </div>
 
-                      <div className="pt-4 border-t border-white/5 flex items-center justify-between gap-3 mt-2">
+                      <div className="pt-4 border-t border-white/10 flex items-center justify-between gap-3 mt-2">
                         <div className="flex flex-col">
-                          <span className="text-lg font-black text-white">{curso.precio}</span>
+                          <span className="text-xl font-extrabold text-white tracking-tight">{curso.precio}</span>
                           <span className="text-[8px] text-slate-500 font-bold uppercase tracking-widest">Hotmart</span>
                         </div>
                         <div className="flex gap-2">
                           <Link 
                             href={curso.brochure}
                             target="_blank"
-                            className="px-3 py-2 bg-white/5 border border-white/10 text-slate-300 rounded-lg font-bold text-[9px] uppercase tracking-wider hover:bg-white/10 hover:text-white text-center transition-all"
+                            className="px-3.5 py-2.5 bg-white/5 border border-white/10 text-slate-300 rounded-xl font-semibold text-[10px] uppercase tracking-wider hover:bg-white/15 hover:text-white text-center transition-all"
                           >
                             Temario
                           </Link>
                           <Link 
                             href={curso.link} 
                             target="_blank" 
-                            className={`px-4 py-2 bg-${curso.color === 'blue' ? 'indigo' : curso.color}-500 text-slate-950 rounded-lg font-black text-[9px] uppercase tracking-wider hover:scale-105 transition-all text-center`}
+                            className={`px-4 py-2.5 ${theme.btnBg} rounded-xl font-bold text-[10px] uppercase tracking-wider hover:scale-105 transition-all text-center`}
                             style={{
-                              boxShadow: `0 0 15px ${curso.color === 'cyan' ? '#06b6d4' : curso.color === 'orange' ? '#f97316' : '#6366f1'}55`
+                              boxShadow: theme.btnShadow
                             }}
                           >
                             Comprar

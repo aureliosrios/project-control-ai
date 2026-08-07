@@ -90,6 +90,7 @@ const sincronicos = [
     horario: "Todos los domingos · 10:00 AM – 1:00 PM",
     sesiones: "18h · 6 sesiones",
     link: "/inscripcion",
+    brochure: "/brochures/Brochure_Agentes_IA_Presupuestos_EETT_Cronogramas.pdf",
     hotmart: "https://pay.hotmart.com/K104218834V",
     paypal: "https://paypal.me/ProjectControlAI",
     color: "cyan",
@@ -424,12 +425,24 @@ export default function Formacion() {
                             <span className="text-2xl font-black text-white">{curso.precio}</span>
                             <span className="text-[10px] text-cyan-400 font-bold uppercase tracking-widest">{curso.precioSoles}</span>
                           </div>
-                          <Link 
-                            href={curso.link} 
-                            className={`px-6 py-3 bg-white/5 border border-white/10 text-white rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-white/10 transition-all`}
-                          >
-                            Inscribirme
-                          </Link>
+                          <div className="flex gap-2">
+                            {curso.brochure && (
+                              <Link 
+                                href={curso.brochure} 
+                                target="_blank"
+                                className="px-4 py-3 bg-white/5 border border-white/10 text-slate-300 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-white/15 hover:text-white transition-all flex items-center gap-1.5"
+                              >
+                                <span className="material-symbols-outlined text-sm">download</span>
+                                Temario
+                              </Link>
+                            )}
+                            <Link 
+                              href={curso.link} 
+                              className={`px-6 py-3 bg-white/5 border border-white/10 text-white rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-white/10 transition-all`}
+                            >
+                              Inscribirme
+                            </Link>
+                          </div>
                         </div>
                         
                         <div className="grid grid-cols-2 gap-3">

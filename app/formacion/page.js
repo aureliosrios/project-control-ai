@@ -81,13 +81,13 @@ const asincronicos = [
 const sincronicos = [
   {
     id: "S1",
-    nombre: "Agentes de IA de Cero a Experto: Presupuestos, EETT y Cronogramas",
+    nombre: "Agentes de IA: Presupuestos, EETT y Cronogramas",
     precio: "$97.00 USD",
     precioSoles: "S/. 300",
     tag: "CURSO 1 · MASTERCLASS",
     desc: "Aprende a automatizar el flujo completo de obra con Agentes Autónomos, SkillsPro y Cerebros Digitales: Presupuestos en Excel con fórmulas vivas, EETT en Word (.docx) y Cronogramas en MS Project vía Macros VBA (.bas).",
-    inicio: "Próximamente",
-    horario: "Sábados y Domingos · 10:00 AM – 1:00 PM",
+    inicio: "Domingo 16 de Agosto, 2026",
+    horario: "Todos los domingos · 10:00 AM – 1:00 PM",
     sesiones: "18h · 6 sesiones",
     link: "/inscripcion",
     hotmart: "https://pay.hotmart.com/K104218834V",
@@ -369,7 +369,7 @@ export default function Formacion() {
                     )}
                   </div>
 
-                  <h3 className="text-2xl font-black text-white mb-6 uppercase tracking-tighter leading-tight">
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-6 tracking-tight leading-snug">
                     {curso.nombre}
                   </h3>
                   <p className="text-slate-400 font-light mb-8 flex-1 text-sm leading-relaxed">

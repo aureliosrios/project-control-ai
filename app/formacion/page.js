@@ -109,7 +109,8 @@ const sincronicos = [
     link: "/inscripcion",
     hotmart: "https://pay.hotmart.com/I104227016S",
     paypal: "https://paypal.me/ProjectControlAI",
-    color: "blue"
+    color: "blue",
+    cerrado: true
   },
   {
     id: "S3",

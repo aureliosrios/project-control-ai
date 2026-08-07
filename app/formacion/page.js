@@ -81,19 +81,19 @@ const asincronicos = [
 const sincronicos = [
   {
     id: "S1",
-    nombre: "Gestión de Construcción con IA (El Despertar Digital)",
-    precio: "$75.00 USD",
-    precioSoles: "S/. 200",
-    tag: "CURSO 1 · BÁSICO",
-    desc: "El inicio de la era digital para ingenieros. Domina la Gestión de Alcance, Contratos, Calidad y HSE mediante informes en HTML, flujogramas en Mermaid y documentos en MD/CSV.",
-    inicio: "14 de Junio, 2026",
-    horario: "Domingos · 10:00 AM – 1:00 PM",
-    sesiones: "15h · 5 sesiones",
+    nombre: "Agentes de IA de Cero a Experto: Presupuestos, EETT y Cronogramas",
+    precio: "$97.00 USD",
+    precioSoles: "S/. 300",
+    tag: "CURSO 1 · MASTERCLASS",
+    desc: "Aprende a automatizar el flujo completo de obra con Agentes Autónomos, SkillsPro y Cerebros Digitales: Presupuestos en Excel con fórmulas vivas, EETT en Word (.docx) y Cronogramas en MS Project vía Macros VBA (.bas).",
+    inicio: "Próximamente",
+    horario: "Sábados y Domingos · 10:00 AM – 1:00 PM",
+    sesiones: "18h · 6 sesiones",
     link: "/inscripcion",
     hotmart: "https://pay.hotmart.com/K104218834V",
     paypal: "https://paypal.me/ProjectControlAI",
     color: "cyan",
-    cerrado: true
+    cerrado: false
   },
   {
     id: "S2",

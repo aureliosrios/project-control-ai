@@ -82,7 +82,7 @@ const sincronicos = [
   {
     id: "S1",
     nombre: "Agentes de IA: Presupuestos, EETT y Cronogramas",
-    precio: "$97.00 USD",
+    precio: "$100.00 USD",
     precioSoles: "S/. 300",
     tag: "CURSO 1 · MASTERCLASS",
     desc: "Aprende a automatizar el flujo completo de obra con Agentes Autónomos, SkillsPro y Cerebros Digitales: Presupuestos en Excel con fórmulas vivas, EETT en Word (.docx) y Cronogramas en MS Project vía Macros VBA (.bas).",

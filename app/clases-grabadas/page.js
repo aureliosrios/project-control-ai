@@ -78,6 +78,13 @@ const courses = {
         status: "OCULTA",
         title: "Lección 05: Automatización de Procesos - Clase 4 (02/08/2026)",
         desc: "Clase del 02 de Agosto (03:00 p.m. - 06:16 p.m.): Cuarta sesión del curso enfocado en automatización de procesos de construcción con agentes de IA (Duración: 3h 16m)."
+      },
+      {
+        id: "jnL8GbiH3zI",
+        num: "06",
+        status: "OCULTA",
+        title: "Lección 06: Automatización de Procesos - Clase 5 (09/08/2026)",
+        desc: "Clase del 09 de Agosto (03:00 p.m. - 06:06 p.m.): Quinta sesión del curso enfocado en automatización de procesos de construcción con agentes de IA (Duración: 3h 06m)."
       }
     ]
   },

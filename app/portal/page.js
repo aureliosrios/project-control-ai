@@ -120,13 +120,17 @@ export default function StudentPortal() {
       });
 
       const processedEnrollments = Object.values(uniqueEnrollmentsMap).map(enroll => {
-        const cert = certificates?.find(c => 
-          c.curso === enroll.curso || 
-          c.nombre_curso_oficial === enroll.curso || 
-          c.nombre_curso_inscrito === enroll.curso ||
-          (c.nombre_curso_oficial && enroll.curso && c.nombre_curso_oficial.toLowerCase().includes(enroll.curso.toLowerCase())) ||
-          (c.nombre_curso_inscrito && enroll.curso && c.nombre_curso_inscrito.toLowerCase().includes(enroll.curso.toLowerCase()))
-        );
+        const cert = certificates?.find(c => {
+          const cName = (c.nombre_curso_oficial || c.nombre_curso_inscrito || c.curso || "").toLowerCase();
+          const eName = (enroll.curso || "").toLowerCase();
+          if (!cName || !eName) return false;
+          if (cName === eName) return true;
+          if (cName.includes(eName) || eName.includes(cName)) return true;
+          if ((cName.includes("despertar") || cName.includes("construc")) && (eName.includes("despertar") || eName.includes("construc"))) return true;
+          if ((cName.includes("automation") || cName.includes("agentes") || cName.includes("obras")) && (eName.includes("automation") || eName.includes("agentes") || eName.includes("obras"))) return true;
+          if (cName.includes("licitac") && eName.includes("licitac")) return true;
+          return false;
+        });
         let status = cert ? "GRADUADO" : "INSCRITO";
         let daysLeft = 999; 
         let accessExpired = false;

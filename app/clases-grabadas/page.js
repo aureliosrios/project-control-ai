@@ -220,7 +220,7 @@ export default function ClasesGrabadas() {
 
       // 3. Obtener certificados para verificar expiraciones (60 días post-graduación)
       const { data: certificates } = await supabase
-        .from('certificados')
+        .from('vw_certificados_publicos')
         .select('*')
         .eq('dni', dni);
 

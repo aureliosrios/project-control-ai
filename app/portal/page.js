@@ -46,7 +46,7 @@ export default function StudentPortal() {
         .eq('dni', trimmedDni);
 
       const { data: certificates } = await supabase
-        .from('certificados')
+        .from('vw_certificados_publicos')
         .select('*')
         .eq('dni', trimmedDni);
 
@@ -120,7 +120,13 @@ export default function StudentPortal() {
       });
 
       const processedEnrollments = Object.values(uniqueEnrollmentsMap).map(enroll => {
-        const cert = certificates?.find(c => c.curso === enroll.curso);
+        const cert = certificates?.find(c => 
+          c.curso === enroll.curso || 
+          c.nombre_curso_oficial === enroll.curso || 
+          c.nombre_curso_inscrito === enroll.curso ||
+          (c.nombre_curso_oficial && enroll.curso && c.nombre_curso_oficial.toLowerCase().includes(enroll.curso.toLowerCase())) ||
+          (c.nombre_curso_inscrito && enroll.curso && c.nombre_curso_inscrito.toLowerCase().includes(enroll.curso.toLowerCase()))
+        );
         let status = cert ? "GRADUADO" : "INSCRITO";
         let daysLeft = 999; 
         let accessExpired = false;
@@ -135,8 +141,9 @@ export default function StudentPortal() {
           };
         }
 
-        if (status === "GRADUADO" && cert.fecha) {
-          const fechaCert = new Date(cert.fecha);
+        const fechaCertStr = cert ? (cert.fecha_fin_clases || cert.fecha_emision || cert.fecha) : null;
+        if (status === "GRADUADO" && fechaCertStr) {
+          const fechaCert = new Date(fechaCertStr);
           const hoy = new Date();
           const diffTime = hoy - fechaCert;
           const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));

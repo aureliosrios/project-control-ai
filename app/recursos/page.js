@@ -7,6 +7,15 @@ import Sidebar from "../portal/components/Sidebar";
 
 const resources = [
   { 
+    id: 0, 
+    type: "brochure", 
+    courseKey: "AGENTES_IA", 
+    title: "Agentes de IA: Presupuestos, EETT y Cronogramas", 
+    desc: "Automatización integral de expedientes, presupuestos vivos en Excel, EETT en Word y cronogramas en MS Project.", 
+    img: "/images/Automation.png", 
+    link: "/brochures/Brochure_Agentes_IA_Presupuestos_EETT_Cronogramas.pdf" 
+  },
+  { 
     id: 1, 
     type: "brochure", 
     courseKey: "LIC", 

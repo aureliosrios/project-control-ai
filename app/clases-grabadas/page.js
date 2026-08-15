@@ -6,6 +6,10 @@ import SecurityOverlay from "../portal/components/SecurityOverlay";
 import { supabase } from "@/lib/supabase";
 
 const courses = {
+  "AGENTES_IA": {
+    name: "Agentes de IA: Presupuestos, EETT y Cronogramas (Sesiones en Vivo)",
+    lessons: []
+  },
   "AE": {
     name: "Automatización de Obras con Agentes de IA (Ingeniería Aumentada) (Sesiones en Vivo)",
     lessons: [

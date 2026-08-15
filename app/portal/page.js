@@ -62,6 +62,13 @@ export default function StudentPortal() {
         const cursoLower = enroll.curso?.trim().toLowerCase();
         
         if (
+          cursoLower?.includes("presupuesto") || 
+          cursoLower?.includes("eett") || 
+          cursoLower?.includes("cronograma") ||
+          (cursoLower?.includes("agentes") && cursoLower?.includes("presupuesto"))
+        ) {
+          cursoHomogeneizado = "Agentes de IA: Presupuestos, EETT y Cronogramas";
+        } else if (
           cursoLower?.includes("gestion proyectos ia") || 
           cursoLower?.includes("gestión integral de proyectos con ia") ||
           cursoLower?.includes("gestion integral de proyectos con ia") ||
@@ -272,6 +279,7 @@ export default function StudentPortal() {
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "");
       
+    if (name.includes("presupuesto") || name.includes("eett") || name.includes("cronograma") || (name.includes("agentes") && name.includes("presupuesto"))) return "AGENTES_IA";
     if (name.includes("automation") || name.includes("ingenieria") || name.includes("automatizacion")) return "AE";
     if (name.includes("licitacion")) return "LIC";
     if (name.includes("despertar") || name.includes("gestion proyectos ia") || name.includes("gip") || name.includes("el despertar") || name.includes("gestion integral")) return "GIP";
@@ -281,6 +289,12 @@ export default function StudentPortal() {
 
 
   const activeZoomSessions = [
+    {
+      courseKey: "AGENTES_IA",
+      zoomUrl: "https://us06web.zoom.us/j/84609995401?pwd=mrbaCGEiPvc7Aa5XlAcpnDNICMMuwt.1",
+      title: "Agentes de IA: Presupuestos, EETT y Cronogramas",
+      message: "¡La clase sincrónica está en vivo! Toca el botón para ingresar a la sala de Zoom."
+    },
     {
       courseKey: "AE",
       zoomUrl: "https://us06web.zoom.us/j/82973721151?pwd=1x6ebtWbhanU26CWSrvVJZNSLzNi7C.1",

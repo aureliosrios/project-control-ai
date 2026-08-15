@@ -172,6 +172,7 @@ const getCourseKey = (dbCursoName) => {
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
     
+  if (name.includes("presupuesto") || name.includes("eett") || name.includes("cronograma") || (name.includes("agentes") && name.includes("presupuesto")) || name.includes("agentes de ia")) return "AGENTES_IA";
   if (name.includes("automation engineer")) return "AE";
   if (name.includes("automatizacion y soluciones") || name.includes("soluciones de ia")) return "AUT_CONST";
   if (name.includes("licitacion")) return "LIC";
@@ -347,7 +348,7 @@ export default function ClasesGrabadas() {
                       : 'text-slate-400 hover:text-white'
                   }`}
                 >
-                  {c.key === "AE" ? "Automatización de Obras con Agentes de IA (Ingeniería Aumentada)" : c.key === "GIP" ? "Gestión de Construcción con IA (El Despertar Digital)" : c.key === "AUT_CONST" ? "Automatización y Soluciones de IA para la Gestión de Construcción" : "Licitaciones de Construcción con IA (Licitaciones Inteligentes)"}
+                  {c.key === "AGENTES_IA" ? "Agentes de IA: Presupuestos, EETT y Cronogramas" : c.key === "AE" ? "Automatización de Obras con Agentes de IA (Ingeniería Aumentada)" : c.key === "GIP" ? "Gestión de Construcción con IA (El Despertar Digital)" : c.key === "AUT_CONST" ? "Automatización y Soluciones de IA para la Gestión de Construcción" : "Licitaciones de Construcción con IA (Licitaciones Inteligentes)"}
                 </button>
               ))}
             </div>

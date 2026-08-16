@@ -8,7 +8,16 @@ import { supabase } from "@/lib/supabase";
 const courses = {
   "AGENTES_IA": {
     name: "Agentes de IA: Presupuestos, EETT y Cronogramas (Sesiones en Vivo)",
-    lessons: []
+    lessons: [      {
+        id: "NjWnA5b9Zho",
+        num: "01",
+        status: "OCULTA",
+        title: "Resumen Clase 1",
+        desc: "Clase grabada correspondiente a la sesión del 2026-08-16 del curso Agentes de IA: Presupuestos, EETT y Cronogramas.",
+        resources: [
+          { title: "Resumen Interactivo de la Clase 1 (HTML)", type: "html", url: "/manuales/resumen_clase_1.html" }
+        ]
+      }]
   },
   "AE": {
     name: "Automatización de Obras con Agentes de IA (Ingeniería Aumentada) (Sesiones en Vivo)",

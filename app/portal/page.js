@@ -112,15 +112,20 @@ export default function StudentPortal() {
         };
       });
 
-      // Fusionar duplicados en memoria conservando el acceso VIP si existe
+      // Fusionar duplicados en memoria (priorizando acceso VIP y luego la matrícula más reciente)
       const uniqueEnrollmentsMap = {};
       homogenizedEnrollments.forEach(enroll => {
         const key = enroll.curso;
-        if (!uniqueEnrollmentsMap[key]) {
+        const existing = uniqueEnrollmentsMap[key];
+        if (!existing) {
           uniqueEnrollmentsMap[key] = enroll;
         } else {
-          // Si ya existe una matrícula, conservamos la que tenga VIP
-          if (enroll.acceso_vip === true) {
+          const enrollDate = new Date(enroll.created_at || 0);
+          const existingDate = new Date(existing.created_at || 0);
+          
+          if (enroll.acceso_vip === true && existing.acceso_vip !== true) {
+            uniqueEnrollmentsMap[key] = enroll;
+          } else if (enroll.acceso_vip === existing.acceso_vip && enrollDate > existingDate) {
             uniqueEnrollmentsMap[key] = enroll;
           }
         }
@@ -165,19 +170,9 @@ export default function StudentPortal() {
             daysLeft = 0;
           }
         } else {
-          // INSCRITO: 60 días desde la fecha de matrícula (created_at)
-          if (enroll.created_at) {
-            const fechaMatricula = new Date(enroll.created_at);
-            const hoy = new Date();
-            const diffTime = hoy - fechaMatricula;
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            
-            daysLeft = 60 - diffDays;
-            if (daysLeft < 0) {
-              accessExpired = true;
-              daysLeft = 0;
-            }
-          }
+          // INSCRITO: Acceso activo mientras dure el dictado (no se haya emitido certificado)
+          daysLeft = "∞";
+          accessExpired = false;
         }
 
         return {

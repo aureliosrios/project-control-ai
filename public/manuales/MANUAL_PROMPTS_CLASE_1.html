@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCAI | Guía de Prompts: Presupuestos, EETT y WBS</title>
+    <!-- Google Fonts: Outfit & Space Grotesk -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #020617;
+            --panel-bg: rgba(15, 23, 42, 0.65);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --primary-neon: #22d3ee; /* Cian */
+            --accent-neon: #fbbf24;  /* Oro */
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            min-height: 100vh;
+            padding: 40px 20px;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(34, 211, 238, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(251, 191, 36, 0.05) 0%, transparent 40%);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* HEADER */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            color: var(--accent-neon);
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--primary-neon) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* PANEL */
+        .glass-panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 40px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+        }
+
+        h2.section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+        }
+
+        h2.section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        h2.section-title span {
+            color: var(--primary-neon);
+        }
+
+        p {
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+        strong {
+            color: #fff;
+        }
+
+        /* TIMELINE / LISTS */
+        .card {
+            background: rgba(255,255,255,0.01);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* PROMPTS STYLING */
+        .prompt-container {
+            margin-top: 24px;
+        }
+
+        .prompt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .prompt-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--accent-neon);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .prompt-box {
+            background: #060911;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+            position: relative;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 13px;
+            color: #cbd5e1;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            margin-bottom: 30px;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-neon);
+            color: #000;
+            border-color: var(--primary-neon);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            color: #fff;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.05em;
+            background: rgba(255,255,255,0.02);
+        }
+
+        td {
+            color: var(--text-muted);
+        }
+
+        .flex-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .flex-child {
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            .flex-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="badge">Guía de prompts oficial</div>
+            <h1>Manual de Prompts para Ingeniería de Control</h1>
+            <p class="subtitle">Estructuración de expedientes técnicos, presupuestos (S10) y descomposición WBS utilizando clientes de IA locales y en la nube.</p>
+        </header>
+
+        <!-- MAIN PANEL -->
+        <div class="glass-panel">
+            <h2 class="section-title"><span>01.</span> Introducción a la Ingeniería de Prompts</h2>
+            <p>Este manual define la metodología práctica para trabajar de manera eficiente con Inteligencia Artificial aplicada a la construcción. En lugar de interacciones informales en la nube, el ingeniero moderno utiliza <strong>formatos estructurados</strong> en entornos locales para garantizar el control, la precisión y la portabilidad de sus datos.</p>
+
+            <h2 class="section-title"><span>02.</span> Framework C.R.I.E.D</h2>
+            <p>Para obtener resultados óptimos y exactos (especialmente con modelos libres o locales en <strong>Openco</strong>), utiliza esta estructura al construir tus prompts:</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Elemento</th>
+                        <th>Descripción</th>
+                        <th>Ejemplo Aplicado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>C - Contexto</strong></td>
+                        <td>Define el alcance del proyecto.</td>
+                        <td>"Vivienda unifamiliar de 2 pisos, 100 m² por planta."</td>
+                    </tr>
+                    <tr>
+                        <td><strong>R - Rol</strong></td>
+                        <td>Perfil experto asignado a la IA.</td>
+                        <td>"Actúa como un Especialista en Costos y Presupuestos (APU)."</td>
+                    </tr>
+                    <tr>
+                        <td><strong>I - Input</strong></td>
+                        <td>Los datos de entrada delimitados.</td>
+                        <td>"Partida de concreto en zapatas f'c=210 kg/cm2..."</td>
+                    </tr>
+                    <tr>
+                        <td><strong>E - Entregable</strong></td>
+                        <td>Estructura y formato de salida.</td>
+                        <td>"Objeto JSON limpio con llaves: partida, rendimiento, hh, hm."</td>
+                    </tr>
+                    <tr>
+                        <td><strong>D - Directrices</strong></td>
+                        <td>Restricciones o reglas negativas.</td>
+                        <td>"No agregues texto explicativo, únicamente el bloque JSON."</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 class="section-title"><span>03.</span> Plantillas de Prompts de Clase</h2>
+
+            <div class="prompt-container">
+                <div class="prompt-header">
+                    <span class="prompt-title">Prompt A: Estructuración de WBS/EDT (JSON)</span>
+                </div>
+                <div class="prompt-box">
+                    <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+<code>Actúa como un Gerente de Control de Proyectos y Planificador Senior.
+Genera la Estructura de Descomposición del Trabajo (EDT/WBS) en formato JSON para un proyecto de construcción de una vivienda unifamiliar de 2 pisos con 100 m² por planta.
+
+Estructura el JSON jerárquicamente hasta un cuarto nivel.
+Esquema requerido para cada nodo:
+{
+  "id": "Código del WBS (ej. 01.01.02)",
+  "nombre": "Nombre del entregable o actividad",
+  "nivel": Número de nivel (del 1 al 4),
+  "metrado_estimado": Valor numérico representativo de la actividad,
+  "unidad": "Unidad de medida estándar (m2, m3, kg, gl, und, etc.)"
+}
+
+Organiza los niveles de la siguiente forma:
+- Nivel 1: Proyecto General
+- Nivel 2: Fases (Obras Provisionales, Estructuras, Arquitectura, Instalaciones)
+- Nivel 3: Sub-fases (ej. Movimiento de tierras, Concreto Armado)
+- Nivel 4: Actividades Ejecutables (ej. Excavación manual, Concreto en Zapatas)
+
+RESTRICCIÓN CRÍTICA: Retorna únicamente el código JSON crudo. No agregues explicaciones, textos introductorios ni bloques explicativos antes o después de la estructura JSON.</code>
+                </div>
+            </div>
+
+            <div class="prompt-container">
+                <div class="prompt-header">
+                    <span class="prompt-title">Prompt B: Análisis de Precios Unitarios (APU Tipo S10 JSON)</span>
+                </div>
+                <div class="prompt-box">
+                    <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+<code>Actúa como un Especialista en Costos y Presupuestos (Especialista APU) familiarizado con el formato de presupuestos S10.
+Toma la siguiente información técnica e informal de una partida de construcción y genera su Análisis de Precio Unitario (APU) en un objeto JSON estructurado.
+
+[INFORMACIÓN DE PARTIDA]
+Partida: Concreto en Zapatas f'c=210 kg/cm2.
+Rendimiento establecido: 20 m3/día.
+Cuadrilla estándar de vaciado: 0.2 Capataz, 1 Operario, 2 Oficiales, 6 Peones.
+Insumos requeridos: Concreto premezclado (m3, costo 340 soles), Gasolina para vibradora (gal, costo 18 soles).
+Equipos: Vibrador de concreto 2" (costo de alquiler 15 soles/hora), herramientas manuales (3% de la mano de obra).
+[/INFORMACIÓN DE PARTIDA]
+
+Estructura el objeto JSON de salida exactamente así:
+{
+  "partida": "Nombre de la partida",
+  "rendimiento": "Rendimiento diario con unidad (ej. 20 m3/dia)",
+  "analisis_costo": {
+    "mano_de_obra": [
+      { "recurso": "Nombre del puesto", "cuadrilla": valor_decimal, "unidad": "hh", "precio_unitario_hora": valor_referencial_soles }
+    ],
+    "materiales": [
+      { "recurso": "Nombre del material", "unidad": "unidad_medida", "cantidad_por_unidad_partida": valor_decimal, "precio_unitario": valor_soles }
+    ],
+    "equipos": [
+      { "recurso": "Nombre de equipo/herramienta", "cuadrilla": valor_decimal, "unidad": "hm", "precio_unitario_hora": valor_soles }
+    ]
+  }
+}
+
+RESTRICCIONES IMPORTANTES:
+1. Calcula la cantidad de horas-hombre (hh) y horas-máquina (hm) necesarias utilizando la fórmula estándar: (Cuadrilla * 8 horas) / Rendimiento.
+2. Utiliza salarios referenciales actuales de construcción civil (Operario: 26.50/h, Oficial: 21.80/h, Peón: 19.70/h, Capataz: 32.00/h).
+3. Entrega únicamente el objeto JSON sin envoltorios conversacionales de saludo ni despedida.</code>
+                </div>
+            </div>
+
+            <div class="prompt-container">
+                <div class="prompt-header">
+                    <span class="prompt-title">Prompt C: Especificaciones Técnicas (Markdown)</span>
+                </div>
+                <div class="prompt-box">
+                    <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+<code>Actúa como un Ingeniero Revisor de Expedientes Técnicos.
+Toma el siguiente fragmento desordenado de especificación técnica y reescríbelo en formato Markdown (.md) profesional y jerárquico.
+
+[TEXTO DESORDENADO]
+En la partida de movimiento de tierras para cimientos, primero se tiene que hacer el trazo de niveles usando estación total o nivel de ingeniero. El metrado se saca midiendo el volumen en m3 de tierra excavada. La excavación se hace a mano con pico y lampa y si es terreno duro se usa retroexcavadora pequeña. El pago es por metro cúbico. Las herramientas a usar son picos, palas y carretillas tipo buggie. El supervisor debe verificar la profundidad antes de vaciar el solado.
+[/TEXTO DESORDENADO]
+
+El documento Markdown resultante debe seguir esta estructura exacta usando cabeceras de Markdown:
+# ESPECIFICACIONES TÉCNICAS
+## PARTIDA: EXCAVACIÓN PARA CIMIENTOS
+### 1. Descripción del Trabajo
+### 2. Equipos y Herramientas
+### 3. Método de Ejecución
+### 4. Método de Medición
+### 5. Condiciones de Pago
+
+RESTRICCIÓN: Retorna únicamente el código Markdown.</code>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        function copyText(button) {
+            var codeElement = button.nextElementSibling;
+            var range = document.createRange();
+            range.selectNode(codeElement);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            try {
+                document.execCommand('copy');
+                var originalText = button.innerText;
+                button.innerText = 'Copiado!';
+                button.style.background = '#22d3ee';
+                button.style.color = '#000';
+                setTimeout(function() {
+                    button.innerText = originalText;
+                    button.style.background = '';
+                    button.style.color = '';
+                }, 2000);
+            } catch (err) {
+                alert('No se pudo copiar el texto.');
+            }
+            window.getSelection().removeAllRanges();
+        }
+    </script>
+</body>
+</html>

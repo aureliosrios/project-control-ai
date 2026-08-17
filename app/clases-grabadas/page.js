@@ -15,7 +15,8 @@ const courses = {
         title: "Resumen Clase 1",
         desc: "Clase grabada correspondiente a la sesión del 2026-08-16 del curso Agentes de IA: Presupuestos, EETT y Cronogramas.",
         resources: [
-          { title: "Resumen Interactivo de la Clase 1 (HTML)", type: "html", url: "/manuales/resumen_clase_1.html" }
+          { title: "Resumen Interactivo de la Clase 1 (HTML)", type: "html", url: "/manuales/resumen_clase_1.html" },
+          { title: "Manual de Prompts para EETT, Presupuestos y WBS (MD)", type: "markdown", url: "/manuales/MANUAL_PROMPTS_CLASE_1.md" }
         ]
       }]
   },

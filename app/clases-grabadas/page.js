@@ -54,8 +54,7 @@ const courses = {
   },
   "AUT_CONST": {
     name: "Automatización y Soluciones de IA para la Gestión de Construcción (Sesiones en Vivo)",
-    lessons: [
-      {
+    lessons: [{
         id: "RlbF2QcvRR8",
         num: "01",
         status: "OCULTA",
@@ -99,8 +98,18 @@ const courses = {
         status: "OCULTA",
         title: "Lección 06: Automatización de Procesos - Clase 5 (09/08/2026)",
         desc: "Clase del 09 de Agosto (03:00 p.m. - 06:06 p.m.): Quinta sesión del curso enfocado en automatización de procesos de construcción con agentes de IA (Duración: 3h 06m)."
-      }
-    ]
+      },
+      {
+        id: "D8Qo7SopK7I",
+        num: "07",
+        status: "OCULTA",
+        title: "Resumen Clase 7",
+        desc: "Clase grabada correspondiente a la sesión del 2026-08-16 del curso Automatización y Soluciones de IA para la Gestión de Construcción.",
+        resources: [
+          { title: "Resumen Interactivo de la Clase 7 (HTML)", type: "html", url: "/manuales/resumen_clase_7.html" },
+          { title: "Guía de Prompts de Sincronización y Dashboards (HTML)", type: "html", url: "/manuales/MANUAL_PROMPTS_CLASE_7.html" }
+        ]
+      }]
   },
   "GIP": {
     name: "Gestión de Construcción con IA (El Despertar Digital)",

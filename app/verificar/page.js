@@ -75,7 +75,18 @@ export default function Verificar() {
 
       setAlumno(data[0]);
       setConfirmName(data[0].nombre_completo.toUpperCase());
-      setResultados(data);
+      
+      // Deduplicar por curso, prefiriendo GRADUADO
+      const uniqueResults = {};
+      data.forEach(item => {
+        const cursoKey = item.nombre_curso_oficial || item.nombre_curso_inscrito || "";
+        const existing = uniqueResults[cursoKey];
+        if (!existing || (item.estado_academico === 'GRADUADO' && existing.estado_academico !== 'GRADUADO')) {
+          uniqueResults[cursoKey] = item;
+        }
+      });
+      setResultados(Object.values(uniqueResults));
+
       setSearchDone(true);
     } catch (e) {
       alert("Error: " + e.message);

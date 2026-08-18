@@ -287,7 +287,7 @@ export default function Verificar() {
         yDetalle = 278;
       } else if (slug.includes("automation") || slug.includes("automatizacion") || slug.includes("automatización")) {
         horasVal = "45";
-        yDetalle = 278;
+        yDetalle = 250;
       }
 
       const detalle = `con una duración de ${horasVal} horas académicas, impartidas del ${formatearFecha(cert.fecha_inicio_clases)} al ${formatearFecha(cert.fecha_fin_clases)} en modalidad online.`;
@@ -313,8 +313,10 @@ export default function Verificar() {
 
       // Detalle
       const dWidth = fontR.widthOfTextAtSize(detalle, 11);
+      const isAutomation = slug.includes("automation") || slug.includes("automatizacion") || slug.includes("automatización");
+      const xOffset = isAutomation ? 82 : 85; // Mover 1mm (3pt) a la derecha si es automatización (-82 en vez de -85)
       page1.drawText(detalle, { 
-        x: (width / 2) - (dWidth / 2) - 85, 
+        x: (width / 2) - (dWidth / 2) - xOffset, 
         y: yDetalle, 
         size: 11, 
         font: fontR, 

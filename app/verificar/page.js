@@ -120,10 +120,11 @@ export default function Verificar() {
       const isAsincronico = (
         !slug.includes("construccion") &&
         !slug.includes("construcción") &&
+        !slug.includes("agentes") && // Excluir Agentes de IA (sincrónico)
         (
           (cert.edicion_grupo || "").toUpperCase().includes("ASINCRONICO") ||
           slug.includes("forense") ||
-          slug.includes("presupuesto") ||
+          (slug.includes("presupuesto") && (slug.includes("costos") || slug.includes("aumentada") || slug.includes("asincronico"))) ||
           slug.includes("asincronico")
         )
       );
@@ -249,7 +250,9 @@ export default function Verificar() {
 
       // --- RAMA SINCRÓNICA (lógica existente) ---
       let archivo = "cert_gestion_integral.pdf";
-      if (slug.includes("automation") || slug.includes("automatizacion") || slug.includes("automatización")) archivo = "cert_automatizacion.pdf";
+      if (slug.includes("agentes")) archivo = "cert_agentes_ia.pdf";
+      else if (slug.includes("presupuesto") || slug.includes("presupuestos")) archivo = "cert_presupuestos_ia.pdf";
+      else if (slug.includes("automation") || slug.includes("automatizacion") || slug.includes("automatización")) archivo = "cert_automatizacion.pdf";
       else if (slug.includes("licitaciones")) archivo = "cert_licitaciones_ia.pdf";
       else if (slug.includes("evm") || slug.includes("control")) archivo = "cert_control_evm.pdf";
       else if (slug.includes("construccion") || slug.includes("construcción")) archivo = "cert_gestion_construccion.pdf";
@@ -265,7 +268,10 @@ export default function Verificar() {
       const { width } = page1.getSize();
 
       const isConstruccion = slug.includes("construccion") || slug.includes("construcción");
-      const horasVal = isConstruccion ? "15" : "45";
+      let horasVal = isConstruccion ? "15" : "45";
+      if (slug.includes("agentes")) {
+        horasVal = "48";
+      }
       const yDetalle = isConstruccion ? 250 : 278;
 
       const detalle = `con una duración de ${horasVal} horas académicas, impartidas del ${formatearFecha(cert.fecha_inicio_clases)} al ${formatearFecha(cert.fecha_fin_clases)} en modalidad online.`;

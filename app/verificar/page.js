@@ -280,10 +280,15 @@ export default function Verificar() {
 
       const isConstruccion = slug.includes("construccion") || slug.includes("construcción");
       let horasVal = isConstruccion ? "15" : "45";
+      let yDetalle = isConstruccion ? 250 : 278;
+      
       if (slug.includes("agentes")) {
         horasVal = "48";
+        yDetalle = 278;
+      } else if (slug.includes("automation") || slug.includes("automatizacion") || slug.includes("automatización")) {
+        horasVal = "45";
+        yDetalle = 278;
       }
-      const yDetalle = isConstruccion ? 250 : 278;
 
       const detalle = `con una duración de ${horasVal} horas académicas, impartidas del ${formatearFecha(cert.fecha_inicio_clases)} al ${formatearFecha(cert.fecha_fin_clases)} en modalidad online.`;
 

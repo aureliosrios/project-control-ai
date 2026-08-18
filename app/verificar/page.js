@@ -313,8 +313,8 @@ export default function Verificar() {
 
       // Detalle
       const dWidth = fontR.widthOfTextAtSize(detalle, 11);
-      const isAutomation = slug.includes("automation") || slug.includes("automatizacion") || slug.includes("automatización");
-      const xOffset = isAutomation ? 82 : 85; // Mover 1mm (3pt) a la derecha si es automatización (-82 en vez de -85)
+      const isAutomationCourse = slug.includes("automation") || slug.includes("automatizacion") || slug.includes("automatización");
+      const xOffset = isAutomationCourse ? 82 : 85; // Mover 1mm (3pt) a la derecha si es automatización (-82 en vez de -85)
       page1.drawText(detalle, { 
         x: (width / 2) - (dWidth / 2) - xOffset, 
         y: yDetalle, 

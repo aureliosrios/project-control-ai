@@ -3,19 +3,45 @@ async function run() {
   console.log(`🔍 Fetching live URL: ${url}`);
   try {
     const res = await fetch(url);
-    const text = await res.text();
+    const html = await res.text();
     
-    // Check if the page has "23 de Agosto"
-    const hasNewDate = text.includes("23 de Agosto") || text.includes("23/08");
-    const hasOldDate = text.includes("16 de Agosto") || text.includes("16/08");
+    // Check main HTML first
+    let hasNewDate = html.includes("23 de Agosto") || html.includes("23/08");
+    let hasOldDate = html.includes("16 de Agosto") || html.includes("16/08");
     
-    console.log(`- Contiene "23 de Agosto" / "23/08": ${hasNewDate ? "✅ SÍ" : "❌ NO"}`);
-    console.log(`- Contiene "16 de Agosto" / "16/08": ${hasOldDate ? "⚠️ SÍ" : "✅ NO"}`);
+    if (!hasNewDate && !hasOldDate) {
+      // Find chunks
+      const chunkRegex = /\/_next\/static\/chunks\/[^"']+\.js/g;
+      const chunks = html.match(chunkRegex) || [];
+      console.log(`Found ${chunks.length} JS chunks. Searching inside chunks...`);
+      
+      for (const chunk of chunks) {
+        const chunkUrl = `https://project-control-ai-one.vercel.app${chunk}`;
+        const chunkRes = await fetch(chunkUrl);
+        const chunkText = await chunkRes.text();
+        
+        if (chunkText.includes("23 de Agosto") || chunkText.includes("23/08")) {
+          hasNewDate = true;
+          console.log(`- Encontrado "23 de Agosto" en chunk: ${chunk}`);
+          break;
+        }
+        if (chunkText.includes("16 de Agosto") || chunkText.includes("16/08")) {
+          hasOldDate = true;
+          console.log(`- Encontrado "16 de Agosto" en chunk: ${chunk}`);
+          break;
+        }
+      }
+    }
     
-    if (hasNewDate && !hasOldDate) {
+    console.log(`- Contiene "23 de Agosto": ${hasNewDate ? "✅ SÍ" : "❌ NO"}`);
+    console.log(`- Contiene "16 de Agosto": ${hasOldDate ? "⚠️ SÍ" : "✅ NO"}`);
+    
+    if (hasNewDate) {
       console.log("\n🎉 [DESPLEGADO] El nuevo despliegue con la fecha del 23 de Agosto ya está activo en Vercel!");
+    } else if (hasOldDate) {
+      console.log("\n⏳ [ESPERANDO] Vercel todavía está sirviendo la versión anterior (16 de Agosto).");
     } else {
-      console.log("\n⏳ [ESPERANDO] Vercel todavía está procesando el build o sirviendo la versión caché anterior.");
+      console.log("\n⏳ [ESPERANDO] Vercel está construyendo y desplegando el nuevo commit...");
     }
   } catch (err) {
     console.error("❌ Error verificando el despliegue:", err);

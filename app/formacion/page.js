@@ -86,7 +86,8 @@ const sincronicos = [
     precioSoles: "S/. 300",
     tag: "CURSO 1 · MASTERCLASS",
     desc: "Aprende a automatizar el flujo completo de obra con Agentes Autónomos, SkillsPro y Cerebros Digitales: Presupuestos en Excel con fórmulas vivas, EETT en Word (.docx) y Cronogramas en MS Project vía Macros VBA (.bas).",
-    inicio: "Domingo 16 de Agosto, 2026",
+    inicio: "Domingo 23 de Agosto, 2026",
+    fin: "Domingo 27 de Septiembre, 2026",
     horario: "Todos los domingos · 10:00 AM – 1:00 PM",
     sesiones: "18h · 6 sesiones",
     link: "/inscripcion",
@@ -104,6 +105,7 @@ const sincronicos = [
     tag: "CURSO 2 · AVANZADO",
     desc: "Domina la automatización avanzada con Python, HTML, VBA y Agentes Autónomos. Aprende a desarrollar Skills y Scripts MCP dentro de ecosistemas agénticos.",
     inicio: "28 de Junio, 2026",
+    fin: "Domingo 26 de Julio, 2026",
     horario: "Domingos · 3:00 PM – 6:00 PM",
     sesiones: "15h · 5 sesiones",
     link: "/inscripcion",
@@ -120,6 +122,7 @@ const sincronicos = [
     tag: "CURSO 3 · AVANZADO",
     desc: "Nivel Avanzado: Domina MCP, Skills y Scripts Python para automatizar APUs y cronogramas. Análisis masivo de expedientes técnicos de miles de páginas.",
     inicio: "29 de Junio, 2026",
+    fin: "Lunes 13 de Julio, 2026",
     horario: "Lunes y Miércoles · 7:00 PM – 10:00 PM",
     sesiones: "15h · 5 sesiones",
     link: "/inscripcion",
@@ -383,6 +386,12 @@ export default function Formacion() {
                       <span className="material-symbols-outlined text-[16px] text-orange-500">calendar_today</span>
                       <span><strong className="text-white">Inicio:</strong> {curso.inicio}</span>
                     </div>
+                    {curso.fin && (
+                      <div className="flex items-center gap-3 text-xs text-slate-300">
+                        <span className="material-symbols-outlined text-[16px] text-orange-500">event_available</span>
+                        <span><strong className="text-white">Finaliza:</strong> {curso.fin}</span>
+                      </div>
+                    )}
                     {curso.horario && (
                       <div className="flex items-center gap-3 text-xs text-slate-300">
                         <span className="material-symbols-outlined text-[16px] text-orange-500">schedule</span>

@@ -149,7 +149,7 @@ export default function Inscripcion() {
                 className="w-full bg-[#0f172a] text-white border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 transition-all outline-none"
               >
                 <option value="" disabled className="bg-[#0f172a] text-slate-400">Seleccione curso...</option>
-                <option value="Agentes de IA: Presupuestos, EETT y Cronogramas" className="bg-[#0f172a] text-white">1. Agentes de IA: Presupuestos, EETT y Cronogramas</option>
+                <option value="Agentes de IA: Presupuestos, EETT y Cronogramas" disabled className="bg-[#0f172a] text-slate-500">1. Agentes de IA: Presupuestos, EETT y Cronogramas (Cupos Agotados)</option>
                 <option value="Ingeniería Aumentada: Automatización con Agentes de IA" className="bg-[#0f172a] text-white">2. Automatización de Obras con Agentes de IA (Ingeniería Aumentada)</option>
                 <option value="Licitaciones Inteligentes" disabled className="bg-[#0f172a] text-slate-500">3. Licitaciones de Construcción con IA (Cupos Agotados)</option>
               </select>

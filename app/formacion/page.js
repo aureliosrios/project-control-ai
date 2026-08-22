@@ -85,7 +85,7 @@ const sincronicos = [
     precio: "$100.00 USD",
     precioSoles: "S/. 300",
     tag: "CURSO 1 · MASTERCLASS",
-    desc: "Aprende a automatizar el flujo completo de obra con Agentes Autónomos, SkillsPro y Cerebros Digitales: Presupuestos en Excel con fórmulas vivas, EETT en Word (.docx) y Cronogramas en MS Project vía Macros VBA (.bas).",
+    desc: "¡Cupos agotados! El curso del 23/08 ya llegó al límite de su capacidad. Reserva tu inscripción para la próxima edición. Aprende a automatizar el flujo completo de obra con Agentes Autónomos, SkillsPro y Cerebros Digitales.",
     inicio: "Domingo 23 de Agosto, 2026",
     fin: "Domingo 27 de Septiembre, 2026",
     horario: "Todos los domingos · 10:00 AM – 1:00 PM",
@@ -95,7 +95,7 @@ const sincronicos = [
     hotmart: "https://pay.hotmart.com/K104218834V",
     paypal: "https://paypal.me/ProjectControlAI",
     color: "cyan",
-    cerrado: false
+    cerrado: true
   },
   {
     id: "S2",
@@ -420,7 +420,7 @@ export default function Formacion() {
                           </button>
                         </div>
                         <Link 
-                          href={`https://wa.me/51993147501?text=Hola,%20deseo%20entrar%20a%20la%20lista%20de%20espera%20para%20el%20curso%20de%20Licitaciones%20Inteligentes.`} 
+                          href={`https://wa.me/51993147501?text=Hola,%20deseo%20entrar%20a%20la%20lista%20de%20espera%20para%20el%20curso%20de%20${encodeURIComponent(curso.nombre)}.`} 
                           target="_blank"
                           className="flex items-center justify-center gap-2 py-3.5 bg-white/5 border border-white/10 rounded-xl text-[10px] font-black text-slate-300 uppercase tracking-widest hover:bg-white/10 transition-all"
                         >

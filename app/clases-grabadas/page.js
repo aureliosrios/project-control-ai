@@ -298,9 +298,10 @@ export default function ClasesGrabadas() {
       setStudentData(student);
       setIsLoggedIn(true);
 
-      // Seleccionar curso por defecto (priorizar GIP si existe, o el primero disponible)
+      // Seleccionar curso por defecto (priorizar AGENTES_IA si existe, luego GIP o el primero disponible)
+      const agentesCourse = processed.find(c => c.key === "AGENTES_IA" && !c.isExpired);
       const gipCourse = processed.find(c => c.key === "GIP" && !c.isExpired);
-      const defaultCourse = gipCourse || processed.find(c => courses[c.key].lessons.length > 0 && !c.isExpired) || processed[0];
+      const defaultCourse = agentesCourse || gipCourse || processed.find(c => courses[c.key].lessons.length > 0 && !c.isExpired) || processed[0];
       
       setActiveCourseKey(defaultCourse.key);
       if (courses[defaultCourse.key].lessons.length > 0 && !defaultCourse.isExpired) {

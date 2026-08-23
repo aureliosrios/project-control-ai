@@ -6,19 +6,21 @@ import SecurityOverlay from "../portal/components/SecurityOverlay";
 import { supabase } from "@/lib/supabase";
 
 const courses = {
-  "AGENTES_IA": {
+    "AGENTES_IA": {
     name: "Agentes de IA: Presupuestos, EETT y Cronogramas (Sesiones en Vivo)",
-    lessons: [      {
-        id: "NjWnA5b9Zho",
+    lessons: [
+      {
+        id: "8QCOyk6Qm58",
         num: "01",
         status: "OCULTA",
-        title: "Resumen Clase 1",
-        desc: "Clase grabada correspondiente a la sesión del 2026-08-23 del curso Agentes de IA: Presupuestos, EETT y Cronogramas.",
+        title: "Clase 01: Agentes de IA, Markdown y Estructuración de Presupuestos (23/08/2026)",
+        desc: "Clase del 23 de Agosto (10:00 a.m. - 01:12 p.m.): Introducción a Antigravity, configuración de notificaciones, conversión de PDF a Markdown/JSON y hoja de ruta de Skills en Python.",
         resources: [
           { title: "Resumen Interactivo de la Clase 1 (HTML)", type: "html", url: "/manuales/resumen_clase_1.html" },
-          { title: "Guía de Prompts para EETT, Presupuestos y WBS (HTML)", type: "html", url: "/manuales/MANUAL_PROMPTS_CLASE_1.html" }
+          { title: "Ayuda Memoria de la Sesión (Markdown)", type: "html", url: "/manuales/Ayuda_Memoria_Clase_1_Agentes_IA_2026-08-23.md" }
         ]
-      }]
+      }
+    ]
   },
   "AE": {
     name: "Automatización de Obras con Agentes de IA (Ingeniería Aumentada) (Sesiones en Vivo)",

@@ -3,36 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PCAI | Resumen Clase 1: Agentes de IA</title>
-    <!-- Google Fonts: Outfit & Space Grotesk -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <title>PCAI | Resumen Interactivo Clase 1 - Agentes de IA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #020617;
-            --panel-bg: rgba(15, 23, 42, 0.65);
-            --border-color: rgba(255, 255, 255, 0.08);
-            --primary-neon: #22d3ee; /* Cian */
-            --accent-neon: #fbbf24;  /* Oro */
+            --bg-primary: #020617;
+            --bg-card: #0f172a;
+            --bg-card-hover: #1e293b;
+            --accent-cyan: #22d3ee;
+            --accent-gold: #f59e0b;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
+            --border: #334155;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
             font-family: 'Outfit', sans-serif;
-            min-height: 100vh;
-            padding: 40px 20px;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(34, 211, 238, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(251, 191, 36, 0.05) 0%, transparent 40%);
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 30px 20px;
         }
 
         .container {
@@ -40,99 +32,99 @@
             margin: 0 auto;
         }
 
-        /* HEADER */
         header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            border: 1px solid var(--accent-cyan);
+            border-radius: 20px;
+            padding: 30px;
             text-align: center;
-            margin-bottom: 50px;
-            position: relative;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(34, 211, 238, 0.15);
         }
 
         .badge {
             display: inline-block;
-            padding: 6px 16px;
             background: rgba(34, 211, 238, 0.1);
-            border: 1px solid rgba(34, 211, 238, 0.2);
-            color: var(--primary-neon);
-            border-radius: 100px;
-            font-size: 11px;
-            font-weight: 800;
+            color: var(--accent-cyan);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
-            margin-bottom: 16px;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            border: 1px solid var(--accent-cyan);
         }
 
         h1 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-            background: linear-gradient(135deg, #ffffff 0%, var(--primary-neon) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 2.2rem;
+            color: #fff;
+            margin-bottom: 10px;
         }
 
         .meta-info {
             display: flex;
             justify-content: center;
-            gap: 24px;
+            gap: 20px;
             color: var(--text-muted);
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            font-size: 0.95rem;
+            flex-wrap: wrap;
         }
 
-        .meta-info span strong {
-            color: var(--text-main);
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        /* TABS NAVIGATION */
+        /* Tabs Navigation */
         .tabs-nav {
             display: flex;
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid var(--border-color);
-            padding: 6px;
-            border-radius: 20px;
-            margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            gap: 12px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
+            overflow-x: auto;
         }
 
         .tab-btn {
-            flex: 1;
             background: transparent;
             border: none;
             color: var(--text-muted);
-            padding: 14px 20px;
-            font-size: 12px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 10px 20px;
             cursor: pointer;
-            border-radius: 14px;
+            border-radius: 10px;
             transition: all 0.3s ease;
         }
 
         .tab-btn:hover {
-            color: var(--primary-neon);
+            color: var(--accent-cyan);
+            background: rgba(34, 211, 238, 0.05);
         }
 
         .tab-btn.active {
-            background: rgba(34, 211, 238, 0.1);
-            color: var(--primary-neon);
-            box-shadow: inset 0 0 10px rgba(34, 211, 238, 0.05);
-            border: 1px solid rgba(34, 211, 238, 0.15);
+            color: #020617;
+            background: var(--accent-cyan);
+            box-shadow: 0 4px 15px rgba(34, 211, 238, 0.3);
         }
 
-        /* TAB CONTENT */
+        /* Tab Content */
         .tab-content {
             display: none;
-            animation: fadeIn 0.5s ease forwards;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         }
 
         .tab-content.active {
             display: block;
+            animation: fadeIn 0.4s ease;
         }
 
         @keyframes fadeIn {
@@ -140,475 +132,263 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* CARD GLASS PANELS */
-        .glass-panel {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 30px;
-            padding: 40px;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-            margin-bottom: 30px;
-        }
-
-        h2.section-title {
+        h2 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.8rem;
-            margin-bottom: 24px;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 16px;
-        }
-
-        h2.section-title span {
-            color: var(--primary-neon);
-        }
-
-        /* TEXT STYLING */
-        p {
-            color: var(--text-muted);
-            line-height: 1.7;
-            font-size: 15px;
+            color: var(--accent-cyan);
             margin-bottom: 20px;
+            font-size: 1.5rem;
         }
 
-        strong {
-            color: #fff;
+        .topic-card {
+            background: #1e293b;
+            border-left: 4px solid var(--accent-cyan);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
         }
 
-        /* GRID LAYOUTS */
-        .grid-2 {
+        .topic-card h3 {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .tool-grid {
             display: grid;
-            grid-template-cols: 1fr 1fr;
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
         }
 
-        @media (max-width: 768px) {
-            .grid-2 {
-                grid-template-cols: 1fr;
-            }
+        .tool-card {
+            background: #1e293b;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            transition: transform 0.2s ease;
         }
 
-        /* TIMELINE / LISTS */
-        .concept-card {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.04);
-            border-radius: 20px;
-            padding: 24px;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
+        .tool-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
         }
 
-        .concept-card:hover {
-            border-color: rgba(34, 211, 238, 0.2);
-            background: rgba(34, 211, 238, 0.01);
-            transform: translateY(-2px);
+        .tool-card h4 {
+            color: var(--accent-cyan);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
         }
 
-        .concept-header {
+        /* Prompt Box */
+        .prompt-box {
+            background: #020617;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .prompt-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
-        .concept-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .concept-tag {
-            padding: 4px 10px;
-            border-radius: 8px;
-            font-size: 9px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .tag-md { background: rgba(34, 211, 238, 0.1); color: var(--primary-neon); }
-        .tag-json { background: rgba(251, 191, 36, 0.1); color: var(--accent-neon); }
-        .tag-html { background: rgba(168, 85, 247, 0.1); color: #a855f7; }
-
-        /* PROMPTS STYLING */
-        .prompt-box {
-            background: #090d16;
-            border: 1px solid var(--border-color);
-            border-radius: 18px;
-            padding: 20px;
-            position: relative;
-            margin-bottom: 24px;
-            font-family: monospace;
-            font-size: 13px;
-            color: #cbd5e1;
-            line-height: 1.5;
-            white-space: pre-wrap;
+        .prompt-title {
+            color: var(--accent-gold);
+            font-weight: 600;
+            font-size: 0.95rem;
         }
 
         .copy-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: var(--text-muted);
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 10px;
-            font-weight: 700;
+            background: rgba(34, 211, 238, 0.15);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 4px 12px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            text-transform: uppercase;
+            font-size: 0.8rem;
+            transition: all 0.2s;
         }
 
         .copy-btn:hover {
-            background: var(--primary-neon);
-            color: #000;
-            border-color: var(--primary-neon);
+            background: var(--accent-cyan);
+            color: #020617;
         }
 
-        /* INTERACTIVE PLAYGROUND */
-        .playground-container {
-            display: grid;
-            grid-template-cols: 1fr 1fr;
-            gap: 24px;
-            margin-top: 20px;
-        }
-
-        @media (max-width: 850px) {
-            .playground-container {
-                grid-template-cols: 1fr;
-            }
-        }
-
-        .editor-section, .preview-section {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        label.editor-label {
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--text-muted);
-            margin-left: 5px;
-        }
-
-        textarea.code-editor {
-            width: 100%;
-            height: 250px;
-            background: #070a13;
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 16px;
-            color: #38bdf8;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 13px;
-            outline: none;
-            resize: none;
-            transition: border-color 0.3s;
-        }
-
-        textarea.code-editor:focus {
-            border-color: var(--primary-neon);
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 12px;
-        }
-
-        .action-btn {
-            flex: 1;
-            padding: 14px;
-            border-radius: 12px;
-            border: none;
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn-cyan {
-            background: var(--primary-neon);
-            color: #000;
-            box-shadow: 0 4px 14px rgba(34, 211, 238, 0.3);
-        }
-
-        .btn-cyan:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(34, 211, 238, 0.4);
-        }
-
-        .btn-gold {
-            background: var(--accent-neon);
-            color: #000;
-            box-shadow: 0 4px 14px rgba(251, 191, 36, 0.3);
-        }
-
-        .btn-gold:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(251, 191, 36, 0.4);
-        }
-
-        .preview-box {
-            width: 100%;
-            height: 250px;
-            background: #090d16;
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 16px;
-            padding: 16px;
+        code {
+            font-family: monospace;
             color: #e2e8f0;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 13px;
-            overflow-y: auto;
+            font-size: 0.9rem;
             white-space: pre-wrap;
         }
 
-        /* PROMPT BUILDER */
-        .builder-row {
-            display: grid;
-            grid-template-cols: 1fr 1.5fr;
-            gap: 20px;
-            margin-top: 15px;
+        /* Interactive Simulator */
+        .calculator {
+            background: #1e293b;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid var(--accent-cyan);
         }
 
-        @media (max-width: 600px) {
-            .builder-row {
-                grid-template-cols: 1fr;
-            }
+        .form-group {
+            margin-bottom: 15px;
         }
 
-        .builder-inputs {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .input-group label {
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
+        label {
+            display: block;
+            margin-bottom: 6px;
             color: var(--text-muted);
         }
 
-        .input-group select, .input-group input {
-            background: #070a13;
-            border: 1px solid var(--border-color);
+        input, select {
+            width: 100%;
+            padding: 10px;
+            background: #020617;
+            border: 1px solid var(--border);
             color: #fff;
-            padding: 12px;
-            border-radius: 10px;
-            font-size: 13px;
-            outline: none;
+            border-radius: 8px;
+            font-family: inherit;
         }
 
-        .input-group select:focus, .input-group input:focus {
-            border-color: var(--accent-neon);
+        .calc-btn {
+            background: var(--accent-cyan);
+            color: #020617;
+            border: none;
+            padding: 12px 24px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+
+        }
+
+        .calc-result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #020617;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-gold);
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- HEADER -->
         <header>
-            <div class="badge">Clase 1 Oficial</div>
-            <h1>Agentes de IA: Expedientes Técnicos</h1>
+            <span class="badge">Project Control AI | Clase Grabada</span>
+            <h1>Agentes de IA: Presupuestos, EETT y Cronogramas</h1>
             <div class="meta-info">
-                <span>Fecha: <strong>23/08/2026</strong></span>
-                <span>Docente: <strong>Ing. Aurelio Solórzano Ríos</strong></span>
-                <span>Estado: <strong>Completada</strong></span>
+                <div class="meta-item">📅 Fecha: 23 de Agosto, 2026</div>
+                <div class="meta-item">👨‍🏫 Docente: Ing. Aurelio Solórzano</div>
+                <div class="meta-item">⏱️ Duración: 3h 12m</div>
             </div>
         </header>
 
-        <!-- TABS NAVIGATION -->
         <div class="tabs-nav">
-            <button class="tab-btn active" onclick="openTab(event, 'temario')">Temario & Conceptos</button>
-            <button class="tab-btn" onclick="openTab(event, 'herramientas')">Herramientas de IA</button>
-            <button class="tab-btn" onclick="openTab(event, 'biblioteca')">Biblioteca de Prompts</button>
-            <button class="tab-btn" onclick="openTab(event, 'practica')">Práctica Interactiva</button>
+            <button class="tab-btn active" onclick="openTab(event, 'tab1')">📋 Temario y Conceptos</button>
+            <button class="tab-btn" onclick="openTab(event, 'tab2')">🛠️ Herramientas de IA</button>
+            <button class="tab-btn" onclick="openTab(event, 'tab3')">💡 Biblioteca de Prompts</button>
+            <button class="tab-btn" onclick="openTab(event, 'tab4')">🎮 Práctica Interactiva</button>
         </div>
 
-        <!-- TAB CONTENT: TEMARIO -->
-        <div id="temario" class="tab-content active">
-            <div class="glass-panel">
-                <h2 class="section-title"><span>01.</span> Fundamentos de Formatos en IA</h2>
-                <p>En esta sesión inaugural, el docente sentó las bases para el trabajo profesional con agentes inteligentes. Explicó que el uso tradicional de la IA a través del navegador (la nube) limita la eficiencia y el control de los datos. La tendencia moderna es trabajar en local utilizando formatos estructurados.</p>
-                
-                <div class="grid-2">
-                    <div class="concept-card">
-                        <div class="concept-header">
-                            <span class="concept-title">Markdown (.md)</span>
-                            <span class="concept-tag tag-md">Sintaxis Limpia</span>
-                        </div>
-                        <p style="font-size: 13px; margin-bottom: 0;">Es el formato idóneo para estructurar especificaciones técnicas (EETT). Los modelos de lenguaje comprenden mejor las jerarquías de títulos (<code>#</code>, <code>##</code>), negritas y listas en Markdown que en formatos complejos como Microsoft Word.</p>
-                    </div>
+        <!-- TAB 1: TEMARIO -->
+        <div id="tab1" class="tab-content active">
+            <h2>Temario y Conceptos Clave de la Sesión</h2>
+            <div class="topic-card">
+                <h3>1. Ecosistema de Agentes y Gestión Eficiente de Tokens</h3>
+                <p>Análisis de las capacidades de Antigravity frente a otros agentes como Codex y Claude. Por qué Antigravity es ideal para presupuestos y expedientes técnicos de gran volumen sin sufrir agotamiento rápido de cuota.</p>
+            </div>
+            <div class="topic-card">
+                <h3>2. Notificaciones y Modos de Autonomía de la IA</h3>
+                <p>Configuración del nivel de confirmación de planes (Opción 3) para reducir interrupciones durante la generación masiva de código o análisis de datos.</p>
+            </div>
+            <div class="topic-card">
+                <h3>3. Transformación de PDF a Markdown (.md) y JSON</h3>
+                <p>Demostración práctica de cómo convertir catálogos de costos y especificaciones de PDF a Markdown y JSON, logrando que los LLMs analicen partidas y costos sin alucinaciones.</p>
+            </div>
+            <div class="topic-card">
+                <h3>4. De Prompting Manual a Skills en Python</h3>
+                <p>El camino para pasar de un presupuesto aproximado ("torpe") a un sistema automatizado en Python con librerías ejecutivas (`pandas`, `openpyxl`) para cálculo exacto de APUs.</p>
+            </div>
+        </div>
 
-                    <div class="concept-card">
-                        <div class="concept-header">
-                            <span class="concept-title">JSON (.json)</span>
-                            <span class="concept-tag tag-json">Datos Estructurados</span>
-                        </div>
-                        <p style="font-size: 13px; margin-bottom: 0;">Representa el estándar de transferencia de datos en ingeniería. Ideal para presupuestos, estructurando partidas, códigos, precios y cantidades que luego pueden exportarse limpiamente a bases de datos o Excel.</p>
-                    </div>
+        <!-- TAB 2: HERRAMIENTAS -->
+        <div id="tab2" class="tab-content">
+            <h2>Herramientas Utilizadas en Clase</h2>
+            <div class="tool-grid">
+                <div class="tool-card">
+                    <h4>Antigravity AI (Google)</h4>
+                    <p>Agente principal de desarrollo e ingeniería de datos. Soporta amplios contextos de tokens y ejecución local con visualización en tiempo real.</p>
                 </div>
-
-                <div class="concept-card" style="margin-top: 20px;">
-                    <div class="concept-header">
-                        <span class="concept-title">HTML (.html)</span>
-                        <span class="concept-tag tag-html">Visualización Interactiva</span>
-                    </div>
-                    <p style="font-size: 13px; margin-bottom: 0;">Permite a los ingenieros empaquetar resultados y crear cuadros de control interactivos, cronogramas interactivos y reportes dinámicos que se pueden visualizar de manera premium en cualquier navegador web.</p>
+                <div class="tool-card">
+                    <h4>Codex / ChatGPT (OpenAI)</h4>
+                    <p>Asistente secundario para consultas rápidas de sintaxis y prototipado de lógica.</p>
+                </div>
+                <div class="tool-card">
+                    <h4>Markdown (.md)</h4>
+                    <p>Formato de texto ligero ideal para alimentar bases de conocimiento a los agentes de IA.</p>
+                </div>
+                <div class="tool-card">
+                    <h4>JSON Format</h4>
+                    <p>Estructura estándar flexible para almacenar presupuestos, partidas, insumos y especificaciones técnicas.</p>
                 </div>
             </div>
         </div>
 
-        <!-- TAB CONTENT: HERRAMIENTAS -->
-        <div id="herramientas" class="tab-content">
-            <div class="glass-panel">
-                <h2 class="section-title"><span>02.</span> Entorno Local & Software de Trabajo</h2>
-                <p>Se introdujeron e instalaron dos herramientas esenciales para ejecutar los flujos de trabajo locales sin depender de las interfaces web estándar:</p>
-                
-                <div class="concept-card">
-                    <h3 style="color:#fff; margin-bottom:10px;">💻 Codex (Desktop Client)</h3>
-                    <p style="margin-bottom:0;">Un cliente liviano instalado directamente en el computador. Evita las interrupciones habituales de las sesiones web y permite gestionar el historial de prompts localmente, mejorando el flujo de trabajo continuo del ingeniero.</p>
+        <!-- TAB 3: PROMPTS -->
+        <div id="tab3" class="tab-content">
+            <h2>Biblioteca de Prompts Recomendados</h2>
+            <div class="prompt-box">
+                <div class="prompt-header">
+                    <span class="prompt-title">Prompt 1: Conversión de PDF/Texto de Revista de Costos a JSON Struct</span>
+                    <button class="copy-btn" onclick="copyPrompt('p1')">Copiar</button>
                 </div>
+                <code id="p1">Actúa como un Ingeniero de Costos y Presupuestos. Convierte el siguiente fragmento de tabla de costos a una estructura JSON limpia con las claves: codigo_item, descripcion, unidad, precio_unitario_soles, fecha_actualizacion. Asegúrate de formatear los números a float sin símbolos de moneda.</code>
+            </div>
 
-                <div class="concept-card">
-                    <h3 style="color:#fff; margin-bottom:10px;">🤖 Openco (Open Code Client)</h3>
-                    <p style="margin-bottom:10px;">Aplicación de código abierto completamente gratuita que permite conectar múltiples modelos de lenguaje locales y en la nube. Soporta modelos de proveedores globales y asiáticos (como DeepSeek o Qwen).</p>
-                    <p style="margin-bottom:0; color: var(--accent-neon); font-size:13px; font-weight: 600;">⚠️ Importante: Los modelos libres en Openco carecen de la flexibilidad contextual de ChatGPT o Claude. Por tanto, requieren que los prompts de instrucción sean sumamente minuciosos, estructurados y detallados para evitar alucinaciones.</p>
+            <div class="prompt-box">
+                <div class="prompt-header">
+                    <span class="prompt-title">Prompt 2: Generador de Especificaciones Técnicas (EETT) Estructuradas</span>
+                    <button class="copy-btn" onclick="copyPrompt('p2')">Copiar</button>
                 </div>
+                <code id="p2">Genera la Especificación Técnica para la partida "[NOMBRE_DE_PARTIDA]". Incluye obligatoriamente: 1. Descripción del Trabajo, 2. Calidad de los Materiales, 3. Método de Ejecución, 4. Unidad de Medida y Forma de Pago. Usa formato Markdown limpio.</code>
             </div>
         </div>
 
-        <!-- TAB CONTENT: BIBLIOTECA -->
-        <div id="biblioteca" class="tab-content">
-            <div class="glass-panel">
-                <h2 class="section-title"><span>03.</span> Biblioteca de Prompts de Clase</h2>
-                <p>Usa estos prompts estructurados en tus clientes locales para generar las plantillas del curso:</p>
-
-                <h3 style="color:#fff; margin-bottom:12px; font-size:14px; text-transform:uppercase;">Prompt 1: Conversión de Partida de Presupuesto a JSON</h3>
-                <div class="prompt-box">
-                    <button class="copy-btn" onclick="copyText(this)">Copiar</button>
-<code id="prompt1-text">Actúa como un Ingeniero de Costos experto. Convierte el siguiente texto informal de una partida de obra en un objeto JSON limpio y bien estructurado.
-El JSON debe contener exactamente las siguientes propiedades:
-{
-  "item": "código de partida",
-  "descripcion": "nombre de la partida",
-  "unidad": "unidad de medida",
-  "metrado": valor numérico,
-  "precio_unitario": valor numérico,
-  "moneda": "PEN",
-  "subtotal": metrado * precio_unitario
-}
-
-Texto a convertir:
-"Partida 02.01.03 de concreto para zapatas con resistencia 210 kg/cm2, volumen calculado de 45.5 metros cúbicos, costo unitario por metro cúbico es de 380 soles"</code>
+        <!-- TAB 4: PRACTICA INTERACTIVA -->
+        <div id="tab4" class="tab-content">
+            <h2>Simulador Interactivo: Estimación Rápida de Partidas en JSON</h2>
+            <div class="calculator">
+                <div class="form-group">
+                    <label>Nombre de la Partida:</label>
+                    <input type="text" id="partidaName" value="Concreto f'c=210 kg/cm2 en Zapatas">
                 </div>
-
-                <h3 style="color:#fff; margin-bottom:12px; font-size:14px; text-transform:uppercase;">Prompt 2: Generación Estructurada de Especificación Técnica (Markdown)</h3>
-                <div class="prompt-box">
-                    <button class="copy-btn" onclick="copyText(this)">Copiar</button>
-<code id="prompt2-text">Actúa como un Ingeniero Civil especialista en Especificaciones Técnicas (EETT).
-Escribe la especificación técnica en formato Markdown (.md) para la partida que te indicaré.
-Sigue esta estructura jerárquica obligatoria usando cabeceras de Markdown:
-# ESPECIFICACIONES TÉCNICAS
-## [Nombre de la Partida]
-### 1. Descripción
-### 2. Materiales y Equipos
-### 3. Método de Construcción
-### 4. Método de Medición y Aceptación
-### 5. Bases de Pago
-
-Partida: "Pintura látex en muros interiores con dos manos"</code>
+                <div class="form-group">
+                    <label>Metrado Estimado (Unidad):</label>
+                    <input type="number" id="metradoVal" value="45.5">
                 </div>
-            </div>
-        </div>
-
-        <!-- TAB CONTENT: PRACTICA -->
-        <div id="practica" class="tab-content">
-            <div class="glass-panel">
-                <h2 class="section-title"><span>04.</span> Práctica Interactiva: Conversor EETT</h2>
-                <p>Experimenta cómo los agentes de IA interpretan los formatos de datos. Ingresa una partida en lenguaje natural a la izquierda y presiona los botones para estructurarla en <strong>Markdown</strong> o <strong>JSON</strong> de forma automática.</p>
-                
-                <div class="playground-container">
-                    <!-- Editor de Partida -->
-                    <div class="editor-section">
-                        <label class="editor-label">Texto de la Partida (Lenguaje Natural)</label>
-                        <textarea id="natural-text" class="code-editor" placeholder="Ej: Zapatas de concreto armado f'c=210 kg/cm2, metrado total de 120 m3, con un costo unitario de 450 soles por m3. Usar cemento portland tipo I."></textarea>
-                        
-                        <div class="btn-group">
-                            <button class="action-btn btn-cyan" onclick="convertToMarkdown()">A Markdown</button>
-                            <button class="action-btn btn-gold" onclick="convertToJSON()">A JSON</button>
-                        </div>
-                    </div>
-
-                    <!-- Panel de Previsualización -->
-                    <div class="preview-section">
-                        <label class="editor-label" id="preview-title">Resultado Estructurado</label>
-                        <div id="result-box" class="preview-box">Presiona uno de los botones para iniciar la conversión...</div>
-                    </div>
+                <div class="form-group">
+                    <label>Costo Unitario Estimado (S/.):</label>
+                    <input type="number" id="costoVal" value="480.00">
                 </div>
+                <button class="calc-btn" onclick="calcularPresupuesto()">Generar Estructura JSON y Total</button>
 
-                <div class="concept-card" style="margin-top: 30px;">
-                    <h3 style="color:#fff; margin-bottom:15px; font-size:14px; text-transform:uppercase;">Generador de Prompts para Openco</h3>
-                    <p>Como se vio en clase, los modelos de Openco requieren prompts minuciosos. Ajusta las opciones abajo para construir tu prompt estructural óptimo:</p>
-                    
-                    <div class="builder-row">
-                        <div class="builder-inputs">
-                            <div class="input-group">
-                                <label>Rol del Agente</label>
-                                <select id="prompt-role">
-                                    <option value="Ingeniero de Costos y Presupuestos">Ingeniero de Costos</option>
-                                    <option value="Especialista en Especificaciones Técnicas">Especialista en EETT</option>
-                                    <option value="Planificador de Proyectos (MS Project)">Project Scheduler</option>
-                                </select>
-                            </div>
-                            <div class="input-group">
-                                <label>Formato de Salida</label>
-                                <select id="prompt-format">
-                                    <option value="un archivo Markdown (.md) bien estructurado y jerárquico">Markdown (.md)</option>
-                                    <option value="un esquema JSON (.json) plano sin anidaciones innecesarias">JSON (.json)</option>
-                                    <option value="un documento HTML5 interactivo y estilizado localmente">HTML (.html)</option>
-                                </select>
-                            </div>
-                            <div class="input-group">
-                                <label>Restricción Crítica</label>
-                                <input type="text" id="prompt-constraint" value="No incluyas explicaciones textuales fuera de la estructura solicitada.">
-                            </div>
-                            <button class="action-btn btn-cyan" onclick="buildCustomPrompt()">Generar Prompt</button>
-                        </div>
-
-                        <div class="preview-section">
-                            <label class="editor-label">Prompt Final Optimizado</label>
-                            <div id="builder-result" class="preview-box" style="height: 190px;">Configura las variables a la izquierda y presiona "Generar Prompt".</div>
-                        </div>
-                    </div>
+                <div id="resultBox" class="calc-result">
+                    <h4>Resultado Calculado:</h4>
+                    <p><strong>Costo Parcial:</strong> S/. <span id="totalRes">0.00</span></p>
+                    <p style="margin-top:10px;"><strong>JSON Generado para IA:</strong></p>
+                    <code id="jsonCode" style="display:block; margin-top:5px;"></code>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC -->
     <script>
         function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
+            let i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tab-content");
             for (i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].classList.remove("active");
@@ -621,95 +401,30 @@ Partida: "Pintura látex en muros interiores con dos manos"</code>
             evt.currentTarget.classList.add("active");
         }
 
-        function copyText(button) {
-            var codeElement = button.nextElementSibling;
-            var range = document.createRange();
-            range.selectNode(codeElement);
-            window.getSelection().removeAllRanges();
-            window.getSelection().addRange(range);
-            try {
-                document.execCommand('copy');
-                var originalText = button.innerText;
-                button.innerText = 'Copiado!';
-                button.style.background = '#22d3ee';
-                button.style.color = '#000';
-                setTimeout(function() {
-                    button.innerText = originalText;
-                    button.style.background = '';
-                    button.style.color = '';
-                }, 2000);
-            } catch (err) {
-                alert('No se pudo copiar el texto.');
-            }
-            window.getSelection().removeAllRanges();
+        function copyPrompt(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("¡Prompt copiado al portapapeles!");
+            });
         }
 
-        // Playground conversions
-        function convertToMarkdown() {
-            var text = document.getElementById("natural-text").value.trim();
-            if (!text) {
-                alert("Ingresa un texto en el editor.");
-                return;
-            }
-            
-            // Simple rule-based extraction for mockup dynamic feel
-            var partida = text.match(/(Zapatas|Concreto|Pintura|Enlucido|Excavación|Acero)/i) ? text.match(/(Zapatas|Concreto|Pintura|Enlucido|Excavación|Acero)/i)[0] : "Partida Genérica";
-            var metrado = text.match(/(\d+(?:\.\d+)?)\s*(m3|m2|kg|ml|und)/i) ? text.match(/(\d+(?:\.\d+)?)\s*(m3|m2|kg|ml|und)/i)[0] : "Metrado no detectado";
-            
-            var mdResult = "# ESPECIFICACIONES TÉCNICAS\n\n";
-            mdResult += "## Partida: " + partida.toUpperCase() + "\n\n";
-            mdResult += "### 1. Descripción\n";
-            mdResult += "Consiste en la ejecución de los trabajos descritos: " + text + "\n\n";
-            mdResult += "### 2. Método de Construcción\n";
-            mdResult += "* Colocación según planos de diseño.\n";
-            mdResult += "* Verificación del alineamiento y niveles.\n\n";
-            mdResult += "### 3. Método de Medición\n";
-            mdResult += "La partida se medirá por unidad especificada (detectado: **" + metrado + "**).\n\n";
-            mdResult += "### 4. Bases de Pago\n";
-            mdResult += "El pago se efectuará al precio unitario del contrato pactado, constituyendo compensación completa.";
+        function calcularPresupuesto() {
+            const nombre = document.getElementById('partidaName').value;
+            const metrado = parseFloat(document.getElementById('metradoVal').value) || 0;
+            const costo = parseFloat(document.getElementById('costoVal').value) || 0;
+            const total = metrado * costo;
 
-            document.getElementById("preview-title").innerText = "Resultado en Markdown (.md)";
-            document.getElementById("result-box").innerText = mdResult;
-        }
-
-        function convertToJSON() {
-            var text = document.getElementById("natural-text").value.trim();
-            if (!text) {
-                alert("Ingresa un texto en el editor.");
-                return;
-            }
+            document.getElementById('totalRes').innerText = total.toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             
-            var desc = text.split(",")[0] || text;
-            var metVal = text.match(/(\d+(?:\.\d+)?)\s*(?:m3|m2|kg|ml|und)/i) ? parseFloat(text.match(/(\d+(?:\.\d+)?)/)[0]) : 1.0;
-            var costVal = text.match(/(\d+(?:\.\d+)?)\s*(?:soles|usd|\$)/i) ? parseFloat(text.match(/(\d+(?:\.\d+)?)\s*(?:soles|usd|\$)/i)[1]) : 100.0;
-            var total = metVal * costVal;
-
-            var jsonResult = {
-                "item": "01.01.01",
-                "descripcion": desc,
-                "unidad": text.match(/(m3|m2|kg|ml|und)/i) ? text.match(/(m3|m2|kg|ml|und)/i)[0].toUpperCase() : "UND",
-                "metrado": metVal,
-                "precio_unitario": costVal,
-                "moneda": "PEN",
-                "total": total
+            const jsonObj = {
+                partida: nombre,
+                metrado: metrado,
+                costo_unitario: costo,
+                parcial_soles: total
             };
 
-            document.getElementById("preview-title").innerText = "Resultado en JSON (.json)";
-            document.getElementById("result-box").innerText = JSON.stringify(jsonResult, null, 2);
-        }
-
-        // Custom Prompt Builder
-        function buildCustomPrompt() {
-            var role = document.getElementById("prompt-role").value;
-            var format = document.getElementById("prompt-format").value;
-            var constraint = document.getElementById("prompt-constraint").value;
-
-            var promptText = "Actúa como un " + role + " senior.\n";
-            promptText += "Toma la descripción técnica de la partida suministrada e impleméntala en " + format + ".\n";
-            promptText += "RESTRICCIÓN CRÍTICA: " + constraint + "\n\n";
-            promptText += "[Ingresa aquí la descripción técnica de tu partida]";
-
-            document.getElementById("builder-result").innerText = promptText;
+            document.getElementById('jsonCode').innerText = JSON.stringify(jsonObj, null, 2);
+            document.getElementById('resultBox').style.display = 'block';
         }
     </script>
 </body>

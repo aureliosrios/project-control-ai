@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCAI | Resumen Interactivo Clase 3 - Agentes de IA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #020617;
+            --bg-card: #0f172a;
+            --bg-card-hover: #1e293b;
+            --accent-cyan: #22d3ee;
+            --accent-emerald: #10b981;
+            --accent-gold: #f59e0b;
+            --accent-rose: #f43f5e;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 30px 20px;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #082f49 100%);
+            border: 1px solid var(--accent-cyan);
+            border-radius: 24px;
+            padding: 35px 25px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(34, 211, 238, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-emerald), var(--accent-gold));
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(34, 211, 238, 0.1);
+            color: var(--accent-cyan);
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+            border: 1px solid var(--accent-cyan);
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.3rem;
+            color: #fff;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .meta-info {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.03);
+            padding: 4px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Tabs Navigation */
+        .tabs-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 12px;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-muted);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 12px 22px;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            color: var(--accent-cyan);
+            background: rgba(34, 211, 238, 0.05);
+            border-color: rgba(34, 211, 238, 0.2);
+        }
+
+        .tab-btn.active {
+            color: #020617;
+            background: var(--accent-cyan);
+            box-shadow: 0 4px 20px rgba(34, 211, 238, 0.35);
+            border-color: var(--accent-cyan);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--accent-cyan);
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .topic-card {
+            background: #1e293b;
+            border-left: 4px solid var(--accent-cyan);
+            padding: 22px;
+            border-radius: 12px;
+            margin-bottom: 18px;
+            transition: transform 0.2s ease;
+        }
+
+        .topic-card:hover {
+            transform: translateX(4px);
+        }
+
+        .topic-card h3 {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .topic-card p {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .tool-card {
+            background: #1e293b;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.2s ease;
+        }
+
+        .tool-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 8px 25px rgba(34, 211, 238, 0.1);
+        }
+
+        .tool-card h4 {
+            color: var(--accent-cyan);
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Prompt Box */
+        .prompt-box {
+            background: #020617;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .prompt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .prompt-title {
+            color: var(--accent-gold);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .copy-btn {
+            background: rgba(34, 211, 238, 0.15);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 6px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: var(--accent-cyan);
+            color: #020617;
+        }
+
+        code {
+            font-family: 'Consolas', monospace;
+            color: #e2e8f0;
+            font-size: 0.92rem;
+            white-space: pre-wrap;
+            display: block;
+            line-height: 1.5;
+        }
+
+        /* Calculators */
+        .calc-container {
+            background: #1e293b;
+            padding: 28px;
+            border-radius: 20px;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-col;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            background: #020617;
+            border: 1px solid var(--border);
+            color: #fff;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+        }
+
+        .calc-btn {
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, #0284c7 100%);
+            color: #020617;
+            border: none;
+            padding: 14px 28px;
+            font-weight: 800;
+            font-size: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .calc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(34, 211, 238, 0.4);
+        }
+
+        .calc-result {
+            margin-top: 25px;
+            padding: 20px;
+            background: #020617;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-gold);
+            display: none;
+        }
+
+        .result-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.03);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .stat-item .val {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+        }
+
+        .stat-item .lbl {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <span class="badge">🚀 Project Control AI | Biblioteca Oficial</span>
+            <h1>Agentes de IA: Presupuestos, EETT y Cronogramas</h1>
+            <p style="color: #94a3b8; font-size: 1.1rem; max-width: 800px; margin: 0 auto;">
+                Sesión 03: Base de Datos Maestra Relacional JSON, Curva S, Cronograma de Vaciados y Cash Flow
+            </p>
+            <div class="meta-info">
+                <div class="meta-item">📅 30 de Agosto, 2026</div>
+                <div class="meta-item">👨‍🏫 Ing. Aurelio Solórzano Ríos</div>
+                <div class="meta-item">⏱️ Duración: 3h 10m</div>
+                <div class="meta-item">🧠 Antigravity & JSON Data Engine</div>
+            </div>
+        </header>
+
+        <div class="tabs-nav">
+            <button class="tab-btn active" onclick="openTab(event, 'tab1')">📋 Temario y Conceptos</button>
+            <button class="tab-btn" onclick="openTab(event, 'tab2')">🔍 Auditoría de Volúmenes</button>
+            <button class="tab-btn" onclick="openTab(event, 'tab3')">💡 Prompts Maestros</button>
+            <button class="tab-btn" onclick="openTab(event, 'tab4')">📊 Simulador Cash Flow & Mixer</button>
+        </div>
+
+        <!-- TAB 1: TEMARIO -->
+        <div id="tab1" class="tab-content active">
+            <h2>📋 Temario y Fundamentos de la Sesión</h2>
+            
+            <div class="topic-card">
+                <h3>1. La Base de Datos Maestra Relacional en JSON (Single Source of Truth)</h3>
+                <p>Por qué abandonar el almacenamiento en hojas de cálculo aisladas y centralizar el proyecto en un esquema JSON relacional. Este enfoque garantiza que cualquier cambio en un metrado o duración actualice simultáneamente el presupuesto, el cronograma y el flujo financiero sin inconsistencias humanas.</p>
+            </div>
+
+            <div class="topic-card">
+                <h3>2. Trazabilidad Bidireccional: Presupuesto vs Cronograma</h3>
+                <p>El presupuesto cuantifica entregables y costos unitarios contractuales; el cronograma distribuye recursos en el tiempo. La IA utiliza el identificador único WBS/EDT para vincular cada sol presupuestado con su fecha exacta de ejecución y desembolso.</p>
+            </div>
+
+            <div class="topic-card">
+                <h3>3. Cronograma de Vaciados de Concreto y Curva S</h3>
+                <p>Generación automatizada de calendarios de vaciado de concreto premezclado (mixer logístico). Identificación de saltos abruptos en la Curva S producidos por vaciados masivos de zapatas, muros de contención y losas de transferencia.</p>
+            </div>
+
+            <div class="topic-card">
+                <h3>4. Flujo de Caja Proyectado (Cash Flow) y Gestión Financiera</h3>
+                <p>Cálculo de la amortización de adelantos directos y de materiales, retención de fondo de garantía (10%) y proyección del saldo neto mensual para planificar con semanas de antelación solicitudes de Factoring o líneas de crédito bancarias.</p>
+            </div>
+        </div>
+
+        <!-- TAB 2: AUDITORÍA -->
+        <div id="tab2" class="tab-content">
+            <h2>🔍 Auditoría de Discrepancias de Metrados y Unidades</h2>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">
+                Análisis de las 4 causas principales de discrepancia detectadas durante los ejercicios prácticos de la sesión:
+            </p>
+
+            <div class="grid-2">
+                <div class="tool-card">
+                    <h4>📐 1. Conflicto de Unidades (m² vs m³)</h4>
+                    <p style="color: #cbd5e1; font-size: 0.9rem;">
+                        En el estándar S10, partidas como encofrados o muros de albañilería se presupuestan en <strong>m²</strong>, mientras que el pedido de concreto y el balance de masa requieren <strong>m³</strong>. La IA debe recibir reglas de inferencia para no omitir conversiones volumétricas.
+                    </p>
+                </div>
+
+                <div class="tool-card">
+                    <h4>🏗️ 2. Estructura EDT / WBS por Frentes</h4>
+                    <p style="color: #cbd5e1; font-size: 0.9rem;">
+                        La segmentación de obra por niveles (Sótano 2, Sótano 1, Pisos 1-10) genera multiplicidad de sub-partidas que deben conciliarse con el metrado global contractual.
+                    </p>
+                </div>
+
+                <div class="tool-card">
+                    <h4>🚛 3. Capacidad Logística de Mixer</h4>
+                    <p style="color: #cbd5e1; font-size: 0.9rem;">
+                        Planificación en base a unidades estándar de camiones mixer (8 m³ por mixer). Los picos de vaciado deben ajustarse a la capacidad de despacho de la planta concretera para evitar sobrecostos por tiempos de espera.
+                    </p>
+                </div>
+
+                <div class="tool-card">
+                    <h4>⚙️ 4. Scripts Deterministas en Python</h4>
+                    <p style="color: #cbd5e1; font-size: 0.9rem;">
+                        Por qué Antigravity genera scripts en la carpeta <code>scratch/</code>: la IA no debe "adivinar" números mediante texto; delega el cómputo aritmético a scripts Python para garantizar 100% de exactitud en sumas y valorizaciones.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: PROMPTS -->
+        <div id="tab3" class="tab-content">
+            <h2>💡 Biblioteca de Prompts Clave de la Sesión</h2>
+
+            <div class="prompt-box">
+                <div class="prompt-header">
+                    <span class="prompt-title">Prompt 1: Construcción de Base de Datos JSON Maestra Relacional</span>
+                    <button class="copy-btn" onclick="copyPrompt('p1')">Copiar Prompt</button>
+                </div>
+                <code id="p1">Actúa como Ingeniero Senior de Control de Proyectos (Project Control). Analiza el presupuesto y cronograma adjuntos. Construye una Base de Datos Maestra Relacional en formato JSON que contenga:
+1. "metadata": nombre_proyecto, fecha_corte, moneda, plazo_dias, monto_contractual_soles.
+2. "actividades": array de objetos con: id, wbs, descripcion, unidad, metrado, precio_unitario, parcial_soles, duracion_dias, predecesoras, fecha_inicio, fecha_fin, volumen_concreto_m3, requiere_mixer (boolean).
+3. Asegura estricta cuadratura matemática: la suma de parciales debe coincidir al centavo con el monto contractual.</code>
+            </div>
+
+            <div class="prompt-box">
+                <div class="prompt-header">
+                    <span class="prompt-title">Prompt 2: Auditoría y Cronograma de Vaciados de Concreto (Mixers)</span>
+                    <button class="copy-btn" onclick="copyPrompt('p2')">Copiar Prompt</button>
+                </div>
+                <code id="p2">Actúa como Jefe de Oficina Técnica. Utilizando la base de datos JSON del proyecto:
+1. Extrae todas las actividades que involucren vaciado de concreto estructural.
+2. Calcula el volumen diario y semanal en m3.
+3. Determina el número de camiones mixer requeridos (capacidad: 8 m3/viaje).
+4. Genera una alerta para aquellas semanas donde la demanda supere los 120 m3/día para coordinar con la planta de concreto.</code>
+            </div>
+
+            <div class="prompt-box">
+                <div class="prompt-header">
+                    <span class="prompt-title">Prompt 3: Simulación de Flujo de Caja (Cash Flow) y Línea de Factoring</span>
+                    <button class="copy-btn" onclick="copyPrompt('p3')">Copiar Prompt</button>
+                </div>
+                <code id="p3">Actúa como Controller Financiero de Construcción. A partir del cronograma valorizado mensual en JSON:
+1. Simula el Flujo de Caja considerando: Adelanto Directo (10%), Adelanto de Materiales (20%), Amortización mensual proporcional y Fondo de Garantía (10%).
+2. Estima los egresos operativos mensuales de obra.
+3. Determina el mes exacto donde el saldo de caja sea negativo (valle de liquidez).
+4. Recomienda el monto a financiar mediante Factoring o pagaré bancario y la fecha óptima para su gestión.</code>
+            </div>
+        </div>
+
+        <!-- TAB 4: SIMULADOR -->
+        <div id="tab4" class="tab-content">
+            <h2>📊 Simulador Interactivo: Logística de Mixer y Balance Financiero</h2>
+            <div class="calc-container">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Monto Contractual Obra (S/.):</label>
+                        <input type="number" id="montoObra" value="4500000">
+                    </div>
+                    <div class="form-group">
+                        <label>Plazo de Obra (Meses):</label>
+                        <input type="number" id="plazoMeses" value="8">
+                    </div>
+                    <div class="form-group">
+                        <label>Volumen Total Concreto (m³):</label>
+                        <input type="number" id="volConcreto" value="1850">
+                    </div>
+                    <div class="form-group">
+                        <label>Capacidad por Mixer (m³):</label>
+                        <input type="number" id="capMixer" value="8">
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>% Adelanto Directo:</label>
+                        <input type="number" id="adelantoDirecto" value="10">
+                    </div>
+                    <div class="form-group">
+                        <label>% Adelanto Materiales:</label>
+                        <input type="number" id="adelantoMat" value="20">
+                    </div>
+                </div>
+
+                <button class="calc-btn" onclick="ejecutarSimulacion()">Ejecutar Análisis y Generar Estructura JSON</button>
+
+                <div id="resultBox" class="calc-result">
+                    <h3 style="color: var(--accent-gold); margin-bottom: 15px;">Resultados de la Simulación:</h3>
+                    
+                    <div class="result-stats">
+                        <div class="stat-item">
+                            <div class="val" id="resMixers">0</div>
+                            <div class="lbl">Viajes de Mixer (8m³)</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="val" id="resAdelantos">S/. 0</div>
+                            <div class="lbl">Total Adelantos Recibidos</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="val" id="resValProm">S/. 0</div>
+                            <div class="lbl">Valorización Promedio Mensual</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="val" id="resMixerMes">0</div>
+                            <div class="lbl">Promedio Mixers / Mes</div>
+                        </div>
+                    </div>
+
+                    <p style="margin-top: 15px; font-weight: 700; color: var(--accent-cyan);">Esquema JSON Relacional Generado para Agentes de IA:</p>
+                    <code id="jsonResult" style="margin-top: 8px; background: #0b1329; padding: 15px; border-radius: 8px; border: 1px solid var(--border);"></code>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            let i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        function copyPrompt(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("¡Prompt copiado exitosamente al portapapeles!");
+            });
+        }
+
+        function ejecutarSimulacion() {
+            const monto = parseFloat(document.getElementById('montoObra').value) || 0;
+            const plazo = parseFloat(document.getElementById('plazoMeses').value) || 1;
+            const vol = parseFloat(document.getElementById('volConcreto').value) || 0;
+            const cap = parseFloat(document.getElementById('capMixer').value) || 8;
+            const pctDir = parseFloat(document.getElementById('adelantoDirecto').value) || 0;
+            const pctMat = parseFloat(document.getElementById('adelantoMat').value) || 0;
+
+            const totalMixers = Math.ceil(vol / cap);
+            const totalAdelantos = monto * ((pctDir + pctMat) / 100);
+            const valPromedio = monto / plazo;
+            const mixersMes = Math.ceil(totalMixers / plazo);
+
+            document.getElementById('resMixers').innerText = totalMixers.toLocaleString('es-PE');
+            document.getElementById('resAdelantos').innerText = 'S/. ' + totalAdelantos.toLocaleString('es-PE', { maximumFractionDigits: 0 });
+            document.getElementById('resValProm').innerText = 'S/. ' + valPromedio.toLocaleString('es-PE', { maximumFractionDigits: 0 });
+            document.getElementById('resMixerMes').innerText = mixersMes.toLocaleString('es-PE');
+
+            const masterJson = {
+                metadata: {
+                    proyecto: "Obra Edificación Multifamiliar - Control IA",
+                    monto_contractual_soles: monto,
+                    plazo_meses: plazo,
+                    adelantos_totales_soles: totalAdelantos,
+                    curva_s_valorizacion_promedio_mensual: valPromedio
+                },
+                logistica_concreto: {
+                    volumen_total_m3: vol,
+                    capacidad_mixer_m3: cap,
+                    total_viajes_mixer: totalMixers,
+                    promedio_viajes_mensuales: mixersMes
+                },
+                cronograma_vaciados_hitos: [
+                    { hito: "Zapatas y Cimentación", mes: 1, volumen_m3: Math.round(vol * 0.3), mixers: Math.ceil((vol * 0.3) / cap) },
+                    { hito: "Muros de Contención y Sótanos", mes: 2, volumen_m3: Math.round(vol * 0.25), mixers: Math.ceil((vol * 0.25) / cap) },
+                    { hito: "Estructuras Niveles Superiores", mes: "3 al " + (plazo - 1), volumen_m3: Math.round(vol * 0.45), mixers: Math.ceil((vol * 0.45) / cap) }
+                ]
+            };
+
+            document.getElementById('jsonResult').innerText = JSON.stringify(masterJson, null, 2);
+            document.getElementById('resultBox').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

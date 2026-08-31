@@ -29,6 +29,17 @@ const courses = {
           { title: "Resumen Interactivo de la Clase 2 (HTML)", type: "html", url: "/manuales/resumen_clase_1.html" },
           { title: "Ayuda Memoria de la Sesión (Markdown)", type: "html", url: "/manuales/Ayuda_Memoria_Clase_1_Agentes_IA_2026-08-23.md" }
         ]
+      },
+      {
+        id: "jxbnYytJUqg",
+        num: "03",
+        status: "OCULTA",
+        title: "Sesión 03: Base de Datos Relacional JSON, Curva S y Cash Flow (30/08/2026)",
+        desc: "Clase del 30 de Agosto (10:00 a.m. - 01:10 p.m.): Estructuración del JSON Maestro Relacional, trazabilidad Presupuesto-Cronograma, auditoría de discrepancias de volúmenes (m² vs m³), cronograma de vaciados de concreto y proyección de Flujo de Caja (Cash Flow).",
+        resources: [
+          { title: "Resumen Interactivo de la Clase 3 (HTML)", type: "html", url: "/manuales/resumen_clase_3.html" },
+          { title: "Manual de Usuario y Ayuda Memoria (Markdown)", type: "md", url: "/manuales/Ayuda_Memoria_Clase_3_Agentes_IA_2026-08-30.md" }
+        ]
       }
     ]
   },

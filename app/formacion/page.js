@@ -55,6 +55,22 @@ const asincronicos = [
     ]
   },
   {
+    id: "B3",
+    nombre: "Seguimiento y Control de Proyectos de Construcción con IA",
+    precio: "$19.99 USD",
+    tag: "CURSO B3 · PUBLICADO",
+    desc: "Aprende a monitorear y controlar el avance físico y financiero de tus obras con IA. Automatiza reportes de Valor Ganado (EVM), curvas S, control de KPIs y detección temprana de desviaciones en tiempo real.",
+    link: "https://pay.hotmart.com/H107475121N",
+    brochure: "https://go.hotmart.com/H107475121N?dp=1",
+    color: "rose",
+    pilares: [
+      "Control de Avance Físico y Financiero",
+      "Curvas S y Métricas de Valor Ganado (EVM)",
+      "Reportabilidad y Tableros en Tiempo Real",
+      "Detección de Desviaciones con Agentes de IA"
+    ]
+  },
+  {
     id: "C1",
     nombre: "Automatización de Presupuestos con IA",
     precio: "$15.99 USD",
@@ -245,6 +261,15 @@ export default function Formacion() {
                       btnBg: "bg-emerald-500 text-slate-950 hover:bg-emerald-400",
                       btnShadow: "0 0 15px rgba(16, 185, 129, 0.4)",
                       priceGlow: "text-emerald-400"
+                    },
+                    B3: {
+                      border: "hover:border-rose-500/50 border-rose-500/20",
+                      glow: "bg-rose-500/10",
+                      tagText: "text-rose-400",
+                      badgeBg: "from-rose-500/20 to-red-500/20 text-rose-300 border-rose-500/40",
+                      btnBg: "bg-rose-500 text-slate-950 hover:bg-rose-400",
+                      btnShadow: "0 0 15px rgba(244, 63, 94, 0.4)",
+                      priceGlow: "text-rose-400"
                     },
                     C1: {
                       border: "hover:border-indigo-500/50 border-indigo-500/20",

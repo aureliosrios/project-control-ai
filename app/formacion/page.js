@@ -101,17 +101,17 @@ const sincronicos = [
     precio: "$100.00 USD",
     precioSoles: "S/. 300",
     tag: "CURSO 1 · MASTERCLASS",
-    desc: "¡Cupos agotados! El curso del 23/08 ya llegó al límite de su capacidad. Reserva tu inscripción para la próxima edición. Aprende a automatizar el flujo completo de obra con Agentes Autónomos, SkillsPro y Cerebros Digitales.",
-    inicio: "Domingo 23 de Agosto, 2026",
-    fin: "Domingo 27 de Septiembre, 2026",
-    horario: "Todos los domingos · 10:00 AM – 1:00 PM",
+    desc: "¡Convocatoria oficial confirmada! Aprende a automatizar el flujo completo de obra con Agentes Autónomos (Antigravity, Codex), SkillsPro, Cerebro Digital en Obsidian, Presupuestos en Excel con fórmulas vivas y Cronogramas en MS Project con macros VBA (.bas).",
+    inicio: "Domingo 20 de Septiembre, 2026",
+    fin: "Domingo 25 de Octubre, 2026",
+    horario: "Todos los domingos · 3:00 PM – 6:00 PM",
     sesiones: "18h · 6 sesiones",
     link: "/inscripcion",
     brochure: "/brochures/Brochure_Agentes_IA_Presupuestos_EETT_Cronogramas.pdf",
     hotmart: "https://pay.hotmart.com/K104218834V",
     paypal: "https://paypal.me/ProjectControlAI",
     color: "cyan",
-    cerrado: true
+    cerrado: false
   },
   {
     id: "S2",

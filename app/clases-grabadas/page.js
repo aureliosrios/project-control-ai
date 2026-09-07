@@ -31,7 +31,7 @@ const courses = {
         ]
       },
       {
-        id: "jxbnYytJUqg",
+        id: "f8ZM78m4Bds",
         num: "03",
         status: "OCULTA",
         title: "Sesión 03: Base de Datos Relacional JSON, Curva S y Cash Flow (30/08/2026)",

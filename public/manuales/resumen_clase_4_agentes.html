@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCAI | Resumen Interactivo Clase 4 - Agentes de IA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #030712;
+            --bg-card: #0b1329;
+            --bg-card-hover: #111d3f;
+            --accent-cyan: #06b6d4;
+            --accent-blue: #3b82f6;
+            --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-purple: #8b5cf6;
+            --accent-rose: #f43f5e;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #1e293b;
+            --border-glow: rgba(6, 182, 212, 0.3);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 30px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0b1329 0%, #171c3d 50%, #082f49 100%);
+            border: 1px solid var(--accent-cyan);
+            border-radius: 24px;
+            padding: 40px 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(6, 182, 212, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple), var(--accent-emerald), var(--accent-amber));
+        }
+
+        .badge-session {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(6, 182, 212, 0.12);
+            color: var(--accent-cyan);
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+            border: 1px solid var(--accent-cyan);
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.4rem;
+            color: #fff;
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            max-width: 850px;
+            margin: 0 auto 20px auto;
+        }
+
+        .meta-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.04);
+            padding: 6px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        /* Tabs Navigation */
+        .tabs-nav {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 12px;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-muted);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 12px 24px;
+            cursor: pointer;
+            border-radius: 14px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab-btn:hover {
+            color: var(--accent-cyan);
+            background: rgba(6, 182, 212, 0.08);
+            border-color: rgba(6, 182, 212, 0.25);
+        }
+
+        .tab-btn.active {
+            color: #030712;
+            background: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 4px 16px rgba(6, 182, 212, 0.35);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards and Grids */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 22px;
+            margin-bottom: 25px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 26px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 10px 30px rgba(6, 182, 212, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .card-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            background: rgba(6, 182, 212, 0.12);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(6, 182, 212, 0.25);
+        }
+
+        .card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            color: #fff;
+        }
+
+        .card p, .card li {
+            color: var(--text-muted);
+            font-size: 0.96rem;
+            line-height: 1.6;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+
+        .card li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+        }
+
+        .card li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-size: 1.1rem;
+        }
+
+        /* Pillars Banner */
+        .pillar-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .p-blue { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
+        .p-amber { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+        .p-purple { background: rgba(139, 92, 246, 0.15); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.3); }
+
+        /* Code & Prompts */
+        .prompt-block {
+            background: #020617;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            margin-bottom: 22px;
+            overflow: hidden;
+        }
+
+        .prompt-header {
+            background: rgba(255,255,255,0.03);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .prompt-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .copy-btn {
+            background: rgba(6, 182, 212, 0.12);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            padding: 5px 14px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background: var(--accent-cyan);
+            color: #030712;
+        }
+
+        pre {
+            padding: 16px 20px;
+            overflow-x: auto;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.88rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        /* Interactive Simulator / Auditor Box */
+        .sim-box {
+            background: linear-gradient(135deg, #0b1329 0%, #151d38 100%);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .sim-inputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .form-control {
+            background: #030712;
+            border: 1px solid var(--border);
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-cyan);
+        }
+
+        .btn-calc {
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+            color: #030712;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(6, 182, 212, 0.3);
+        }
+
+        .btn-calc:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 22px rgba(6, 182, 212, 0.45);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 14px;
+            margin-top: 22px;
+        }
+
+        .metric-card {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .metric-val {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 4px;
+        }
+
+        .metric-lbl {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Checkbox items */
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+            background: rgba(255,255,255,0.02);
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .check-item input[type="checkbox"] {
+            margin-top: 4px;
+            accent-color: var(--accent-cyan);
+            width: 18px;
+            height: 18px;
+        }
+
+        footer {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.88rem;
+        }
+
+        @media(max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="badge-session">Sesión 04 en Vivo | 06 de Septiembre de 2026</div>
+            <h1>Cerebro Digital de Proyecto, Trazabilidad de Presupuestos y Especificaciones Técnicas (EETT)</h1>
+            <p class="subtitle">Arquitectura de Bóvedas de 3 Pilares en Obsidian, depuración de grafos relacionales, flujo diario EVM (Markdown a JSON) y generación rigurosa de EETT en 8 secciones canónicas.</p>
+            <div class="meta-info">
+                <div class="meta-item">👨‍🏫 <strong>Docente:</strong> Ing. Aurelio Solórzano Ríos</div>
+                <div class="meta-item">⏱️ <strong>Duración Total:</strong> 3h 02m (Parte 1: 26m + Parte 2: 2h 36m)</div>
+                <div class="meta-item">🏗️ <strong>Proyecto Caso:</strong> Edificio Educativo (6 pisos + 2 sótanos + azotea)</div>
+            </div>
+        </header>
+
+        <!-- Tabs Navigation -->
+        <div class="tabs-nav">
+            <button class="tab-btn active" onclick="switchTab('tab-resumen')">📋 1. Resumen Ejecutivo</button>
+            <button class="tab-btn" onclick="switchTab('tab-pilares')">🏛️ 2. Los 3 Pilares del Cerebro Digital</button>
+            <button class="tab-btn" onclick="switchTab('tab-eett')">📐 3. Metodología EETT (8 Secciones)</button>
+            <button class="tab-btn" onclick="switchTab('tab-prompts')">🎯 4. Biblioteca de Prompts</button>
+            <button class="tab-btn" onclick="switchTab('tab-simulador')">⚡ 5. Validador de Auditoría WBS</button>
+        </div>
+
+        <!-- TAB 1: RESUMEN EJECUTIVO -->
+        <div id="tab-resumen" class="tab-content active">
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">📊</div>
+                        <h3>Trazabilidad en Presupuestos Masivos</h3>
+                    </div>
+                    <p><strong>Caso Real de Carretera S/. 283 Millones:</strong></p>
+                    <p>Frente a expedientes en PDF sin nativos de Presto o S10, el error común es volcar todo directamente a JSON. La estrategia validada en clase exige:</p>
+                    <ul>
+                        <li>Comprender la taxonomía del presupuesto antes de procesar: Partida ➔ Subpartida ➔ APU ➔ Insumo.</li>
+                        <li>Auditar la cuadratura matemática en JSON: sumatoria de recursos = costo directo.</li>
+                        <li>Generar Excel con fórmulas nativas vivas para evitar inconsistencias de redondeo.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">⏱️</div>
+                        <h3>Control Diario de Obra con EVM</h3>
+                    </div>
+                    <p><strong>Estrategia Markdown a JSON Acumulativo:</strong></p>
+                    <p>A las 6:00 p.m., el flujo de información de campo se consolida sin fricción:</p>
+                    <ul>
+                        <li><strong>Markdown:</strong> Captura ágil y fiel de los reportes del tareador, almacén, maquinaria y subcontratistas.</li>
+                        <li><strong>JSON Maestro:</strong> El agente actualiza la base de datos central acumulativa.</li>
+                        <li><strong>Mapeo EVM:</strong> Avance real = Earned Value (EV), Mano de obra y compras = Actual Cost (AC), Línea base = Planned Value (PV). Permite auditar qué cuadrilla o frente específico pierde dinero día a día.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card" style="margin-bottom: 25px;">
+                <div class="card-header">
+                    <div class="card-icon">🧠</div>
+                    <h3>Obsidian: Desmitificación Visual vs Poder Metodológico</h3>
+                </div>
+                <p>Durante la sesión se enfatizó que la aplicación de escritorio de Obsidian es meramente una interfaz visual (grafo). Lo verdaderamente valioso para el ingeniero es la <strong>metodología de enlaces relacionales (Wikilinks [[nodo]])</strong>. Los agentes de IA (Antigravity, Claude Code, Codex) consumen esta estructura para no perder trazabilidad ni olvidar normativas al redactar especificaciones técnicas y memorias de cálculo.</p>
+            </div>
+        </div>
+
+        <!-- TAB 2: LOS 3 PILARES -->
+        <div id="tab-pilares" class="tab-content">
+            <div class="grid-3">
+                <div class="card">
+                    <span class="pillar-badge p-blue">Pilar 1</span>
+                    <div class="card-header">
+                        <div class="card-icon" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">📁</div>
+                        <h3>Documentos de Proyecto</h3>
+                    </div>
+                    <p>Fuentes primarias de ingeniería indexadas y resumidas:</p>
+                    <ul>
+                        <li><strong>Estudios Básicos:</strong> Mecánica de suelos, capacidad portante, cotas de cimentación, agresividad química de sales y sulfatos.</li>
+                        <li><strong>Planos de Ingeniería:</strong> Láminas de cimentación, muros anclados, losas y vigas.</li>
+                        <li><strong>Memorias Descriptivas:</strong> Criterios de diseño, accesos y logística de faena.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <span class="pillar-badge p-amber">Pilar 2</span>
+                    <div class="card-header">
+                        <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">📜</div>
+                        <h3>Biblioteca Normativa</h3>
+                    </div>
+                    <p>Marco regulatorio peruano aplicable:</p>
+                    <ul>
+                        <li><strong>RNE E.050:</strong> Suelos y cimentaciones, excavaciones profundas y calzaduras.</li>
+                        <li><strong>RNE E.060:</strong> Concreto armado, recubrimientos y tolerancias.</li>
+                        <li><strong>RNE E.020 / E.030:</strong> Cargas de diseño y norma sismorresistente.</li>
+                        <li><strong>Seguridad y SST:</strong> DS 011-2019-TR y Norma Técnica G.050 Seguridad durante la Construcción.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <span class="pillar-badge p-purple">Pilar 3</span>
+                    <div class="card-header">
+                        <div class="card-icon" style="background: rgba(139, 92, 246, 0.15); color: #a78bfa;">🕸️</div>
+                        <h3>Grafo de EETT & WBS</h3>
+                    </div>
+                    <p>Nodos relacionales y trazabilidad cruzada:</p>
+                    <ul>
+                        <li><strong>78 Partidas Estructuradas:</strong> Distribuidas en 13 capítulos canónicos.</li>
+                        <li><strong>Conexión Wikilink:</strong> Cada partida referencia su plano exacto y el artículo legal vinculante.</li>
+                        <li><strong>Depuración de Huérfanos:</strong> Eliminación de archivos temporales flotantes para asegurar un grafo limpio.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: METODOLOGÍA EETT -->
+        <div id="tab-eett" class="tab-content">
+            <div class="card" style="margin-bottom: 25px;">
+                <div class="card-header">
+                    <div class="card-icon">⚡</div>
+                    <h3>¿Por qué Redacción Incremental (1 a 1) y No Masiva?</h3>
+                </div>
+                <p>El Ing. Aurelio demostró en vivo que al solicitarle al modelo redactar 50 o 200 páginas de especificaciones de un solo golpe, la IA condensa el texto, omite tolerancias geométricas, elimina referencias a ensayos y tiende a alucinar. La metodología institucional de Project Control AI exige la <strong>redacción secuencial supervisada</strong>, garantizando 8 secciones por partida:</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h4 style="color: var(--accent-cyan); margin-bottom: 10px;">1. Delimitación y Alcance</h4>
+                    <p>Ubicación espacial exacta del predio, frente de faena, accesos autorizados por gerencia de transporte y definición precisa de lo que incluye y no incluye la partida.</p>
+                </div>
+                <div class="card">
+                    <h4 style="color: var(--accent-cyan); margin-bottom: 10px;">2. Materiales Certificados</h4>
+                    <p>Normas NTP y ASTM requeridas, certificados de calidad de fábrica, tipos de cemento resistente a sulfatos, acero grado 60 y agregados libres de materia orgánica.</p>
+                </div>
+                <div class="card">
+                    <h4 style="color: var(--accent-cyan); margin-bottom: 10px;">3. Equipos y Herramientas</h4>
+                    <p>Capacidades técnicas (ej. excavadora de oruga 22 ton, volquetes 15 m³, vibroapisonadores, vibradores de aguja de 2") y plan de mantenimiento preventivo.</p>
+                </div>
+                <div class="card">
+                    <h4 style="color: var(--accent-cyan); margin-bottom: 10px;">4. Procedimiento Constructivo</h4>
+                    <p>Secuencia operativa paso a paso: trazo, perforación, colocación de armadura, vaciado, vibrado, desencofrado y curado según especificación de planos.</p>
+                </div>
+                <div class="card">
+                    <h4 style="color: var(--accent-cyan); margin-bottom: 10px;">5. Controles y Ensayos Críticos</h4>
+                    <p>Frecuencia de muestreo de probetas (ej. 1 juego por cada 50 m³), ensayos de revenimiento (slump), densidades de campo (Cono de arena / Densímetro nuclear).</p>
+                </div>
+                <div class="card">
+                    <h4 style="color: var(--accent-cyan); margin-bottom: 10px;">6. Tolerancias y Criterios de Aceptación</h4>
+                    <p>Desviaciones milimétricas admisibles de verticalidad, espesores de losa, recubrimientos mínimos y sanciones en caso de segregación o cangrejeras.</p>
+                </div>
+                <div class="card">
+                    <h4 style="color: var(--accent-cyan); margin-bottom: 10px;">7. Seguridad, Salud y Ambiente (SST)</h4>
+                    <p>EPP obligatorio, líneas de vida en excavaciones profundas, vigías en salida de camiones, protocolos según DS 011-2019-TR y gestión de residuos de desmonte.</p>
+                </div>
+                <div class="card">
+                    <h4 style="color: var(--accent-cyan); margin-bottom: 10px;">8. Medición y Base de Pago</h4>
+                    <p>Unidad contractual (m³, m², kg, glb), método geométrico de cubicación y condiciones previas de aprobación por supervisión para tramitar la valorización.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: PROMPTS -->
+        <div id="tab-prompts" class="tab-content">
+            <div class="prompt-block">
+                <div class="prompt-header">
+                    <div class="prompt-title">🎯 Prompt 1: Creación de Bóveda Obsidian y Cerebro Digital</div>
+                    <button class="copy-btn" onclick="copyCode('p1')">Copiar Prompt</button>
+                </div>
+                <pre id="p1">Actúa como Arquitecto de Información Técnica y Especialista en Normativas de Construcción.
+Construye desde cero el CEREBRO DIGITAL para elaborar las Especificaciones Técnicas del proyecto.
+
+Fuentes de Entrada:
+- Carpeta 1: Documentos Técnicos del Proyecto (memorias, estudios de suelos, planos de replanteo).
+- Carpeta 2: Biblioteca Normativa (RNE E.050, E.060, E.020, E.030, DS 011-2019-TR).
+
+Reglas:
+1. Trata las carpetas de entrada exclusivamente como solo lectura.
+2. Organiza un baúl canónico de Obsidian en 3 Pilares:
+   - Pilar 1: Documentos de Proyecto indexados en Markdown.
+   - Pilar 2: Normativa vinculante clasificada por especialidad.
+   - Pilar 3: Grafo de Conocimiento con enlaces relacionales [[nodo]].
+3. Depura archivos huérfanos y genera informe de validación del cerebro digital.</pre>
+            </div>
+
+            <div class="prompt-block">
+                <div class="prompt-header">
+                    <div class="prompt-title">🎯 Prompt 2: Matriz Canónica de Trazabilidad 78 Partidas (Excel S10)</div>
+                    <button class="copy-btn" onclick="copyCode('p2')">Copiar Prompt</button>
+                </div>
+                <pre id="p2">Actúa como Ingeniero Senior de Costos y Especificaciones Técnicas.
+A partir del Cerebro Digital estructurado, genera una Matriz Canónica de Trazabilidad Integral en formato JSON y Excel profesional (estilo S10).
+
+Debe abarcar 13 capítulos y 78 partidas de estructuras con columnas independientes:
+1. Item WBS y Descripción
+2. Unidad y Metrado Contractual
+3. Criterio técnico de la Memoria Descriptiva
+4. Parámetros del Estudio de Suelos / Geotécnico fuente
+5. Referencia de Lámina y Plano de Detalle
+6. Norma Técnica Vinculante (Código y artículo específico del RNE)
+7. Procedimiento Constructivo
+8. Protocolos de Seguridad SST (DS 011-2019-TR)</pre>
+            </div>
+
+            <div class="prompt-block">
+                <div class="prompt-header">
+                    <div class="prompt-title">🎯 Prompt 3: Redacción Incremental de EETT (8 Secciones Canónicas)</div>
+                    <button class="copy-btn" onclick="copyCode('p3')">Copiar Prompt</button>
+                </div>
+                <pre id="p3">Actúa como Ingeniero Supervisor y Proyectista Principal de Estructuras.
+Utilizando el Cerebro Digital y la Matriz de Trazabilidad, elabora la Especificación Técnica para la partida:
+[INDICAR PARTIDA: ej. 01.01 Movilización y Desmovilización de Maquinaria Pesada]
+
+Estructura rigurosa en 8 secciones:
+1. Delimitación espacial y alcance operativo de la faena.
+2. Especificaciones de materiales e insumos certificados.
+3. Equipos, maquinaria pesada y herramientas asignadas.
+4. Procedimiento constructivo secuencial paso a paso.
+5. Controles de calidad, frecuencia de muestreo y ensayos críticos.
+6. Tolerancias dimensionales y criterios de aceptación/rechazo.
+7. Disposiciones de Seguridad, Salud en el Trabajo y Medio Ambiente.
+8. Método de medición y condiciones para la base de pago.</pre>
+            </div>
+        </div>
+
+        <!-- TAB 5: SIMULADOR DE AUDITORÍA -->
+        <div id="tab-simulador" class="tab-content">
+            <div class="sim-box">
+                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; margin-bottom: 8px;">⚡ Validador de Auditoría y Métricas del Cerebro Digital</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">Calcula la densidad de enlaces relacionales, número de capítulos y estimación de páginas para la compilación de EETT en Word.</p>
+                
+                <div class="sim-inputs">
+                    <div class="form-group">
+                        <label>Total Partidas WBS</label>
+                        <input type="number" id="inpPartidas" class="form-control" value="78">
+                    </div>
+                    <div class="form-group">
+                        <label>Total Capítulos WBS</label>
+                        <input type="number" id="inpCapitulos" class="form-control" value="13">
+                    </div>
+                    <div class="form-group">
+                        <label>Promedio Páginas por EETT</label>
+                        <input type="number" id="inpPaginas" class="form-control" value="2.5" step="0.5">
+                    </div>
+                    <div class="form-group">
+                        <label>Normas Vinculadas</label>
+                        <input type="number" id="inpNormas" class="form-control" value="6">
+                    </div>
+                </div>
+
+                <button class="btn-calc" onclick="calcularMetricas()">Computar Auditoría</button>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-val" id="resNodos">78</div>
+                        <div class="metric-lbl">Nodos en Grafo</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-val" id="resEnlaces">468</div>
+                        <div class="metric-lbl">Enlaces Cruzados (Wikilinks)</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-val" id="resPaginasWord">195</div>
+                        <div class="metric-lbl">Páginas Estimadas Word</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-val" id="resTiempoEst">1.3 h</div>
+                        <div class="metric-lbl">Tiempo Secuencial con Agente</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="margin-bottom: 15px; color: #fff;">Checklist de Asignación del Alumno</h3>
+                <div class="check-item">
+                    <input type="checkbox" checked>
+                    <div><strong>Bóveda Obsidian Vinculada:</strong> Apertura de carpeta en Obsidian y verificación de vista gráfica sin huérfanos.</div>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" checked>
+                    <div><strong>Matriz de 78 Partidas en Excel:</strong> Columnas independientes de estudios de suelos, planos y RNE.</div>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox">
+                    <div><strong>Entrega Obligatoria:</strong> 05 Especificaciones Técnicas en formato Word (.docx) profesional con membrete institucional.</div>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox">
+                    <div><strong>Difusión de Comunidad:</strong> Difundir con colegas el nuevo inicio del curso para el domingo 20 de Septiembre de 2026.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>Plataforma de Alumnos &copy; 2026 <strong>Project Control AI</strong>. Todos los derechos reservados.</p>
+            <p style="margin-top: 5px; font-size: 0.8rem; color: #64748b;">Automatización con Agentes Inteligentes en Ingeniería de Presupuestos, EETT y Cronogramas.</p>
+        </footer>
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        function copyCode(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('¡Prompt copiado al portapapeles con éxito!');
+            });
+        }
+
+        function calcularMetricas() {
+            const partidas = parseInt(document.getElementById('inpPartidas').value) || 0;
+            const capitulos = parseInt(document.getElementById('inpCapitulos').value) || 0;
+            const pagPorEett = parseFloat(document.getElementById('inpPaginas').value) || 0;
+            const normas = parseInt(document.getElementById('inpNormas').value) || 0;
+
+            const totalNodos = partidas;
+            const enlacesCruzados = partidas * normas;
+            const totalPaginas = Math.round(partidas * pagPorEett);
+            const tiempoMinutos = Math.round(partidas * 1.0); // 1 min por EETT con agente
+            const tiempoHoras = (tiempoMinutos / 60).toFixed(1);
+
+            document.getElementById('resNodos').innerText = totalNodos;
+            document.getElementById('resEnlaces').innerText = enlacesCruzados.toLocaleString('es-PE');
+            document.getElementById('resPaginasWord').innerText = totalPaginas;
+            document.getElementById('resTiempoEst').innerText = tiempoHoras + ' h';
+        }
+    </script>
+</body>
+</html>

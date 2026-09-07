@@ -40,6 +40,28 @@ const courses = {
           { title: "Resumen Interactivo de la Clase 3 (HTML)", type: "html", url: "/manuales/resumen_clase_3.html" },
           { title: "Manual de Usuario y Ayuda Memoria (Markdown)", type: "md", url: "/manuales/Ayuda_Memoria_Clase_3_Agentes_IA_2026-08-30.md" }
         ]
+      },
+      {
+        id: "wXbSJy9tbUA",
+        num: "04-A",
+        status: "OCULTA",
+        title: "Sesión 04 (Parte 1): Presupuestos Masivos y Flujo de Control Diario (06/09/2026)",
+        desc: "Clase del 06 de Septiembre (Parte 1: 09:55 a.m. - 10:21 a.m.): Trazabilidad matemática de presupuestos de S/. 283 Millones en PDF/Presto, flujo de obra Markdown a JSON y fundamentos de arquitectura de Cerebro Digital.",
+        resources: [
+          { title: "Resumen Interactivo de la Clase 4 (HTML)", type: "html", url: "/manuales/resumen_clase_4_agentes.html" },
+          { title: "Manual de Estudio y Ayuda Memoria (Markdown)", type: "md", url: "/manuales/Ayuda_Memoria_Clase_4_Agentes_IA_2026-09-06.md" }
+        ]
+      },
+      {
+        id: "9nmQRD1cphA",
+        num: "04-B",
+        status: "OCULTA",
+        title: "Sesión 04 (Parte 2): Bóvedas de 3 Pilares en Obsidian y EETT Trazables (06/09/2026)",
+        desc: "Clase del 06 de Septiembre (Parte 2: 10:24 a.m. - 01:00 p.m.): Configuración de Bóveda Obsidian de 3 Pilares, Matriz Canónica WBS de 78 Partidas, redacción incremental de EETT en 8 secciones y empaquetado de Skills.",
+        resources: [
+          { title: "Resumen Interactivo de la Clase 4 (HTML)", type: "html", url: "/manuales/resumen_clase_4_agentes.html" },
+          { title: "Manual de Estudio y Ayuda Memoria (Markdown)", type: "md", url: "/manuales/Ayuda_Memoria_Clase_4_Agentes_IA_2026-09-06.md" }
+        ]
       }
     ]
   },

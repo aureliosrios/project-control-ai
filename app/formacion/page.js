@@ -56,17 +56,17 @@ const asincronicos = [
   },
   {
     id: "B3",
-    nombre: "Seguimiento y Control de Proyectos de Construcción con IA",
+    nombre: "Seguimiento y Control de Proyectos de Construcción con IA, Last Planner y MS Project",
     precio: "$19.99 USD",
     tag: "CURSO B3 · PUBLICADO",
-    desc: "Aprende a monitorear y controlar el avance físico y financiero de tus obras con IA. Automatiza reportes de Valor Ganado (EVM), curvas S, control de KPIs y detección temprana de desviaciones en tiempo real.",
+    desc: "Aprende a monitorear y controlar el avance físico y financiero integrando MS Project y Last Planner System (LPS) con IA. Automatiza reportes de Valor Ganado (EVM), curvas S, confiabilidad PPC y detección temprana de desviaciones.",
     link: "https://pay.hotmart.com/H107475121N",
     brochure: "https://go.hotmart.com/H107475121N?dp=1",
     color: "rose",
     pilares: [
-      "Control de Avance Físico y Financiero",
+      "Control de Avance Físico y Financiero en MS Project",
+      "Last Planner System (LPS, Lookahead y PPC)",
       "Curvas S y Métricas de Valor Ganado (EVM)",
-      "Reportabilidad y Tableros en Tiempo Real",
       "Detección de Desviaciones con Agentes de IA"
     ]
   },

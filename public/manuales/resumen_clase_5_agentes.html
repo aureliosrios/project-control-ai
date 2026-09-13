@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCAI | Resumen Interactivo Clase 5 - Agentes de IA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #030712;
+            --bg-card: #0b1329;
+            --bg-card-hover: #111d3f;
+            --accent-cyan: #06b6d4;
+            --accent-blue: #3b82f6;
+            --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-purple: #8b5cf6;
+            --accent-rose: #f43f5e;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #1e293b;
+            --border-glow: rgba(6, 182, 212, 0.3);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 30px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0b1329 0%, #171c3d 50%, #082f49 100%);
+            border: 1px solid var(--accent-cyan);
+            border-radius: 24px;
+            padding: 40px 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(6, 182, 212, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple), var(--accent-emerald), var(--accent-amber));
+        }
+
+        .badge-session {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(6, 182, 212, 0.12);
+            color: var(--accent-cyan);
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+            border: 1px solid var(--accent-cyan);
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.3rem;
+            color: #fff;
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.12rem;
+            max-width: 900px;
+            margin: 0 auto 20px auto;
+        }
+
+        .meta-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.04);
+            padding: 6px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        /* Tabs Navigation */
+        .tabs-nav {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 12px;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 12px 24px;
+            border-radius: 14px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tab-btn:hover {
+            color: #fff;
+            border-color: var(--accent-cyan);
+            background: rgba(6, 182, 212, 0.08);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(59, 130, 246, 0.2));
+            color: #fff;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.25);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.35s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards & Grid */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 26px;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            border-color: var(--accent-cyan);
+            background: var(--bg-card-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .card-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .badge-opt {
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge-danger { background: rgba(244, 63, 94, 0.15); color: var(--accent-rose); border: 1px solid var(--accent-rose); }
+        .badge-warn { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); border: 1px solid var(--accent-amber); }
+        .badge-success { background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); border: 1px solid var(--accent-emerald); }
+
+        ul.feature-list {
+            list-style: none;
+            margin-top: 12px;
+        }
+
+        ul.feature-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 10px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        ul.feature-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        /* Section Banner */
+        .banner {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.1));
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 30px;
+        }
+
+        .banner h3 {
+            color: var(--accent-cyan);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        /* Prompt Box */
+        .prompt-card {
+            background: #060b18;
+            border: 1px solid #1e293b;
+            border-radius: 18px;
+            padding: 22px;
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .prompt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .prompt-title {
+            color: var(--accent-amber);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-copy {
+            background: rgba(6, 182, 212, 0.15);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 6px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-copy:hover {
+            background: var(--accent-cyan);
+            color: #000;
+        }
+
+        pre {
+            background: #020617;
+            padding: 16px;
+            border-radius: 12px;
+            overflow-x: auto;
+            color: #cbd5e1;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.88rem;
+            line-height: 1.5;
+            border: 1px solid rgba(255,255,255,0.05);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* Interactive Simulator */
+        .sim-box {
+            background: linear-gradient(135deg, #0b1329 0%, #151a3a 100%);
+            border: 1px solid var(--accent-cyan);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .sim-inputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            background: #030712;
+            border: 1px solid var(--border);
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-family: inherit;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+        }
+
+        .btn-calc {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #000;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-calc:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(6, 182, 212, 0.4);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .metric-card {
+            background: rgba(3, 7, 18, 0.7);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .metric-val {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 4px;
+        }
+
+        .metric-lbl {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .check-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            padding: 12px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0 10px 0;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="badge-session">Sesión Oficial 05 &bull; 13/09/2026</div>
+            <h1>Agentes de IA: Presupuestos, EETT y Cronogramas</h1>
+            <p class="subtitle">Consolidación de Especificaciones Técnicas Trazables, Empaquetado de Agent Skills (.agents/skills) y Transición Metodológica hacia el Presupuesto y APUs Trazables.</p>
+            <div class="meta-info">
+                <div class="meta-item"><span>👨‍🏫 Docente:</span> <strong>Ing. Aurelio Solórzano Ríos</strong></div>
+                <div class="meta-item"><span>⏱ Duración:</span> <strong>3 Horas (180 min)</strong></div>
+                <div class="meta-item"><span>🏛 Academia:</span> <strong>Project Control AI</strong></div>
+                <div class="meta-item"><span>⚡ Nivel:</span> <strong>Avanzado / Producción</strong></div>
+            </div>
+        </header>
+
+        <!-- TABS NAV -->
+        <div class="tabs-nav">
+            <button class="tab-btn active" onclick="switchTab('tab-temario')">📘 Temario y Conceptos</button>
+            <button class="tab-btn" onclick="switchTab('tab-casos')">🏗️ Casos de Estudio y EETT</button>
+            <button class="tab-btn" onclick="switchTab('tab-prompts')">🎯 Biblioteca de Prompts</button>
+            <button class="tab-btn" onclick="switchTab('tab-simulador')">⚡ Simulador y Práctica</button>
+        </div>
+
+        <!-- TAB 1: TEMARIO Y CONCEPTOS -->
+        <div id="tab-temario" class="tab-content active">
+            <div class="banner">
+                <h3>⚖️ Auditoría Metodológica: Las 3 Opciones para Proyectos de Construcción</h3>
+                <p>El Ing. Aurelio Solórzano analizó los tres enfoques de interacción con Modelos de Lenguaje en expedientes técnicos de ingeniería, alertando sobre el grave peligro del uso ingenuo de la IA.</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: rgba(244, 63, 94, 0.15); color: var(--accent-rose);">❌</div>
+                        <div>
+                            <div class="card-title">Opción 1: Ingesta Directa PDF/Word</div>
+                            <span class="badge-opt badge-danger">Descartada &bull; Alto Riesgo</span>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">Cargar expedientes y planos en PDF directamente al chat de Claude o ChatGPT sin preprocesamiento.</p>
+                    <ul class="feature-list">
+                        <li><strong>Pérdida Silenciosa:</strong> Degradación de atención en ventanas de contexto extensas.</li>
+                        <li><strong>Alucinación de Tolerancias:</strong> La IA inventa cotas o asume normas genéricas no peruanas.</li>
+                        <li><strong>Riesgo Contractual:</strong> Inconsistencias graves ante peritajes y arbitrajes.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: var(--accent-amber);">⚠️</div>
+                        <div>
+                            <div class="card-title">Opción 2: Formatos Ligeros (MD/JSON)</div>
+                            <span class="badge-opt badge-warn">Proyectos Medianos</span>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">Conversión previa de expedientes a Markdown estructurado y tablas clave en JSON relacional.</p>
+                    <ul class="feature-list">
+                        <li><strong>Excelente Comprensión:</strong> Los LLMs interpretan el Markdown con mínima fricción semántica.</li>
+                        <li><strong>Rango Óptimo:</strong> Expedientes técnicos de 100 a 200 páginas de memoria y planos.</li>
+                        <li><strong>Velocidad:</strong> Tiempos de respuesta inmediatos y bajo consumo de tokens.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald);">🛡️</div>
+                        <div>
+                            <div class="card-title">Opción 3: Cerebro Digital Completo</div>
+                            <span class="badge-opt badge-success">Estándar Obligatorio</span>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">Bóvedas de 3 Pilares, Grafo de Conocimiento con Wikilinks y Matriz Canónica de Trazabilidad WBS.</p>
+                    <ul class="feature-list">
+                        <li><strong>Trazabilidad Matemática:</strong> Cada partida se ancla a su artículo del RNE y lámina.</li>
+                        <li><strong>Cero Omisiones:</strong> Ideal para normativas masivas (>1,000 páginas como el RNE).</li>
+                        <li><strong>Entregables Auditables:</strong> Soporta auditorías de Contraloría y supervisión de obra.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan);">📏</div>
+                        <div class="card-title">Regla de Proporcionalidad en EETT</div>
+                    </div>
+                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 14px;">No todas las partidas requieren la misma densidad documental. La ingeniería exige calibrar la extensión por criticidad:</p>
+                    <ul class="feature-list">
+                        <li><strong style="color: #fff;">Nivel 1 (Críticas / 800 - 1,200 palabras):</strong> Zapatas masivas, muros pantalla, columnas f'c=280, cisternas monolíticas y losas de transferencia.</li>
+                        <li><strong style="color: #fff;">Nivel 2 (Estándar / 450 - 700 palabras):</strong> Muros de albañilería, contrapisos, tuberías PVC-SAP, tableros eléctricos.</li>
+                        <li><strong style="color: #fff;">Nivel 3 (Sintéticas / 250 - 400 palabras):</strong> Cerco de malla rachel, cartel institucional de obra, limpieza continua.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: rgba(139, 92, 246, 0.15); color: var(--accent-purple);">📦</div>
+                        <div class="card-title">Empaquetado de Agent Skills (.agents/skills)</div>
+                    </div>
+                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 14px;">El conocimiento validado con el agente nunca debe quedar efímero en la memoria de la sesión:</p>
+                    <ul class="feature-list">
+                        <li><strong style="color: #fff;">Principio de Permanencia:</strong> "Antes de apagar la computadora, empaqueta el aprendizaje en un Skill reutilizable".</li>
+                        <li><strong style="color: #fff;">Estructura Canónica:</strong> Carpeta local `.agents/skills/` con archivo rector `SKILL.md` (metadata, prompts y reglas de validación).</li>
+                        <li><strong style="color: #fff;">Portabilidad Total:</strong> Traslado de activos de ingeniería entre Antigravity, Claude Code y Codex sin re-entrenamiento.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: CASOS DE ESTUDIO -->
+        <div id="tab-casos" class="tab-content">
+            <div class="banner">
+                <h3>🔍 Casos Prácticos Analizados y Proyectos de Alumnos</h3>
+                <p>Durante la sesión sincrónica se auditaron entregables en vivo desarrollados por los estudiantes y el facilitador, verificando su conformidad técnica y estética.</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald);">🏢</div>
+                        <div class="card-title">Partida 05.01: Zapatas de Concreto Premezclado</div>
+                    </div>
+                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 12px;"><strong>Especificación f'c = 280 kg/cm² vaciado con bomba telescópica en sótanos (-5.00 a -5.80 m).</strong></p>
+                    <ul class="feature-list">
+                        <li><strong>Prohibición Expresa de Obra:</strong> Queda terminantemente prohibido el mezclado manual o en trompo; suministro 100% industrializado por camión mixer.</li>
+                        <li><strong>Control de Calidad Riguroso:</strong> Asentamiento (slump) de 4" a 6", toma de probetas cilíndricas por cada 50 m³ con rotura a 7, 14 y 28 días según ASTM C39.</li>
+                        <li><strong>Tolerancia de Nivelación:</strong> Variación máxima admisible de cota superficial de &plusmn;10 mm en cabezales de zapata.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: rgba(59, 130, 246, 0.15); color: var(--accent-blue);">💧</div>
+                        <div class="card-title">Partida 06.05: Cuarto de Bombas Monolítico</div>
+                    </div>
+                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 12px;"><strong>Caso presentado por Juan José Gómez: Estructura monolítica estanca.</strong></p>
+                    <ul class="feature-list">
+                        <li><strong>Estanqueidad Hidráulica:</strong> Incorporación de aditivo impermeabilizante integral por cristalización y junta waterstop en encuentros losa-muro.</li>
+                        <li><strong>Secuencia de Desencofrado:</strong> Retiro de laterales a las 24 horas y fondos estructurales con apuntalamiento continuo a 21 días.</li>
+                        <li><strong>Respaldo RNE:</strong> Concordancia directa con capítulos de tanques de almacenamiento de la norma E.060.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card" style="margin-bottom: 30px;">
+                <div class="card-header">
+                    <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: var(--accent-amber);">📊</div>
+                    <div class="card-title">Auditoría de Entregables: Caso Reilly Espinoza (348 Páginas)</div>
+                </div>
+                <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 14px;">El colega Reilly Espinoza presentó la compilación total de EETT del proyecto en un solo tomo de 348 páginas en Word generado por agentes:</p>
+                <div class="grid-3" style="margin-bottom: 0;">
+                    <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; border: 1px solid var(--border);">
+                        <strong style="color: var(--accent-cyan); display: block; margin-bottom: 5px;">⚡ Velocidad de Ejecución</strong>
+                        <p style="font-size: 0.88rem; color: var(--text-muted);">El agente completó la redacción en ~3 minutos. Ideal para estudios de prefactibilidad o entregables de forma urgente.</p>
+                    </div>
+                    <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; border: 1px solid var(--border);">
+                        <strong style="color: var(--accent-amber); display: block; margin-bottom: 5px;">⚠️ Auditoría Cruzada Obligatoria</strong>
+                        <p style="font-size: 0.88rem; color: var(--text-muted);">En entregas masivas rápidas, se recomienda usar un segundo agente (ej. Codex auditando a Antigravity) para verificar congruencia técnica.</p>
+                    </div>
+                    <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; border: 1px solid var(--border);">
+                        <strong style="color: var(--accent-emerald); display: block; margin-bottom: 5px;">📑 Saneamiento Tipográfico</strong>
+                        <p style="font-size: 0.88rem; color: var(--text-muted);">Uso de scripts Python con <code>python-docx</code> para eliminar asteriscos residuales (**), interlineado 1.5 y carátula formal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: BIBLIOTECA DE PROMPTS -->
+        <div id="tab-prompts" class="tab-content">
+            <div class="banner">
+                <h3>🎯 Prompts Oficiales Ejecutados en la Sesión 05</h3>
+                <p>Haz clic en "Copiar Prompt" para llevar la directiva a tu portapapeles y ejecutarla en Antigravity, Claude Code o Codex.</p>
+            </div>
+
+            <!-- PROMPT 1 -->
+            <div class="prompt-card">
+                <div class="prompt-header">
+                    <div class="prompt-title"><span>🎯 Prompt 1:</span> Calibrador de Criticidad y Redacción de EETT en 8 Secciones</div>
+                    <button class="btn-copy" onclick="copyPrompt('p1')">Copiar Prompt</button>
+                </div>
+                <pre id="p1">Actúa como Ingeniero Senior de Especificaciones Técnicas y Coordinador de Control de Proyectos.
+Analiza la partida contractual seleccionada dentro del expediente del proyecto:
+[INDICAR CÓDIGO Y NOMBRE DE PARTIDA, ej: 05.01 ZAPATAS CONCRETO PREMEZCLADO F'C=280 KG/CM2]
+
+Determina su nivel de criticidad según el estándar del proyecto:
+- Nivel 1 (Crítica / Estructural): 800 a 1,200 palabras.
+- Nivel 2 (Estándar / Acabados): 450 a 700 palabras.
+- Nivel 3 (Sintética / Auxiliar): 250 a 400 palabras.
+
+Redacta la especificación técnica en Markdown cumpliendo rigurosamente las 8 secciones canónicas:
+1. Objetivo técnico y delimitación espacial (cotas, niveles de cimentación y exclusiones).
+2. Especificaciones de materiales (certificaciones de calidad, RNE y normas ASTM).
+3. Equipos y maquinaria (especificación de bombas de impulsión, mixers y vibradores).
+4. Procedimiento constructivo secuencial y logística de vaciado.
+5. Control de calidad y ensayos críticos (muestreo de probetas a 7, 14 y 28 días, revenimiento/slump).
+6. Tolerancias dimensionales y criterios de rechazo de mezclas.
+7. Seguridad y salud en el trabajo (SST - DS 011-2019-TR y RNE G.050).
+8. Método de medición y bases de pago según la unidad contractual oficial.</pre>
+            </div>
+
+            <!-- PROMPT 2 -->
+            <div class="prompt-card">
+                <div class="prompt-header">
+                    <div class="prompt-title"><span>🎯 Prompt 2:</span> Empaquetador de Agent Skill Oficial (.agents/skills)</div>
+                    <button class="btn-copy" onclick="copyPrompt('p2')">Copiar Prompt</button>
+                </div>
+                <pre id="p2">Actúa como Arquitecto de Agentes y Especialista en Metodología Antigravity.
+Toma la configuración, prompts validados y reglas de control de calidad aplicadas en la sesión actual y compila un Agent Skill oficial y portable.
+
+Crea dentro de la carpeta '.agents/skills/skill_especificaciones_tecnicas/' el archivo SKILL.md con la siguiente estructura:
+1. YAML frontmatter con nombre, descripción clara y lista de herramientas requeridas.
+2. Directivas de ejecución paso a paso para la generación de EETT trazables.
+3. Reglas de saneamiento de Markdown a Word para eliminar caracteres residuales (** y ***).
+4. Esquema relacional de validación contra el JSON maestro de presupuesto.</pre>
+            </div>
+
+            <!-- PROMPT 3 -->
+            <div class="prompt-card">
+                <div class="prompt-header">
+                    <div class="prompt-title"><span>🎯 Prompt 3:</span> Compilador de Markdown a Documento Word Profesional</div>
+                    <button class="btn-copy" onclick="copyPrompt('p3')">Copiar Prompt</button>
+                </div>
+                <pre id="p3">Actúa como Desarrollador de Automatización Documental en Python.
+Desarrolla un script con la librería python-docx que tome todos los archivos Markdown de especificaciones técnicas de la carpeta de trabajo y genere un documento Word (.docx) profesional de entrega oficial.
+
+Requisitos del entregable:
+1. Carátula institucional con datos del proyecto, ubicación, cliente y consultor.
+2. Hoja oficial de firmas y sellos para profesionales responsables (Especialista en Estructuras, Residente, Supervisor).
+3. Tabla de contenido e índice general paginado automáticamente.
+4. Aplicación de paleta corporativa y tipografía estandarizada (interlineado 1.5).
+5. Filtro de depuración para suprimir caracteres residuales de escape o asteriscos de Markdown.</pre>
+            </div>
+
+            <!-- PROMPT 4 -->
+            <div class="prompt-card">
+                <div class="prompt-header">
+                    <div class="prompt-title"><span>🎯 Prompt 4:</span> Formulación de APUs y Presupuesto Trazable en JSON y Excel</div>
+                    <button class="btn-copy" onclick="copyPrompt('p4')">Copiar Prompt</button>
+                </div>
+                <pre id="p4">Actúa como Ingeniero de Costos y Presupuestos Senior.
+A partir de la Memoria Descriptiva, las Especificaciones Técnicas y la Matriz WBS consolidadas:
+1. Genera los Análisis de Precios Unitarios (APU) para las 78 partidas del proyecto.
+2. Modela los rendimientos y cuadrillas considerando los equipos reales especificados en las EETT (suministro con mixer y bomba de concreto, sin elaboración manual).
+3. Integra cotizaciones reales de insumos y tarifas oficiales de mano de obra (CAPECO / Construcción Civil).
+4. Estructura el entregable en un JSON Maestro Integrado con auditoría de consistencia matemática.
+5. Exporta el presupuesto estructurado a hojas de cálculo Excel profesional en formatos compatibles con S10 y Presto.</pre>
+            </div>
+        </div>
+
+        <!-- TAB 4: SIMULADOR Y PRÁCTICA -->
+        <div id="tab-simulador" class="tab-content">
+            <div class="sim-box">
+                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; margin-bottom: 8px;">⚡ Calculadora de Recursos de Vaciado y Calibrador de EETT</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">Estima en tiempo real la logística de mixers requeridos, bombeo, palabras recomendadas para la especificación y tiempo de redacción asistido por agentes.</p>
+                
+                <div class="sim-inputs">
+                    <div class="form-group">
+                        <label>Tipo de Partida</label>
+                        <select id="selPartida" class="form-control" onchange="calcularLogistica()">
+                            <option value="1">Zapata / Cimentación (Nivel 1 Crítica)</option>
+                            <option value="2">Muro / Columna Estructural (Nivel 1 Crítica)</option>
+                            <option value="3">Tabiquería / Acabado (Nivel 2 Estándar)</option>
+                            <option value="4">Cerco / Obra Provisional (Nivel 3 Sintética)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Metrado Total de Partida (m³ o m²)</label>
+                        <input type="number" id="inpMetrado" class="form-control" value="160" oninput="calcularLogistica()">
+                    </div>
+                    <div class="form-group">
+                        <label>Capacidad Camión Mixer (m³)</label>
+                        <input type="number" id="inpMixerCap" class="form-control" value="8" oninput="calcularLogistica()">
+                    </div>
+                    <div class="form-group">
+                        <label>Rendimiento Cuadrilla (m³/día)</label>
+                        <input type="number" id="inpRendimiento" class="form-control" value="40" oninput="calcularLogistica()">
+                    </div>
+                </div>
+
+                <button class="btn-calc" onclick="calcularLogistica()">Calcular Parámetros de Obra</button>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-val" id="resMixers">20</div>
+                        <div class="metric-lbl">Viajes Mixer (8 m³)</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-val" id="resJornadas">4.0 días</div>
+                        <div class="metric-lbl">Jornadas Estimadas</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-val" id="resPalabras">1,050</div>
+                        <div class="metric-lbl">Palabras en EETT</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-val" id="resTiempoAgente">45 seg</div>
+                        <div class="metric-lbl">Tiempo de Redacción con Agente</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="margin-bottom: 15px; color: #fff;">📋 Checklist Obligatorio de Asignaciones para la Sesión 06</h3>
+                <div class="check-item">
+                    <input type="checkbox" checked>
+                    <div><strong>Empaquetado de Skill Local:</strong> Creación de la carpeta <code>.agents/skills/skill_especificaciones_tecnicas/</code> en el entorno de desarrollo.</div>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" checked>
+                    <div><strong>Saneamiento de Formato Word:</strong> Script en Python ejecutado con eliminación de asteriscos (**) y márgenes limpios.</div>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox">
+                    <div><strong>Modelado de APUs en JSON:</strong> Cuadratura matemática de 78 partidas vinculando cotizaciones reales de insumos de construcción.</div>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox">
+                    <div><strong>Exportación a Excel S10/Presto:</strong> Hoja de cálculo con fórmulas vivas (SUM, PRODUCT) lista para revisión docente.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <p>Plataforma de Alumnos &copy; 2026 <strong>Project Control AI</strong>. Todos los derechos reservados.</p>
+            <p style="margin-top: 5px; font-size: 0.8rem; color: #64748b;">Ingeniería de Control de Proyectos Asistida por Inteligencia Artificial y Metodología de Agentes Autónomos.</p>
+        </footer>
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        function copyPrompt(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('¡Prompt copiado al portapapeles con éxito!');
+            });
+        }
+
+        function calcularLogistica() {
+            const nivel = parseInt(document.getElementById('selPartida').value);
+            const metrado = parseFloat(document.getElementById('inpMetrado').value) || 0;
+            const mixerCap = parseFloat(document.getElementById('inpMixerCap').value) || 8;
+            const rendimiento = parseFloat(document.getElementById('inpRendimiento').value) || 1;
+
+            const totalMixers = Math.ceil(metrado / mixerCap);
+            const jornadas = (metrado / rendimiento).toFixed(1);
+
+            let palabras = 1000;
+            let tiempo = "45 seg";
+
+            if (nivel === 1) {
+                palabras = 1050;
+                tiempo = "50 seg";
+            } else if (nivel === 2) {
+                palabras = 950;
+                tiempo = "45 seg";
+            } else if (nivel === 3) {
+                palabras = 600;
+                tiempo = "30 seg";
+            } else {
+                palabras = 320;
+                tiempo = "15 seg";
+            }
+
+            document.getElementById('resMixers').innerText = totalMixers.toLocaleString('es-PE');
+            document.getElementById('resJornadas').innerText = jornadas + " días";
+            document.getElementById('resPalabras').innerText = palabras.toLocaleString('es-PE');
+            document.getElementById('resTiempoAgente').innerText = tiempo;
+        }
+    </script>
+</body>
+</html>

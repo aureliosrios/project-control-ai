@@ -62,6 +62,17 @@ const courses = {
           { title: "Resumen Interactivo de la Clase 4 (HTML)", type: "html", url: "/manuales/resumen_clase_4_agentes.html" },
           { title: "Manual de Estudio y Ayuda Memoria (Markdown)", type: "md", url: "/manuales/Ayuda_Memoria_Clase_4_Agentes_IA_2026-09-06.md" }
         ]
+      },
+      {
+        id: "T_EbHomRQME",
+        num: "05",
+        status: "OCULTA",
+        title: "Sesión 05: Consolidación de EETT, Empaquetado de Skills y Presupuesto Trazable (13/09/2026)",
+        desc: "Clase del 13 de Septiembre (10:00 a.m. - 01:00 p.m.): Las 3 opciones de trabajo con IA, calibración de EETT por criticidad (Nivel 1 a 3), empaquetado de Agent Skills (.agents/skills), depuración de formato Word y modelado de APUs en JSON para exportación S10 y Presto.",
+        resources: [
+          { title: "Resumen Interactivo de la Clase 5 (HTML)", type: "html", url: "/manuales/resumen_clase_5_agentes.html" },
+          { title: "Manual de Estudio y Ayuda Memoria (Markdown)", type: "md", url: "/manuales/Ayuda_Memoria_Clase_5_Agentes_IA_2026-09-13.md" }
+        ]
       }
     ]
   },

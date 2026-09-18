@@ -71,6 +71,24 @@ const asincronicos = [
     ]
   },
   {
+    id: "B4",
+    nombre: "Seguimiento y Control de Obras: Primavera P6 & Last Planner System",
+    precio: "$19.99 USD",
+    tag: "CURSO B4 · NUEVO",
+    desc: "Aprende el seguimiento y control integral de obras con IA, Oracle Primavera P6 y Last Planner System (LPS) en un caso real (Edificio 6 pisos y 2 sótanos, 128 partidas CPM). Red CPM cerrada, doble barra en Gantt, Lookahead matricial y conciliación EVM.",
+    link: "https://pay.hotmart.com/S107662854J",
+    brochure: "https://go.hotmart.com/S107662854J?dp=1",
+    color: "teal",
+    pilares: [
+      "Arquitectura de Datos SSOT en JSON",
+      "Cronogramas Primavera P6 (.XER / .PLF) bajo DCMA",
+      "Cronograma Dual y Doble Barra en Gantt (LB-0 vs Real)",
+      "Conciliación Comercial y Valor Ganado (EVM, SPI, CPI)",
+      "Lookahead LPS en 3 Filas en Excel 365 matricial",
+      "Gobernanza Semanal Last Planner (WWP y Restricciones)"
+    ]
+  },
+  {
     id: "C1",
     nombre: "Automatización de Presupuestos con IA",
     precio: "$15.99 USD",
@@ -160,7 +178,7 @@ const rutas = [
     letra: "B",
     titulo: "Gestión y Control de Proyectos",
     desc: "Optimización de cronogramas y administración contractual.",
-    cursos: ["B1: Planificación Agéntica", "B2: Automatización MS Project", "B3: Control de Costos (EVM)", "B4: Dashboards HTML"]
+    cursos: ["B1: Planificación Agéntica", "B2: Automatización MS Project", "B3: Control de Costos (EVM)", "B4: Primavera P6 & LPS"]
   },
   {
     letra: "C",
@@ -270,6 +288,15 @@ export default function Formacion() {
                       btnBg: "bg-rose-500 text-slate-950 hover:bg-rose-400",
                       btnShadow: "0 0 15px rgba(244, 63, 94, 0.4)",
                       priceGlow: "text-rose-400"
+                    },
+                    B4: {
+                      border: "hover:border-teal-500/50 border-teal-500/20",
+                      glow: "bg-teal-500/10",
+                      tagText: "text-teal-400",
+                      badgeBg: "from-teal-500/20 to-emerald-500/20 text-teal-300 border-teal-500/40",
+                      btnBg: "bg-teal-500 text-slate-950 hover:bg-teal-400",
+                      btnShadow: "0 0 15px rgba(20, 184, 166, 0.4)",
+                      priceGlow: "text-teal-400"
                     },
                     C1: {
                       border: "hover:border-indigo-500/50 border-indigo-500/20",

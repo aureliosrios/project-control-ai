@@ -6,177 +6,139 @@ import Link from "next/link";
 const asincronicos = [
   {
     id: "A1",
+    ruta: "A",
+    imagen: "/cursos/A1.jpeg",
     nombre: "El Despertar de la IA en la Gestión de Proyectos",
     precio: "$14.99 USD",
-    tag: "CURSO A1 · PUBLICADO",
-    destacadoBadge: "Empieza Aquí",
-    badgeType: "primary",
-    desc: "Genera 6 entregables ejecutivos de obra (reportes HTML, flujogramas en Mermaid, matrices CSV y formatos ATS/IPERC) a partir de datos técnicos, aplicando prompts estructurados sin necesidad de programar.",
-    casoReal: "Implementación de reportes de supervisión diaria y matriz de riesgos de seguridad (ATS/IPERC) en frente de obra civil.",
-    paraQuien: "Ingenieros residentes, supervisores de obra y asistentes técnicos.",
-    entregable: "6 formatos listos para obra (HTML interactivo, Mermaid, CSV, ATS e IPERC).",
-    nivel: "Básico (Sin código)",
-    herramientas: "Claude, ChatGPT, Mermaid.js, HTML, CSV",
-    incluye: "Prompts listos, plantillas de reporte y casos descargables.",
+    tag: "CURSO A1 · FUNDAMENTOS",
     link: "https://pay.hotmart.com/I104938744G",
-    brochure: "https://go.hotmart.com/I104938744G?dp=1",
-    color: "cyan",
-    pilares: ["Reportes HTML interactivos", "Flujogramas Mermaid.js", "ATS + IPERC inteligentes", "Cronogramas visuales"]
+    brochure: "https://go.hotmart.com/I104938744G?dp=1"
   },
   {
     id: "A2",
+    ruta: "A",
+    imagen: "/cursos/A2.jpeg",
     nombre: "Gestión de Documentos Contractuales en la Gestión de Construcción",
     precio: "$15.99 USD",
-    tag: "CURSO A2 · PUBLICADO",
-    destacadoBadge: "Gestión Contractual",
-    badgeType: "neutral",
-    desc: "Audita y extrae requisitos críticos de contratos de obra, bases y TDRs, detectando penalidades, riesgos de ampliación de plazo y checklists de movilización mediante NotebookLM y Gemini.",
-    casoReal: "Auditoría forense de contrato de obra pública con bases técnicas y detección anticipada de penalidades e hitos contractuales.",
-    paraQuien: "Administradores de contrato, jefes de oficina técnica y gerentes de proyecto.",
-    entregable: "Matriz de riesgos contractuales, checklist de movilización y reporte forense.",
-    nivel: "Básico - Intermedio",
-    herramientas: "NotebookLM, Gemini, Google Workspace",
-    incluye: "Prompts contractuales, matrices de penalidades y ejemplos de bases.",
+    tag: "CURSO A2 · CONTRATOS",
     link: "https://pay.hotmart.com/O105604032H",
-    brochure: "https://go.hotmart.com/O105604032H?dp=1",
-    color: "orange",
-    pilares: ["Análisis masivo con NotebookLM", "Prompts Contractuales para Gemini", "Auditoría Forense Legal-Técnica", "Análisis de Riesgos y Reclamos"]
+    brochure: "https://go.hotmart.com/O105604032H?dp=1"
   },
   {
     id: "B1",
+    ruta: "B",
+    imagen: "/cursos/B1.jpeg",
     nombre: "Planificación de Obras con IA: del Presupuesto al Cronograma Nivelado",
     precio: "$15.99 USD",
-    tag: "CURSO B1 · PUBLICADO",
-    destacadoBadge: "Ruta Práctica (Paso 1)",
-    badgeType: "featured",
-    desc: "Transforma presupuestos y análisis de precios unitarios (APU) en un cronograma balanceado, definiendo trenes de trabajo, calculando rendimientos reales y nivelando cuadrillas con IA.",
-    casoReal: "Presupuesto integral y balance de rendimientos de mano de obra en edificación multifamiliar para trenes continuos.",
-    paraQuien: "Planificadores, jefes de producción e ingenieros de costos.",
-    entregable: "Cálculo de rendimientos, dimensionamiento de cuadrillas y secuencia lógica de trenes.",
-    nivel: "Intermedio",
-    herramientas: "IA para análisis de APU, Excel de Productividad, Trenes de Trabajo",
-    incluye: "Plantillas de balance de recursos, cálculo de duraciones y matriz de trenes.",
+    tag: "CURSO B1 · PLANIFICACIÓN",
     link: "https://pay.hotmart.com/L106624764I",
-    brochure: "https://go.hotmart.com/L106624764I?dp=1",
-    color: "orange",
-    pilares: ["Análisis de APU y Recursos", "Definición de Trenes de Trabajo", "Cálculo de Productividad", "Nivelación de Cuadrillas con IA"]
+    brochure: "https://go.hotmart.com/L106624764I?dp=1"
   },
   {
     id: "B2",
+    ruta: "B",
+    imagen: "/cursos/B2.jpeg",
     nombre: "Automatización de Cronogramas de Obra con IA & MS Project",
     precio: "$14.99 USD",
-    tag: "CURSO B2 · PUBLICADO",
-    destacadoBadge: "Ruta Práctica (Paso 2)",
-    badgeType: "featured",
-    desc: "Convierte presupuestos de obra en PDF en una programación estructurada de MS Project con EDT, ruta crítica, duraciones y recursos cargados, mediante macros VBA generadas por IA.",
-    casoReal: "Presupuestos en PDF de proyectos pesados (obras de túneles y central hidroeléctrica) convertidos a MS Project ejecutable.",
-    paraQuien: "Ingenieros de planificación, control de proyectos y programadores de obra.",
-    entregable: "Cronograma .mpp listo en MS Project con EDT, APUs y macro VBA (.bas) reutilizable.",
-    nivel: "Intermedio",
-    herramientas: "Antigravity IDE, MS Project, VBA (.bas), JSON",
-    incluye: "Código de macro VBA, scripts de extracción de PDF y archivo .mpp base.",
+    tag: "CURSO B2 · MS PROJECT VBA",
     link: "https://pay.hotmart.com/O106954282N",
-    brochure: "https://go.hotmart.com/O106954282N?dp=1",
-    color: "emerald",
-    pilares: [
-      "Configuración de Antigravity IDE en Ingeniería Civil",
-      "Generación de código VBA (.bas) sin saber programar",
-      "Conversión de presupuestos PDF a JSON estructurado",
-      "Casos Reales: Obras de Túneles y Central Hidroeléctrica",
-      "Carga masiva de APUs, mano de obra, equipos y materiales"
-    ]
+    brochure: "https://go.hotmart.com/O106954282N?dp=1"
   },
   {
     id: "B3",
+    ruta: "B",
+    imagen: "/cursos/B3.jpeg",
     nombre: "Seguimiento y Control de Proyectos de Construcción con IA, Last Planner y MS Project",
     precio: "$19.99 USD",
-    tag: "CURSO B3 · PUBLICADO",
-    destacadoBadge: "Especialidad MS Project",
-    badgeType: "software",
-    diferenciador: "Especializado para equipos que gestionan con Microsoft Project y Last Planner System.",
-    desc: "Monitorea y controla el avance físico y financiero integrando MS Project y Last Planner System (LPS). Automatiza métricas de Valor Ganado (EVM), curvas S vivas y confiabilidad semanal (PPC).",
-    casoReal: "Control físico-financiero de obra con 4 cortes semanales de Valor Ganado (EVM) y reporte de confiabilidad PPC.",
-    paraQuien: "Ingenieros de control de proyectos, planners y jefes de oficina técnica con MS Project.",
-    entregable: "Modelo de control EVM en MS Project, Curvas S automatizadas y plantilla de Lookahead LPS.",
-    nivel: "Intermedio - Avanzado",
-    herramientas: "MS Project, Excel 365, Last Planner System (LPS), EVM",
-    incluye: "Plantilla matricial de Lookahead, tablero de confiabilidad PPC y fórmulas EVM.",
+    tag: "CURSO B3 · CONTROL & EVM",
     link: "https://pay.hotmart.com/H107475121N",
-    brochure: "https://go.hotmart.com/H107475121N?dp=1",
-    color: "rose",
-    pilares: [
-      "Control de Avance Físico y Financiero en MS Project",
-      "Last Planner System (LPS, Lookahead y PPC)",
-      "Curvas S y Métricas de Valor Ganado (EVM)",
-      "Detección de Desviaciones con Agentes de IA"
-    ]
+    brochure: "https://go.hotmart.com/H107475121N?dp=1"
   },
   {
     id: "B4",
+    ruta: "B",
+    imagen: "/cursos/B4.jpeg",
     nombre: "Seguimiento y Control de Obras: Primavera P6 & Last Planner System",
     precio: "$19.99 USD",
-    tag: "CURSO B4 · PUBLICADO",
-    destacadoBadge: "Especialidad Primavera P6",
-    badgeType: "software",
-    diferenciador: "Especializado para grandes obras y organizaciones que estandarizan con Oracle Primavera P6 (.XER/.PLF).",
-    desc: "Ejecuta el control integral de plazos y costos con Oracle Primavera P6 y Last Planner System. Incluye red CPM cerrada, cronograma dual (LB-0 vs Real), curvas S y Lookahead en 3 filas.",
-    casoReal: "Edificio corporativo real de 6 pisos y 2 sótanos (128 partidas CPM cerradas sin lags negativos).",
-    paraQuien: "Planners senior, directores de obra, consultores y contratistas que licitan con Primavera P6.",
-    entregable: "Archivos .XER y .PLF saneados bajo estándar DCMA + Lookahead LPS matricial en Excel 365.",
-    nivel: "Avanzado",
-    herramientas: "Oracle Primavera P6, Excel 365 Matricial, JSON SSOT, LPS",
-    incluye: "Archivos .XER multi-proyecto, layout .PLF, plantilla de Lookahead 3 filas y motor EVM.",
+    tag: "CURSO B4 · PRIMAVERA P6",
     link: "https://pay.hotmart.com/S107662854J",
-    brochure: "https://go.hotmart.com/S107662854J?dp=1",
-    color: "teal",
-    pilares: [
-      "Arquitectura de Datos SSOT en JSON",
-      "Cronogramas Primavera P6 (.XER / .PLF) bajo DCMA",
-      "Cronograma Dual y Doble Barra en Gantt (LB-0 vs Real)",
-      "Conciliación Comercial y Valor Ganado (EVM, SPI, CPI)",
-      "Lookahead LPS en 3 Filas en Excel 365 matricial",
-      "Gobernanza Semanal Last Planner (WWP y Restricciones)"
-    ]
+    brochure: "https://go.hotmart.com/S107662854J?dp=1"
   },
   {
     id: "C1",
-    nombre: "Automatización de Presupuestos con IA",
+    ruta: "C",
+    imagen: "/cursos/C1.jpeg",
+    nombre: "Automatización de Presupuestos con IA (Tipo S10)",
     precio: "$15.99 USD",
-    tag: "CURSO C1 · ESPECIALIDAD",
-    destacadoBadge: "Especialidad Rentable (Paso 1)",
-    badgeType: "profit",
-    desc: "Automatiza la estructuración de presupuestos tipo S10 y análisis de precios unitarios (APU) conectando bases de datos de insumos, especificaciones técnicas y Python asistido por IA.",
-    casoReal: "Presupuesto real de obra con base de insumos, rendimientos y cálculo automático de cuadrillas tipo S10.",
-    paraQuien: "Ingenieros de costos, presupuestistas, cotizadores y consultores de licitaciones.",
-    entregable: "Presupuesto tipo S10 estructurado, base de datos de insumos y scripts de automatización.",
-    nivel: "Intermedio",
-    herramientas: "Python, Pandas, S10 formato, IA para Costos",
-    incluye: "Scripts de Python, plantilla de base de datos de costos y prompts de descomposición.",
+    tag: "CURSO C1 · COSTOS & S10",
     link: "https://pay.hotmart.com/H105703259M",
-    brochure: "https://go.hotmart.com/H105703259M?dp=1",
-    color: "indigo",
-    pilares: ["Infraestructura Python", "IA para EETT y WBS", "Visión Artificial Planos", "SkillPro v4: Lógica APU"]
+    brochure: "https://go.hotmart.com/H105703259M?dp=1"
   },
   {
     id: "C2",
-    nombre: "Generar EETT con agentes de AI",
+    ruta: "C",
+    imagen: "/cursos/C2.jpeg",
+    nombre: "Generación de EETT con Agentes de IA a Word",
     precio: "$15.99 USD",
-    tag: "CURSO C2 · PUBLICADO",
-    destacadoBadge: "Especialidad Rentable (Paso 2)",
-    badgeType: "profit",
-    desc: "Automatiza la redacción técnica y auditoría de Especificaciones Técnicas (EETT) a partir de planos, normativas y memorias, exportando entregables profesionales directos a Microsoft Word.",
-    casoReal: "Elaboración de EETT completas de especialidades (estructuras, arquitectura e instalaciones) según normativa vigente.",
-    paraQuien: "Ingenieros proyectistas, revisores de expedientes técnicos y personal de oficina técnica.",
-    entregable: "Documento ejecutivo de EETT en Microsoft Word con formato institucional y normativa trazable.",
-    nivel: "Intermedio",
-    herramientas: "NotebookLM, Gemini, Microsoft Word, Agentes Especializados",
-    incluye: "Biblioteca de prompts de EETT, índice de normativa técnica y plantilla Word profesional.",
+    tag: "CURSO C2 · EETT & WORD",
     link: "https://pay.hotmart.com/D106788121M",
-    brochure: "https://go.hotmart.com/D106788121M?dp=1",
-    color: "purple",
-    pilares: ["NotebookLM como Fuente de Verdad", "Índice Vectorial de Normativa", "Agentes y Skills Personalizadas", "Conversión a Word Profesional"]
+    brochure: "https://go.hotmart.com/D106788121M?dp=1"
   }
 ];
+
+const rutasConstruccion = {
+  A: {
+    letra: "A",
+    titulo: "Fundamentos Transversales",
+    subtitulo: "Para todo profesional en obra",
+    colorNombre: "Azul Acero Estructural",
+    borderClass: "border-[#1E40AF]",
+    borderHover: "hover:border-[#3B82F6]",
+    badgeBg: "bg-[#1E40AF]/20 text-[#93C5FD] border-[#1E40AF]/60",
+    badgeSolid: "bg-[#1E40AF] text-white",
+    cardBg: "bg-[#0A101F]",
+    btnPrimary: "bg-[#1E40AF] hover:bg-[#2563EB] text-white shadow-[0_4px_14px_rgba(30,64,175,0.4)]",
+    btnTemario: "border-[#1E40AF]/60 text-slate-200 hover:bg-[#1E40AF]/20 hover:border-[#1E40AF]",
+    desc: "IA práctica, gestión documental y auditoría legal-técnica de contratos y expedientes sin programar.",
+    tagColor: "text-[#60A5FA]",
+    cursosCount: 2,
+    cursosLista: "Cursos A1 y A2"
+  },
+  B: {
+    letra: "B",
+    titulo: "Gestión y Control de Proyectos",
+    subtitulo: "Planners, residentes y oficina técnica",
+    colorNombre: "Ámbar / Amarillo Maquinaria CAT",
+    borderClass: "border-[#D97706]",
+    borderHover: "hover:border-[#F59E0B]",
+    badgeBg: "bg-[#D97706]/20 text-[#FCD34D] border-[#D97706]/60",
+    badgeSolid: "bg-[#D97706] text-slate-950 font-black",
+    cardBg: "bg-[#140F07]",
+    btnPrimary: "bg-[#D97706] hover:bg-[#F59E0B] text-slate-950 font-black shadow-[0_4px_14px_rgba(217,119,6,0.4)]",
+    btnTemario: "border-[#D97706]/60 text-slate-200 hover:bg-[#D97706]/20 hover:border-[#D97706]",
+    desc: "Del APU al cronograma nivelado en MS Project y Primavera P6 con Last Planner System y EVM.",
+    tagColor: "text-[#FBBF24]",
+    cursosCount: 4,
+    cursosLista: "Cursos B1, B2, B3 y B4"
+  },
+  C: {
+    letra: "C",
+    titulo: "Especialidades de Ingeniería",
+    subtitulo: "Costos, presupuestos y especificaciones",
+    colorNombre: "Naranja Industrial de Seguridad",
+    borderClass: "border-[#EA580C]",
+    borderHover: "hover:border-[#F97316]",
+    badgeBg: "bg-[#EA580C]/20 text-[#FDBA74] border-[#EA580C]/60",
+    badgeSolid: "bg-[#EA580C] text-white font-black",
+    cardBg: "bg-[#160B06]",
+    btnPrimary: "bg-[#EA580C] hover:bg-[#F97316] text-white font-black shadow-[0_4px_14px_rgba(234,88,12,0.4)]",
+    btnTemario: "border-[#EA580C]/60 text-slate-200 hover:bg-[#EA580C]/20 hover:border-[#EA580C]",
+    desc: "Automatización de presupuestos tipo S10 con Python y redacción de EETT normadas a Word.",
+    tagColor: "text-[#FB923C]",
+    cursosCount: 2,
+    cursosLista: "Cursos C1 y C2"
+  }
+};
 
 const rutasDecision = [
   {
@@ -326,90 +288,6 @@ const rutas = [
   }
 ];
 
-// Mapa estático de colores para Tailwind CSS en cursos asincrónicos
-const themeMap = {
-  A1: {
-    border: "border-cyan-500/30 hover:border-cyan-500/60",
-    glow: "bg-cyan-500/10",
-    tagText: "text-cyan-400",
-    badgeBg: "from-cyan-500/20 to-blue-500/20 text-cyan-300 border-cyan-500/40",
-    badgeHighlight: "bg-cyan-500/15 text-cyan-300 border-cyan-500/30",
-    btnBg: "bg-cyan-500 text-slate-950 hover:bg-cyan-400",
-    btnShadow: "0 0 15px rgba(6, 182, 212, 0.4)",
-    priceGlow: "text-cyan-400"
-  },
-  A2: {
-    border: "border-amber-500/30 hover:border-amber-500/60",
-    glow: "bg-amber-500/10",
-    tagText: "text-amber-400",
-    badgeBg: "from-amber-500/20 to-orange-500/20 text-amber-300 border-amber-500/40",
-    badgeHighlight: "bg-amber-500/15 text-amber-300 border-amber-500/30",
-    btnBg: "bg-amber-500 text-slate-950 hover:bg-amber-400",
-    btnShadow: "0 0 15px rgba(245, 158, 11, 0.4)",
-    priceGlow: "text-amber-400"
-  },
-  B1: {
-    border: "border-orange-500/30 hover:border-orange-500/60",
-    glow: "bg-orange-500/10",
-    tagText: "text-orange-400",
-    badgeBg: "from-orange-500/20 to-red-500/20 text-orange-300 border-orange-500/40",
-    badgeHighlight: "bg-orange-500/15 text-orange-300 border-orange-500/30",
-    btnBg: "bg-orange-500 text-slate-950 hover:bg-orange-400",
-    btnShadow: "0 0 15px rgba(249, 115, 22, 0.4)",
-    priceGlow: "text-orange-400"
-  },
-  B2: {
-    border: "border-emerald-500/30 hover:border-emerald-500/60",
-    glow: "bg-emerald-500/10",
-    tagText: "text-emerald-400",
-    badgeBg: "from-emerald-500/20 to-teal-500/20 text-emerald-300 border-emerald-500/40",
-    badgeHighlight: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
-    btnBg: "bg-emerald-500 text-slate-950 hover:bg-emerald-400",
-    btnShadow: "0 0 15px rgba(16, 185, 129, 0.4)",
-    priceGlow: "text-emerald-400"
-  },
-  B3: {
-    border: "border-rose-500/30 hover:border-rose-500/60",
-    glow: "bg-rose-500/10",
-    tagText: "text-rose-400",
-    badgeBg: "from-rose-500/20 to-red-500/20 text-rose-300 border-rose-500/40",
-    badgeHighlight: "bg-rose-500/15 text-rose-300 border-rose-500/30",
-    btnBg: "bg-rose-500 text-slate-950 hover:bg-rose-400",
-    btnShadow: "0 0 15px rgba(244, 63, 94, 0.4)",
-    priceGlow: "text-rose-400"
-  },
-  B4: {
-    border: "border-teal-500/30 hover:border-teal-500/60",
-    glow: "bg-teal-500/10",
-    tagText: "text-teal-400",
-    badgeBg: "from-teal-500/20 to-emerald-500/20 text-teal-300 border-teal-500/40",
-    badgeHighlight: "bg-teal-500/15 text-teal-300 border-teal-500/30",
-    btnBg: "bg-teal-500 text-slate-950 hover:bg-teal-400",
-    btnShadow: "0 0 15px rgba(20, 184, 166, 0.4)",
-    priceGlow: "text-teal-400"
-  },
-  C1: {
-    border: "border-indigo-500/30 hover:border-indigo-500/60",
-    glow: "bg-indigo-500/10",
-    tagText: "text-indigo-400",
-    badgeBg: "from-indigo-500/20 to-purple-500/20 text-indigo-300 border-indigo-500/40",
-    badgeHighlight: "bg-indigo-500/15 text-indigo-300 border-indigo-500/30",
-    btnBg: "bg-indigo-500 text-white hover:bg-indigo-400",
-    btnShadow: "0 0 15px rgba(99, 102, 241, 0.4)",
-    priceGlow: "text-indigo-400"
-  },
-  C2: {
-    border: "border-purple-500/30 hover:border-purple-500/60",
-    glow: "bg-purple-500/10",
-    tagText: "text-purple-400",
-    badgeBg: "from-purple-500/20 to-pink-500/20 text-purple-300 border-purple-500/40",
-    badgeHighlight: "bg-purple-500/15 text-purple-300 border-purple-500/30",
-    btnBg: "bg-purple-500 text-white hover:bg-purple-400",
-    btnShadow: "0 0 15px rgba(168, 85, 247, 0.4)",
-    priceGlow: "text-purple-400"
-  }
-};
-
 // Mapa estático de colores para Tailwind CSS en cursos sincrónicos (evita purgado en producción)
 const sincThemes = {
   cyan: {
@@ -437,15 +315,11 @@ const sincThemes = {
 
 export default function Formacion() {
   const [activeTab, setActiveTab] = useState("asinc");
-  const [selectedRoute, setSelectedRoute] = useState(null);
+  const [selectedRuta, setSelectedRuta] = useState("TODAS");
 
-  const scrollToCourse = (courseId) => {
-    setSelectedRoute(courseId);
-    const element = document.getElementById(`curso-${courseId}`);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  };
+  const cursosFiltrados = selectedRuta === "TODAS"
+    ? asincronicos
+    : asincronicos.filter((c) => c.ruta === selectedRuta);
 
   return (
     <div className="min-h-screen bg-[#020617] text-slate-100 selection:bg-cyan-500/30">
@@ -522,55 +396,131 @@ export default function Formacion() {
 
         {activeTab === "asinc" ? (
           <div className="space-y-16">
-            {/* Bloque: ¿Qué necesitas resolver? (Rutas de Decisión) */}
-            <section className="p-8 md:p-10 rounded-3xl bg-slate-900/80 border border-white/10 backdrop-blur-xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/5 blur-[90px] pointer-events-none" />
-              
+            {/* NUEVO: Selector de Rutas Profesionales de Construcción */}
+            <section className="p-8 md:p-10 rounded-3xl bg-slate-950/80 border border-white/10 backdrop-blur-xl relative overflow-hidden">
               <div className="mb-8">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="material-symbols-outlined text-cyan-400 text-lg">alt_route</span>
-                  <span className="text-cyan-400 text-xs font-black tracking-[0.25em] uppercase">Guía Rápida de Selección</span>
+                  <span className="material-symbols-outlined text-amber-400 text-lg">alt_route</span>
+                  <span className="text-amber-400 text-xs font-black tracking-[0.25em] uppercase">Rutas de Formación Profesional</span>
                 </div>
-                <h2 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight">¿Qué necesitas resolver hoy en obra?</h2>
+                <h2 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight">Elige tu Ruta Especializada</h2>
                 <p className="text-slate-400 text-sm max-w-2xl mt-1">
-                  Encuentra directamente la ruta formativa basada en la necesidad técnica que buscas resolver:
+                  Selecciona la ruta según tu área de trabajo en obra. Los bordes identifican la especialidad técnica de cada curso:
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {rutasDecision.map((rd) => (
-                  <button
-                    key={rd.id}
-                    onClick={() => scrollToCourse(rd.cursoSugerido)}
-                    className={`text-left p-5 rounded-2xl border transition-all duration-300 flex flex-col justify-between group ${
-                      selectedRoute === rd.cursoSugerido 
-                        ? 'bg-cyan-500/15 border-cyan-500 shadow-[0_0_20px_rgba(6,182,212,0.2)]' 
-                        : 'bg-white/[0.02] border-white/10 hover:border-white/25 hover:bg-white/[0.05]'
-                    }`}
-                  >
-                    <div>
-                      <div className="flex items-center justify-between gap-2 mb-2.5">
-                        <span className="text-[10px] font-black uppercase tracking-wider text-cyan-400 px-2.5 py-0.5 rounded-md bg-cyan-500/10 border border-cyan-500/20">
-                          {rd.enfoque}
-                        </span>
-                        <span className="text-xs font-black text-white font-mono bg-white/10 px-2 py-0.5 rounded">
-                          {rd.codigo}
-                        </span>
-                      </div>
-                      <p className="text-sm font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
-                        {rd.necesidad}
-                      </p>
-                      <p className="text-xs text-slate-400 font-normal leading-relaxed mb-4">
-                        {rd.beneficio}
-                      </p>
+              {/* 3 Tarjetas de Rutas con Colores Fuertes de Construcción */}
+              <div className="grid md:grid-cols-3 gap-5">
+                {/* RUTA A */}
+                <button
+                  onClick={() => setSelectedRuta(selectedRuta === "A" ? "TODAS" : "A")}
+                  className={`text-left p-6 rounded-2xl border-2 transition-all duration-300 flex flex-col justify-between group ${
+                    selectedRuta === "A"
+                      ? 'border-[#1E40AF] bg-[#0A101F] shadow-[0_0_25px_rgba(30,64,175,0.4)] scale-[1.02]'
+                      : 'border-[#1E40AF]/60 bg-[#070D1E]/60 hover:border-[#1E40AF] hover:bg-[#0A101F]'
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-[11px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md bg-[#1E40AF] text-white">
+                        RUTA A
+                      </span>
+                      <span className="text-xs font-mono font-bold text-blue-300 bg-[#1E40AF]/20 px-2 py-0.5 rounded border border-[#1E40AF]/40">
+                        2 Cursos
+                      </span>
                     </div>
+                    <h3 className="text-lg font-black text-white mb-1 group-hover:text-blue-300 transition-colors">
+                      {rutasConstruccion.A.titulo}
+                    </h3>
+                    <p className="text-xs font-bold text-[#60A5FA] mb-2">
+                      {rutasConstruccion.A.subtitulo}
+                    </p>
+                    <p className="text-xs text-slate-300 font-normal leading-relaxed">
+                      {rutasConstruccion.A.desc}
+                    </p>
+                  </div>
 
-                    <div className="pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-bold text-cyan-400 group-hover:translate-x-1 transition-transform">
-                      <span>Ver curso recomendado</span>
-                      <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                  <div className="pt-4 mt-4 border-t border-white/10 flex items-center justify-between text-xs font-bold text-[#60A5FA]">
+                    <span>{selectedRuta === "A" ? "Viendo Ruta A (A1, A2)" : "Filtrar por Ruta A"}</span>
+                    <span className="material-symbols-outlined text-sm">
+                      {selectedRuta === "A" ? "check_circle" : "arrow_forward"}
+                    </span>
+                  </div>
+                </button>
+
+                {/* RUTA B */}
+                <button
+                  onClick={() => setSelectedRuta(selectedRuta === "B" ? "TODAS" : "B")}
+                  className={`text-left p-6 rounded-2xl border-2 transition-all duration-300 flex flex-col justify-between group ${
+                    selectedRuta === "B"
+                      ? 'border-[#D97706] bg-[#140F07] shadow-[0_0_25px_rgba(217,119,6,0.4)] scale-[1.02]'
+                      : 'border-[#D97706]/60 bg-[#100C05]/60 hover:border-[#D97706] hover:bg-[#140F07]'
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-[11px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md bg-[#D97706] text-slate-950">
+                        RUTA B
+                      </span>
+                      <span className="text-xs font-mono font-bold text-amber-300 bg-[#D97706]/20 px-2 py-0.5 rounded border border-[#D97706]/40">
+                        4 Cursos
+                      </span>
                     </div>
-                  </button>
-                ))}
+                    <h3 className="text-lg font-black text-white mb-1 group-hover:text-amber-300 transition-colors">
+                      {rutasConstruccion.B.titulo}
+                    </h3>
+                    <p className="text-xs font-bold text-[#FBBF24] mb-2">
+                      {rutasConstruccion.B.subtitulo}
+                    </p>
+                    <p className="text-xs text-slate-300 font-normal leading-relaxed">
+                      {rutasConstruccion.B.desc}
+                    </p>
+                  </div>
+
+                  <div className="pt-4 mt-4 border-t border-white/10 flex items-center justify-between text-xs font-bold text-[#FBBF24]">
+                    <span>{selectedRuta === "B" ? "Viendo Ruta B (B1 a B4)" : "Filtrar por Ruta B"}</span>
+                    <span className="material-symbols-outlined text-sm">
+                      {selectedRuta === "B" ? "check_circle" : "arrow_forward"}
+                    </span>
+                  </div>
+                </button>
+
+                {/* RUTA C */}
+                <button
+                  onClick={() => setSelectedRuta(selectedRuta === "C" ? "TODAS" : "C")}
+                  className={`text-left p-6 rounded-2xl border-2 transition-all duration-300 flex flex-col justify-between group ${
+                    selectedRuta === "C"
+                      ? 'border-[#EA580C] bg-[#160B06] shadow-[0_0_25px_rgba(234,88,12,0.4)] scale-[1.02]'
+                      : 'border-[#EA580C]/60 bg-[#120904]/60 hover:border-[#EA580C] hover:bg-[#160B06]'
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-[11px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md bg-[#EA580C] text-white">
+                        RUTA C
+                      </span>
+                      <span className="text-xs font-mono font-bold text-orange-300 bg-[#EA580C]/20 px-2 py-0.5 rounded border border-[#EA580C]/40">
+                        2 Cursos
+                      </span>
+                    </div>
+                    <h3 className="text-lg font-black text-white mb-1 group-hover:text-orange-300 transition-colors">
+                      {rutasConstruccion.C.titulo}
+                    </h3>
+                    <p className="text-xs font-bold text-[#FB923C] mb-2">
+                      {rutasConstruccion.C.subtitulo}
+                    </p>
+                    <p className="text-xs text-slate-300 font-normal leading-relaxed">
+                      {rutasConstruccion.C.desc}
+                    </p>
+                  </div>
+
+                  <div className="pt-4 mt-4 border-t border-white/10 flex items-center justify-between text-xs font-bold text-[#FB923C]">
+                    <span>{selectedRuta === "C" ? "Viendo Ruta C (C1, C2)" : "Filtrar por Ruta C"}</span>
+                    <span className="material-symbols-outlined text-sm">
+                      {selectedRuta === "C" ? "check_circle" : "arrow_forward"}
+                    </span>
+                  </div>
+                </button>
               </div>
             </section>
 
@@ -578,131 +528,138 @@ export default function Formacion() {
             <div>
               <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
                 <div>
-                  <span className="text-cyan-400 text-[10px] font-black tracking-[0.3em] uppercase block mb-1">Catálogo Activo · Hotmart</span>
-                  <h2 className="text-3xl font-black text-white uppercase tracking-tighter">Cursos Asincrónicos Disponibles</h2>
+                  <span className="text-amber-400 text-[10px] font-black tracking-[0.3em] uppercase block mb-1">Catálogo Activo · Hotmart</span>
+                  <h2 className="text-3xl font-black text-white uppercase tracking-tighter">
+                    {selectedRuta === "TODAS" ? "Todos los Cursos Disponibles (8)" : `Cursos de la ${rutasConstruccion[selectedRuta].titulo}`}
+                  </h2>
                   <p className="text-slate-400 font-light text-sm max-w-2xl mt-1">
-                    Capacitación 100% práctica aplicada a casos reales de obra con archivos y soporte descargable.
+                    Afiches oficiales, temarios completos en Hotmart y acceso de por vida.
                   </p>
                 </div>
-                {selectedRoute && (
+
+                {/* Filtros rápidos */}
+                <div className="flex flex-wrap gap-2">
                   <button 
-                    onClick={() => setSelectedRoute(null)}
-                    className="self-start md:self-auto text-xs text-cyan-400 hover:text-cyan-300 font-bold flex items-center gap-1 bg-cyan-500/10 px-3 py-1.5 rounded-lg border border-cyan-500/20"
+                    onClick={() => setSelectedRuta("TODAS")}
+                    className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all ${
+                      selectedRuta === "TODAS"
+                        ? "bg-white text-slate-950 font-black shadow-md"
+                        : "bg-white/5 text-slate-400 hover:text-white border border-white/10"
+                    }`}
                   >
-                    <span className="material-symbols-outlined text-sm">filter_alt_off</span>
-                    Mostrar todos los cursos
+                    Todos (8)
                   </button>
-                )}
+                  <button 
+                    onClick={() => setSelectedRuta("A")}
+                    className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all border ${
+                      selectedRuta === "A"
+                        ? "bg-[#1E40AF] text-white border-[#1E40AF] shadow-[0_0_15px_rgba(30,64,175,0.4)]"
+                        : "bg-[#070D1E] text-blue-300 border-[#1E40AF]/40 hover:border-[#1E40AF]"
+                    }`}
+                  >
+                    Ruta A (2)
+                  </button>
+                  <button 
+                    onClick={() => setSelectedRuta("B")}
+                    className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all border ${
+                      selectedRuta === "B"
+                        ? "bg-[#D97706] text-slate-950 font-black border-[#D97706] shadow-[0_0_15px_rgba(217,119,6,0.4)]"
+                        : "bg-[#100C05] text-amber-300 border-[#D97706]/40 hover:border-[#D97706]"
+                    }`}
+                  >
+                    Ruta B (4)
+                  </button>
+                  <button 
+                    onClick={() => setSelectedRuta("C")}
+                    className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all border ${
+                      selectedRuta === "C"
+                        ? "bg-[#EA580C] text-white font-black border-[#EA580C] shadow-[0_0_15px_rgba(234,88,12,0.4)]"
+                        : "bg-[#120904] text-orange-300 border-[#EA580C]/40 hover:border-[#EA580C]"
+                    }`}
+                  >
+                    Ruta C (2)
+                  </button>
+                </div>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {asincronicos.map((curso) => {
-                  const theme = themeMap[curso.id] || themeMap.A1;
-                  const isHighlighted = selectedRoute === curso.id;
+              {/* Grid de Tarjetas Ultra-Limpias */}
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {cursosFiltrados.map((curso) => {
+                  const rutaInfo = rutasConstruccion[curso.ruta] || rutasConstruccion.A;
 
                   return (
                     <div 
                       key={curso.id} 
                       id={`curso-${curso.id}`}
-                      className={`glass-panel p-6 rounded-3xl flex flex-col justify-between group transition-all duration-300 relative overflow-hidden bg-slate-900/70 backdrop-blur-xl border ${theme.border} ${
-                        isHighlighted ? 'ring-2 ring-cyan-400 ring-offset-4 ring-offset-[#020617] scale-[1.01]' : ''
-                      }`}
+                      className={`rounded-3xl border-2 ${rutaInfo.borderClass} ${rutaInfo.cardBg} p-4 sm:p-5 flex flex-col justify-between transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl group`}
                     >
-                      <div className={`absolute top-0 right-0 w-36 h-36 ${theme.glow} blur-[60px] pointer-events-none`} />
-                      
-                      <div>
-                        {/* Cabecera con jerarquía comercial clara */}
-                        <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                          <span className={`text-[10px] font-black tracking-[0.2em] uppercase ${theme.tagText}`}>
-                            {curso.tag}
+                      {/* Portada Oficial con Imagen Encajada 3:4 */}
+                      <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-black/60 mb-4 border border-white/10 shadow-inner">
+                        <img 
+                          src={curso.imagen} 
+                          alt={curso.nombre} 
+                          className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                        {/* Badges superiores */}
+                        <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+                          <span className={`text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-wider backdrop-blur-md shadow-md ${rutaInfo.badgeSolid}`}>
+                            {curso.id}
                           </span>
-                          
-                          {/* Badge de Jerarquía Comercial */}
-                          {curso.destacadoBadge && (
-                            <span className={`border text-[9px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center gap-1 ${theme.badgeHighlight}`}>
-                              <span className="material-symbols-outlined text-[12px]">verified</span>
-                              {curso.destacadoBadge}
-                            </span>
-                          )}
                         </div>
-
-                        {/* Título */}
-                        <h3 className="text-base md:text-lg font-bold text-white mb-2 leading-snug group-hover:text-cyan-300 transition-colors">
-                          {curso.nombre}
-                        </h3>
-
-                        {/* Diferenciador explícito para B3 y B4 */}
-                        {curso.diferenciador && (
-                          <div className="mb-3 px-3 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 text-[11px] text-cyan-300 font-semibold flex items-center gap-2">
-                            <span className="material-symbols-outlined text-sm text-cyan-400">info</span>
-                            <span>{curso.diferenciador}</span>
-                          </div>
-                        )}
-
-                        {/* Descripción (Resultado + Contexto + Herramienta) */}
-                        <p className="text-slate-300 font-normal text-xs mb-4 leading-relaxed">
-                          {curso.desc}
-                        </p>
-
-                        {/* Ficha de Prueba de Valor y Caso Real */}
-                        <div className="space-y-2 mb-5 p-3.5 rounded-2xl bg-black/40 border border-white/5 text-[11px]">
-                          <div className="flex items-start gap-2">
-                            <span className="material-symbols-outlined text-amber-400 text-sm mt-0.5">apartment</span>
-                            <div>
-                              <span className="font-bold text-amber-300 block uppercase tracking-wider text-[9px]">Caso Real de Obra</span>
-                              <span className="text-slate-300 leading-snug">{curso.casoReal}</span>
-                            </div>
-                          </div>
-
-                          <div className="pt-2 border-t border-white/5 grid grid-cols-2 gap-2 text-[10px]">
-                            <div>
-                              <span className="text-slate-500 font-bold block uppercase tracking-wider text-[8px]">Para quién:</span>
-                              <span className="text-slate-300 leading-tight block">{curso.paraQuien}</span>
-                            </div>
-                            <div>
-                              <span className="text-slate-500 font-bold block uppercase tracking-wider text-[8px]">Nivel:</span>
-                              <span className="text-cyan-400 font-semibold">{curso.nivel}</span>
-                            </div>
-                          </div>
-
-                          <div className="pt-2 border-t border-white/5">
-                            <span className="text-slate-500 font-bold block uppercase tracking-wider text-[8px]">Entregable que te llevas:</span>
-                            <span className="text-emerald-300 font-medium leading-snug">{curso.entregable}</span>
-                          </div>
-
-                          <div className="pt-1 text-[9px] text-slate-400">
-                            <strong className="text-slate-300">Incluye:</strong> {curso.incluye}
-                          </div>
+                        <div className="absolute top-2.5 right-2.5">
+                          <span className="text-[9px] font-black px-2 py-0.5 rounded uppercase tracking-wider bg-black/80 text-white border border-white/20 backdrop-blur-md">
+                            HOTMART
+                          </span>
                         </div>
                       </div>
 
-                      {/* Footer de Tarjeta con Precios y Botones */}
-                      <div className="pt-4 border-t border-white/10 flex items-center justify-between gap-3 mt-2">
-                        <div className="flex flex-col">
-                          <span className="text-2xl font-extrabold text-white tracking-tight">{curso.precio}</span>
-                          <span className="text-[8px] text-slate-500 font-bold uppercase tracking-widest">Pago Único · Hotmart</span>
+                      {/* Cuerpo de la Tarjeta: Nombre y Monto */}
+                      <div className="flex-1 flex flex-col justify-between mb-4">
+                        <div>
+                          <div className="flex items-center gap-2 mb-1.5">
+                            <span className={`text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded border ${rutaInfo.badgeBg}`}>
+                              RUTA {curso.ruta}
+                            </span>
+                            <span className="text-[9px] font-bold text-slate-400 uppercase">
+                              {curso.tag}
+                            </span>
+                          </div>
+                          <h3 className="text-sm md:text-base font-bold text-white leading-snug line-clamp-2 min-h-[2.75rem] group-hover:text-white transition-colors">
+                            {curso.nombre}
+                          </h3>
                         </div>
-                        <div className="flex gap-2">
-                          <Link 
-                            href={curso.brochure}
-                            target="_blank"
-                            className="px-3 py-2.5 bg-white/5 border border-white/10 text-slate-300 rounded-xl font-semibold text-[10px] uppercase tracking-wider hover:bg-white/15 hover:text-white text-center transition-all flex items-center gap-1"
-                          >
-                            <span className="material-symbols-outlined text-[13px]">description</span>
-                            Temario
-                          </Link>
-                          <Link 
-                            href={curso.link} 
-                            target="_blank" 
-                            className={`px-4 py-2.5 ${theme.btnBg} rounded-xl font-black text-[10px] uppercase tracking-wider hover:scale-105 transition-all text-center flex items-center gap-1`}
-                            style={{
-                              boxShadow: theme.btnShadow
-                            }}
-                          >
-                            <span className="material-symbols-outlined text-[14px]">shopping_cart</span>
-                            Comprar
-                          </Link>
+
+                        {/* Monto Oficial */}
+                        <div className="pt-3 mt-3 border-t border-white/10 flex items-baseline justify-between">
+                          <div>
+                            <span className="text-2xl font-black text-white tracking-tight">{curso.precio}</span>
+                            <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider block">Acceso 24/7</span>
+                          </div>
+                          <span className="text-[10px] text-emerald-400 font-bold flex items-center gap-0.5">
+                            <span className="material-symbols-outlined text-xs">verified</span> Oficial
+                          </span>
                         </div>
+                      </div>
+
+                      {/* Botones de Acción: Ver Temario y Comprar */}
+                      <div className="grid grid-cols-2 gap-2 pt-2 border-t border-white/10">
+                        <Link 
+                          href={curso.brochure}
+                          target="_blank"
+                          className={`py-2.5 px-2 rounded-xl text-[11px] font-bold uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 border ${rutaInfo.btnTemario}`}
+                        >
+                          <span className="material-symbols-outlined text-[14px]">description</span>
+                          Temario
+                        </Link>
+                        <Link 
+                          href={curso.link} 
+                          target="_blank" 
+                          className={`py-2.5 px-2 rounded-xl text-[11px] font-black uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 ${rutaInfo.btnPrimary}`}
+                        >
+                          <span className="material-symbols-outlined text-[14px]">shopping_cart</span>
+                          Comprar
+                        </Link>
                       </div>
                     </div>
                   );

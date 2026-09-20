@@ -6,6 +6,10 @@ import SecurityOverlay from "../portal/components/SecurityOverlay";
 import { supabase } from "@/lib/supabase";
 
 const courses = {
+    "AGENTES_IA_TARDE": {
+    name: "Agentes de IA: Presupuestos, EETT y Cronogramas (Grupo Tarde - Domingos 3pm a 6pm)",
+    lessons: []
+  },
   "AGENTES_IA": {
     name: "Agentes de IA: Presupuestos, EETT y Cronogramas (Sesiones en Vivo)",
     lessons: [
@@ -240,14 +244,23 @@ const courses = {
   }
 };
 
-const getCourseKey = (dbCursoName) => {
+const getCourseKey = (dbCursoName, edicionCurso = "") => {
   if (!dbCursoName) return null;
   const name = dbCursoName
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
+  const edicion = (edicionCurso || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
     
-  if (name.includes("presupuesto") || name.includes("eett") || name.includes("cronograma") || (name.includes("agentes") && name.includes("presupuesto")) || name.includes("agentes de ia")) return "AGENTES_IA";
+  if (name.includes("presupuesto") || name.includes("eett") || name.includes("cronograma") || (name.includes("agentes") && name.includes("presupuesto")) || name.includes("agentes de ia")) {
+    if (edicion.includes("tarde") || edicion.includes("20/09") || edicion.includes("grupo 2") || name.includes("tarde")) {
+      return "AGENTES_IA_TARDE";
+    }
+    return "AGENTES_IA";
+  }
   if (name.includes("automation engineer")) return "AE";
   if (name.includes("automatizacion y soluciones") || name.includes("soluciones de ia")) return "AUT_CONST";
   if (name.includes("licitacion")) return "LIC";
@@ -312,7 +325,7 @@ export default function ClasesGrabadas() {
 
       // 4. Mapear y procesar accesos por curso
       const processed = enrollments.map(enroll => {
-        const key = getCourseKey(enroll.curso);
+        const key = getCourseKey(enroll.curso, enroll.edicion_curso);
         if (!key) return null;
 
         // Todos los alumnos matriculados en cursos activos tienen acceso completo a la biblioteca de clases grabadas
@@ -424,7 +437,7 @@ export default function ClasesGrabadas() {
                       : 'text-slate-400 hover:text-white'
                   }`}
                 >
-                  {c.key === "AGENTES_IA" ? "Agentes de IA: Presupuestos, EETT y Cronogramas" : c.key === "AE" ? "Automatización de Obras con Agentes de IA (Ingeniería Aumentada)" : c.key === "GIP" ? "Gestión de Construcción con IA (El Despertar Digital)" : c.key === "AUT_CONST" ? "Automatización y Soluciones de IA para la Gestión de Construcción" : "Licitaciones de Construcción con IA (Licitaciones Inteligentes)"}
+                  {c.key === "AGENTES_IA_TARDE" ? "Agentes de IA (Grupo Tarde: 3pm - 6pm)" : c.key === "AGENTES_IA" ? "Agentes de IA: Presupuestos, EETT y Cronogramas (Grupo Mañana)" : c.key === "AE" ? "Automatización de Obras con Agentes de IA (Ingeniería Aumentada)" : c.key === "GIP" ? "Gestión de Construcción con IA (El Despertar Digital)" : c.key === "AUT_CONST" ? "Automatización y Soluciones de IA para la Gestión de Construcción" : "Licitaciones de Construcción con IA (Licitaciones Inteligentes)"}
                 </button>
               ))}
             </div>

@@ -115,7 +115,7 @@ export default function StudentPortal() {
       // Fusionar duplicados en memoria (priorizando acceso VIP y luego la matrícula más reciente)
       const uniqueEnrollmentsMap = {};
       homogenizedEnrollments.forEach(enroll => {
-        const key = enroll.curso;
+        const key = `${enroll.curso}_${enroll.edicion_curso || 'default'}`;
         const existing = uniqueEnrollmentsMap[key];
         if (!existing) {
           uniqueEnrollmentsMap[key] = enroll;
@@ -267,28 +267,41 @@ export default function StudentPortal() {
     );
   }
 
-  const getCourseKey = (dbCursoName) => {
+  const getCourseKey = (dbCursoName, edicionCurso = "") => {
     if (!dbCursoName) return null;
     const name = dbCursoName
       .toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "");
+    const edicion = (edicionCurso || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
       
-    if (name.includes("presupuesto") || name.includes("eett") || name.includes("cronograma") || (name.includes("agentes") && name.includes("presupuesto"))) return "AGENTES_IA";
+    if (name.includes("presupuesto") || name.includes("eett") || name.includes("cronograma") || (name.includes("agentes") && name.includes("presupuesto")) || name.includes("agentes de ia")) {
+      if (edicion.includes("tarde") || edicion.includes("20/09") || edicion.includes("grupo 2") || name.includes("tarde")) {
+        return "AGENTES_IA_TARDE";
+      }
+      return "AGENTES_IA";
+    }
     if (name.includes("automation") || name.includes("ingenieria") || name.includes("automatizacion")) return "AE";
     if (name.includes("licitacion")) return "LIC";
     if (name.includes("despertar") || name.includes("gestion proyectos ia") || name.includes("gip") || name.includes("el despertar") || name.includes("gestion integral")) return "GIP";
     return null;
   };
 
-
-
   const activeZoomSessions = [
     {
       courseKey: "AGENTES_IA",
       zoomUrl: "https://us06web.zoom.us/j/84609995401?pwd=mrbaCGEiPvc7Aa5XlAcpnDNICMMuwt.1",
-      title: "Agentes de IA: Presupuestos, EETT y Cronogramas",
+      title: "Agentes de IA: Presupuestos, EETT y Cronogramas (Turno Mañana: 10:00 AM - 01:00 PM)",
       message: "¡La clase sincrónica está en vivo! Toca el botón para ingresar a la sala de Zoom."
+    },
+    {
+      courseKey: "AGENTES_IA_TARDE",
+      zoomUrl: "https://us06web.zoom.us/j/85951795621?pwd=naEJFAWPk1PbPr2AaHLpCXQLG10msb.1",
+      title: "Agentes de IA: Presupuestos, EETT y Cronogramas (Turno Tarde: 03:00 PM - 06:00 PM)",
+      message: "¡Hoy inicia tu curso! La sesión sincrónica está activa (3:00 p.m. a 6:00 p.m.). Toca el botón de abajo para ingresar a tu clase de hoy."
     },
     {
       courseKey: "AE",
@@ -305,7 +318,7 @@ export default function StudentPortal() {
   ];
 
   const studentZoomSessions = activeZoomSessions.filter(session => 
-    matriculas.some(m => getCourseKey(m.curso) === session.courseKey)
+    matriculas.some(m => getCourseKey(m.curso, m.edicion_curso) === session.courseKey)
   );
 
   return (
@@ -361,7 +374,16 @@ export default function StudentPortal() {
                             {m.status === 'VIP' ? 'Acceso Ilimitado' : m.status === 'INSCRITO' ? 'Acceso Ilimitado' : `${m.daysLeft} días de acceso`}
                           </span>
                         </div>
-                        <h3 className="text-xl font-black text-white mb-6 uppercase leading-tight">{m.curso}</h3>
+                        <h3 className="text-xl font-black text-white mb-2 uppercase leading-tight">{m.curso}</h3>
+                        {m.edicion_curso && (
+                          <p className="text-[10px] text-cyan-400 font-bold uppercase tracking-wider mb-6">
+                            {m.edicion_curso.toLowerCase().includes("tarde") || m.edicion_curso.includes("20/09")
+                              ? "Turno Tarde: Domingos 3:00 PM - 6:00 PM"
+                              : m.edicion_curso.includes("23/08")
+                                ? "Turno Mañana: Domingos 10:00 AM - 1:00 PM"
+                                : `Edición: ${m.edicion_curso}`}
+                          </p>
+                        )}
                         <div className="flex gap-4">
                           <a 
                             href="/clases-grabadas" 

@@ -302,23 +302,11 @@ export default function StudentPortal() {
       zoomUrl: "https://us06web.zoom.us/j/85951795621?pwd=naEJFAWPk1PbPr2AaHLpCXQLG10msb.1",
       title: "Agentes de IA: Presupuestos, EETT y Cronogramas (Turno Tarde: 03:00 PM - 06:00 PM)",
       message: "¡Hoy inicia tu curso! La sesión sincrónica está activa (3:00 p.m. a 6:00 p.m.). Toca el botón de abajo para ingresar a tu clase de hoy."
-    },
-    {
-      courseKey: "AE",
-      zoomUrl: "https://us06web.zoom.us/j/82973721151?pwd=1x6ebtWbhanU26CWSrvVJZNSLzNi7C.1",
-      title: "Automatización de Obras con Agentes de IA (Ingeniería Aumentada)",
-      message: "La clase está en curso. Toca el botón de abajo para unirte desde tu celular."
-    },
-    {
-      courseKey: "GIP",
-      zoomUrl: "https://us06web.zoom.us/j/82338486465?pwd=kBVuLWZgYxA2WOzMVjCM6tqM47GA5g.1",
-      title: "Gestión de Construcción con IA (El Despertar Digital)",
-      message: "¡Hoy inicia el curso! La sesión sincrónica está activa. Toca el botón de abajo para ingresar a tu clase de hoy."
     }
   ];
 
   const studentZoomSessions = activeZoomSessions.filter(session => 
-    matriculas.some(m => getCourseKey(m.curso, m.edicion_curso) === session.courseKey)
+    matriculas.some(m => m.status !== "GRADUADO" && !m.accessExpired && getCourseKey(m.curso, m.edicion_curso) === session.courseKey)
   );
 
   return (

@@ -24,7 +24,11 @@ export default function StudentPortal() {
   const fetchStudentData = async (dniValue) => {
     setLoading(true);
     try {
-      const trimmedDni = dniValue.trim();
+      let trimmedDni = (dniValue || "").trim();
+      // Homogeneizar DNI: Si tiene 7 dígitos numéricos, autocompletar con cero a la izquierda (8 dígitos RENIEC)
+      if (/^\d{7}$/.test(trimmedDni)) {
+        trimmedDni = trimmedDni.padStart(8, '0');
+      }
       
       // 1. Obtener datos del estudiante
       const { data: student, error: studentError } = await supabase

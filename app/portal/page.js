@@ -137,17 +137,28 @@ export default function StudentPortal() {
 
       const processedEnrollments = Object.values(uniqueEnrollmentsMap).map(enroll => {
         const cert = certificates?.find(c => {
+          if (!c || !c.certificado_id || c.estado_academico !== 'GRADUADO') return false;
           const cName = (c.nombre_curso_oficial || c.nombre_curso_inscrito || c.curso || "").toLowerCase();
           const eName = (enroll.curso || "").toLowerCase();
           if (!cName || !eName) return false;
           if (cName === eName) return true;
           if (cName.includes(eName) || eName.includes(cName)) return true;
-          if ((cName.includes("despertar") || cName.includes("construc")) && (eName.includes("despertar") || eName.includes("construc"))) return true;
-          if ((cName.includes("automation") || cName.includes("agentes") || cName.includes("obras")) && (eName.includes("automation") || eName.includes("agentes") || eName.includes("obras"))) return true;
+          if (cName.includes("despertar") && eName.includes("despertar")) return true;
           if (cName.includes("licitac") && eName.includes("licitac")) return true;
+          if (cName.includes("evm") && eName.includes("evm")) return true;
+          if (
+            (cName.includes("presupuesto") || cName.includes("eett") || cName.includes("cronograma")) &&
+            (eName.includes("presupuesto") || eName.includes("eett") || eName.includes("cronograma"))
+          ) return true;
+          if (
+            (cName.includes("automatizacion") || cName.includes("automation")) &&
+            (eName.includes("automatizacion") || eName.includes("automation")) &&
+            !eName.includes("presupuesto")
+          ) return true;
           return false;
         });
-        let status = cert ? "GRADUADO" : "INSCRITO";
+        const hasValidCert = Boolean(cert && cert.certificado_id && cert.estado_academico === 'GRADUADO');
+        let status = hasValidCert ? "GRADUADO" : "INSCRITO";
         let daysLeft = 999; 
         let accessExpired = false;
 
@@ -310,7 +321,7 @@ export default function StudentPortal() {
   ];
 
   const studentZoomSessions = activeZoomSessions.filter(session => 
-    matriculas.some(m => m.status !== "GRADUADO" && !m.accessExpired && getCourseKey(m.curso, m.edicion_curso) === session.courseKey)
+    matriculas.some(m => !m.accessExpired && getCourseKey(m.curso, m.edicion_curso) === session.courseKey)
   );
 
   return (

@@ -2,6 +2,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
+import { registeredCourseKey } from "@/lib/cohortes";
 import Sidebar from "./components/Sidebar";
 import Image from "next/image";
 import Link from "next/link";
@@ -283,6 +284,8 @@ export default function StudentPortal() {
   }
 
   const getCourseKey = (dbCursoName, edicionCurso = "") => {
+    const registered = registeredCourseKey(dbCursoName, edicionCurso);
+    if (registered) return registered;
     if (!dbCursoName) return null;
     const name = dbCursoName
       .toLowerCase()

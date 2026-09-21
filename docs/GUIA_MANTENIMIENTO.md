@@ -32,7 +32,7 @@ Son instrucciones para el asistente que trabaja en el proyecto, no procesos perm
 
 ## Consultoría
 
-`lib/oferta.js` concentra tarifa, duración gratuita y WhatsApp: S/ 100 por hora, reunión inicial gratuita de 15 minutos. Inicio y consultoría consumen estos datos. Los botones solo abren una solicitud de coordinación: no confirman reservas ni realizan cobros.
+`lib/oferta.js` concentra tarifas, duración gratuita, PayPal y WhatsApp: S/ 100 por hora o $35 USD por hora (en soles cualquier medio de pago; en dólares pago único por PayPal), reunión inicial gratuita de 15 minutos y solicitud para cotizar servicios a medida (presupuestos, cronogramas, EETT, automatización en cotizaciones, reportabilidad, control y seguimiento). Inicio y consultoría consumen estos datos. Los botones solo abren una solicitud de coordinación: no confirman reservas ni realizan cobros automáticos.
 
 ## Imágenes
 

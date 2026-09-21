@@ -5,8 +5,8 @@ import ConditionalLayout from "./components/ConditionalLayout";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "PCAI System v5.2 | Ingeniería Aumentada",
-  description: "Sistema de Control de Proyectos impulsado por IA de Élite.",
+  title: "Project Control AI | Capacitación y consultoría",
+  description: "Capacitación y consultoría en gestión de proyectos de construcción, planeamiento, presupuestos e inteligencia artificial.",
 };
 
 export default function RootLayout({ children }) {

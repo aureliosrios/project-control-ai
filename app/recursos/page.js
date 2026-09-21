@@ -149,7 +149,7 @@ export default function Recursos() {
         {filtered.map(resource => (
           <div key={resource.id} className="glass-card rounded-3xl border-white/5 overflow-hidden group hover:border-cyan-500/30 transition-all flex flex-col">
             <div className="aspect-video relative overflow-hidden bg-white/5">
-              <Image src={resource.img} alt={resource.title} fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+              <Image src={resource.img} alt={resource.title} fill sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw" quality={75} className="object-cover group-hover:scale-110 transition-transform duration-700" />
               <div className="absolute top-4 right-4 bg-cyan-500 text-slate-950 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest">
                 {resource.type}
               </div>

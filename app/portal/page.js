@@ -460,7 +460,7 @@ export default function StudentPortal() {
                   <h3 className="text-xs font-black uppercase tracking-widest">Soporte Técnico</h3>
                 </div>
                 <p className="text-slate-400 text-[11px] leading-relaxed mb-6 italic">
-                  "Si tienes problemas con el acceso a Zoom o tus certificados, escríbenos directamente."
+                  &ldquo;Si tienes problemas con el acceso a Zoom o tus certificados, escríbenos directamente.&rdquo;
                 </p>
                 <button className="w-full py-4 bg-cyan-500/20 border border-cyan-500/40 rounded-xl text-[10px] font-black uppercase tracking-widest text-cyan-400 hover:bg-cyan-500/30 transition-all">
                   Contactar por WhatsApp

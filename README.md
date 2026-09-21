@@ -1,41 +1,23 @@
-# PCAI System v5.2 | Ingeniería Aumentada
+# Project Control AI
 
-![Status](https://img.shields.io/badge/Status-Active-cyan)
-![Framework](https://img.shields.io/badge/Framework-Next.js%2014-black)
-![Deployment](https://img.shields.io/badge/Deploy-Vercel-black)
+Web de capacitación y consultoría en construcción e inteligencia artificial. Aplicación Next.js 15.1.9, React 19 y Tailwind CSS.
 
-## 🎓 El Ecosistema de Project Control AI
-Plataforma industrial de alto impacto diseñada para la formación de ingenieros en la era de la Inteligencia Artificial. Especializados en automatización de procesos, licitaciones inteligentes y control de proyectos avanzado.
+- `app/`: rutas activas y componentes compartidos en `app/components/`.
+- `data/cursos.json`: catálogo comercial utilizado por formación e inscripción.
+- `lib/oferta.js`: condiciones y contacto de consultoría.
+- `lib/supabase.js`: cliente del servicio de alumnos y certificados.
+- `public/`: imágenes, brochures y materiales.
+- `.agents/skills/`: asistentes reutilizables para crear, actualizar y revisar cursos.
+- `scripts/`: validación del catálogo y sus pruebas.
+- `old_site/`: archivo histórico, sin uso en las rutas actuales.
 
-## 🚀 Arquitectura Técnica
-Este proyecto ha evolucionado de una versión estática a una aplicación robusta basada en **Next.js**:
-
-- **Core**: Next.js 14 (App Router)
-- **Estilos**: Tailwind CSS con estética NASA-Punk (Industrial Dark)
-- **Base de Datos**: Supabase (Gestión de inscritos y recursos)
-- **Deployment**: Vercel (CI/CD automático desde GitHub)
-
-## 🌐 Enlaces Oficiales
-- **Producción**: [https://project-control-ai-one.vercel.app](https://project-control-ai-one.vercel.app)
-- **TikTok (Link Bio)**: [PCAI Official](https://www.tiktok.com/@aureliosrios)
-
-## 📁 Estructura del Sistema
-- `app/`: Lógica de páginas y rutas (App Router).
-- `components/`: Componentes modulares (Navbar, Footer, CourseCards).
-- `lib/`: Configuraciones de clientes (Supabase).
-- `public/`: Activos estáticos (imágenes, logos).
-- `docs/`: Documentación técnica y guías de mantenimiento.
-
-## 🛠️ Desarrollo y Mantenimiento
-Para correr el proyecto localmente:
-```bash
+```sh
 npm install
 npm run dev
 ```
 
-Para actualizar contenido (precios, links de Hotmart), consulta la [Guía de Mantenimiento](docs/GUIA_MANTENIMIENTO.md).
+Antes de publicar: `npm run check:cursos`, `npm run test:cursos`, `npm run lint` y `npm run build`.
 
-## 📝 Licencia y Contacto
-Propiedad de **Project Control AI**. Todos los derechos reservados 2025.
-- WhatsApp: +51 993 147 501
-- Web: [projectcontrolai.com](https://projectcontrolai.com)
+Consulta [Mantenimiento](docs/GUIA_MANTENIMIENTO.md) y [Análisis de mejoras](docs/ANALISIS_MEJORAS.md). Los cambios locales no se publican automáticamente hasta ejecutar el flujo de despliegue del proyecto.
+
+WhatsApp: +51 993 147 501.

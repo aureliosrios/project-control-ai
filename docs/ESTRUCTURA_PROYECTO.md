@@ -1,43 +1,20 @@
-# Estructura del Proyecto | PCAI System v5.2
+# Estructura activa
 
-## 🏗️ Arquitectura de Carpetas (Next.js)
+- `app/page.js`: portada de capacitación y consultoría.
+- `app/consultoria/page.js`: reunión gratuita y consultoría por hora.
+- `app/formacion/page.js`: catálogo, filtros y convocatorias.
+- `app/inscripcion/page.js`: registro enviado a Google Apps Script/Sheets.
+- `app/portal/`, `app/clases-grabadas/`, `app/recursos/`: acceso y contenido académico con Supabase.
+- `app/verificar/`, `app/qc-admin/`, `app/admin/qc/`: certificados y revisión.
+- `app/mobile/`: landing de campañas, con contenido editorial independiente.
+- `app/components/`: navegación, pie y selección de layout.
+- `data/cursos.json`: catálogo compartido de formación e inscripción.
+- `lib/oferta.js`: tarifa, duración gratuita y contacto de consultoría.
+- `lib/supabase.js`: cliente de Supabase.
+- `public/`: portadas, brochures y materiales.
+- `.agents/skills/`: asistentes para crear, actualizar y revisar cursos.
+- `scripts/validar-cursos.mjs`: validación local ejecutada antes del build.
+- `scripts/validar-cursos.test.mjs`: casos válidos e inválidos del catálogo.
+- `old_site/`, `docs/legacy/`: archivo histórico.
 
-```
-📦 project-control-ai/
-├── 📁 app/                     # El corazón de la aplicación (App Router)
-│   ├── 📁 components/          # Componentes compartidos (Navbar, Footer)
-│   ├── 📁 consultoria/         # Página de servicios B2B
-│   ├── 📁 formacion/           # Catálogo de cursos y ecosistema
-│   ├── 📁 inscripcion/         # Formulario de registro con Supabase
-│   ├── 📁 recursos/            # Descargas y herramientas
-│   ├── 📁 clases-grabadas/     # Portal de contenido educativo
-│   ├── 📄 layout.js            # Layout global (Navbar/Footer persistente)
-│   ├── 📄 page.js              # Home Page (Landing Principal)
-│   └── 📄 globals.css          # Estilos base y tokens NASA-Punk
-│
-├── 📁 lib/                     # Utilidades y clientes externos
-│   └── 📄 supabase.js          # Cliente de base de datos
-│
-├── 📁 public/                  # Archivos estáticos públicos
-│   └── 📁 images/              # Logotipos y recursos visuales
-│
-├── 📁 old_site/                # LEGACY: Versión antigua HTML/JS (Solo lectura)
-│
-├── 📄 vercel.json              # Configuración de rutas y rewrites para Vercel
-├── 📄 tailwind.config.js       # Tokens de diseño y colores industriales
-└── 📄 package.json             # Dependencias del sistema
-```
-
-## 🎨 Design System
-El sistema utiliza una estética **NASA-Punk** definida en `tailwind.config.js` y `app/globals.css`, con los siguientes pilares:
-- **Colores**: Slate-950 (Fondo), Cyan-500 (Acción), White/10 (Bordes vidriosos).
-- **Tipografía**: Inter (Primaria), Material Symbols (Iconos).
-- **Efectos**: Backdrop-blur, gradientes sutiles y micro-animaciones.
-
-## 📡 Integraciones
-1. **Supabase**: Maneja el almacenamiento de leads y datos de cursos.
-2. **Hotmart**: Pasarela de pagos externa (links configurados en `app/formacion/page.js`).
-3. **Vercel**: Hosting y gestión de dominios.
-
-## 📑 Mantenimiento
-Para realizar cambios en el contenido sin romper la estructura, consulta la [`GUIA_MANTENIMIENTO.md`](GUIA_MANTENIMIENTO.md).
+Consulta `GUIA_MANTENIMIENTO.md` para cambios comerciales. Hotmart, PayPal, PDF y Supabase no se sincronizan al editar el JSON.

@@ -1,41 +1,53 @@
-# Guía de Mantenimiento | PCAI System v5.2
+# Mantenimiento de Project Control AI
 
-Esta guía contiene los pasos necesarios para mantener el sistema actualizado sin necesidad de re-programar la estructura core.
+La web activa es Next.js 15.1.9 (App Router). Ejecutar los comandos desde la raíz del repositorio. `old_site/` conserva el sitio anterior; sus HTML y scripts no alimentan las páginas actuales.
 
-## 1. Actualizar Links de Pago (Hotmart)
-Los links de inscripción se gestionan directamente en los componentes de página.
+## Cursos: fuente de datos
 
-- **Ubicación**: `app/formacion/page.js`
-- **Procedimiento**:
-  1. Busca la sección de "Cursos Síncronos" o "Cursos Asíncronos".
-  2. Localiza el array de objetos de cursos.
-  3. Cambia el valor de la propiedad `href` o el link del botón por el nuevo link de Hotmart.
-  4. Guarda el archivo y haz `git push`.
+Editar `data/cursos.json`. Los listados `asincronicos` y `sincronicos` alimentan `/formacion`; los sincrónicos también alimentan el selector de `/inscripcion`. Los conteos y el listado de cursos disponibles por ruta se calculan desde esos datos.
 
-## 2. Cambiar Precios y Fechas
-- **Cursos Síncronos**: Se editan en `app/formacion/page.js`.
-- **Cursos Asíncronos**: Se editan en el mismo archivo o en sus componentes respectivos.
-- **Formulario de Inscripción**: Si necesitas cambiar los cursos disponibles en el selector, edita `app/inscripcion/page.js`.
+- Grabados: `id`, `ruta` (A/B/C), `imagen`, `nombre`, `precio` (por ejemplo `$15.99 USD`), `tag`, `link` de compra y `brochure`.
+- En vivo: `id`, `nombre`, `registro`, `precio` USD, `precioSoles`, `tag`, `desc`, `casoReal`, `inicio`, `fin`, `horario`, `sesiones`, `link` (`/inscripcion`), `hotmart`, `paypal`, `colorKey` (cyan/blue/orange), `cerrado`. `brochure` es opcional y `destacado` se requiere si la convocatoria está abierta.
+- `registro` conserva el nombre usado por la integración histórica de inscripción. No cambiarlo al renombrar comercialmente un curso sin revisar el mapeo de matrículas.
+- `cerrado: true` conserva el curso en el historial e impide seleccionarlo en el formulario. Reabrir únicamente una convocatoria confirmada.
+- Fechas y horarios son textos editoriales: verificar el calendario, día de la semana, duración y zona horaria manualmente. Los importes USD y PEN son independientes.
 
-## 3. Gestión de Imágenes
-- Todas las imágenes nuevas deben subirse a `public/images/`.
-- Referéncialas en el código como `/images/tu-imagen.png` (Next.js resuelve la carpeta public automáticamente).
+Editar el JSON no modifica precios de Hotmart/PayPal, PDF, grabaciones, certificados ni bases de datos. Las recomendaciones editoriales de formación y las campañas de `/mobile` también requieren revisión si el cambio las afecta. Los enlaces de inscripción de formación incluyen el nombre de registro para preseleccionar el curso.
 
-## 4. Sistema de Certificación (Verificar)
-El sistema de descarga de diplomas es automático y consume datos de Supabase.
-- **Link Oficial**: [https://project-control-ai-one.vercel.app/verificar](https://project-control-ai-one.vercel.app/verificar)
-- **Límite de Descarga**: Por seguridad, los certificados tienen un límite de **1 descarga**.
-- **Coordenadas PDF**: Si cambias la plantilla del certificado, debes ajustar las coordenadas en `app/verificar/page.js`.
+## Asistentes reutilizables
 
-## 5. Despliegue (Deploy)
-El sistema está configurado con **CI/CD** (Integración Continua).
-- Cada vez que haces un `git push origin main`, Vercel detecta el cambio y actualiza el sitio en segundos.
-- **Link de Producción**: [https://project-control-ai-one.vercel.app](https://project-control-ai-one.vercel.app)
+Disponibles en `.agents/skills/`, con rutas de selección en `AGENTS.md`:
 
-## 5. Troubleshooting (Problemas Comunes)
-- **El sitio no se actualiza**: Asegúrate de que el commit se envió correctamente y revisa el dashboard de Vercel.
-- **Error de "Create Next App"**: Limpia la caché de tu navegador (`Ctrl + Shift + R`).
-- **Links rotos**: Verifica que las rutas en el `Navbar.js` coincidan con las carpetas dentro de `app/`.
+- `pcai-crear-curso`: preparar e incorporar un curso con datos confirmados.
+- `pcai-actualizar-curso`: actualizar precios, fechas, horarios o contenido sin perder referencias históricas.
+- `pcai-revisar-web`: revisar coherencia, funcionamiento, accesibilidad y rendimiento después del cambio.
 
----
-*Para soporte técnico avanzado, contactar con el equipo de desarrollo de PCAI.*
+Ejemplos de solicitud:
+
+- «Usa pcai-crear-curso para añadir un curso grabado de la ruta B. Estos son sus datos: ...»
+- «Usa pcai-actualizar-curso: cambia S1 a este horario y estos precios: ...»
+- «Usa pcai-revisar-web para revisar los cambios del catálogo antes de publicar».
+
+Son instrucciones para el asistente que trabaja en el proyecto, no procesos permanentes ni un sistema que invoca IA al guardar un archivo. El control automático del catálogo sí se ejecuta durante el build.
+
+## Consultoría
+
+`lib/oferta.js` concentra tarifa, duración gratuita y WhatsApp: S/ 100 por hora, reunión inicial gratuita de 15 minutos. Inicio y consultoría consumen estos datos. Los botones solo abren una solicitud de coordinación: no confirman reservas ni realizan cobros.
+
+## Imágenes
+
+Conservar originales en `public/cursos/` y `public/images/`. Las portadas de formación usan `next/image`, `sizes`, carga diferida y calidad 70 para servir versiones adaptadas. Revisar legibilidad antes de bajar más la calidad, pues contienen texto. No recomprimir PDF, firmas o QR como si fueran fotografías.
+
+## Comprobaciones
+
+```sh
+npm run check:cursos
+npm run test:cursos
+npm run lint
+npm run build
+npm run start -- --port 3000
+```
+
+El validador comprueba estructura, IDs, formatos y archivos locales; no comprueba calendarios ni destinos de pago remotos. El build vuelve a ejecutarlo. Probar filtros, pestañas, enlaces y selección de inscripción en escritorio y móvil. No enviar formularios ni pagos reales como parte de una comprobación visual.
+
+Publicar requiere un paso separado según el flujo de Git/Vercel. No asumir que cambios locales ya están desplegados. Consultar `docs/ANALISIS_MEJORAS.md` para hallazgos pendientes fuera del alcance de esta entrega.

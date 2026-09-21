@@ -1,154 +1,53 @@
 import Link from "next/link";
-import Image from "next/image";
+import { consultoria, contactoConsultoria } from "@/lib/oferta";
 
-const soluciones = [
-  {
-    title: "APUs y Presupuestos con IA (Formato S10)",
-    desc: "Creación rápida de presupuestos, análisis de precios unitarios (APU) y listado de recursos estructurados similar al formato S10, con trazabilidad de fórmulas y estudio automático de precios de mercado.",
-    icon: "payments",
-    features: ["Estructuración tipo S10 automatizada", "Trazabilidad de fórmulas y rendimientos", "Estudio de precios de mercado con agentes de IA"]
-  },
-  {
-    title: "Generación e Ingeniería Forense de EETT",
-    desc: "Generación y revisión de Especificaciones Técnicas (EETT) utilizando agentes de IA para analizar estudios de suelos, diseños, logística y bases, eliminando vicios ocultos y riesgos.",
-    icon: "assignment",
-    features: ["Generación rápida de EETT consistentes", "Auditoría automatizada de bases y TDRs", "Optimización logística y normativa"]
-  },
-  {
-    title: "Planificación y Nivelación de Recursos",
-    desc: "Generación acelerada de cronogramas y nivelación óptima de recursos (personal, equipos y materiales) con IA para proteger los plazos y márgenes del proyecto.",
-    icon: "account_tree",
-    features: ["Cronogramas lógicos automáticos", "Nivelación inteligente de recursos", "Exportación a Primavera P6 y MS Project"]
-  },
-  {
-    title: "Sistemas Operativos a Medida (Premium B2B)",
-    desc: "Digitalización completa del frente de obra y automatización avanzada (reportabilidad móvil, dashboards gerenciales en tiempo real y conciliación automatizada de costos AC vs EV).",
-    icon: "smartphone",
-    features: ["Reportabilidad móvil desde campo", "Conciliación automática Costo Actual vs Valor Ganado", "Dashboards gerenciales en tiempo real"],
-    isPremium: true
-  }
+export const metadata = {
+  title: `Consultoría para construcción · ${consultoria.precioTexto} por hora | Project Control AI`,
+  description: `Reunión inicial gratuita de ${consultoria.minutosGratis} minutos o consultoría a ${consultoria.precioTexto} por hora. Planeamiento, presupuestos, EETT, cerebro digital y automatizaciones.`,
+};
+const temas = [
+  ["Planeamiento y cronogramas", "Revisa secuencias, recursos y seguimiento de obra en MS Project o Primavera P6."],
+  ["Presupuestos y costos", "Trabaja tus APUs, rendimientos, estructura de presupuesto y control de costos."],
+  ["Especificaciones técnicas", "Organiza y revisa tus EETT, sus fuentes y su coherencia con el expediente técnico."],
+  ["Cerebro digital", "Estructura documentos y conocimiento de tu proyecto para encontrar y reutilizar información."],
+  ["Automatizaciones y agentes de IA", "Identifica tareas repetitivas y recibe orientación para automatizar reportes, hojas de cálculo y documentos."],
+  ["Otros retos de tu proyecto", "Cuéntanos tu caso en la reunión inicial para confirmar si podemos ayudarte."],
 ];
-
 export default function Consultoria() {
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-200 pt-32 pb-20 selection:bg-cyan-500/30">
-      <div className="fixed inset-0 tech-grid pointer-events-none opacity-20" />
-      
-      <main className="relative max-w-7xl mx-auto px-6">
-        {/* Header Hero */}
-        <section className="text-center mb-24">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[10px] font-black uppercase tracking-[0.4em] mb-8">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_10px_rgba(0,242,255,0.8)]"></span>
-            Operational Intelligence System
-          </div>
-          <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-white mb-10 uppercase leading-[0.9]">
-            MÁXIMA <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">EFICIENCIA OPERATIVA</span>
-          </h1>
-          <p className="text-xl text-slate-400 max-w-3xl mx-auto font-light leading-relaxed mb-12">
-            Especialistas en eliminar el trabajo manual en empresas constructoras. 
-            Digitalizamos el frente de obra y automatizamos el control de proyectos con precisión quirúrgica.
-          </p>
-          <Link 
-            href="https://wa.me/51993147501?text=Hola,%20necesito%20automatizar%20mis%20procesos%20de%20ingenier%C3%ADa." 
-            target="_blank"
-            className="bg-cyan-500 text-slate-950 px-10 py-5 rounded-2xl font-black text-sm uppercase tracking-widest hover:scale-105 transition-all shadow-[0_0_40px_rgba(6,182,212,0.3)] inline-flex items-center gap-4 group"
-          >
-            Agendar Diagnóstico Operativo
-            <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">bolt</span>
-          </Link>
-        </section>
-
-        {/* Services Grid */}
-        <section className="grid md:grid-cols-2 gap-8 mb-32">
-          {soluciones.map((sol, i) => (
-            <div 
-              key={i} 
-              className={`glass-panel p-10 rounded-[40px] border-white/5 transition-all group relative ${
-                sol.isPremium 
-                  ? 'hover:border-amber-500/40 bg-gradient-to-br from-amber-500/5 to-transparent border-amber-500/10' 
-                  : 'hover:border-cyan-500/30'
-              }`}
-            >
-              {sol.isPremium && (
-                <span className="absolute top-8 right-8 bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[8px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full">
-                  PREMIUM B2B
-                </span>
-              )}
-              <div className={`w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform ${
-                sol.isPremium ? 'text-amber-400' : 'text-cyan-400'
-              }`}>
-                <span className="material-symbols-outlined text-4xl">{sol.icon}</span>
-              </div>
-              <h3 className="text-2xl font-black text-white mb-4 uppercase tracking-tighter">{sol.title}</h3>
-              <p className="text-slate-400 text-sm font-light leading-relaxed mb-8">{sol.desc}</p>
-              <ul className="space-y-3">
-                {sol.features.map((f, j) => (
-                  <li key={j} className="flex items-center gap-3 text-[11px] font-bold text-slate-500 uppercase tracking-widest">
-                    <span className={`w-1.5 h-1.5 rounded-full ${sol.isPremium ? 'bg-amber-500' : 'bg-cyan-500'}`} />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </section>
-
-        {/* Metodología & Agentes */}
-        <section className="mb-32">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-black text-white uppercase tracking-tighter mb-4">Nuestra Infraestructura</h2>
-            <p className="text-slate-500 font-light max-w-xl mx-auto">Utilizamos el stack tecnológico más avanzado del mercado para dar vida a nuestras soluciones.</p>
-          </div>
-          
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
-            <div className="glass-panel p-12 rounded-[50px] border-white/5 relative overflow-hidden h-full">
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600" />
-              <div className="flex flex-col gap-8">
-                <div>
-                  <h4 className="text-white font-black uppercase text-xl mb-4">Arquitectura Agéntica</h4>
-                  <p className="text-slate-400 text-sm font-light leading-relaxed">
-                    Nuestras soluciones son impulsadas por motores de IA especializados como <span className="text-cyan-400 font-bold">Claude Code</span> y <span className="text-cyan-400 font-bold">Antigravity</span>. 
-                    No instalamos software genérico; desplegamos agentes autónomos entrenados en tu lógica de negocio.
-                  </p>
-                </div>
-                <div className="flex flex-wrap gap-4 pt-4">
-                  {["Supabase", "Vercel", "GitHub", "Google Sheets", "Python Core"].map((tech) => (
-                    <span key={tech} className="bg-white/5 border border-white/10 px-4 py-2 rounded-lg text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-            
-            <div className="glass-panel p-12 rounded-[50px] border-white/5 h-full flex items-center justify-center bg-gradient-to-br from-cyan-500/5 to-transparent">
-               <div className="text-center">
-                 <span className="material-symbols-outlined text-6xl text-cyan-500 mb-6 animate-spin-slow">hub</span>
-                 <p className="text-white font-black uppercase text-2xl tracking-tighter">Sincronización <br /> Total</p>
-               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Closing CTA */}
-        <section className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-black text-white mb-6 uppercase tracking-tighter">¿Listo para escalar tu rentabilidad?</h2>
-          <p className="text-slate-400 mb-12 font-light italic">
-            "No vendemos herramientas aisladas, entregamos sistemas de control que permiten a los ingenieros volver a hacer ingeniería."
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link 
-              href="https://wa.me/51993147501" 
-              className="px-8 py-4 rounded-xl border border-white/10 text-white font-bold uppercase text-xs tracking-widest hover:bg-white/5 transition-all"
-            >
-              Contactar Consultoría VIP
-            </Link>
-          </div>
-        </section>
-      </main>
-    </div>
+    <main className="min-h-screen bg-[#020617] text-slate-100 pt-32 pb-20">
+      <section className="max-w-7xl mx-auto px-6 pt-8 pb-12">
+        <Link href="/" className="text-sm text-slate-400 hover:text-cyan-300">← Inicio</Link>
+        <p className="text-cyan-300 text-xs font-semibold tracking-[0.18em] uppercase mt-10 mb-5">Consultoría para profesionales y empresas</p>
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] max-w-4xl">Tu proyecto tiene un reto.<br /><span className="text-cyan-300">Trabajemos en resolverlo.</span></h1>
+        <p className="text-lg text-slate-300 leading-relaxed mt-6 max-w-2xl">Acompañamiento sobre tu caso real: planeamiento, presupuestos, especificaciones técnicas e inteligencia artificial aplicada a la construcción.</p>
+      </section>
+      <section id="modalidades" aria-labelledby="modalidades-title" className="max-w-7xl mx-auto px-6 scroll-mt-28">
+        <h2 id="modalidades-title" className="text-2xl font-bold mb-6">Dos formas de empezar</h2>
+        <div className="grid md:grid-cols-2 gap-6">
+          <article className="rounded-3xl border border-slate-700 bg-slate-900 p-7 sm:p-9 flex flex-col">
+            <p className="text-sm text-slate-300">Para conocer tu necesidad</p><h3 className="text-2xl font-bold mt-3">Reunión inicial gratuita</h3>
+            <p className="text-4xl font-bold mt-6">S/ 0<span className="text-base font-normal text-slate-300"> / {consultoria.minutosGratis} minutos</span></p><p className="text-slate-400 text-sm mt-2">Coordinamos el horario por WhatsApp.</p>
+            <ul className="mt-7 space-y-3 text-slate-300 list-disc pl-5"><li>Nos cuentas el problema y el contexto de tu proyecto.</li><li>Evaluamos cómo podemos ayudarte.</li><li>Definimos el alcance de una posible sesión de trabajo.</li></ul>
+            <p className="text-sm text-slate-400 mt-6 mb-8">Es una primera conversación para orientar tu consulta; el trabajo técnico se realiza en la consultoría por hora.</p>
+            <a href={contactoConsultoria("gratuita")} target="_blank" rel="noopener noreferrer" className="mt-auto block text-center rounded-xl border border-cyan-300 text-cyan-300 hover:bg-cyan-950 px-5 py-4 font-bold">Coordinar reunión gratuita</a>
+          </article>
+          <article className="rounded-3xl border border-cyan-400/60 bg-cyan-950/30 p-7 sm:p-9 flex flex-col">
+            <p className="text-sm text-cyan-300">Para trabajar sobre tu caso</p><h3 className="text-2xl font-bold mt-3">Consultoría por hora</h3>
+            <p className="text-4xl font-bold mt-6">{consultoria.precioTexto}<span className="text-base font-normal text-slate-300"> / hora</span></p><p className="text-slate-400 text-sm mt-2">Tarifa en soles · Sesión de 60 minutos.</p>
+            <ul className="mt-7 space-y-3 text-slate-300 list-disc pl-5"><li>Revisión de un problema técnico concreto.</li><li>Orientación aplicada a tus documentos y herramientas.</li><li>Definición de los siguientes pasos para avanzar.</li></ul>
+            <p className="text-sm text-slate-400 mt-6 mb-8">Antes de la sesión coordinamos el alcance, los archivos necesarios, el horario y el pago. Si necesitas más horas, las acordamos contigo.</p>
+            <a href={contactoConsultoria("hora")} target="_blank" rel="noopener noreferrer" className="mt-auto block text-center rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 px-5 py-4 font-bold">Solicitar consultoría · {consultoria.precioTexto}/h</a>
+          </article>
+        </div>
+      </section>
+      <section className="max-w-7xl mx-auto px-6 mt-20" aria-labelledby="temas-title"><h2 id="temas-title" className="text-3xl font-bold mb-8">¿Qué podemos revisar juntos?</h2><div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">{temas.map(([titulo, descripcion], i) => <article key={titulo} className="border-t border-slate-700 pt-5"><p className="font-mono text-cyan-300 text-sm">0{i + 1}</p><h3 className="text-xl font-semibold mt-3 mb-3">{titulo}</h3><p className="text-slate-400 leading-relaxed">{descripcion}</p></article>)}</div></section>
+      <section className="max-w-7xl mx-auto px-6 mt-20"><div className="rounded-3xl bg-slate-900 p-7 sm:p-10"><h2 className="text-2xl font-bold mb-8">De tu consulta a una sesión de trabajo</h2><ol className="grid md:grid-cols-3 gap-8">{[["1. Cuéntanos tu caso", "Escríbenos por WhatsApp con el tema y el resultado que buscas."], ["2. Acordamos el alcance", "Confirmamos qué revisaremos, la disponibilidad y los documentos necesarios."], ["3. Trabajamos juntos", "En la consultoría abordamos el problema y definimos los próximos pasos."]].map(([titulo, texto]) => <li key={titulo}><h3 className="font-semibold text-cyan-300 mb-2">{titulo}</h3><p className="text-slate-300 leading-relaxed">{texto}</p></li>)}</ol></div></section>
+      <section className="max-w-3xl mx-auto px-6 mt-20"><h2 className="text-2xl font-bold mb-6">Antes de agendar</h2>{[
+        ["¿Puedo consultar por mi empresa o equipo?", "Sí. Atendemos consultas de profesionales y equipos. Cuéntanos quiénes participarán y qué necesitan revisar para coordinar el alcance."],
+        ["¿Se resolverá todo en una hora?", "Depende de la complejidad del caso. Definimos una prioridad para la sesión y, si se requiere más trabajo, lo conversamos antes de continuar."],
+        ["¿Cómo confirmo mi reserva?", "Los botones abren WhatsApp para solicitar una reunión. El horario y la reserva se confirman por ese medio."],
+      ].map(([pregunta, respuesta]) => <details key={pregunta} className="border-b border-slate-700 py-5"><summary className="cursor-pointer font-semibold">{pregunta}</summary><p className="mt-4 text-slate-300 leading-relaxed">{respuesta}</p></details>)}<p className="mt-10 text-slate-400">¿Prefieres aprender con un programa estructurado? <Link href="/formacion" className="text-cyan-300 underline underline-offset-4">Explora las capacitaciones.</Link></p></section>
+    </main>
   );
 }
-
-

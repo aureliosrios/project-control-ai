@@ -22,7 +22,7 @@ export default function Home() {
           <p className="text-lg text-slate-300 leading-relaxed mt-6 max-w-xl">Aprende a aplicar IA en tus proyectos o trabaja con nosotros sobre un problema concreto de planeamiento, presupuesto o gestión técnica.</p>
           <div className="flex flex-col sm:flex-row gap-3 mt-8">
             <Link href="/formacion" className="rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold px-6 py-4 text-center">Explorar capacitaciones <span aria-hidden="true">↗</span></Link>
-            <Link href="/consultoria" className="rounded-xl border border-slate-600 hover:border-cyan-300 font-semibold px-6 py-4 text-center">Ver consultorías</Link>
+            <Link href="/consultoria" className="rounded-xl border border-slate-600 hover:border-cyan-300 font-semibold px-6 py-4 text-center">Ver consultoría y servicios</Link>
           </div>
           <p className="text-sm text-slate-400 mt-5">Para profesionales y equipos del sector construcción.</p>
         </div>
@@ -35,9 +35,9 @@ export default function Home() {
           </article>
           <article className="rounded-3xl border border-cyan-400/30 bg-cyan-950/30 p-7 sm:p-8">
             <div className="flex justify-between items-center gap-4"><p className="text-cyan-300 text-xs font-bold tracking-widest uppercase">Quiero resolver un problema</p><span className="text-sm text-cyan-200">{consultoria.precioTexto} / hora</span></div>
-            <h2 className="text-2xl font-bold mt-4">Consultoría aplicada</h2>
-            <p className="text-slate-300 leading-relaxed mt-3">Trae tu caso y revisemos cómo avanzar. Empieza con una reunión gratuita de {consultoria.minutosGratis} minutos para definir lo que necesitas.</p>
-            <Link href="/consultoria" className="inline-block text-cyan-300 font-semibold mt-6 underline underline-offset-4">Elegir mi tipo de reunión</Link>
+            <h2 className="text-2xl font-bold mt-4">Consultoría y servicios técnicos</h2>
+            <p className="text-slate-300 leading-relaxed mt-3">Trae tu caso o cotiza un servicio de planeamiento, presupuestos, EETT o automatización. Empieza con una reunión gratuita de {consultoria.minutosGratis} minutos.</p>
+            <Link href="/consultoria" className="inline-block text-cyan-300 font-semibold mt-6 underline underline-offset-4">Elegir mi tipo de reunión o servicio</Link>
           </article>
         </div>
       </section>

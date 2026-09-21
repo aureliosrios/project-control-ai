@@ -28,15 +28,15 @@ python "D:\Project Control AI\Administración de datos\admin-ops\deploy.py" chec
 ### 1. Despliegue a Producción
 Desde `D:\Project Control AI\project-control-ai`:
 ```bash
-vercel deploy --prod
+vercel deploy --prod --yes
 ```
-O utilizando el script operativo:
+O utilizando el script operativo desde `Administración de datos`:
 ```bash
-python "D:\Project Control AI\Administración de datos\admin-ops\deploy.py" production --apply
+python admin-ops/deploy.py production --apply
 ```
 
 ### 2. Verificación de Salud en Producción
-Una vez finalizado el despliegue, comprobar la disponibilidad de las rutas principales:
+Una vez finalizado el despliegue, comprobar la disponibilidad de las rutas principales (HTTP 200 OK):
 - Home: `https://project-control-ai-one.vercel.app/`
 - Catálogo de Formación: `https://project-control-ai-one.vercel.app/formacion`
 - Portal del Alumno: `https://project-control-ai-one.vercel.app/portal`
@@ -46,5 +46,5 @@ Una vez finalizado el despliegue, comprobar la disponibilidad de las rutas princ
 ### 3. Verificación de Bundle de Video Publicado (si aplica)
 Para comprobar que una nueva lección publicada en `data/clases-grabadas.json` fue incluida en el bundle compilado de producción:
 ```bash
-python "D:\Project Control AI\Administración de datos\admin-ops\deploy.py" verify https://project-control-ai-one.vercel.app "D:\Project Control AI\Administración de datos\admin-ops\jobs\<job_id>.json"
+python admin-ops/deploy.py verify https://project-control-ai-one.vercel.app admin-ops/jobs/<job_id>.json
 ```

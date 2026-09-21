@@ -29,16 +29,24 @@ Este asistente se encarga de auditar la consistencia entre el catálogo de la we
    - Si la cohorte tiene clases grabadas publicadas, comprobar concordancia con `data/cohortes.json`.
 
 4. **Generación de planes de cambio (si se requiere)**:
-   - **Para dar de alta un nuevo curso sincrónico en Supabase**:
-     Crear archivo JSON temporal con `nombre_curso`, `categoria`, `horas_academicas` y `profesor_id` (UUID), y ejecutar:
-     ```bash
-     node admin-ops/ops.js plan-curso entrada.json
-     ```
-   - **Para actualizar la edición de un curso sincrónico**:
-     Crear archivo JSON con `curso`, `edicion_anterior`, `edicion_nueva`, y `matriculas_esperadas`, y ejecutar:
-     ```bash
-     node admin-ops/ops.js plan-fecha entrada.json
-     ```
+   - **Alta de curso sincrónico en Supabase**:
+     - *Opción directa CLI (Recomendada)*:
+       ```bash
+       node admin-ops/ops.js curso-uno --nombre "Nuevo Curso Sincrónico" --categoria "IA y Construcción" --horas 40 [--profesor UUID]
+       ```
+     - *Opción vía JSON*:
+       ```bash
+       node admin-ops/ops.js plan-curso entrada.json
+       ```
+   - **Actualización de fecha o edición de curso sincrónico**:
+     - *Opción directa CLI (Recomendada)*:
+       ```bash
+       node admin-ops/ops.js fecha-uno --curso "Nombre del Curso" --edicion-anterior "23/08/2026" --edicion-nueva "20/09/2026 - Tarde" [--esperadas 15]
+       ```
+     - *Opción vía JSON*:
+       ```bash
+       node admin-ops/ops.js plan-fecha entrada.json
+       ```
    El plan generado en `admin-ops/runs/<run>.sql` incluye locks transaccionales y hash SHA-256.
 
 5. **Aplicación controlada**:

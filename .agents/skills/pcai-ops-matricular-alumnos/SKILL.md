@@ -19,7 +19,16 @@ Este asistente gestiona la incorporación segura y atómica de estudiantes en la
 
 Ejecutar desde `D:\Project Control AI\Administración de datos`:
 ```bash
-node admin-ops/ops.js matricular-uno --curso "Agentes de IA: Presupuestos, EETT y Cronogramas" --edicion "20/09/2026 - Tarde" --dni 12345678 --nombre "Juan" --apellido "Perez" [--vip] [--email "juan@ejemplo.com"] [--telefono "+51999999999"] [--profesion "Ingeniero Civil"]
+node admin-ops/ops.js matricular-uno \
+  --curso "Agentes de IA: Presupuestos, EETT y Cronogramas" \
+  --edicion "20/09/2026 - Tarde" \
+  --dni 12345678 \
+  --nombre "Juan" \
+  --apellido "Perez" \
+  [--vip] \
+  [--email "juan@ejemplo.com"] \
+  [--telefono "+51999999999"] \
+  [--profesion "Ingeniero Civil"]
 ```
 
 ### Opción B: Matrícula Masiva / Grupal (Vía Archivo JSON)
@@ -58,11 +67,11 @@ node admin-ops/ops.js matricular-uno --curso "Agentes de IA: Presupuestos, EETT 
 
 1. Revisar el archivo `.sql` generado en `admin-ops/runs/`.
 2. Aplicar la transacción:
-   - Opción 1 (Directa):
+   - Opción 1 (Directa por CLI):
      ```bash
      node admin-ops/ops.js aplicar admin-ops/runs/<run>.json --apply
      ```
-   - Opción 2: Copiar el contenido del `.sql` en el SQL Editor del panel web de Supabase y ejecutar.
+   - Opción 2 (Supabase SQL Editor): Copiar el contenido del `.sql` en el SQL Editor del panel web de Supabase y ejecutar.
 3. Sincronizar el estado local para confirmar:
    ```bash
    node admin-ops/ops.js sync

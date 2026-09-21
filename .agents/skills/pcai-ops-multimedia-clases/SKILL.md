@@ -62,9 +62,9 @@ Incorporar la lección en `data/clases-grabadas.json` y respaldar la anterior:
 node admin-ops/publish.js admin-ops/jobs/<job_id>.json --apply
 ```
 
-### 7. Limpieza de Archivos de Video Locales
+### 7. Limpieza Segura de Archivos Locales
 Una vez verificada la publicación y desplegado el portal, ejecutar:
 ```bash
-python admin-ops/cleanup.py --apply
+node admin-ops/ops.js limpiar --apply
 ```
 Elimina el archivo MP4 local de `temp_videos/` liberando espacio en disco de manera segura.

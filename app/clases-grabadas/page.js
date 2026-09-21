@@ -6,9 +6,18 @@ import SecurityOverlay from "../portal/components/SecurityOverlay";
 import { supabase } from "@/lib/supabase";
 
 const courses = {
-    "AGENTES_IA_TARDE": {
+        "AGENTES_IA_TARDE": {
     name: "Agentes de IA: Presupuestos, EETT y Cronogramas (Grupo Tarde - Domingos 3pm a 6pm)",
-    lessons: []
+    lessons: [
+      {
+        id: "0nJQXGfkMB4",
+        num: "01",
+        status: "OCULTA",
+        title: "Sesión 01: Introducción a Agentes de IA y Entorno de Trabajo (20/09/2026)",
+        desc: "Clase del 20 de Septiembre (03:00 p.m. - 05:30 p.m.): Sesión inaugural del Grupo Tarde. Entorno de trabajo, Markdown, estructuración de partidas, EETT y primeros flujos con IA.",
+        resources: []
+      }
+    ]
   },
   "AGENTES_IA": {
     name: "Agentes de IA: Presupuestos, EETT y Cronogramas (Sesiones en Vivo)",
@@ -77,6 +86,14 @@ const courses = {
           { title: "Resumen Interactivo de la Clase 5 (HTML)", type: "html", url: "/manuales/resumen_clase_5_agentes.html" },
           { title: "Manual de Estudio y Ayuda Memoria (Markdown)", type: "md", url: "/manuales/Ayuda_Memoria_Clase_5_Agentes_IA_2026-09-13.md" }
         ]
+      },
+      {
+        id: "ioLaEinkxVQ",
+        num: "06",
+        status: "OCULTA",
+        title: "Sesión 06: Agentes de IA, Presupuestos y Cronogramas (20/09/2026)",
+        desc: "Clase del 20 de Septiembre (10:00 a.m. - 01:09 p.m.): Consolidación avanzada de agentes de IA, presupuestos trazables, orquestación y cierre de ciclo del programa sincrónico.",
+        resources: []
       }
     ]
   },

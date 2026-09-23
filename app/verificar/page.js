@@ -61,6 +61,20 @@ export default function Verificar() {
     setResultados([]);
 
     try {
+      // Validar si el alumno tiene matrícula en estado RETIRADO sin cursos activos
+      const { data: matriculas } = await supabase
+        .from('matriculas')
+        .select('edicion_curso')
+        .eq('dni', dni.trim());
+      
+      const hasRetirement = (matriculas || []).some(m => (m.edicion_curso || '').toUpperCase().includes('RETIRADO'));
+      const hasActive = (matriculas || []).some(m => !(m.edicion_curso || '').toUpperCase().includes('RETIRADO'));
+
+      if (hasRetirement && !hasActive) {
+        alert("ACCESO SUSPENDIDO:\n\nPor incumplimiento de las políticas de la institución, has sido retirado del curso y se encuentra inhabilitada la emisión y descarga de certificados.\n\nPara solicitar tu reintegro, debes comprometerte a cumplir las políticas, regularizar tus deudas pendientes y abonar el gasto administrativo de reconexión en la base de datos.\n\nPor favor, conversa directamente con el administrador.");
+        setLoading(false);
+        return;
+      }
       const { data, error } = await supabase
         .from('vw_certificados_publicos')
         .select('*')

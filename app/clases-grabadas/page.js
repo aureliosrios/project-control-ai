@@ -72,6 +72,7 @@ export default function ClasesGrabadas() {
         .select('*')
         .eq('dni', dni);
 
+      const hasRetirement = (rawEnrollments || []).some(enroll => (enroll.edicion_curso || "").toUpperCase().includes("RETIRADO"));
       const enrollments = (rawEnrollments || []).filter(enroll => {
         const edicion = enroll.edicion_curso || "";
         return !edicion.toUpperCase().includes("RETIRADO");
@@ -84,7 +85,11 @@ export default function ClasesGrabadas() {
         .eq('dni', dni);
 
       if (!enrollments || enrollments.length === 0) {
-        alert("Acceso Restringido: No cuentas con una matrícula activa en el sistema.");
+        if (hasRetirement) {
+          alert("ACCESO SUSPENDIDO:\n\nPor incumplimiento de las políticas de la institución, has sido retirado del curso y se ha suspendido el acceso al portal del alumno, clases grabadas, sesiones en vivo y emisión de certificados.\n\nPara solicitar tu reintegro, debes comprometerte a cumplir las políticas, regularizar tus deudas pendientes y abonar el gasto administrativo de reconexión en la base de datos.\n\nPor favor, conversa directamente con el administrador.");
+        } else {
+          alert("Acceso Restringido: No cuentas con una matrícula activa en el sistema.");
+        }
         window.location.href = "/portal";
         return;
       }

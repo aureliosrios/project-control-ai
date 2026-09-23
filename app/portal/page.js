@@ -56,10 +56,21 @@ export default function StudentPortal() {
         .eq('dni', trimmedDni);
 
       // 3. Procesar lógica de acceso por curso (excluyendo alumnos retirados)
+      const hasRetirement = (enrollments || []).some(enroll => (enroll.edicion_curso || "").toUpperCase().includes("RETIRADO"));
       const activeEnrollmentsOnly = (enrollments || []).filter(enroll => {
         const edicion = enroll.edicion_curso || "";
         return !edicion.toUpperCase().includes("RETIRADO");
       });
+
+      // CASO ESPECIAL: ALUMNO RETIRADO POR INCUMPLIMIENTO DE POLÍTICAS
+      if (activeEnrollmentsOnly.length === 0 && hasRetirement) {
+        alert("ACCESO SUSPENDIDO:\n\nPor incumplimiento de las políticas de la institución, has sido retirado del curso y se ha suspendido el acceso al portal del alumno, clases grabadas, sesiones en vivo y emisión de certificados.\n\nPara solicitar tu reintegro, debes comprometerte a cumplir las políticas, regularizar tus deudas pendientes y abonar el gasto administrativo de reconexión en la base de datos.\n\nPor favor, conversa directamente con el administrador.");
+        localStorage.removeItem("pcai_student_dni");
+        setIsLoggedIn(false);
+        setStudentData(null);
+        setMatriculas([]);
+        return;
+      }
 
       // Homogeneizar nombres de cursos en memoria para evitar errores de duplicación en DB
       const homogenizedEnrollments = activeEnrollmentsOnly.map(enroll => {
@@ -202,7 +213,7 @@ export default function StudentPortal() {
       // 4. Filtrar solo los que tienen acceso (Inscritos o Graduados < 60 días)
       const activeEnrollments = processedEnrollments.filter(e => !e.accessExpired);
 
-      if (activeEnrollments.length === 0 && enrollments.length > 0) {
+      if (activeEnrollments.length === 0 && enrollments.length > 0 && !hasRetirement) {
         alert("Tu periodo de acceso a clases ha finalizado (60 días post-graduación). Aún puedes descargar tus certificados en la sección correspondiente.");
       }
 

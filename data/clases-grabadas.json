@@ -3,6 +3,20 @@
     "name": "Agentes de IA: Presupuestos, EETT y Cronogramas (Grupo Tarde - Domingos 3pm a 6pm)",
     "lessons": [
       {
+        "id": "NjWnA5b9Zho",
+        "num": "00",
+        "status": "OCULTA",
+        "title": "Sesión 00: Nivelación, Configuración de Entorno y Prompts Base",
+        "desc": "Sesión preparatoria de nivelación: Configuración del entorno de trabajo, bases de prompts para EETT, WBS y fundamentos de automatización con IA.",
+        "resources": [
+          {
+            "title": "Guía de Prompts para EETT, Presupuestos y WBS (HTML)",
+            "type": "html",
+            "url": "/manuales/MANUAL_PROMPTS_CLASE_1.html"
+          }
+        ]
+      },
+      {
         "id": "0nJQXGfkMB4",
         "num": "01",
         "status": "OCULTA",

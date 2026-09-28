@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCAI | Guía Sesión 02 Tarde - JSON, Curva S y Flujo Financiero</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#030712;--card:#0b1329;--card2:#111d3f;--cyan:#06b6d4;--blue:#3b82f6;--em:#10b981;--amb:#f59e0b;--pur:#8b5cf6;--rose:#f43f5e;--tx:#f8fafc;--mu:#94a3b8;--bd:#1e293b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tx);line-height:1.65;padding:30px 16px}
+.container{max-width:1150px;margin:0 auto}
+header{background:linear-gradient(135deg,#0b1329 0%,#171c3d 50%,#082f49 100%);border:1px solid var(--cyan);border-radius:24px;padding:38px 26px;text-align:center;margin-bottom:28px;box-shadow:0 15px 35px rgba(6,182,212,.15);position:relative;overflow:hidden}
+header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--cyan),var(--pur),var(--em),var(--amb))}
+.badge{display:inline-block;background:rgba(6,182,212,.12);color:var(--cyan);padding:6px 18px;border-radius:20px;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px;border:1px solid var(--cyan)}
+h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,4vw,2.3rem);margin-bottom:10px;letter-spacing:-.5px}
+.subtitle{color:var(--mu);font-size:1.08rem;max-width:880px;margin:0 auto 18px}
+.meta{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;color:var(--mu);font-size:.92rem}
+.meta span{background:rgba(255,255,255,.04);padding:6px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.06)}
+.tabs{display:flex;gap:10px;margin-bottom:26px;border-bottom:2px solid var(--bd);padding-bottom:12px;overflow-x:auto}
+.tab{background:rgba(15,23,42,.6);border:1px solid var(--bd);color:var(--mu);padding:11px 20px;border-radius:14px;font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:.2s}
+.tab:hover{color:#fff;border-color:var(--cyan)}
+.tab.active{background:linear-gradient(135deg,rgba(6,182,212,.2),rgba(59,130,246,.2));color:#fff;border-color:var(--cyan);box-shadow:0 0 18px rgba(6,182,212,.25)}
+.panel{display:none;animation:fi .3s ease}.panel.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:24px;margin-bottom:20px}
+.card h2{font-family:'Space Grotesk',sans-serif;font-size:1.35rem;margin-bottom:12px;color:#fff}
+.card h3{font-size:1.08rem;margin:16px 0 8px;color:var(--cyan)}
+.card p{color:#cbd5e1;margin-bottom:10px}
+.card ul,.card ol{padding-left:22px;color:#cbd5e1}.card li{margin-bottom:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-bottom:20px}
+.kpi{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:18px}
+.kpi b{display:block;font-family:'Space Grotesk',sans-serif;font-size:1.5rem;color:var(--cyan)}
+.kpi span{color:var(--mu);font-size:.9rem}
+.callout{border-left:4px solid var(--amb);background:rgba(245,158,11,.08);padding:14px 18px;border-radius:0 12px 12px 0;margin:14px 0;color:#fde68a}
+.callout.ok{border-color:var(--em);background:rgba(16,185,129,.08);color:#a7f3d0}
+.callout.bad{border-color:var(--rose);background:rgba(244,63,94,.08);color:#fecdd3}
+.steps{counter-reset:s;list-style:none;padding:0!important}
+.steps>li{counter-increment:s;position:relative;padding:14px 16px 14px 62px;background:var(--card2);border:1px solid var(--bd);border-radius:14px;margin-bottom:12px}
+.steps>li::before{content:counter(s);position:absolute;left:16px;top:14px;width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--cyan),var(--blue));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.steps>li strong{color:#fff}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0}
+.flow span{background:var(--card2);border:1px solid var(--cyan);border-radius:10px;padding:8px 12px;font-weight:600;font-size:.92rem}
+.flow i{color:var(--cyan);font-style:normal;font-weight:800}
+table{width:100%;border-collapse:collapse;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--bd);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:var(--card2);color:var(--cyan)}td{color:#cbd5e1}
+.tw{overflow-x:auto}
+.prompt{position:relative;background:#020617;border:1px solid var(--pur);border-radius:14px;padding:18px 18px 16px;margin:12px 0;font-family:Consolas,'Courier New',monospace;font-size:.9rem;color:#e2e8f0;white-space:pre-wrap}
+.prompt .lbl{display:block;font-family:'Outfit',sans-serif;color:var(--pur);font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.copy{position:absolute;top:12px;right:12px;background:var(--pur);color:#fff;border:0;border-radius:8px;padding:5px 12px;font-size:.8rem;cursor:pointer;font-family:'Outfit',sans-serif}
+kbd{background:#1e293b;border:1px solid #334155;border-radius:6px;padding:1px 7px;font-size:.88rem}
+.check label{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border:1px solid var(--bd);border-radius:12px;margin-bottom:8px;cursor:pointer;color:#cbd5e1}
+.check input{margin-top:5px;accent-color:var(--em);width:18px;height:18px}
+.check label.done{opacity:.6;text-decoration:line-through}
+.qa{border-left:3px solid var(--cyan);padding:8px 14px;margin:12px 0;background:rgba(6,182,212,.05);border-radius:0 10px 10px 0}
+.qa b{color:var(--cyan)}
+footer{text-align:center;color:var(--mu);font-size:.85rem;margin-top:30px}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <div class="badge">Sesión 02 · Grupo Tarde</div>
+  <h1>El JSON como cerebro de datos: presupuesto y cronograma en un solo archivo</h1>
+  <p class="subtitle">Integración trazable de presupuesto y cronograma por ID, entregables automáticos (valor planificado, curva S diaria, histograma de equipos, flujo financiero) y creación de un agente extractor que acepta cualquier formato de entrada.</p>
+  <div class="meta"><span>📅 Domingo 27/09/2026</span><span>🕒 03:00 PM – 06:00 PM</span><span>🎓 Agentes de IA: Presupuestos, EETT y Cronogramas</span><span>➡️ Próxima clase: 11/10/2026</span></div>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-t="p1">🧭 Resumen</button>
+  <button class="tab" data-t="p2">🛠️ Flujo paso a paso</button>
+  <button class="tab" data-t="p3">📊 Entregables</button>
+  <button class="tab" data-t="p4">💬 Prompts</button>
+  <button class="tab" data-t="p5">🤖 Agente extractor</button>
+  <button class="tab" data-t="p6">✅ Tarea y avisos</button>
+</nav>
+
+<!-- ============ RESUMEN ============ -->
+<section id="p1" class="panel active">
+  <div class="card">
+    <h2>🗺️ Dónde estamos en el curso</h2>
+    <div class="tw"><table>
+      <tr><th>Clase</th><th>Tema</th></tr>
+      <tr><td>1 (20/09)</td><td>Cómo funcionan los agentes: trabajar en tu computadora y no en la nube.</td></tr>
+      <tr><td><strong>2 (hoy)</strong></td><td><strong>Cómo funciona el JSON</strong>, el formato ligero para datos.</td></tr>
+      <tr><td>3 (11/10)</td><td>Markdown + JSON = <em>cerebro digital</em> para especificaciones técnicas trazables.</td></tr>
+      <tr><td>Siguientes</td><td>Presupuesto y automatización del cronograma.</td></tr>
+    </table></div>
+    <div class="callout">"Quédense con la <strong>metodología</strong> más que con el entregable". La curva S es solo un ejemplo. El principio sirve para cualquier gestión: llevar la información a un formato ligero y pedir a la IA que la convierta en otro entregable.</div>
+  </div>
+
+  <div class="grid">
+    <div class="kpi"><b>Word → .md</b><span>Documentos de texto a Markdown</span></div>
+    <div class="kpi"><b>Excel → .json</b><span>Datos tabulares y estructurados a JSON</span></div>
+    <div class="kpi"><b>ID</b><span>Llave de trazabilidad: ID de tarea + partida S10</span></div>
+    <div class="kpi"><b>802 mil</b><span>Costo directo del caso (el dato de control para validar la IA)</span></div>
+  </div>
+
+  <div class="card">
+    <h2>🔥 Por qué trabajar en formato ligero</h2>
+    <p>Cada vez que entregas a la IA un PDF, un Word o un Excel, primero lo convierte internamente a un formato ligero. Si cada mes vuelves a cargar todos los PDF de antecedentes, <strong>quemas tokens</strong> repitiendo la misma conversión. Es como darle a alguien un APU impreso de 30 páginas para que lo modifique.</p>
+    <ul>
+      <li>Convierte una sola vez los antecedentes a <code>.md</code> o <code>.json</code> y trabaja siempre sobre esa versión.</li>
+      <li>Ten dos versiones de cada fuente: una <strong>para ti</strong> (Excel o Project) y otra <strong>para la IA</strong> (JSON o MD).</li>
+      <li>Lo ideal habría sido convertir el presupuesto a JSON, el cronograma a JSON y luego unirlos. En clase se unieron directamente.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ FLUJO ============ -->
+<section id="p2" class="panel">
+  <div class="card">
+    <h2>🛠️ Procedimiento de la sesión</h2>
+    <ol class="steps">
+      <li><strong>Crear la carpeta <code>Planeamiento de proyectos/</code></strong> dentro de la carpeta del curso (en Antigravity: <em>File → Open Folder</em>). Todo el trabajo de hoy se hace ahí.</li>
+      <li><strong>Copiar los insumos:</strong> el <em>presupuesto trazable</em> (resumen, insumos, APU con fórmulas, presupuesto por EDT y gastos generales) y el <em>cronograma organizado por pisos</em>. Ambos comparten el <strong>ID de tarea</strong> y la <strong>partida S10</strong>.</li>
+      <li><strong>Guardar el prompt como archivo <code>.md</code></strong> dentro de la carpeta (no pegarlo en el chat). Si tienes varios, numéralos: <code>prompt_1.md</code>, <code>prompt_2.md</code>, etc.</li>
+      <li><strong>Ejecutar:</strong> escribe "Ejecuta el prompt del archivo Markdown; los archivos Excel están en la carpeta de trabajo". Si Antigravity pregunta en cada paso, elige la <strong>opción 3</strong> para que continúe.</li>
+      <li><strong>Revisar el informe de auditoría</strong> que devuelve la IA: costo directo, cuadratura de metrados, cuadratura de HH y HM, actividades no trazables y observadas.</li>
+      <li><strong>Pedir entregables a partir del JSON:</strong> valor planificado, curva S, histogramas y flujo financiero (ver pestaña Entregables).</li>
+      <li><strong>Validar cada número contra la fuente original</strong> antes de aceptarlo.</li>
+      <li><strong>Documentar el conocimiento</strong> en un agente para no repetir el proceso desde cero.</li>
+    </ol>
+    <div class="callout ok"><strong>Ubicación de salidas:</strong> si la IA guarda los archivos en la carpeta superior, indícale: "A partir de ahora, crea todos los entregables en esta carpeta: &lt;ruta&gt;".</div>
+  </div>
+
+  <div class="card">
+    <h2>🧾 ¿Por qué un prompt tan largo si antes bastaba con "convierte a Markdown"?</h2>
+    <p>Pasar un Word a Markdown es como pedir que pasen una carta a máquina. Convertir un presupuesto con APU, insumos y fórmulas es como pedirle a esa misma persona que arme el Excel completo: hay que explicarle cómo conectar cada dato. Por eso el prompt de integración define el rol (auditor de control de proyectos), las reglas de no perder información, el origen de cada dato y los controles de integridad.</p>
+    <p>Si no tienes el prompt completo, empieza con uno corto y mejóralo iteración tras iteración hasta que el resultado te satisfaga. Después lo fijas como prompt estable o como skill.</p>
+  </div>
+</section>
+
+<!-- ============ ENTREGABLES ============ -->
+<section id="p3" class="panel">
+  <div class="card">
+    <h2>📊 Entregables generados desde un solo JSON</h2>
+    <div class="tw"><table>
+      <tr><th>Entregable</th><th>Contenido obtenido en clase</th><th>Qué verificar</th></tr>
+      <tr><td><strong>Valor planificado y curva S semanal</strong></td><td>Valor planificado semanal y acumulado, % de avance, HH semanal y acumulada, detalle de actividades.</td><td>Que la curva sea por monto (costo directo).</td></tr>
+      <tr><td><strong>Valor planificado y curva S diaria</strong></td><td>180 días en columnas, monto diario y matriz de HH diaria, en pestañas separadas.</td><td>Útil para el reporte diario frente a lo real. Revisar que las fórmulas estén vivas.</td></tr>
+      <tr><td><strong>Histograma de equipos</strong></td><td>26 equipos × 180 días: grúa torre, volquetes, excavadoras, cortadora de acero, bomba de concreto, electrobomba, andamios. Días activos por equipo.</td><td>Total de equipos ≈ 174 mil USD. Contrastar con los insumos del presupuesto.</td></tr>
+      <tr><td><strong>Flujo financiero</strong></td><td>Monto contractual sin IGV: 967,335. Adelanto del 20% en el mes 0 (≈193 mil). Déficit ≈31 mil: se requiere financiamiento adicional.</td><td>No incluir IGV en el flujo. Considerar los plazos de pago de las valorizaciones.</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h2>💰 Flujo financiero más realista</h2>
+    <ul>
+      <li>El <strong>mes 0</strong> recibe el adelanto o anticipo para compras y contrataciones antes de iniciar la obra.</li>
+      <li>En el primer flujo faltó el <strong>desfase de cobro</strong>: la valorización no se paga el mismo mes.</li>
+      <li>Plazos típicos comentados en clase: <strong>15 días de revisión técnica y 30 días de aprobación</strong> de logística y finanzas. En la industria privada, unos 45 días en total.</li>
+      <li>Opción en Perú: <strong>factoring</strong>. El banco adelanta el efectivo contra la factura por un 1–2%, sin préstamo por proyecto.</li>
+      <li>La gerencia espera este análisis: cuánto dura el adelanto y en qué mes se necesita financiamiento.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>🔎 Cómo revisar entregables hechos por IA (una nueva habilidad)</h2>
+    <p>La IA <strong>no es determinista</strong>: el mismo prompt puede producir formatos distintos en cada persona. Un software como S10 o MS Project sí lo es. Los skills y los prompts detallados reducen esa variación.</p>
+    <div class="tw"><table>
+      <tr><th>Dato de control</th><th>Valor esperado</th><th>Errores vistos en clase</th></tr>
+      <tr><td>Costo directo</td><td><strong>≈ 802 mil</strong></td><td>Hubo resultados de 1 millón y de 1.5 millones: se estaba tomando el total con GG, utilidad o IGV.</td></tr>
+      <tr><td>Horas hombre (HH)</td><td><strong>≈ 24,858</strong> (APU, cronograma y JSON cuadran)</td><td>Un resultado de 32,000 HH estaba inflado.</td></tr>
+      <tr><td>Suma de insumos</td><td>Debe cuadrar con el costo directo</td><td>Un caso sumó ≈1.8 millones frente a 802 mil. Se debe revisar.</td></tr>
+      <tr><td>Horas máquina (HM)</td><td>Cuadratura con los APU</td><td>El control marcó falla. Hay que revisarlo.</td></tr>
+    </table></div>
+    <div class="callout">Si un número es crítico, <strong>recalcúlalo con un segundo agente</strong> o en una sesión nueva desde cero y compara. Si una celda sale en cero, envía la captura mostrando la columna y su fórmula.</div>
+  </div>
+</section>
+
+<!-- ============ PROMPTS ============ -->
+<section id="p4" class="panel">
+  <div class="card">
+    <h2>💬 Prompts de la sesión (versión depurada)</h2>
+
+    <div class="prompt"><span class="lbl">Prompt 1 · Integración auditable (resumen del prompt del docente)</span><button class="copy">Copiar</button><span class="txt">Eres un auditor de control de proyectos de construcción (costos, planeamiento, CPM y EVM) y un ingeniero de costos. Tu trabajo no es resumir: es convertir sin perder información, verificar cada dato y dejar rastro de dónde viene cada uno.
+Entradas: el Excel del presupuesto (resumen, insumos, APU, presupuesto por EDT, gastos generales) y el Excel del cronograma por pisos, ambos en la carpeta de trabajo.
+Salida: un JSON auditable y trazable que una presupuesto y cronograma por ID de tarea y partida, con controles de integridad: costo directo, cuadratura de metrados, HH y HM, y actividades no trazables u observadas. Si un dato no existe, indícalo; no lo inventes.</span></div>
+
+    <div class="prompt"><span class="lbl">Prompt 2 · Valor planificado y curva S (versión corta)</span><button class="copy">Copiar</button><span class="txt">Elabora una plantilla en Excel con fórmulas vivas donde se muestre el PV (valor planificado) y la curva S, tomando en consideración el presupuesto y el cronograma del JSON.</span></div>
+
+    <div class="prompt"><span class="lbl">Prompt 3 · Valor planificado diario en monto y HH</span><button class="copy">Copiar</button><span class="txt">Elabora una plantilla en Excel con fórmulas vivas que muestre el PV (valor planificado) diario, calculado a partir del presupuesto y de las HH, en pestañas diferenciadas. Incluye la curva S.</span></div>
+
+    <div class="prompt"><span class="lbl">Prompt 4 · Control de HH</span><button class="copy">Copiar</button><span class="txt">Según el JSON del proyecto, ¿cómo están desagregadas las HH? Muestra la cuadratura global: HH de los APU, HH del cronograma y HH del listado de insumos.</span></div>
+
+    <div class="prompt"><span class="lbl">Prompt 5 · Histograma de equipos</span><button class="copy">Copiar</button><span class="txt">Genera un archivo Excel con la información del histograma de equipos, día a día, para los diversos equipos, y una gráfica de histograma por equipo.</span></div>
+
+    <div class="prompt"><span class="lbl">Prompt 6 · Flujo financiero (mejorado con los comentarios de clase)</span><button class="copy">Copiar</button><span class="txt">Genera un flujo financiero para este proyecto considerando un adelanto del 20% en el mes 0. Indica si es necesario un préstamo adicional para ejecutar el proyecto. Trabaja sin IGV, considera 15 días de revisión y 30 días de aprobación para el pago de cada valorización, cumple los estándares de ingeniería económica y usa fórmulas vivas.</span></div>
+
+    <div class="prompt"><span class="lbl">Prompt 7 · Crear el agente extractor</span><button class="copy">Copiar</button><span class="txt">Hemos generado un JSON que contiene el presupuesto y el cronograma organizados por IDs. Quiero que generes un agente que permita al usuario colocar en una carpeta el presupuesto y el cronograma, no necesariamente en Excel: también en PDF, JPG, documentos escaneados u otros. El agente debe extraer la información, organizarla y hacerla trazable mediante IDs o ítems, para obtener un JSON auditable y trazable que permita generar curvas S, valor planificado, flujos financieros, histogramas y demás información de costos y control de proyectos.</span></div>
+  </div>
+</section>
+
+<!-- ============ AGENTE ============ -->
+<section id="p5" class="panel">
+  <div class="card">
+    <h2>🤖 Usar el agente en un proyecto nuevo</h2>
+    <ol class="steps">
+      <li>Crea una carpeta nueva (en clase: <code>Probando agente/</code>).</li>
+      <li>Copia ahí las carpetas del agente generado (en el caso del docente: <code>.agents/</code> y <code>agente extractor/</code>).</li>
+      <li>Copia el presupuesto y el cronograma del nuevo proyecto, en cualquier formato.</li>
+      <li>Abre esa carpeta en tu herramienta de IA y escribe: <em>"Genera el JSON de acuerdo con lo que se indica en el agente."</em></li>
+      <li>Verifica el JSON con los controles de la pestaña Entregables.</li>
+    </ol>
+    <div class="callout">La IA no es determinista: a unos les generó 2 carpetas de agente y a otros solo una, y a veces el agente además produce histogramas o curvas que no pediste. Ajústalo: "Quiero que el JSON quede preparado para eso, pero no generes esos entregables".</div>
+  </div>
+
+  <div class="card">
+    <h2>🔁 Mejora continua del agente</h2>
+    <ul>
+      <li>Cada vez que un resultado te satisface, pide: "Este conocimiento no hay que perderlo; documéntalo en un agente".</li>
+      <li><strong>Ingeniería inversa</strong> (aporte de Jorge): a partir de un entregable bueno, pide a la IA el prompt o el agente que lo reproduce.</li>
+      <li>Si aparece un error nuevo, corrígelo y pide: "Este error no estaba documentado; actualiza el agente".</li>
+      <li>Se puede usar el <strong>contexto</strong> de una carpeta con el <strong>agente</strong> de otra. El docente, por ejemplo, tiene un agente de "cómo crear un video" que aplica sobre proyectos distintos.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>❓ Preguntas de la sesión</h2>
+    <div class="qa"><b>Julio:</b> ¿Cuál es la diferencia entre un agente y un skill? <br><b>R:</b> Son muy parecidos. Un agente puede contener varios skills, pero un skill no contiene agentes. El agente vive en una carpeta y el skill es un solo archivo.</div>
+    <div class="qa"><b>Saúl:</b> ¿Se puede partir de la EDT e incluso dibujarla como organigrama? <br><b>R:</b> Sí. Todo parte de la EDT o WBS, aunque la trazabilidad fina se maneja con el ID de cada actividad.</div>
+    <div class="qa"><b>Jorge:</b> ¿Incluimos EV (valor ganado) y AC (costo real)? <br><b>R:</b> Todavía no. En planificación solo existe el PV. El EV y el AC salen de los reportes diarios durante la ejecución.</div>
+    <div class="qa"><b>Jorge:</b> ¿Cómo se generó el presupuesto trazable? <br><b>R:</b> Se verá en la 4.ª clase. Hoy el objetivo es entender el JSON. El presupuesto y el cronograma podrían venir incluso escaneados.</div>
+    <div class="qa"><b>Saúl:</b> ¿Hay que instalar JSON? <br><b>R:</b> No. JSON y Markdown son formatos de texto que ya reconoce cualquier sistema operativo. En la clase 1 se instalaron Python y sus extensiones para manejar Excel, Word y PDF.</div>
+    <div class="qa"><b>Saúl:</b> Si falta el JSON, ¿la IA leerá los Excel? <br><b>R:</b> Puede que te avise o puede que decida convertirlos por su cuenta. Por eso conviene canalizar el proceso con prompts y skills estables.</div>
+    <div class="qa"><b>Gian:</b> ¿Funciona con 20,000 o 30,000 partidas? <br><b>R:</b> El mayor caso del docente fue una carretera con unas 1,000 partidas: JSON de 2 MB y unos 45 minutos de proceso con Claude. No hay experiencia directa con 20,000, pero se espera que funcione.</div>
+    <div class="qa"><b>Edgar:</b> Se me acabó la cuota de Antigravity y OpenCode da error. <br><b>R:</b> En OpenCode, actualiza la aplicación, usa <em>Añadir proyecto</em> para vincular la carpeta y elige el modelo <strong>Muse Spark</strong>. Algunos modelos gratuitos fallan con las fórmulas vivas: envía la captura para que lo corrijan.</div>
+  </div>
+</section>
+
+<!-- ============ TAREA ============ -->
+<section id="p6" class="panel">
+  <div class="card check">
+    <h2>✅ Tarea (dos semanas libres hasta el 11/10)</h2>
+    <label><input type="checkbox"> Replicar la integración de presupuesto y cronograma en JSON con los archivos de clase.</label>
+    <label><input type="checkbox"> Validar el costo directo (≈802 mil) y las HH (≈24,858) de tu JSON.</label>
+    <label><input type="checkbox"> Generar el valor planificado y la curva S diaria en monto y en HH.</label>
+    <label><input type="checkbox"> Generar el histograma de equipos (y, si quieres, de materiales o mano de obra).</label>
+    <label><input type="checkbox"> Generar el flujo financiero con adelanto del 20% y un desfase de cobro de 15 + 30 días.</label>
+    <label><input type="checkbox"> Repetir el ejercicio con un presupuesto o cronograma <strong>escaneado o en PDF</strong>.</label>
+    <label><input type="checkbox"> Crear tu agente extractor y probarlo en una carpeta nueva.</label>
+    <label><input type="checkbox"> Enviar los resultados por el grupo de WhatsApp (de preferencia el grupo general).</label>
+  </div>
+
+  <div class="card">
+    <h2>📢 Avisos</h2>
+    <div class="callout bad"><strong>No hay clase el domingo 04/10/2026</strong> por las elecciones en Perú. <strong>La próxima clase es el domingo 11/10/2026, de 3:00 PM a 6:00 PM.</strong></div>
+    <p>En la próxima clase se unirán Markdown y JSON para construir el <strong>cerebro digital</strong>: especificaciones técnicas hechas desde cero con información del proyecto y normativa, sin "copiar y pegar" de proyectos similares.</p>
+    <p>Consultas en el grupo general de WhatsApp (unos 700 ingenieros) o en el grupo del curso.</p>
+  </div>
+</section>
+<footer>Project Control AI · Guía generada a partir de la transcripción de la sesión grabada</footer>
+</div>
+<script>
+document.querySelectorAll('.tab').forEach(function(b){b.addEventListener('click',function(){
+  document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active')});
+  document.querySelectorAll('.panel').forEach(function(x){x.classList.remove('active')});
+  b.classList.add('active');document.getElementById(b.dataset.t).classList.add('active');});});
+document.querySelectorAll('.copy').forEach(function(btn){btn.addEventListener('click',function(){
+  var t=btn.parentElement.querySelector('.txt').innerText;
+  var done=function(){btn.textContent='¡Copiado!';setTimeout(function(){btn.textContent='Copiar'},1500)};
+  if(navigator.clipboard){navigator.clipboard.writeText(t).then(done,done)}else{done()}});});
+var KEY='pcai-check-'+location.pathname;var st={};
+try{st=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+document.querySelectorAll('.check input').forEach(function(c,i){
+  c.checked=!!st[i];c.parentElement.classList.toggle('done',c.checked);
+  c.addEventListener('change',function(){st[i]=c.checked;c.parentElement.classList.toggle('done',c.checked);
+    try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}});});
+</script>
+</body>
+</html>

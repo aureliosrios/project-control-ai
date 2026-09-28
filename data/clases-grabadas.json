@@ -23,6 +23,20 @@
         "title": "Sesión 01: Introducción a Agentes de IA y Entorno de Trabajo (20/09/2026)",
         "desc": "Clase del 20 de Septiembre (03:00 p.m. - 05:30 p.m.): Sesión inaugural del Grupo Tarde. Entorno de trabajo, Markdown, estructuración de partidas, EETT y primeros flujos con IA.",
         "resources": []
+      },
+      {
+        "id": "vABYYEA46yc",
+        "num": "02",
+        "status": "OCULTA",
+        "title": "Sesión 02: JSON como Cerebro de Datos - Curva S, Histogramas y Flujo Financiero (27/09/2026)",
+        "desc": "Curso Agentes de IA: Presupuestos, EETT y Cronogramas (Grupo Tarde, 27/09/2026).\n\nTemas: integración de presupuesto y cronograma en un JSON auditable y trazable por ID de partida/tarea, controles de cuadratura (costo directo, metrados, HH), Valor Planificado (PV) y Curva S semanal y diaria con fórmulas vivas, histograma de equipos, flujo financiero con adelanto del 20% y análisis de déficit, y creación de un agente extractor que convierte presupuestos y cronogramas en cualquier formato (Excel, PDF, JPG) a JSON.\n\nProject Control AI",
+        "resources": [
+          {
+            "title": "Guía de la Clase 2: JSON, Curva S y Flujo Financiero (HTML)",
+            "type": "html",
+            "url": "/manuales/resumen_tarde_clase_2_agentes.html"
+          }
+        ]
       }
     ]
   },
@@ -145,6 +159,20 @@
         "title": "Sesión 06: Agentes de IA, Presupuestos y Cronogramas (20/09/2026)",
         "desc": "Clase del 20 de Septiembre (10:00 a.m. - 01:09 p.m.): Consolidación avanzada de agentes de IA, presupuestos trazables, orquestación y cierre de ciclo del programa sincrónico.",
         "resources": []
+      },
+      {
+        "id": "yTsV3TAk6Tk",
+        "num": "07",
+        "status": "OCULTA",
+        "title": "Sesión 07: Cronograma Automatizado con IA - JSON, Macro .BAS y MS Project (27/09/2026)",
+        "desc": "Sesión final del curso Agentes de IA: Presupuestos, EETT y Cronogramas (Grupo Mañana, 27/09/2026).\n\nTemas: metrados por piso convertidos a JSON, configuración previa de MS Project (fecha de inicio, calendario propio 7 días, horario corrido 8am-4pm, duración fija, tareas no condicionadas por el esfuerzo), generación de cronograma con duraciones y vínculos a partir de la memoria descriptiva, macro VBA (.bas) importada con Alt+F11, depuración iterativa de errores (438, 1100, 91) y construcción de un agente de cronograma con registro de errores. Plazo contractual: 180 días.\n\nProject Control AI",
+        "resources": [
+          {
+            "title": "Guía de la Clase 7: Cronograma Automatizado con IA (HTML)",
+            "type": "html",
+            "url": "/manuales/resumen_clase_7_agentes.html"
+          }
+        ]
       }
     ]
   },

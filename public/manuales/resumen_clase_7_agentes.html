@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCAI | Guía Sesión 07 - Cronograma Automatizado (Agentes de IA)</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#030712;--card:#0b1329;--card2:#111d3f;--cyan:#06b6d4;--blue:#3b82f6;--em:#10b981;--amb:#f59e0b;--pur:#8b5cf6;--rose:#f43f5e;--tx:#f8fafc;--mu:#94a3b8;--bd:#1e293b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tx);line-height:1.65;padding:30px 16px}
+.container{max-width:1150px;margin:0 auto}
+header{background:linear-gradient(135deg,#0b1329 0%,#171c3d 50%,#082f49 100%);border:1px solid var(--cyan);border-radius:24px;padding:38px 26px;text-align:center;margin-bottom:28px;box-shadow:0 15px 35px rgba(6,182,212,.15);position:relative;overflow:hidden}
+header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--cyan),var(--pur),var(--em),var(--amb))}
+.badge{display:inline-block;background:rgba(6,182,212,.12);color:var(--cyan);padding:6px 18px;border-radius:20px;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px;border:1px solid var(--cyan)}
+h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,4vw,2.3rem);margin-bottom:10px;letter-spacing:-.5px}
+.subtitle{color:var(--mu);font-size:1.08rem;max-width:880px;margin:0 auto 18px}
+.meta{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;color:var(--mu);font-size:.92rem}
+.meta span{background:rgba(255,255,255,.04);padding:6px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.06)}
+.tabs{display:flex;gap:10px;margin-bottom:26px;border-bottom:2px solid var(--bd);padding-bottom:12px;overflow-x:auto}
+.tab{background:rgba(15,23,42,.6);border:1px solid var(--bd);color:var(--mu);padding:11px 20px;border-radius:14px;font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:.2s}
+.tab:hover{color:#fff;border-color:var(--cyan)}
+.tab.active{background:linear-gradient(135deg,rgba(6,182,212,.2),rgba(59,130,246,.2));color:#fff;border-color:var(--cyan);box-shadow:0 0 18px rgba(6,182,212,.25)}
+.panel{display:none;animation:fi .3s ease}.panel.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:24px;margin-bottom:20px}
+.card h2{font-family:'Space Grotesk',sans-serif;font-size:1.35rem;margin-bottom:12px;color:#fff}
+.card h3{font-size:1.08rem;margin:16px 0 8px;color:var(--cyan)}
+.card p{color:#cbd5e1;margin-bottom:10px}
+.card ul,.card ol{padding-left:22px;color:#cbd5e1}.card li{margin-bottom:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-bottom:20px}
+.kpi{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:18px}
+.kpi b{display:block;font-family:'Space Grotesk',sans-serif;font-size:1.5rem;color:var(--cyan)}
+.kpi span{color:var(--mu);font-size:.9rem}
+.callout{border-left:4px solid var(--amb);background:rgba(245,158,11,.08);padding:14px 18px;border-radius:0 12px 12px 0;margin:14px 0;color:#fde68a}
+.callout.ok{border-color:var(--em);background:rgba(16,185,129,.08);color:#a7f3d0}
+.callout.bad{border-color:var(--rose);background:rgba(244,63,94,.08);color:#fecdd3}
+.steps{counter-reset:s;list-style:none;padding:0!important}
+.steps>li{counter-increment:s;position:relative;padding:14px 16px 14px 62px;background:var(--card2);border:1px solid var(--bd);border-radius:14px;margin-bottom:12px}
+.steps>li::before{content:counter(s);position:absolute;left:16px;top:14px;width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--cyan),var(--blue));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.steps>li strong{color:#fff}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0}
+.flow span{background:var(--card2);border:1px solid var(--cyan);border-radius:10px;padding:8px 12px;font-weight:600;font-size:.92rem}
+.flow i{color:var(--cyan);font-style:normal;font-weight:800}
+table{width:100%;border-collapse:collapse;font-size:.93rem;margin:10px 0}
+th,td{border:1px solid var(--bd);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:var(--card2);color:var(--cyan)}td{color:#cbd5e1}
+.tw{overflow-x:auto}
+.prompt{position:relative;background:#020617;border:1px solid var(--pur);border-radius:14px;padding:18px 18px 16px;margin:12px 0;font-family:Consolas,'Courier New',monospace;font-size:.9rem;color:#e2e8f0;white-space:pre-wrap}
+.prompt .lbl{display:block;font-family:'Outfit',sans-serif;color:var(--pur);font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.copy{position:absolute;top:12px;right:12px;background:var(--pur);color:#fff;border:0;border-radius:8px;padding:5px 12px;font-size:.8rem;cursor:pointer;font-family:'Outfit',sans-serif}
+kbd{background:#1e293b;border:1px solid #334155;border-radius:6px;padding:1px 7px;font-size:.88rem}
+.check label{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border:1px solid var(--bd);border-radius:12px;margin-bottom:8px;cursor:pointer;color:#cbd5e1}
+.check input{margin-top:5px;accent-color:var(--em);width:18px;height:18px}
+.check label.done{opacity:.6;text-decoration:line-through}
+.qa{border-left:3px solid var(--cyan);padding:8px 14px;margin:12px 0;background:rgba(6,182,212,.05);border-radius:0 10px 10px 0}
+.qa b{color:var(--cyan)}
+footer{text-align:center;color:var(--mu);font-size:.85rem;margin-top:30px}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <div class="badge">Sesión 07 · Grupo Mañana · Clase final</div>
+  <h1>Cronograma automatizado con IA: del JSON a MS Project</h1>
+  <p class="subtitle">Metrados por piso convertidos a JSON, configuración de MS Project antes de automatizar, macro VBA (.bas) generada por la IA y construcción iterativa de un agente de cronograma a partir de los errores.</p>
+  <div class="meta"><span>📅 Domingo 27/09/2026</span><span>🕙 10:00 AM – 01:00 PM</span><span>🎓 Agentes de IA: Presupuestos, EETT y Cronogramas</span><span>⏱️ Plazo del caso: 180 días</span></div>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-t="p1">🧭 Resumen</button>
+  <button class="tab" data-t="p2">⚙️ Configuración de MS Project</button>
+  <button class="tab" data-t="p3">🛠️ Flujo paso a paso</button>
+  <button class="tab" data-t="p4">💬 Prompts</button>
+  <button class="tab" data-t="p5">🐞 Errores y agente</button>
+  <button class="tab" data-t="p6">✅ Tarea y cierre</button>
+</nav>
+
+<!-- ============ RESUMEN ============ -->
+<section id="p1" class="panel active">
+  <div class="grid">
+    <div class="kpi"><b>3 de 3</b><span>Entregables del curso completados: EETT → Presupuesto → <strong>Cronograma</strong></span></div>
+    <div class="kpi"><b>JSON</b><span>Es el centro de trabajo. Excel, MS Project o HTML son solo salidas</span></div>
+    <div class="kpi"><b>.bas</b><span>Macro VBA que construye el cronograma completo dentro de MS Project</span></div>
+    <div class="kpi"><b>~40</b><span>Iteraciones que le tomó al docente estabilizar su agente de cronograma</span></div>
+  </div>
+
+  <div class="card">
+    <h2>🎯 Idea central de la sesión</h2>
+    <p>Con las EETT trazables y el presupuesto ya resueltos en semanas anteriores, esta sesión cierra el ciclo con el <strong>cronograma automatizado</strong>. Se usa el mismo proyecto (edificio de 6 pisos) y la misma memoria descriptiva, lo que mantiene la <strong>trazabilidad</strong> entre EETT, presupuesto y cronograma.</p>
+    <div class="flow"><span>Metrados por piso (Excel)</span><i>→</i><span>JSON de metrados</span><i>→</i><span>+ Memoria descriptiva</span><i>→</i><span>JSON del cronograma</span><i>→</i><span>Macro .bas</span><i>→</i><span>MS Project</span></div>
+  </div>
+
+  <div class="card">
+    <h2>📐 Presupuesto vs cronograma: distinto desagregado</h2>
+    <p>El presupuesto comercial agrupa por <em>actividad</em> (todas las columnas del edificio juntas). El cronograma necesita saber <em>dónde y cuándo</em> se ejecuta cada elemento, así que los metrados se reorganizan por <strong>ubicación</strong>:</p>
+    <div class="flow"><span>Obras preliminares</span><span>Cimentaciones</span><span>Sótano 2</span><span>Sótano 1</span><span>Piso 1 … Piso 6</span><span>Azotea</span><span>Cierre</span></div>
+    <p>Los ítems siguen vinculados al presupuesto por su ID, aunque la descripción de la actividad cambie.</p>
+  </div>
+
+  <div class="card">
+    <h2>⚖️ Tecnología sí, pero con criterio profesional</h2>
+    <p>La IA puede generar los vínculos de todas las actividades. Que eso sea aceptable depende del <strong>tipo de entregable</strong>:</p>
+    <div class="tw"><table>
+      <tr><th>Situación</th><th>Uso recomendado de la IA</th></tr>
+      <tr><td>Estudio preliminar, licitación, cronograma rápido</td><td>Se puede delegar casi al 100%: das la memoria descriptiva, los metrados y el plazo, y la IA genera el Gantt.</td></tr>
+      <tr><td>Cronograma de seguimiento y control</td><td>Usa la IA como base, pero revisa tú los hitos del cliente, las interferencias, los trenes de trabajo, las cuadrillas y la ruta crítica.</td></tr>
+    </table></div>
+    <div class="callout">La herramienta no reemplaza el criterio. El entregable final tiene que ser profesional. Tú decides cuánto delegas a la IA y cuánto revisas personalmente.</div>
+  </div>
+</section>
+
+<!-- ============ CONFIG PROJECT ============ -->
+<section id="p2" class="panel">
+  <div class="card">
+    <h2>⚙️ Lo que debes saber de MS Project antes de automatizar</h2>
+    <p>"Si no sabes a dónde quieres llegar, no puedes automatizarlo". El docente recorrió MS Project <strong>solo para entender</strong> la configuración. Toda esta información va después dentro del prompt y de la macro. El archivo de Project se abre <strong>vacío</strong>.</p>
+    <div class="tw"><table>
+      <tr><th>#</th><th>Parámetro</th><th>Valor del caso</th><th>Por qué</th></tr>
+      <tr><td>1</td><td>Fecha de inicio</td><td><strong>05/10/2026</strong></td><td>Proyecto en planeamiento: fecha futura (Proyecto → Información del proyecto).</td></tr>
+      <tr><td>2</td><td>Días laborables</td><td><strong>Los 7 días de la semana</strong></td><td>Los contratos se miden en <em>días calendario</em>. La meta semanal se cumple en 6 días reales con horas extra, más recursos o incentivos.</td></tr>
+      <tr><td>3</td><td>Horario</td><td><strong>08:00 – 16:00 corrido</strong></td><td>Replicar el refrigerio y la media hora del sábado genera errores. El horario corrido de 8 h es más fácil de controlar.</td></tr>
+      <tr><td>4</td><td>Tipo de tarea</td><td><strong>Duración fija</strong></td><td>Contratos a suma alzada o por precios unitarios. <em>Unidades fijas</em> solo aplica en contratos por recursos, por ejemplo campamentos petroleros en la selva.</td></tr>
+      <tr><td>5</td><td>Condicionada por el esfuerzo</td><td><strong>Desactivada en todas</strong></td><td>Así las duraciones no se alteran y se pueden sustentar las ampliaciones de plazo.</td></tr>
+      <tr><td>6</td><td>Calendario</td><td><strong>Calendario propio</strong></td><td>No usar el Estándar (L–V, 9–13 y 15–19). También se puede editar el Estándar, pero se recomienda uno nuevo.</td></tr>
+      <tr><td>7</td><td>Estructura</td><td><strong>EDT e ID del JSON</strong></td><td>Mantiene la trazabilidad con el presupuesto y las EETT.</td></tr>
+    </table></div>
+    <div class="callout ok"><strong>Tip visual:</strong> en <em>Escala temporal → Días no laborables</em>, elige el <strong>calendario del proyecto</strong> para quitar las franjas grises cuando se trabaja los 7 días.</div>
+  </div>
+</section>
+
+<!-- ============ FLUJO ============ -->
+<section id="p3" class="panel">
+  <div class="card">
+    <h2>🛠️ Procedimiento completo (Antigravity, Claude Code, Codex u OpenCode)</h2>
+    <ol class="steps">
+      <li><strong>Crear la carpeta <code>cronograma/</code></strong> en el espacio de trabajo con el Excel de <em>metrados por piso</em> y la <em>memoria descriptiva</em> (la misma que usaste para las EETT y el presupuesto).</li>
+      <li><strong>Convertir los metrados a JSON.</strong> Trabajar sobre Excel no es recomendable. Pide un JSON jerárquico organizado por IDs (EDT → ítem → unidad → metrado).</li>
+      <li><strong>Generar el JSON del cronograma</strong> a partir de la memoria descriptiva y del JSON de metrados. La IA agrega rendimientos, duraciones estimadas, predecesoras, sucesoras, tipo de vínculo (FC, CC, FF, CF), lags, fechas tempranas y ruta crítica. Si olvidaste la fecha de inicio, pide que la corrija (en clase asumió el 1 de mayo y se cambió al 05/10).</li>
+      <li><strong>Pedir la macro <code>.bas</code></strong> indicando las 7 consideraciones de configuración (ver pestaña Prompts).</li>
+      <li><strong>Importar la macro en MS Project:</strong>
+        <ul>
+          <li>Abre un proyecto <strong>en blanco</strong> y guárdalo con un nombre.</li>
+          <li>Pulsa <kbd>Alt</kbd>+<kbd>F11</kbd> para abrir el editor de Visual Basic, ve a <em>Archivo → Importar archivo</em> y elige el <code>.bas</code>.</li>
+          <li>Guarda y cierra el editor de VBA.</li>
+          <li>Ve a <em>Vista → Macros → Ver macros</em>, selecciona la macro y pulsa <strong>Ejecutar</strong>.</li>
+        </ul>
+      </li>
+      <li><strong>Validar:</strong> la duración total debe ser 180 días (del 05/10/2026 al 02/04/2027). No debe haber actividades sueltas, los vínculos deben ser lógicos y la ruta crítica debe ser continua.</li>
+      <li><strong>Iterar:</strong> ante cada error, pasa a la IA la captura de pantalla o la línea del depurador y pide que corrija el <code>.bas</code>. Repite hasta que corra bien.</li>
+      <li><strong>Convertir el conocimiento en agente:</strong> registra en un skill o agente los errores y sus soluciones para que la próxima vez no se repitan.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>🧠 Cambio de paradigma: el JSON como centro de trabajo</h2>
+    <p>Antes, la información vivía en MS Project o Primavera y se exportaba a Excel. Ahora la fuente es el <strong>JSON</strong>: desde ahí se "imprime" a Excel, a MS Project (<code>.bas</code>), a Primavera (<code>.xer</code>) o a un dashboard HTML.</p>
+    <div class="callout ok"><strong>Primavera P6:</strong> el concepto es el mismo, pero el entregable es un archivo <strong>.XER</strong> en lugar de un <code>.bas</code>. Antes instala las extensiones de Python correspondientes, como en la primera clase. Al docente le tomó unas 10 iteraciones, frente a unas 40 en MS Project.</div>
+  </div>
+</section>
+
+<!-- ============ PROMPTS ============ -->
+<section id="p4" class="panel">
+  <div class="card">
+    <h2>💬 Prompts de la sesión (versión depurada)</h2>
+    <p>Los prompts se dictaron por voz durante la clase. Aquí están ordenados y limpios para reutilizarlos.</p>
+
+    <div class="prompt"><span class="lbl">Prompt 1 · Metrados → JSON</span><button class="copy">Copiar</button><span class="txt">Analiza el archivo Excel "metrados" de la carpeta cronograma y conviértelo en un JSON jerárquico, organizado por IDs (EDT/WBS → ítem → unidad → metrado), listo para convertirse después en un cronograma.</span></div>
+
+    <div class="prompt"><span class="lbl">Prompt 2 · JSON del cronograma</span><button class="copy">Copiar</button><span class="txt">Analizando la memoria descriptiva del proyecto (carpeta cronograma/memoria descriptiva) y el JSON de metrados, genera el cronograma del proyecto incluyendo duraciones estimadas, predecesoras, sucesoras, tipo de vínculo, lags y demás información de planeamiento. Fecha de inicio: 05/10/2026. Plazo contractual: 180 días calendario. Entregable: un JSON del cronograma.</span></div>
+
+    <div class="prompt"><span class="lbl">Prompt 3 · Macro .BAS para MS Project</span><button class="copy">Copiar</button><span class="txt">Analizando el JSON del cronograma, genera un archivo .BAS (macro VBA) para MS Project con las siguientes consideraciones:
+1. Fecha de inicio: 05/10/2026.
+2. Días laborables: los 7 días de la semana.
+3. Horario de trabajo: de 8:00 a.m. a 4:00 p.m. corrido.
+4. Tipo de tarea: duración fija.
+5. Ninguna tarea condicionada por el esfuerzo.
+6. Crear un calendario propio.
+7. Respetar la EDT y los IDs del JSON.
+Si hay algún error, descríbelo de forma específica para poder corregirlo.</span></div>
+
+    <div class="prompt"><span class="lbl">Prompt 4 · Corrección iterativa (ejemplo real de clase)</span><button class="copy">Copiar</button><span class="txt">El proyecto debe tener una duración de 180 días, pero en MS Project salió con 94 días (adjunto captura). Verifica el JSON del cronograma y, después de confirmar la causa, mejora el archivo .BAS.</span></div>
+
+    <div class="prompt"><span class="lbl">Prompt 5 · Registrar errores en un agente o skill</span><button class="copy">Copiar</button><span class="txt">En el proceso de generar el archivo .BAS se están cometiendo diversos errores al no obtener el resultado adecuado. Administra, filtra y guarda todos estos errores y sus posibles soluciones en un skill o agente, para que la IA no vuelva a cometerlos en futuros casos de generación de diagramas de Gantt en MS Project.</span></div>
+
+    <div class="prompt"><span class="lbl">Prompt 6 · Usar el agente de cronograma del docente</span><button class="copy">Copiar</button><span class="txt">Lee el agente de cronograma (.agents) y, analizando el JSON del cronograma, genera el archivo .BAS para MS Project considerando las 7 condiciones indicadas.</span></div>
+  </div>
+</section>
+
+<!-- ============ ERRORES ============ -->
+<section id="p5" class="panel">
+  <div class="card">
+    <h2>🐞 Errores reales que aparecieron en clase</h2>
+    <div class="tw"><table>
+      <tr><th>Síntoma</th><th>Quién</th><th>Qué hacer</th></tr>
+      <tr><td>Error <strong>438</strong> (el objeto no admite la propiedad o el método)</td><td>Pavel</td><td>Pasar la captura a la IA. Pedirle que describa cada error de forma específica.</td></tr>
+      <tr><td>Error <strong>1100</strong></td><td>Pavel (2.ª iteración)</td><td>Es normal en las primeras iteraciones. Seguir retroalimentando a la IA.</td></tr>
+      <tr><td>Error <strong>91</strong> al crear el calendario propio</td><td>Demostración</td><td>La macro referencia un calendario que todavía no existe. Pedir que lo cree antes de asignarlo.</td></tr>
+      <tr><td>Duración de <strong>94 días</strong> en lugar de 180</td><td>Docente</td><td>Causa raíz: incompatibilidad en la numeración de los vínculos. Se regeneró el <code>.bas</code>.</td></tr>
+      <tr><td>Duración de <strong>229 días</strong></td><td>Jhoan James</td><td>El plazo de 180 días figura en los metrados y en la memoria descriptiva. Exigirlo como restricción.</td></tr>
+      <tr><td>Termina el <strong>01/04</strong> en vez del 02/04 (179 días)</td><td>Docente</td><td>Desfase de horas por el calendario propio. Revisar con escala en horas o pedir a la IA que ubique la diferencia.</td></tr>
+      <tr><td>Termina el 21/04 o dura 138 días</td><td>Oswaldo / otros</td><td>Seguir iterando y verificar con un Excel exportado desde el JSON.</td></tr>
+      <tr><td>Actividades <strong>sueltas</strong> (sin sucesora)</td><td>Revisión final</td><td>Todas deben estar vinculadas. Si no, las ampliaciones de plazo no actualizan la ruta crítica.</td></tr>
+      <tr><td>El cronograma "corre" pero no se actualiza</td><td>Reilly</td><td>Primera corrida. Mostrar el resultado a la IA y pedir la mejora.</td></tr>
+    </table></div>
+    <div class="callout ok"><strong>Tip de Reilly:</strong> en vez de la captura, puedes copiar la línea que resalta el depurador de VBA y pegarla en el chat. También funciona. El docente prefiere la captura porque da más contexto.</div>
+  </div>
+
+  <div class="card">
+    <h2>🤖 Cómo nace un agente: prueba y error documentado</h2>
+    <ul>
+      <li>Un agente es el <strong>resultado</strong> de iterar hasta lograr el objetivo. Todo camino equivocado que registras es uno que la IA ya no volverá a intentar.</li>
+      <li>No esperes al resultado final: empieza a documentar los errores <strong>desde las primeras iteraciones</strong>.</li>
+      <li>No cortes la conversación a la mitad: perderías el contexto aprendido. Consolídalo antes en el agente.</li>
+      <li>Si el agente falla con un caso nuevo, <strong>actualízalo</strong> con ese error. Así se vuelve cada vez más autónomo.</li>
+      <li>Convención de nombre <code>.agents/</code>: el punto inicial hace que las IA lo reconozcan y lean automáticamente. Aun así, el docente prefiere indicarlo en el prompt.</li>
+      <li>El agente funciona con cualquier herramienta: Antigravity, Claude Code, Codex u OpenCode.</li>
+      <li>El agente no es infalible. Si se equivoca, se corrige y se actualiza.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>❓ Preguntas de la sesión</h2>
+    <div class="qa"><b>Henry:</b> ¿Hay que configurar el proyecto en MS Project y luego convertirlo? <br><b>R:</b> No. Toda la configuración va <em>dentro del .bas</em>. En MS Project abres un archivo vacío, lo guardas, importas la macro y la ejecutas.</div>
+    <div class="qa"><b>Pavel:</b> ¿Cómo sería para Primavera? <br><b>R:</b> Con el mismo concepto, pidiendo un archivo <code>.XER</code> en lugar del <code>.bas</code>, después de instalar las extensiones de Python.</div>
+    <div class="qa"><b>Pavel:</b> En Claude, ¿el skill se va mejorando solo con cada error? <br><b>R:</b> Sí, funciona igual en ambos casos: con cada iteración el skill se mejora hasta que deja de fallar.</div>
+    <div class="qa"><b>Oswaldo:</b> ¿Puedo tomar un cronograma del expediente técnico y reprogramarlo para la ejecución? <br><b>R:</b> Sí. Pasa el cronograma a Excel y de ahí a JSON (con duraciones y vínculos). Escribe tu estrategia de ejecución en Markdown: frentes, equipos, trabajos en paralelo. Pide a la IA que reprograme el JSON con esa estrategia y genera un nuevo <code>.bas</code> para el seguimiento.</div>
+  </div>
+</section>
+
+<!-- ============ TAREA ============ -->
+<section id="p6" class="panel">
+  <div class="card check">
+    <h2>✅ Checklist de práctica</h2>
+    <label><input type="checkbox"> Crear la carpeta <code>cronograma/</code> con los metrados por piso y la memoria descriptiva.</label>
+    <label><input type="checkbox"> Convertir los metrados a JSON organizado por IDs.</label>
+    <label><input type="checkbox"> Generar el JSON del cronograma con duraciones, vínculos y lags.</label>
+    <label><input type="checkbox"> Exportar el JSON a Excel para revisar las fechas de inicio y fin.</label>
+    <label><input type="checkbox"> Generar el <code>.bas</code> con las 7 consideraciones.</label>
+    <label><input type="checkbox"> Importar y ejecutar la macro en MS Project (<kbd>Alt</kbd>+<kbd>F11</kbd> → Importar → Vista → Macros).</label>
+    <label><input type="checkbox"> Validar los 180 días (05/10/2026 → 02/04/2027) y que no queden actividades sueltas.</label>
+    <label><input type="checkbox"> Iterar con capturas de pantalla hasta que la macro corra sin errores.</label>
+    <label><input type="checkbox"> Ejecutar el prompt 5 y guardar tu propio agente en <code>.agents/</code>.</label>
+    <label><input type="checkbox"> Revisar hitos del cliente, interferencias y ruta crítica (control de calidad profesional).</label>
+  </div>
+
+  <div class="card">
+    <h2>🎓 Cierre del curso (Grupo Mañana)</h2>
+    <p>Esta fue la <strong>última clase</strong> del grupo. Recomendaciones del docente:</p>
+    <ul>
+      <li>Vuelve a ver los videos las veces que sea necesario y replica todo en tus propios proyectos.</li>
+      <li>Usa mucho el <strong>JSON</strong>: es la base de todos tus nuevos entregables.</li>
+      <li>Sigue en el grupo general de WhatsApp: ahí se anuncian los nuevos cursos de IA.</li>
+      <li>Para consultas o consultorías, contacta al docente presentándote como exalumno.</li>
+    </ul>
+    <div class="callout">Nota de clase: el docente mostró un control 4D de un tanque. La IA revisó 193 planos, seleccionó 67 y generó un modelo con unos 10,000 elementos en JSON. Está evaluando convertirlo en un curso.</div>
+  </div>
+</section>
+<footer>Project Control AI · Guía generada a partir de la transcripción de la sesión grabada</footer>
+</div>
+<script>
+document.querySelectorAll('.tab').forEach(function(b){b.addEventListener('click',function(){
+  document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active')});
+  document.querySelectorAll('.panel').forEach(function(x){x.classList.remove('active')});
+  b.classList.add('active');document.getElementById(b.dataset.t).classList.add('active');});});
+document.querySelectorAll('.copy').forEach(function(btn){btn.addEventListener('click',function(){
+  var t=btn.parentElement.querySelector('.txt').innerText;
+  var done=function(){btn.textContent='¡Copiado!';setTimeout(function(){btn.textContent='Copiar'},1500)};
+  if(navigator.clipboard){navigator.clipboard.writeText(t).then(done,done)}else{done()}});});
+var KEY='pcai-check-'+location.pathname;var st={};
+try{st=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+document.querySelectorAll('.check input').forEach(function(c,i){
+  c.checked=!!st[i];c.parentElement.classList.toggle('done',c.checked);
+  c.addEventListener('change',function(){st[i]=c.checked;c.parentElement.classList.toggle('done',c.checked);
+    try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}});});
+</script>
+</body>
+</html>

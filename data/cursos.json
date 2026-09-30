@@ -21,6 +21,16 @@
       "brochure": "https://go.hotmart.com/O105604032H?dp=1"
     },
     {
+      "id": "A3",
+      "ruta": "A",
+      "imagen": "/cursos/A3.jpeg",
+      "nombre": "Digitalización de Planos DWG con IA: De Imagen y PDF a AutoCAD",
+      "precio": "$19.99 USD",
+      "tag": "CURSO A3 · PLANOS & CAD",
+      "link": "https://pay.hotmart.com/R107827493N",
+      "brochure": "https://go.hotmart.com/R107827493N?dp=1"
+    },
+    {
       "id": "B1",
       "ruta": "B",
       "imagen": "/cursos/B1.jpeg",

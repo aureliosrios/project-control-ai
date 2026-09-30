@@ -60,8 +60,8 @@ const rutas = [
     titulo: "Fundamentos Transversales",
     desc: "Herramientas de IA y análisis documental para todo profesional de la construcción.",
     cursos: [
-      { codigo: "A3", nombre: "Prompt Engineering Pro para Obras", estado: "proximamente" },
-      { codigo: "A4", nombre: "Python for Construction Engineers", estado: "proximamente" }
+      { codigo: "A4", nombre: "Prompt Engineering Pro para Obras", estado: "proximamente" },
+      { codigo: "A5", nombre: "Python for Construction Engineers", estado: "proximamente" }
     ]
   },
   {

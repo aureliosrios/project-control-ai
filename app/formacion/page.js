@@ -645,59 +645,62 @@ export default function Formacion() {
             </div>
 
             {/* Ediciones Anteriores y Lista de Espera */}
-            <div className="pt-8 border-t border-white/5">
-              <div className="mb-6">
-                <span className="text-slate-500 text-[10px] font-black tracking-[0.3em] uppercase block mb-1">Historial Académico</span>
-                <h3 className="text-2xl font-black text-white uppercase tracking-tight">Ediciones Anteriores y Lista de Espera</h3>
-                <p className="text-slate-400 text-xs">
-                  Estos programas completaron sus vacantes. Puedes unirte a la lista de espera para la siguiente edición.
-                </p>
-              </div>
+            {sincronicos.some(c => c.cerrado) && (
+              <div className="pt-8 border-t border-white/5">
+                <div className="mb-6">
+                  <span className="text-slate-500 text-[10px] font-black tracking-[0.3em] uppercase block mb-1">Historial Académico</span>
+                  <h3 className="text-2xl font-black text-white uppercase tracking-tight">Ediciones en Curso y Lista de Espera</h3>
+                  <p className="text-slate-400 text-xs">
+                    Programas en pleno dictado con vacantes completadas. Puedes unirte a la lista de espera para la siguiente edición.
+                  </p>
+                </div>
 
-              <div className="grid md:grid-cols-2 gap-6">
-                {sincronicos.filter(c => c.cerrado).map((curso) => {
-                  const theme = sincThemes[curso.colorKey] || sincThemes.orange;
+                <div className="grid md:grid-cols-2 gap-6">
+                  {sincronicos.filter(c => c.cerrado).map((curso) => {
+                    const theme = sincThemes[curso.colorKey] || sincThemes.orange;
 
-                  return (
-                    <div key={curso.id} className="p-6 rounded-3xl bg-white/[0.02] border border-white/10 flex flex-col justify-between opacity-85 hover:opacity-100 transition-all">
-                      <div>
-                        <div className="flex items-center justify-between gap-2 mb-3">
-                          <span className={`text-[10px] font-black tracking-wider uppercase ${theme.tagText}`}>
-                            {curso.tag}
-                          </span>
-                          <span className="bg-red-500/20 text-red-400 border border-red-500/30 text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
-                            Matrículas Cerradas
-                          </span>
-                        </div>
-
-                        <h4 className="text-lg font-bold text-slate-200 mb-2">{curso.nombre}</h4>
-                        <p className="text-slate-400 text-xs mb-4 leading-relaxed">{curso.desc}</p>
-
-                        <div className="p-3 rounded-xl bg-black/40 border border-white/5 text-[11px] mb-4">
-                          <span className="text-slate-500 font-bold uppercase tracking-wider text-[8px] block">Caso Real:</span>
-                          <span className="text-slate-300">{curso.casoReal}</span>
-                        </div>
-                      </div>
-
-                      <div className="pt-4 border-t border-white/5 flex items-center justify-between gap-4">
+                    return (
+                      <div key={curso.id} className="p-6 rounded-3xl bg-white/[0.02] border border-white/10 flex flex-col justify-between opacity-90 hover:opacity-100 transition-all">
                         <div>
-                          <span className="text-sm font-bold text-slate-500 line-through block">{curso.precio}</span>
-                          <span className="text-[10px] text-slate-500 uppercase">{curso.sesiones}</span>
+                          <div className="flex items-center justify-between gap-2 mb-3">
+                            <span className={`text-[10px] font-black tracking-wider uppercase ${theme.tagText}`}>
+                              {curso.tag}
+                            </span>
+                            <span className="bg-amber-500/15 text-amber-300 border border-amber-500/30 text-[9px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5">
+                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                              {curso.estadoBadge || "Matrículas Cerradas"}
+                            </span>
+                          </div>
+
+                          <h4 className="text-lg font-bold text-slate-200 mb-2">{curso.nombre}</h4>
+                          <p className="text-slate-400 text-xs mb-4 leading-relaxed">{curso.desc}</p>
+
+                          <div className="p-3 rounded-xl bg-black/40 border border-white/5 text-[11px] mb-4">
+                            <span className="text-slate-500 font-bold uppercase tracking-wider text-[8px] block">Caso Real:</span>
+                            <span className="text-slate-300">{curso.casoReal}</span>
+                          </div>
                         </div>
-                        <Link
-                          href={`https://wa.me/51993147501?text=Hola,%20deseo%20entrar%20a%20la%20lista%20de%20espera%20para%20la%20nueva%20edici%C3%B3n%20del%20curso%20${encodeURIComponent(curso.nombre)}.`}
-                          target="_blank"
-                          className="px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-[10px] font-black text-cyan-300 uppercase tracking-wider hover:bg-cyan-500/10 transition-all flex items-center gap-1.5"
-                        >
-                          <span className="material-symbols-outlined text-sm">chat</span>
-                          Lista de Espera (WhatsApp)
-                        </Link>
+
+                        <div className="pt-4 border-t border-white/5 flex items-center justify-between gap-4">
+                          <div>
+                            <span className="text-sm font-bold text-slate-500 line-through block">{curso.precio}</span>
+                            <span className="text-[10px] text-slate-500 uppercase">{curso.sesiones}</span>
+                          </div>
+                          <Link
+                            href={`https://wa.me/51993147501?text=Hola,%20deseo%20entrar%20a%20la%20lista%20de%20espera%20para%20la%20nueva%20edici%C3%B3n%20del%20curso%20${encodeURIComponent(curso.nombre)}.`}
+                            target="_blank"
+                            className="px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-[10px] font-black text-cyan-300 uppercase tracking-wider hover:bg-cyan-500/10 transition-all flex items-center gap-1.5"
+                          >
+                            <span className="material-symbols-outlined text-sm">chat</span>
+                            Lista de Espera (WhatsApp)
+                          </Link>
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Canales y Métodos de Pago Oficiales */}
             <div className="grid md:grid-cols-2 gap-8 mt-12">

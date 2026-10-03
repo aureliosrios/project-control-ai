@@ -150,6 +150,27 @@
       "colorKey": "orange",
       "cerrado": true,
       "registro": "Licitaciones Inteligentes"
+    },
+    {
+      "id": "S4",
+      "nombre": "Presupuestos y Planificación de Obras con IA",
+      "precio": "$100.00 USD",
+      "precioSoles": "S/. 300",
+      "tag": "CURSO 4 · MASTERCLASS",
+      "destacado": "Nueva Convocatoria Octubre 2026",
+      "desc": "Aprende a automatizar el presupuesto y el planeamiento de obra con agentes de IA. Calcula cuadrillas y duraciones, identifica sobreasignaciones, nivela recursos, desarrolla una línea de balance y genera el Gantt en MS Project y Primavera P6 mediante VBA.",
+      "casoReal": "Flujo integral de obra: del APU y cálculo de cuadrillas a la nivelación de recursos, línea de balance y programación Gantt en MS Project y Primavera P6.",
+      "inicio": "Domingo 18 de Octubre, 2026",
+      "fin": "Domingo 15 de Noviembre, 2026",
+      "horario": "Todos los domingos · 10:00 AM – 1:00 PM",
+      "sesiones": "15h · 5 sesiones en vivo",
+      "link": "/inscripcion",
+      "brochure": "/brochures/Brochure_Presupuestos_y_Planificacion_de_Obras_con_IA.pdf",
+      "hotmart": "https://pay.hotmart.com/K104218834V",
+      "paypal": "https://paypal.me/ProjectControlAI",
+      "colorKey": "cyan",
+      "cerrado": false,
+      "registro": "Presupuestos y Planificación de Obras con IA"
     }
   ]
 }

@@ -512,14 +512,17 @@ export default function Formacion() {
             <div>
               <div className="mb-8">
                 <span className="text-orange-400 text-[10px] font-black tracking-[0.3em] uppercase block mb-1">Clases en Vivo · Masterclass</span>
-                <h2 className="text-3xl font-black text-white uppercase tracking-tighter">Próxima Convocatoria Oficial</h2>
+                <h2 className="text-3xl font-black text-white uppercase tracking-tighter">
+                  {sincronicos.filter(c => !c.cerrado).length > 1 ? "Próximas Convocatorias Oficiales" : "Próxima Convocatoria Oficial"}
+                </h2>
                 <p className="text-slate-400 font-light text-sm max-w-2xl mt-1">
                   Capacitación intensiva en tiempo real con resolución de consultas, talleres interactivos y acompañamiento directo.
                 </p>
               </div>
 
-              {/* S1: Tarjeta Destacada de Convocatoria Abierta */}
-              {sincronicos.filter(c => !c.cerrado).map((curso) => {
+              {/* Tarjetas Destacadas de Convocatoria Abierta */}
+              <div className="space-y-8">
+                {sincronicos.filter(c => !c.cerrado).map((curso) => {
                 const theme = sincThemes[curso.colorKey] || sincThemes.cyan;
 
                 return (
@@ -638,6 +641,7 @@ export default function Formacion() {
                   </div>
                 );
               })}
+              </div>
             </div>
 
             {/* Ediciones Anteriores y Lista de Espera */}

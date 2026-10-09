@@ -76,8 +76,8 @@ const rutas = [
     titulo: "Especialidades de Ingeniería",
     desc: "Ingeniería de costos, formulación de EETT y agentes autónomos especializados.",
     cursos: [
-      { codigo: "C3", nombre: "Auditoría Técnica y Forense de Expedientes", estado: "proximamente" },
-      { codigo: "C4", nombre: "Ecosistemas de Agentes Autónomos y MCP", estado: "proximamente" }
+      { codigo: "C4", nombre: "Auditoría Técnica y Forense de Expedientes", estado: "proximamente" },
+      { codigo: "C5", nombre: "Ecosistemas de Agentes Autónomos y MCP", estado: "proximamente" }
     ]
   }
 ];

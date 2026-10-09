@@ -89,6 +89,16 @@
       "tag": "CURSO C2 · EETT & WORD",
       "link": "https://pay.hotmart.com/D106788121M",
       "brochure": "https://go.hotmart.com/D106788121M?dp=1"
+    },
+    {
+      "id": "C3",
+      "ruta": "C",
+      "imagen": "/cursos/C3.jpeg",
+      "nombre": "Cuantificación de Obras con Inteligencia Artificial: de Planos DWG a Excel",
+      "precio": "$24.99 USD",
+      "tag": "CURSO C3 · CUANTIFICACIÓN & DWG",
+      "link": "https://pay.hotmart.com/I107950676I",
+      "brochure": "https://go.hotmart.com/I107950676I?dp=1"
     }
   ],
   "sincronicos": [

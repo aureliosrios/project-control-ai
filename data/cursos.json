@@ -139,7 +139,9 @@
       "link": "/inscripcion",
       "brochure": "/brochures/Brochure_Presupuestos_y_Planificacion_de_Obras_con_IA.pdf",
       "hotmart": "https://pay.hotmart.com/K104218834V",
-      "paypal": "https://paypal.me/ProjectControlAI",
+      "paypal": "https://paypal.me/ProjectControlAI/95USD",
+      "precioHotmart": "$100.00 USD",
+      "precioPaypal": "$95.00 USD",
       "colorKey": "cyan",
       "cerrado": false,
       "registro": "Presupuestos y Planificación de Obras con IA"

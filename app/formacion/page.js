@@ -588,6 +588,16 @@ export default function Formacion() {
                             <span className="text-4xl font-black text-white">{curso.precio}</span>
                             <span className="text-sm text-cyan-400 font-extrabold uppercase tracking-wider">{curso.precioSoles}</span>
                           </div>
+                          {curso.precioPaypal ? (
+                            <div className="mt-2.5 flex flex-wrap gap-2 text-[11px]">
+                              <span className="px-2 py-0.5 rounded-md bg-orange-500/10 border border-orange-500/30 text-orange-300 font-bold">
+                                Hotmart: {curso.precioHotmart || curso.precio}
+                              </span>
+                              <span className="px-2 py-0.5 rounded-md bg-blue-500/10 border border-blue-500/30 text-blue-300 font-bold">
+                                PayPal: {curso.precioPaypal}
+                              </span>
+                            </div>
+                          ) : null}
                           <p className="text-[11px] text-slate-400 mt-2">Acceso a clases en vivo, grabaciones y materiales de por vida.</p>
                         </div>
 
@@ -614,16 +624,18 @@ export default function Formacion() {
                             <Link
                               href={curso.hotmart}
                               target="_blank"
-                              className="py-2.5 bg-orange-500/10 border border-orange-500/30 rounded-xl text-[10px] font-black text-orange-400 uppercase tracking-wider hover:bg-orange-500/20 text-center transition-all"
+                              className="py-2.5 bg-orange-500/10 border border-orange-500/30 rounded-xl text-[10px] font-black text-orange-400 uppercase tracking-wider hover:bg-orange-500/20 text-center transition-all flex flex-col items-center justify-center"
                             >
-                              Hotmart
+                              <span>Hotmart</span>
+                              <span className="text-[9px] font-semibold text-orange-300/80">{curso.precioHotmart || curso.precio}</span>
                             </Link>
                             <Link
                               href={curso.paypal}
                               target="_blank"
-                              className="py-2.5 bg-blue-500/10 border border-blue-500/30 rounded-xl text-[10px] font-black text-blue-400 uppercase tracking-wider hover:bg-blue-500/20 text-center transition-all"
+                              className="py-2.5 bg-blue-500/10 border border-blue-500/30 rounded-xl text-[10px] font-black text-blue-400 uppercase tracking-wider hover:bg-blue-500/20 text-center transition-all flex flex-col items-center justify-center"
                             >
-                              PayPal
+                              <span>PayPal</span>
+                              <span className="text-[9px] font-semibold text-blue-300/80">{curso.precioPaypal || curso.precio}</span>
                             </Link>
                           </div>
 

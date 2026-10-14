@@ -37,6 +37,25 @@
             "url": "/manuales/resumen_tarde_clase_2_agentes.html"
           }
         ]
+      },
+      {
+        "id": "OvATAGxuR8w",
+        "num": "03",
+        "status": "OCULTA",
+        "title": "Sesión 03: Cerebro Digital y EETT por Partida (11/10/2026)",
+        "desc": "Clase de Agentes de IA del domingo 11 de octubre de 2026, grupo tarde (3:00 p.m. a 6:00 p.m., hora de Perú). Material complementario: prompts para configurar el cerebro digital con dos carpetas y generar EETT en Markdown por ítem. Project Control AI.",
+        "resources": [
+          {
+            "title": "Prompt 01: Configurar el Cerebro Digital con dos carpetas (Markdown)",
+            "type": "md",
+            "url": "/manuales/agentes-ia-tarde-2026-10-11/01_PROMPT_CONFIGURAR_CEREBRO_DIGITAL_2_CARPETAS.md"
+          },
+          {
+            "title": "Prompt 02: Generar EETT en Markdown por ítem (Markdown)",
+            "type": "md",
+            "url": "/manuales/agentes-ia-tarde-2026-10-11/02_PROMPT_GENERAR_EETT_MD_POR_ITEM.md"
+          }
+        ]
       }
     ]
   },

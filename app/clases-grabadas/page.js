@@ -136,8 +136,8 @@ export default function ClasesGrabadas() {
       setStudentData(student);
       setIsLoggedIn(true);
 
-      // Seleccionar curso por defecto (priorizar AGENTES_IA si existe, luego GIP o el primero disponible)
-      const agentesCourse = processed.find(c => c.key === "AGENTES_IA" && !c.isExpired);
+      // Seleccionar curso por defecto (priorizar la cohorte vigente, luego AGENTES_IA, GIP o el primero disponible)
+      const agentesCourse = processed.find(c => c.key === "AGENTE_PPTO_PROG" && !c.isExpired) || processed.find(c => c.key === "AGENTES_IA" && !c.isExpired);
       const gipCourse = processed.find(c => c.key === "GIP" && !c.isExpired);
       const defaultCourse = agentesCourse || gipCourse || processed.find(c => courses[c.key].lessons.length > 0 && !c.isExpired) || processed[0];
       
@@ -208,7 +208,7 @@ export default function ClasesGrabadas() {
                       : 'text-slate-400 hover:text-white'
                   }`}
                 >
-                  {c.key === "AGENTES_IA_TARDE" ? "Agentes de IA (Grupo Tarde: 3pm - 6pm)" : c.key === "AGENTES_IA" ? "Agentes de IA: Presupuestos, EETT y Cronogramas (Grupo Mañana)" : c.key === "AE" ? "Automatización de Obras con Agentes de IA (Ingeniería Aumentada)" : c.key === "GIP" ? "Gestión de Construcción con IA (El Despertar Digital)" : c.key === "AUT_CONST" ? "Automatización y Soluciones de IA para la Gestión de Construcción" : "Licitaciones de Construcción con IA (Licitaciones Inteligentes)"}
+                  {c.key === "AGENTE_PPTO_PROG" ? "Agente de IA: Presupuesto y programación" : c.key === "AGENTES_IA_TARDE" ? "Agentes de IA (Grupo Tarde: 3pm - 6pm)" : c.key === "AGENTES_IA" ? "Agentes de IA: Presupuestos, EETT y Cronogramas (Grupo Mañana)" : c.key === "AE" ? "Automatización de Obras con Agentes de IA (Ingeniería Aumentada)" : c.key === "GIP" ? "Gestión de Construcción con IA (El Despertar Digital)" : c.key === "AUT_CONST" ? "Automatización y Soluciones de IA para la Gestión de Construcción" : "Licitaciones de Construcción con IA (Licitaciones Inteligentes)"}
                 </button>
               ))}
             </div>

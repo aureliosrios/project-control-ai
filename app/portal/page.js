@@ -76,9 +76,12 @@ export default function StudentPortal() {
       const homogenizedEnrollments = activeEnrollmentsOnly.map(enroll => {
         let cursoHomogeneizado = enroll.curso;
         const cursoLower = enroll.curso?.trim().toLowerCase();
-        
-        if (
-          cursoLower?.includes("presupuesto") || 
+
+        // Las cohortes registradas en data/cohortes.json conservan su nombre oficial
+        if (registeredCourseKey(enroll.curso, enroll.edicion_curso)) {
+          // sin homogeneizar
+        } else if (
+          cursoLower?.includes("presupuesto") ||
           cursoLower?.includes("eett") || 
           cursoLower?.includes("cronograma") ||
           (cursoLower?.includes("agentes") && cursoLower?.includes("presupuesto"))
@@ -142,6 +145,8 @@ export default function StudentPortal() {
           const eName = (enroll.curso || "").toLowerCase();
           if (!cName || !eName) return false;
           if (cName === eName) return true;
+          // El curso "Presupuesto y programación" no comparte certificado con cursos anteriores
+          if (eName.includes("programaci") !== cName.includes("programaci")) return false;
           if (cName.includes(eName) || eName.includes(cName)) return true;
           if (cName.includes("despertar") && eName.includes("despertar")) return true;
           if (cName.includes("licitac") && eName.includes("licitac")) return true;
@@ -308,6 +313,12 @@ export default function StudentPortal() {
   };
 
   const activeZoomSessions = [
+    {
+      courseKey: "AGENTE_PPTO_PROG",
+      zoomUrl: "https://us06web.zoom.us/j/85436610256?pwd=YkJk9hB35KYaXIbcswMsg11u5r2muf.1",
+      title: "Agente de IA: Presupuesto y programación (Domingos 10:00 AM - 01:00 PM)",
+      message: "Tu clase sincrónica es los domingos de 10:00 a.m. a 1:00 p.m. Toca el botón para ingresar a la sala de Zoom."
+    },
     {
       courseKey: "AGENTES_IA",
       zoomUrl: "https://us06web.zoom.us/j/84609995401?pwd=mrbaCGEiPvc7Aa5XlAcpnDNICMMuwt.1",

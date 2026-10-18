@@ -8,5 +8,10 @@
     "curso": "Agentes de IA: Presupuestos, EETT y Cronogramas",
     "edicion": "20/09/2026 - Tarde",
     "courseKey": "AGENTES_IA_TARDE"
+  },
+  {
+    "curso": "Agente de IA: Presupuesto y programación",
+    "edicion": "18/10/2026",
+    "courseKey": "AGENTE_PPTO_PROG"
   }
 ]

@@ -1,4 +1,8 @@
 {
+  "AGENTE_PPTO_PROG": {
+    "name": "Agente de IA: Presupuesto y programación (Domingos 10am a 1pm)",
+    "lessons": []
+  },
   "AGENTES_IA_TARDE": {
     "name": "Agentes de IA: Presupuestos, EETT y Cronogramas (Grupo Tarde - Domingos 3pm a 6pm)",
     "lessons": [

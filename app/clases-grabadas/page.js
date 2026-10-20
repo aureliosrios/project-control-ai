@@ -297,14 +297,14 @@ export default function ClasesGrabadas() {
                         >
                           <div className="flex items-center gap-3">
                             <span className={`material-symbols-outlined ${
-                              res.type === 'pdf' ? 'text-red-400' : res.type === 'md' || res.type === 'markdown' ? 'text-emerald-400' : 'text-cyan-400'
+                              res.type === 'pdf' ? 'text-red-400' : res.type === 'md' || res.type === 'markdown' ? 'text-emerald-400' : res.type === 'zip' ? 'text-amber-400' : 'text-cyan-400'
                             }`}>
-                              {res.type === 'pdf' ? 'picture_as_pdf' : res.type === 'md' || res.type === 'markdown' ? 'description' : 'html'}
+                              {res.type === 'pdf' ? 'picture_as_pdf' : res.type === 'md' || res.type === 'markdown' ? 'description' : res.type === 'zip' ? 'archive' : 'html'}
                             </span>
                             <div className="text-left">
                               <p className="text-xs font-bold text-white uppercase tracking-wider group-hover:text-cyan-400 transition-colors">{res.title}</p>
                               <p className="text-[10px] text-slate-500 uppercase tracking-widest">
-                                {res.type === 'pdf' ? 'Documento PDF' : res.type === 'md' || res.type === 'markdown' ? 'Documento Markdown' : 'Resumen Interactivo (HTML)'}
+                                {res.type === 'pdf' ? 'Documento PDF' : res.type === 'md' || res.type === 'markdown' ? 'Documento Markdown' : res.type === 'zip' ? 'Archivo ZIP descargable' : 'Resumen Interactivo (HTML)'}
                               </p>
                             </div>
                           </div>

@@ -1,7 +1,27 @@
 {
   "AGENTE_PPTO_PROG": {
     "name": "Agente de IA: Presupuesto y programación (Domingos 10am a 1pm)",
-    "lessons": []
+    "lessons": [
+      {
+        "id": "dVZNMhvNSsw",
+        "num": "01",
+        "status": "OCULTA",
+        "title": "Sesión 01: Agente de IA para Presupuestos y Programación (18/10/2026)",
+        "desc": "Clase del domingo 18 de octubre de 2026, de 10:00 a.m. a 1:00 p.m. (hora de Perú), del curso Agente de IA: Presupuesto y programación. Grabación editada para retirar el tramo previo sin contenido. Project Control AI.",
+        "resources": [
+          {
+            "title": "Entregable 01: Especificaciones Técnicas de Obras Civiles (PDF)",
+            "type": "pdf",
+            "url": "/manuales/06_EETT Civiles_Rv01.pdf"
+          },
+          {
+            "title": "Entregable 02: Especificaciones Técnicas Mecánicas (PDF)",
+            "type": "pdf",
+            "url": "/manuales/06_EETT Mecánicas_Rv01.pdf"
+          }
+        ]
+      }
+    ]
   },
   "AGENTES_IA_TARDE": {
     "name": "Agentes de IA: Presupuestos, EETT y Cronogramas (Grupo Tarde - Domingos 3pm a 6pm)",
@@ -58,6 +78,30 @@
             "title": "Prompt 02: Generar EETT en Markdown por ítem (Markdown)",
             "type": "md",
             "url": "/manuales/agentes-ia-tarde-2026-10-11/02_PROMPT_GENERAR_EETT_MD_POR_ITEM.md"
+          }
+        ]
+      },
+      {
+        "id": "wTnQ1dIU77E",
+        "num": "04",
+        "status": "OCULTA",
+        "title": "Sesión 04: Agentes de IA, Presupuestos, EETT y Cronogramas (18/10/2026)",
+        "desc": "Clase del domingo 18 de octubre de 2026, de 3:00 p.m. a 6:00 p.m. (hora de Perú), del curso Agentes de IA: Presupuestos, EETT y Cronogramas. Video consolidado a partir de dos grabaciones consecutivas de Zoom. Project Control AI.",
+        "resources": [
+          {
+            "title": "Material 01: Agentes de Presupuesto (ZIP)",
+            "type": "zip",
+            "url": "/manuales/Agentes_de_Presupuesto.zip"
+          },
+          {
+            "title": "Material 02: Presupuesto sin CD (ZIP)",
+            "type": "zip",
+            "url": "/manuales/Presupuesto sin CD.zip"
+          },
+          {
+            "title": "Prompt: Cerebro Digital (Markdown)",
+            "type": "md",
+            "url": "/manuales/PROMPT_CEREBRO_DIGITAL.md"
           }
         ]
       }

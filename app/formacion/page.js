@@ -1,10 +1,139 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import catalogo from "@/data/cursos.json";
 
 const { asincronicos, sincronicos } = catalogo;
+
+const agentesEspecializados = [
+  {
+    id: "agente-s10",
+    nombre: "Agente de Presupuestos & APU Tipo S10",
+    especialidad: "Costos y Presupuestos",
+    tag: "COSTOS & S10",
+    theme: {
+      border: "border-amber-500/40 hover:border-amber-400",
+      bg: "bg-gradient-to-br from-[#1c1307] to-[#0d0a04]",
+      badge: "bg-amber-500 text-slate-950 font-black",
+      pill: "bg-amber-500/10 text-amber-300 border-amber-500/30",
+      btn: "bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-[0_4px_14px_rgba(245,158,11,0.35)]"
+    },
+    icono: "calculate",
+    duracionVideo: "12 min",
+    tiempoEntrega: "15 segundos",
+    problema: "¿Pasas horas calculando rendimientos, cuadrillas y transcribiendo precios en hojas de cálculo propensas a errores?",
+    solucion: "Genera el desglose paramétrico de partidas, análisis de precios unitarios (APU) tipo S10, cálculo de HH/HM y costo directo con fórmulas vivas.",
+    entregable: "Plantilla Excel con fórmulas nativas vivas, cálculo de cuadrillas, mano de obra y lista de insumos tipo S10.",
+    videoId: "dVZNMhvNSsw",
+    whatsappMsg: "Hola Aurelio, deseo implementar el Agente de Presupuestos y APU Tipo S10 en mis proyectos."
+  },
+  {
+    id: "agente-msproject",
+    nombre: "Agente Programador Gantt & VBA (MS Project)",
+    especialidad: "Planeamiento y Programación",
+    tag: "MS PROJECT & VBA",
+    theme: {
+      border: "border-blue-500/40 hover:border-blue-400",
+      bg: "bg-gradient-to-br from-[#071329] to-[#030914]",
+      badge: "bg-blue-500 text-white font-black",
+      pill: "bg-blue-500/10 text-blue-300 border-blue-500/30",
+      btn: "bg-blue-500 hover:bg-blue-400 text-white shadow-[0_4px_14px_rgba(59,130,246,0.35)]"
+    },
+    icono: "calendar_month",
+    duracionVideo: "15 min",
+    tiempoEntrega: "20 segundos",
+    problema: "¿Vincular cientos de tareas una por una, ajustar calendarios y nivelar recursos a mano en MS Project te toma días?",
+    solucion: "Convierte cualquier WBS o presupuesto en un cronograma estructurado con ruta crítica CPM, hitos y duraciones calculadas con macros VBA.",
+    entregable: "Script VBA (.bas) listo para importar directamente a MS Project, generando el cronograma y diagrama de Gantt sin errores.",
+    videoId: "NjWnA5b9Zho",
+    whatsappMsg: "Hola Aurelio, me interesa implementar el Agente Programador Gantt con macros VBA para MS Project."
+  },
+  {
+    id: "agente-p6",
+    nombre: "Agente Primavera P6 (.XER / PLF)",
+    especialidad: "Control Maestro y Forense",
+    tag: "PRIMAVERA P6",
+    theme: {
+      border: "border-orange-500/40 hover:border-orange-400",
+      bg: "bg-gradient-to-br from-[#1c0c05] to-[#0a0502]",
+      badge: "bg-orange-500 text-slate-950 font-black",
+      pill: "bg-orange-500/10 text-orange-300 border-orange-500/30",
+      btn: "bg-orange-500 hover:bg-orange-400 text-slate-950 shadow-[0_4px_14px_rgba(249,115,22,0.35)]"
+    },
+    icono: "reorder",
+    duracionVideo: "14 min",
+    tiempoEntrega: "30 segundos",
+    problema: "¿Archivos .XER con errores de importación (%T PROJECT), descuadres en calendarios o curvas de valor ganado inconsistentes?",
+    solucion: "Genera y sanea archivos nativos de Oracle Primavera P6 (.xer) y plantillas de diseño visual (.plf) con curvas S y Valor Ganado (EVM).",
+    entregable: "Archivo .XER compatible y limpio, con Curva S (PV/EV), asignación de recursos y diseño de seguimiento de barras Gantt.",
+    videoId: "vABYYEA46yc",
+    whatsappMsg: "Hola Aurelio, requiero el Agente Primavera P6 (.XER) para el control maestro de mis cronogramas."
+  },
+  {
+    id: "agente-contratos",
+    nombre: "Agente Auditor Contractual & Cerebro Digital",
+    especialidad: "Oficina Técnica y Contractual",
+    tag: "CONTRATOS & AUDITORÍA",
+    theme: {
+      border: "border-purple-500/40 hover:border-purple-400",
+      bg: "bg-gradient-to-br from-[#170a24] to-[#09030f]",
+      badge: "bg-purple-500 text-white font-black",
+      pill: "bg-purple-500/10 text-purple-300 border-purple-500/30",
+      btn: "bg-purple-500 hover:bg-purple-400 text-white shadow-[0_4px_14px_rgba(168,85,247,0.35)]"
+    },
+    icono: "gavel",
+    duracionVideo: "10 min",
+    tiempoEntrega: "25 segundos",
+    problema: "¿Expedientes y contratos de más de 500 páginas donde se pierden penalidades, plazos de ampliación y obligaciones críticas?",
+    solucion: "Pipeline OCR y análisis semántico para extraer automáticamente matrices de riesgos, penalidades diarias y causales de ampliación.",
+    entregable: "Matriz ejecutiva de control contractual en Excel (dashboard A3) y grafo de conocimiento conectado en Obsidian.",
+    videoId: "0nJQXGfkMB4",
+    whatsappMsg: "Hola Aurelio, quiero aplicar el Agente Auditor Contractual y Cerebro Digital para proteger mis contratos de obra."
+  },
+  {
+    id: "agente-lps",
+    nombre: "Agente Lookahead & Last Planner System",
+    especialidad: "Control Semanal y Producción",
+    tag: "LAST PLANNER SYSTEM",
+    theme: {
+      border: "border-emerald-500/40 hover:border-emerald-400",
+      bg: "bg-gradient-to-br from-[#061c12] to-[#020b07]",
+      badge: "bg-emerald-500 text-slate-950 font-black",
+      pill: "bg-emerald-500/10 text-emerald-300 border-emerald-500/30",
+      btn: "bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-[0_4px_14px_rgba(16,185,129,0.35)]"
+    },
+    icono: "fact_check",
+    duracionVideo: "11 min",
+    tiempoEntrega: "15 segundos",
+    problema: "¿Reuniones de producción caóticas, restricciones no identificadas a tiempo y cálculo manual del PPC cada semana?",
+    solucion: "Estructura el Lookahead a 6 semanas con arquitectura de 3 filas (Línea Base LB-0, Reprogramado y Real Campo), Plan Semanal WWP y restricciones.",
+    entregable: "Matriz viva de restricciones en Excel con semaforización automática, causas de no cumplimiento (CNC) y cálculo PPC.",
+    videoId: "dVZNMhvNSsw",
+    whatsappMsg: "Hola Aurelio, me interesa el Agente Lookahead & Last Planner System para la gestión de producción en campo."
+  },
+  {
+    id: "agente-eett",
+    nombre: "Agente Redactor de EETT a Word",
+    especialidad: "Especificaciones Técnicas",
+    tag: "EETT & WORD",
+    theme: {
+      border: "border-cyan-500/40 hover:border-cyan-400",
+      bg: "bg-gradient-to-br from-[#051724] to-[#02090e]",
+      badge: "bg-cyan-500 text-slate-950 font-black",
+      pill: "bg-cyan-500/10 text-cyan-300 border-cyan-500/30",
+      btn: "bg-cyan-500 hover:bg-cyan-400 text-slate-950 shadow-[0_4px_14px_rgba(6,182,212,0.35)]"
+    },
+    icono: "description",
+    duracionVideo: "10 min",
+    tiempoEntrega: "20 segundos",
+    problema: "¿Copiar y pegar especificaciones desactualizadas con normas derogadas y unidades de medida incongruentes?",
+    solucion: "Redacta especificaciones técnicas completas y normadas por partida (descripción, materiales, método de ejecución, controles, medición y pago).",
+    entregable: "Documento oficial listo para entregar en Microsoft Word (.docx) con índice automático, estilos institucionales y normativa técnica vigente.",
+    videoId: "NjWnA5b9Zho",
+    whatsappMsg: "Hola Aurelio, deseo implementar el Agente Redactor de EETT a Word para la formulación rápida de expedientes."
+  }
+];
 
 const rutasConstruccion = {
   A: {
@@ -108,8 +237,19 @@ const sincThemes = {
 };
 
 export default function Formacion() {
-  const [activeTab, setActiveTab] = useState("asinc");
+  const [activeTab, setActiveTab] = useState("agentes");
   const [selectedRuta, setSelectedRuta] = useState("TODAS");
+  const [selectedVideo, setSelectedVideo] = useState(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const tabParam = params.get("tab");
+      if (tabParam === "agentes" || tabParam === "sinc" || tabParam === "asinc") {
+        setActiveTab(tabParam);
+      }
+    }
+  }, []);
 
   const cursosFiltrados = selectedRuta === "TODAS"
     ? asincronicos
@@ -133,8 +273,41 @@ export default function Formacion() {
           </h1>
 
           <p className="text-xl md:text-2xl text-slate-300 font-normal max-w-3xl leading-relaxed mb-8">
-            Automatiza presupuestos, cronogramas, EETT y control de obra con IA. Cursos prácticos para ingenieros y profesionales de construcción.
+            Automatiza presupuestos, cronogramas, EETT y control de obra con IA. Cursos prácticos y soluciones agénticas para ingenieros y profesionales de construcción.
           </p>
+
+          {/* Banner rápido hacia Solución Agéntica */}
+          <div 
+            onClick={() => setActiveTab("agentes")}
+            className="cursor-pointer mb-8 p-4 rounded-2xl bg-gradient-to-r from-emerald-500/15 via-teal-500/10 to-transparent border border-emerald-500/30 hover:border-emerald-400 transition-all flex flex-col md:flex-row items-start md:items-center justify-between gap-4 group"
+          >
+            <div className="flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-black shrink-0">
+                <span className="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">bolt</span>
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded bg-emerald-500 text-slate-950">
+                    NUEVO ENFOQUE
+                  </span>
+                  <span className="text-xs text-emerald-300 font-bold">
+                    ¿No tienes 8 horas para llevar un curso por cada especialidad?
+                  </span>
+                </div>
+                <p className="text-sm font-semibold text-white mt-0.5">
+                  Descubre las <span className="text-emerald-400 underline underline-offset-4">Soluciones Agénticas</span>: entregables profesionales en segundos con videoguías de 10 a 15 min.
+                </p>
+              </div>
+            </div>
+            <button 
+              type="button"
+              onClick={(e) => { e.stopPropagation(); setActiveTab("agentes"); }}
+              className="whitespace-nowrap px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider transition-all flex items-center gap-1 shadow-md"
+            >
+              Ver Agentes
+              <span className="material-symbols-outlined text-sm">arrow_forward</span>
+            </button>
+          </div>
 
           {/* Tres pruebas de valor concretas enfocadas en Casos Reales de Obra */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl">
@@ -171,26 +344,313 @@ export default function Formacion() {
         </header>
 
         {/* Tab Selector */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-14 border-b border-white/10 pb-6">
+        <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-14 border-b border-white/10 pb-6">
+          <button
+            aria-pressed={activeTab === "agentes"}
+            onClick={() => setActiveTab("agentes")}
+            className={`px-6 md:px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-2.5 ${
+              activeTab === 'agentes'
+                ? 'bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 shadow-[0_0_30px_rgba(16,185,129,0.45)] ring-2 ring-emerald-400/50'
+                : 'bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 border border-emerald-500/20'
+            }`}
+          >
+            <span className="material-symbols-outlined text-base text-emerald-400">smart_toy</span>
+            <span>⚡ Soluciones Agénticas</span>
+            <span className="text-[9px] px-2 py-0.5 rounded-full font-black uppercase tracking-wider bg-emerald-950 text-emerald-300 border border-emerald-500/30">
+              Nuevo
+            </span>
+          </button>
+
           <button
             aria-pressed={activeTab === "asinc"}
             onClick={() => setActiveTab("asinc")}
-            className={`px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all flex items-center gap-2 ${activeTab === 'asinc' ? 'bg-cyan-500 text-slate-950 shadow-[0_0_30px_rgba(6,182,212,0.4)]' : 'bg-white/5 text-slate-500 hover:text-white'}`}
+            className={`px-6 md:px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-2 ${
+              activeTab === 'asinc'
+                ? 'bg-cyan-500 text-slate-950 shadow-[0_0_30px_rgba(6,182,212,0.4)]'
+                : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
+            }`}
           >
             <span className="material-symbols-outlined text-sm">schedule</span>
             A tu ritmo (Asincrónico)
           </button>
+
           <button
             aria-pressed={activeTab === "sinc"}
             onClick={() => setActiveTab("sinc")}
-            className={`px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all flex items-center gap-2 ${activeTab === 'sinc' ? 'bg-orange-500 text-slate-950 shadow-[0_0_30px_rgba(244,99,15,0.4)]' : 'bg-white/5 text-slate-500 hover:text-white'}`}
+            className={`px-6 md:px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-2 ${
+              activeTab === 'sinc'
+                ? 'bg-orange-500 text-slate-950 shadow-[0_0_30px_rgba(244,99,15,0.4)]'
+                : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
+            }`}
           >
             <span className="material-symbols-outlined text-sm">sensors</span>
             En Vivo (Sincrónico)
           </button>
         </div>
 
-        {activeTab === "asinc" ? (
+        {activeTab === "agentes" && (
+          <div className="space-y-16 animate-in fade-in duration-300">
+            {/* 1. Hero del Manifiesto Agéntico */}
+            <section className="p-8 md:p-12 rounded-[40px] bg-gradient-to-br from-slate-900 via-[#061524] to-[#020b17] border-2 border-emerald-500/40 relative overflow-hidden shadow-[0_0_50px_rgba(16,185,129,0.15)]">
+              <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 blur-[90px] pointer-events-none" />
+              <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-cyan-500/10 blur-[80px] pointer-events-none" />
+
+              <div className="relative z-10 max-w-4xl">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-black uppercase tracking-[0.2em] mb-6">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                  Solución Agéntica · Ingeniería de Precisión
+                </div>
+
+                <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-white uppercase tracking-tight leading-[1.08] mb-6">
+                  ¿No tienes tiempo para llevar <span className="text-emerald-400">8 horas de cursos</span> para aprender una especialidad?
+                </h2>
+
+                <p className="text-base sm:text-xl text-slate-200 font-normal leading-relaxed mb-8">
+                  Aprender desde cero presupuestos, cronogramas, seguimiento y control toma semanas. <strong className="text-white font-bold">Acá te damos la solución agéntica:</strong> agentes autónomos de IA que te dan la libertad de tener un entregable profesional en segundos. Solo mira una videoguía de 10 a 15 minutos y estarás listo para aplicarlos a tus proyectos reales de obra.
+                </p>
+
+                {/* 3 Pilares Clave */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                  <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md">
+                    <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold mb-3">
+                      <span className="material-symbols-outlined text-[22px]">timer</span>
+                    </div>
+                    <p className="text-xs font-black text-white uppercase tracking-wider">Video de 10 a 15 min</p>
+                    <p className="text-[11px] text-slate-400 mt-1">Directo a la aplicación práctica, sin teoría innecesaria.</p>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md">
+                    <div className="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold mb-3">
+                      <span className="material-symbols-outlined text-[22px]">bolt</span>
+                    </div>
+                    <p className="text-xs font-black text-white uppercase tracking-wider">Entregable en Segundos</p>
+                    <p className="text-[11px] text-slate-400 mt-1">APUs en Excel, macros VBA en MS Project, .XER en P6 y EETT a Word.</p>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md">
+                    <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold mb-3">
+                      <span className="material-symbols-outlined text-[22px]">engineering</span>
+                    </div>
+                    <p className="text-xs font-black text-white uppercase tracking-wider">Listo para Obra</p>
+                    <p className="text-[11px] text-slate-400 mt-1">Fórmulas vivas, normativas vigentes y trazabilidad técnica.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* 2. Banner Destacado: Curso "El Despertar" a $0 USD */}
+            <section className="p-8 md:p-10 rounded-3xl bg-gradient-to-r from-emerald-950/60 via-slate-950 to-cyan-950/40 border-2 border-emerald-500/40 relative overflow-hidden shadow-[0_0_40px_rgba(16,185,129,0.2)]">
+              <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+                <div className="flex-1 space-y-3">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-emerald-500 text-slate-950 text-[10px] font-black uppercase tracking-widest">
+                    <span className="material-symbols-outlined text-[14px]">card_giftcard</span>
+                    Beca Abierta · Precio Reducido al 100%
+                  </div>
+
+                  <h3 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
+                    ¿No sabes de agentes? Empieza con el curso <span className="text-emerald-400">&ldquo;El Despertar&rdquo;</span>
+                  </h3>
+
+                  <p className="text-slate-300 text-sm leading-relaxed max-w-3xl">
+                    Si aún no sabes cómo interactúan los agentes de IA con tus archivos de obra, preparamos el curso introductorio <strong>&ldquo;El Despertar de la IA en la Gestión de Proyectos&rdquo;</strong>. Hoy con precio totalmente disminuido de <strong>$15.00 USD a $0.00 USD (GRATUITO)</strong> con la intención de que todos los profesionales y estudiantes de ingeniería puedan conocer cómo funcionan los agentes sin ninguna barrera económica.
+                  </p>
+
+                  <div className="flex flex-wrap items-center gap-4 pt-2">
+                    <div className="flex items-baseline gap-2 bg-black/40 px-3.5 py-1.5 rounded-xl border border-white/10">
+                      <span className="text-xs text-slate-500 line-through font-bold">Precio Regular: $15.00 USD</span>
+                      <span className="text-lg font-black text-emerald-400">Hoy: $0.00 USD (Gratis)</span>
+                    </div>
+                    <span className="text-xs text-slate-400 flex items-center gap-1">
+                      <span className="material-symbols-outlined text-sm text-cyan-400">all_inclusive</span>
+                      Acceso 24/7 en Hotmart
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row lg:flex-col gap-3 w-full lg:w-auto shrink-0">
+                  <Link
+                    href="https://pay.hotmart.com/I104938744G"
+                    target="_blank"
+                    className="px-6 py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(16,185,129,0.5)] hover:scale-105"
+                  >
+                    <span className="material-symbols-outlined text-base">card_giftcard</span>
+                    Acceder Gratis al Curso ($0 USD)
+                  </Link>
+
+                  <Link
+                    href="https://go.hotmart.com/I104938744G?dp=1"
+                    target="_blank"
+                    className="px-6 py-3 rounded-2xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 font-bold text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2"
+                  >
+                    <span className="material-symbols-outlined text-base">description</span>
+                    Descargar Temario PDF
+                  </Link>
+                </div>
+              </div>
+            </section>
+
+            {/* 3. Banner Oficial de YouTube */}
+            <section className="p-8 md:p-10 rounded-3xl bg-gradient-to-r from-red-950/30 via-slate-950 to-slate-900 border border-red-500/30 relative overflow-hidden">
+              <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-14 h-14 rounded-2xl bg-red-600/20 text-red-500 border border-red-500/30 flex items-center justify-center shrink-0">
+                    <span className="material-symbols-outlined text-3xl">smart_display</span>
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded bg-red-500 text-white">
+                        CANAL OFICIAL
+                      </span>
+                      <span className="text-xs text-red-400 font-bold">Comunidad Abierta</span>
+                    </div>
+                    <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight">
+                      Hoy nos encontramos también en YouTube
+                    </h3>
+                    <p className="text-slate-400 text-xs md:text-sm max-w-2xl mt-1">
+                      Mira demostraciones de agentes en tiempo real, videoguías de 10 a 15 minutos, resolución de casos de obra reales y tutoriales paso a paso para aplicar inteligencia artificial a tu trabajo diario.
+                    </p>
+                  </div>
+                </div>
+
+                <Link
+                  href="https://www.youtube.com/@ProjectControlAI"
+                  target="_blank"
+                  className="px-6 py-3.5 rounded-2xl bg-red-600 hover:bg-red-500 text-white font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 shrink-0 shadow-[0_0_20px_rgba(239,68,68,0.4)] hover:scale-105"
+                >
+                  <span className="material-symbols-outlined text-base">subscriptions</span>
+                  Ir a YouTube
+                </Link>
+              </div>
+            </section>
+
+            {/* 4. Catálogo de Agentes de Precisión */}
+            <div>
+              <div className="mb-8">
+                <span className="text-emerald-400 text-[10px] font-black tracking-[0.3em] uppercase block mb-1">
+                  Catálogo de Agentes · Entregables en Segundos
+                </span>
+                <h2 className="text-3xl font-black text-white uppercase tracking-tighter">
+                  Elige tu Agente, Mira el Video y Contáctanos
+                </h2>
+                <p className="text-slate-400 font-light text-sm max-w-2xl mt-1">
+                  Cada agente resuelve un problema crítico de oficina técnica o campo. Revisa la videoguía demostrativa de 10-15 minutos y contáctanos para implementarlo directamente en tus proyectos.
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {agentesEspecializados.map((agente) => (
+                  <div
+                    key={agente.id}
+                    className={`p-6 sm:p-7 rounded-3xl border-2 ${agente.theme.border} ${agente.theme.bg} flex flex-col justify-between transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl group relative overflow-hidden`}
+                  >
+                    <div>
+                      {/* Header de Tarjeta */}
+                      <div className="flex items-center justify-between gap-2 mb-4">
+                        <span className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md ${agente.theme.badge}`}>
+                          {agente.tag}
+                        </span>
+                        <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-slate-300 bg-white/5 px-2 py-0.5 rounded border border-white/10">
+                          <span className="material-symbols-outlined text-[13px] text-cyan-400">schedule</span>
+                          {agente.duracionVideo}
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-3 mb-3">
+                        <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0 text-white">
+                          <span className="material-symbols-outlined text-[22px]">{agente.icono}</span>
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors leading-snug">
+                            {agente.nombre}
+                          </h3>
+                          <p className="text-[11px] text-slate-400 font-medium">{agente.especialidad}</p>
+                        </div>
+                      </div>
+
+                      {/* El Reto vs La Solución */}
+                      <div className="space-y-3 my-4 text-xs">
+                        <div className="p-3 rounded-xl bg-black/40 border border-white/5">
+                          <span className="text-[10px] font-bold text-amber-400 uppercase tracking-wider block mb-0.5">El Reto:</span>
+                          <p className="text-slate-300 leading-relaxed text-[11px]">{agente.problema}</p>
+                        </div>
+
+                        <div className="p-3 rounded-xl bg-white/5 border border-white/5">
+                          <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider block mb-0.5">Solución Agéntica:</span>
+                          <p className="text-slate-300 leading-relaxed text-[11px]">{agente.solucion}</p>
+                        </div>
+
+                        <div className="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20">
+                          <div className="flex items-center justify-between mb-0.5">
+                            <span className="text-[10px] font-black text-cyan-300 uppercase tracking-wider">Entregable Listo:</span>
+                            <span className="text-[9px] font-mono font-bold text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">
+                              ⚡ {agente.tiempoEntrega}
+                            </span>
+                          </div>
+                          <p className="text-slate-200 text-[11px] font-medium leading-relaxed">{agente.entregable}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Acciones de la Tarjeta */}
+                    <div className="pt-4 border-t border-white/10 space-y-2">
+                      <button
+                        type="button"
+                        onClick={() => setSelectedVideo(agente)}
+                        className="w-full py-2.5 px-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5"
+                      >
+                        <span className="material-symbols-outlined text-base text-red-500">play_circle</span>
+                        Ver Video ({agente.duracionVideo})
+                      </button>
+
+                      <Link
+                        href={`https://wa.me/51993147501?text=${encodeURIComponent(agente.whatsappMsg)}`}
+                        target="_blank"
+                        className={`w-full py-2.5 px-3 rounded-xl font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 ${agente.theme.btn}`}
+                      >
+                        <span className="material-symbols-outlined text-base">chat</span>
+                        Ponte en Contacto
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 5. Cierre y Llamado a la Acción Global */}
+            <section className="p-8 md:p-12 rounded-[40px] bg-slate-900 border border-white/10 text-center relative overflow-hidden">
+              <div className="max-w-2xl mx-auto space-y-4">
+                <span className="text-emerald-400 text-xs font-black tracking-[0.3em] uppercase block">
+                  Adopción Inmediata · Soporte Directo
+                </span>
+                <h3 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight">
+                  Elige tu agente, mira el video y ponte en contacto con nosotros
+                </h3>
+                <p className="text-slate-300 text-sm leading-relaxed">
+                  ¿Deseas implementar estos agentes en tu empresa o adaptar un flujo agéntico para tu tipo de proyecto? Conversemos directamente por WhatsApp o programa una sesión técnica de consultoría.
+                </p>
+
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
+                  <Link
+                    href="https://wa.me/51993147501?text=Hola%20Aurelio,%20estuve%20revisando%20la%20secci%C3%B3n%20de%20agentes%20en%20Project%20Control%20AI%20y%20deseo%20m%C3%A1s%20informaci%C3%B3n."
+                    target="_blank"
+                    className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(16,185,129,0.4)]"
+                  >
+                    <span className="material-symbols-outlined text-base">chat</span>
+                    Contactar por WhatsApp (+51 993 147 501)
+                  </Link>
+                  <Link
+                    href="/consultoria"
+                    className="w-full sm:w-auto px-6 py-4 rounded-2xl bg-white/5 hover:bg-white/10 text-slate-200 hover:text-white border border-white/10 font-bold text-xs uppercase tracking-widest transition-all"
+                  >
+                    Ver Consultoría Técnica
+                  </Link>
+                </div>
+              </div>
+            </section>
+          </div>
+        )}
+
+        {activeTab === "asinc" && (
           <div className="space-y-16">
             {/* NUEVO: Selector de Rutas Profesionales de Construcción */}
             <section className="p-8 md:p-10 rounded-3xl bg-slate-950/80 border border-white/10 backdrop-blur-xl relative overflow-hidden">
@@ -402,6 +862,11 @@ export default function Formacion() {
                           <span className={`text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-wider backdrop-blur-md shadow-md ${rutaInfo.badgeSolid}`}>
                             {curso.id}
                           </span>
+                          {curso.precio === "$0.00 USD" && (
+                            <span className="text-[9px] font-black px-2 py-0.5 rounded uppercase tracking-wider bg-emerald-500 text-slate-950 shadow-md animate-pulse">
+                              BECA LIBRE
+                            </span>
+                          )}
                         </div>
                         <div className="absolute top-2.5 right-2.5">
                           <span className="text-[9px] font-black px-2 py-0.5 rounded uppercase tracking-wider bg-black/80 text-white border border-white/20 backdrop-blur-md">
@@ -428,10 +893,20 @@ export default function Formacion() {
 
                         {/* Monto Oficial */}
                         <div className="pt-3 mt-3 border-t border-white/10 flex items-baseline justify-between">
-                          <div>
-                            <span className="text-2xl font-black text-white tracking-tight">{curso.precio}</span>
-                            <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider block">Acceso 24/7</span>
-                          </div>
+                          {curso.precio === "$0.00 USD" ? (
+                            <div>
+                              <div className="flex items-center gap-1.5">
+                                <span className="text-xs text-slate-500 line-through font-bold">$14.99 USD</span>
+                                <span className="text-2xl font-black text-emerald-400 tracking-tight">$0.00 USD</span>
+                              </div>
+                              <span className="text-[9px] text-emerald-300 font-bold uppercase tracking-wider block">100% Gratuito · Beca Libre</span>
+                            </div>
+                          ) : (
+                            <div>
+                              <span className="text-2xl font-black text-white tracking-tight">{curso.precio}</span>
+                              <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider block">Acceso 24/7</span>
+                            </div>
+                          )}
                           <span className="text-[10px] text-emerald-400 font-bold flex items-center gap-0.5">
                             <span className="material-symbols-outlined text-xs">verified</span> Oficial
                           </span>
@@ -451,10 +926,16 @@ export default function Formacion() {
                         <Link
                           href={curso.link}
                           target="_blank"
-                          className={`py-2.5 px-2 rounded-xl text-[11px] font-black uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 ${rutaInfo.btnPrimary}`}
+                          className={`py-2.5 px-2 rounded-xl text-[11px] font-black uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 ${
+                            curso.precio === "$0.00 USD"
+                              ? "bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black shadow-[0_4px_14px_rgba(16,185,129,0.4)]"
+                              : rutaInfo.btnPrimary
+                          }`}
                         >
-                          <span className="material-symbols-outlined text-[14px]">shopping_cart</span>
-                          Comprar
+                          <span className="material-symbols-outlined text-[14px]">
+                            {curso.precio === "$0.00 USD" ? "card_giftcard" : "shopping_cart"}
+                          </span>
+                          {curso.precio === "$0.00 USD" ? "Acceder Gratis" : "Comprar"}
                         </Link>
                       </div>
                     </div>
@@ -506,7 +987,9 @@ export default function Formacion() {
               </div>
             </section>
           </div>
-        ) : (
+        )}
+
+        {activeTab === "sinc" && (
           <div className="space-y-16">
             {/* Cursos Sincrónicos: Convocatoria Oficial Abierta (Destacada) */}
             <div>
@@ -795,6 +1278,66 @@ export default function Formacion() {
                     </div>
                     <span className="text-[9px] text-slate-400 font-black uppercase tracking-tighter">Checkout en tarjeta</span>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Modal de Video Demostrativo */}
+        {selectedVideo && (
+          <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
+            <div className="relative w-full max-w-4xl bg-slate-900 border border-white/15 rounded-3xl overflow-hidden shadow-2xl">
+              <div className="p-4 sm:p-6 border-b border-white/10 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <span className="material-symbols-outlined text-red-500 text-2xl">play_circle</span>
+                  <div>
+                    <h3 className="text-base sm:text-lg font-bold text-white">{selectedVideo.nombre}</h3>
+                    <p className="text-xs text-slate-400">Demostración práctica · Duración estimada: {selectedVideo.duracionVideo}</p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setSelectedVideo(null)}
+                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
+                  aria-label="Cerrar video"
+                >
+                  <span className="material-symbols-outlined text-lg">close</span>
+                </button>
+              </div>
+
+              <div className="relative aspect-video w-full bg-black">
+                <iframe
+                  src={`https://www.youtube.com/embed/${selectedVideo.videoId}?autoplay=1&rel=0`}
+                  title={selectedVideo.nombre}
+                  className="w-full h-full border-0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+
+              <div className="p-4 sm:p-6 bg-slate-950 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="text-xs text-slate-400 text-center sm:text-left">
+                  <span className="text-emerald-400 font-bold block mb-0.5">⚡ Entregable en segundos:</span>
+                  {selectedVideo.entregable}
+                </div>
+                <div className="flex items-center gap-3 w-full sm:w-auto">
+                  <Link
+                    href={`https://wa.me/51993147501?text=${encodeURIComponent(selectedVideo.whatsappMsg)}`}
+                    target="_blank"
+                    className="flex-1 sm:flex-none px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg"
+                  >
+                    <span className="material-symbols-outlined text-sm">chat</span>
+                    Contactar por WhatsApp
+                  </Link>
+                  <Link
+                    href="https://www.youtube.com/@ProjectControlAI"
+                    target="_blank"
+                    className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5"
+                  >
+                    <span className="material-symbols-outlined text-sm text-red-500">subscriptions</span>
+                    Canal de YouTube
+                  </Link>
                 </div>
               </div>
             </div>

@@ -336,6 +336,227 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 4. HUB DE ENLACES TIKTOK (LO QUE SE MUESTRA EN /mobile) */}
+      <section id="enlaces-tiktok" className="scroll-mt-32 max-w-7xl mx-auto px-6 py-16" aria-labelledby="tiktok-hub-title">
+        <div className="max-w-3xl mb-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-400 text-xs font-black uppercase tracking-[0.2em] mb-4">
+            <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+            </svg>
+            Canal Oficial TikTok · @project.control.a
+          </div>
+          <h2 id="tiktok-hub-title" className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
+            Enlaces Oficiales & Hub Móvil
+          </h2>
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed mt-3">
+            Accede a la misma vista directa y minimalista enlazada en nuestro TikTok: contacto directo con el <strong>Ing. Aurelio Solórzano</strong>, capacitaciones sincrónicas y asincrónicas, soluciones agénticas y consultoría técnica.
+          </p>
+        </div>
+
+        {/* Card Contenedora con el diseño idéntico al de /mobile */}
+        <div className="max-w-2xl mx-auto bg-slate-950/80 border-2 border-cyan-500/30 rounded-[36px] p-6 sm:p-10 backdrop-blur-2xl shadow-[0_0_50px_rgba(245,168,0,0.12)] relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-72 h-72 bg-gradient-to-b from-pink-500/10 via-cyan-500/10 to-transparent blur-3xl pointer-events-none" />
+
+          {/* Header perfil del Ing. Aurelio Solórzano */}
+          <div className="mb-8">
+            <Link 
+              href="https://wa.me/51993147501?text=Hola%20Ing.%20Aurelio,%20vengo%20de%20TikTok%20y%20necesito%20una%20consulta%20especializada."
+              target="_blank"
+              className="flex items-center gap-4 w-full bg-slate-900/90 p-4 rounded-2xl border border-cyan-500/30 shadow-lg group hover:border-cyan-400 hover:scale-[1.01] transition-all"
+            >
+              <div className="relative w-14 h-14 sm:w-16 sm:h-16 shrink-0">
+                <Image 
+                  src="/images/Aurelio Solorzano.png" 
+                  alt="Ing. Aurelio Solorzano" 
+                  fill 
+                  sizes="64px"
+                  className="rounded-full object-cover border-2 border-cyan-400" 
+                />
+                <div className="absolute bottom-0 right-0 w-4 h-4 bg-emerald-500 border-2 border-[#14161a] rounded-full shadow-[0_0_10px_rgba(16,185,129,0.8)]" />
+              </div>
+              <div className="text-left flex-1 min-w-0">
+                <span className="block text-[10px] font-black text-cyan-400 uppercase tracking-widest">Consultor Principal</span>
+                <span className="block text-lg font-black text-white leading-tight truncate">Ing. Aurelio Solórzano Ríos</span>
+                <span className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 mt-1">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" /> Activo en WhatsApp (+51 993 147 501)
+                </span>
+              </div>
+              <span className="material-symbols-outlined text-emerald-400 text-2xl group-hover:translate-x-1 transition-transform">
+                chat
+              </span>
+            </Link>
+          </div>
+
+          {/* Stack de Enlaces Rápidos (/mobile) */}
+          <div className="space-y-3.5">
+            {/* 1. Cursos Asincrónicos */}
+            <Link 
+              href="/formacion?tab=asinc#catalogo-formacion" 
+              className="block w-full bg-slate-900/80 p-4 rounded-2xl border border-purple-500/30 hover:border-purple-400 transition-all group hover:scale-[1.01]"
+            >
+              <div className="flex items-center gap-3.5">
+                <div className="w-11 h-11 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 shrink-0">
+                  <span className="material-symbols-outlined text-2xl font-bold">play_lesson</span>
+                </div>
+                <div className="text-left flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <span className="text-sm font-black text-white group-hover:text-purple-300 transition-colors uppercase tracking-tight">
+                      Cursos Asincrónicos
+                    </span>
+                    <span className="text-[9px] font-mono font-bold text-purple-400 bg-purple-950 px-2 py-0.5 rounded border border-purple-800">
+                      DESDE $5 USD
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-300 leading-tight">
+                    Aprende a tu propio ritmo: &quot;El Despertar&quot;, clases abiertas y másters.
+                  </p>
+                </div>
+                <span className="material-symbols-outlined text-slate-500 group-hover:text-purple-400 text-lg transition-colors">
+                  chevron_right
+                </span>
+              </div>
+            </Link>
+
+            {/* 2. Cursos Sincrónicos */}
+            <Link 
+              href="/formacion?tab=sinc#catalogo-formacion" 
+              className="block w-full bg-slate-900/80 p-4 rounded-2xl border border-emerald-500/30 hover:border-emerald-400 transition-all group hover:scale-[1.01]"
+            >
+              <div className="flex items-center gap-3.5">
+                <div className="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+                  <span className="material-symbols-outlined text-2xl font-bold">video_camera_front</span>
+                </div>
+                <div className="text-left flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <span className="text-sm font-black text-white group-hover:text-emerald-300 transition-colors uppercase tracking-tight">
+                      Cursos Sincrónicos
+                    </span>
+                    <span className="text-[9px] font-mono font-bold text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">
+                      EN VIVO
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-300 leading-tight">
+                    Acompañamiento en directo paso a paso con el Ing. Aurelio Solórzano.
+                  </p>
+                </div>
+                <span className="material-symbols-outlined text-slate-500 group-hover:text-emerald-400 text-lg transition-colors">
+                  chevron_right
+                </span>
+              </div>
+            </Link>
+
+            {/* 3. Soluciones Agénticas */}
+            <Link 
+              href="/servicios?tab=agentes#agentes" 
+              className="block w-full bg-slate-900/80 p-4 rounded-2xl border border-cyan-500/30 hover:border-cyan-400 transition-all group hover:scale-[1.01]"
+            >
+              <div className="flex items-center gap-3.5">
+                <div className="w-11 h-11 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
+                  <span className="material-symbols-outlined text-2xl font-bold">smart_toy</span>
+                </div>
+                <div className="text-left flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <span className="text-sm font-black text-white group-hover:text-cyan-300 transition-colors uppercase tracking-tight">
+                      Soluciones Agénticas
+                    </span>
+                    <span className="text-[9px] font-mono font-bold text-cyan-400 bg-cyan-950 px-2 py-0.5 rounded border border-cyan-800">
+                      SEGUNDOS
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-300 leading-tight">
+                    Agentes de IA: Visor 4D/5D, APUs tipo S10, macros MS Project y EETT.
+                  </p>
+                </div>
+                <span className="material-symbols-outlined text-slate-500 group-hover:text-cyan-400 text-lg transition-colors">
+                  chevron_right
+                </span>
+              </div>
+            </Link>
+
+            {/* 4. Consultorías */}
+            <Link 
+              href="/servicios?tab=consultoria#consultoria" 
+              className="block w-full bg-slate-900/80 p-4 rounded-2xl border border-amber-500/30 hover:border-amber-400 transition-all group hover:scale-[1.01]"
+            >
+              <div className="flex items-center gap-3.5">
+                <div className="w-11 h-11 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0">
+                  <span className="material-symbols-outlined text-2xl font-bold">engineering</span>
+                </div>
+                <div className="text-left flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <span className="text-sm font-black text-white group-hover:text-amber-300 transition-colors uppercase tracking-tight">
+                      Consultorías Especializadas
+                    </span>
+                    <span className="text-[9px] font-mono font-bold text-amber-400 bg-amber-950 px-2 py-0.5 rounded border border-amber-800">
+                      {consultoria.minutosGratis} MIN GRATIS
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-300 leading-tight">
+                    Planeamiento maestro, reclamos de ampliación, auditoría y peritajes.
+                  </p>
+                </div>
+                <span className="material-symbols-outlined text-slate-500 group-hover:text-amber-400 text-lg transition-colors">
+                  chevron_right
+                </span>
+              </div>
+            </Link>
+
+            {/* Redes y Comunidad */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-2">
+              <Link 
+                href="https://chat.whatsapp.com/H0lG0T5yLAVB0qGRBhpBsT" 
+                target="_blank" 
+                className="flex items-center gap-2.5 p-3 rounded-xl bg-slate-900/60 border border-emerald-500/20 hover:border-emerald-500/50 transition-all group"
+              >
+                <span className="material-symbols-outlined text-emerald-400 text-lg">group</span>
+                <div className="text-left min-w-0">
+                  <span className="block text-[11px] font-bold text-white group-hover:text-emerald-300 truncate">Comunidad VIP</span>
+                  <span className="block text-[9px] text-slate-400 font-mono">WhatsApp Gratis</span>
+                </div>
+              </Link>
+
+              <Link 
+                href="https://www.youtube.com/@aurelioalfonsosolorzanorios" 
+                target="_blank" 
+                className="flex items-center gap-2.5 p-3 rounded-xl bg-slate-900/60 border border-red-500/20 hover:border-red-500/50 transition-all group"
+              >
+                <span className="material-symbols-outlined text-red-500 text-lg">subscriptions</span>
+                <div className="text-left min-w-0">
+                  <span className="block text-[11px] font-bold text-white group-hover:text-red-300 truncate">YouTube Oficial</span>
+                  <span className="block text-[9px] text-slate-400 font-mono">Masterclasses</span>
+                </div>
+              </Link>
+
+              <Link 
+                href="https://vt.tiktok.com/ZSgyYmMFX/" 
+                target="_blank" 
+                className="flex items-center gap-2.5 p-3 rounded-xl bg-slate-900/60 border border-pink-500/20 hover:border-pink-500/50 transition-all group"
+              >
+                <svg className="w-4 h-4 fill-current text-pink-400 shrink-0" viewBox="0 0 24 24">
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                </svg>
+                <div className="text-left min-w-0">
+                  <span className="block text-[11px] font-bold text-white group-hover:text-pink-300 truncate">TikTok Oficial</span>
+                  <span className="block text-[9px] text-slate-400 font-mono">Demos en Video</span>
+                </div>
+              </Link>
+            </div>
+
+            {/* Botón a /mobile */}
+            <div className="pt-4 text-center">
+              <Link 
+                href="/mobile" 
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-pink-600 via-purple-600 to-cyan-600 hover:from-pink-500 hover:to-cyan-500 text-white font-black text-xs uppercase tracking-widest transition-all shadow-[0_0_25px_rgba(236,72,153,0.3)] hover:scale-105"
+              >
+                <span className="material-symbols-outlined text-sm">smartphone</span>
+                <span>Abrir Vista Minimalista de TikTok (/mobile)</span>
+                <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 5. EL EXPERTO DETRÁS: ING. AURELIO SOLÓRZANO */}
       <section className="max-w-7xl mx-auto px-6 py-8">
         <div className="rounded-[36px] bg-slate-900 border border-slate-800 p-8 sm:p-12 flex flex-col lg:flex-row gap-8 items-center justify-between">

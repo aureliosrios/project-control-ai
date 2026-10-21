@@ -207,6 +207,77 @@ export default function Navbar() {
               </div>
             </div>
 
+            {/* Dropdown / Pestaña TikTok */}
+            <div className="relative group">
+              <Link 
+                href="/mobile" 
+                className="flex items-center gap-1.5 text-slate-300 hover:text-pink-400 transition-colors py-2 uppercase"
+              >
+                <svg className="w-3.5 h-3.5 fill-current text-pink-400" viewBox="0 0 24 24">
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                </svg>
+                <span>TikTok</span>
+                <span className="material-symbols-outlined text-sm transition-transform group-hover:rotate-180">expand_more</span>
+              </Link>
+              
+              <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none group-hover:pointer-events-auto">
+                <div className="w-80 p-3 rounded-2xl bg-slate-950/95 border border-white/10 backdrop-blur-xl shadow-2xl flex flex-col gap-1.5">
+                  <Link
+                    href="/mobile"
+                    className="p-3 rounded-xl hover:bg-white/5 transition-colors flex items-start gap-3 group/item border border-pink-500/30 hover:border-pink-500/60 bg-pink-950/20"
+                  >
+                    <div className="w-9 h-9 rounded-lg bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-400 shrink-0">
+                      <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="block text-xs font-black text-white group-hover/item:text-pink-300 transition-colors uppercase">
+                          Enlaces TikTok (Bio Móvil)
+                        </span>
+                        <span className="text-[9px] px-1.5 py-0.2 rounded bg-pink-500/20 text-pink-300 font-bold border border-pink-500/40">HUB</span>
+                      </div>
+                      <span className="block text-[10px] text-slate-400 font-medium normal-case mt-0.5">
+                        Vista minimalista y rápida vinculada a nuestro canal de TikTok
+                      </span>
+                    </div>
+                  </Link>
+
+                  <div className="px-2 pt-2 pb-1 border-t border-white/10 flex items-center justify-between">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-cyan-400">
+                      Accesos Rápidos
+                    </span>
+                    <span className="text-[9px] text-slate-400 font-medium">Desde el perfil</span>
+                  </div>
+
+                  <Link
+                    href="https://wa.me/51993147501?text=Hola%20Ing.%20Aurelio,%20vengo%20de%20TikTok%20y%20necesito%20una%20consulta%20especializada."
+                    target="_blank"
+                    className="p-2 rounded-xl hover:bg-white/5 transition-colors flex items-center gap-2.5 text-xs text-slate-200 hover:text-emerald-400"
+                  >
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="font-bold">WhatsApp: Ing. Aurelio Solórzano</span>
+                  </Link>
+
+                  <Link
+                    href="/#enlaces-tiktok"
+                    className="p-2 rounded-xl hover:bg-white/5 transition-colors flex items-center gap-2.5 text-xs text-slate-200 hover:text-cyan-300"
+                  >
+                    <span className="material-symbols-outlined text-sm text-cyan-400">visibility</span>
+                    <span>Ver sección TikTok en web principal</span>
+                  </Link>
+
+                  <Link
+                    href="/mobile"
+                    className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-center text-xs font-black text-cyan-300 uppercase tracking-wider border border-white/10 mt-1 transition-colors"
+                  >
+                    Abrir Hub Completo (/mobile) →
+                  </Link>
+                </div>
+              </div>
+            </div>
+
             <Link href="/portal" className="text-white hover:text-cyan-400 transition-colors border-l border-white/10 pl-8">
               Portal Alumno
             </Link>
@@ -292,6 +363,34 @@ export default function Navbar() {
               className="block text-sm font-bold text-slate-200 hover:text-cyan-300 transition-colors"
             >
               • Capacitación Asincrónica (Grabada)
+            </Link>
+          </div>
+
+          {/* Sección TikTok Mobile */}
+          <div className="space-y-2.5 border-l-2 border-pink-500/40 pl-4 py-1">
+            <Link
+              href="/mobile"
+              onClick={() => setIsOpen(false)}
+              className="text-xs font-mono font-black text-pink-400 uppercase tracking-widest block hover:text-white flex items-center gap-1.5"
+            >
+              <svg className="w-3.5 h-3.5 fill-current text-pink-400" viewBox="0 0 24 24">
+                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+              </svg>
+              Enlaces TikTok (Bio Móvil)
+            </Link>
+            <Link
+              href="/mobile"
+              onClick={() => setIsOpen(false)}
+              className="block text-sm font-bold text-slate-200 hover:text-pink-300 transition-colors"
+            >
+              • Abrir Hub Minimalista (/mobile)
+            </Link>
+            <Link
+              href="/#enlaces-tiktok"
+              onClick={() => setIsOpen(false)}
+              className="block text-sm font-bold text-slate-200 hover:text-cyan-300 transition-colors"
+            >
+              • Ver sección en la web principal
             </Link>
           </div>
 

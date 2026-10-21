@@ -1,229 +1,324 @@
 import Image from "next/image";
 import Link from "next/link";
+import { consultoria } from "@/lib/oferta";
+
+export const metadata = {
+  title: "Project Control AI | Enlaces Oficiales (TikTok)",
+  description: "Soluciones agénticas para construcción, consultoría técnica, capacitaciones sincrónicas y asincrónicas, y contacto directo con el Ing. Aurelio Solórzano.",
+};
 
 export default function MobileLanding() {
   return (
     <div className="min-h-screen bg-[#020617] text-slate-100 flex flex-col items-center px-4 py-8 selection:bg-cyan-500/30 overflow-x-hidden relative">
-      {/* Premium Cyber Background Effects */}
+      {/* Cyber Background Effects */}
       <div className="fixed inset-0 tech-grid pointer-events-none opacity-20" />
-      <div className="absolute top-0 w-full h-[600px] bg-gradient-to-b from-cyan-500/10 via-transparent to-transparent -z-10" />
-      <div className="absolute top-40 -left-40 w-80 h-80 rounded-full bg-purple-500/5 blur-[120px] -z-10" />
-      <div className="absolute top-80 -right-40 w-80 h-80 rounded-full bg-emerald-500/5 blur-[120px] -z-10" />
+      <div className="absolute top-0 w-full h-[500px] bg-gradient-to-b from-cyan-500/10 via-transparent to-transparent -z-10" />
 
       {/* Header Section */}
-      <header className="relative mt-8 mb-10 flex flex-col items-center">
-        <div className="relative w-28 h-28 mb-5 p-1 rounded-full bg-gradient-to-tr from-cyan-500 via-blue-600 to-purple-600 shadow-[0_0_40px_rgba(6,182,212,0.25)] animate-pulse duration-[3000ms]">
-          <div className="w-full h-full rounded-full bg-gradient-to-b from-slate-900 to-[#020617] p-4 flex items-center justify-center overflow-hidden">
-            <div className="relative w-full h-full">
-              <Image 
-                src="/images/logo.png" 
-                alt="Project Control AI Logo" 
-                fill 
-                className="object-contain filter contrast-[1.1] brightness-[1.05]" 
-                style={{
-                  maskImage: 'radial-gradient(circle, black 65%, transparent 100%)',
-                  WebkitMaskImage: 'radial-gradient(circle, black 65%, transparent 100%)'
-                }}
-              />
+      <header className="relative mt-4 mb-6 flex flex-col items-center text-center">
+        <Link href="/" className="group flex flex-col items-center">
+          <div className="relative w-20 h-20 mb-3 p-1 rounded-full bg-gradient-to-tr from-cyan-500 via-blue-600 to-emerald-500 shadow-[0_0_30px_rgba(6,182,212,0.3)] group-hover:scale-105 transition-transform">
+            <div className="w-full h-full rounded-full bg-slate-950 p-3 flex items-center justify-center overflow-hidden">
+              <div className="relative w-full h-full">
+                <Image 
+                  src="/images/logo.png" 
+                  alt="Project Control AI Logo" 
+                  fill 
+                  sizes="80px"
+                  className="object-contain" 
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <h1 className="text-3xl font-black tracking-tighter text-white mb-2 text-center uppercase bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400">
-          Project Control AI
-        </h1>
-        <p className="text-cyan-400 text-[9px] font-black tracking-[0.6em] uppercase text-center ml-[0.6em]">
-          Engineering Intelligence Systems
-        </p>
+          <h1 className="text-2xl font-black tracking-tight text-white uppercase">
+            Project Control AI
+          </h1>
+          <p className="text-cyan-400 text-[10px] font-mono font-bold tracking-[0.3em] uppercase mt-1">
+            Soluciones Agénticas & Formación
+          </p>
+        </Link>
       </header>
 
-      {/* Profile Bio Card (VIP Consultant) */}
-      <section className="w-full max-w-md mb-8 px-2">
+      {/* Profile Bio Card (Ing. Aurelio Solorzano) */}
+      <section className="w-full max-w-md mb-6 px-1">
         <Link 
           href="https://wa.me/51993147501?text=Hola%20Ing.%20Aurelio,%20vengo%20de%20TikTok%20y%20necesito%20una%20consulta%20especializada."
           target="_blank"
-          className="flex items-center gap-4 w-full bg-slate-950/60 backdrop-blur-xl p-4 rounded-[2rem] border border-cyan-500/20 shadow-[0_15px_40px_rgba(0,0,0,0.6)] group hover:border-cyan-400/50 hover:scale-[1.02] transition-all duration-300 active:scale-95"
+          className="flex items-center gap-3.5 w-full bg-slate-950/80 backdrop-blur-xl p-3.5 rounded-2xl border border-cyan-500/30 shadow-[0_10px_30px_rgba(0,0,0,0.5)] group hover:border-cyan-400 hover:scale-[1.01] transition-all"
         >
-          <div className="relative w-16 h-16 flex-shrink-0">
-            <div className="absolute inset-0 bg-cyan-500 blur-lg opacity-25 group-hover:opacity-40 transition-opacity" />
+          <div className="relative w-14 h-14 flex-shrink-0">
             <Image 
               src="/images/Aurelio Solorzano.png" 
               alt="Ing. Aurelio Solorzano" 
               fill 
+              sizes="56px"
               className="rounded-full object-cover border-2 border-cyan-500 relative z-10" 
             />
-            <div className="absolute bottom-0 right-0 w-4.5 h-4.5 bg-emerald-500 border-2 border-[#020617] rounded-full z-20 shadow-[0_0_10px_rgba(16,185,129,0.8)]" />
+            <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-[#020617] rounded-full z-20 shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
           </div>
-          <div className="text-left">
-            <span className="block text-[8px] font-black text-cyan-400 uppercase tracking-widest mb-0.5">Lead AI Consultant</span>
-            <span className="block text-lg font-black text-white leading-tight">Ing. Aurelio Solorzano Rios</span>
-            <span className="inline-flex items-center gap-1.5 mt-1 text-[9px] font-bold text-slate-400">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" /> Activo en WhatsApp
+          <div className="text-left flex-1 min-w-0">
+            <span className="block text-[9px] font-black text-cyan-400 uppercase tracking-widest">Consultor Principal</span>
+            <span className="block text-base font-black text-white leading-tight truncate">Ing. Aurelio Solórzano Ríos</span>
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-emerald-400 mt-0.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Activo en WhatsApp
             </span>
           </div>
-          <span className="ml-auto material-symbols-outlined text-cyan-500 text-2xl group-hover:translate-x-1 group-hover:scale-110 transition-transform">
-            bolt
+          <span className="material-symbols-outlined text-emerald-400 text-xl group-hover:translate-x-1 transition-transform">
+            chat
           </span>
         </Link>
       </section>
 
-      {/* Main Navigation Stack (Top 3 Priority Actions) */}
-      <main className="w-full max-w-md space-y-6 px-2">
-        
-        {/* Separator - Priority 1 */}
-        <div className="flex items-center gap-4 py-1">
-          <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-emerald-500/25" />
-          <span className="text-[9px] font-black text-emerald-400 uppercase tracking-[0.4em]">PRIORIDAD #1 | COMUNIDAD</span>
-          <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-emerald-500/25" />
+      {/* Main Container Stack */}
+      <main className="w-full max-w-md space-y-4 px-1">
+
+        {/* 1. DESTACADO TIKTOK: AGENTE PLANEAMIENTO 4D/5D */}
+        <div className="p-5 rounded-3xl border-2 border-cyan-500/50 bg-gradient-to-br from-cyan-950/40 via-slate-950 to-slate-900 shadow-[0_0_25px_rgba(6,182,212,0.2)] relative overflow-hidden group">
+          <div className="flex items-center justify-between gap-2 mb-2">
+            <span className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-red-950 text-red-400 border border-red-500/40 flex items-center gap-1 shadow-[0_0_10px_rgba(239,68,68,0.3)]">
+              <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
+              ¡Lo que viste en TikTok!
+            </span>
+            <span className="text-[9px] font-mono text-cyan-300 font-bold bg-cyan-950 px-2 py-0.5 rounded border border-cyan-800">
+              DISPONIBLE
+            </span>
+          </div>
+
+          <h2 className="text-lg font-black text-white tracking-tight leading-snug mb-1">
+            Agente de Planeamiento de Obra 4D y 5D
+          </h2>
+          <p className="text-xs text-slate-300 leading-relaxed mb-4">
+            De Planos (DWG) + Cronograma + Presupuesto a <strong>Visor 3D interactivo en segundos</strong> con Curva S y Lookahead.
+          </p>
+
+          <div className="space-y-2">
+            <Link
+              href="https://wa.me/51993147501?text=Hola%20Ing.%20Aurelio,%20vi%20el%20video%20en%20TikTok%20del%20Agente%20de%20Planeamiento%204D5D%20y%20deseo%20adquirirlo."
+              target="_blank"
+              className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.3)]"
+            >
+              <span className="material-symbols-outlined text-base">chat</span>
+              Quiero el Agente (+51 993 147 501)
+            </Link>
+
+            <Link
+              href="https://youtu.be/weL9yLqdCHY"
+              target="_blank"
+              className="w-full py-2.5 px-3 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 shadow-[0_0_15px_rgba(239,68,68,0.3)]"
+            >
+              <span className="material-symbols-outlined text-base">play_circle</span>
+              Ver Guía Completa en YouTube (14 min)
+            </Link>
+          </div>
         </div>
 
-        {/* 1. WHATSAPP COMMUNITY CARD (Highest Conversion) */}
-        <Link 
-          href="https://chat.whatsapp.com/H0lG0T5yLAVB0qGRBhpBsT" 
-          target="_blank" 
-          className="block w-full bg-[#070b14]/75 backdrop-blur-xl p-6 rounded-3xl border border-emerald-500/30 hover:border-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.1)] hover:shadow-[0_0_35px_rgba(16,185,129,0.3)] transition-all duration-300 relative overflow-hidden group hover:scale-[1.02] active:scale-95"
-        >
-          {/* Neon Glow Shift */}
-          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/5 to-emerald-500/0 -translate-x-full group-hover:translate-x-full transition-transform duration-[1200ms]" />
+        {/* Separador: Acceso a Todos los Servicios */}
+        <div className="flex items-center gap-3 py-1">
+          <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-cyan-500/30" />
+          <span className="text-[9px] font-black text-cyan-400 uppercase tracking-[0.3em]">NUESTROS SERVICIOS</span>
+          <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-cyan-500/30" />
+        </div>
 
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform flex-shrink-0">
-              <span className="material-symbols-outlined text-2xl font-bold">group</span>
+        {/* 2. SOLUCIONES AGÉNTICAS */}
+        <Link 
+          href="/formacion?tab=agentes" 
+          className="block w-full bg-slate-950/70 backdrop-blur-xl p-4 rounded-2xl border border-cyan-500/30 hover:border-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.1)] transition-all group hover:scale-[1.01]"
+        >
+          <div className="flex items-center gap-3.5">
+            <div className="w-11 h-11 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-105 transition-transform flex-shrink-0">
+              <span className="material-symbols-outlined text-2xl font-bold">smart_toy</span>
             </div>
-            <div className="text-left">
-              {/* Title with Inline Glowing Badge */}
-              <div className="flex flex-wrap items-center gap-2 mb-1">
-                <span className="text-xl font-black text-white tracking-tight group-hover:text-emerald-300 transition-colors">
-                  GRUPO DE WHATSAPP
+            <div className="text-left flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-0.5">
+                <span className="text-sm font-black text-white group-hover:text-cyan-300 transition-colors uppercase tracking-tight">
+                  Soluciones Agénticas
                 </span>
-                <span className="bg-gradient-to-r from-emerald-600 to-emerald-400 text-[#020617] text-[8px] font-black tracking-widest uppercase px-2 py-0.5 rounded shadow-[0_0_10px_rgba(16,185,129,0.3)] inline-flex items-center gap-1">
-                  <span className="w-1 h-1 rounded-full bg-slate-950 animate-ping" />
-                  GRATIS
+                <span className="text-[8px] font-mono font-bold text-cyan-400 bg-cyan-950 px-1.5 py-0.5 rounded border border-cyan-800">
+                  SEGUNDOS
                 </span>
               </div>
-              <p className="text-xs text-slate-300 leading-relaxed font-medium">
-                Únete a nuestra comunidad. Recibe plantillas de control, scripts de Python y lecciones exclusivas sin costo.
+              <p className="text-[11px] text-slate-300 leading-tight">
+                Agentes de IA: Visor 4D/5D, APUs tipo S10, macros MS Project y EETT.
               </p>
             </div>
+            <span className="material-symbols-outlined text-slate-500 group-hover:text-cyan-400 text-lg transition-colors">
+              chevron_right
+            </span>
           </div>
         </Link>
 
-        {/* Separator - Priority 2 & 3 */}
-        <div className="flex items-center gap-4 py-1 pt-2">
-          <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-cyan-500/25" />
-          <span className="text-[9px] font-black text-cyan-400 uppercase tracking-[0.4em]">SERVICIOS Y FORMACIÓN</span>
-          <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-cyan-500/25" />
-        </div>
-
-        {/* 2. ACADEMY CARD (Cyan glow) */}
-        <Link 
-          href="/formacion" 
-          className="block w-full bg-[#070b14]/75 backdrop-blur-xl p-6 rounded-3xl border border-cyan-500/30 hover:border-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.08)] hover:shadow-[0_0_35px_rgba(6,182,212,0.25)] transition-all duration-300 relative overflow-hidden group hover:scale-[1.02] active:scale-95"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-cyan-500/0 -translate-x-full group-hover:translate-x-full transition-transform duration-[1200ms]" />
-
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform flex-shrink-0">
-              <span className="material-symbols-outlined text-2xl font-bold">school</span>
-            </div>
-            <div className="text-left">
-              {/* Title with Inline Glowing Badge */}
-              <div className="flex flex-wrap items-center gap-2 mb-1">
-                <span className="text-xl font-black text-white tracking-tight group-hover:text-cyan-300 transition-colors">
-                  EXPLORAR CURSOS
-                </span>
-                <span className="bg-gradient-to-r from-cyan-600 to-cyan-400 text-[#020617] text-[8px] font-black tracking-widest uppercase px-2 py-0.5 rounded shadow-[0_0_10px_rgba(6,182,212,0.3)]">
-                  ACADEMIA
-                </span>
-              </div>
-              <p className="text-xs text-slate-300 leading-relaxed font-medium">
-                Python para ingenieros, Primavera P6 con Inteligencia Artificial y agentes para control de proyectos.
-              </p>
-            </div>
-          </div>
-        </Link>
-
-        {/* 3. CONSULTANCY CARD (Purple glow) */}
+        {/* 3. CONSULTORÍA ESPECIALIZADA */}
         <Link 
           href="/consultoria" 
-          className="block w-full bg-[#070b14]/75 backdrop-blur-xl p-6 rounded-3xl border border-purple-500/30 hover:border-purple-400 shadow-[0_0_20px_rgba(139,92,246,0.08)] hover:shadow-[0_0_35px_rgba(139,92,246,0.25)] transition-all duration-300 relative overflow-hidden group hover:scale-[1.02] active:scale-95"
+          className="block w-full bg-slate-950/70 backdrop-blur-xl p-4 rounded-2xl border border-amber-500/30 hover:border-amber-400 shadow-[0_0_15px_rgba(217,119,6,0.1)] transition-all group hover:scale-[1.01]"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/5 to-purple-500/0 -translate-x-full group-hover:translate-x-full transition-transform duration-[1200ms]" />
-
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform flex-shrink-0">
-              <span className="material-symbols-outlined text-2xl font-bold">psychology</span>
+          <div className="flex items-center gap-3.5">
+            <div className="w-11 h-11 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 group-hover:scale-105 transition-transform flex-shrink-0">
+              <span className="material-symbols-outlined text-2xl font-bold">engineering</span>
             </div>
-            <div className="text-left">
-              {/* Title with Inline Glowing Badge */}
-              <div className="flex flex-wrap items-center gap-2 mb-1">
-                <span className="text-xl font-black text-white tracking-tight group-hover:text-purple-300 transition-colors">
-                  CONSULTORÍA IA
+            <div className="text-left flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-0.5">
+                <span className="text-sm font-black text-white group-hover:text-amber-300 transition-colors uppercase tracking-tight">
+                  Consultoría en Obra
                 </span>
-                <span className="bg-gradient-to-r from-purple-600 to-purple-400 text-[#020617] text-[8px] font-black tracking-widest uppercase px-2 py-0.5 rounded shadow-[0_0_10px_rgba(139,92,246,0.3)]">
-                  B2B SYSTEMS
+                <span className="text-[8px] font-mono font-bold text-amber-400 bg-amber-950 px-1.5 py-0.5 rounded border border-amber-800">
+                  {consultoria.minutosGratis} MIN GRATIS
                 </span>
               </div>
-              <p className="text-xs text-slate-300 leading-relaxed font-medium">
-                Implementación de agentes autónomos y sistemas cognitivos a medida para constructoras y empresas.
+              <p className="text-[11px] text-slate-300 leading-tight">
+                Planeamiento maestro, reclamos de ampliación, auditoría y peritajes.
               </p>
             </div>
+            <span className="material-symbols-outlined text-slate-500 group-hover:text-amber-400 text-lg transition-colors">
+              chevron_right
+            </span>
           </div>
         </Link>
 
-        {/* Separator - Secondary Access */}
-        <div className="flex items-center gap-4 py-2 pt-6">
+        {/* 4. CAPACITACIONES SINCRÓNICAS (EN VIVO) */}
+        <Link 
+          href="/formacion?tab=sinc" 
+          className="block w-full bg-slate-950/70 backdrop-blur-xl p-4 rounded-2xl border border-emerald-500/30 hover:border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.1)] transition-all group hover:scale-[1.01]"
+        >
+          <div className="flex items-center gap-3.5">
+            <div className="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform flex-shrink-0">
+              <span className="material-symbols-outlined text-2xl font-bold">video_camera_front</span>
+            </div>
+            <div className="text-left flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-0.5">
+                <span className="text-sm font-black text-white group-hover:text-emerald-300 transition-colors uppercase tracking-tight">
+                  Cursos en Vivo (Sincrónicos)
+                </span>
+                <span className="text-[8px] font-mono font-bold text-emerald-400 bg-emerald-950 px-1.5 py-0.5 rounded border border-emerald-800">
+                  EN DIRECTO
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-300 leading-tight">
+                Acompañamiento en directo paso a paso con el Ing. Aurelio Solórzano.
+              </p>
+            </div>
+            <span className="material-symbols-outlined text-slate-500 group-hover:text-emerald-400 text-lg transition-colors">
+              chevron_right
+            </span>
+          </div>
+        </Link>
+
+        {/* 5. CAPACITACIONES ASINCRÓNICAS (GRABADAS) */}
+        <Link 
+          href="/formacion?tab=asinc" 
+          className="block w-full bg-slate-950/70 backdrop-blur-xl p-4 rounded-2xl border border-purple-500/30 hover:border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.1)] transition-all group hover:scale-[1.01]"
+        >
+          <div className="flex items-center gap-3.5">
+            <div className="w-11 h-11 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 group-hover:scale-105 transition-transform flex-shrink-0">
+              <span className="material-symbols-outlined text-2xl font-bold">play_lesson</span>
+            </div>
+            <div className="text-left flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-0.5">
+                <span className="text-sm font-black text-white group-hover:text-purple-300 transition-colors uppercase tracking-tight">
+                  Cursos Grabados (Asincrónicos)
+                </span>
+                <span className="text-[8px] font-mono font-bold text-purple-400 bg-purple-950 px-1.5 py-0.5 rounded border border-purple-800">
+                  DESDE $5 USD
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-300 leading-tight">
+                Aprende a tu propio ritmo: &quot;El Despertar&quot;, clases abiertas y másters.
+              </p>
+            </div>
+            <span className="material-symbols-outlined text-slate-500 group-hover:text-purple-400 text-lg transition-colors">
+              chevron_right
+            </span>
+          </div>
+        </Link>
+
+        {/* 6. BOTÓN PROMINENTE A LA WEB PRINCIPAL */}
+        <Link 
+          href="/" 
+          className="block w-full bg-gradient-to-r from-blue-900/60 via-slate-900 to-cyan-950/60 p-4 rounded-2xl border-2 border-cyan-400/50 hover:border-cyan-300 shadow-[0_0_20px_rgba(6,182,212,0.2)] transition-all group hover:scale-[1.02] text-center"
+        >
+          <div className="flex items-center justify-center gap-2 text-cyan-300 font-black text-xs uppercase tracking-widest mb-1">
+            <span className="material-symbols-outlined text-base">language</span>
+            Web Principal Matriz
+          </div>
+          <p className="text-[11px] text-slate-300 font-medium">
+            Ver el manifiesto completo, comparativas y todos los servicios en pantalla completa.
+          </p>
+        </Link>
+
+        {/* Separador: Comunidad & Redes */}
+        <div className="flex items-center gap-3 py-1 pt-3">
           <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-white/10" />
-          <span className="text-[9px] font-black text-slate-500 uppercase tracking-[0.4em]">Enlaces Adicionales</span>
+          <span className="text-[9px] font-black text-slate-500 uppercase tracking-[0.3em]">COMUNIDAD Y REDES</span>
           <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-white/10" />
         </div>
 
-        {/* 4. WEB PRINCIPAL (Portal) */}
+        {/* 7. GRUPO GRATUITO DE WHATSAPP */}
         <Link 
-          href="/" 
-          className="flex items-center gap-4 w-full bg-slate-950/40 p-4 rounded-2xl border border-white/5 hover:border-blue-500/40 transition-all duration-300 group hover:scale-[1.01]"
-        >
-          <div className="w-10 h-10 rounded-xl bg-blue-500/5 border border-blue-500/10 flex items-center justify-center text-blue-400 group-hover:scale-105 transition-transform flex-shrink-0">
-            <span className="material-symbols-outlined text-xl">language</span>
-          </div>
-          <div className="text-left">
-            <span className="block text-xs font-black text-slate-400 uppercase tracking-wider mb-0.5">Global System</span>
-            <span className="block text-sm font-bold text-white group-hover:text-blue-300 transition-colors">WEB PRINCIPAL</span>
-          </div>
-          <span className="ml-auto material-symbols-outlined text-slate-600 text-lg group-hover:translate-x-1 transition-transform">
-            chevron_right
-          </span>
-        </Link>
-
-        {/* 5. LINKEDIN */}
-        <Link 
-          href="https://www.linkedin.com/company/112620972/" 
+          href="https://chat.whatsapp.com/H0lG0T5yLAVB0qGRBhpBsT" 
           target="_blank" 
-          className="flex items-center gap-4 w-full bg-slate-950/40 p-4 rounded-2xl border border-white/5 hover:border-[#0077b5]/40 transition-all duration-300 group hover:scale-[1.01]"
+          className="flex items-center gap-3.5 w-full bg-slate-950/50 p-3.5 rounded-xl border border-emerald-500/20 hover:border-emerald-500/50 transition-all group"
         >
-          <div className="w-10 h-10 rounded-xl bg-[#0077b5]/5 border border-[#0077b5]/10 flex items-center justify-center text-[#0077b5] group-hover:scale-105 transition-transform flex-shrink-0 relative">
-            <Image 
-              src="/images/Logotipo.png" 
-              alt="LinkedIn icon" 
-              width={16} 
-              height={16} 
-              className="opacity-70 group-hover:opacity-100 filter brightness-[1.2]" 
-            />
+          <div className="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 flex-shrink-0">
+            <span className="material-symbols-outlined text-xl">group</span>
           </div>
-          <div className="text-left">
-            <span className="block text-xs font-black text-slate-400 uppercase tracking-wider mb-0.5">LinkedIn</span>
-            <span className="block text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">SÍGUENOS EN REDES</span>
+          <div className="text-left flex-1 min-w-0">
+            <span className="block text-xs font-bold text-white group-hover:text-emerald-300 transition-colors">
+              Comunidad VIP de WhatsApp
+            </span>
+            <span className="block text-[10px] text-slate-400">Plantillas, scripts y novedades sin costo</span>
           </div>
-          <span className="ml-auto material-symbols-outlined text-slate-600 text-lg group-hover:translate-x-1 transition-transform">
+          <span className="text-[9px] font-black text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">
+            GRATIS
+          </span>
+        </Link>
+
+        {/* 8. CANAL DE YOUTUBE */}
+        <Link 
+          href="https://www.youtube.com/@aurelioalfonsosolorzanorios" 
+          target="_blank" 
+          className="flex items-center gap-3.5 w-full bg-slate-950/50 p-3.5 rounded-xl border border-red-500/20 hover:border-red-500/50 transition-all group"
+        >
+          <div className="w-9 h-9 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 flex-shrink-0">
+            <span className="material-symbols-outlined text-xl">subscriptions</span>
+          </div>
+          <div className="text-left flex-1 min-w-0">
+            <span className="block text-xs font-bold text-white group-hover:text-red-300 transition-colors">
+              Canal de YouTube Oficial
+            </span>
+            <span className="block text-[10px] text-slate-400">Masterclasses de ingeniería y tutoriales</span>
+          </div>
+          <span className="material-symbols-outlined text-slate-600 text-base group-hover:translate-x-1 transition-transform">
             chevron_right
           </span>
         </Link>
 
+        {/* 9. TIKTOK */}
+        <Link 
+          href="https://vt.tiktok.com/ZSgyYmMFX/" 
+          target="_blank" 
+          className="flex items-center gap-3.5 w-full bg-slate-950/50 p-3.5 rounded-xl border border-pink-500/20 hover:border-pink-500/50 transition-all group"
+        >
+          <div className="w-9 h-9 rounded-lg bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-400 flex-shrink-0">
+            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+            </svg>
+          </div>
+          <div className="text-left flex-1 min-w-0">
+            <span className="block text-xs font-bold text-white group-hover:text-pink-300 transition-colors">
+              TikTok Oficial (@project.control.a)
+            </span>
+            <span className="block text-[10px] text-slate-400">Demos y resultados finales en formato corto</span>
+          </div>
+          <span className="material-symbols-outlined text-slate-600 text-base group-hover:translate-x-1 transition-transform">
+            chevron_right
+          </span>
+        </Link>
       </main>
 
-      {/* Premium Footer */}
-      <footer className="mt-20 pb-8 flex flex-col items-center">
-        <p className="text-[8px] font-mono text-slate-600 tracking-[0.5em] uppercase text-center ml-[0.5em]">
-          PCAI_MOBILE_ENDPOINT_STABLE_V6
+      {/* Footer Minimalista */}
+      <footer className="mt-12 pb-6 flex flex-col items-center text-center">
+        <p className="text-[10px] text-slate-500 font-mono tracking-widest uppercase">
+          © 2026 PROJECT CONTROL AI · TODOS LOS DERECHOS RESERVADOS
         </p>
       </footer>
     </div>

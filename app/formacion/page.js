@@ -291,8 +291,15 @@ export default function Formacion() {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       const tabParam = params.get("tab");
+      const hash = window.location.hash.toLowerCase().replace("#", "");
       if (tabParam === "agentes" || tabParam === "sinc" || tabParam === "asinc") {
         setActiveTab(tabParam);
+      } else if (hash.includes("agente")) {
+        setActiveTab("agentes");
+      } else if (hash.includes("sincronico") || hash === "sinc") {
+        setActiveTab("sinc");
+      } else if (hash.includes("asincronico") || hash === "asinc") {
+        setActiveTab("asinc");
       }
     }
   }, []);

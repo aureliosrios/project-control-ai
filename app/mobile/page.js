@@ -36,6 +36,10 @@ export default function MobileLanding() {
           <p className="text-cyan-400 text-[10px] font-mono font-bold tracking-[0.3em] uppercase mt-1">
             Soluciones Agénticas & Formación
           </p>
+          <div className="mt-3 inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/40 text-cyan-300 text-[10px] font-black uppercase tracking-wider hover:bg-cyan-900/80 transition-all shadow-[0_0_15px_rgba(6,182,212,0.2)]">
+            <span className="material-symbols-outlined text-xs">open_in_new</span>
+            <span>Ir a la Página Principal</span>
+          </div>
         </Link>
       </header>
 
@@ -70,92 +74,72 @@ export default function MobileLanding() {
       </section>
 
       {/* Main Container Stack */}
-      <main className="w-full max-w-md space-y-4 px-1">
+      <main className="w-full max-w-md space-y-3.5 px-1">
 
-        {/* 1. DESTACADO TIKTOK: AGENTE PLANEAMIENTO 4D/5D */}
-        <div className="p-5 rounded-3xl border-2 border-cyan-500/50 bg-gradient-to-br from-cyan-950/40 via-slate-950 to-slate-900 shadow-[0_0_25px_rgba(6,182,212,0.2)] relative overflow-hidden group">
-          <div className="flex items-center justify-between gap-2 mb-2">
-            <span className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-red-950 text-red-400 border border-red-500/40 flex items-center gap-1 shadow-[0_0_10px_rgba(239,68,68,0.3)]">
-              <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
-              ¡Lo que viste en TikTok!
-            </span>
-            <span className="text-[9px] font-mono text-cyan-300 font-bold bg-cyan-950 px-2 py-0.5 rounded border border-cyan-800">
-              DISPONIBLE
-            </span>
-          </div>
-
-          <h2 className="text-lg font-black text-white tracking-tight leading-snug mb-1">
-            Agente de Planeamiento de Obra 4D y 5D
-          </h2>
-          <p className="text-xs text-slate-300 leading-relaxed mb-3">
-            De Planos (DWG) + Cronograma + Presupuesto a <strong>Visor 3D interactivo en segundos</strong> con Curva S y Lookahead.
-          </p>
-
-          {/* Caja de Inversión y Medios de Pago */}
-          <div className="p-3 rounded-2xl bg-black/60 border border-cyan-500/40 mb-3 space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold">Inversión:</span>
-              <span className="text-xs font-mono font-black text-emerald-400 bg-emerald-950/80 px-2.5 py-0.5 rounded border border-emerald-500/40">
-                S/ 70 PEN · $25 USD
-              </span>
-            </div>
-            <div className="text-[11px] text-slate-300 flex items-center justify-between pt-1 border-t border-slate-800">
-              <span>📱 <strong>Yape:</strong> 51 993147501</span>
-              <span>💳 <strong>PayPal</strong> disponible</span>
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <div className="grid grid-cols-2 gap-2">
-              <a
-                href="https://paypal.me/ProjectControlAI/25USD"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 shadow-md"
-              >
-                <span className="material-symbols-outlined text-sm">payment</span>
-                PayPal ($25)
-              </a>
-
-              <a
-                href="https://wa.me/51993147501?text=Hola%20Ing.%20Aurelio,%20deseo%20adquirir%20el%20Agente%20de%20Planeamiento%204D5D%20v%C3%ADa%20Yape%20(S/%2070).%20Adjunto%20mi%20comprobante."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="py-2.5 px-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 shadow-md"
-              >
-                <span className="material-symbols-outlined text-sm">phone_iphone</span>
-                Yape (S/ 70)
-              </a>
-            </div>
-
-            <Link
-              href="https://wa.me/51993147501?text=Hola%20Ing.%20Aurelio,%20vi%20el%20video%20en%20TikTok%20del%20Agente%20de%20Planeamiento%204D5D%20y%20deseo%20adquirirlo%20(S/%2070%20o%20$25%20USD)."
-              target="_blank"
-              className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.3)]"
-            >
-              <span className="material-symbols-outlined text-base">chat</span>
-              Quiero el Agente (+51 993 147 501)
-            </Link>
-
-            <Link
-              href="https://youtu.be/weL9yLqdCHY"
-              target="_blank"
-              className="w-full py-2.5 px-3 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 shadow-[0_0_15px_rgba(239,68,68,0.3)]"
-            >
-              <span className="material-symbols-outlined text-base">play_circle</span>
-              Ver Guía Completa en YouTube (14 min)
-            </Link>
-          </div>
-        </div>
-
-        {/* Separador: Acceso a Todos los Servicios */}
+        {/* Separador: Nuestros Servicios */}
         <div className="flex items-center gap-3 py-1">
           <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-cyan-500/30" />
-          <span className="text-[9px] font-black text-cyan-400 uppercase tracking-[0.3em]">NUESTROS SERVICIOS</span>
+          <span className="text-[9px] font-black text-cyan-400 uppercase tracking-[0.3em]">SERVICIOS DE INGENIERÍA & FORMACIÓN</span>
           <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-cyan-500/30" />
         </div>
 
-        {/* 2. SOLUCIONES AGÉNTICAS */}
+        {/* 1. CURSOS ASINCRÓNICOS (GRABADOS) */}
+        <Link 
+          href="/formacion?tab=asinc" 
+          className="block w-full bg-slate-950/70 backdrop-blur-xl p-4 rounded-2xl border border-purple-500/30 hover:border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.1)] transition-all group hover:scale-[1.01]"
+        >
+          <div className="flex items-center gap-3.5">
+            <div className="w-11 h-11 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 group-hover:scale-105 transition-transform flex-shrink-0">
+              <span className="material-symbols-outlined text-2xl font-bold">play_lesson</span>
+            </div>
+            <div className="text-left flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-0.5">
+                <span className="text-sm font-black text-white group-hover:text-purple-300 transition-colors uppercase tracking-tight">
+                  Cursos Asincrónicos
+                </span>
+                <span className="text-[8px] font-mono font-bold text-purple-400 bg-purple-950 px-1.5 py-0.5 rounded border border-purple-800">
+                  DESDE $5 USD
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-300 leading-tight">
+                Aprende a tu propio ritmo: &quot;El Despertar&quot;, clases abiertas y másters.
+              </p>
+            </div>
+            <span className="material-symbols-outlined text-slate-500 group-hover:text-purple-400 text-lg transition-colors">
+              chevron_right
+            </span>
+          </div>
+        </Link>
+
+        {/* 2. CURSOS SINCRÓNICOS (EN VIVO) */}
+        <Link 
+          href="/formacion?tab=sinc" 
+          className="block w-full bg-slate-950/70 backdrop-blur-xl p-4 rounded-2xl border border-emerald-500/30 hover:border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.1)] transition-all group hover:scale-[1.01]"
+        >
+          <div className="flex items-center gap-3.5">
+            <div className="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform flex-shrink-0">
+              <span className="material-symbols-outlined text-2xl font-bold">video_camera_front</span>
+            </div>
+            <div className="text-left flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-0.5">
+                <span className="text-sm font-black text-white group-hover:text-emerald-300 transition-colors uppercase tracking-tight">
+                  Cursos Sincrónicos
+                </span>
+                <span className="text-[8px] font-mono font-bold text-emerald-400 bg-emerald-950 px-1.5 py-0.5 rounded border border-emerald-800">
+                  EN VIVO
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-300 leading-tight">
+                Acompañamiento en directo paso a paso con el Ing. Aurelio Solórzano.
+              </p>
+            </div>
+            <span className="material-symbols-outlined text-slate-500 group-hover:text-emerald-400 text-lg transition-colors">
+              chevron_right
+            </span>
+          </div>
+        </Link>
+
+        {/* 3. SOLUCIONES AGÉNTICAS */}
         <Link 
           href="/servicios#agentes" 
           className="block w-full bg-slate-950/70 backdrop-blur-xl p-4 rounded-2xl border border-cyan-500/30 hover:border-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.1)] transition-all group hover:scale-[1.01]"
@@ -183,7 +167,7 @@ export default function MobileLanding() {
           </div>
         </Link>
 
-        {/* 3. CONSULTORÍA ESPECIALIZADA */}
+        {/* 4. CONSULTORÍAS */}
         <Link 
           href="/servicios#consultoria" 
           className="block w-full bg-slate-950/70 backdrop-blur-xl p-4 rounded-2xl border border-amber-500/30 hover:border-amber-400 shadow-[0_0_15px_rgba(217,119,6,0.1)] transition-all group hover:scale-[1.01]"
@@ -195,7 +179,7 @@ export default function MobileLanding() {
             <div className="text-left flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-0.5">
                 <span className="text-sm font-black text-white group-hover:text-amber-300 transition-colors uppercase tracking-tight">
-                  Consultoría en Obra
+                  Consultorías
                 </span>
                 <span className="text-[8px] font-mono font-bold text-amber-400 bg-amber-950 px-1.5 py-0.5 rounded border border-amber-800">
                   {consultoria.minutosGratis} MIN GRATIS
@@ -211,73 +195,19 @@ export default function MobileLanding() {
           </div>
         </Link>
 
-        {/* 4. CAPACITACIONES SINCRÓNICAS (EN VIVO) */}
-        <Link 
-          href="/formacion?tab=sinc" 
-          className="block w-full bg-slate-950/70 backdrop-blur-xl p-4 rounded-2xl border border-emerald-500/30 hover:border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.1)] transition-all group hover:scale-[1.01]"
-        >
-          <div className="flex items-center gap-3.5">
-            <div className="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform flex-shrink-0">
-              <span className="material-symbols-outlined text-2xl font-bold">video_camera_front</span>
-            </div>
-            <div className="text-left flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-0.5">
-                <span className="text-sm font-black text-white group-hover:text-emerald-300 transition-colors uppercase tracking-tight">
-                  Cursos en Vivo (Sincrónicos)
-                </span>
-                <span className="text-[8px] font-mono font-bold text-emerald-400 bg-emerald-950 px-1.5 py-0.5 rounded border border-emerald-800">
-                  EN DIRECTO
-                </span>
-              </div>
-              <p className="text-[11px] text-slate-300 leading-tight">
-                Acompañamiento en directo paso a paso con el Ing. Aurelio Solórzano.
-              </p>
-            </div>
-            <span className="material-symbols-outlined text-slate-500 group-hover:text-emerald-400 text-lg transition-colors">
-              chevron_right
-            </span>
-          </div>
-        </Link>
-
-        {/* 5. CAPACITACIONES ASINCRÓNICAS (GRABADAS) */}
-        <Link 
-          href="/formacion?tab=asinc" 
-          className="block w-full bg-slate-950/70 backdrop-blur-xl p-4 rounded-2xl border border-purple-500/30 hover:border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.1)] transition-all group hover:scale-[1.01]"
-        >
-          <div className="flex items-center gap-3.5">
-            <div className="w-11 h-11 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 group-hover:scale-105 transition-transform flex-shrink-0">
-              <span className="material-symbols-outlined text-2xl font-bold">play_lesson</span>
-            </div>
-            <div className="text-left flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-0.5">
-                <span className="text-sm font-black text-white group-hover:text-purple-300 transition-colors uppercase tracking-tight">
-                  Cursos Grabados (Asincrónicos)
-                </span>
-                <span className="text-[8px] font-mono font-bold text-purple-400 bg-purple-950 px-1.5 py-0.5 rounded border border-purple-800">
-                  DESDE $5 USD
-                </span>
-              </div>
-              <p className="text-[11px] text-slate-300 leading-tight">
-                Aprende a tu propio ritmo: &quot;El Despertar&quot;, clases abiertas y másters.
-              </p>
-            </div>
-            <span className="material-symbols-outlined text-slate-500 group-hover:text-purple-400 text-lg transition-colors">
-              chevron_right
-            </span>
-          </div>
-        </Link>
-
-        {/* 6. BOTÓN PROMINENTE A LA WEB PRINCIPAL */}
+        {/* 5. BOTÓN PROMINENTE A LA WEB PRINCIPAL (ABRIR EN PESTAÑA O NAVEGACIÓN) */}
         <Link 
           href="/" 
+          target="_blank"
+          rel="noopener noreferrer"
           className="block w-full bg-gradient-to-r from-blue-900/60 via-slate-900 to-cyan-950/60 p-4 rounded-2xl border-2 border-cyan-400/50 hover:border-cyan-300 shadow-[0_0_20px_rgba(6,182,212,0.2)] transition-all group hover:scale-[1.02] text-center"
         >
           <div className="flex items-center justify-center gap-2 text-cyan-300 font-black text-xs uppercase tracking-widest mb-1">
-            <span className="material-symbols-outlined text-base">language</span>
-            Web Principal Matriz
+            <span className="material-symbols-outlined text-base">open_in_new</span>
+            Página Principal (Web Matriz)
           </div>
           <p className="text-[11px] text-slate-300 font-medium">
-            Ver el manifiesto completo, comparativas y todos los servicios en pantalla completa.
+            Abrir en pestaña nueva: Manifiesto agéntico, comparativas y plataforma completa.
           </p>
         </Link>
 

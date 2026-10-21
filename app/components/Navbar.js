@@ -23,6 +23,10 @@ export default function Navbar() {
         {/* Desktop Menu */}
         <div className="hidden lg:flex items-center gap-10">
           <div className="flex items-center gap-8 text-[11px] font-bold text-slate-400 uppercase tracking-widest">
+            <Link href="/" className="hover:text-cyan-400 transition-colors">
+              Inicio
+            </Link>
+
             <Link href="/servicios" className="hover:text-cyan-400 transition-colors">
               Servicios de Ingeniería
             </Link>
@@ -96,6 +100,10 @@ export default function Navbar() {
       {/* Mobile Menu Overlay */}
       {isOpen && (
         <div id="menu-movil" className="lg:hidden absolute top-full left-0 w-full bg-[#020617] border-b border-white/10 p-8 flex flex-col gap-5 animate-in slide-in-from-top duration-300">
+          <Link href="/" onClick={() => setIsOpen(false)} className="text-lg font-black text-white uppercase tracking-tighter">
+            Inicio
+          </Link>
+
           <Link href="/servicios" onClick={() => setIsOpen(false)} className="text-lg font-black text-white uppercase tracking-tighter">
             Servicios de Ingeniería
           </Link>

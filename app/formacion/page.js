@@ -25,6 +25,28 @@ const clasesGratuitasYouTube = [
 
 const agentesEspecializados = [
   {
+    id: "agente-4d5d",
+    nombre: "Agente de Planeamiento de Obra 4D y 5D",
+    especialidad: "Planeamiento BIM 4D/5D, Curva S y Visor Web 3D",
+    tag: "BIM 4D/5D & THREE.JS",
+    estado: "Publicado en YouTube",
+    theme: {
+      border: "border-cyan-500/40 hover:border-cyan-400",
+      bg: "bg-slate-900/60",
+      badge: "bg-red-950 text-red-300 border border-red-500/40 font-bold",
+      pill: "bg-slate-800/80 text-cyan-400 border border-cyan-800/60",
+      btn: "bg-red-600 hover:bg-red-500 text-white"
+    },
+    icono: "view_in_ar",
+    duracionVideo: "14 min",
+    tiempoEntrega: "45 segundos",
+    problema: "¿Coordinar planos 2D en CAD, cronogramas de cientos de tareas y presupuestos desvinculados sin visualizar la obra en el tiempo?",
+    solucion: "Le proporcionas al Agente tus Planos (DWG/DXF), Cronograma (P6/MSP) y Presupuesto, y genera un Visor Web 3D 4D/5D interactivo con semáforo constructivo, Curva S y Lookahead.",
+    entregable: "Visor 3D interactivo en HTML/Three.js autocontenido, simulación temporal 4D, panel de costos 5D (EVM), Curva S y Lookahead a 4 semanas.",
+    videoId: "weL9yLqdCHY",
+    whatsappMsg: "Hola Aurelio, vi el video del Agente de Planeamiento de Obra 4D/5D en YouTube y deseo adquirir el agente para mis proyectos."
+  },
+  {
     id: "agente-s10",
     nombre: "Agente de Presupuestos & APU Tipo S10",
     especialidad: "Costos y Presupuestos",
@@ -627,16 +649,27 @@ export default function Formacion() {
                 {agentesEspecializados.map((agente) => (
                   <div
                     key={agente.id}
-                    className="p-6 sm:p-7 rounded-3xl border-2 border-slate-800 bg-slate-900/40 hover:border-slate-700 flex flex-col justify-between transition-all duration-300 group relative overflow-hidden backdrop-blur-sm"
+                    className={`p-6 sm:p-7 rounded-3xl border-2 flex flex-col justify-between transition-all duration-300 group relative overflow-hidden backdrop-blur-sm ${
+                      agente.estado === "Publicado en YouTube"
+                        ? "border-cyan-500/50 bg-slate-900/70 hover:border-cyan-400 shadow-[0_0_25px_rgba(6,182,212,0.15)]"
+                        : "border-slate-800 bg-slate-900/40 hover:border-slate-700"
+                    }`}
                   >
                     <div>
-                      {/* Header de Tarjeta en Gris */}
+                      {/* Header de Tarjeta */}
                       <div className="flex items-center justify-between gap-2 mb-4">
                         <div className="flex items-center gap-2">
-                          <span className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-slate-800 text-amber-400 border border-amber-500/30 flex items-center gap-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                            Próximamente
-                          </span>
+                          {agente.estado === "Publicado en YouTube" ? (
+                            <span className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-red-950/80 text-red-400 border border-red-500/40 flex items-center gap-1 shadow-[0_0_10px_rgba(239,68,68,0.25)]">
+                              <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
+                              Disponible en YouTube
+                            </span>
+                          ) : (
+                            <span className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-slate-800 text-amber-400 border border-amber-500/30 flex items-center gap-1">
+                              <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                              Próximamente
+                            </span>
+                          )}
                           <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
                             {agente.tag}
                           </span>
@@ -648,11 +681,17 @@ export default function Formacion() {
                       </div>
 
                       <div className="flex items-start gap-3 mb-3">
-                        <div className="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0 text-slate-300">
+                        <div className={`w-10 h-10 rounded-xl border flex items-center justify-center shrink-0 ${
+                          agente.estado === "Publicado en YouTube"
+                            ? "bg-cyan-950/60 border-cyan-500/50 text-cyan-300"
+                            : "bg-slate-800 border-slate-700 text-slate-300"
+                        }`}>
                           <span className="material-symbols-outlined text-[22px]">{agente.icono}</span>
                         </div>
                         <div>
-                          <h3 className="text-lg font-bold text-slate-200 group-hover:text-cyan-300 transition-colors leading-snug">
+                          <h3 className={`text-lg font-bold group-hover:text-cyan-300 transition-colors leading-snug ${
+                            agente.estado === "Publicado en YouTube" ? "text-white" : "text-slate-200"
+                          }`}>
                             {agente.nombre}
                           </h3>
                           <p className="text-[11px] text-slate-400 font-medium">{agente.especialidad}</p>
@@ -688,19 +727,29 @@ export default function Formacion() {
                       <button
                         type="button"
                         onClick={() => setSelectedVideo(agente)}
-                        className="w-full py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 border border-slate-700"
+                        className={`w-full py-2.5 px-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 ${
+                          agente.estado === "Publicado en YouTube"
+                            ? "bg-red-600 hover:bg-red-500 text-white shadow-[0_0_15px_rgba(239,68,68,0.3)] border border-red-500/50"
+                            : "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700"
+                        }`}
                       >
-                        <span className="material-symbols-outlined text-base text-red-400">play_circle</span>
-                        Ver Avance en YouTube
+                        <span className="material-symbols-outlined text-base text-white">play_circle</span>
+                        {agente.estado === "Publicado en YouTube" ? "Ver Guía en YouTube (14 min)" : "Ver Avance en YouTube"}
                       </button>
 
                       <Link
                         href={`https://wa.me/51993147501?text=${encodeURIComponent(agente.whatsappMsg)}`}
                         target="_blank"
-                        className="w-full py-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-bold text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 border border-white/10"
+                        className={`w-full py-2.5 px-3 rounded-xl font-bold text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 ${
+                          agente.estado === "Publicado en YouTube"
+                            ? "bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.3)] border border-emerald-400/40"
+                            : "bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10"
+                        }`}
                       >
-                        <span className="material-symbols-outlined text-base text-slate-400">notifications_active</span>
-                        Lista de Espera (WhatsApp)
+                        <span className="material-symbols-outlined text-base">
+                          {agente.estado === "Publicado en YouTube" ? "chat" : "notifications_active"}
+                        </span>
+                        {agente.estado === "Publicado en YouTube" ? "Quiero el Agente (+51 993 147 501)" : "Lista de Espera (WhatsApp)"}
                       </Link>
                     </div>
                   </div>
@@ -723,7 +772,7 @@ export default function Formacion() {
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
                   <Link
-                    href="https://www.youtube.com/@ProjectControlAI"
+                    href="https://www.youtube.com/@aurelioalfonsosolorzanorios"
                     target="_blank"
                     className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-red-600 hover:bg-red-500 text-white font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(239,68,68,0.4)]"
                   >
@@ -1423,7 +1472,7 @@ export default function Formacion() {
                     Contactar por WhatsApp
                   </Link>
                   <Link
-                    href="https://www.youtube.com/@ProjectControlAI"
+                    href="https://www.youtube.com/@aurelioalfonsosolorzanorios"
                     target="_blank"
                     className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5"
                   >

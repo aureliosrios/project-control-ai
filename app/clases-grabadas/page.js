@@ -160,13 +160,13 @@ export default function ClasesGrabadas() {
     window.location.href = "/portal";
   };
 
-  if (!isLoggedIn) return <div className="min-h-screen bg-[#020617]" />;
+  if (!isLoggedIn) return <div className="min-h-screen bg-[#14161a]" />;
 
   const activeCourse = studentCourses.find(c => c.key === activeCourseKey);
   const lessons = courses[activeCourseKey]?.lessons || [];
 
   return (
-    <div className="min-h-screen bg-[#020617] text-white flex">
+    <div className="min-h-screen bg-[#14161a] text-white flex">
       <Sidebar studentName={studentData?.nombre} onLogout={handleLogout} />
 
       <main className="flex-1 p-8 md:p-12 relative overflow-y-auto h-screen">

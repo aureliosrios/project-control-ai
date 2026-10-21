@@ -13,15 +13,15 @@ const rutasConstruccion = {
     titulo: "Fundamentos Transversales",
     subtitulo: "Para todo profesional en obra",
     colorNombre: "Azul Acero Estructural",
-    borderClass: "border-[#1E40AF]",
-    borderHover: "hover:border-[#3B82F6]",
-    badgeBg: "bg-[#1E40AF]/20 text-[#93C5FD] border-[#1E40AF]/60",
-    badgeSolid: "bg-[#1E40AF] text-white",
-    cardBg: "bg-[#0A101F]",
-    btnPrimary: "bg-[#1E40AF] hover:bg-[#2563EB] text-white shadow-[0_4px_14px_rgba(30,64,175,0.4)]",
-    btnTemario: "border-[#1E40AF]/60 text-slate-200 hover:bg-[#1E40AF]/20 hover:border-[#1E40AF]",
+    borderClass: "border-[#4B6A88]",
+    borderHover: "hover:border-[#6B8CAE]",
+    badgeBg: "bg-[#4B6A88]/20 text-[#C3D3E3] border-[#4B6A88]/60",
+    badgeSolid: "bg-[#4B6A88] text-white",
+    cardBg: "bg-[#14181d]",
+    btnPrimary: "bg-[#4B6A88] hover:bg-[#2563EB] text-white shadow-[0_4px_14px_rgba(75,106,136,0.4)]",
+    btnTemario: "border-[#4B6A88]/60 text-slate-200 hover:bg-[#4B6A88]/20 hover:border-[#4B6A88]",
     desc: "IA práctica, digitalización de planos DWG a AutoCAD y herramientas fundamentales para obra.",
-    tagColor: "text-[#60A5FA]"
+    tagColor: "text-[#8FAFD0]"
   },
   B: {
     letra: "B",
@@ -173,7 +173,7 @@ function FormacionContent() {
     : asincronicos.filter((c) => c.ruta === selectedRuta);
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-100 selection:bg-cyan-500/30">
+    <div className="min-h-screen bg-[#14161a] text-slate-100 selection:bg-cyan-500/30">
       <div className="fixed inset-0 tech-grid opacity-30 pointer-events-none" />
 
       <main className="relative z-10 pt-32 pb-32 px-6 md:px-8 max-w-7xl mx-auto">
@@ -235,7 +235,7 @@ function FormacionContent() {
             </div>
 
             <div className="flex items-center gap-3.5 p-4 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 backdrop-blur-md">
-              <div className="w-10 h-10 rounded-xl bg-cyan-500/30 text-cyan-300 flex items-center justify-center font-bold shadow-[0_0_15px_rgba(6,182,212,0.3)]">
+              <div className="w-10 h-10 rounded-xl bg-cyan-500/30 text-cyan-300 flex items-center justify-center font-bold shadow-[0_0_15px_rgba(245,168,0,0.3)]">
                 <span className="material-symbols-outlined text-[20px]">engineering</span>
               </div>
               <div>
@@ -278,7 +278,7 @@ function FormacionContent() {
             onClick={() => changeTab("asinc")}
             className={`px-6 md:px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-2 ${
               activeTab === "asinc"
-                ? "bg-cyan-500 text-slate-950 shadow-[0_0_30px_rgba(6,182,212,0.4)] ring-2 ring-cyan-400/50"
+                ? "bg-cyan-500 text-slate-950 shadow-[0_0_30px_rgba(245,168,0,0.4)] ring-2 ring-cyan-400/50"
                 : "bg-white/5 text-slate-400 hover:text-white hover:bg-white/10"
             }`}
           >
@@ -331,23 +331,23 @@ function FormacionContent() {
                   onClick={() => setSelectedRuta(selectedRuta === "A" ? "TODAS" : "A")}
                   className={`text-left p-6 rounded-2xl border-2 transition-all duration-300 flex flex-col justify-between group ${
                     selectedRuta === "A"
-                      ? 'border-[#1E40AF] bg-[#0A101F] shadow-[0_0_25px_rgba(30,64,175,0.4)] scale-[1.02]'
-                      : 'border-[#1E40AF]/60 bg-[#070D1E]/60 hover:border-[#1E40AF] hover:bg-[#0A101F]'
+                      ? 'border-[#4B6A88] bg-[#14181d] shadow-[0_0_25px_rgba(75,106,136,0.4)] scale-[1.02]'
+                      : 'border-[#4B6A88]/60 bg-[#101419]/60 hover:border-[#4B6A88] hover:bg-[#14181d]'
                   }`}
                 >
                   <div>
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-[11px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md bg-[#1E40AF] text-white">
+                      <span className="text-[11px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md bg-[#4B6A88] text-white">
                         RUTA A
                       </span>
-                      <span className="text-xs font-mono font-bold text-blue-300 bg-[#1E40AF]/20 px-2 py-0.5 rounded border border-[#1E40AF]/40">
+                      <span className="text-xs font-mono font-bold text-blue-300 bg-[#4B6A88]/20 px-2 py-0.5 rounded border border-[#4B6A88]/40">
                         {asincronicos.filter(c => c.ruta === "A").length} Cursos
                       </span>
                     </div>
                     <h3 className="text-lg font-black text-white mb-1 group-hover:text-blue-300 transition-colors">
                       {rutasConstruccion.A.titulo}
                     </h3>
-                    <p className="text-xs font-bold text-[#60A5FA] mb-2">
+                    <p className="text-xs font-bold text-[#8FAFD0] mb-2">
                       {rutasConstruccion.A.subtitulo}
                     </p>
                     <p className="text-xs text-slate-300 font-normal leading-relaxed">
@@ -355,7 +355,7 @@ function FormacionContent() {
                     </p>
                   </div>
 
-                  <div className="pt-4 mt-4 border-t border-white/10 flex items-center justify-between text-xs font-bold text-[#60A5FA]">
+                  <div className="pt-4 mt-4 border-t border-white/10 flex items-center justify-between text-xs font-bold text-[#8FAFD0]">
                     <span>{selectedRuta === "A" ? "Viendo Ruta A" : "Filtrar por Ruta A"}</span>
                     <span className="material-symbols-outlined text-sm">
                       {selectedRuta === "A" ? "check_circle" : "arrow_forward"}
@@ -468,8 +468,8 @@ function FormacionContent() {
                     onClick={() => setSelectedRuta("A")}
                     className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all border ${
                       selectedRuta === "A"
-                        ? "bg-[#1E40AF] text-white border-[#1E40AF] shadow-[0_0_15px_rgba(30,64,175,0.4)]"
-                        : "bg-[#070D1E] text-blue-300 border-[#1E40AF]/40 hover:border-[#1E40AF]"
+                        ? "bg-[#4B6A88] text-white border-[#4B6A88] shadow-[0_0_15px_rgba(75,106,136,0.4)]"
+                        : "bg-[#101419] text-blue-300 border-[#4B6A88]/40 hover:border-[#4B6A88]"
                     }`}
                   >
                     Ruta A ({asincronicos.filter(c => c.ruta === "A").length})
@@ -587,7 +587,7 @@ function FormacionContent() {
                           target="_blank"
                           className={`py-2.5 px-2 rounded-xl text-[11px] font-black uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 ${
                             curso.id === "A1"
-                              ? "bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black shadow-[0_4px_14px_rgba(6,182,212,0.4)]"
+                              ? "bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black shadow-[0_4px_14px_rgba(245,168,0,0.4)]"
                               : rutaInfo.btnPrimary
                           }`}
                         >
@@ -666,7 +666,7 @@ function FormacionContent() {
                 const theme = sincThemes[curso.colorKey] || sincThemes.cyan;
 
                 return (
-                  <div key={curso.id} className="p-8 md:p-12 rounded-[40px] bg-gradient-to-br from-slate-900 via-slate-900 to-[#030d22] border-2 border-cyan-500/40 relative overflow-hidden shadow-[0_0_50px_rgba(6,182,212,0.15)]">
+                  <div key={curso.id} className="p-8 md:p-12 rounded-[40px] bg-gradient-to-br from-slate-900 via-slate-900 to-[#15181c] border-2 border-cyan-500/40 relative overflow-hidden shadow-[0_0_50px_rgba(245,168,0,0.15)]">
                     <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/15 blur-[90px] pointer-events-none" />
 
                     <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
@@ -754,7 +754,7 @@ function FormacionContent() {
                           )}
                           <Link
                             href={`${curso.link}?curso=${encodeURIComponent(curso.registro)}`}
-                            className="w-full py-3.5 bg-cyan-500 text-slate-950 rounded-xl font-black text-xs uppercase tracking-wider hover:bg-cyan-400 transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(6,182,212,0.4)]"
+                            className="w-full py-3.5 bg-cyan-500 text-slate-950 rounded-xl font-black text-xs uppercase tracking-wider hover:bg-cyan-400 transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(245,168,0,0.4)]"
                           >
                             <span className="material-symbols-outlined text-sm">how_to_reg</span>
                             Ficha de Inscripción
@@ -947,7 +947,7 @@ function FormacionContent() {
 
 export default function Formacion() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#020617]" />}>
+    <Suspense fallback={<div className="min-h-screen bg-[#14161a]" />}>
       <FormacionContent />
     </Suspense>
   );

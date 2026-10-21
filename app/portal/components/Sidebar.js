@@ -14,7 +14,7 @@ export default function Sidebar({ studentName, onLogout }) {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 bg-[#020617] border-r border-white/10 h-screen sticky top-0 hidden lg:flex flex-col p-6 z-40">
+    <aside className="w-64 bg-[#14161a] border-r border-white/10 h-screen sticky top-0 hidden lg:flex flex-col p-6 z-40">
       <div className="mb-12">
         <Image 
           src="/images/logo.png" 

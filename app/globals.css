@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :focus-visible {
-  outline: 2px solid #67e8f9;
+  outline: 2px solid #ffd84d;
   outline-offset: 4px;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -17,7 +17,7 @@
 
 /* FORCED DARK MODE RESET */
 html, body {
-  background-color: #020617 !important;
+  background-color: #14161a !important;
   color: #f1f5f9 !important;
   margin: 0;
   padding: 0;
@@ -32,28 +32,28 @@ html, body {
 @layer components {
   .tech-grid {
     background-image: 
-      linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
+      linear-gradient(rgba(255, 194, 14, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 194, 14, 0.05) 1px, transparent 1px);
     background-size: 50px 50px;
     mask-image: radial-gradient(ellipse at center, black, transparent 80%);
   }
 
   .glass-panel {
-    background: rgba(15, 23, 42, 0.6) !important;
+    background: rgba(28,31,36, 0.6) !important;
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .neon-button {
-    background: #06b6d4 !important;
-    color: #020617 !important;
-    box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+    background: #f5a800 !important;
+    color: #14161a !important;
+    box-shadow: 0 0 20px rgba(245,168,0, 0.4);
     font-weight: 900;
     text-transform: uppercase;
   }
 
   .text-neon {
-    color: #00f2ff !important;
-    text-shadow: 0 0 8px rgba(0, 242, 255, 0.4);
+    color: #ffc20e !important;
+    text-shadow: 0 0 8px rgba(255, 194, 14, 0.4);
   }
 }

@@ -2,8 +2,7 @@
 "use client";
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
-import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
-import QRCode from "qrcode";
+import { cargarPdf } from "@/lib/pdf";
 
 export default function QCDashboard() {
   const [dni, setDni] = useState("");
@@ -33,6 +32,7 @@ export default function QCDashboard() {
   }
 
   async function generarCertificado(cert, mode = 'preview') {
+    const { PDFDocument, rgb, StandardFonts, QRCode } = await cargarPdf();
     setSelectedCert(cert);
     if (mode === 'preview') setLoading(true);
     try {
@@ -247,7 +247,7 @@ export default function QCDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-100 font-sans p-8 pt-32">
+    <div className="min-h-screen bg-[#14161a] text-slate-100 font-sans p-8 pt-32">
       <div className="max-w-7xl mx-auto">
         <header className="flex justify-between items-center mb-12 bg-white/5 p-8 rounded-[32px] border border-white/10">
           <div>
@@ -299,7 +299,7 @@ export default function QCDashboard() {
               : <div className="text-center opacity-20">Seleccione un certificado para previsualizar</div>
             }
             {loading && (
-              <div className="absolute inset-0 bg-[#020617]/90 flex items-center justify-center text-cyan-400 font-black animate-pulse uppercase">
+              <div className="absolute inset-0 bg-[#14161a]/90 flex items-center justify-center text-cyan-400 font-black animate-pulse uppercase">
                 Generando PDF...
               </div>
             )}

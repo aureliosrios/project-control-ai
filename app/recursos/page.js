@@ -190,7 +190,7 @@ export default function Recursos() {
   // Si está logueado mostramos la barra lateral, sino el diseño público estándar
   if (isLoggedIn) {
     return (
-      <div className="min-h-screen bg-[#020617] text-white flex">
+      <div className="min-h-screen bg-[#14161a] text-white flex">
         <Sidebar studentName={studentData?.nombre} onLogout={handleLogout} />
         <div className="flex-1 p-8 md:p-12 relative overflow-y-auto h-screen">
           <div className="absolute inset-0 tech-grid pointer-events-none opacity-10" />
@@ -201,7 +201,7 @@ export default function Recursos() {
   }
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-200 pt-32 pb-20 selection:bg-cyan-500/30">
+    <div className="min-h-screen bg-[#14161a] text-slate-200 pt-32 pb-20 selection:bg-cyan-500/30">
       <div className="fixed inset-0 cyber-grid pointer-events-none opacity-20" />
       {mainContent}
     </div>

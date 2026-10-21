@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function MobileLanding() {
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-100 flex flex-col items-center px-4 py-8 selection:bg-cyan-500/30 overflow-x-hidden relative">
+    <div className="min-h-screen bg-[#14161a] text-slate-100 flex flex-col items-center px-4 py-8 selection:bg-cyan-500/30 overflow-x-hidden relative">
       {/* Cyber Background Effects */}
       <div className="fixed inset-0 tech-grid pointer-events-none opacity-20" />
       <div className="absolute top-0 w-full h-[500px] bg-gradient-to-b from-cyan-500/10 via-transparent to-transparent -z-10" />
@@ -17,7 +17,7 @@ export default function MobileLanding() {
       {/* Header Section */}
       <header className="relative mt-4 mb-6 flex flex-col items-center text-center">
         <Link href="/" className="group flex flex-col items-center">
-          <div className="relative w-20 h-20 mb-3 p-1 rounded-full bg-gradient-to-tr from-cyan-500 via-blue-600 to-emerald-500 shadow-[0_0_30px_rgba(6,182,212,0.3)] group-hover:scale-105 transition-transform">
+          <div className="relative w-20 h-20 mb-3 p-1 rounded-full bg-gradient-to-tr from-cyan-500 via-blue-600 to-emerald-500 shadow-[0_0_30px_rgba(245,168,0,0.3)] group-hover:scale-105 transition-transform">
             <div className="w-full h-full rounded-full bg-slate-950 p-3 flex items-center justify-center overflow-hidden">
               <div className="relative w-full h-full">
                 <Image 
@@ -36,7 +36,7 @@ export default function MobileLanding() {
           <p className="text-cyan-400 text-[10px] font-mono font-bold tracking-[0.3em] uppercase mt-1">
             Soluciones Agénticas & Formación
           </p>
-          <div className="mt-3 inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/40 text-cyan-300 text-[10px] font-black uppercase tracking-wider hover:bg-cyan-900/80 transition-all shadow-[0_0_15px_rgba(6,182,212,0.2)]">
+          <div className="mt-3 inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/40 text-cyan-300 text-[10px] font-black uppercase tracking-wider hover:bg-cyan-900/80 transition-all shadow-[0_0_15px_rgba(245,168,0,0.2)]">
             <span className="material-symbols-outlined text-xs">open_in_new</span>
             <span>Ir a la Página Principal</span>
           </div>
@@ -58,7 +58,7 @@ export default function MobileLanding() {
               sizes="56px"
               className="rounded-full object-cover border-2 border-cyan-500 relative z-10" 
             />
-            <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-[#020617] rounded-full z-20 shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
+            <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-[#14161a] rounded-full z-20 shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
           </div>
           <div className="text-left flex-1 min-w-0">
             <span className="block text-[9px] font-black text-cyan-400 uppercase tracking-widest">Consultor Principal</span>
@@ -86,7 +86,7 @@ export default function MobileLanding() {
         {/* 1. CURSOS ASINCRÓNICOS (GRABADOS) */}
         <Link 
           href="/formacion?tab=asinc#catalogo-formacion" 
-          className="block w-full bg-slate-950/70 backdrop-blur-xl p-4 rounded-2xl border border-purple-500/30 hover:border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.1)] transition-all group hover:scale-[1.01]"
+          className="block w-full bg-slate-950/70 backdrop-blur-xl p-4 rounded-2xl border border-purple-500/30 hover:border-purple-400 shadow-[0_0_15px_rgba(185,85,60,0.1)] transition-all group hover:scale-[1.01]"
         >
           <div className="flex items-center gap-3.5">
             <div className="w-11 h-11 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 group-hover:scale-105 transition-transform flex-shrink-0">
@@ -142,7 +142,7 @@ export default function MobileLanding() {
         {/* 3. SOLUCIONES AGÉNTICAS */}
         <Link 
           href="/servicios#agentes" 
-          className="block w-full bg-slate-950/70 backdrop-blur-xl p-4 rounded-2xl border border-cyan-500/30 hover:border-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.1)] transition-all group hover:scale-[1.01]"
+          className="block w-full bg-slate-950/70 backdrop-blur-xl p-4 rounded-2xl border border-cyan-500/30 hover:border-cyan-400 shadow-[0_0_15px_rgba(245,168,0,0.1)] transition-all group hover:scale-[1.01]"
         >
           <div className="flex items-center gap-3.5">
             <div className="w-11 h-11 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-105 transition-transform flex-shrink-0">
@@ -200,7 +200,7 @@ export default function MobileLanding() {
           href="/" 
           target="_blank"
           rel="noopener noreferrer"
-          className="block w-full bg-gradient-to-r from-blue-900/60 via-slate-900 to-cyan-950/60 p-4 rounded-2xl border-2 border-cyan-400/50 hover:border-cyan-300 shadow-[0_0_20px_rgba(6,182,212,0.2)] transition-all group hover:scale-[1.02] text-center"
+          className="block w-full bg-gradient-to-r from-blue-900/60 via-slate-900 to-cyan-950/60 p-4 rounded-2xl border-2 border-cyan-400/50 hover:border-cyan-300 shadow-[0_0_20px_rgba(245,168,0,0.2)] transition-all group hover:scale-[1.02] text-center"
         >
           <div className="flex items-center justify-center gap-2 text-cyan-300 font-black text-xs uppercase tracking-widest mb-1">
             <span className="material-symbols-outlined text-base">open_in_new</span>

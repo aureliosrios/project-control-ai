@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/5 py-12 px-6 bg-[#020617]">
+    <footer className="border-t border-white/5 py-12 px-6 bg-[#14161a]">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
         <div className="flex items-center gap-3 grayscale opacity-50">
           <Image src="/images/logo.png" alt="PCAI Logo" width={30} height={30} />

@@ -78,7 +78,7 @@ export default function Inscripcion() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-[#020617] flex items-center justify-center px-6 pt-32 pb-20">
+      <div className="min-h-screen bg-[#14161a] flex items-center justify-center px-6 pt-32 pb-20">
         <div className="glass-card p-12 rounded-3xl border-white/5 text-center max-w-md w-full animate-in fade-in zoom-in duration-500">
           <div className="w-20 h-20 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">✓</div>
           <h2 className="text-3xl font-bold text-white mb-4">¡Registro Exitoso!</h2>
@@ -96,7 +96,7 @@ export default function Inscripcion() {
   }
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-200 pt-32 pb-20 selection:bg-cyan-500/30">
+    <div className="min-h-screen bg-[#14161a] text-slate-200 pt-32 pb-20 selection:bg-cyan-500/30">
       <div className="fixed inset-0 cyber-grid pointer-events-none opacity-20" />
       
       <main className="relative max-w-2xl mx-auto px-6">
@@ -149,11 +149,11 @@ export default function Inscripcion() {
                 required 
                 value={formData.curso} 
                 onChange={handleChange} 
-                className="w-full bg-[#0f172a] text-white border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 transition-all outline-none"
+                className="w-full bg-[#1c1f24] text-white border border-white/10 rounded-xl px-4 py-3 focus:border-cyan-500 transition-all outline-none"
               >
-                <option value="" disabled className="bg-[#0f172a] text-slate-400">Seleccione curso...</option>
+                <option value="" disabled className="bg-[#1c1f24] text-slate-400">Seleccione curso...</option>
                 {sincronicos.map(curso => (
-                  <option key={curso.id} value={curso.registro} disabled={curso.cerrado} className="bg-[#0f172a] text-white">
+                  <option key={curso.id} value={curso.registro} disabled={curso.cerrado} className="bg-[#1c1f24] text-white">
                     {curso.nombre} ({curso.cerrado ? "Inscripciones cerradas" : `Inicio: ${curso.inicio}`})
                   </option>
                 ))}
@@ -165,7 +165,7 @@ export default function Inscripcion() {
             <button 
               type="submit" 
               disabled={loading}
-              className="w-full bg-cyan-500 text-slate-950 py-4 rounded-xl font-bold text-lg hover:bg-cyan-400 transition-all disabled:opacity-50 mt-4 shadow-[0_0_30px_rgba(6,182,212,0.2)]"
+              className="w-full bg-cyan-500 text-slate-950 py-4 rounded-xl font-bold text-lg hover:bg-cyan-400 transition-all disabled:opacity-50 mt-4 shadow-[0_0_30px_rgba(245,168,0,0.2)]"
             >
               {loading ? "PROCESANDO..." : "FINALIZAR INSCRIPCIÓN"}
             </button>

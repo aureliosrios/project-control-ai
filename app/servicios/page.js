@@ -254,7 +254,7 @@ export default function ServiciosPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-100 selection:bg-cyan-500/30">
+    <div className="min-h-screen bg-[#14161a] text-slate-100 selection:bg-cyan-500/30">
       <div className="fixed inset-0 tech-grid opacity-30 pointer-events-none" />
 
       <main className="relative z-10 pt-32 pb-32 px-6 md:px-8 max-w-7xl mx-auto">
@@ -316,7 +316,7 @@ export default function ServiciosPage() {
         {activeTab === "agentes" && (
           <div id="agentes" className="space-y-16 animate-in fade-in duration-300">
             {/* Manifiesto Agéntico */}
-            <section className="p-8 md:p-12 rounded-[40px] bg-gradient-to-br from-slate-900 via-[#0a1320] to-[#020617] border-2 border-slate-700/60 relative overflow-hidden shadow-[0_0_50px_rgba(30,41,59,0.3)]">
+            <section className="p-8 md:p-12 rounded-[40px] bg-gradient-to-br from-slate-900 via-[#181b1f] to-[#14161a] border-2 border-slate-700/60 relative overflow-hidden shadow-[0_0_50px_rgba(30,41,59,0.3)]">
               <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 blur-[90px] pointer-events-none" />
               <div className="relative z-10 max-w-4xl">
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-cyan-400 text-xs font-black uppercase tracking-[0.2em] mb-6">
@@ -482,7 +482,7 @@ export default function ServiciosPage() {
                     onClick={() => setStatusFilter("todos")}
                     className={`px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
                       statusFilter === "todos"
-                        ? "bg-cyan-500 text-slate-950 shadow-[0_0_15px_rgba(6,182,212,0.3)] font-black"
+                        ? "bg-cyan-500 text-slate-950 shadow-[0_0_15px_rgba(245,168,0,0.3)] font-black"
                         : "bg-slate-950/80 text-slate-400 hover:text-white border border-slate-800"
                     }`}
                   >
@@ -545,7 +545,7 @@ export default function ServiciosPage() {
                         className={`rounded-2xl border-2 transition-all duration-300 backdrop-blur-sm overflow-hidden ${
                           isExpanded
                             ? agente.estado === "Publicado en YouTube"
-                              ? "border-cyan-500/60 bg-slate-900/90 shadow-[0_0_30px_rgba(6,182,212,0.18)] ring-1 ring-cyan-500/30"
+                              ? "border-cyan-500/60 bg-slate-900/90 shadow-[0_0_30px_rgba(245,168,0,0.18)] ring-1 ring-cyan-500/30"
                               : "border-slate-700 bg-slate-900/90 shadow-lg"
                             : agente.estado === "Publicado en YouTube"
                             ? "border-cyan-500/40 bg-slate-900/60 hover:border-cyan-400/70 hover:bg-slate-900/80"
@@ -806,7 +806,7 @@ export default function ServiciosPage() {
                 </article>
 
                 {/* Modalidad 2: Por Hora */}
-                <article className="rounded-3xl border-2 border-cyan-500/60 bg-cyan-950/30 p-7 sm:p-8 flex flex-col justify-between shadow-[0_0_30px_rgba(6,182,212,0.15)]">
+                <article className="rounded-3xl border-2 border-cyan-500/60 bg-cyan-950/30 p-7 sm:p-8 flex flex-col justify-between shadow-[0_0_30px_rgba(245,168,0,0.15)]">
                   <div>
                     <span className="inline-block bg-cyan-400 text-slate-950 text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full mb-2">
                       Sesión técnica 1 a 1

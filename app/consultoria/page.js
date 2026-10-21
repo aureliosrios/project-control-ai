@@ -17,7 +17,7 @@ const temas = [
 
 export default function Consultoria() {
   return (
-    <main className="min-h-screen bg-[#020617] text-slate-100 pt-32 pb-20">
+    <main className="min-h-screen bg-[#14161a] text-slate-100 pt-32 pb-20">
       <section className="max-w-7xl mx-auto px-6 pt-8 pb-12">
         <Link href="/" className="text-sm text-slate-400 hover:text-cyan-300">← Inicio</Link>
         <p className="text-cyan-300 text-xs font-semibold tracking-[0.18em] uppercase mt-10 mb-5">Consultoría y servicios para profesionales y empresas</p>
@@ -46,7 +46,7 @@ export default function Consultoria() {
           </article>
 
           {/* Modalidad 2: Consultoría por hora */}
-          <article className="rounded-3xl border border-cyan-400/60 bg-cyan-950/30 p-7 sm:p-8 flex flex-col relative shadow-[0_0_30px_rgba(6,182,212,0.12)]">
+          <article className="rounded-3xl border border-cyan-400/60 bg-cyan-950/30 p-7 sm:p-8 flex flex-col relative shadow-[0_0_30px_rgba(245,168,0,0.12)]">
             <span className="inline-block bg-cyan-400 text-slate-950 text-[11px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full w-fit mb-2">
               Sesión técnica 1 a 1
             </span>

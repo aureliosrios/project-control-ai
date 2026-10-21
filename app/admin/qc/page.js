@@ -1,8 +1,7 @@
 "use client";
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
-import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
-import QRCode from "qrcode";
+import { cargarPdf } from "@/lib/pdf";
 import Image from "next/image";
 
 export default function AdminQCDashboard() {
@@ -44,6 +43,7 @@ export default function AdminQCDashboard() {
   }
 
   async function generarVistaPrevia(cert) {
+    const { PDFDocument, rgb, StandardFonts, QRCode } = await cargarPdf();
     setSelectedCert(cert);
     setLoading(true);
     try {
@@ -108,7 +108,7 @@ export default function AdminQCDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-100 font-sans p-8">
+    <div className="min-h-screen bg-[#14161a] text-slate-100 font-sans p-8">
       <div className="max-w-7xl mx-auto">
         <header className="flex justify-between items-center mb-12">
           <div>
@@ -177,7 +177,7 @@ export default function AdminQCDashboard() {
                 </div>
               )}
               {loading && (
-                <div className="absolute inset-0 bg-[#020617]/80 flex items-center justify-center backdrop-blur-sm">
+                <div className="absolute inset-0 bg-[#14161a]/80 flex items-center justify-center backdrop-blur-sm">
                   <div className="text-cyan-400 font-black animate-pulse tracking-widest">PROCESANDO...</div>
                 </div>
               )}

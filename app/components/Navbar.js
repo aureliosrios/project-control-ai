@@ -22,7 +22,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 w-full z-[100] border-b border-white/10 bg-[#020617]/90 backdrop-blur-2xl">
+    <nav className="fixed top-0 w-full z-[100] border-b border-white/10 bg-[#14161a]/90 backdrop-blur-2xl">
       <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
         <Link href="/" className="flex items-center gap-4 group">
           <div className="relative w-12 h-12 transition-transform group-hover:scale-110">
@@ -96,7 +96,7 @@ export default function Navbar() {
               Portal Alumno
             </Link>
           </div>
-          <Link href="/inscripcion" className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 px-6 py-3 rounded-xl font-black text-xs uppercase tracking-widest transition-all hover:scale-105 shadow-[0_0_20px_rgba(6,182,212,0.3)]">
+          <Link href="/inscripcion" className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 px-6 py-3 rounded-xl font-black text-xs uppercase tracking-widest transition-all hover:scale-105 shadow-[0_0_20px_rgba(245,168,0,0.3)]">
             Inscripción
           </Link>
         </div>
@@ -115,7 +115,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Overlay */}
       {isOpen && (
-        <div id="menu-movil" className="lg:hidden absolute top-full left-0 w-full bg-[#020617] border-b border-white/10 p-8 flex flex-col gap-5 animate-in slide-in-from-top duration-300">
+        <div id="menu-movil" className="lg:hidden absolute top-full left-0 w-full bg-[#14161a] border-b border-white/10 p-8 flex flex-col gap-5 animate-in slide-in-from-top duration-300">
           <Link href="/" onClick={() => setIsOpen(false)} className="text-lg font-black text-white uppercase tracking-tighter">
             Inicio
           </Link>

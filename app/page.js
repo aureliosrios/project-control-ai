@@ -56,12 +56,12 @@ const serviciosPrincipales = [
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#020617] text-slate-100 pt-28 sm:pt-36 pb-20 selection:bg-cyan-500 selection:text-slate-950">
+    <main className="min-h-screen bg-[#14161a] text-slate-100 pt-28 sm:pt-36 pb-20 selection:bg-cyan-500 selection:text-slate-950">
       {/* 1. HERO SECTION: LA MISIÓN AGÉNTICA */}
       <section className="max-w-7xl mx-auto px-6 py-8 sm:py-16">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           {/* Badge Misión */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-950/80 border border-cyan-500/30 shadow-[0_0_20px_rgba(6,182,212,0.15)] animate-in fade-in duration-700">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-950/80 border border-cyan-500/30 shadow-[0_0_20px_rgba(245,168,0,0.15)] animate-in fade-in duration-700">
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
             <span className="text-[11px] font-mono font-bold tracking-widest text-cyan-300 uppercase">
               Misión: Soluciones Agénticas para la Construcción
@@ -89,7 +89,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <Link
               href="/servicios"
-              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-black text-xs uppercase tracking-widest transition-all duration-300 shadow-[0_0_25px_rgba(6,182,212,0.35)] hover:scale-105 flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-black text-xs uppercase tracking-widest transition-all duration-300 shadow-[0_0_25px_rgba(245,168,0,0.35)] hover:scale-105 flex items-center justify-center gap-2"
             >
               <span className="material-symbols-outlined text-base">engineering</span>
               Servicios de Ingeniería
@@ -146,7 +146,7 @@ export default function Home() {
           </div>
 
           {/* Tarjeta Futuro: Soluciones Agénticas con IA */}
-          <div className="p-8 rounded-3xl border-2 border-cyan-500/40 bg-gradient-to-b from-cyan-950/30 to-slate-950/80 shadow-[0_0_30px_rgba(6,182,212,0.15)] relative overflow-hidden">
+          <div className="p-8 rounded-3xl border-2 border-cyan-500/40 bg-gradient-to-b from-cyan-950/30 to-slate-950/80 shadow-[0_0_30px_rgba(245,168,0,0.15)] relative overflow-hidden">
             <div className="flex items-center gap-3 mb-6">
               <span className="w-10 h-10 rounded-xl bg-cyan-950 border border-cyan-500/50 flex items-center justify-center text-cyan-300">
                 <span className="material-symbols-outlined">bolt</span>
@@ -176,7 +176,7 @@ export default function Home() {
 
       {/* 2.5. AGENTE DESTACADO: PLANEAMIENTO 4D/5D CON MEDIOS DE PAGO */}
       <section className="max-w-7xl mx-auto px-6 py-4">
-        <div className="p-8 sm:p-12 rounded-[40px] bg-gradient-to-br from-[#071728] via-slate-900 to-[#020617] border-2 border-cyan-500/50 shadow-[0_0_50px_rgba(6,182,212,0.2)] relative overflow-hidden">
+        <div className="p-8 sm:p-12 rounded-[40px] bg-gradient-to-br from-[#171a1e] via-slate-900 to-[#14161a] border-2 border-cyan-500/50 shadow-[0_0_50px_rgba(245,168,0,0.2)] relative overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 blur-[90px] pointer-events-none" />
 
           <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
@@ -360,7 +360,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
             <Link
               href="/consultoria"
-              className="px-6 py-4 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-black text-xs uppercase tracking-widest text-center transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)]"
+              className="px-6 py-4 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-black text-xs uppercase tracking-widest text-center transition-all shadow-[0_0_20px_rgba(245,168,0,0.3)]"
             >
               Reunión Gratuita ({consultoria.minutosGratis} min)
             </Link>
@@ -391,7 +391,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <Link
               href="/formacion"
-              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-black text-xs uppercase tracking-widest transition-all shadow-[0_0_25px_rgba(6,182,212,0.4)]"
+              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-black text-xs uppercase tracking-widest transition-all shadow-[0_0_25px_rgba(245,168,0,0.4)]"
             >
               Ver Catálogo de Agentes y Cursos
             </Link>

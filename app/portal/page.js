@@ -242,7 +242,7 @@ export default function StudentPortal() {
 
   if (!isLoggedIn) {
     return (
-      <div className="min-h-screen bg-[#020617] flex items-center justify-center p-8 relative overflow-hidden">
+      <div className="min-h-screen bg-[#14161a] flex items-center justify-center p-8 relative overflow-hidden">
         <div className="absolute inset-0 tech-grid pointer-events-none opacity-30" />
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
         
@@ -274,7 +274,7 @@ export default function StudentPortal() {
             <button
               onClick={handleLogin}
               disabled={loading}
-              className="w-full neon-button py-4 rounded-2xl font-black text-xs tracking-[0.2em] uppercase transition-all hover:scale-[1.02] active:scale-[0.98] bg-cyan-500 text-black shadow-[0_0_20px_rgba(6,182,212,0.4)]"
+              className="w-full neon-button py-4 rounded-2xl font-black text-xs tracking-[0.2em] uppercase transition-all hover:scale-[1.02] active:scale-[0.98] bg-cyan-500 text-black shadow-[0_0_20px_rgba(245,168,0,0.4)]"
             >
               {loading ? "Verificando Protocolos..." : "Iniciar Sesión"}
             </button>
@@ -338,7 +338,7 @@ export default function StudentPortal() {
   );
 
   return (
-    <div className="min-h-screen bg-[#020617] text-white flex">
+    <div className="min-h-screen bg-[#14161a] text-white flex">
       <Sidebar studentName={studentData.nombre} onLogout={handleLogout} />
 
       <main className="flex-1 p-8 md:p-12 relative overflow-y-auto h-screen">

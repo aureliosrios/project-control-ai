@@ -1,8 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
-import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
-import QRCode from "qrcode";
+import { cargarPdf } from "@/lib/pdf";
 import Image from "next/image";
 
 export default function Verificar() {
@@ -110,6 +109,7 @@ export default function Verificar() {
   }
 
   async function procesarDiploma(cert) {
+    const { PDFDocument, rgb, StandardFonts, QRCode } = await cargarPdf();
     const certId = cert.certificado_id;
     try {
       // 1. Validar límite en tiempo real
@@ -494,7 +494,7 @@ export default function Verificar() {
   }
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-100 selection:bg-cyan-500/30 font-sans">
+    <div className="min-h-screen bg-[#14161a] text-slate-100 selection:bg-cyan-500/30 font-sans">
       <div className="fixed inset-0 tech-grid opacity-30 pointer-events-none" />
 
       <main className="relative z-10 flex flex-col items-center justify-center min-h-screen p-6">
@@ -528,7 +528,7 @@ export default function Verificar() {
                 <button 
                   onClick={buscarCertificados}
                   disabled={loading}
-                  className="w-full py-5 bg-cyan-500 text-slate-950 rounded-2xl font-black text-sm uppercase tracking-[0.2em] hover:scale-105 transition-all shadow-[0_0_40px_rgba(6,182,212,0.3)] disabled:opacity-50"
+                  className="w-full py-5 bg-cyan-500 text-slate-950 rounded-2xl font-black text-sm uppercase tracking-[0.2em] hover:scale-105 transition-all shadow-[0_0_40px_rgba(245,168,0,0.3)] disabled:opacity-50"
                 >
                   {loading ? "VALIDANDO..." : "CONSULTAR MIS CURSOS"}
                 </button>
@@ -542,21 +542,21 @@ export default function Verificar() {
                   <select 
                     value={titulo}
                     onChange={(e) => setTitulo(e.target.value)}
-                    className="bg-[#020617] border border-white/10 rounded-xl px-3 py-3 text-xs font-bold text-white outline-none focus:border-cyan-500"
+                    className="bg-[#14161a] border border-white/10 rounded-xl px-3 py-3 text-xs font-bold text-white outline-none focus:border-cyan-500"
                   >
-                    <option value="Ing." className="bg-[#020617] text-white">Ing.</option>
-                    <option value="Arq." className="bg-[#020617] text-white">Arq.</option>
-                    <option value="Lic." className="bg-[#020617] text-white">Lic.</option>
-                    <option value="Mag." className="bg-[#020617] text-white">Mag.</option>
-                    <option value="Dr." className="bg-[#020617] text-white">Dr.</option>
-                    <option value="Sr." className="bg-[#020617] text-white">Sr.</option>
-                    <option value="" className="bg-[#020617] text-white">---</option>
+                    <option value="Ing." className="bg-[#14161a] text-white">Ing.</option>
+                    <option value="Arq." className="bg-[#14161a] text-white">Arq.</option>
+                    <option value="Lic." className="bg-[#14161a] text-white">Lic.</option>
+                    <option value="Mag." className="bg-[#14161a] text-white">Mag.</option>
+                    <option value="Dr." className="bg-[#14161a] text-white">Dr.</option>
+                    <option value="Sr." className="bg-[#14161a] text-white">Sr.</option>
+                    <option value="" className="bg-[#14161a] text-white">---</option>
                   </select>
                   <input 
                     type="text"
                     value={confirmName}
                     onChange={(e) => setConfirmName(e.target.value.toUpperCase())}
-                    className="flex-1 bg-[#020617] border border-white/10 rounded-xl px-4 py-3 text-sm font-black text-white outline-none focus:border-cyan-500"
+                    className="flex-1 bg-[#14161a] border border-white/10 rounded-xl px-4 py-3 text-sm font-black text-white outline-none focus:border-cyan-500"
                   />
                 </div>
               </div>

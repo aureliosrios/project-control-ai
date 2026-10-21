@@ -44,6 +44,7 @@ const agentesEspecializados = [
     solucion: "Le proporcionas al Agente tus Planos (DWG/DXF), Cronograma (P6/MSP) y Presupuesto, y genera un Visor Web 3D 4D/5D interactivo con semáforo constructivo, Curva S y Lookahead.",
     entregable: "Visor 3D interactivo en HTML/Three.js autocontenido, simulación temporal 4D, panel de costos 5D (EVM), Curva S y Lookahead a 4 semanas.",
     videoId: "weL9yLqdCHY",
+    tiktokUrl: "https://vt.tiktok.com/ZSgyYmMFX/",
     whatsappMsg: "Hola Aurelio, vi el video del Agente de Planeamiento de Obra 4D/5D en YouTube y deseo adquirir el agente para mis proyectos."
   },
   {
@@ -736,6 +737,19 @@ export default function Formacion() {
                         <span className="material-symbols-outlined text-base text-white">play_circle</span>
                         {agente.estado === "Publicado en YouTube" ? "Ver Guía en YouTube (14 min)" : "Ver Avance en YouTube"}
                       </button>
+
+                      {agente.tiktokUrl && (
+                        <Link
+                          href={agente.tiktokUrl}
+                          target="_blank"
+                          className="w-full py-2.5 px-3 rounded-xl font-bold text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 bg-black/80 hover:bg-black text-white border border-pink-500/30 hover:border-pink-500/60 shadow-[0_0_12px_rgba(236,72,153,0.15)] group/tiktok"
+                        >
+                          <svg className="w-4 h-4 fill-current text-cyan-400 group-hover/tiktok:text-pink-400 transition-colors" viewBox="0 0 24 24">
+                            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                          </svg>
+                          <span>Ver Resultado Final (TikTok)</span>
+                        </Link>
+                      )}
 
                       <Link
                         href={`https://wa.me/51993147501?text=${encodeURIComponent(agente.whatsappMsg)}`}
@@ -1463,6 +1477,18 @@ export default function Formacion() {
                   {selectedVideo.entregable}
                 </div>
                 <div className="flex items-center gap-3 w-full sm:w-auto">
+                  {selectedVideo.tiktokUrl && (
+                    <Link
+                      href={selectedVideo.tiktokUrl}
+                      target="_blank"
+                      className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-black hover:bg-zinc-800 text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 border border-pink-500/40"
+                    >
+                      <svg className="w-3.5 h-3.5 fill-current text-cyan-400" viewBox="0 0 24 24">
+                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                      </svg>
+                      Demo en TikTok
+                    </Link>
+                  )}
                   <Link
                     href={`https://wa.me/51993147501?text=${encodeURIComponent(selectedVideo.whatsappMsg)}`}
                     target="_blank"

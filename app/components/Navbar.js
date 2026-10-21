@@ -7,6 +7,20 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [formacionOpen, setFormacionOpen] = useState(false);
 
+  const handleFormacionTab = (tab) => {
+    setIsOpen(false);
+    setFormacionOpen(false);
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("pcai-tab-change", { detail: tab }));
+      if (window.location.pathname.startsWith("/formacion")) {
+        const el = document.getElementById("catalogo-formacion");
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    }
+  };
+
   return (
     <nav className="fixed top-0 w-full z-[100] border-b border-white/10 bg-[#020617]/90 backdrop-blur-2xl">
       <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
@@ -44,12 +58,13 @@ export default function Navbar() {
               <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none group-hover:pointer-events-auto">
                 <div className="w-72 p-3 rounded-2xl bg-slate-950/95 border border-white/10 backdrop-blur-xl shadow-2xl flex flex-col gap-1.5">
                   <Link
-                    href="/formacion?tab=sinc"
+                    href="/formacion?tab=sinc#catalogo-formacion"
+                    onClick={() => handleFormacionTab("sinc")}
                     className="p-3 rounded-xl hover:bg-white/5 transition-colors flex items-start gap-3 group/item"
                   >
-                    <span className="material-symbols-outlined text-emerald-400 text-xl mt-0.5">video_camera_front</span>
+                    <span className="material-symbols-outlined text-orange-400 text-xl mt-0.5">sensors</span>
                     <div>
-                      <span className="block text-xs font-black text-white group-hover/item:text-emerald-300 transition-colors uppercase">
+                      <span className="block text-xs font-black text-white group-hover/item:text-orange-400 transition-colors uppercase">
                         Cursos en Vivo
                       </span>
                       <span className="block text-[10px] text-slate-400 font-medium normal-case">
@@ -59,12 +74,13 @@ export default function Navbar() {
                   </Link>
 
                   <Link
-                    href="/formacion?tab=asinc"
+                    href="/formacion?tab=asinc#catalogo-formacion"
+                    onClick={() => handleFormacionTab("asinc")}
                     className="p-3 rounded-xl hover:bg-white/5 transition-colors flex items-start gap-3 group/item"
                   >
-                    <span className="material-symbols-outlined text-purple-400 text-xl mt-0.5">play_lesson</span>
+                    <span className="material-symbols-outlined text-cyan-400 text-xl mt-0.5">schedule</span>
                     <div>
-                      <span className="block text-xs font-black text-white group-hover/item:text-purple-300 transition-colors uppercase">
+                      <span className="block text-xs font-black text-white group-hover/item:text-cyan-300 transition-colors uppercase">
                         Cursos Grabados
                       </span>
                       <span className="block text-[10px] text-slate-400 font-medium normal-case">
@@ -113,16 +129,16 @@ export default function Navbar() {
               Formación
             </span>
             <Link
-              href="/formacion?tab=sinc"
-              onClick={() => setIsOpen(false)}
-              className="block text-sm font-bold text-slate-200 hover:text-white"
+              href="/formacion?tab=sinc#catalogo-formacion"
+              onClick={() => handleFormacionTab("sinc")}
+              className="block text-sm font-bold text-slate-200 hover:text-orange-400 transition-colors"
             >
               • Capacitación Sincrónica (En Vivo)
             </Link>
             <Link
-              href="/formacion?tab=asinc"
-              onClick={() => setIsOpen(false)}
-              className="block text-sm font-bold text-slate-200 hover:text-white"
+              href="/formacion?tab=asinc#catalogo-formacion"
+              onClick={() => handleFormacionTab("asinc")}
+              className="block text-sm font-bold text-slate-200 hover:text-cyan-300 transition-colors"
             >
               • Capacitación Asincrónica (Grabada)
             </Link>

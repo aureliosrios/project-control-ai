@@ -1,5 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import catalogo from "@/data/cursos.json";
@@ -107,24 +108,65 @@ const sincThemes = {
   }
 };
 
-export default function Formacion() {
+function FormacionContent() {
+  const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState("sinc");
   const [selectedRuta, setSelectedRuta] = useState("TODAS");
   const [selectedCursoForPayment, setSelectedCursoForPayment] = useState(null);
   const [paymentModalOpen, setPaymentModalOpen] = useState(false);
 
+  // Sincronizar activeTab cuando cambia searchParams (URL query) o hash
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    const tabParam = searchParams?.get("tab");
+    const hash = typeof window !== "undefined" ? window.location.hash.toLowerCase() : "";
+    if (tabParam === "asinc" || hash.includes("asinc")) {
+      setActiveTab("asinc");
+    } else if (tabParam === "sinc" || hash.includes("sinc")) {
+      setActiveTab("sinc");
+    }
+  }, [searchParams]);
+
+  // Escuchar eventos globales y cambios de historial (popstate / hashchange / custom event)
+  useEffect(() => {
+    const applyFromUrl = () => {
+      if (typeof window === "undefined") return;
       const params = new URLSearchParams(window.location.search);
       const tabParam = params.get("tab");
-      const hash = window.location.hash.toLowerCase().replace("#", "");
+      const hash = window.location.hash.toLowerCase();
       if (tabParam === "asinc" || hash.includes("asinc")) {
         setActiveTab("asinc");
       } else if (tabParam === "sinc" || hash.includes("sinc")) {
         setActiveTab("sinc");
       }
-    }
+    };
+
+    const handleCustomTab = (e) => {
+      if (e.detail === "sinc" || e.detail === "asinc") {
+        setActiveTab(e.detail);
+      }
+    };
+
+    window.addEventListener("pcai-tab-change", handleCustomTab);
+    window.addEventListener("popstate", applyFromUrl);
+    window.addEventListener("hashchange", applyFromUrl);
+
+    applyFromUrl();
+
+    return () => {
+      window.removeEventListener("pcai-tab-change", handleCustomTab);
+      window.removeEventListener("popstate", applyFromUrl);
+      window.removeEventListener("hashchange", applyFromUrl);
+    };
   }, []);
+
+  const changeTab = (newTab) => {
+    setActiveTab(newTab);
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      url.searchParams.set("tab", newTab);
+      window.history.replaceState({}, "", url.toString());
+    }
+  };
 
   const cursosFiltrados = selectedRuta === "TODAS"
     ? asincronicos
@@ -215,10 +257,11 @@ export default function Formacion() {
         </header>
 
         {/* Tab Selector: Únicamente Sincrónicas y Asincrónicas */}
-        <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-14 border-b border-white/10 pb-6">
+        <div id="catalogo-formacion" className="scroll-mt-32 flex flex-col sm:flex-row gap-3 md:gap-4 mb-6 border-b border-white/10 pb-6">
           <button
+            type="button"
             aria-pressed={activeTab === "sinc"}
-            onClick={() => setActiveTab("sinc")}
+            onClick={() => changeTab("sinc")}
             className={`px-6 md:px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-2 ${
               activeTab === "sinc"
                 ? "bg-orange-500 text-slate-950 shadow-[0_0_30px_rgba(244,99,15,0.4)] ring-2 ring-orange-400/50"
@@ -230,8 +273,9 @@ export default function Formacion() {
           </button>
 
           <button
+            type="button"
             aria-pressed={activeTab === "asinc"}
-            onClick={() => setActiveTab("asinc")}
+            onClick={() => changeTab("asinc")}
             className={`px-6 md:px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-2 ${
               activeTab === "asinc"
                 ? "bg-cyan-500 text-slate-950 shadow-[0_0_30px_rgba(6,182,212,0.4)] ring-2 ring-cyan-400/50"
@@ -240,6 +284,28 @@ export default function Formacion() {
           >
             <span className="material-symbols-outlined text-base">schedule</span>
             Cursos Grabados (Asincrónicos)
+          </button>
+        </div>
+
+        {/* Indicador Visual y Rápido del Catálogo Seleccionado */}
+        <div className="mb-10 p-3.5 sm:p-4 rounded-2xl bg-slate-900/80 border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-2.5">
+            <span className={`w-2.5 h-2.5 rounded-full ${activeTab === "sinc" ? "bg-orange-400 animate-pulse" : "bg-cyan-400 animate-pulse"}`} />
+            <span className="text-xs font-black uppercase tracking-wider text-slate-300">
+              Viendo ahora:{" "}
+              <strong className={activeTab === "sinc" ? "text-orange-400" : "text-cyan-400"}>
+                {activeTab === "sinc" ? "Capacitaciones Sincrónicas (En Vivo con Mentoría Directa)" : "Capacitaciones Asincrónicas (Cursos Grabados a tu Ritmo)"}
+              </strong>
+            </span>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => changeTab(activeTab === "sinc" ? "asinc" : "sinc")}
+            className="text-xs font-bold text-slate-400 hover:text-white transition-colors flex items-center gap-1 self-start sm:self-auto group"
+          >
+            <span>Cambiar a {activeTab === "sinc" ? "Cursos Grabados (Asincrónicos)" : "Cursos en Vivo (Sincrónicos)"}</span>
+            <span className="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
           </button>
         </div>
 
@@ -876,5 +942,13 @@ export default function Formacion() {
         )}
       </main>
     </div>
+  );
+}
+
+export default function Formacion() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#020617]" />}>
+      <FormacionContent />
+    </Suspense>
   );
 }

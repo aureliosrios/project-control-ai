@@ -85,7 +85,7 @@ export default function MobileLanding() {
 
         {/* 1. CURSOS ASINCRÓNICOS (GRABADOS) */}
         <Link 
-          href="/formacion?tab=asinc" 
+          href="/formacion?tab=asinc#catalogo-formacion" 
           className="block w-full bg-slate-950/70 backdrop-blur-xl p-4 rounded-2xl border border-purple-500/30 hover:border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.1)] transition-all group hover:scale-[1.01]"
         >
           <div className="flex items-center gap-3.5">
@@ -113,7 +113,7 @@ export default function MobileLanding() {
 
         {/* 2. CURSOS SINCRÓNICOS (EN VIVO) */}
         <Link 
-          href="/formacion?tab=sinc" 
+          href="/formacion?tab=sinc#catalogo-formacion" 
           className="block w-full bg-slate-950/70 backdrop-blur-xl p-4 rounded-2xl border border-emerald-500/30 hover:border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.1)] transition-all group hover:scale-[1.01]"
         >
           <div className="flex items-center gap-3.5">

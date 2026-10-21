@@ -39,7 +39,7 @@ const serviciosPrincipales = [
     badge: "En Vivo con el Ing. Aurelio",
     desc: "Programas intensivos en directo con acompañamiento paso a paso. Aprende a crear, configurar e implementar agentes de ingeniería en proyectos reales, interactuando en vivo para resolver dudas y adaptar los flujos a tus obras.",
     linkText: "Ver Cursos en Vivo",
-    linkHref: "/formacion?tab=sinc",
+    linkHref: "/formacion?tab=sinc#catalogo-formacion",
   },
   {
     num: "04",
@@ -50,7 +50,7 @@ const serviciosPrincipales = [
     badge: "Acceso Inmediato 24/7",
     desc: "Cursos grabados de alta definición con materiales descargables. Incluye desde el curso accesible de iniciación 'El Despertar' y clases maestras abiertas en YouTube hasta módulos especializados de programación y control de proyectos.",
     linkText: "Ver Cursos Grabados",
-    linkHref: "/formacion?tab=asinc",
+    linkHref: "/formacion?tab=asinc#catalogo-formacion",
   },
 ];
 

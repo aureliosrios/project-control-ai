@@ -121,7 +121,7 @@ export default function MobileLanding() {
 
         {/* 2. SOLUCIONES AGÉNTICAS */}
         <Link 
-          href="/formacion?tab=agentes" 
+          href="/servicios#agentes" 
           className="block w-full bg-slate-950/70 backdrop-blur-xl p-4 rounded-2xl border border-cyan-500/30 hover:border-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.1)] transition-all group hover:scale-[1.01]"
         >
           <div className="flex items-center gap-3.5">
@@ -149,7 +149,7 @@ export default function MobileLanding() {
 
         {/* 3. CONSULTORÍA ESPECIALIZADA */}
         <Link 
-          href="/consultoria" 
+          href="/servicios#consultoria" 
           className="block w-full bg-slate-950/70 backdrop-blur-xl p-4 rounded-2xl border border-amber-500/30 hover:border-amber-400 shadow-[0_0_15px_rgba(217,119,6,0.1)] transition-all group hover:scale-[1.01]"
         >
           <div className="flex items-center gap-3.5">

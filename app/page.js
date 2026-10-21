@@ -10,14 +10,14 @@ export const metadata = {
 const serviciosPrincipales = [
   {
     num: "01",
-    tag: "AUTOMATIZACIÓN INSTANTÁNEA",
+    tag: "INGENIERÍA AGÉNTICA",
     titulo: "Soluciones Agénticas",
     icono: "smart_toy",
     color: "from-cyan-500/20 to-blue-500/10 border-cyan-500/30 text-cyan-400",
     badge: "Entregables en Segundos",
     desc: "Agentes de IA autónomos que procesan tus planos (DWG/DXF), cronogramas y presupuestos. Generan en segundos visores 3D interactivos 4D/5D, APUs tipo S10, macros VBA en MS Project y redacción de EETT normadas sin la rigidez del software clásico.",
-    linkText: "Explorar Agentes",
-    linkHref: "/formacion?tab=agentes",
+    linkText: "Ver Soluciones Agénticas",
+    linkHref: "/servicios#agentes",
   },
   {
     num: "02",
@@ -28,7 +28,7 @@ const serviciosPrincipales = [
     badge: `${consultoria.minutosGratis} min gratis`,
     desc: "Acompañamiento directo para empresas y profesionales en retos de alta complejidad: planeamiento maestro, reclamos de ampliación de plazo, presupuestos desglosados, auditoría de contratos y automatización de procesos técnicos a medida.",
     linkText: "Agendar Consultoría",
-    linkHref: "/consultoria",
+    linkHref: "/servicios#consultoria",
   },
   {
     num: "03",
@@ -88,19 +88,19 @@ export default function Home() {
           {/* Botones de Acción (CTAs) */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <Link
-              href="/formacion"
+              href="/servicios"
               className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-black text-xs uppercase tracking-widest transition-all duration-300 shadow-[0_0_25px_rgba(6,182,212,0.35)] hover:scale-105 flex items-center justify-center gap-2"
             >
-              <span className="material-symbols-outlined text-base">smart_toy</span>
-              Explorar Soluciones & Cursos
+              <span className="material-symbols-outlined text-base">engineering</span>
+              Servicios de Ingeniería
             </Link>
 
             <Link
-              href="/consultoria"
+              href="/formacion"
               className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-widest border border-slate-700 hover:border-cyan-400 transition-all flex items-center justify-center gap-2"
             >
-              <span className="material-symbols-outlined text-base text-cyan-400">engineering</span>
-              Consultoría Especializada
+              <span className="material-symbols-outlined text-base text-cyan-400">school</span>
+              Formación & Cursos
             </Link>
 
             <Link
@@ -174,102 +174,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. SHOWCASE DESTACADO: NUESTRO PRIMER AGENTE PUBLICADO (4D/5D) */}
-      <section className="max-w-7xl mx-auto px-6 py-8">
-        <div className="p-8 sm:p-12 rounded-[36px] border-2 border-cyan-500/40 bg-gradient-to-br from-slate-900 via-slate-950 to-[#030a1c] relative overflow-hidden shadow-[0_0_40px_rgba(6,182,212,0.2)]">
-          <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-8 items-center">
-            <div className="space-y-5">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full bg-red-950 text-red-400 border border-red-500/40 flex items-center gap-1.5 shadow-[0_0_12px_rgba(239,68,68,0.3)]">
-                  <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
-                  Primer Agente en Acción · Disponible
-                </span>
-                <span className="text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full bg-slate-800 text-cyan-300 border border-slate-700">
-                  BIM 4D/5D & Three.js WebGL
-                </span>
-              </div>
-
-              <h2 className="text-2xl sm:text-4xl font-black text-white uppercase tracking-tight leading-tight">
-                Agente de Planeamiento de Obra 4D y 5D con IA
-              </h2>
-
-              <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-                Le proporcionas al agente de IA tus <strong>Planos (DWG/DXF)</strong>, <strong>Cronograma maestro</strong> y <strong>Presupuesto</strong>, y genera de forma automática un <strong>Visor Web 3D interactivo</strong> donde modela todo el proceso constructivo paso a paso, integrando Curva S, presupuesto devengado y Lookahead Planning.
-              </p>
-
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 text-xs">
-                <div className="p-3 rounded-xl bg-black/40 border border-slate-800">
-                  <span className="text-[10px] text-slate-400 uppercase block font-bold">Insumos:</span>
-                  <span className="text-slate-200 font-semibold">Planos + P6/MSP + APUs</span>
-                </div>
-                <div className="p-3 rounded-xl bg-black/40 border border-slate-800">
-                  <span className="text-[10px] text-slate-400 uppercase block font-bold">Entregable:</span>
-                  <span className="text-cyan-300 font-semibold">Visor 3D Interactivo (.html)</span>
-                </div>
-                <div className="p-3 rounded-xl bg-black/40 border border-slate-800 col-span-2 sm:col-span-1">
-                  <span className="text-[10px] text-slate-400 uppercase block font-bold">Velocidad:</span>
-                  <span className="text-emerald-400 font-semibold">⚡ En Segundos</span>
-                </div>
-              </div>
-
-              {/* Botones del Agente 4D/5D */}
-              <div className="flex flex-wrap items-center gap-3 pt-3">
-                <Link
-                  href="https://youtu.be/weL9yLqdCHY"
-                  target="_blank"
-                  className="px-5 py-3 rounded-xl bg-red-600 hover:bg-red-500 text-white font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(239,68,68,0.4)]"
-                >
-                  <span className="material-symbols-outlined text-base">play_circle</span>
-                  Ver Guía en YouTube (14 min)
-                </Link>
-
-                <Link
-                  href="https://vt.tiktok.com/ZSgyYmMFX/"
-                  target="_blank"
-                  className="px-5 py-3 rounded-xl bg-black hover:bg-zinc-900 text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 border border-pink-500/40 shadow-[0_0_12px_rgba(236,72,153,0.2)]"
-                >
-                  <svg className="w-4 h-4 fill-current text-cyan-400" viewBox="0 0 24 24">
-                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
-                  </svg>
-                  Ver Resultado Final (TikTok)
-                </Link>
-
-                <Link
-                  href="https://wa.me/51993147501?text=Hola%20Ing.%20Aurelio,%20vi%20el%20Agente%20de%20Planeamiento%204D/5D%20y%20deseo%20adquirirlo%20para%20mis%20proyectos."
-                  target="_blank"
-                  className="px-5 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.3)]"
-                >
-                  <span className="material-symbols-outlined text-base">chat</span>
-                  Quiero el Agente (+51 993 147 501)
-                </Link>
-              </div>
-            </div>
-
-            {/* Mockup / Visual del Visor 3D */}
-            <div className="relative rounded-2xl overflow-hidden border border-cyan-500/30 bg-slate-950 p-6 flex flex-col justify-between shadow-2xl min-h-[300px]">
-              <div className="flex items-center justify-between pb-4 border-b border-white/10">
-                <span className="text-[11px] font-mono text-cyan-400 font-bold">CASE STUDY: REFINERÍA CONCHÁN</span>
-                <span className="text-[10px] font-mono bg-cyan-950 text-cyan-300 px-2 py-0.5 rounded border border-cyan-800">478 DÍAS DE OBRA</span>
-              </div>
-              <div className="space-y-3 py-6 text-center">
-                <div className="w-16 h-16 mx-auto rounded-2xl bg-cyan-500/10 border border-cyan-500/40 flex items-center justify-center text-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.3)]">
-                  <span className="material-symbols-outlined text-3xl">view_in_ar</span>
-                </div>
-                <h4 className="text-lg font-bold text-white">Tanques T-68 & T-69 (160,000 Bls)</h4>
-                <p className="text-xs text-slate-400 max-w-xs mx-auto">
-                  Simulación de gateo inverso, cubeto de retención de 755.4 ml, Curva S y Lookahead a 4 semanas.
-                </p>
-              </div>
-              <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
-                <span>EVM: $16.8M USD</span>
-                <span className="text-emerald-400 font-mono font-bold">100% Autocontenido (.HTML)</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. NUESTROS SERVICIOS: SOLUCIONES AGÉNTICAS, CONSULTORÍA Y CAPACITACIONES */}
+      {/* 3. NUESTROS SERVICIOS: SOLUCIONES AGÉNTICAS, CONSULTORÍA Y CAPACITACIONES */}
       <section className="max-w-7xl mx-auto px-6 py-16" aria-labelledby="servicios-title">
         <div className="max-w-3xl mb-12">
           <p className="text-xs font-mono font-bold tracking-widest text-cyan-400 uppercase mb-2">Ecosistema Integral</p>

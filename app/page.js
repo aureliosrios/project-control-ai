@@ -17,7 +17,7 @@ const serviciosPrincipales = [
     badge: "Entregables en Segundos",
     desc: "Agentes de IA autónomos que procesan tus planos (DWG/DXF), cronogramas y presupuestos. Generan en segundos visores 3D interactivos 4D/5D, APUs tipo S10, macros VBA en MS Project y redacción de EETT normadas sin la rigidez del software clásico.",
     linkText: "Ver Soluciones Agénticas",
-    linkHref: "/servicios#agentes",
+    linkHref: "/servicios?tab=agentes#agentes",
   },
   {
     num: "02",
@@ -28,7 +28,7 @@ const serviciosPrincipales = [
     badge: `${consultoria.minutosGratis} min gratis`,
     desc: "Acompañamiento directo para empresas y profesionales en retos de alta complejidad: planeamiento maestro, reclamos de ampliación de plazo, presupuestos desglosados, auditoría de contratos y automatización de procesos técnicos a medida.",
     linkText: "Agendar Consultoría",
-    linkHref: "/servicios#consultoria",
+    linkHref: "/servicios?tab=consultoria#consultoria",
   },
   {
     num: "03",

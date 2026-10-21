@@ -1,5 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { consultoria, contactoConsultoria } from "@/lib/oferta";
@@ -192,7 +193,8 @@ const temasConsultoria = [
   ["Cerebro digital y agentes IA", "Estructura documentos y conocimiento de tu proyecto para encontrar información al instante y simplificar tareas."],
 ];
 
-export default function ServiciosPage() {
+function ServiciosContent() {
+  const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState("agentes");
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [expandedAgents, setExpandedAgents] = useState({ "agente-4d5d": true });
@@ -240,18 +242,70 @@ export default function ServiciosPage() {
   const countDisponibles = agentesEspecializados.filter((a) => a.estado === "Publicado en YouTube").length;
   const countProximos = agentesEspecializados.filter((a) => a.estado !== "Publicado en YouTube").length;
 
+  const changeTab = (tab, hashTarget = null) => {
+    setActiveTab(tab);
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      url.searchParams.set("tab", tab);
+      if (hashTarget) {
+        url.hash = hashTarget;
+      }
+      window.history.replaceState(null, "", url.toString());
+      if (hashTarget) {
+        setTimeout(() => {
+          const el = document.getElementById(hashTarget);
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    }
+  };
+
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      const tabParam = params.get("tab");
+      const tabParam = searchParams?.get("tab") || new URLSearchParams(window.location.search).get("tab");
       const hash = window.location.hash.toLowerCase().replace("#", "");
       if (tabParam === "consultoria" || hash.includes("consultoria")) {
         setActiveTab("consultoria");
       } else if (tabParam === "agentes" || hash.includes("agente")) {
         setActiveTab("agentes");
       }
+
+      if (hash) {
+        setTimeout(() => {
+          const el = document.getElementById(hash);
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+        }, 120);
+      }
+
+      const handleCustomEvent = (e) => {
+        if (e.detail?.tab) {
+          setActiveTab(e.detail.tab);
+        }
+        if (e.detail?.hashTarget) {
+          setTimeout(() => {
+            const el = document.getElementById(e.detail.hashTarget);
+            if (el) el.scrollIntoView({ behavior: "smooth" });
+          }, 120);
+        }
+      };
+
+      const handlePopState = () => {
+        const p = new URLSearchParams(window.location.search).get("tab");
+        const h = window.location.hash.toLowerCase().replace("#", "");
+        if (p === "consultoria" || h.includes("consultoria")) setActiveTab("consultoria");
+        else if (p === "agentes" || h.includes("agente")) setActiveTab("agentes");
+      };
+
+      window.addEventListener("pcai-servicios-tab", handleCustomEvent);
+      window.addEventListener("popstate", handlePopState);
+      window.addEventListener("hashchange", handlePopState);
+      return () => {
+        window.removeEventListener("pcai-servicios-tab", handleCustomEvent);
+        window.removeEventListener("popstate", handlePopState);
+        window.removeEventListener("hashchange", handlePopState);
+      };
     }
-  }, []);
+  }, [searchParams]);
 
   return (
     <div className="min-h-screen bg-[#14161a] text-slate-100 selection:bg-cyan-500/30">
@@ -277,10 +331,11 @@ export default function ServiciosPage() {
           </p>
 
           {/* Selector de Pestañas de Servicios */}
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-4 border-b border-white/10 pb-6">
+          <div id="catalogo-servicios" className="scroll-mt-32 flex flex-col sm:flex-row gap-3 md:gap-4 mb-4 border-b border-white/10 pb-6">
             <button
               type="button"
-              onClick={() => setActiveTab("agentes")}
+              aria-pressed={activeTab === "agentes"}
+              onClick={() => changeTab("agentes")}
               className={`px-6 md:px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-2.5 ${
                 activeTab === "agentes"
                   ? "bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 shadow-[0_0_30px_rgba(16,185,129,0.45)] ring-2 ring-emerald-400/50"
@@ -296,7 +351,8 @@ export default function ServiciosPage() {
 
             <button
               type="button"
-              onClick={() => setActiveTab("consultoria")}
+              aria-pressed={activeTab === "consultoria"}
+              onClick={() => changeTab("consultoria")}
               className={`px-6 md:px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-2.5 ${
                 activeTab === "consultoria"
                   ? "bg-amber-500 text-slate-950 shadow-[0_0_30px_rgba(245,158,11,0.45)] ring-2 ring-amber-400/50"
@@ -308,6 +364,28 @@ export default function ServiciosPage() {
               <span className="text-[9px] px-2 py-0.5 rounded-full font-black uppercase tracking-wider bg-amber-950 text-amber-300 border border-amber-500/30">
                 15 min gratis
               </span>
+            </button>
+          </div>
+
+          {/* Indicador Visual y Rápido de la Sección Seleccionada */}
+          <div className="mb-10 p-3.5 sm:p-4 rounded-2xl bg-slate-900/80 border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-2.5">
+              <span className={`w-2.5 h-2.5 rounded-full ${activeTab === "agentes" ? "bg-emerald-400 animate-pulse" : "bg-amber-400 animate-pulse"}`} />
+              <span className="text-xs font-black uppercase tracking-wider text-slate-300">
+                Viendo ahora:{" "}
+                <strong className={activeTab === "agentes" ? "text-emerald-400" : "text-amber-400"}>
+                  {activeTab === "agentes" ? "⚡ Soluciones Agénticas de IA (Entregables Técnicos en Segundos)" : "🛠️ Consultoría Especializada en Obra (15 min gratis, por hora y proyectos)"}
+                </strong>
+              </span>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => changeTab(activeTab === "agentes" ? "consultoria" : "agentes")}
+              className="text-xs font-bold text-slate-400 hover:text-white transition-colors flex items-center gap-1 self-start sm:self-auto group"
+            >
+              <span>Cambiar a {activeTab === "agentes" ? "Consultoría y Asesoría Técnica" : "Soluciones Agénticas de IA"}</span>
+              <span className="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
             </button>
           </div>
         </header>
@@ -780,8 +858,8 @@ export default function ServiciosPage() {
               </div>
 
               <div className="grid md:grid-cols-3 gap-6">
-                {/* Modalidad 1: Gratuita */}
-                <article className="rounded-3xl border border-slate-700 bg-slate-900 p-7 sm:p-8 flex flex-col justify-between">
+                {/* Modalidad 1: Gratuita (15 min gratis) */}
+                <article id="consultoria-gratis" className="scroll-mt-36 rounded-3xl border border-slate-700 bg-slate-900 p-7 sm:p-8 flex flex-col justify-between">
                   <div>
                     <span className="text-xs font-semibold tracking-wider text-slate-400 uppercase">Orientación inicial</span>
                     <h4 className="text-2xl font-bold mt-2 text-white">Reunión inicial gratuita</h4>
@@ -806,7 +884,7 @@ export default function ServiciosPage() {
                 </article>
 
                 {/* Modalidad 2: Por Hora */}
-                <article className="rounded-3xl border-2 border-cyan-500/60 bg-cyan-950/30 p-7 sm:p-8 flex flex-col justify-between shadow-[0_0_30px_rgba(245,168,0,0.15)]">
+                <article id="consultoria-hora" className="scroll-mt-36 rounded-3xl border-2 border-cyan-500/60 bg-cyan-950/30 p-7 sm:p-8 flex flex-col justify-between shadow-[0_0_30px_rgba(245,168,0,0.15)]">
                   <div>
                     <span className="inline-block bg-cyan-400 text-slate-950 text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full mb-2">
                       Sesión técnica 1 a 1
@@ -832,11 +910,11 @@ export default function ServiciosPage() {
                   </a>
                 </article>
 
-                {/* Modalidad 3: Por Proyecto */}
-                <article className="rounded-3xl border border-indigo-500/40 bg-indigo-950/20 p-7 sm:p-8 flex flex-col justify-between">
+                {/* Modalidad 3: Por Proyecto (Trabajos Puntuales) */}
+                <article id="consultoria-proyecto" className="scroll-mt-36 rounded-3xl border border-indigo-500/40 bg-indigo-950/20 p-7 sm:p-8 flex flex-col justify-between">
                   <div>
                     <span className="text-xs font-semibold tracking-wider text-indigo-400 uppercase">Entregables a medida</span>
-                    <h4 className="text-2xl font-bold mt-2 text-white">Servicio por proyecto</h4>
+                    <h4 className="text-2xl font-bold mt-2 text-white">Servicio por proyecto (Trabajos puntuales)</h4>
                     <p className="text-3xl sm:text-4xl font-bold mt-4 text-indigo-300">
                       A cotizar <span className="text-xs font-normal text-slate-300 block mt-1">según alcance del expediente</span>
                     </p>
@@ -985,5 +1063,13 @@ export default function ServiciosPage() {
         )}
       </main>
     </div>
+  );
+}
+
+export default function ServiciosPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#14161a]" />}>
+      <ServiciosContent />
+    </Suspense>
   );
 }

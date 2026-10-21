@@ -21,6 +21,22 @@ export default function Navbar() {
     }
   };
 
+  const handleServiciosTab = (tab, hashTarget) => {
+    setIsOpen(false);
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("pcai-servicios-tab", { detail: { tab, hashTarget } }));
+      if (window.location.pathname.startsWith("/servicios")) {
+        const targetId = hashTarget || (tab === "agentes" ? "agentes" : "consultoria");
+        setTimeout(() => {
+          const el = document.getElementById(targetId);
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 80);
+      }
+    }
+  };
+
   return (
     <nav className="fixed top-0 w-full z-[100] border-b border-white/10 bg-[#14161a]/90 backdrop-blur-2xl">
       <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
@@ -41,9 +57,108 @@ export default function Navbar() {
               Inicio
             </Link>
 
-            <Link href="/servicios" className="hover:text-cyan-400 transition-colors">
-              Servicios de Ingeniería
-            </Link>
+            {/* Dropdown Servicios de Ingeniería */}
+            <div className="relative group">
+              <Link 
+                href="/servicios" 
+                className="flex items-center gap-1 hover:text-cyan-400 transition-colors py-2 uppercase"
+              >
+                <span>Servicios</span>
+                <span className="material-symbols-outlined text-sm transition-transform group-hover:rotate-180">expand_more</span>
+              </Link>
+              
+              <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none group-hover:pointer-events-auto">
+                <div className="w-80 p-3 rounded-2xl bg-slate-950/95 border border-white/10 backdrop-blur-xl shadow-2xl flex flex-col gap-1.5">
+                  {/* 1. Soluciones Agénticas */}
+                  <Link
+                    href="/servicios?tab=agentes#agentes"
+                    onClick={() => handleServiciosTab("agentes", "agentes")}
+                    className="p-3 rounded-xl hover:bg-white/5 transition-colors flex items-start gap-3 group/item border border-emerald-500/20 hover:border-emerald-500/50 bg-emerald-950/20"
+                  >
+                    <span className="material-symbols-outlined text-emerald-400 text-xl mt-0.5">smart_toy</span>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="block text-xs font-black text-white group-hover/item:text-emerald-300 transition-colors uppercase">
+                          Soluciones Agénticas
+                        </span>
+                        <span className="text-[9px] px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40">IA</span>
+                      </div>
+                      <span className="block text-[10px] text-slate-400 font-medium normal-case mt-0.5">
+                        Agentes especializados (4D/5D, presupuestos, cronogramas) con entregables en segundos
+                      </span>
+                    </div>
+                  </Link>
+
+                  {/* Subcabecera Consultoría */}
+                  <div className="px-2 pt-2.5 pb-1 border-t border-white/10 flex items-center justify-between">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-amber-400">
+                      Consultoría Especializada
+                    </span>
+                    <span className="text-[9px] text-slate-400 font-mono font-medium">Asesoría Técnica</span>
+                  </div>
+
+                  {/* 2. 15 min gratis */}
+                  <Link
+                    href="/servicios?tab=consultoria#consultoria-gratis"
+                    onClick={() => handleServiciosTab("consultoria", "consultoria-gratis")}
+                    className="p-2.5 rounded-xl hover:bg-white/5 transition-colors flex items-start gap-3 group/item"
+                  >
+                    <span className="material-symbols-outlined text-cyan-400 text-lg mt-0.5">timer</span>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="block text-xs font-black text-white group-hover/item:text-cyan-300 transition-colors uppercase">
+                          15 Minutos Gratis
+                        </span>
+                        <span className="text-[9px] px-1.5 py-0.2 rounded bg-cyan-500/20 text-cyan-300 font-bold">Sin costo</span>
+                      </div>
+                      <span className="block text-[10px] text-slate-400 font-medium normal-case">
+                        Diagnóstico inicial y orientación técnica sobre tu caso
+                      </span>
+                    </div>
+                  </Link>
+
+                  {/* 3. Consultoría por Hora */}
+                  <Link
+                    href="/servicios?tab=consultoria#consultoria-hora"
+                    onClick={() => handleServiciosTab("consultoria", "consultoria-hora")}
+                    className="p-2.5 rounded-xl hover:bg-white/5 transition-colors flex items-start gap-3 group/item"
+                  >
+                    <span className="material-symbols-outlined text-amber-400 text-lg mt-0.5">hourglass_bottom</span>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="block text-xs font-black text-white group-hover/item:text-amber-300 transition-colors uppercase">
+                          Consultoría por Hora
+                        </span>
+                        <span className="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-300 font-bold">S/ 100 · $35</span>
+                      </div>
+                      <span className="block text-[10px] text-slate-400 font-medium normal-case">
+                        Sesión 1 a 1 por videollamada para destrabe de proyectos
+                      </span>
+                    </div>
+                  </Link>
+
+                  {/* 4. Trabajos Puntuales (Por Proyecto) */}
+                  <Link
+                    href="/servicios?tab=consultoria#consultoria-proyecto"
+                    onClick={() => handleServiciosTab("consultoria", "consultoria-proyecto")}
+                    className="p-2.5 rounded-xl hover:bg-white/5 transition-colors flex items-start gap-3 group/item"
+                  >
+                    <span className="material-symbols-outlined text-indigo-400 text-lg mt-0.5">task</span>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="block text-xs font-black text-white group-hover/item:text-indigo-300 transition-colors uppercase">
+                          Trabajos Puntuales
+                        </span>
+                        <span className="text-[9px] px-1.5 py-0.2 rounded bg-indigo-500/20 text-indigo-300 font-bold">A Medida</span>
+                      </div>
+                      <span className="block text-[10px] text-slate-400 font-medium normal-case">
+                        Elaboración de cronogramas P6/MSP, presupuestos y peritajes
+                      </span>
+                    </div>
+                  </Link>
+                </div>
+              </div>
+            </div>
 
             {/* Dropdown Formación */}
             <div className="relative group">
@@ -115,16 +230,52 @@ export default function Navbar() {
 
       {/* Mobile Menu Overlay */}
       {isOpen && (
-        <div id="menu-movil" className="lg:hidden absolute top-full left-0 w-full bg-[#14161a] border-b border-white/10 p-8 flex flex-col gap-5 animate-in slide-in-from-top duration-300">
+        <div id="menu-movil" className="lg:hidden absolute top-full left-0 w-full bg-[#14161a] border-b border-white/10 p-8 flex flex-col gap-5 animate-in slide-in-from-top duration-300 max-h-[85vh] overflow-y-auto">
           <Link href="/" onClick={() => setIsOpen(false)} className="text-lg font-black text-white uppercase tracking-tighter">
             Inicio
           </Link>
 
-          <Link href="/servicios" onClick={() => setIsOpen(false)} className="text-lg font-black text-white uppercase tracking-tighter">
-            Servicios de Ingeniería
-          </Link>
+          {/* Sección Servicios de Ingeniería Mobile */}
+          <div className="space-y-2.5 border-l-2 border-emerald-500/40 pl-4 py-1">
+            <Link
+              href="/servicios"
+              onClick={() => setIsOpen(false)}
+              className="text-xs font-mono font-black text-emerald-400 uppercase tracking-widest block hover:text-white"
+            >
+              Servicios de Ingeniería
+            </Link>
+            <Link
+              href="/servicios?tab=agentes#agentes"
+              onClick={() => handleServiciosTab("agentes", "agentes")}
+              className="block text-sm font-bold text-slate-200 hover:text-emerald-400 transition-colors"
+            >
+              • Soluciones Agénticas (IA)
+            </Link>
+            <Link
+              href="/servicios?tab=consultoria#consultoria-gratis"
+              onClick={() => handleServiciosTab("consultoria", "consultoria-gratis")}
+              className="block text-sm font-bold text-slate-200 hover:text-cyan-300 transition-colors"
+            >
+              • Consultoría: 15 min gratis
+            </Link>
+            <Link
+              href="/servicios?tab=consultoria#consultoria-hora"
+              onClick={() => handleServiciosTab("consultoria", "consultoria-hora")}
+              className="block text-sm font-bold text-slate-200 hover:text-amber-300 transition-colors"
+            >
+              • Consultoría por hora (S/ 100 / $35 USD)
+            </Link>
+            <Link
+              href="/servicios?tab=consultoria#consultoria-proyecto"
+              onClick={() => handleServiciosTab("consultoria", "consultoria-proyecto")}
+              className="block text-sm font-bold text-slate-200 hover:text-indigo-300 transition-colors"
+            >
+              • Trabajos puntuales (Por proyecto)
+            </Link>
+          </div>
 
-          <div className="space-y-3 border-l-2 border-cyan-500/40 pl-4 py-1">
+          {/* Sección Formación Mobile */}
+          <div className="space-y-2.5 border-l-2 border-cyan-500/40 pl-4 py-1">
             <span className="text-xs font-mono font-black text-cyan-400 uppercase tracking-widest block">
               Formación
             </span>

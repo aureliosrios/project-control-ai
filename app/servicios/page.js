@@ -195,6 +195,50 @@ const temasConsultoria = [
 export default function ServiciosPage() {
   const [activeTab, setActiveTab] = useState("agentes");
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [expandedAgents, setExpandedAgents] = useState({ "agente-4d5d": true });
+  const [searchQuery, setSearchQuery] = useState("");
+  const [statusFilter, setStatusFilter] = useState("todos"); // "todos" | "disponibles" | "proximos"
+
+  const toggleAgent = (id) => {
+    setExpandedAgents((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
+
+  const expandAll = () => {
+    const all = {};
+    agentesEspecializados.forEach((a) => {
+      all[a.id] = true;
+    });
+    setExpandedAgents(all);
+  };
+
+  const collapseAll = () => {
+    setExpandedAgents({});
+  };
+
+  const filteredAgentes = agentesEspecializados.filter((agente) => {
+    if (statusFilter === "disponibles" && agente.estado !== "Publicado en YouTube") {
+      return false;
+    }
+    if (statusFilter === "proximos" && agente.estado === "Publicado en YouTube") {
+      return false;
+    }
+    if (!searchQuery.trim()) return true;
+    const q = searchQuery.toLowerCase();
+    return (
+      agente.nombre.toLowerCase().includes(q) ||
+      agente.especialidad.toLowerCase().includes(q) ||
+      agente.tag.toLowerCase().includes(q) ||
+      agente.problema.toLowerCase().includes(q) ||
+      agente.solucion.toLowerCase().includes(q) ||
+      agente.entregable.toLowerCase().includes(q)
+    );
+  });
+
+  const countDisponibles = agentesEspecializados.filter((a) => a.estado === "Publicado en YouTube").length;
+  const countProximos = agentesEspecializados.filter((a) => a.estado !== "Publicado en YouTube").length;
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -366,182 +410,357 @@ export default function ServiciosPage() {
               </div>
             </section>
 
-            {/* Catálogo Maestro de Agentes */}
-            <div>
-              <div className="mb-8">
-                <span className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-widest block mb-1">
-                  Catálogo Oficial de Agentes de Ingeniería
-                </span>
-                <h3 className="text-2xl sm:text-4xl font-black text-white uppercase tracking-tight">
-                  Elige tu Agente de IA para Obra
-                </h3>
-                <p className="text-slate-400 text-xs sm:text-sm mt-1 max-w-2xl">
-                  Iremos publicando los agentes uno a uno en YouTube. Mira la guía técnica, revisa el resultado final en TikTok y comunícate con nosotros para adquirir el agente.
-                </p>
+            {/* Catálogo Maestro de Agentes (Comprimible, Desplegable y con Buscador) */}
+            <div className="space-y-6">
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                  <span className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-widest block mb-1">
+                    Catálogo Oficial de Agentes de Ingeniería
+                  </span>
+                  <h3 className="text-2xl sm:text-4xl font-black text-white uppercase tracking-tight">
+                    Elige tu Agente de IA para Obra
+                  </h3>
+                  <p className="text-slate-400 text-xs sm:text-sm mt-1 max-w-2xl">
+                    Sección comprimible y desplegable: abre cualquier agente para ver su reto, solución, entregable y medios de pago.
+                  </p>
+                </div>
+
+                {/* Acciones de Expandir / Colapsar todos */}
+                <div className="flex items-center gap-2 self-start md:self-auto shrink-0">
+                  <button
+                    type="button"
+                    onClick={expandAll}
+                    className="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 hover:border-slate-700 text-xs font-bold transition-all flex items-center gap-1.5"
+                    title="Expandir todos los agentes"
+                  >
+                    <span className="material-symbols-outlined text-base">unfold_more</span>
+                    <span>Expandir todos</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={collapseAll}
+                    className="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 hover:border-slate-700 text-xs font-bold transition-all flex items-center gap-1.5"
+                    title="Colapsar todos los agentes"
+                  >
+                    <span className="material-symbols-outlined text-base">unfold_less</span>
+                    <span>Colapsar todos</span>
+                  </button>
+                </div>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {agentesEspecializados.map((agente) => (
-                  <div
-                    key={agente.id}
-                    className={`p-6 sm:p-7 rounded-3xl border-2 flex flex-col justify-between transition-all duration-300 group relative overflow-hidden backdrop-blur-sm ${
-                      agente.estado === "Publicado en YouTube"
-                        ? "border-cyan-500/50 bg-slate-900/70 hover:border-cyan-400 shadow-[0_0_25px_rgba(6,182,212,0.15)]"
-                        : "border-slate-800 bg-slate-900/40 hover:border-slate-700"
+              {/* Barra de Búsqueda y Filtros Rápidos */}
+              <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+                {/* Input de Búsqueda */}
+                <div className="relative flex-1">
+                  <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xl pointer-events-none">
+                    search
+                  </span>
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Buscar agente (ej. 4D, S10, presupuestos, MS Project, Primavera P6, contratos...)"
+                    className="w-full pl-10 pr-9 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-white placeholder:text-slate-500 text-xs sm:text-sm focus:outline-none focus:border-cyan-500 transition-colors"
+                  />
+                  {searchQuery && (
+                    <button
+                      type="button"
+                      onClick={() => setSearchQuery("")}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-sm"
+                      aria-label="Limpiar búsqueda"
+                    >
+                      <span className="material-symbols-outlined text-base">close</span>
+                    </button>
+                  )}
+                </div>
+
+                {/* Filtros de Estado */}
+                <div className="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0 shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setStatusFilter("todos")}
+                    className={`px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
+                      statusFilter === "todos"
+                        ? "bg-cyan-500 text-slate-950 shadow-[0_0_15px_rgba(6,182,212,0.3)] font-black"
+                        : "bg-slate-950/80 text-slate-400 hover:text-white border border-slate-800"
                     }`}
                   >
-                    <div>
-                      <div className="flex items-center justify-between gap-2 mb-4">
-                        <div className="flex items-center gap-2">
-                          {agente.estado === "Publicado en YouTube" ? (
-                            <span className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-red-950/80 text-red-400 border border-red-500/40 flex items-center gap-1 shadow-[0_0_10px_rgba(239,68,68,0.25)]">
-                              <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
-                              Disponible en YouTube
-                            </span>
-                          ) : (
-                            <span className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-slate-800 text-amber-400 border border-amber-500/30 flex items-center gap-1">
-                              <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                              Próximamente
-                            </span>
-                          )}
-                          <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
-                            {agente.tag}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-1 text-[10px] font-mono font-bold text-slate-400 bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/60">
-                          <span className="material-symbols-outlined text-[13px] text-slate-400">schedule</span>
-                          {agente.duracionVideo}
-                        </div>
-                      </div>
+                    Todos ({agentesEspecializados.length})
+                  </button>
 
-                      <div className="flex items-start gap-3 mb-3">
-                        <div className={`w-10 h-10 rounded-xl border flex items-center justify-center shrink-0 ${
-                          agente.estado === "Publicado en YouTube"
-                            ? "bg-cyan-950/60 border-cyan-500/50 text-cyan-300"
-                            : "bg-slate-800 border-slate-700 text-slate-300"
-                        }`}>
-                          <span className="material-symbols-outlined text-[22px]">{agente.icono}</span>
-                        </div>
-                        <div>
-                          <h3 className={`text-lg font-bold group-hover:text-cyan-300 transition-colors leading-snug ${
-                            agente.estado === "Publicado en YouTube" ? "text-white" : "text-slate-200"
-                          }`}>
-                            {agente.nombre}
-                          </h3>
-                          <p className="text-[11px] text-slate-400 font-medium">{agente.especialidad}</p>
-                        </div>
-                      </div>
+                  <button
+                    type="button"
+                    onClick={() => setStatusFilter("disponibles")}
+                    className={`px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 ${
+                      statusFilter === "disponibles"
+                        ? "bg-red-600 text-white shadow-[0_0_15px_rgba(239,68,68,0.3)] font-black"
+                        : "bg-slate-950/80 text-slate-400 hover:text-white border border-slate-800"
+                    }`}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
+                    Disponibles ({countDisponibles})
+                  </button>
 
-                      <div className="space-y-3 my-4 text-xs">
-                        <div className="p-3 rounded-xl bg-black/40 border border-slate-800/80">
-                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">El Reto Habitual:</span>
-                          <p className="text-slate-300 leading-relaxed text-[11px]">{agente.problema}</p>
-                        </div>
+                  <button
+                    type="button"
+                    onClick={() => setStatusFilter("proximos")}
+                    className={`px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 ${
+                      statusFilter === "proximos"
+                        ? "bg-amber-500 text-slate-950 shadow-[0_0_15px_rgba(245,158,11,0.3)] font-black"
+                        : "bg-slate-950/80 text-slate-400 hover:text-white border border-slate-800"
+                    }`}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                    Próximamente ({countProximos})
+                  </button>
+                </div>
+              </div>
 
-                        <div className="p-3 rounded-xl bg-slate-800/30 border border-slate-800/80">
-                          <span className="text-[10px] font-bold text-cyan-400 uppercase tracking-wider block mb-0.5">Solución Agéntica:</span>
-                          <p className="text-slate-300 leading-relaxed text-[11px]">{agente.solucion}</p>
-                        </div>
+              {/* Lista Desplegable / Acordeón de Agentes */}
+              {filteredAgentes.length === 0 ? (
+                <div className="p-10 rounded-3xl bg-slate-900/40 border border-slate-800 text-center space-y-3">
+                  <span className="material-symbols-outlined text-slate-500 text-4xl">search_off</span>
+                  <h4 className="text-lg font-bold text-white">No se encontraron agentes</h4>
+                  <p className="text-xs text-slate-400 max-w-md mx-auto">
+                    No encontramos ningún agente que coincida con &quot;{searchQuery}&quot;. ¿Necesitas un agente a la medida de tu proyecto?
+                  </p>
+                  <Link
+                    href="https://wa.me/51993147501?text=Hola%20Ing.%20Aurelio,%20estoy%20buscando%20un%20agente%20especializado%20para%20mi%20proyecto."
+                    target="_blank"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider transition-all"
+                  >
+                    <span className="material-symbols-outlined text-sm">chat</span>
+                    Solicitar Agente Personalizado
+                  </Link>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {filteredAgentes.map((agente) => {
+                    const isExpanded = !!expandedAgents[agente.id];
 
-                        <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800">
-                          <div className="flex items-center justify-between mb-0.5">
-                            <span className="text-[10px] font-black text-slate-300 uppercase tracking-wider">Entregable en Segundos:</span>
-                            <span className="text-[9px] font-mono font-bold text-cyan-400 bg-cyan-950/60 px-1.5 py-0.5 rounded border border-cyan-800/40">
-                              ⚡ {agente.tiempoEntrega}
-                            </span>
+                    return (
+                      <div
+                        key={agente.id}
+                        className={`rounded-2xl border-2 transition-all duration-300 backdrop-blur-sm overflow-hidden ${
+                          isExpanded
+                            ? agente.estado === "Publicado en YouTube"
+                              ? "border-cyan-500/60 bg-slate-900/90 shadow-[0_0_30px_rgba(6,182,212,0.18)] ring-1 ring-cyan-500/30"
+                              : "border-slate-700 bg-slate-900/90 shadow-lg"
+                            : agente.estado === "Publicado en YouTube"
+                            ? "border-cyan-500/40 bg-slate-900/60 hover:border-cyan-400/70 hover:bg-slate-900/80"
+                            : "border-slate-800/80 bg-slate-900/40 hover:border-slate-700 hover:bg-slate-900/60"
+                        }`}
+                      >
+                        {/* Cabecera Comprimible (Siempre Visible y Clickeable) */}
+                        <div
+                          role="button"
+                          tabIndex={0}
+                          onClick={() => toggleAgent(agente.id)}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              e.preventDefault();
+                              toggleAgent(agente.id);
+                            }
+                          }}
+                          className="p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer select-none transition-colors group"
+                        >
+                          {/* Izquierda: Ícono, Título, Tag y Especialidad */}
+                          <div className="flex items-center gap-3.5 min-w-0 flex-1">
+                            <div className={`w-11 h-11 rounded-xl border flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 ${
+                              agente.estado === "Publicado en YouTube"
+                                ? "bg-cyan-950/80 border-cyan-500/50 text-cyan-300"
+                                : "bg-slate-800 border-slate-700 text-slate-300"
+                            }`}>
+                              <span className="material-symbols-outlined text-2xl">{agente.icono}</span>
+                            </div>
+
+                            <div className="min-w-0 flex-1">
+                              <div className="flex flex-wrap items-center gap-2 mb-0.5">
+                                <h3 className={`text-base sm:text-lg font-black leading-tight transition-colors ${
+                                  agente.estado === "Publicado en YouTube"
+                                    ? "text-white group-hover:text-cyan-300"
+                                    : "text-slate-200 group-hover:text-white"
+                                }`}>
+                                  {agente.nombre}
+                                </h3>
+                                <span className="text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
+                                  {agente.tag}
+                                </span>
+                              </div>
+                              <p className="text-xs text-slate-400 truncate">{agente.especialidad}</p>
+                            </div>
                           </div>
-                          <p className="text-slate-200 text-[11px] font-medium leading-relaxed">{agente.entregable}</p>
-                        </div>
 
-                        {agente.precioSoles && (
-                          <div className="p-3 rounded-xl bg-gradient-to-r from-cyan-950/60 to-emerald-950/60 border border-cyan-500/40">
-                            <div className="flex items-center justify-between mb-1">
-                              <span className="text-[10px] font-black uppercase tracking-wider text-cyan-300 flex items-center gap-1">
-                                <span className="material-symbols-outlined text-sm">sell</span>
-                                Inversión del Agente:
+                          {/* Derecha: Badges, Inversión, Tiempo y Botón Expandir */}
+                          <div className="flex items-center justify-between md:justify-end gap-3 shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-slate-800/80">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              {agente.estado === "Publicado en YouTube" ? (
+                                <span className="text-[9px] font-black uppercase tracking-wider px-2.5 py-1 rounded bg-red-950 text-red-300 border border-red-500/40 flex items-center gap-1 shadow-[0_0_10px_rgba(239,68,68,0.25)]">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
+                                  Disponible
+                                </span>
+                              ) : (
+                                <span className="text-[9px] font-black uppercase tracking-wider px-2 py-1 rounded bg-slate-800 text-amber-400 border border-amber-500/30 flex items-center gap-1">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                                  Próximamente
+                                </span>
+                              )}
+
+                              <span className="text-[10px] font-mono font-bold text-cyan-300 bg-cyan-950/60 px-2 py-1 rounded border border-cyan-800/40 flex items-center gap-1">
+                                ⚡ {agente.tiempoEntrega}
                               </span>
-                              <span className="text-xs font-mono font-black text-emerald-300">
-                                {agente.precioSoles} PEN · {agente.precioDolares}
+
+                              {agente.precioSoles && (
+                                <span className="text-[10px] font-mono font-black text-emerald-300 bg-emerald-950/80 px-2 py-1 rounded border border-emerald-500/40">
+                                  {agente.precioSoles} / {agente.precioDolares}
+                                </span>
+                              )}
+                            </div>
+
+                            <div className="flex items-center gap-1.5 pl-2 border-l border-slate-800 text-xs font-bold text-slate-300 group-hover:text-cyan-400 transition-colors">
+                              <span className="hidden sm:inline text-[11px] uppercase tracking-wider">
+                                {isExpanded ? "Ocultar" : "Detalles"}
+                              </span>
+                              <span className={`material-symbols-outlined text-xl transition-transform duration-300 ${
+                                isExpanded ? "rotate-180 text-cyan-400" : "text-slate-400"
+                              }`}>
+                                expand_more
                               </span>
                             </div>
-                            <div className="text-[10px] text-slate-300 flex items-center justify-between pt-1 border-t border-cyan-800/40">
-                              <span>📱 <strong>Yape:</strong> {agente.yape}</span>
-                              <span>💳 <strong>PayPal</strong> disponible</span>
+                          </div>
+                        </div>
+
+                        {/* Contenido Expandible (Detalle Completo) */}
+                        {isExpanded && (
+                          <div className="px-5 pb-6 pt-2 border-t border-slate-800/80 animate-in fade-in duration-200 space-y-4">
+                            {/* Grid de 3 Bloques: Reto, Solución y Entregable */}
+                            <div className="grid md:grid-cols-3 gap-3 text-xs pt-2">
+                              <div className="p-3.5 rounded-xl bg-black/40 border border-slate-800/80 flex flex-col justify-between">
+                                <div>
+                                  <span className="text-[10px] font-bold text-red-400 uppercase tracking-wider block mb-1">
+                                    El Reto Habitual:
+                                  </span>
+                                  <p className="text-slate-300 leading-relaxed text-[11px]">{agente.problema}</p>
+                                </div>
+                              </div>
+
+                              <div className="p-3.5 rounded-xl bg-slate-800/30 border border-slate-800/80 flex flex-col justify-between">
+                                <div>
+                                  <span className="text-[10px] font-bold text-cyan-400 uppercase tracking-wider block mb-1">
+                                    Solución Agéntica:
+                                  </span>
+                                  <p className="text-slate-300 leading-relaxed text-[11px]">{agente.solucion}</p>
+                                </div>
+                              </div>
+
+                              <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 flex flex-col justify-between">
+                                <div>
+                                  <div className="flex items-center justify-between mb-1">
+                                    <span className="text-[10px] font-black text-slate-300 uppercase tracking-wider">
+                                      Entregable en Segundos:
+                                    </span>
+                                    <span className="text-[9px] font-mono font-bold text-cyan-400 bg-cyan-950/60 px-1.5 py-0.5 rounded border border-cyan-800/40">
+                                      ⚡ {agente.tiempoEntrega}
+                                    </span>
+                                  </div>
+                                  <p className="text-slate-200 text-[11px] font-medium leading-relaxed">{agente.entregable}</p>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Caja de Inversión y Pagos (si aplica) */}
+                            {agente.precioSoles && (
+                              <div className="p-4 rounded-xl bg-gradient-to-r from-emerald-950/60 via-slate-950 to-cyan-950/60 border border-cyan-500/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                <div>
+                                  <div className="flex items-center gap-2 mb-0.5">
+                                    <span className="text-[10px] font-black uppercase tracking-wider text-cyan-300 flex items-center gap-1">
+                                      <span className="material-symbols-outlined text-sm">sell</span>
+                                      Inversión del Agente:
+                                    </span>
+                                    <span className="text-sm font-mono font-black text-emerald-300">
+                                      {agente.precioSoles} PEN · {agente.precioDolares}
+                                    </span>
+                                  </div>
+                                  <p className="text-[11px] text-slate-300">
+                                    📱 Yape al <strong>{agente.yape}</strong> · 💳 PayPal para compras internacionales
+                                  </p>
+                                </div>
+
+                                <div className="flex items-center gap-2 shrink-0">
+                                  <a
+                                    href={agente.paypalUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-md"
+                                  >
+                                    <span className="material-symbols-outlined text-sm">payment</span>
+                                    PayPal ($25)
+                                  </a>
+
+                                  <a
+                                    href={`https://wa.me/51993147501?text=${encodeURIComponent("Hola Ing. Aurelio, deseo adquirir el Agente de Planeamiento de Obra 4D y 5D por Yape (S/ 70). Adjunto mi comprobante de pago al 51 993147501.")}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="px-3.5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-md"
+                                  >
+                                    <span className="material-symbols-outlined text-sm">phone_iphone</span>
+                                    Yape (S/ 70)
+                                  </a>
+                                </div>
+                              </div>
+                            )}
+
+                            {/* Barra de Acciones */}
+                            <div className="pt-2 flex flex-wrap items-center gap-2.5">
+                              <button
+                                type="button"
+                                onClick={() => setSelectedVideo(agente)}
+                                className={`px-4 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 ${
+                                  agente.estado === "Publicado en YouTube"
+                                    ? "bg-red-600 hover:bg-red-500 text-white shadow-[0_0_15px_rgba(239,68,68,0.3)] border border-red-500/50"
+                                    : "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700"
+                                }`}
+                              >
+                                <span className="material-symbols-outlined text-base text-white">play_circle</span>
+                                {agente.estado === "Publicado en YouTube" ? `Ver Guía en YouTube (${agente.duracionVideo})` : "Ver Avance en YouTube"}
+                              </button>
+
+                              {agente.tiktokUrl && (
+                                <Link
+                                  href={agente.tiktokUrl}
+                                  target="_blank"
+                                  className="px-4 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 bg-black/80 hover:bg-black text-white border border-pink-500/30 hover:border-pink-500/60 shadow-[0_0_12px_rgba(236,72,153,0.15)] group/tiktok"
+                                >
+                                  <svg className="w-4 h-4 fill-current text-cyan-400 group-hover/tiktok:text-pink-400 transition-colors" viewBox="0 0 24 24">
+                                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                                  </svg>
+                                  <span>Demo en TikTok</span>
+                                </Link>
+                              )}
+
+                              <Link
+                                href={`https://wa.me/51993147501?text=${encodeURIComponent(agente.whatsappMsg)}`}
+                                target="_blank"
+                                className={`px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 ${
+                                  agente.estado === "Publicado en YouTube"
+                                    ? "bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.3)] border border-emerald-400/40"
+                                    : "bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10"
+                                }`}
+                              >
+                                <span className="material-symbols-outlined text-base">
+                                  {agente.estado === "Publicado en YouTube" ? "chat" : "notifications_active"}
+                                </span>
+                                {agente.estado === "Publicado en YouTube" ? "Quiero el Agente (+51 993 147 501)" : "Lista de Espera (WhatsApp)"}
+                              </Link>
                             </div>
                           </div>
                         )}
                       </div>
-                    </div>
-
-                    <div className="pt-4 border-t border-slate-800/80 space-y-2">
-                      {agente.precioSoles && (
-                        <div className="grid grid-cols-2 gap-2">
-                          <a
-                            href={agente.paypalUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 shadow-md"
-                          >
-                            <span className="material-symbols-outlined text-sm">payment</span>
-                            PayPal ($25)
-                          </a>
-
-                          <a
-                            href={`https://wa.me/51993147501?text=${encodeURIComponent("Hola Ing. Aurelio, deseo adquirir el Agente de Planeamiento de Obra 4D y 5D por Yape (S/ 70). Adjunto mi comprobante de pago al 51 993147501.")}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="py-2.5 px-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 shadow-md"
-                          >
-                            <span className="material-symbols-outlined text-sm">phone_iphone</span>
-                            Yape (S/ 70)
-                          </a>
-                        </div>
-                      )}
-
-                      <button
-                        type="button"
-                        onClick={() => setSelectedVideo(agente)}
-                        className={`w-full py-2.5 px-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 ${
-                          agente.estado === "Publicado en YouTube"
-                            ? "bg-red-600 hover:bg-red-500 text-white shadow-[0_0_15px_rgba(239,68,68,0.3)] border border-red-500/50"
-                            : "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700"
-                        }`}
-                      >
-                        <span className="material-symbols-outlined text-base text-white">play_circle</span>
-                        {agente.estado === "Publicado en YouTube" ? "Ver Guía en YouTube (14 min)" : "Ver Avance en YouTube"}
-                      </button>
-
-                      {agente.tiktokUrl && (
-                        <Link
-                          href={agente.tiktokUrl}
-                          target="_blank"
-                          className="w-full py-2.5 px-3 rounded-xl font-bold text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 bg-black/80 hover:bg-black text-white border border-pink-500/30 hover:border-pink-500/60 shadow-[0_0_12px_rgba(236,72,153,0.15)] group/tiktok"
-                        >
-                          <svg className="w-4 h-4 fill-current text-cyan-400 group-hover/tiktok:text-pink-400 transition-colors" viewBox="0 0 24 24">
-                            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
-                          </svg>
-                          <span>Ver Resultado Final (TikTok)</span>
-                        </Link>
-                      )}
-
-                      <Link
-                        href={`https://wa.me/51993147501?text=${encodeURIComponent(agente.whatsappMsg)}`}
-                        target="_blank"
-                        className={`w-full py-2.5 px-3 rounded-xl font-bold text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 ${
-                          agente.estado === "Publicado en YouTube"
-                            ? "bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.3)] border border-emerald-400/40"
-                            : "bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10"
-                        }`}
-                      >
-                        <span className="material-symbols-outlined text-base">
-                          {agente.estado === "Publicado en YouTube" ? "chat" : "notifications_active"}
-                        </span>
-                        {agente.estado === "Publicado en YouTube" ? "Quiero el Agente (+51 993 147 501)" : "Lista de Espera (WhatsApp)"}
-                      </Link>
-                    </div>
-                  </div>
-                ))}
-              </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
         )}

@@ -19,7 +19,7 @@ const rutasConstruccion = {
     cardBg: "bg-[#0A101F]",
     btnPrimary: "bg-[#1E40AF] hover:bg-[#2563EB] text-white shadow-[0_4px_14px_rgba(30,64,175,0.4)]",
     btnTemario: "border-[#1E40AF]/60 text-slate-200 hover:bg-[#1E40AF]/20 hover:border-[#1E40AF]",
-    desc: "IA práctica, gestión documental y auditoría legal-técnica de contratos y expedientes sin programar.",
+    desc: "IA práctica, digitalización de planos DWG a AutoCAD y herramientas fundamentales para obra.",
     tagColor: "text-[#60A5FA]"
   },
   B: {

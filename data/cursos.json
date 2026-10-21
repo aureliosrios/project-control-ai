@@ -14,19 +14,9 @@
       "id": "A2",
       "ruta": "A",
       "imagen": "/cursos/A2.jpeg",
-      "nombre": "Gestión de Documentos Contractuales en la Gestión de Construcción",
-      "precio": "$15.99 USD",
-      "tag": "CURSO A2 · CONTRATOS",
-      "link": "https://pay.hotmart.com/O105604032H",
-      "brochure": "https://go.hotmart.com/O105604032H?dp=1"
-    },
-    {
-      "id": "A3",
-      "ruta": "A",
-      "imagen": "/cursos/A3.jpeg",
       "nombre": "Digitalización de Planos DWG con IA: De Imagen y PDF a AutoCAD",
       "precio": "$25.00 USD",
-      "tag": "CURSO A3 · PLANOS & CAD",
+      "tag": "CURSO A2 · PLANOS & CAD",
       "link": "https://pay.hotmart.com/R107827493N",
       "brochure": "https://go.hotmart.com/R107827493N?dp=1"
     },

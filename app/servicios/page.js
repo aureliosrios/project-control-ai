@@ -28,6 +28,10 @@ const agentesEspecializados = [
     especialidad: "Planeamiento BIM 4D/5D, Curva S y Visor Web 3D",
     tag: "BIM 4D/5D & THREE.JS",
     estado: "Publicado en YouTube",
+    precioSoles: "S/ 70",
+    precioDolares: "$25 USD",
+    yape: "51 993147501",
+    paypalUrl: "https://paypal.me/ProjectControlAI/25USD",
     theme: {
       border: "border-cyan-500/40 hover:border-cyan-400",
       bg: "bg-slate-900/60",
@@ -43,7 +47,7 @@ const agentesEspecializados = [
     entregable: "Visor 3D interactivo en HTML/Three.js autocontenido, simulación temporal 4D, panel de costos 5D (EVM), Curva S y Lookahead a 4 semanas.",
     videoId: "weL9yLqdCHY",
     tiktokUrl: "https://vt.tiktok.com/ZSgyYmMFX/",
-    whatsappMsg: "Hola Aurelio, vi el video del Agente de Planeamiento de Obra 4D/5D en YouTube y deseo adquirir el agente para mis proyectos."
+    whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente de Planeamiento de Obra 4D y 5D (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },
   {
     id: "agente-s10",
@@ -448,10 +452,52 @@ export default function ServiciosPage() {
                           </div>
                           <p className="text-slate-200 text-[11px] font-medium leading-relaxed">{agente.entregable}</p>
                         </div>
+
+                        {agente.precioSoles && (
+                          <div className="p-3 rounded-xl bg-gradient-to-r from-cyan-950/60 to-emerald-950/60 border border-cyan-500/40">
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="text-[10px] font-black uppercase tracking-wider text-cyan-300 flex items-center gap-1">
+                                <span className="material-symbols-outlined text-sm">sell</span>
+                                Inversión del Agente:
+                              </span>
+                              <span className="text-xs font-mono font-black text-emerald-300">
+                                {agente.precioSoles} PEN · {agente.precioDolares}
+                              </span>
+                            </div>
+                            <div className="text-[10px] text-slate-300 flex items-center justify-between pt-1 border-t border-cyan-800/40">
+                              <span>📱 <strong>Yape:</strong> {agente.yape}</span>
+                              <span>💳 <strong>PayPal</strong> disponible</span>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
 
                     <div className="pt-4 border-t border-slate-800/80 space-y-2">
+                      {agente.precioSoles && (
+                        <div className="grid grid-cols-2 gap-2">
+                          <a
+                            href={agente.paypalUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 shadow-md"
+                          >
+                            <span className="material-symbols-outlined text-sm">payment</span>
+                            PayPal ($25)
+                          </a>
+
+                          <a
+                            href={`https://wa.me/51993147501?text=${encodeURIComponent("Hola Ing. Aurelio, deseo adquirir el Agente de Planeamiento de Obra 4D y 5D por Yape (S/ 70). Adjunto mi comprobante de pago al 51 993147501.")}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="py-2.5 px-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 shadow-md"
+                          >
+                            <span className="material-symbols-outlined text-sm">phone_iphone</span>
+                            Yape (S/ 70)
+                          </a>
+                        </div>
+                      )}
+
                       <button
                         type="button"
                         onClick={() => setSelectedVideo(agente)}
@@ -643,7 +689,43 @@ export default function ServiciosPage() {
                 />
               </div>
 
-              <div className="p-4 sm:p-6 bg-slate-950 flex flex-col sm:flex-row items-center justify-between gap-4">
+              {selectedVideo.precioSoles && (
+                <div className="p-4 sm:p-5 bg-gradient-to-r from-emerald-950/80 via-slate-950 to-cyan-950/80 border-t border-emerald-500/40 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div>
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold block mb-0.5">
+                      Adquiere este Agente de IA
+                    </span>
+                    <p className="text-base font-black text-white">
+                      Inversión: <span className="text-emerald-300 font-mono">{selectedVideo.precioSoles} PEN</span> ó <span className="text-cyan-300 font-mono">{selectedVideo.precioDolares}</span>
+                    </p>
+                    <p className="text-xs text-slate-300 mt-0.5">
+                      📱 Yape: <strong className="text-white">{selectedVideo.yape}</strong> · 💳 PayPal para pagos internacionales
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-2.5 w-full sm:w-auto">
+                    <a
+                      href={selectedVideo.paypalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 shadow-md"
+                    >
+                      <span className="material-symbols-outlined text-sm">payment</span>
+                      PayPal ($25)
+                    </a>
+                    <a
+                      href={`https://wa.me/51993147501?text=${encodeURIComponent("Hola Ing. Aurelio, deseo adquirir el Agente de Planeamiento de Obra 4D y 5D por Yape (S/ 70). Adjunto mi comprobante de pago.")}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 shadow-md"
+                    >
+                      <span className="material-symbols-outlined text-sm">phone_iphone</span>
+                      Yape (S/ 70)
+                    </a>
+                  </div>
+                </div>
+              )}
+
+              <div className="p-4 sm:p-6 bg-slate-950 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/5">
                 <div className="text-xs text-slate-400 text-center sm:text-left">
                   <span className="text-emerald-400 font-bold block mb-0.5">⚡ Entregable en segundos:</span>
                   {selectedVideo.entregable}

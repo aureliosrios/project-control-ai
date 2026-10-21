@@ -87,13 +87,49 @@ export default function MobileLanding() {
           <h2 className="text-lg font-black text-white tracking-tight leading-snug mb-1">
             Agente de Planeamiento de Obra 4D y 5D
           </h2>
-          <p className="text-xs text-slate-300 leading-relaxed mb-4">
+          <p className="text-xs text-slate-300 leading-relaxed mb-3">
             De Planos (DWG) + Cronograma + Presupuesto a <strong>Visor 3D interactivo en segundos</strong> con Curva S y Lookahead.
           </p>
 
+          {/* Caja de Inversión y Medios de Pago */}
+          <div className="p-3 rounded-2xl bg-black/60 border border-cyan-500/40 mb-3 space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold">Inversión:</span>
+              <span className="text-xs font-mono font-black text-emerald-400 bg-emerald-950/80 px-2.5 py-0.5 rounded border border-emerald-500/40">
+                S/ 70 PEN · $25 USD
+              </span>
+            </div>
+            <div className="text-[11px] text-slate-300 flex items-center justify-between pt-1 border-t border-slate-800">
+              <span>📱 <strong>Yape:</strong> 51 993147501</span>
+              <span>💳 <strong>PayPal</strong> disponible</span>
+            </div>
+          </div>
+
           <div className="space-y-2">
+            <div className="grid grid-cols-2 gap-2">
+              <a
+                href="https://paypal.me/ProjectControlAI/25USD"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 shadow-md"
+              >
+                <span className="material-symbols-outlined text-sm">payment</span>
+                PayPal ($25)
+              </a>
+
+              <a
+                href="https://wa.me/51993147501?text=Hola%20Ing.%20Aurelio,%20deseo%20adquirir%20el%20Agente%20de%20Planeamiento%204D5D%20v%C3%ADa%20Yape%20(S/%2070).%20Adjunto%20mi%20comprobante."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="py-2.5 px-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 shadow-md"
+              >
+                <span className="material-symbols-outlined text-sm">phone_iphone</span>
+                Yape (S/ 70)
+              </a>
+            </div>
+
             <Link
-              href="https://wa.me/51993147501?text=Hola%20Ing.%20Aurelio,%20vi%20el%20video%20en%20TikTok%20del%20Agente%20de%20Planeamiento%204D5D%20y%20deseo%20adquirirlo."
+              href="https://wa.me/51993147501?text=Hola%20Ing.%20Aurelio,%20vi%20el%20video%20en%20TikTok%20del%20Agente%20de%20Planeamiento%204D5D%20y%20deseo%20adquirirlo%20(S/%2070%20o%20$25%20USD)."
               target="_blank"
               className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.3)]"
             >

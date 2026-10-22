@@ -763,6 +763,12 @@ function ServiciosContent() {
                                   <p className="text-[11px] text-slate-300">
                                     📱 Yape al <strong>{agente.yape}</strong> · 💳 PayPal para compras internacionales
                                   </p>
+                                  <p className="text-[11px] text-slate-400 mt-1">
+                                    1) Mira la guía y la demo · 2) Paga y envía tu comprobante · 3) Recibe tu clave de un solo uso ·{" "}
+                                    <Link href="/agentes/descargar" className="text-emerald-300 font-bold hover:underline">
+                                      ¿Ya tienes tu clave? Descarga aquí
+                                    </Link>
+                                  </p>
                                 </div>
 
                                 <div className="flex items-center gap-2 shrink-0">

@@ -15,28 +15,28 @@ export default function MobileLanding() {
       <div className="absolute top-0 w-full h-[500px] bg-gradient-to-b from-cyan-500/10 via-transparent to-transparent -z-10" />
 
       {/* Header Section */}
-      <header className="relative mt-4 mb-6 flex flex-col items-center text-center">
+      <header className="relative mt-2 mb-4 flex flex-col items-center text-center">
         <Link href="/" className="group flex flex-col items-center">
-          <div className="relative w-20 h-20 mb-3 p-1 rounded-full bg-gradient-to-tr from-cyan-500 via-blue-600 to-emerald-500 shadow-[0_0_30px_rgba(245,168,0,0.3)] group-hover:scale-105 transition-transform">
-            <div className="w-full h-full rounded-full bg-slate-950 p-3 flex items-center justify-center overflow-hidden">
+          <div className="relative w-16 h-16 mb-2.5 p-1 rounded-full bg-gradient-to-tr from-cyan-500 via-blue-600 to-emerald-500 shadow-[0_0_25px_rgba(245,168,0,0.3)] group-hover:scale-105 transition-transform">
+            <div className="w-full h-full rounded-full bg-slate-950 p-2.5 flex items-center justify-center overflow-hidden">
               <div className="relative w-full h-full">
                 <Image 
                   src="/images/logo.png" 
                   alt="Project Control AI Logo" 
                   fill 
-                  sizes="80px"
+                  sizes="64px"
                   className="object-contain" 
                 />
               </div>
             </div>
           </div>
-          <h1 className="text-2xl font-black tracking-tight text-white uppercase">
+          <h1 className="text-xl sm:text-2xl font-black tracking-tight text-white uppercase">
             Project Control AI
           </h1>
-          <p className="text-cyan-400 text-[10px] font-mono font-bold tracking-[0.3em] uppercase mt-1">
+          <p className="text-cyan-400 text-[10px] font-mono font-bold tracking-[0.25em] uppercase mt-0.5">
             Soluciones Agénticas & Formación
           </p>
-          <div className="mt-3 inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/40 text-cyan-300 text-[10px] font-black uppercase tracking-wider hover:bg-cyan-900/80 transition-all shadow-[0_0_15px_rgba(245,168,0,0.2)]">
+          <div className="mt-2.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/40 text-cyan-300 text-[10px] font-black uppercase tracking-wider hover:bg-cyan-900/80 transition-all shadow-[0_0_15px_rgba(245,168,0,0.2)]">
             <span className="material-symbols-outlined text-xs">open_in_new</span>
             <span>Ir a la Página Principal</span>
           </div>
@@ -44,32 +44,79 @@ export default function MobileLanding() {
       </header>
 
       {/* Profile Bio Card (Ing. Aurelio Solorzano) */}
-      <section className="w-full max-w-md mb-6 px-1">
+      <section className="w-full max-w-md mb-3 px-1">
         <Link 
           href="https://wa.me/51993147501?text=Hola%20Ing.%20Aurelio,%20vengo%20de%20TikTok%20y%20necesito%20una%20consulta%20especializada."
           target="_blank"
-          className="flex items-center gap-3.5 w-full bg-slate-950/80 backdrop-blur-xl p-3.5 rounded-2xl border border-cyan-500/30 shadow-[0_10px_30px_rgba(0,0,0,0.5)] group hover:border-cyan-400 hover:scale-[1.01] transition-all"
+          className="flex items-center gap-3 w-full bg-slate-950/80 backdrop-blur-xl p-3 rounded-2xl border border-cyan-500/30 shadow-[0_8px_24px_rgba(0,0,0,0.5)] group hover:border-cyan-400 hover:scale-[1.01] transition-all"
         >
-          <div className="relative w-14 h-14 flex-shrink-0">
+          <div className="relative w-12 h-12 flex-shrink-0">
             <Image 
               src="/images/Aurelio Solorzano.png" 
               alt="Ing. Aurelio Solorzano" 
               fill 
-              sizes="56px"
+              sizes="48px"
               className="rounded-full object-cover border-2 border-cyan-500 relative z-10" 
             />
-            <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-[#14161a] rounded-full z-20 shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
+            <div className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-[#14161a] rounded-full z-20 shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
           </div>
           <div className="text-left flex-1 min-w-0">
             <span className="block text-[9px] font-black text-cyan-400 uppercase tracking-widest">Consultor Principal</span>
-            <span className="block text-base font-black text-white leading-tight truncate">Ing. Aurelio Solórzano Ríos</span>
+            <span className="block text-sm font-black text-white leading-tight truncate">Ing. Aurelio Solórzano Ríos</span>
             <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-emerald-400 mt-0.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Activo en WhatsApp
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Activo en WhatsApp Directo
             </span>
           </div>
-          <span className="material-symbols-outlined text-emerald-400 text-xl group-hover:translate-x-1 transition-transform">
+          <span className="material-symbols-outlined text-emerald-400 text-lg group-hover:translate-x-1 transition-transform">
             chat
           </span>
+        </Link>
+      </section>
+
+      {/* ⭐ HERO DESTACADO (PRIMERA VISTA): GRUPO GRATUITO DE WHATSAPP */}
+      <section className="w-full max-w-md mb-3.5 px-1">
+        <Link 
+          href="https://chat.whatsapp.com/H0lG0T5yLAVB0qGRBhpBsT" 
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative block w-full overflow-hidden p-4 rounded-2xl bg-gradient-to-r from-emerald-950/90 via-slate-950 to-emerald-950/80 border-2 border-emerald-400/90 shadow-[0_0_30px_rgba(16,185,129,0.35)] group hover:border-emerald-300 hover:scale-[1.02] transition-all"
+        >
+          {/* Efecto de luz ambiental cyber */}
+          <div className="absolute -top-10 -right-10 w-32 h-32 bg-emerald-500/20 rounded-full blur-2xl pointer-events-none group-hover:bg-emerald-500/35 transition-all" />
+
+          <div className="relative z-10 flex items-center gap-3.5">
+            {/* Icono animado */}
+            <div className="relative w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-400/60 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform flex-shrink-0 shadow-[0_0_15px_rgba(16,185,129,0.4)]">
+              <span className="material-symbols-outlined text-3xl font-bold">groups</span>
+              <span className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full animate-ping" />
+              <span className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full" />
+            </div>
+
+            {/* Textos de alta conversión */}
+            <div className="text-left flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-[9px] font-mono font-black text-emerald-300 bg-emerald-950 px-2 py-0.5 rounded-full border border-emerald-500/50 uppercase tracking-wider">
+                  Acceso 100% Libre
+                </span>
+                <span className="text-[9px] font-bold text-emerald-400 flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Comunidad VIP
+                </span>
+              </div>
+              <h2 className="text-[15px] font-black text-white group-hover:text-emerald-200 transition-colors uppercase tracking-tight leading-tight">
+                Únete a mi Grupo de WhatsApp Gratuito
+              </h2>
+              <p className="text-[11px] text-slate-300 leading-snug mt-1 font-medium">
+                Plantillas, scripts de control de proyectos, prompts de IA y novedades sin costo.
+              </p>
+            </div>
+
+            {/* Flecha de acción */}
+            <div className="flex-shrink-0 self-center pl-1">
+              <div className="w-9 h-9 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center font-black group-hover:translate-x-1 group-hover:bg-emerald-400 transition-all shadow-[0_0_12px_rgba(16,185,129,0.6)]">
+                <span className="material-symbols-outlined text-xl font-bold">arrow_forward</span>
+              </div>
+            </div>
+          </div>
         </Link>
       </section>
 
@@ -229,7 +276,7 @@ export default function MobileLanding() {
           </div>
           <div className="text-left flex-1 min-w-0">
             <span className="block text-xs font-bold text-white group-hover:text-emerald-300 transition-colors">
-              Comunidad VIP de WhatsApp
+              Únete a mi Grupo de WhatsApp Gratuito
             </span>
             <span className="block text-[10px] text-slate-400">Plantillas, scripts y novedades sin costo</span>
           </div>

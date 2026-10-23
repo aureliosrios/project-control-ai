@@ -14,9 +14,16 @@ const clasesGratuitasYouTube = [
     url: "https://youtu.be/0nJQXGfkMB4"
   },
   {
-    id: "8QCOyk6Qm58",
+    id: "dVZNMhvNSsw",
     num: "02",
-    titulo: "Sesión 02: Agentes de Ingeniería para Proyectos de Construcción",
+    titulo: "Sesión 02: Agente de IA para Presupuestos y Programación de Obras",
+    desc: "Clase grabada práctica sobre la operación de agentes de IA aplicados a presupuestos, especificaciones técnicas (EETT) y programación de obra: configuración del flujo agéntico y generación de entregables técnicos.",
+    url: "https://youtu.be/dVZNMhvNSsw"
+  },
+  {
+    id: "8QCOyk6Qm58",
+    num: "03",
+    titulo: "Sesión 03: Agentes de Ingeniería, Markdown y Estructuración de Proyectos",
     desc: "Casos aplicados de agentes en obras: uso de Antigravity, configuración del entorno, conversión de PDF a Markdown/JSON y del presupuesto al cronograma ejecutable sin la rigidez del software convencional.",
     url: "https://youtu.be/8QCOyk6Qm58"
   }

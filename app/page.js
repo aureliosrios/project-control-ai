@@ -515,7 +515,7 @@ export default function Home() {
           {/* ⭐ HERO DESTACADO: GRUPO GRATUITO DE WHATSAPP */}
           <div className="mb-6">
             <Link 
-              href="https://chat.whatsapp.com/H0lG0T5yLAVB0qGRBhpBsT" 
+              href="https://chat.whatsapp.com/Jq7YgCGPFpoKyEaQ2mwRx7" 
               target="_blank"
               rel="noopener noreferrer"
               className="relative block w-full overflow-hidden p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-950/90 via-slate-950 to-emerald-950/80 border-2 border-emerald-400/90 shadow-[0_0_30px_rgba(16,185,129,0.35)] group hover:border-emerald-300 hover:scale-[1.02] transition-all"
@@ -672,7 +672,7 @@ export default function Home() {
             {/* Redes y Comunidad */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-2">
               <Link 
-                href="https://chat.whatsapp.com/H0lG0T5yLAVB0qGRBhpBsT" 
+                href="https://chat.whatsapp.com/Jq7YgCGPFpoKyEaQ2mwRx7" 
                 target="_blank" 
                 className="flex items-center gap-2.5 p-3 rounded-xl bg-slate-900/60 border border-emerald-500/20 hover:border-emerald-500/50 transition-all group"
               >

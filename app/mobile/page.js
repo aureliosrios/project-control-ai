@@ -76,7 +76,7 @@ export default function MobileLanding() {
       {/* ⭐ HERO DESTACADO (PRIMERA VISTA): GRUPO GRATUITO DE WHATSAPP */}
       <section className="w-full max-w-md mb-3.5 px-1">
         <Link 
-          href="https://chat.whatsapp.com/H0lG0T5yLAVB0qGRBhpBsT" 
+          href="https://chat.whatsapp.com/Jq7YgCGPFpoKyEaQ2mwRx7" 
           target="_blank"
           rel="noopener noreferrer"
           className="relative block w-full overflow-hidden p-4 rounded-2xl bg-gradient-to-r from-emerald-950/90 via-slate-950 to-emerald-950/80 border-2 border-emerald-400/90 shadow-[0_0_30px_rgba(16,185,129,0.35)] group hover:border-emerald-300 hover:scale-[1.02] transition-all"
@@ -267,7 +267,7 @@ export default function MobileLanding() {
 
         {/* 7. GRUPO GRATUITO DE WHATSAPP */}
         <Link 
-          href="https://chat.whatsapp.com/H0lG0T5yLAVB0qGRBhpBsT" 
+          href="https://chat.whatsapp.com/Jq7YgCGPFpoKyEaQ2mwRx7" 
           target="_blank" 
           className="flex items-center gap-3.5 w-full bg-slate-950/50 p-3.5 rounded-xl border border-emerald-500/20 hover:border-emerald-500/50 transition-all group"
         >

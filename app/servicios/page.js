@@ -734,160 +734,127 @@ function ServiciosContent() {
                           </div>
                         </div>
 
-                        {/* Contenido Expandible (Detalle Completo) */}
+                        {/* Contenido Expandible (Estructura Mínima Información - Estilo Tarjeta Destacada) */}
                         {isExpanded && (
-                          <div className="px-5 pb-6 pt-2 border-t border-slate-800/80 animate-in fade-in duration-200 space-y-4">
-                            {/* Grid de 3 Bloques: Reto, Solución y Entregable */}
-                            <div className="grid md:grid-cols-3 gap-3 text-xs pt-2">
-                              <div className="p-3.5 rounded-xl bg-black/40 border border-slate-800/80 flex flex-col justify-between">
-                                <div>
-                                  <span className="text-[10px] font-bold text-red-400 uppercase tracking-wider block mb-1">
-                                    El Reto Habitual:
-                                  </span>
-                                  <p className="text-slate-300 leading-relaxed text-[11px]">{agente.problema}</p>
-                                </div>
-                              </div>
+                          <div className="p-5 sm:p-6 border-t border-slate-800/80 bg-gradient-to-br from-[#171a1e]/80 via-slate-900/60 to-[#14161a] animate-in fade-in duration-200">
+                            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+                              {/* Izquierda: Descripción concisa y Caja de Inversión */}
+                              <div className="flex-1 space-y-4 max-w-2xl">
+                                <p className="text-slate-300 text-sm leading-relaxed font-normal">
+                                  {agente.solucion}
+                                </p>
 
-                              <div className="p-3.5 rounded-xl bg-slate-800/30 border border-slate-800/80 flex flex-col justify-between">
-                                <div>
-                                  <span className="text-[10px] font-bold text-cyan-400 uppercase tracking-wider block mb-1">
-                                    Solución Agéntica:
-                                  </span>
-                                  <p className="text-slate-300 leading-relaxed text-[11px]">{agente.solucion}</p>
-                                </div>
-                              </div>
-
-                              <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 flex flex-col justify-between">
-                                <div>
-                                  <div className="flex items-center justify-between mb-1">
-                                    <span className="text-[10px] font-black text-slate-300 uppercase tracking-wider">
-                                      Entregable en Segundos:
-                                    </span>
-                                    <span className="text-[9px] font-mono font-bold text-cyan-400 bg-cyan-950/60 px-1.5 py-0.5 rounded border border-cyan-800/40">
-                                      ⚡ {agente.tiempoEntrega}
-                                    </span>
+                                {/* Caja de Inversión y Medios de Pago */}
+                                {agente.precioSoles ? (
+                                  <div className="p-4 rounded-2xl bg-black/60 border border-cyan-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4 max-w-xl">
+                                    <div>
+                                      <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 block font-bold">
+                                        Inversión del Agente
+                                      </span>
+                                      <div className="flex items-baseline gap-2">
+                                        <span className="text-xl sm:text-2xl font-black text-emerald-400 font-mono">
+                                          {agente.precioSoles} PEN
+                                        </span>
+                                        <span className="text-xs text-slate-400 font-bold">ó</span>
+                                        <span className="text-lg sm:text-xl font-black text-cyan-300 font-mono">
+                                          {agente.precioDolares}
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <div className="text-xs text-slate-300 space-y-1.5 border-t sm:border-t-0 sm:border-l border-slate-800 pt-3 sm:pt-0 sm:pl-4">
+                                      <div className="flex items-center gap-1.5">
+                                        <span className="w-2 h-2 rounded-full bg-purple-400 shrink-0" />
+                                        <span><strong>Perú (Yape / Plin):</strong> {agente.yape}</span>
+                                      </div>
+                                      <div className="flex items-center gap-1.5">
+                                        <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0" />
+                                        <span><strong>Extranjero (PayPal):</strong> {agente.precioDolares}</span>
+                                      </div>
+                                    </div>
                                   </div>
-                                  <p className="text-slate-200 text-[11px] font-medium leading-relaxed">{agente.entregable}</p>
-                                </div>
-                              </div>
-                            </div>
-
-                            {/* Caja de Inversión y Pagos (si aplica) */}
-                            {agente.precioSoles ? (
-                              <div className="p-4 rounded-xl bg-gradient-to-r from-emerald-950/60 via-slate-950 to-cyan-950/60 border border-cyan-500/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                                <div>
-                                  <div className="flex items-center gap-2 mb-0.5">
-                                    <span className="text-[10px] font-black uppercase tracking-wider text-cyan-300 flex items-center gap-1">
-                                      <span className="material-symbols-outlined text-sm">sell</span>
-                                      Inversión del Agente:
-                                    </span>
-                                    <span className="text-sm font-mono font-black text-emerald-300">
-                                      {agente.precioSoles} PEN · {agente.precioDolares}
-                                    </span>
+                                ) : (
+                                  <div className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-400">
+                                    💡 Este agente se encuentra en fase final de despliegue. Puedes unirte a la lista de espera para acceso prioritario.
                                   </div>
-                                  <p className="text-[11px] text-slate-300">
-                                    📱 <strong>Perú:</strong> Yape / Plin al <strong>{agente.yape}</strong> · 💳 <strong>Extranjero:</strong> PayPal ({agente.precioDolares})
-                                  </p>
-                                  <p className="text-[11px] text-slate-400 mt-1">
-                                    1) Mira la guía y la demo · 2) Paga y envía tu comprobante · 3) Recibe tu clave de un solo uso ·{" "}
-                                    <Link href="/agentes/descargar" className="text-emerald-300 font-bold hover:underline">
-                                      ¿Ya tienes tu clave? Descarga aquí
-                                    </Link>
-                                  </p>
-                                </div>
+                                )}
 
-                                <div className="flex items-center gap-2 shrink-0">
-                                  <a
-                                    href={agente.paypalUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-md"
-                                  >
-                                    <span className="material-symbols-outlined text-sm">payment</span>
-                                    PayPal ($25)
-                                  </a>
-
-                                  <a
-                                    href={`https://wa.me/51993147501?text=${encodeURIComponent(agente.whatsappMsg || `Hola Ing. Aurelio, deseo adquirir el ${agente.nombre} por Yape / Plin (S/ 70). Adjunto mi comprobante de pago al 51 993147501.`)}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="px-3.5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-md"
-                                  >
-                                    <span className="material-symbols-outlined text-sm">phone_iphone</span>
-                                    Yape / Plin (S/ 70)
-                                  </a>
+                                {/* Enlace para canjear clave de descarga */}
+                                <div className="text-xs text-slate-400 flex items-center gap-1.5 pt-1">
+                                  <span className="material-symbols-outlined text-emerald-400 text-sm">key</span>
+                                  <span>¿Ya adquiriste tu clave de acceso?</span>
+                                  <Link href="/agentes/descargar" className="text-emerald-300 font-bold hover:underline">
+                                    Canjear y Descargar aquí →
+                                  </Link>
                                 </div>
                               </div>
-                            ) : agente.estado === "Publicado en YouTube" && (
-                              <div className="p-4 rounded-xl bg-gradient-to-r from-emerald-950/60 via-slate-950 to-teal-950/60 border border-emerald-500/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-[0_0_20px_rgba(16,185,129,0.12)]">
-                                <div>
-                                  <div className="flex items-center gap-2 mb-1">
-                                    <span className="text-[10px] font-black uppercase tracking-wider text-emerald-300 flex items-center gap-1">
-                                      <span className="material-symbols-outlined text-base text-emerald-400">contact_support</span>
-                                      ¿Deseas este Agente o una demostración para tu empresa?
-                                    </span>
+
+                              {/* Derecha: Botones de Acción (PayPal, Yape, WhatsApp, YouTube, TikTok) */}
+                              <div className="flex flex-col gap-2.5 w-full lg:w-auto shrink-0 min-w-[280px]">
+                                {agente.precioSoles && (
+                                  <div className="grid grid-cols-2 gap-2">
+                                    <a
+                                      href={agente.paypalUrl}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="px-3.5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 shadow-md hover:scale-[1.02]"
+                                    >
+                                      <span className="material-symbols-outlined text-sm">payment</span>
+                                      PayPal ($25)
+                                    </a>
+                                    <a
+                                      href={`https://wa.me/51993147501?text=${encodeURIComponent(agente.whatsappMsg || `Hola Ing. Aurelio, deseo adquirir el ${agente.nombre} por Yape / Plin (S/ 70). Adjunto mi comprobante de pago al 51 993147501.`)}`}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="px-3.5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 shadow-md hover:scale-[1.02]"
+                                    >
+                                      <span className="material-symbols-outlined text-sm">phone_iphone</span>
+                                      Yape / Plin (S/ 70)
+                                    </a>
                                   </div>
-                                  <p className="text-[11px] text-slate-300 leading-relaxed">
-                                    Contáctame por WhatsApp para adquirir la solución agéntica, implementarla en tu servidor o adaptarla a la estructura de costos de tus obras.
-                                  </p>
-                                </div>
+                                )}
 
-                                <div className="flex items-center gap-2 shrink-0">
-                                  <a
-                                    href={`https://wa.me/51993147501?text=${encodeURIComponent(agente.whatsappMsg)}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.35)]"
-                                  >
-                                    <span className="material-symbols-outlined text-base">chat</span>
-                                    <span>Contactar por WhatsApp (+51 993 147 501)</span>
-                                  </a>
-                                </div>
-                              </div>
-                            )}
-
-                            {/* Barra de Acciones */}
-                            <div className="pt-2 flex flex-wrap items-center gap-2.5">
-                              <button
-                                type="button"
-                                onClick={() => setSelectedVideo(agente)}
-                                className={`px-4 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 ${
-                                  agente.estado === "Publicado en YouTube"
-                                    ? "bg-red-600 hover:bg-red-500 text-white shadow-[0_0_15px_rgba(239,68,68,0.3)] border border-red-500/50"
-                                    : "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700"
-                                }`}
-                              >
-                                <span className="material-symbols-outlined text-base text-white">play_circle</span>
-                                {agente.estado === "Publicado en YouTube" ? `Ver Guía en YouTube (${agente.duracionVideo})` : "Ver Avance en YouTube"}
-                              </button>
-
-                              {agente.tiktokUrl && (
-                                <Link
-                                  href={agente.tiktokUrl}
+                                <a
+                                  href={`https://wa.me/51993147501?text=${encodeURIComponent(agente.whatsappMsg)}`}
                                   target="_blank"
-                                  className="px-4 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 bg-black/80 hover:bg-black text-white border border-pink-500/30 hover:border-pink-500/60 shadow-[0_0_12px_rgba(236,72,153,0.15)] group/tiktok"
+                                  rel="noopener noreferrer"
+                                  className={`px-4 py-3 rounded-xl font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2 shadow-lg hover:scale-[1.02] ${
+                                    agente.estado === "Publicado en YouTube"
+                                      ? "bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.3)]"
+                                      : "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700"
+                                  }`}
                                 >
-                                  <svg className="w-4 h-4 fill-current text-cyan-400 group-hover/tiktok:text-pink-400 transition-colors" viewBox="0 0 24 24">
-                                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
-                                  </svg>
-                                  <span>Demo en TikTok</span>
-                                </Link>
-                              )}
+                                  <span className="material-symbols-outlined text-base">chat</span>
+                                  {agente.estado === "Publicado en YouTube" ? "Quiero el Agente (+51 993 147 501)" : "Lista de Espera (WhatsApp)"}
+                                </a>
 
-                              <Link
-                                href={`https://wa.me/51993147501?text=${encodeURIComponent(agente.whatsappMsg)}`}
-                                target="_blank"
-                                className={`px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 ${
-                                  agente.estado === "Publicado en YouTube"
-                                    ? "bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.3)] border border-emerald-400/40"
-                                    : "bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10"
-                                }`}
-                              >
-                                <span className="material-symbols-outlined text-base">
-                                  {agente.estado === "Publicado en YouTube" ? "chat" : "notifications_active"}
-                                </span>
-                                {agente.estado === "Publicado en YouTube" ? "Quiero el Agente (+51 993 147 501)" : "Lista de Espera (WhatsApp)"}
-                              </Link>
+                                <div className="flex gap-2">
+                                  <button
+                                    type="button"
+                                    onClick={() => setSelectedVideo(agente)}
+                                    className="flex-1 px-3 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 shadow-md hover:scale-[1.02]"
+                                  >
+                                    <span className="material-symbols-outlined text-sm">play_circle</span>
+                                    YouTube ({agente.duracionVideo})
+                                  </button>
+
+                                  {agente.tiktokUrl ? (
+                                    <Link
+                                      href={agente.tiktokUrl}
+                                      target="_blank"
+                                      className="flex-1 px-3 py-2.5 rounded-xl bg-black hover:bg-zinc-800 text-white font-bold text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 border border-pink-500/40 shadow-md hover:scale-[1.02]"
+                                    >
+                                      <svg className="w-3.5 h-3.5 fill-current text-cyan-400" viewBox="0 0 24 24">
+                                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                                      </svg>
+                                      TikTok
+                                    </Link>
+                                  ) : (
+                                    <span className="flex-1 px-3 py-2.5 rounded-xl bg-slate-900/90 text-slate-500 font-bold text-[11px] uppercase tracking-wider text-center flex items-center justify-center border border-slate-800">
+                                      TikTok Pronto
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
                             </div>
                           </div>
                         )}

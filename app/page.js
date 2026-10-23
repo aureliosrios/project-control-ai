@@ -483,7 +483,7 @@ export default function Home() {
           <div className="absolute top-0 right-0 w-72 h-72 bg-gradient-to-b from-pink-500/10 via-cyan-500/10 to-transparent blur-3xl pointer-events-none" />
 
           {/* Header perfil del Ing. Aurelio Solórzano */}
-          <div className="mb-8">
+          <div className="mb-4">
             <Link 
               href="https://wa.me/51993147501?text=Hola%20Ing.%20Aurelio,%20vengo%20de%20TikTok%20y%20necesito%20una%20consulta%20especializada."
               target="_blank"
@@ -509,6 +509,49 @@ export default function Home() {
               <span className="material-symbols-outlined text-emerald-400 text-2xl group-hover:translate-x-1 transition-transform">
                 chat
               </span>
+            </Link>
+          </div>
+
+          {/* ⭐ HERO DESTACADO: GRUPO GRATUITO DE WHATSAPP */}
+          <div className="mb-6">
+            <Link 
+              href="https://chat.whatsapp.com/H0lG0T5yLAVB0qGRBhpBsT" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative block w-full overflow-hidden p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-950/90 via-slate-950 to-emerald-950/80 border-2 border-emerald-400/90 shadow-[0_0_30px_rgba(16,185,129,0.35)] group hover:border-emerald-300 hover:scale-[1.02] transition-all"
+            >
+              <div className="absolute -top-10 -right-10 w-32 h-32 bg-emerald-500/20 rounded-full blur-2xl pointer-events-none group-hover:bg-emerald-500/35 transition-all" />
+
+              <div className="relative z-10 flex items-center gap-4">
+                <div className="relative w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-400/60 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform shrink-0 shadow-[0_0_15px_rgba(16,185,129,0.4)]">
+                  <span className="material-symbols-outlined text-3xl font-bold">groups</span>
+                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full animate-ping" />
+                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full" />
+                </div>
+
+                <div className="text-left flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-[9px] font-mono font-black text-emerald-300 bg-emerald-950 px-2 py-0.5 rounded-full border border-emerald-500/50 uppercase tracking-wider">
+                      Acceso 100% Libre
+                    </span>
+                    <span className="text-[9px] font-bold text-emerald-400 flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Comunidad VIP
+                    </span>
+                  </div>
+                  <h3 className="text-base sm:text-lg font-black text-white group-hover:text-emerald-200 transition-colors uppercase tracking-tight leading-tight">
+                    Únete a mi Grupo de WhatsApp Gratuito
+                  </h3>
+                  <p className="text-xs text-slate-300 leading-snug mt-1 font-medium">
+                    Plantillas, scripts de control de proyectos, prompts de IA y novedades sin costo.
+                  </p>
+                </div>
+
+                <div className="shrink-0 self-center pl-1">
+                  <div className="w-10 h-10 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center font-black group-hover:translate-x-1 group-hover:bg-emerald-400 transition-all shadow-[0_0_12px_rgba(16,185,129,0.6)]">
+                    <span className="material-symbols-outlined text-xl font-bold">arrow_forward</span>
+                  </div>
+                </div>
+              </div>
             </Link>
           </div>
 

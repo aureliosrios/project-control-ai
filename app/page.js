@@ -174,8 +174,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2.5. AGENTE DESTACADO: PLANEAMIENTO 4D/5D CON MEDIOS DE PAGO */}
-      <section className="max-w-7xl mx-auto px-6 py-4">
+      {/* 2.5. AGENTES DESTACADOS DISPONIBLES */}
+      <section className="max-w-7xl mx-auto px-6 py-4 space-y-6">
+        {/* Agente 1: Planeamiento 4D y 5D */}
         <div className="p-8 sm:p-12 rounded-[40px] bg-gradient-to-br from-[#171a1e] via-slate-900 to-[#14161a] border-2 border-cyan-500/50 shadow-[0_0_50px_rgba(245,168,0,0.2)] relative overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 blur-[90px] pointer-events-none" />
 
@@ -275,6 +276,97 @@ export default function Home() {
                   TikTok
                 </Link>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Agente 2: Presupuestos & APU Tipo S10 */}
+        <div className="p-8 sm:p-12 rounded-[40px] bg-gradient-to-br from-[#171a1e] via-slate-900 to-[#14161a] border-2 border-emerald-500/50 shadow-[0_0_50px_rgba(16,185,129,0.15)] relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 blur-[90px] pointer-events-none" />
+
+          <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+            <div className="max-w-2xl space-y-4">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full bg-red-950 text-red-400 border border-red-500/40 flex items-center gap-1.5 shadow-[0_0_12px_rgba(239,68,68,0.3)]">
+                  <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
+                  Agente Destacado · Disponible Ahora
+                </span>
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-800">
+                  COSTOS & S10 · OPENPYXL
+                </span>
+                <span className="text-[10px] font-mono font-bold text-cyan-300 bg-cyan-950/60 px-2 py-1 rounded border border-cyan-800/40">
+                  ⚡ 15 segundos
+                </span>
+              </div>
+
+              <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight uppercase leading-tight">
+                Agente de Presupuestos & APU Tipo S10
+              </h2>
+
+              <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                Le proporcionas tus Expedientes Técnicos (PDF/Excel: Memoria, EETT, Metrados y Cotizaciones) y genera en segundos un <strong>Presupuesto profesional tipo S10 en Excel con fórmulas vivas</strong>, cálculo de APUs, desglose de gastos generales y fórmula polinómica conforme al D.S. 011-79-VC.
+              </p>
+
+              {/* Caja de Características Técnicas */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-black/60 border border-emerald-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4 max-w-xl">
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400 block font-bold">Cerebro Digital & Calidad QA</span>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-lg sm:text-xl font-black text-white">1,486 Nodos · 10 Compuertas</span>
+                  </div>
+                </div>
+                <div className="text-xs text-slate-300 space-y-1.5 border-t sm:border-t-0 sm:border-l border-slate-800 pt-3 sm:pt-0 sm:pl-4">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0" />
+                    <span><strong>Cero alucinaciones:</strong> Motor Python determinista</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0" />
+                    <span><strong>Trazabilidad:</strong> Hashes SHA-256</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Acciones y Enlaces */}
+            <div className="flex flex-col gap-3 w-full lg:w-auto shrink-0 min-w-[280px]">
+              <a
+                href="https://wa.me/51993147501?text=Hola%20Ing.%20Aurelio,%20vi%20la%20guia%20del%20Agente%20de%20Presupuestos%20Tipo%20S10%20en%20YouTube%20y%20deseo%20adquirirlo%20o%20implementarlo."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.35)] hover:scale-[1.02]"
+              >
+                <span className="material-symbols-outlined text-base">chat</span>
+                Quiero el Agente (+51 993 147 501)
+              </a>
+
+              <div className="flex gap-2">
+                <Link
+                  href="https://youtu.be/NoaHRpYAzMc"
+                  target="_blank"
+                  className="flex-1 px-3 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 shadow-md hover:scale-[1.02]"
+                >
+                  <span className="material-symbols-outlined text-sm">play_circle</span>
+                  YouTube (15 min)
+                </Link>
+                <Link
+                  href="https://vt.tiktok.com/ZSg5CFDGH/"
+                  target="_blank"
+                  className="flex-1 px-3 py-2.5 rounded-xl bg-black hover:bg-zinc-800 text-white font-bold text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 border border-pink-500/40 shadow-md hover:scale-[1.02]"
+                >
+                  <svg className="w-3.5 h-3.5 fill-current text-cyan-400" viewBox="0 0 24 24">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                  </svg>
+                  TikTok
+                </Link>
+              </div>
+
+              <Link
+                href="/servicios?tab=agentes#agentes"
+                className="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 text-center text-[11px] font-bold uppercase tracking-wider transition-colors"
+              >
+                Ver Catálogo de Agentes
+              </Link>
             </div>
           </div>
         </div>

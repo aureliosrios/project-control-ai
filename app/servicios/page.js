@@ -463,56 +463,6 @@ function ServiciosContent() {
               </div>
             </section>
 
-            {/* Clases Gratuitas en YouTube */}
-            <section className="p-8 md:p-10 rounded-[32px] bg-slate-900/60 border border-slate-800">
-              <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="material-symbols-outlined text-red-500 text-xl">smart_display</span>
-                    <span className="text-xs font-black text-red-400 tracking-[0.25em] uppercase">Fundamentos Abiertos en YouTube</span>
-                  </div>
-                  <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight">
-                    ¿Primera vez con Agentes de Ingeniería?
-                  </h3>
-                  <p className="text-slate-300 text-sm max-w-2xl mt-1">
-                    Mira estas dos clases gratuitas en nuestro canal de YouTube para entender cómo operan los agentes de IA en obras reales:
-                  </p>
-                </div>
-                <Link
-                  href="https://www.youtube.com/@aurelioalfonsosolorzanorios"
-                  target="_blank"
-                  className="px-5 py-3 rounded-xl bg-red-600 hover:bg-red-500 text-white font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(239,68,68,0.3)] shrink-0"
-                >
-                  <span className="material-symbols-outlined text-base">subscriptions</span>
-                  Canal de YouTube
-                </Link>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                {clasesGratuitasYouTube.map((clase) => (
-                  <div key={clase.id} className="p-6 rounded-2xl bg-black/40 border border-slate-800 flex flex-col justify-between">
-                    <div>
-                      <span className="text-xs font-mono font-bold text-red-400 uppercase tracking-widest block mb-2">
-                        CLASE {clase.num} · 100% GRATUITA
-                      </span>
-                      <h4 className="text-lg font-bold text-white mb-2 leading-snug">{clase.titulo}</h4>
-                      <p className="text-xs text-slate-300 leading-relaxed">{clase.desc}</p>
-                    </div>
-                    <div className="pt-4 mt-4 border-t border-slate-800">
-                      <Link
-                        href={clase.url}
-                        target="_blank"
-                        className="inline-flex items-center gap-2 text-xs font-black text-red-400 hover:text-red-300 uppercase tracking-wider transition-colors"
-                      >
-                        <span className="material-symbols-outlined text-base">play_circle</span>
-                        Ver Clase en YouTube
-                      </Link>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-
             {/* Catálogo Maestro de Agentes (Comprimible, Desplegable y con Buscador) */}
             <div className="space-y-6">
               <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -864,6 +814,56 @@ function ServiciosContent() {
                 </div>
               )}
             </div>
+
+            {/* Clases Gratuitas en YouTube (Al final de la sección) */}
+            <section className="p-8 md:p-10 rounded-[32px] bg-slate-900/60 border border-slate-800">
+              <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="material-symbols-outlined text-red-500 text-xl">smart_display</span>
+                    <span className="text-xs font-black text-red-400 tracking-[0.25em] uppercase">Fundamentos Abiertos en YouTube</span>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight">
+                    ¿Primera vez con Agentes de Ingeniería?
+                  </h3>
+                  <p className="text-slate-300 text-sm max-w-2xl mt-1">
+                    Mira estas dos clases gratuitas en nuestro canal de YouTube para entender cómo operan los agentes de IA en obras reales:
+                  </p>
+                </div>
+                <Link
+                  href="https://www.youtube.com/@aurelioalfonsosolorzanorios"
+                  target="_blank"
+                  className="px-5 py-3 rounded-xl bg-red-600 hover:bg-red-500 text-white font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(239,68,68,0.3)] shrink-0"
+                >
+                  <span className="material-symbols-outlined text-base">subscriptions</span>
+                  Canal de YouTube
+                </Link>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                {clasesGratuitasYouTube.map((clase) => (
+                  <div key={clase.id} className="p-6 rounded-2xl bg-black/40 border border-slate-800 flex flex-col justify-between">
+                    <div>
+                      <span className="text-xs font-mono font-bold text-red-400 uppercase tracking-widest block mb-2">
+                        CLASE {clase.num} · 100% GRATUITA
+                      </span>
+                      <h4 className="text-lg font-bold text-white mb-2 leading-snug">{clase.titulo}</h4>
+                      <p className="text-xs text-slate-300 leading-relaxed">{clase.desc}</p>
+                    </div>
+                    <div className="pt-4 mt-4 border-t border-slate-800">
+                      <Link
+                        href={clase.url}
+                        target="_blank"
+                        className="inline-flex items-center gap-2 text-xs font-black text-red-400 hover:text-red-300 uppercase tracking-wider transition-colors"
+                      >
+                        <span className="material-symbols-outlined text-base">play_circle</span>
+                        Ver Clase en YouTube
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
           </div>
         )}
 

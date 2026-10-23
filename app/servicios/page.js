@@ -222,6 +222,7 @@ function ServiciosContent() {
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState("agentes");
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [selectedFreeClass, setSelectedFreeClass] = useState(clasesGratuitasYouTube[0]);
   const [expandedAgents, setExpandedAgents] = useState({ "agente-4d5d": true, "agente-s10": true });
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("todos"); // "todos" | "disponibles" | "proximos"
@@ -858,19 +859,21 @@ function ServiciosContent() {
               )}
             </div>
 
-            {/* Clases Gratuitas en YouTube (Al final de la sección) */}
-            <section className="p-8 md:p-10 rounded-[32px] bg-slate-900/60 border border-slate-800">
+            {/* Clases Gratuitas Grabadas en YouTube (Al final de Soluciones Agénticas, estilo Biblioteca de Clases Grabadas) */}
+            <section id="clases-gratuitas-agentes" className="p-6 sm:p-8 md:p-10 rounded-[32px] bg-slate-900/70 border border-slate-800 shadow-2xl">
               <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
                 <div>
                   <div className="flex items-center gap-2 mb-2">
                     <span className="material-symbols-outlined text-red-500 text-xl">smart_display</span>
-                    <span className="text-xs font-black text-red-400 tracking-[0.25em] uppercase">Fundamentos Abiertos en YouTube</span>
+                    <span className="text-xs font-black text-red-400 tracking-[0.25em] uppercase">
+                      Clases Grabadas Gratuitas · Fundamentos de Agentes de IA
+                    </span>
                   </div>
                   <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight">
-                    ¿Primera vez con Agentes de Ingeniería?
+                    ¿Cómo funcionan y se configuran los <span className="text-cyan-400">Agentes de IA</span>?
                   </h3>
-                  <p className="text-slate-300 text-sm max-w-2xl mt-1">
-                    Mira estas dos clases gratuitas en nuestro canal de YouTube para entender cómo operan los agentes de IA en obras reales:
+                  <p className="text-slate-300 text-sm max-w-3xl mt-1">
+                    Reproduce aquí mismo nuestras clases grabadas gratuitas para aprender desde cero cómo operan, se configuran y se aplican los agentes de IA en proyectos reales de ingeniería:
                   </p>
                 </div>
                 <Link
@@ -883,28 +886,113 @@ function ServiciosContent() {
                 </Link>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-6">
-                {clasesGratuitasYouTube.map((clase) => (
-                  <div key={clase.id} className="p-6 rounded-2xl bg-black/40 border border-slate-800 flex flex-col justify-between">
-                    <div>
-                      <span className="text-xs font-mono font-bold text-red-400 uppercase tracking-widest block mb-2">
-                        CLASE {clase.num} · 100% GRATUITA
+              <div className="grid lg:grid-cols-3 gap-8">
+                {/* Columna Principal del Reproductor (Estilo Clases Grabadas) */}
+                <div className="lg:col-span-2 space-y-5">
+                  <div className="aspect-video bg-black rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative group">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${selectedFreeClass.id}?modestbranding=1&rel=0`}
+                      className="w-full h-full border-0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      title={selectedFreeClass.titulo}
+                    />
+                  </div>
+
+                  <div className="p-5 sm:p-6 rounded-2xl bg-black/40 border border-slate-800 space-y-3">
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        CLASE {selectedFreeClass.num} · GRABACIÓN 100% GRATUITA
                       </span>
-                      <h4 className="text-lg font-bold text-white mb-2 leading-snug">{clase.titulo}</h4>
-                      <p className="text-xs text-slate-300 leading-relaxed">{clase.desc}</p>
-                    </div>
-                    <div className="pt-4 mt-4 border-t border-slate-800">
                       <Link
-                        href={clase.url}
+                        href={selectedFreeClass.url}
                         target="_blank"
-                        className="inline-flex items-center gap-2 text-xs font-black text-red-400 hover:text-red-300 uppercase tracking-wider transition-colors"
+                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-red-600/20 hover:bg-red-600/30 text-red-300 border border-red-500/30 text-xs font-black uppercase tracking-wider transition-colors"
                       >
-                        <span className="material-symbols-outlined text-base">play_circle</span>
-                        Ver Clase en YouTube
+                        <span className="material-symbols-outlined text-base">open_in_new</span>
+                        Ver en YouTube
                       </Link>
                     </div>
+                    <h4 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight leading-snug">
+                      {selectedFreeClass.titulo}
+                    </h4>
+                    <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                      {selectedFreeClass.desc}
+                    </p>
                   </div>
-                ))}
+                </div>
+
+                {/* Columna Lateral de Lista de Reproducción (Estilo Clases Grabadas) */}
+                <div className="rounded-[28px] bg-black/40 border border-white/10 p-5 h-fit space-y-4">
+                  <div className="px-2">
+                    <h4 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em]">
+                      Sesiones Grabadas Disponibles
+                    </h4>
+                    <p className="text-[11px] text-slate-500 mt-1">
+                      Selecciona una sesión para reproducirla en el visor principal:
+                    </p>
+                  </div>
+
+                  <div className="space-y-3">
+                    {clasesGratuitasYouTube.map((clase) => {
+                      const isSelected = selectedFreeClass.id === clase.id;
+                      return (
+                        <button
+                          key={clase.id}
+                          type="button"
+                          onClick={() => setSelectedFreeClass(clase)}
+                          className={`w-full flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-3.5 p-3.5 rounded-2xl transition-all text-left group ${
+                            isSelected
+                              ? "bg-cyan-500/15 border border-cyan-500/40 shadow-[0_0_20px_rgba(6,182,212,0.12)]"
+                              : "bg-slate-900/50 hover:bg-white/5 border border-slate-800/80"
+                          }`}
+                        >
+                          <div className="relative w-full sm:w-32 lg:w-full xl:w-28 aspect-video rounded-xl overflow-hidden flex-shrink-0 bg-black border border-white/10">
+                            <Image
+                              src={`https://img.youtube.com/vi/${clase.id}/mqdefault.jpg`}
+                              alt={clase.titulo}
+                              fill
+                              className="object-cover group-hover:scale-105 transition-transform opacity-80"
+                            />
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                              <span className={`material-symbols-outlined text-2xl ${
+                                isSelected ? "text-cyan-400" : "text-white/80 group-hover:text-red-400"
+                              }`}>
+                                {isSelected ? "equalizer" : "play_circle"}
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="flex flex-col justify-center min-w-0 flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                              <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded ${
+                                isSelected
+                                  ? "bg-cyan-400 text-slate-950"
+                                  : "bg-red-950/80 text-red-400 border border-red-500/30"
+                              }`}>
+                                CLASE {clase.num}
+                              </span>
+                              {isSelected && (
+                                <span className="text-[9px] font-mono font-bold text-cyan-300 uppercase tracking-wider">
+                                  Reproduciendo
+                                </span>
+                              )}
+                            </div>
+                            <span className={`text-xs font-bold leading-snug uppercase tracking-tight ${
+                              isSelected ? "text-cyan-300" : "text-slate-200 group-hover:text-white"
+                            }`}>
+                              {clase.titulo}
+                            </span>
+                            <p className="text-[11px] text-slate-400 line-clamp-2 mt-1">
+                              {clase.desc}
+                            </p>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
             </section>
           </div>

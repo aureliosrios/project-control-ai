@@ -190,6 +190,9 @@ export default function Home() {
                 <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800">
                   BIM 4D/5D & THREE.JS
                 </span>
+                <span className="text-[10px] font-mono font-bold text-cyan-300 bg-cyan-950/60 px-2 py-1 rounded border border-cyan-800/40">
+                  ⚡ 45 segundos
+                </span>
               </div>
 
               <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight uppercase leading-tight">
@@ -236,7 +239,7 @@ export default function Home() {
                   PayPal ($25)
                 </a>
                 <a
-                  href="https://wa.me/51993147501?text=Hola%20Ing.%20Aurelio,%20deseo%20adquirir%20el%20Agente%20de%20Planeamiento%204D5D%20por%20Yape%20/%20Plin%20(S/%2070).%20Adjunto%20mi%20comprobante%20al%2051%20993147501."
+                  href={`https://wa.me/51993147501?text=${encodeURIComponent("Hola Ing. Aurelio, deseo adquirir el Agente de Planeamiento de Obra 4D y 5D por Yape / Plin (S/ 70). Adjunto mi comprobante al 51 993147501.")}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-4 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 shadow-md hover:scale-[1.02]"
@@ -247,7 +250,7 @@ export default function Home() {
               </div>
 
               <a
-                href="https://wa.me/51993147501?text=Hola%20Ing.%20Aurelio,%20deseo%20adquirir%20el%20Agente%20de%20Planeamiento%204D5D%20(S/%2070%20o%20$25%20USD)."
+                href={`https://wa.me/51993147501?text=${encodeURIComponent("Hola Ing. Aurelio, deseo adquirir el Agente de Planeamiento de Obra 4D y 5D (S/ 70 o $25 USD).")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-5 py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.35)] hover:scale-[1.02]"
@@ -260,7 +263,7 @@ export default function Home() {
                 <Link
                   href="https://youtu.be/weL9yLqdCHY"
                   target="_blank"
-                  className="flex-1 px-3 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 shadow-md"
+                  className="flex-1 px-3 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 shadow-md hover:scale-[1.02]"
                 >
                   <span className="material-symbols-outlined text-sm">play_circle</span>
                   YouTube (14 min)
@@ -268,7 +271,7 @@ export default function Home() {
                 <Link
                   href="https://vt.tiktok.com/ZSgyYmMFX/"
                   target="_blank"
-                  className="flex-1 px-3 py-2.5 rounded-xl bg-black hover:bg-zinc-800 text-white font-bold text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 border border-pink-500/40 shadow-md"
+                  className="flex-1 px-3 py-2.5 rounded-xl bg-black hover:bg-zinc-800 text-white font-bold text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 border border-pink-500/40 shadow-md hover:scale-[1.02]"
                 >
                   <svg className="w-3.5 h-3.5 fill-current text-cyan-400" viewBox="0 0 24 24">
                     <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
@@ -276,6 +279,13 @@ export default function Home() {
                   TikTok
                 </Link>
               </div>
+
+              <Link
+                href="/servicios?tab=agentes#agentes"
+                className="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 text-center text-[11px] font-bold uppercase tracking-wider transition-colors"
+              >
+                Ver Catálogo de Agentes
+              </Link>
             </div>
           </div>
         </div>

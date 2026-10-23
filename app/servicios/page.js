@@ -83,6 +83,10 @@ const agentesEspecializados = [
     especialidad: "Planeamiento y Programación",
     tag: "MS PROJECT & VBA",
     estado: "Próximamente",
+    precioSoles: "S/ 70",
+    precioDolares: "$25 USD",
+    yape: "51 993147501",
+    paypalUrl: "https://paypal.me/ProjectControlAI/25USD",
     theme: {
       border: "border-slate-800 hover:border-slate-700",
       bg: "bg-slate-900/50",
@@ -97,7 +101,7 @@ const agentesEspecializados = [
     solucion: "Convierte cualquier WBS o presupuesto en un cronograma estructurado con ruta crítica CPM, hitos y duraciones calculadas con macros VBA.",
     entregable: "Script VBA (.bas) listo para importar directamente a MS Project, generando el cronograma y diagrama de Gantt sin errores.",
     videoId: "NjWnA5b9Zho",
-    whatsappMsg: "Hola Aurelio, deseo entrar a la lista de espera para el Agente Programador Gantt con macros VBA para MS Project."
+    whatsappMsg: "Hola Ing. Aurelio, deseo adquirir / reservar el Agente Programador Gantt & VBA (MS Project) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },
   {
     id: "agente-p6",
@@ -105,6 +109,10 @@ const agentesEspecializados = [
     especialidad: "Control Maestro y Forense",
     tag: "PRIMAVERA P6",
     estado: "Próximamente",
+    precioSoles: "S/ 70",
+    precioDolares: "$25 USD",
+    yape: "51 993147501",
+    paypalUrl: "https://paypal.me/ProjectControlAI/25USD",
     theme: {
       border: "border-slate-800 hover:border-slate-700",
       bg: "bg-slate-900/50",
@@ -119,7 +127,7 @@ const agentesEspecializados = [
     solucion: "Genera y sanea archivos nativos de Oracle Primavera P6 (.xer) y plantillas de diseño visual (.plf) con curvas S y Valor Ganado (EVM).",
     entregable: "Archivo .XER compatible y limpio, con Curva S (PV/EV), asignación de recursos y diseño de seguimiento de barras Gantt.",
     videoId: "vABYYEA46yc",
-    whatsappMsg: "Hola Aurelio, deseo entrar a la lista de espera para el Agente Primavera P6 (.XER)."
+    whatsappMsg: "Hola Ing. Aurelio, deseo adquirir / reservar el Agente Primavera P6 (.XER) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },
   {
     id: "agente-contratos",
@@ -127,6 +135,10 @@ const agentesEspecializados = [
     especialidad: "Oficina Técnica y Contractual",
     tag: "CONTRATOS & AUDITORÍA",
     estado: "Próximamente",
+    precioSoles: "S/ 70",
+    precioDolares: "$25 USD",
+    yape: "51 993147501",
+    paypalUrl: "https://paypal.me/ProjectControlAI/25USD",
     theme: {
       border: "border-slate-800 hover:border-slate-700",
       bg: "bg-slate-900/50",
@@ -141,7 +153,7 @@ const agentesEspecializados = [
     solucion: "Pipeline OCR y análisis semántico para extraer automáticamente matrices de riesgos, penalidades diarias y causales de ampliación.",
     entregable: "Matriz ejecutiva de control contractual en Excel (dashboard A3) y grafo de conocimiento conectado en Obsidian.",
     videoId: "0nJQXGfkMB4",
-    whatsappMsg: "Hola Aurelio, deseo entrar a la lista de espera para el Agente Auditor Contractual y Cerebro Digital."
+    whatsappMsg: "Hola Ing. Aurelio, deseo adquirir / reservar el Agente Auditor Contractual & Cerebro Digital (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },
   {
     id: "agente-lps",
@@ -149,6 +161,10 @@ const agentesEspecializados = [
     especialidad: "Control Semanal y Producción",
     tag: "LAST PLANNER SYSTEM",
     estado: "Próximamente",
+    precioSoles: "S/ 70",
+    precioDolares: "$25 USD",
+    yape: "51 993147501",
+    paypalUrl: "https://paypal.me/ProjectControlAI/25USD",
     theme: {
       border: "border-slate-800 hover:border-slate-700",
       bg: "bg-slate-900/50",
@@ -163,7 +179,7 @@ const agentesEspecializados = [
     solucion: "Estructura el Lookahead a 6 semanas con arquitectura de 3 filas (Línea Base LB-0, Reprogramado y Real Campo), Plan Semanal WWP y restricciones.",
     entregable: "Matriz viva de restricciones en Excel con semaforización automática, causas de no cumplimiento (CNC) y cálculo PPC.",
     videoId: "dVZNMhvNSsw",
-    whatsappMsg: "Hola Aurelio, deseo entrar a la lista de espera para el Agente Lookahead & Last Planner System."
+    whatsappMsg: "Hola Ing. Aurelio, deseo adquirir / reservar el Agente Lookahead & Last Planner System (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },
   {
     id: "agente-eett",
@@ -171,6 +187,10 @@ const agentesEspecializados = [
     especialidad: "Especificaciones Técnicas",
     tag: "EETT & WORD",
     estado: "Próximamente",
+    precioSoles: "S/ 70",
+    precioDolares: "$25 USD",
+    yape: "51 993147501",
+    paypalUrl: "https://paypal.me/ProjectControlAI/25USD",
     theme: {
       border: "border-slate-800 hover:border-slate-700",
       bg: "bg-slate-900/50",
@@ -185,7 +205,7 @@ const agentesEspecializados = [
     solucion: "Redacta especificaciones técnicas completas y normadas por partida (descripción, materiales, método de ejecución, controles, medición y pago).",
     entregable: "Documento oficial listo para entregar en Microsoft Word (.docx) con índice automático, estilos institucionales y normativa técnica vigente.",
     videoId: "NjWnA5b9Zho",
-    whatsappMsg: "Hola Aurelio, deseo entrar a la lista de espera para el Agente Redactor de EETT a Word."
+    whatsappMsg: "Hola Ing. Aurelio, deseo adquirir / reservar el Agente Redactor de EETT a Word (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   }
 ];
 

@@ -261,12 +261,12 @@ export default function Home() {
 
               <div className="flex gap-2">
                 <Link
-                  href="https://youtu.be/weL9yLqdCHY"
+                  href="https://youtu.be/K-jnVQ7ZRgA"
                   target="_blank"
                   className="flex-1 px-3 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 shadow-md hover:scale-[1.02]"
                 >
                   <span className="material-symbols-outlined text-sm">play_circle</span>
-                  YouTube (14 min)
+                  YouTube (9 min)
                 </Link>
                 <Link
                   href="https://vt.tiktok.com/ZSgyYmMFX/"
@@ -375,12 +375,12 @@ export default function Home() {
 
               <div className="flex gap-2">
                 <Link
-                  href="https://youtu.be/NoaHRpYAzMc"
+                  href="https://youtu.be/jAjlcNZUFZI"
                   target="_blank"
                   className="flex-1 px-3 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 shadow-md hover:scale-[1.02]"
                 >
                   <span className="material-symbols-outlined text-sm">play_circle</span>
-                  YouTube (15 min)
+                  YouTube (38 min)
                 </Link>
                 <Link
                   href="https://vt.tiktok.com/ZSg5CFDGH/"

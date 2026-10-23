@@ -41,12 +41,12 @@ const agentesEspecializados = [
       btn: "bg-red-600 hover:bg-red-500 text-white"
     },
     icono: "view_in_ar",
-    duracionVideo: "14 min",
+    duracionVideo: "9 min",
     tiempoEntrega: "45 segundos",
     problema: "¿Coordinar planos 2D en CAD, cronogramas de cientos de tareas y presupuestos desvinculados sin visualizar la obra en el tiempo?",
     solucion: "Le proporcionas al Agente tus Planos (DWG/DXF), Cronograma (P6/MSP) y Presupuesto, y genera un Visor Web 3D 4D/5D interactivo con semáforo constructivo, Curva S y Lookahead.",
     entregable: "Visor 3D interactivo en HTML/Three.js autocontenido, simulación temporal 4D, panel de costos 5D (EVM), Curva S y Lookahead a 4 semanas.",
-    videoId: "weL9yLqdCHY",
+    videoId: "K-jnVQ7ZRgA",
     tiktokUrl: "https://vt.tiktok.com/ZSgyYmMFX/",
     whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente de Planeamiento de Obra 4D y 5D (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },
@@ -68,12 +68,12 @@ const agentesEspecializados = [
       btn: "bg-red-600 hover:bg-red-500 text-white"
     },
     icono: "calculate",
-    duracionVideo: "15 min",
+    duracionVideo: "38 min",
     tiempoEntrega: "15 segundos",
     problema: "¿Pasas horas calculando rendimientos, cuadrillas y transcribiendo precios en hojas de cálculo propensas a errores y alucinaciones de LLMs?",
     solucion: "Ingesta determinista de expedientes (PDF/Excel), construcción de Cerebro Digital con Grafo de 1,486 nodos, evaluación de 10 compuertas (G1-G10) y fórmula polinómica conforme al D.S. 011-79-VC.",
     entregable: "Carpeta autocontenida con libro Excel S10 de fórmulas vivas (openpyxl), budget_result.json, Wiki técnica navegable, grafo integrado y verificación matemática SHA-256.",
-    videoId: "NoaHRpYAzMc",
+    videoId: "jAjlcNZUFZI",
     tiktokUrl: "https://vt.tiktok.com/ZSg5CFDGH/",
     whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente de Presupuestos & APU Tipo S10 (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },

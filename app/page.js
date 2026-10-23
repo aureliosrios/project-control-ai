@@ -259,11 +259,28 @@ export default function Home() {
                 Quiero el Agente (+51 993 147 501)
               </a>
 
+              {/* Explicación de los videos: YouTube vs TikTok */}
+              <div className="p-3 rounded-xl bg-slate-950/80 border border-white/10 text-[11px] space-y-1.5 text-slate-300">
+                <div className="flex items-start gap-2">
+                  <span className="material-symbols-outlined text-red-500 text-sm shrink-0 mt-0.5">play_circle</span>
+                  <p className="leading-tight">
+                    <strong className="text-white font-bold">YouTube:</strong> Guía práctica para el manejo del agente.
+                  </p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="material-symbols-outlined text-cyan-400 text-sm shrink-0 mt-0.5">bolt</span>
+                  <p className="leading-tight">
+                    <strong className="text-white font-bold">TikTok:</strong> Alcance que tiene el agente y su resultado en segundos.
+                  </p>
+                </div>
+              </div>
+
               <div className="flex gap-2">
                 <Link
                   href="https://youtu.be/weL9yLqdCHY"
                   target="_blank"
                   className="flex-1 px-3 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 shadow-md hover:scale-[1.02]"
+                  title="YouTube: Guía práctica para el manejo del agente"
                 >
                   <span className="material-symbols-outlined text-sm">play_circle</span>
                   YouTube (14 min)
@@ -272,11 +289,12 @@ export default function Home() {
                   href="https://vt.tiktok.com/ZSgyYmMFX/"
                   target="_blank"
                   className="flex-1 px-3 py-2.5 rounded-xl bg-black hover:bg-zinc-800 text-white font-bold text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 border border-pink-500/40 shadow-md hover:scale-[1.02]"
+                  title="TikTok: Alcance y resultado obtenido"
                 >
                   <svg className="w-3.5 h-3.5 fill-current text-cyan-400" viewBox="0 0 24 24">
                     <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
                   </svg>
-                  TikTok
+                  TikTok (Alcance)
                 </Link>
               </div>
 
@@ -373,11 +391,28 @@ export default function Home() {
                 Quiero el Agente (+51 993 147 501)
               </a>
 
+              {/* Explicación de los videos: YouTube vs TikTok */}
+              <div className="p-3 rounded-xl bg-slate-950/80 border border-white/10 text-[11px] space-y-1.5 text-slate-300">
+                <div className="flex items-start gap-2">
+                  <span className="material-symbols-outlined text-red-500 text-sm shrink-0 mt-0.5">play_circle</span>
+                  <p className="leading-tight">
+                    <strong className="text-white font-bold">YouTube:</strong> Guía práctica para el manejo del agente.
+                  </p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="material-symbols-outlined text-cyan-400 text-sm shrink-0 mt-0.5">bolt</span>
+                  <p className="leading-tight">
+                    <strong className="text-white font-bold">TikTok:</strong> Alcance que tiene el agente y su resultado en segundos.
+                  </p>
+                </div>
+              </div>
+
               <div className="flex gap-2">
                 <Link
                   href="https://youtu.be/NoaHRpYAzMc"
                   target="_blank"
                   className="flex-1 px-3 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 shadow-md hover:scale-[1.02]"
+                  title="YouTube: Guía práctica para el manejo del agente"
                 >
                   <span className="material-symbols-outlined text-sm">play_circle</span>
                   YouTube (15 min)
@@ -386,11 +421,12 @@ export default function Home() {
                   href="https://vt.tiktok.com/ZSg5CFDGH/"
                   target="_blank"
                   className="flex-1 px-3 py-2.5 rounded-xl bg-black hover:bg-zinc-800 text-white font-bold text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 border border-pink-500/40 shadow-md hover:scale-[1.02]"
+                  title="TikTok: Alcance y resultado obtenido"
                 >
                   <svg className="w-3.5 h-3.5 fill-current text-cyan-400" viewBox="0 0 24 24">
                     <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
                   </svg>
-                  TikTok
+                  TikTok (Alcance)
                 </Link>
               </div>
 

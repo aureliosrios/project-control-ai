@@ -53,24 +53,25 @@ const agentesEspecializados = [
   {
     id: "agente-s10",
     nombre: "Agente de Presupuestos & APU Tipo S10",
-    especialidad: "Costos y Presupuestos",
+    especialidad: "Costos, Presupuestos y Fórmulas Polinómicas con IA",
     tag: "COSTOS & S10",
-    estado: "Próximamente",
+    estado: "Publicado en YouTube",
     theme: {
-      border: "border-slate-800 hover:border-slate-700",
-      bg: "bg-slate-900/50",
-      badge: "bg-slate-800 text-slate-300 border border-slate-700 font-bold",
-      pill: "bg-slate-800/80 text-slate-400 border border-slate-700/60",
-      btn: "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700"
+      border: "border-emerald-500/40 hover:border-emerald-400",
+      bg: "bg-slate-900/60",
+      badge: "bg-red-950 text-red-300 border border-red-500/40 font-bold",
+      pill: "bg-slate-800/80 text-emerald-400 border border-emerald-800/60",
+      btn: "bg-red-600 hover:bg-red-500 text-white"
     },
     icono: "calculate",
-    duracionVideo: "12 min",
+    duracionVideo: "15 min",
     tiempoEntrega: "15 segundos",
-    problema: "¿Pasas horas calculando rendimientos, cuadrillas y transcribiendo precios en hojas de cálculo propensas a errores?",
-    solucion: "Genera el desglose paramétrico de partidas, análisis de precios unitarios (APU) tipo S10, cálculo de HH/HM y costo directo con fórmulas vivas.",
-    entregable: "Plantilla Excel con fórmulas nativas vivas, cálculo de cuadrillas, mano de obra y lista de insumos tipo S10.",
-    videoId: "dVZNMhvNSsw",
-    whatsappMsg: "Hola Aurelio, deseo entrar a la lista de espera para el Agente de Presupuestos y APU Tipo S10."
+    problema: "¿Pasas horas calculando rendimientos, cuadrillas y transcribiendo precios en hojas de cálculo propensas a errores y alucinaciones de LLMs?",
+    solucion: "Ingesta determinista de expedientes (PDF/Excel), construcción de Cerebro Digital con Grafo de 1,486 nodos, evaluación de 10 compuertas (G1-G10) y fórmula polinómica conforme al D.S. 011-79-VC.",
+    entregable: "Carpeta autocontenida con libro Excel S10 de fórmulas vivas (openpyxl), budget_result.json, Wiki técnica navegable, grafo integrado y verificación matemática SHA-256.",
+    videoId: "NoaHRpYAzMc",
+    tiktokUrl: "https://vt.tiktok.com/ZSg5CFDGH/",
+    whatsappMsg: "Hola Ing. Aurelio, vi la guía del Agente de Presupuestos Tipo S10 en YouTube y deseo adquirir el agente / coordinar su implementación para mis proyectos."
   },
   {
     id: "agente-msproject",
@@ -197,7 +198,7 @@ function ServiciosContent() {
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState("agentes");
   const [selectedVideo, setSelectedVideo] = useState(null);
-  const [expandedAgents, setExpandedAgents] = useState({ "agente-4d5d": true });
+  const [expandedAgents, setExpandedAgents] = useState({ "agente-4d5d": true, "agente-s10": true });
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("todos"); // "todos" | "disponibles" | "proximos"
 
@@ -748,7 +749,7 @@ function ServiciosContent() {
                             </div>
 
                             {/* Caja de Inversión y Pagos (si aplica) */}
-                            {agente.precioSoles && (
+                            {agente.precioSoles ? (
                               <div className="p-4 rounded-xl bg-gradient-to-r from-emerald-950/60 via-slate-950 to-cyan-950/60 border border-cyan-500/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                                 <div>
                                   <div className="flex items-center gap-2 mb-0.5">
@@ -790,6 +791,32 @@ function ServiciosContent() {
                                   >
                                     <span className="material-symbols-outlined text-sm">phone_iphone</span>
                                     Yape (S/ 70)
+                                  </a>
+                                </div>
+                              </div>
+                            ) : agente.estado === "Publicado en YouTube" && (
+                              <div className="p-4 rounded-xl bg-gradient-to-r from-emerald-950/60 via-slate-950 to-teal-950/60 border border-emerald-500/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-[0_0_20px_rgba(16,185,129,0.12)]">
+                                <div>
+                                  <div className="flex items-center gap-2 mb-1">
+                                    <span className="text-[10px] font-black uppercase tracking-wider text-emerald-300 flex items-center gap-1">
+                                      <span className="material-symbols-outlined text-base text-emerald-400">contact_support</span>
+                                      ¿Deseas este Agente o una demostración para tu empresa?
+                                    </span>
+                                  </div>
+                                  <p className="text-[11px] text-slate-300 leading-relaxed">
+                                    Contáctame por WhatsApp para adquirir la solución agéntica, implementarla en tu servidor o adaptarla a la estructura de costos de tus obras.
+                                  </p>
+                                </div>
+
+                                <div className="flex items-center gap-2 shrink-0">
+                                  <a
+                                    href={`https://wa.me/51993147501?text=${encodeURIComponent(agente.whatsappMsg)}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.35)]"
+                                  >
+                                    <span className="material-symbols-outlined text-base">chat</span>
+                                    <span>Contactar por WhatsApp (+51 993 147 501)</span>
                                   </a>
                                 </div>
                               </div>

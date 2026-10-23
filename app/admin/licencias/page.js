@@ -133,6 +133,7 @@ export default function LicenciasAdmin() {
               <input className={inputCls} placeholder="DNI (opcional)" inputMode="numeric" value={form.dni} onChange={(e) => setForm({ ...form, dni: e.target.value })} />
               <select className={inputCls} value={form.monto} onChange={(e) => setForm({ ...form, monto: e.target.value })}>
                 <option>S/ 70 Yape</option>
+                <option>S/ 70 Plin</option>
                 <option>$25 PayPal</option>
                 <option>Cortesía</option>
               </select>

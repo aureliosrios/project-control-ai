@@ -213,11 +213,11 @@ export default function Home() {
                 <div className="text-xs text-slate-300 space-y-1.5 border-t sm:border-t-0 sm:border-l border-slate-800 pt-3 sm:pt-0 sm:pl-4">
                   <div className="flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-purple-400 shrink-0" />
-                    <span><strong>Yape:</strong> 51 993147501</span>
+                    <span><strong>Perú (Yape / Plin):</strong> 51 993147501</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0" />
-                    <span><strong>PayPal:</strong> Pago internacional seguro</span>
+                    <span><strong>Extranjero (PayPal):</strong> $25 USD</span>
                   </div>
                 </div>
               </div>
@@ -236,13 +236,13 @@ export default function Home() {
                   PayPal ($25)
                 </a>
                 <a
-                  href="https://wa.me/51993147501?text=Hola%20Ing.%20Aurelio,%20deseo%20adquirir%20el%20Agente%20de%20Planeamiento%204D5D%20por%20Yape%20(S/%2070).%20Adjunto%20mi%20comprobante%20al%2051%20993147501."
+                  href="https://wa.me/51993147501?text=Hola%20Ing.%20Aurelio,%20deseo%20adquirir%20el%20Agente%20de%20Planeamiento%204D5D%20por%20Yape%20/%20Plin%20(S/%2070).%20Adjunto%20mi%20comprobante%20al%2051%20993147501."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-4 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 shadow-md hover:scale-[1.02]"
                 >
                   <span className="material-symbols-outlined text-sm">phone_iphone</span>
-                  Yape (S/ 70)
+                  Yape / Plin (S/ 70)
                 </a>
               </div>
 
@@ -307,31 +307,54 @@ export default function Home() {
                 Le proporcionas tus Expedientes Técnicos (PDF/Excel: Memoria, EETT, Metrados y Cotizaciones) y genera en segundos un <strong>Presupuesto profesional tipo S10 en Excel con fórmulas vivas</strong>, cálculo de APUs, desglose de gastos generales y fórmula polinómica conforme al D.S. 011-79-VC.
               </p>
 
-              {/* Caja de Características Técnicas */}
+              {/* Caja de Inversión y Medios de Pago */}
               <div className="p-4 sm:p-5 rounded-2xl bg-black/60 border border-emerald-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4 max-w-xl">
                 <div>
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400 block font-bold">Cerebro Digital & Calidad QA</span>
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 block font-bold">Inversión del Agente</span>
                   <div className="flex items-baseline gap-2">
-                    <span className="text-lg sm:text-xl font-black text-white">1,486 Nodos · 10 Compuertas</span>
+                    <span className="text-2xl sm:text-3xl font-black text-emerald-400 font-mono">S/ 70 PEN</span>
+                    <span className="text-xs text-slate-400 font-bold">ó</span>
+                    <span className="text-xl sm:text-2xl font-black text-cyan-300 font-mono">$25 USD</span>
                   </div>
                 </div>
                 <div className="text-xs text-slate-300 space-y-1.5 border-t sm:border-t-0 sm:border-l border-slate-800 pt-3 sm:pt-0 sm:pl-4">
                   <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0" />
-                    <span><strong>Cero alucinaciones:</strong> Motor Python determinista</span>
+                    <span className="w-2 h-2 rounded-full bg-purple-400 shrink-0" />
+                    <span><strong>Perú (Yape / Plin):</strong> 51 993147501</span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0" />
-                    <span><strong>Trazabilidad:</strong> Hashes SHA-256</span>
+                    <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0" />
+                    <span><strong>Extranjero (PayPal):</strong> $25 USD</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Acciones y Enlaces */}
+            {/* Acciones y Medios de Pago */}
             <div className="flex flex-col gap-3 w-full lg:w-auto shrink-0 min-w-[280px]">
+              <div className="grid grid-cols-2 gap-2">
+                <a
+                  href="https://paypal.me/ProjectControlAI/25USD"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 shadow-md hover:scale-[1.02]"
+                >
+                  <span className="material-symbols-outlined text-sm">payment</span>
+                  PayPal ($25)
+                </a>
+                <a
+                  href={`https://wa.me/51993147501?text=${encodeURIComponent("Hola Ing. Aurelio, deseo adquirir el Agente de Presupuestos & APU Tipo S10 por Yape / Plin (S/ 70). Adjunto mi comprobante al 51 993147501.")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 shadow-md hover:scale-[1.02]"
+                >
+                  <span className="material-symbols-outlined text-sm">phone_iphone</span>
+                  Yape / Plin (S/ 70)
+                </a>
+              </div>
+
               <a
-                href="https://wa.me/51993147501?text=Hola%20Ing.%20Aurelio,%20vi%20la%20guia%20del%20Agente%20de%20Presupuestos%20Tipo%20S10%20en%20YouTube%20y%20deseo%20adquirirlo%20o%20implementarlo."
+                href={`https://wa.me/51993147501?text=${encodeURIComponent("Hola Ing. Aurelio, deseo adquirir el Agente de Presupuestos & APU Tipo S10 (S/ 70 o $25 USD).")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-5 py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.35)] hover:scale-[1.02]"

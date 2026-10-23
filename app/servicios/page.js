@@ -9,15 +9,15 @@ const clasesGratuitasYouTube = [
   {
     id: "0nJQXGfkMB4",
     num: "01",
-    titulo: "Introducción a Agentes de IA y Entorno de Trabajo",
-    desc: "Aprende los fundamentos de operación, configuración de prompts base, estructuración de partidas y primeros flujos agénticos.",
+    titulo: "Sesión 01: Cómo Funcionan y se Configuran los Agentes de IA (Entorno de Trabajo)",
+    desc: "Clase grabada completa para que el alumno entienda paso a paso cómo funcionan y cómo se configuran los agentes de IA desde cero: entorno de trabajo, configuración de prompts base, Markdown, estructuración de partidas y primeros flujos agénticos.",
     url: "https://youtu.be/0nJQXGfkMB4"
   },
   {
     id: "8QCOyk6Qm58",
     num: "02",
-    titulo: "Agentes de Ingeniería para Proyectos de Construcción",
-    desc: "Casos aplicados de agentes en obras: del presupuesto al cronograma ejecutable y entregables técnicos sin la rigidez del software convencional.",
+    titulo: "Sesión 02: Agentes de Ingeniería para Proyectos de Construcción",
+    desc: "Casos aplicados de agentes en obras: uso de Antigravity, configuración del entorno, conversión de PDF a Markdown/JSON y del presupuesto al cronograma ejecutable sin la rigidez del software convencional.",
     url: "https://youtu.be/8QCOyk6Qm58"
   }
 ];

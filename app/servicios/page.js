@@ -56,6 +56,10 @@ const agentesEspecializados = [
     especialidad: "Costos, Presupuestos y Fórmulas Polinómicas con IA",
     tag: "COSTOS & S10",
     estado: "Publicado en YouTube",
+    precioSoles: "S/ 70",
+    precioDolares: "$25 USD",
+    yape: "51 993147501",
+    paypalUrl: "https://paypal.me/ProjectControlAI/25USD",
     theme: {
       border: "border-emerald-500/40 hover:border-emerald-400",
       bg: "bg-slate-900/60",
@@ -71,7 +75,7 @@ const agentesEspecializados = [
     entregable: "Carpeta autocontenida con libro Excel S10 de fórmulas vivas (openpyxl), budget_result.json, Wiki técnica navegable, grafo integrado y verificación matemática SHA-256.",
     videoId: "NoaHRpYAzMc",
     tiktokUrl: "https://vt.tiktok.com/ZSg5CFDGH/",
-    whatsappMsg: "Hola Ing. Aurelio, vi la guía del Agente de Presupuestos Tipo S10 en YouTube y deseo adquirir el agente / coordinar su implementación para mis proyectos."
+    whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente de Presupuestos & APU Tipo S10 (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },
   {
     id: "agente-msproject",
@@ -762,7 +766,7 @@ function ServiciosContent() {
                                     </span>
                                   </div>
                                   <p className="text-[11px] text-slate-300">
-                                    📱 Yape al <strong>{agente.yape}</strong> · 💳 PayPal para compras internacionales
+                                    📱 <strong>Perú:</strong> Yape / Plin al <strong>{agente.yape}</strong> · 💳 <strong>Extranjero:</strong> PayPal ({agente.precioDolares})
                                   </p>
                                   <p className="text-[11px] text-slate-400 mt-1">
                                     1) Mira la guía y la demo · 2) Paga y envía tu comprobante · 3) Recibe tu clave de un solo uso ·{" "}
@@ -784,13 +788,13 @@ function ServiciosContent() {
                                   </a>
 
                                   <a
-                                    href={`https://wa.me/51993147501?text=${encodeURIComponent("Hola Ing. Aurelio, deseo adquirir el Agente de Planeamiento de Obra 4D y 5D por Yape (S/ 70). Adjunto mi comprobante de pago al 51 993147501.")}`}
+                                    href={`https://wa.me/51993147501?text=${encodeURIComponent(agente.whatsappMsg || `Hola Ing. Aurelio, deseo adquirir el ${agente.nombre} por Yape / Plin (S/ 70). Adjunto mi comprobante de pago al 51 993147501.`)}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="px-3.5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-md"
                                   >
                                     <span className="material-symbols-outlined text-sm">phone_iphone</span>
-                                    Yape (S/ 70)
+                                    Yape / Plin (S/ 70)
                                   </a>
                                 </div>
                               </div>
@@ -1029,7 +1033,7 @@ function ServiciosContent() {
                       Inversión: <span className="text-emerald-300 font-mono">{selectedVideo.precioSoles} PEN</span> ó <span className="text-cyan-300 font-mono">{selectedVideo.precioDolares}</span>
                     </p>
                     <p className="text-xs text-slate-300 mt-0.5">
-                      📱 Yape: <strong className="text-white">{selectedVideo.yape}</strong> · 💳 PayPal para pagos internacionales
+                      📱 <strong>Perú:</strong> Yape / Plin al <strong className="text-white">{selectedVideo.yape}</strong> · 💳 <strong>Extranjero:</strong> PayPal ({selectedVideo.precioDolares})
                     </p>
                   </div>
                   <div className="flex flex-wrap items-center gap-2.5 w-full sm:w-auto">
@@ -1043,13 +1047,13 @@ function ServiciosContent() {
                       PayPal ($25)
                     </a>
                     <a
-                      href={`https://wa.me/51993147501?text=${encodeURIComponent("Hola Ing. Aurelio, deseo adquirir el Agente de Planeamiento de Obra 4D y 5D por Yape (S/ 70). Adjunto mi comprobante de pago.")}`}
+                      href={`https://wa.me/51993147501?text=${encodeURIComponent(selectedVideo.whatsappMsg || `Hola Ing. Aurelio, deseo adquirir el ${selectedVideo.nombre} por Yape / Plin (S/ 70). Adjunto mi comprobante de pago.`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 shadow-md"
                     >
                       <span className="material-symbols-outlined text-sm">phone_iphone</span>
-                      Yape (S/ 70)
+                      Yape / Plin (S/ 70)
                     </a>
                   </div>
                 </div>

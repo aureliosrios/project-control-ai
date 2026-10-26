@@ -104,6 +104,25 @@
             "url": "/manuales/PROMPT_CEREBRO_DIGITAL.md"
           }
         ]
+      },
+      {
+        "id": "1Jt_Adf8Y6E",
+        "num": "05",
+        "status": "OCULTA",
+        "title": "Sesión 05: Agentes de IA, Presupuestos, EETT y Cronogramas (25/10/2026)",
+        "desc": "Clase del domingo 25 de octubre de 2026, de 3:00 p.m. a 6:00 p.m. (hora de Perú), del curso Agentes de IA: Presupuestos, EETT y Cronogramas. Project Control AI.",
+        "resources": [
+          {
+            "title": "Material 01: Insumos Mínimos de Cronograma (ZIP)",
+            "type": "zip",
+            "url": "/manuales/00_Insumos_Minimos_Cronograma.zip"
+          },
+          {
+            "title": "Prompt: Replicable Cronograma Planning (Markdown)",
+            "type": "md",
+            "url": "/manuales/PROMPT_REPLICABLE_CRONOGRAMA_PLANNING.md"
+          }
+        ]
       }
     ]
   },

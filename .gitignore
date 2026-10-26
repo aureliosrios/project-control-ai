@@ -42,3 +42,9 @@ next-env.d.ts
 
 .vercel
 .env*.local
+
+# credenciales y cache local de scripts
+*token_youtube*.json
+*client_secrets*.json
+**/__pycache__/
+*.pyc

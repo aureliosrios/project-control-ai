@@ -15,7 +15,7 @@ const serviciosPrincipales = [
     icono: "smart_toy",
     color: "from-cyan-500/20 to-blue-500/10 border-cyan-500/30 text-cyan-400",
     badge: "Entregables en Segundos",
-    desc: "Agentes de IA autónomos que procesan tus planos (DWG/DXF), cronogramas y presupuestos. Generan en segundos visores 3D interactivos 4D/5D, APUs tipo S10, macros VBA en MS Project y redacción de EETT normadas sin la rigidez del software clásico.",
+    desc: "Agentes de IA autónomos que procesan tus planos (PDF, PNG, JPG a DWG/DXF), cronogramas y presupuestos. Generan en segundos visores 3D interactivos 4D/5D, APUs tipo S10 y Presto en Excel, digitalización CAD a DWG, macros VBA en MS Project y redacción de EETT normadas sin la rigidez del software clásico.",
     linkText: "Ver Soluciones Agénticas",
     linkHref: "/servicios?tab=agentes#agentes",
   },
@@ -439,6 +439,270 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        {/* Agente 3: Presupuestos & APU Tipo Presto */}
+        <div className="p-8 sm:p-12 rounded-[40px] bg-gradient-to-br from-[#171a1e] via-slate-900 to-[#14161a] border-2 border-amber-500/50 shadow-[0_0_50px_rgba(245,158,11,0.18)] relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 blur-[90px] pointer-events-none" />
+
+          <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+            <div className="max-w-2xl space-y-4">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full bg-red-950 text-red-400 border border-red-500/40 flex items-center gap-1.5 shadow-[0_0_12px_rgba(239,68,68,0.3)]">
+                  <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
+                  Agente Destacado · Disponible Ahora
+                </span>
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-950 text-amber-300 border border-amber-800">
+                  COSTOS & PRESTO · EXCEL & BC3
+                </span>
+                <span className="text-[10px] font-mono font-bold text-cyan-300 bg-cyan-950/60 px-2 py-1 rounded border border-cyan-800/40">
+                  ⚡ 15 segundos
+                </span>
+              </div>
+
+              <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight uppercase leading-tight">
+                Agente de Presupuestos & APU Tipo Presto
+              </h2>
+
+              <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                Le proporcionas tus Expedientes Técnicos (PDF/Excel: Memoria, EETT, Metrados y Cotizaciones) y genera en segundos un <strong>Presupuesto profesional en formato Presto en Excel con fórmulas vivas</strong>, cuadro de precios descompuestos (APUs) por naturalezas (mano de obra, maquinaria, materiales, subcontratas), desglose de costes indirectos y archivo de intercambio estándar <strong>BC3 (FIEBDC-3/2020)</strong> listo para importar en Presto.
+              </p>
+
+              {/* Caja de Inversión y Medios de Pago */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-black/60 border border-amber-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4 max-w-xl">
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 block font-bold">Inversión del Agente</span>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-2xl sm:text-3xl font-black text-emerald-400 font-mono">S/ 70 PEN</span>
+                    <span className="text-xs text-slate-400 font-bold">ó</span>
+                    <span className="text-xl sm:text-2xl font-black text-cyan-300 font-mono">$25 USD</span>
+                  </div>
+                </div>
+                <div className="text-xs text-slate-300 space-y-1.5 border-t sm:border-t-0 sm:border-l border-slate-800 pt-3 sm:pt-0 sm:pl-4">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-purple-400 shrink-0" />
+                    <span><strong>Perú (Yape / Plin):</strong> 51 993147501</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0" />
+                    <span><strong>Extranjero (PayPal):</strong> $25 USD</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Acciones y Medios de Pago */}
+            <div className="flex flex-col gap-3 w-full lg:w-auto shrink-0 min-w-[280px]">
+              <div className="grid grid-cols-2 gap-2">
+                <a
+                  href="https://paypal.me/ProjectControlAI/25USD"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 shadow-md hover:scale-[1.02]"
+                >
+                  <span className="material-symbols-outlined text-sm">payment</span>
+                  PayPal ($25)
+                </a>
+                <a
+                  href={`https://wa.me/51993147501?text=${encodeURIComponent("Hola Ing. Aurelio, deseo adquirir el Agente de Presupuestos & APU Tipo Presto por Yape / Plin (S/ 70). Adjunto mi comprobante al 51 993147501.")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 shadow-md hover:scale-[1.02]"
+                >
+                  <span className="material-symbols-outlined text-sm">phone_iphone</span>
+                  Yape / Plin (S/ 70)
+                </a>
+              </div>
+
+              <a
+                href={`https://wa.me/51993147501?text=${encodeURIComponent("Hola Ing. Aurelio, deseo adquirir el Agente de Presupuestos & APU Tipo Presto (S/ 70 o $25 USD).")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.35)] hover:scale-[1.02]"
+              >
+                <span className="material-symbols-outlined text-base">chat</span>
+                Quiero el Agente (+51 993 147 501)
+              </a>
+
+              {/* Explicación de los videos: YouTube vs TikTok */}
+              <div className="p-3 rounded-xl bg-slate-950/80 border border-white/10 text-[11px] space-y-1.5 text-slate-300">
+                <div className="flex items-start gap-2">
+                  <span className="material-symbols-outlined text-red-500 text-sm shrink-0 mt-0.5">play_circle</span>
+                  <p className="leading-tight">
+                    <strong className="text-white font-bold">YouTube:</strong> Guía práctica para el manejo del agente.
+                  </p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="material-symbols-outlined text-cyan-400 text-sm shrink-0 mt-0.5">bolt</span>
+                  <p className="leading-tight">
+                    <strong className="text-white font-bold">TikTok:</strong> Alcance que tiene el agente y su resultado en segundos.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-2">
+                <Link
+                  href="https://youtu.be/Npqz9TnI6No"
+                  target="_blank"
+                  className="flex-1 px-3 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 shadow-md hover:scale-[1.02]"
+                  title="YouTube: Guía práctica para el manejo del agente"
+                >
+                  <span className="material-symbols-outlined text-sm">play_circle</span>
+                  YouTube (15 min)
+                </Link>
+                <Link
+                  href="https://vt.tiktok.com/ZSg9ThvSH/"
+                  target="_blank"
+                  className="flex-1 px-3 py-2.5 rounded-xl bg-black hover:bg-zinc-800 text-white font-bold text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 border border-pink-500/40 shadow-md hover:scale-[1.02]"
+                  title="TikTok: Alcance y resultado obtenido"
+                >
+                  <svg className="w-3.5 h-3.5 fill-current text-cyan-400" viewBox="0 0 24 24">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                  </svg>
+                  TikTok (Alcance)
+                </Link>
+              </div>
+
+              <Link
+                href="/servicios?tab=agentes#agentes"
+                className="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 text-center text-[11px] font-bold uppercase tracking-wider transition-colors"
+              >
+                Ver Catálogo de Agentes
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Agente 4: Digitalización de Planos (PDF, PNG, JPG a DWG) */}
+        <div className="p-8 sm:p-12 rounded-[40px] bg-gradient-to-br from-[#171a1e] via-slate-900 to-[#14161a] border-2 border-indigo-500/50 shadow-[0_0_50px_rgba(99,102,241,0.18)] relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/10 blur-[90px] pointer-events-none" />
+
+          <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+            <div className="max-w-2xl space-y-4">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full bg-red-950 text-red-400 border border-red-500/40 flex items-center gap-1.5 shadow-[0_0_12px_rgba(239,68,68,0.3)]">
+                  <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
+                  Agente Destacado · Disponible Ahora
+                </span>
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-indigo-950 text-indigo-300 border border-indigo-800">
+                  CAD · PDF/PNG/JPG A DWG
+                </span>
+                <span className="text-[10px] font-mono font-bold text-cyan-300 bg-cyan-950/60 px-2 py-1 rounded border border-cyan-800/40">
+                  ⚡ 30 segundos
+                </span>
+              </div>
+
+              <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight uppercase leading-tight">
+                Agente de Digitalización de Planos (PDF, PNG, JPG a DWG)
+              </h2>
+
+              <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                Le proporcionas tus planos en <strong>PDF (vectorial o escaneado), PNG o JPG</strong> y el agente restituye, vectoriza y estandariza todo a formato nativo editable <strong>.DWG y .DXF (R2018)</strong> en milímetros reales (escala 1:1), organizando capas por disciplina (OCG/AIA/ISO), bloques reutilizables, achurados (HATCH), cotas, lámina A1 con viewports calibrados y validación con AutoCAD Core Console.
+              </p>
+
+              {/* Caja de Inversión y Medios de Pago */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-black/60 border border-indigo-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4 max-w-xl">
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 block font-bold">Inversión del Agente</span>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-2xl sm:text-3xl font-black text-emerald-400 font-mono">S/ 70 PEN</span>
+                    <span className="text-xs text-slate-400 font-bold">ó</span>
+                    <span className="text-xl sm:text-2xl font-black text-cyan-300 font-mono">$25 USD</span>
+                  </div>
+                </div>
+                <div className="text-xs text-slate-300 space-y-1.5 border-t sm:border-t-0 sm:border-l border-slate-800 pt-3 sm:pt-0 sm:pl-4">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-purple-400 shrink-0" />
+                    <span><strong>Perú (Yape / Plin):</strong> 51 993147501</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0" />
+                    <span><strong>Extranjero (PayPal):</strong> $25 USD</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Acciones y Medios de Pago */}
+            <div className="flex flex-col gap-3 w-full lg:w-auto shrink-0 min-w-[280px]">
+              <div className="grid grid-cols-2 gap-2">
+                <a
+                  href="https://paypal.me/ProjectControlAI/25USD"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 shadow-md hover:scale-[1.02]"
+                >
+                  <span className="material-symbols-outlined text-sm">payment</span>
+                  PayPal ($25)
+                </a>
+                <a
+                  href={`https://wa.me/51993147501?text=${encodeURIComponent("Hola Ing. Aurelio, deseo adquirir el Agente de Digitalización de Planos (PDF, PNG, JPG a DWG) por Yape / Plin (S/ 70). Adjunto mi comprobante al 51 993147501.")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 shadow-md hover:scale-[1.02]"
+                >
+                  <span className="material-symbols-outlined text-sm">phone_iphone</span>
+                  Yape / Plin (S/ 70)
+                </a>
+              </div>
+
+              <a
+                href={`https://wa.me/51993147501?text=${encodeURIComponent("Hola Ing. Aurelio, deseo adquirir el Agente de Digitalización de Planos (PDF, PNG, JPG a DWG) (S/ 70 o $25 USD).")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.35)] hover:scale-[1.02]"
+              >
+                <span className="material-symbols-outlined text-base">chat</span>
+                Quiero el Agente (+51 993 147 501)
+              </a>
+
+              {/* Explicación de los videos: YouTube vs TikTok */}
+              <div className="p-3 rounded-xl bg-slate-950/80 border border-white/10 text-[11px] space-y-1.5 text-slate-300">
+                <div className="flex items-start gap-2">
+                  <span className="material-symbols-outlined text-red-500 text-sm shrink-0 mt-0.5">play_circle</span>
+                  <p className="leading-tight">
+                    <strong className="text-white font-bold">YouTube:</strong> Guía práctica para el manejo del agente.
+                  </p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="material-symbols-outlined text-cyan-400 text-sm shrink-0 mt-0.5">bolt</span>
+                  <p className="leading-tight">
+                    <strong className="text-white font-bold">TikTok:</strong> Alcance que tiene el agente y su resultado en segundos.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-2">
+                <Link
+                  href="https://youtu.be/IPSAlchju68"
+                  target="_blank"
+                  className="flex-1 px-3 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 shadow-md hover:scale-[1.02]"
+                  title="YouTube: Guía práctica para el manejo del agente"
+                >
+                  <span className="material-symbols-outlined text-sm">play_circle</span>
+                  YouTube (9 min)
+                </Link>
+                <Link
+                  href="https://vt.tiktok.com/ZSg4H7Urm/"
+                  target="_blank"
+                  className="flex-1 px-3 py-2.5 rounded-xl bg-black hover:bg-zinc-800 text-white font-bold text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 border border-pink-500/40 shadow-md hover:scale-[1.02]"
+                  title="TikTok: Alcance y resultado obtenido"
+                >
+                  <svg className="w-3.5 h-3.5 fill-current text-cyan-400" viewBox="0 0 24 24">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                  </svg>
+                  TikTok (Alcance)
+                </Link>
+              </div>
+
+              <Link
+                href="/servicios?tab=agentes#agentes"
+                className="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 text-center text-[11px] font-bold uppercase tracking-wider transition-colors"
+              >
+                Ver Catálogo de Agentes
+              </Link>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* 3. NUESTROS SERVICIOS: SOLUCIONES AGÉNTICAS, CONSULTORÍA Y CAPACITACIONES */}
@@ -668,7 +932,7 @@ export default function Home() {
                     </span>
                   </div>
                   <p className="text-xs text-slate-300 leading-tight">
-                    Agentes de IA: Visor 4D/5D, APUs tipo S10, macros MS Project y EETT.
+                    Agentes de IA: Visor 4D/5D, APUs tipo S10 y Presto, Planos PDF/PNG a DWG, macros MS Project y EETT.
                   </p>
                 </div>
                 <span className="material-symbols-outlined text-slate-500 group-hover:text-cyan-400 text-lg transition-colors">

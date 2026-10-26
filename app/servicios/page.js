@@ -53,7 +53,7 @@ const agentesEspecializados = [
     problema: "¿Coordinar planos 2D en CAD, cronogramas de cientos de tareas y presupuestos desvinculados sin visualizar la obra en el tiempo?",
     solucion: "Le proporcionas al Agente tus Planos (DWG/DXF), Cronograma (P6/MSP) y Presupuesto, y genera un Visor Web 3D 4D/5D interactivo con semáforo constructivo, Curva S y Lookahead.",
     entregable: "Visor 3D interactivo en HTML/Three.js autocontenido, simulación temporal 4D, panel de costos 5D (EVM), Curva S y Lookahead a 4 semanas.",
-    videoId: "weL9yLqdCHY",
+    videoId: "skWw6d2JAes",
     tiktokUrl: "https://vt.tiktok.com/ZSgyYmMFX/",
     whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente de Planeamiento de Obra 4D y 5D (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },
@@ -80,9 +80,63 @@ const agentesEspecializados = [
     problema: "¿Pasas horas calculando rendimientos, cuadrillas y transcribiendo precios en hojas de cálculo propensas a errores y alucinaciones de LLMs?",
     solucion: "Ingesta determinista de expedientes (PDF/Excel), construcción de Cerebro Digital con Grafo de 1,486 nodos, evaluación de 10 compuertas (G1-G10) y fórmula polinómica conforme al D.S. 011-79-VC.",
     entregable: "Carpeta autocontenida con libro Excel S10 de fórmulas vivas (openpyxl), budget_result.json, Wiki técnica navegable, grafo integrado y verificación matemática SHA-256.",
-    videoId: "NoaHRpYAzMc",
+    videoId: "rK4FQC59Ojc",
     tiktokUrl: "https://vt.tiktok.com/ZSg5CFDGH/",
     whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente de Presupuestos & APU Tipo S10 (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
+  },
+  {
+    id: "agente-presto",
+    nombre: "Agente de Presupuestos & APU Tipo Presto",
+    especialidad: "Costos, Presupuestos y Exportación Presto (Excel & BC3)",
+    tag: "COSTOS & PRESTO",
+    estado: "Publicado en YouTube",
+    precioSoles: "S/ 70",
+    precioDolares: "$25 USD",
+    yape: "51 993147501",
+    paypalUrl: "https://paypal.me/ProjectControlAI/25USD",
+    theme: {
+      border: "border-amber-500/40 hover:border-amber-400",
+      bg: "bg-slate-900/60",
+      badge: "bg-red-950 text-red-300 border border-red-500/40 font-bold",
+      pill: "bg-slate-800/80 text-amber-400 border border-amber-800/60",
+      btn: "bg-red-600 hover:bg-red-500 text-white"
+    },
+    icono: "table_chart",
+    duracionVideo: "15 min",
+    tiempoEntrega: "15 segundos",
+    problema: "¿Expedientes complejos sin archivos nativos de Presto y horas perdidas transcribiendo partidas y APUs sin trazabilidad?",
+    solucion: "Ingesta determinista de expedientes (PDF/Excel), generación de presupuesto en formato Presto con descomposición por naturalezas (mano de obra, maquinaria, materiales, subcontratas) y archivo estándar BC3 (FIEBDC-3/2020).",
+    entregable: "Carpeta autocontenida con libro Excel oficial formato Presto de fórmulas vivas, archivo estándar nativo .bc3 para Presto, Cerebro Digital navegable y grafo de conocimiento.",
+    videoId: "Npqz9TnI6No",
+    tiktokUrl: "https://vt.tiktok.com/ZSg9ThvSH/",
+    whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente de Presupuestos & APU Tipo Presto (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
+  },
+  {
+    id: "agente-cad-dwg",
+    nombre: "Agente de Digitalización de Planos (PDF, PNG, JPG a DWG)",
+    especialidad: "Restitución CAD, Vectorización y Estandarización DWG/DXF",
+    tag: "CAD · PDF/PNG/JPG A DWG",
+    estado: "Publicado en YouTube",
+    precioSoles: "S/ 70",
+    precioDolares: "$25 USD",
+    yape: "51 993147501",
+    paypalUrl: "https://paypal.me/ProjectControlAI/25USD",
+    theme: {
+      border: "border-indigo-500/40 hover:border-indigo-400",
+      bg: "bg-slate-900/60",
+      badge: "bg-red-950 text-red-300 border border-red-500/40 font-bold",
+      pill: "bg-slate-800/80 text-indigo-400 border border-indigo-800/60",
+      btn: "bg-red-600 hover:bg-red-500 text-white"
+    },
+    icono: "architecture",
+    duracionVideo: "9 min",
+    tiempoEntrega: "30 segundos",
+    problema: "¿Tienes planos en PDF, imágenes PNG/JPG o escaneados sin el archivo editable y pierdes días redibujando capas, bloques, cotas y escalas en AutoCAD?",
+    solucion: "Digitaliza y restituye planos desde PDF (vectorial o escaneado), PNG y JPG a formato nativo DWG y DXF (R2018) en milímetros reales (escala 1:1). Detecta y organiza capas por disciplina (OCG/AIA/ISO), convierte geometría repetida en bloques reutilizables, reconstruye achurados (HATCH), textos, cotas, layout A1 con viewports calibrados y valida con AutoCAD Core Console (0 errores de auditoría).",
+    entregable: "Carpeta CAD autocontenida con plano nativo .DWG y .DXF (R2018) estandarizado por capas y bloques, lámina en espacio papel con viewports calibrados, comparativa visual e informe técnico de control de calidad.",
+    videoId: "IPSAlchju68",
+    tiktokUrl: "https://vt.tiktok.com/ZSg4H7Urm/",
+    whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente de Digitalización de Planos (PDF, PNG, JPG a DWG) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },
   {
     id: "agente-msproject",
@@ -230,7 +284,7 @@ function ServiciosContent() {
   const [activeTab, setActiveTab] = useState("agentes");
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [selectedFreeClass, setSelectedFreeClass] = useState(clasesGratuitasYouTube[0]);
-  const [expandedAgents, setExpandedAgents] = useState({ "agente-4d5d": true, "agente-s10": true });
+  const [expandedAgents, setExpandedAgents] = useState({ "agente-4d5d": true, "agente-s10": true, "agente-presto": true, "agente-cad-dwg": true });
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("todos"); // "todos" | "disponibles" | "proximos"
 
@@ -550,7 +604,7 @@ function ServiciosContent() {
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Buscar agente (ej. 4D, S10, presupuestos, MS Project, Primavera P6, contratos...)"
+                    placeholder="Buscar agente (ej. 4D, S10, Presto, DWG, PDF, PNG, JPG, MS Project, Primavera P6, contratos...)"
                     className="w-full pl-10 pr-9 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-white placeholder:text-slate-500 text-xs sm:text-sm focus:outline-none focus:border-cyan-500 transition-colors"
                   />
                   {searchQuery && (

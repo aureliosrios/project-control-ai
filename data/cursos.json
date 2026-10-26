@@ -11,16 +11,6 @@
       "brochure": "https://go.hotmart.com/I104938744G?dp=1"
     },
     {
-      "id": "A2",
-      "ruta": "A",
-      "imagen": "/cursos/A2.jpeg",
-      "nombre": "Digitalización de Planos DWG con IA: De Imagen y PDF a AutoCAD",
-      "precio": "$25.00 USD",
-      "tag": "CURSO A2 · PLANOS & CAD",
-      "link": "https://pay.hotmart.com/R107827493N",
-      "brochure": "https://go.hotmart.com/R107827493N?dp=1"
-    },
-    {
       "id": "B1",
       "ruta": "B",
       "imagen": "/cursos/B1.jpeg",
@@ -79,16 +69,6 @@
       "tag": "CURSO C2 · EETT & WORD",
       "link": "https://pay.hotmart.com/D106788121M",
       "brochure": "https://go.hotmart.com/D106788121M?dp=1"
-    },
-    {
-      "id": "C3",
-      "ruta": "C",
-      "imagen": "/cursos/C3.jpeg",
-      "nombre": "Cuantificación de Obras con Inteligencia Artificial: de Planos DWG a Excel",
-      "precio": "$24.99 USD",
-      "tag": "CURSO C3 · CUANTIFICACIÓN & DWG",
-      "link": "https://pay.hotmart.com/I107950676I",
-      "brochure": "https://go.hotmart.com/I107950676I?dp=1"
     }
   ],
   "sincronicos": [

@@ -205,7 +205,7 @@ export default function MobileLanding() {
                 </span>
               </div>
               <p className="text-[11px] text-slate-300 leading-tight">
-                Agentes de IA: Visor 4D/5D, APUs tipo S10, macros MS Project y EETT.
+                Agentes de IA: Visor 4D/5D, APUs tipo S10 y Presto, Planos PDF/PNG a DWG, macros MS Project y EETT.
               </p>
             </div>
             <span className="material-symbols-outlined text-slate-500 group-hover:text-cyan-400 text-lg transition-colors">

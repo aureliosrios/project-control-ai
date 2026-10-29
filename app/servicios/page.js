@@ -139,6 +139,33 @@ const agentesEspecializados = [
     whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente de Digitalización de Planos (PDF, PNG, JPG a DWG) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },
   {
+    id: "agente-metrados-dwg",
+    nombre: "Agente Automatizador de Metrados (Planos DWG a Excel)",
+    especialidad: "Cuantificación de Planos CAD (DWG/DXF), WBS/EDT y Planillas de Metrados en Excel",
+    tag: "METRADOS · DWG A EXCEL",
+    estado: "Publicado en YouTube",
+    precioSoles: "S/ 70",
+    precioDolares: "$25 USD",
+    yape: "51 993147501",
+    paypalUrl: "https://paypal.me/ProjectControlAI/25USD",
+    theme: {
+      border: "border-teal-500/40 hover:border-teal-400",
+      bg: "bg-slate-900/60",
+      badge: "bg-red-950 text-red-300 border border-red-500/40 font-bold",
+      pill: "bg-slate-800/80 text-teal-400 border border-teal-800/60",
+      btn: "bg-red-600 hover:bg-red-500 text-white"
+    },
+    icono: "square_foot",
+    duracionVideo: "65 min",
+    tiempoEntrega: "30 segundos",
+    problema: "¿Pasas semanas midiendo polilíneas a mano en AutoCAD, contando bloques uno por uno y digitando medidas en Excel con alto riesgo de duplicidades o partidas omitidas?",
+    solucion: "Automatiza la extracción geométrica de entidades desde planos nativos AutoCAD (.DWG y .DXF) con LibreDWG/Python, estructura partidas por WBS/EDT en múltiples disciplinas (civil, mecánica, electricidad e instrumentación) y genera planillas de metrados con fórmulas vivas auditadas matemáticamente.",
+    entregable: "Carpeta de proyecto con libro Excel oficial de metrados con fórmulas vivas (Resumen WBS, detalle por paquete de trabajo, fuentes y criterios), protocolos de cobertura y supuestos, y semáforo de calidad técnica.",
+    videoId: "9FqLHJgDC94",
+    tiktokUrl: "https://vt.tiktok.com/ZSgsPDX9M/",
+    whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente Automatizador de Metrados (Planos DWG a Excel) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
+  },
+  {
     id: "agente-msproject",
     nombre: "Agente Programador Gantt & VBA (MS Project)",
     especialidad: "Planeamiento y Programación",
@@ -284,7 +311,7 @@ function ServiciosContent() {
   const [activeTab, setActiveTab] = useState("agentes");
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [selectedFreeClass, setSelectedFreeClass] = useState(clasesGratuitasYouTube[0]);
-  const [expandedAgents, setExpandedAgents] = useState({ "agente-4d5d": true, "agente-s10": true, "agente-presto": true, "agente-cad-dwg": true });
+  const [expandedAgents, setExpandedAgents] = useState({ "agente-4d5d": true, "agente-s10": true, "agente-presto": true, "agente-cad-dwg": true, "agente-metrados-dwg": true });
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("todos"); // "todos" | "disponibles" | "proximos"
 

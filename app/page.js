@@ -15,7 +15,7 @@ const serviciosPrincipales = [
     icono: "smart_toy",
     color: "from-cyan-500/20 to-blue-500/10 border-cyan-500/30 text-cyan-400",
     badge: "Entregables en Segundos",
-    desc: "Agentes de IA autónomos que procesan tus planos (PDF, PNG, JPG a DWG/DXF), cronogramas y presupuestos. Generan en segundos visores 3D interactivos 4D/5D, APUs tipo S10 y Presto en Excel, digitalización CAD a DWG, macros VBA en MS Project y redacción de EETT normadas sin la rigidez del software clásico.",
+    desc: "Agentes de IA autónomos que procesan tus planos (PDF, PNG, JPG a DWG/DXF), cronogramas y presupuestos. Generan en segundos visores 3D interactivos 4D/5D, metrados automáticos DWG a Excel, APUs tipo S10 y Presto en Excel, digitalización CAD a DWG, macros VBA en MS Project y redacción de EETT normadas sin la rigidez del software clásico.",
     linkText: "Ver Soluciones Agénticas",
     linkHref: "/servicios?tab=agentes#agentes",
   },
@@ -932,7 +932,7 @@ export default function Home() {
                     </span>
                   </div>
                   <p className="text-xs text-slate-300 leading-tight">
-                    Agentes de IA: Visor 4D/5D, APUs tipo S10 y Presto, Planos PDF/PNG a DWG, macros MS Project y EETT.
+                    Agentes de IA: Metrados DWG a Excel, Visor 4D/5D, APUs tipo S10 y Presto, Planos PDF/PNG a DWG, macros MS Project y EETT.
                   </p>
                 </div>
                 <span className="material-symbols-outlined text-slate-500 group-hover:text-cyan-400 text-lg transition-colors">

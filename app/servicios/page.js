@@ -166,6 +166,33 @@ const agentesEspecializados = [
     whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente Automatizador de Metrados (Planos DWG a Excel) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },
   {
+    id: "agente-ingesta-s10",
+    nombre: "Agente de Ingesta Excel a Base de Datos S10 (SQL Server)",
+    especialidad: "Migración Automatizada de Presupuestos Excel a Esquema Nativo S10",
+    tag: "INGESTA · EXCEL A S10 SQL",
+    estado: "Publicado en YouTube",
+    precioSoles: "S/ 70",
+    precioDolares: "$25 USD",
+    yape: "51 993147501",
+    paypalUrl: "https://paypal.me/ProjectControlAI/25USD",
+    theme: {
+      border: "border-sky-500/40 hover:border-sky-400",
+      bg: "bg-slate-900/60",
+      badge: "bg-red-950 text-red-300 border border-red-500/40 font-bold",
+      pill: "bg-slate-800/80 text-sky-400 border border-sky-800/60",
+      btn: "bg-red-600 hover:bg-red-500 text-white"
+    },
+    icono: "dns",
+    duracionVideo: "10 min",
+    tiempoEntrega: "10 segundos",
+    problema: "¿Pasas semanas digitando presupuestos celda por celda en S10, lidiando con errores de importación de texto o bases de datos corruptas?",
+    solucion: "Ingesta determinista y transaccional desde Excel o JSON que escribe directamente en las tablas del esquema nativo de S10 en SQL Server (Presupuesto, Partida, APUs, Subpartidas anidadas, Insumos, Pie y Fórmulas), con 100% de asignación a Índices Unificados oficiales del INEI y verificación matemática atómica.",
+    entregable: "Script T-SQL transaccional (BEGIN TRAN/COMMIT) validado contra la plantilla oficial ModelS10, base de datos S10 lista para procesar en S10 Presupuestos y respaldo .BAK de seguridad.",
+    videoId: "1l2e-I65KtQ",
+    tiktokUrl: "https://vt.tiktok.com/ZSgtw7FYv/",
+    whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente de Ingesta Excel a Base de Datos S10 (SQL Server) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
+  },
+  {
     id: "agente-msproject",
     nombre: "Agente Programador Gantt & VBA (MS Project)",
     especialidad: "Planeamiento y Programación",

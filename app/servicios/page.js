@@ -338,7 +338,7 @@ function ServiciosContent() {
   const [activeTab, setActiveTab] = useState("agentes");
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [selectedFreeClass, setSelectedFreeClass] = useState(clasesGratuitasYouTube[0]);
-  const [expandedAgents, setExpandedAgents] = useState({ "agente-4d5d": true, "agente-s10": true, "agente-presto": true, "agente-cad-dwg": true, "agente-metrados-dwg": true });
+  const [expandedAgents, setExpandedAgents] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("todos"); // "todos" | "disponibles" | "proximos"
 
@@ -452,49 +452,39 @@ function ServiciosContent() {
     <div className="min-h-screen bg-[#14161a] text-slate-100 selection:bg-cyan-500/30">
       <div className="fixed inset-0 tech-grid opacity-30 pointer-events-none" />
 
-      <main className="relative z-10 pt-32 pb-32 px-6 md:px-8 max-w-7xl mx-auto">
+      <main className="relative z-10 pt-24 md:pt-28 pb-24 px-4 sm:px-6 md:px-8 max-w-7xl mx-auto">
         {/* Header de Servicios de Ingeniería */}
-        <header className="mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-black uppercase tracking-[0.2em] mb-6">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-            Project Control AI · Servicios de Ingeniería
-          </div>
-
-          <h1 className="text-4xl md:text-7xl font-black tracking-tight mb-6 uppercase leading-none">
-            SERVICIOS DE <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400">
-              INGENIERÍA
-            </span>
+        <header className="mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-2 leading-tight">
+            {activeTab === "agentes" ? "Soluciones agénticas para construcción" : "Consultoría técnica para tu proyecto"}
           </h1>
-
-          <p className="text-lg md:text-2xl text-slate-300 font-normal max-w-3xl leading-relaxed mb-8">
-            El software convencional es rígido. Proporcionamos <strong>Soluciones Agénticas de IA</strong> que generan entregables técnicos en segundos y <strong>Consultoría Especializada en Obra</strong> para resolver los retos críticos de tus proyectos.
+          <p className="text-sm sm:text-base text-slate-300 max-w-3xl leading-relaxed mb-5">
+            {activeTab === "agentes"
+              ? "Agentes para arquitectura, ingeniería, planeamiento, costos y control de calidad. Explora el caso, el entregable y la demostración de cada uno."
+              : "Asesoría especializada para resolver los retos técnicos de tu obra."}
           </p>
 
           {/* Selector de Pestañas de Servicios */}
-          <div id="catalogo-servicios" className="scroll-mt-32 flex flex-col sm:flex-row gap-3 md:gap-4 mb-4 border-b border-white/10 pb-6">
+          <div id="catalogo-servicios" className="scroll-mt-24 flex flex-wrap gap-2 border-b border-white/10 pb-4">
             <button
               type="button"
               aria-pressed={activeTab === "agentes"}
               onClick={() => changeTab("agentes")}
-              className={`px-6 md:px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-2.5 ${
+              className={`px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 ${
                 activeTab === "agentes"
                   ? "bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 shadow-[0_0_30px_rgba(16,185,129,0.45)] ring-2 ring-emerald-400/50"
                   : "bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 border border-emerald-500/20"
               }`}
             >
               <span className="material-symbols-outlined text-base">smart_toy</span>
-              <span>⚡ Soluciones Agénticas (IA)</span>
-              <span className="text-[9px] px-2 py-0.5 rounded-full font-black uppercase tracking-wider bg-emerald-950 text-emerald-300 border border-emerald-500/30">
-                Entregables en Segundos
-              </span>
+              <span>Soluciones Agénticas</span>
             </button>
 
             <button
               type="button"
               aria-pressed={activeTab === "consultoria"}
               onClick={() => changeTab("consultoria")}
-              className={`px-6 md:px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-2.5 ${
+              className={`px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 ${
                 activeTab === "consultoria"
                   ? "bg-amber-500 text-slate-950 shadow-[0_0_30px_rgba(245,158,11,0.45)] ring-2 ring-amber-400/50"
                   : "bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 border border-amber-500/20"
@@ -502,125 +492,26 @@ function ServiciosContent() {
             >
               <span className="material-symbols-outlined text-base">engineering</span>
               <span>Consultoría y Asesoría Técnica</span>
-              <span className="text-[9px] px-2 py-0.5 rounded-full font-black uppercase tracking-wider bg-amber-950 text-amber-300 border border-amber-500/30">
-                15 min gratis
-              </span>
-            </button>
-          </div>
-
-          {/* Indicador Visual y Rápido de la Sección Seleccionada */}
-          <div className="mb-10 p-3.5 sm:p-4 rounded-2xl bg-slate-900/80 border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="flex items-center gap-2.5">
-              <span className={`w-2.5 h-2.5 rounded-full ${activeTab === "agentes" ? "bg-emerald-400 animate-pulse" : "bg-amber-400 animate-pulse"}`} />
-              <span className="text-xs font-black uppercase tracking-wider text-slate-300">
-                Viendo ahora:{" "}
-                <strong className={activeTab === "agentes" ? "text-emerald-400" : "text-amber-400"}>
-                  {activeTab === "agentes" ? "⚡ Soluciones Agénticas de IA (Entregables Técnicos en Segundos)" : "🛠️ Consultoría Especializada en Obra (15 min gratis, por hora y proyectos)"}
-                </strong>
-              </span>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => changeTab(activeTab === "agentes" ? "consultoria" : "agentes")}
-              className="text-xs font-bold text-slate-400 hover:text-white transition-colors flex items-center gap-1 self-start sm:self-auto group"
-            >
-              <span>Cambiar a {activeTab === "agentes" ? "Consultoría y Asesoría Técnica" : "Soluciones Agénticas de IA"}</span>
-              <span className="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
             </button>
           </div>
         </header>
 
         {/* 1. CONTENIDO: SOLUCIONES AGÉNTICAS */}
         {activeTab === "agentes" && (
-          <div id="agentes" className="space-y-16 animate-in fade-in duration-300">
-            {/* Manifiesto Agéntico */}
-            <section className="p-8 md:p-12 rounded-[40px] bg-gradient-to-br from-slate-900 via-[#181b1f] to-[#14161a] border-2 border-slate-700/60 relative overflow-hidden shadow-[0_0_50px_rgba(30,41,59,0.3)]">
-              <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 blur-[90px] pointer-events-none" />
-              <div className="relative z-10 max-w-4xl">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-cyan-400 text-xs font-black uppercase tracking-[0.2em] mb-6">
-                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                  La Era de los Agentes de Ingeniería
-                </div>
-
-                <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-white uppercase tracking-tight leading-[1.08] mb-6">
-                  ¿No tienes tiempo para llevar <span className="text-cyan-400">8 horas de cursos</span> para aprender una especialidad?
-                </h2>
-
-                <p className="text-base sm:text-xl text-slate-200 font-normal leading-relaxed mb-6">
-                  Hay que entender que hoy en día los softwares tradicionales de ingeniería son demasiado rígidos y lentos. <strong className="text-white font-bold">Acá te damos la solución agéntica:</strong> agentes autónomos de IA que te dan la libertad de tener un entregable profesional en segundos. Solo mira un video de 10 a 15 minutos y estarás listo para aplicar los diversos agentes a tus proyectos reales de obra.
-                </p>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                  <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md">
-                    <div className="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold mb-3">
-                      <span className="material-symbols-outlined text-[22px]">timer</span>
-                    </div>
-                    <p className="text-xs font-black text-white uppercase tracking-wider">Video de 10 a 15 min</p>
-                    <p className="text-[11px] text-slate-400 mt-1">Directo a la aplicación práctica, sin rodeos teóricos.</p>
-                  </div>
-
-                  <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md">
-                    <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold mb-3">
-                      <span className="material-symbols-outlined text-[22px]">bolt</span>
-                    </div>
-                    <p className="text-xs font-black text-white uppercase tracking-wider">Entregable en Segundos</p>
-                    <p className="text-[11px] text-slate-400 mt-1">Visor 3D 4D/5D, APUs en Excel, macros VBA en MS Project y .XER en P6.</p>
-                  </div>
-
-                  <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md">
-                    <div className="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold mb-3">
-                      <span className="material-symbols-outlined text-[22px]">tune</span>
-                    </div>
-                    <p className="text-xs font-black text-white uppercase tracking-wider">Flexibilidad Total</p>
-                    <p className="text-[11px] text-slate-400 mt-1">El software tradicional es rígido; la IA se adapta a tus proyectos.</p>
-                  </div>
-                </div>
-              </div>
-            </section>
-
+          <div id="agentes" className="space-y-10 animate-in fade-in duration-300 scroll-mt-24">
             {/* Catálogo Maestro de Agentes (Comprimible, Desplegable y con Buscador) */}
-            <div className="space-y-6">
-              <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div className="space-y-4">
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
                 <div>
-                  <span className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-widest block mb-1">
-                    Catálogo Oficial de Agentes de Ingeniería
-                  </span>
-                  <h3 className="text-2xl sm:text-4xl font-black text-white uppercase tracking-tight">
-                    Elige tu Agente de IA para Obra
-                  </h3>
+                  <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+                    Explora los agentes de IA
+                  </h2>
                   <p className="text-slate-400 text-xs sm:text-sm mt-1 max-w-2xl">
-                    Sección comprimible y desplegable: abre cualquier agente para ver su reto, solución, entregable y medios de pago.
+                    Abre una ficha para conocer qué recibe, qué entrega y cómo se usa.
                   </p>
-
-                  {/* Banner Explicativo: YouTube (Guía Práctica) vs TikTok (Alcance y Resultado) */}
-                  <div className="mt-4 p-4 rounded-2xl bg-slate-900/90 border border-slate-800 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 text-xs">
-                    <div className="flex-1 flex items-start gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-red-600/20 text-red-500 border border-red-500/30 flex items-center justify-center shrink-0">
-                        <span className="material-symbols-outlined text-lg">play_circle</span>
-                      </div>
-                      <div>
-                        <span className="font-black text-white uppercase tracking-wider block">Videos en YouTube</span>
-                        <p className="text-slate-400 mt-0.5 leading-snug">
-                          <strong className="text-slate-200">Guía práctica para el manejo del agente:</strong> flujo operativo completo, configuración y comandos para procesar tus proyectos.
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="hidden sm:block w-px bg-slate-800 self-stretch" />
-
-                    <div className="flex-1 flex items-start gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-black text-cyan-400 border border-cyan-500/30 flex items-center justify-center shrink-0">
-                        <span className="material-symbols-outlined text-lg">bolt</span>
-                      </div>
-                      <div>
-                        <span className="font-black text-white uppercase tracking-wider block">Videos en TikTok</span>
-                        <p className="text-slate-400 mt-0.5 leading-snug">
-                          <strong className="text-slate-200">Alcance y resultado obtenido:</strong> demostración de alto impacto visual del entregable generado en segundos y su alcance en obra.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                  <a href="https://chat.whatsapp.com/Jq7YgCGPFpoKyEaQ2mwRx7" target="_blank" rel="noopener noreferrer" className="inline-flex mt-2 text-xs font-semibold text-emerald-300 hover:text-emerald-200 underline underline-offset-4">
+                    Únete al grupo de WhatsApp para ver nuevos casos →
+                  </a>
                 </div>
 
                 {/* Acciones de Expandir / Colapsar todos */}
@@ -648,7 +539,7 @@ function ServiciosContent() {
               </div>
 
               {/* Barra de Búsqueda y Filtros Rápidos */}
-              <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+              <div className="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2">
                 {/* Input de Búsqueda */}
                 <div className="relative flex-1">
                   <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xl pointer-events-none">
@@ -658,7 +549,8 @@ function ServiciosContent() {
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Buscar agente (ej. 4D, S10, Presto, DWG, PDF, PNG, JPG, MS Project, Primavera P6, contratos...)"
+                    placeholder="Buscar por especialidad, formato o entregable"
+                    aria-label="Buscar agentes"
                     className="w-full pl-10 pr-9 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-white placeholder:text-slate-500 text-xs sm:text-sm focus:outline-none focus:border-cyan-500 transition-colors"
                   />
                   {searchQuery && (
@@ -674,11 +566,11 @@ function ServiciosContent() {
                 </div>
 
                 {/* Filtros de Estado */}
-                <div className="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0 shrink-0">
+                <div className="grid grid-cols-3 gap-1.5 md:gap-2 shrink-0">
                   <button
                     type="button"
                     onClick={() => setStatusFilter("todos")}
-                    className={`px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
+                    className={`min-w-0 px-2 md:px-3.5 py-2 rounded-xl text-[10px] md:text-xs font-bold uppercase leading-tight tracking-wide transition-all ${
                       statusFilter === "todos"
                         ? "bg-cyan-500 text-slate-950 shadow-[0_0_15px_rgba(245,168,0,0.3)] font-black"
                         : "bg-slate-950/80 text-slate-400 hover:text-white border border-slate-800"
@@ -690,7 +582,7 @@ function ServiciosContent() {
                   <button
                     type="button"
                     onClick={() => setStatusFilter("disponibles")}
-                    className={`px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 ${
+                    className={`min-w-0 px-2 md:px-3.5 py-2 rounded-xl text-[10px] md:text-xs font-bold uppercase leading-tight tracking-wide transition-all flex items-center justify-center gap-1 ${
                       statusFilter === "disponibles"
                         ? "bg-red-600 text-white shadow-[0_0_15px_rgba(239,68,68,0.3)] font-black"
                         : "bg-slate-950/80 text-slate-400 hover:text-white border border-slate-800"
@@ -703,7 +595,7 @@ function ServiciosContent() {
                   <button
                     type="button"
                     onClick={() => setStatusFilter("proximos")}
-                    className={`px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 ${
+                    className={`min-w-0 px-2 md:px-3.5 py-2 rounded-xl text-[10px] md:text-xs font-bold uppercase leading-tight tracking-wide transition-all flex items-center justify-center gap-1 ${
                       statusFilter === "proximos"
                         ? "bg-amber-500 text-slate-950 shadow-[0_0_15px_rgba(245,158,11,0.3)] font-black"
                         : "bg-slate-950/80 text-slate-400 hover:text-white border border-slate-800"
@@ -751,38 +643,33 @@ function ServiciosContent() {
                         }`}
                       >
                         {/* Cabecera Comprimible (Siempre Visible y Clickeable) */}
-                        <div
-                          role="button"
-                          tabIndex={0}
+                        <button
+                          type="button"
+                          aria-expanded={isExpanded}
+                          aria-controls={`${agente.id}-detalles`}
                           onClick={() => toggleAgent(agente.id)}
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter" || e.key === " ") {
-                              e.preventDefault();
-                              toggleAgent(agente.id);
-                            }
-                          }}
-                          className="p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer select-none transition-colors group"
+                          className="w-full text-left p-3 sm:p-4 flex flex-col md:flex-row md:items-center justify-between gap-2 cursor-pointer select-none transition-colors group focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-400"
                         >
                           {/* Izquierda: Ícono, Título, Tag y Especialidad */}
                           <div className="flex items-center gap-3.5 min-w-0 flex-1">
-                            <div className={`w-11 h-11 rounded-xl border flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 ${
+                            <div className={`w-9 h-9 rounded-lg border flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 ${
                               agente.estado === "Publicado en YouTube"
                                 ? "bg-cyan-950/80 border-cyan-500/50 text-cyan-300"
                                 : "bg-slate-800 border-slate-700 text-slate-300"
                             }`}>
-                              <span className="material-symbols-outlined text-2xl">{agente.icono}</span>
+                                <span className="material-symbols-outlined text-xl">{agente.icono}</span>
                             </div>
 
                             <div className="min-w-0 flex-1">
                               <div className="flex flex-wrap items-center gap-2 mb-0.5">
-                                <h3 className={`text-base sm:text-lg font-black leading-tight transition-colors ${
+                                <h3 className={`text-sm sm:text-base font-bold leading-tight transition-colors ${
                                   agente.estado === "Publicado en YouTube"
                                     ? "text-white group-hover:text-cyan-300"
                                     : "text-slate-200 group-hover:text-white"
                                 }`}>
                                   {agente.nombre}
                                 </h3>
-                                <span className="text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
+                                <span className="hidden sm:inline text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
                                   {agente.tag}
                                 </span>
                               </div>
@@ -791,7 +678,7 @@ function ServiciosContent() {
                           </div>
 
                           {/* Derecha: Badges, Inversión, Tiempo y Botón Expandir */}
-                          <div className="flex items-center justify-between md:justify-end gap-3 shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-slate-800/80">
+                          <div className="flex items-center justify-between md:justify-end gap-2 shrink-0 pt-1 md:pt-0 border-t md:border-t-0 border-slate-800/80">
                             <div className="flex items-center gap-2 flex-wrap">
                               {agente.estado === "Publicado en YouTube" ? (
                                 <span className="text-[9px] font-black uppercase tracking-wider px-2.5 py-1 rounded bg-red-950 text-red-300 border border-red-500/40 flex items-center gap-1 shadow-[0_0_10px_rgba(239,68,68,0.25)]">
@@ -805,7 +692,7 @@ function ServiciosContent() {
                                 </span>
                               )}
 
-                              <span className="text-[10px] font-mono font-bold text-cyan-300 bg-cyan-950/60 px-2 py-1 rounded border border-cyan-800/40 flex items-center gap-1">
+                              <span className="hidden sm:flex text-[10px] font-mono font-bold text-cyan-300 bg-cyan-950/60 px-2 py-1 rounded border border-cyan-800/40 items-center gap-1">
                                 ⚡ {agente.tiempoEntrega}
                               </span>
 
@@ -827,51 +714,18 @@ function ServiciosContent() {
                               </span>
                             </div>
                           </div>
-                        </div>
+                        </button>
 
                         {/* Contenido Expandible (Estructura Mínima Información - Estilo Tarjeta Destacada) */}
                         {isExpanded && (
-                          <div className="p-5 sm:p-6 border-t border-slate-800/80 bg-gradient-to-br from-[#171a1e]/80 via-slate-900/60 to-[#14161a] animate-in fade-in duration-200">
+                          <div id={`${agente.id}-detalles`} className="p-4 sm:p-5 border-t border-slate-800/80 bg-gradient-to-br from-[#171a1e]/80 via-slate-900/60 to-[#14161a] animate-in fade-in duration-200">
                             <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
                               {/* Izquierda: Descripción concisa y Caja de Inversión */}
-                              <div className="flex-1 space-y-4 max-w-2xl">
+                              <div className="flex-1 space-y-3 max-w-2xl">
                                 <p className="text-slate-300 text-sm leading-relaxed font-normal">
                                   {agente.solucion}
                                 </p>
-
-                                {/* Caja de Inversión y Medios de Pago */}
-                                {agente.precioSoles ? (
-                                  <div className="p-4 rounded-2xl bg-black/60 border border-cyan-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4 max-w-xl">
-                                    <div>
-                                      <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 block font-bold">
-                                        Inversión del Agente
-                                      </span>
-                                      <div className="flex items-baseline gap-2">
-                                        <span className="text-xl sm:text-2xl font-black text-emerald-400 font-mono">
-                                          {agente.precioSoles} PEN
-                                        </span>
-                                        <span className="text-xs text-slate-400 font-bold">ó</span>
-                                        <span className="text-lg sm:text-xl font-black text-cyan-300 font-mono">
-                                          {agente.precioDolares}
-                                        </span>
-                                      </div>
-                                    </div>
-                                    <div className="text-xs text-slate-300 space-y-1.5 border-t sm:border-t-0 sm:border-l border-slate-800 pt-3 sm:pt-0 sm:pl-4">
-                                      <div className="flex items-center gap-1.5">
-                                        <span className="w-2 h-2 rounded-full bg-purple-400 shrink-0" />
-                                        <span><strong>Perú (Yape / Plin):</strong> {agente.yape}</span>
-                                      </div>
-                                      <div className="flex items-center gap-1.5">
-                                        <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0" />
-                                        <span><strong>Extranjero (PayPal):</strong> {agente.precioDolares}</span>
-                                      </div>
-                                    </div>
-                                  </div>
-                                ) : (
-                                  <div className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-400">
-                                    💡 Este agente se encuentra en fase final de despliegue. Puedes unirte a la lista de espera para acceso prioritario.
-                                  </div>
-                                )}
+                                <p className="text-slate-400 text-xs leading-relaxed"><strong className="text-white">Entregable:</strong> {agente.entregable}</p>
 
                                 {/* Enlace para canjear clave de descarga */}
                                 <div className="text-xs text-slate-400 flex items-center gap-1.5 pt-1">
@@ -921,18 +775,6 @@ function ServiciosContent() {
                                   <span className="material-symbols-outlined text-base">chat</span>
                                   {agente.estado === "Publicado en YouTube" ? "Quiero el Agente (+51 993 147 501)" : "Lista de Espera (WhatsApp)"}
                                 </a>
-
-                                {/* Resumen explicativo de los formatos de video */}
-                                <div className="p-2.5 rounded-xl bg-black/60 border border-slate-800/80 text-[11px] space-y-1.5 text-slate-300">
-                                  <div className="flex items-start gap-1.5">
-                                    <span className="material-symbols-outlined text-red-500 text-sm shrink-0 mt-0.5">smart_display</span>
-                                    <span><strong className="text-white">YouTube:</strong> Guía práctica para el manejo del agente.</span>
-                                  </div>
-                                  <div className="flex items-start gap-1.5">
-                                    <span className="material-symbols-outlined text-cyan-400 text-sm shrink-0 mt-0.5">bolt</span>
-                                    <span><strong className="text-white">TikTok:</strong> Alcance que tiene el agente y su resultado en segundos.</span>
-                                  </div>
-                                </div>
 
                                 <div className="flex gap-2">
                                   <button

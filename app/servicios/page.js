@@ -193,6 +193,33 @@ const agentesEspecializados = [
     whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente de Ingesta Excel a Base de Datos S10 (SQL Server) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },
   {
+    id: "agente-excel-p6",
+    nombre: "Agente de Excel a Primavera P6 (.XER)",
+    especialidad: "Planeamiento, Seguimiento, Lookahead y Generación Nativa de XER",
+    tag: "EXCEL A PRIMAVERA P6 (.XER)",
+    estado: "Publicado en YouTube",
+    precioSoles: "S/ 70",
+    precioDolares: "$25 USD",
+    yape: "51 993147501",
+    paypalUrl: "https://paypal.me/ProjectControlAI/25USD",
+    theme: {
+      border: "border-orange-500/40 hover:border-orange-400",
+      bg: "bg-slate-900/60",
+      badge: "bg-red-950 text-red-300 border border-red-500/40 font-bold",
+      pill: "bg-slate-800/80 text-orange-400 border border-orange-800/60",
+      btn: "bg-red-600 hover:bg-red-500 text-white"
+    },
+    icono: "table_view",
+    duracionVideo: "17 min",
+    tiempoEntrega: "10 segundos",
+    problema: "¿Pasas días cargando cronogramas a mano en Primavera P6, lidiando con errores de sintaxis en el XER, descuadres de calendarios o pérdida de relaciones lógicas y costos?",
+    solucion: "Ingesta determinista desde Excel o JSON que reconoce 3 fuentes (Planeamiento con relaciones CPM, Seguimiento al corte Data Date y Lookahead diario PROG/EJEC) y 3 niveles de control (N1 barras, N2 horas-hombre y N3 costos/EVM). Resuelve ambigüedades en PREGUNTAS.md antes de asumir datos y genera directamente el archivo .XER oficial.",
+    entregable: "Archivo nativo .XER listo para importar en Primavera P6 sin errores, proyecto_p6.json (contrato 3.0), memoria técnica de supuestos (SUPUESTOS.md), reporte de conversión y auditoría de retorno con métricas DCMA-14.",
+    videoId: "gorfbCeit3A",
+    tiktokUrl: "https://vt.tiktok.com/ZSp1wND3d/",
+    whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente de Excel a Primavera P6 (.XER) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
+  },
+  {
     id: "agente-msproject",
     nombre: "Agente Programador Gantt & VBA (MS Project)",
     especialidad: "Planeamiento y Programación",
@@ -217,32 +244,6 @@ const agentesEspecializados = [
     entregable: "Script VBA (.bas) listo para importar directamente a MS Project, generando el cronograma y diagrama de Gantt sin errores.",
     videoId: "NjWnA5b9Zho",
     whatsappMsg: "Hola Ing. Aurelio, deseo adquirir / reservar el Agente Programador Gantt & VBA (MS Project) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
-  },
-  {
-    id: "agente-p6",
-    nombre: "Agente Primavera P6 (.XER / PLF)",
-    especialidad: "Control Maestro y Forense",
-    tag: "PRIMAVERA P6",
-    estado: "Próximamente",
-    precioSoles: "S/ 70",
-    precioDolares: "$25 USD",
-    yape: "51 993147501",
-    paypalUrl: "https://paypal.me/ProjectControlAI/25USD",
-    theme: {
-      border: "border-slate-800 hover:border-slate-700",
-      bg: "bg-slate-900/50",
-      badge: "bg-slate-800 text-slate-300 border border-slate-700 font-bold",
-      pill: "bg-slate-800/80 text-slate-400 border border-slate-700/60",
-      btn: "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700"
-    },
-    icono: "reorder",
-    duracionVideo: "14 min",
-    tiempoEntrega: "30 segundos",
-    problema: "¿Archivos .XER con errores de importación (%T PROJECT), descuadres en calendarios o curvas de valor ganado inconsistentes?",
-    solucion: "Genera y sanea archivos nativos de Oracle Primavera P6 (.xer) y plantillas de diseño visual (.plf) con curvas S y Valor Ganado (EVM).",
-    entregable: "Archivo .XER compatible y limpio, con Curva S (PV/EV), asignación de recursos y diseño de seguimiento de barras Gantt.",
-    videoId: "vABYYEA46yc",
-    whatsappMsg: "Hola Ing. Aurelio, deseo adquirir / reservar el Agente Primavera P6 (.XER) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },
   {
     id: "agente-contratos",

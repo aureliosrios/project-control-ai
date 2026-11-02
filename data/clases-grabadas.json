@@ -137,8 +137,24 @@
         "num": "06",
         "status": "OCULTA",
         "title": "Sesión 06: Agentes de IA, Presupuestos, EETT y Cronogramas (01/11/2026)",
-        "desc": "Clase del domingo 1 de noviembre de 2026, de 3:00 p.m. a 6:00 p.m. (hora de Perú), del curso Agentes de IA: Presupuestos, EETT y Cronogramas. Project Control AI.",
-        "resources": []
+        "desc": "Clase del domingo 1 de noviembre de 2026, de 3:00 p.m. a 6:00 p.m. (hora de Perú), del curso Agentes de IA: Presupuestos, EETT y Cronogramas. Incluye modelado integral de planeamiento (Takt Planning, Red CPM y Línea de Balance en Excel y JSON), ajuste de duraciones enteras, compresión a 240 días con rebalanceo de cuadrillas, creación del agente .agente_cronograma y automatización VBA (.bas) para MS Project conciliada con las Horas-Hombre del presupuesto. Project Control AI.",
+        "resources": [
+          {
+            "title": "Material 01: Planeamiento Integral y Cronograma de Obra Rev.02 (Excel)",
+            "type": "xlsx",
+            "url": "/manuales/Planeamiento_Integral_Cronograma_Obra_2026_Rev02.xlsx"
+          },
+          {
+            "title": "Material 02: Modelo de Planeamiento Integral y Cronograma (JSON)",
+            "type": "json",
+            "url": "/manuales/Modelo_Planeamiento_Integral_Cronograma_2026.json"
+          },
+          {
+            "title": "Guía de Prompts: Cronograma JSON, Agente y Macro .BAS para MS Project (Markdown)",
+            "type": "md",
+            "url": "/manuales/PROMPTS_CLASE_06_CRONOGRAMA_MSPROJECT_VBA.md"
+          }
+        ]
       }
     ]
   },

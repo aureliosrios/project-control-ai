@@ -293,18 +293,19 @@ export default function ClasesGrabadas() {
                           href={res.url}
                           target="_blank"
                           rel="noopener noreferrer"
+                          download={res.type === 'xlsx' || res.type === 'json' || res.type === 'zip' ? true : undefined}
                           className="flex items-center justify-between p-4 rounded-2xl bg-black/40 border border-white/10 hover:border-cyan-500/40 hover:bg-cyan-950/20 transition-all group"
                         >
                           <div className="flex items-center gap-3">
                             <span className={`material-symbols-outlined ${
-                              res.type === 'pdf' ? 'text-red-400' : res.type === 'md' || res.type === 'markdown' ? 'text-emerald-400' : res.type === 'zip' ? 'text-amber-400' : 'text-cyan-400'
+                              res.type === 'pdf' ? 'text-red-400' : res.type === 'md' || res.type === 'markdown' || res.type === 'xlsx' ? 'text-emerald-400' : res.type === 'zip' || res.type === 'json' ? 'text-amber-400' : 'text-cyan-400'
                             }`}>
-                              {res.type === 'pdf' ? 'picture_as_pdf' : res.type === 'md' || res.type === 'markdown' ? 'description' : res.type === 'zip' ? 'archive' : 'html'}
+                              {res.type === 'pdf' ? 'picture_as_pdf' : res.type === 'md' || res.type === 'markdown' ? 'description' : res.type === 'xlsx' ? 'table_view' : res.type === 'json' ? 'data_object' : res.type === 'zip' ? 'archive' : 'html'}
                             </span>
                             <div className="text-left">
                               <p className="text-xs font-bold text-white uppercase tracking-wider group-hover:text-cyan-400 transition-colors">{res.title}</p>
                               <p className="text-[10px] text-slate-500 uppercase tracking-widest">
-                                {res.type === 'pdf' ? 'Documento PDF' : res.type === 'md' || res.type === 'markdown' ? 'Documento Markdown' : res.type === 'zip' ? 'Archivo ZIP descargable' : 'Resumen Interactivo (HTML)'}
+                                {res.type === 'pdf' ? 'Documento PDF' : res.type === 'md' || res.type === 'markdown' ? 'Documento Markdown' : res.type === 'xlsx' ? 'Libro de Excel (.XLSX)' : res.type === 'json' ? 'Modelo de Datos (.JSON)' : res.type === 'zip' ? 'Archivo ZIP descargable' : 'Resumen Interactivo (HTML)'}
                               </p>
                             </div>
                           </div>

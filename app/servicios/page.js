@@ -460,7 +460,7 @@ function ServiciosContent() {
           </h1>
           <p className="text-sm sm:text-base text-slate-300 max-w-3xl leading-relaxed mb-5">
             {activeTab === "agentes"
-              ? "Agentes para arquitectura, ingeniería, planeamiento, costos y control de calidad. Explora el caso, el entregable y la demostración de cada uno."
+              ? "En Project Control AI somos pioneros en soluciones agénticas para arquitectura, ingeniería, planeamiento, costos y control de calidad. Explora cada agente y su demostración."
               : "Asesoría especializada para resolver los retos técnicos de tu obra."}
           </p>
 

@@ -20,6 +20,14 @@
             "url": "/manuales/06_EETT Mecánicas_Rv01.pdf"
           }
         ]
+      },
+      {
+        "id": "4DeDcmCNRdA",
+        "num": "02",
+        "status": "OCULTA",
+        "title": "Sesión 02: Agente de IA para Presupuestos y Programación (01/11/2026)",
+        "desc": "Clase del domingo 1 de noviembre de 2026, de 10:00 a.m. a 1:00 p.m. (hora de Perú), del curso Agente de IA: Presupuesto y programación. Project Control AI.",
+        "resources": []
       }
     ]
   },
@@ -123,6 +131,14 @@
             "url": "/manuales/PROMPT_REPLICABLE_CRONOGRAMA_PLANNING.md"
           }
         ]
+      },
+      {
+        "id": "nlLw7VfolMA",
+        "num": "06",
+        "status": "OCULTA",
+        "title": "Sesión 06: Agentes de IA, Presupuestos, EETT y Cronogramas (01/11/2026)",
+        "desc": "Clase del domingo 1 de noviembre de 2026, de 3:00 p.m. a 6:00 p.m. (hora de Perú), del curso Agentes de IA: Presupuestos, EETT y Cronogramas. Project Control AI.",
+        "resources": []
       }
     ]
   },

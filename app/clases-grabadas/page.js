@@ -136,8 +136,8 @@ export default function ClasesGrabadas() {
       setStudentData(student);
       setIsLoggedIn(true);
 
-      // Seleccionar curso por defecto (priorizar la cohorte vigente, luego AGENTES_IA, GIP o el primero disponible)
-      const agentesCourse = processed.find(c => c.key === "AGENTE_PPTO_PROG" && !c.isExpired) || processed.find(c => c.key === "AGENTES_IA" && !c.isExpired);
+      // Seleccionar curso por defecto (priorizar la cohorte vigente, luego AGENTES_IA_TARDE, AGENTES_IA, GIP o el primero disponible)
+      const agentesCourse = processed.find(c => c.key === "AGENTE_PPTO_PROG" && !c.isExpired) || processed.find(c => c.key === "AGENTES_IA_TARDE" && !c.isExpired) || processed.find(c => c.key === "AGENTES_IA" && !c.isExpired);
       const gipCourse = processed.find(c => c.key === "GIP" && !c.isExpired);
       const defaultCourse = agentesCourse || gipCourse || processed.find(c => courses[c.key].lessons.length > 0 && !c.isExpired) || processed[0];
       

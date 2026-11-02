@@ -26,8 +26,24 @@
         "num": "02",
         "status": "OCULTA",
         "title": "Sesión 02: Agente de IA para Presupuestos y Programación (01/11/2026)",
-        "desc": "Clase del domingo 1 de noviembre de 2026, de 10:00 a.m. a 1:00 p.m. (hora de Perú), del curso Agente de IA: Presupuesto y programación. Project Control AI.",
-        "resources": []
+        "desc": "Clase del domingo 1 de noviembre de 2026, de 10:00 a.m. a 1:00 p.m. (hora de Perú), del curso Agente de IA: Presupuesto y programación. Incluye análisis integral del expediente del proyecto (WBS, metrados y EETT), generación de presupuesto en JSON con APUs y listado de insumos, presupuesto en Excel con fórmulas dinámicas en formato Presto (USD) y metrado de acero de los pisos 3 y 4. Project Control AI.",
+        "resources": [
+          {
+            "title": "Material 01: Información del Proyecto - WBS, Metrados, EETT y Costos (ZIP)",
+            "type": "zip",
+            "url": "/manuales/Informacion_del_Proyecto.zip"
+          },
+          {
+            "title": "Material 02: Metrado de Acero Pisos 3 y 4 (Excel)",
+            "type": "xlsx",
+            "url": "/manuales/Metrado_Acero_Pisos_3_y_4.xlsx"
+          },
+          {
+            "title": "Guía de Prompts: Presupuesto en JSON, APUs, Insumos y Excel Formato Presto en USD (Markdown)",
+            "type": "md",
+            "url": "/manuales/PROMPTS_CLASE_02_PRESUPUESTO_PRESTO_USD_Y_APU.md"
+          }
+        ]
       }
     ]
   },

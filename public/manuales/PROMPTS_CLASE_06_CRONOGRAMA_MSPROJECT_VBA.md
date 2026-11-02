@@ -17,6 +17,16 @@
 
 ---
 
+## 📌 Prompt 00: Generación de Presupuesto en JSON (APU e Insumos) y Excel Formato Presto en Dólares (USD)
+
+Usa este prompt apuntando a la carpeta de información del proyecto (WBS, metrados, especificaciones técnicas y costos):
+
+```text
+Dentro de la carpeta se encuentra la información de un proyecto de construcción, incluyendo el WBS, metrados, especificaciones técnicas y demás. Analiza todo el proyecto y genera un presupuesto en formato JSON, incorporando los análisis de PU y el listado de insumos. Además, crea un entregable en Excel con fórmulas dinámicas; el presupuesto debe estar en formato Presto y en dólares.
+```
+
+---
+
 ## 📌 Prompt 01: Ajuste de Duraciones a Días Enteros (Sin Decimales)
 
 Usa este prompt cuando el cálculo teórico de duraciones ($D = \text{Metrado} / (\text{Rendimiento} \times N_{\text{cuad}})$) arroje duraciones fraccionarias y las bases establezcan duraciones enteras:

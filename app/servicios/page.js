@@ -220,6 +220,33 @@ const agentesEspecializados = [
     whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente de Excel a Primavera P6 (.XER) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },
   {
+    id: "agente-valorizaciones-publicas",
+    nombre: "Agente de Valorizaciones de Obra Pública (Perú)",
+    especialidad: "Presupuesto, Cronograma, Cuaderno de Obra en PDF, Reajustes (K) y Curva S",
+    tag: "VALORIZACIONES & CONTRATACIONES",
+    estado: "Publicado en YouTube",
+    precioSoles: "S/ 70",
+    precioDolares: "$25 USD",
+    yape: "51 993147501",
+    paypalUrl: "https://paypal.me/ProjectControlAI/25USD",
+    theme: {
+      border: "border-purple-500/40 hover:border-purple-400",
+      bg: "bg-slate-900/60",
+      badge: "bg-red-950 text-red-300 border border-red-500/40 font-bold",
+      pill: "bg-slate-800/80 text-purple-400 border border-purple-800/60",
+      btn: "bg-red-600 hover:bg-red-500 text-white"
+    },
+    icono: "receipt_long",
+    duracionVideo: "20 min",
+    tiempoEntrega: "30 segundos",
+    problema: "¿Pasas días cuadrando manualmente los asientos diarios del Cuaderno de Obra en PDF con la planilla de metrados, el presupuesto contractual en Excel y calculando fórmulas de reajuste K propensas a observaciones y retrasos de pago?",
+    solucion: "Le proporcionas al Agente el Presupuesto Contractual (Excel con partidas y APUs tipo S10), el Cronograma de Ejecución de Obra (Excel con Línea Base LB-0) y el PDF del Cuaderno de Obra digitalizado. El Agente extrae los metrados ejecutados diarios, concilia avances acumulados y genera en minutos la valorización mensual con fórmulas vivas bajo la Ley de Contrataciones del Estado (D.L. 1444, D.S. 344-2018-EF).",
+    entregable: "Expediente oficial en Excel con fórmulas vivas (Resumen General, Desagregado Contractual, Planilla de Metrados, Cálculo de Reajuste K por Fórmula Polinómica D.S. 011-79-VC, Amortizaciones y Deducciones de Adelanto Directo y Materiales, Retenciones), Informe Técnico en Markdown/PDF y Curva S programada vs ejecutada.",
+    videoId: "0LPG5_YoXlM",
+    tiktokUrl: "https://vt.tiktok.com/ZSpFeuU4Y/",
+    whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente de Valorizaciones de Obra Pública (Perú) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
+  },
+  {
     id: "agente-msproject",
     nombre: "Agente Programador Gantt & VBA (MS Project)",
     especialidad: "Planeamiento y Programación",

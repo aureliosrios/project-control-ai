@@ -115,6 +115,28 @@
       "colorKey": "cyan",
       "cerrado": false,
       "registro": "Presupuestos y Planificación de Obras con IA"
+    },
+    {
+      "id": "S5",
+      "nombre": "Agentes de IA: Valorizaciones y Control de Obras con Last Planner y JSON",
+      "precio": "$100.00 USD",
+      "precioSoles": "S/. 300",
+      "tag": "CURSO MASTERCLASS",
+      "destacado": "Nueva Convocatoria Noviembre 2026",
+      "desc": "Aprende a conectar la evidencia de campo, el cuaderno de obra y el Lookahead Planning con agentes de IA locales. Genera valorizaciones contractuales con fórmula polinómica (K), deducciones y amortizaciones en Excel automatizado y esquemas JSON trazables.",
+      "casoReal": "De la evidencia fotográfica y cuaderno de obra a la valorización mensual aprobada y control Lookahead con Last Planner System.",
+      "inicio": "Viernes 20 de Noviembre, 2026",
+      "fin": "Viernes 04 de Diciembre, 2026",
+      "horario": "Viernes y Sábados · 7:00 PM – 10:00 PM",
+      "sesiones": "15h · 5 sesiones en vivo",
+      "link": "/inscripcion",
+      "hotmart": "https://pay.hotmart.com/K104218834V",
+      "paypal": "https://paypal.me/ProjectControlAI/95USD",
+      "precioHotmart": "$100.00 USD",
+      "precioPaypal": "$95.00 USD",
+      "colorKey": "orange",
+      "cerrado": false,
+      "registro": "Agentes de IA: Valorizaciones y Control de Obras con Last Planner y JSON"
     }
   ]
 }

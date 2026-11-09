@@ -44,6 +44,25 @@
             "url": "/manuales/PROMPTS_CLASE_02_PRESUPUESTO_PRESTO_USD_Y_APU.md"
           }
         ]
+      },
+      {
+        "id": "bqPsXr0gPhs",
+        "num": "03",
+        "status": "OCULTA",
+        "title": "Sesión 03: Agente de IA para Presupuestos y Programación (08/11/2026)",
+        "desc": "Clase del domingo 8 de noviembre de 2026, de 10:00 a.m. a 1:00 p.m. (hora de Perú), del curso Agente de IA: Presupuesto y programación. Project Control AI.",
+        "resources": [
+          {
+            "title": "Material 01: Documentos del Proyecto - WBS, Metrados, EETT y Memorias (ZIP)",
+            "type": "zip",
+            "url": "/manuales/01_documentos_del_proyecto.zip"
+          },
+          {
+            "title": "Material 02: Fuentes de Costos y Rendimientos - Parámetros Laborales, Cotizaciones y Fichas Técnicas (ZIP)",
+            "type": "zip",
+            "url": "/manuales/02_fuentes_de_costos_y_rendimientos.zip"
+          }
+        ]
       }
     ]
   },
@@ -318,21 +337,24 @@
         "num": "01",
         "status": "OCULTA",
         "title": "Introducción a la Automatización de Procesos",
-        "desc": "Clase del 19 de Abril: Fundamentos y herramientas clave para el ingeniero de automatización moderno."
+        "desc": "Clase del 19 de Abril: Fundamentos y herramientas clave para el ingeniero de automatización moderno.",
+        "resources": []
       },
       {
         "id": "9vvyQFfvOGo",
         "num": "02",
         "status": "OCULTA",
         "title": "Arquitectura de Agentes and Workflows",
-        "desc": "Clase del 26 de Abril: Diseño de flujos de trabajo inteligentes y orquestación de agentes."
+        "desc": "Clase del 26 de Abril: Diseño de flujos de trabajo inteligentes y orquestación de agentes.",
+        "resources": []
       },
       {
         "id": "BqV82NdFt_k",
         "num": "03",
         "status": "OCULTA",
         "title": "Integración Avanzada y Sistemas Autónomos",
-        "desc": "Clase del 03 de Mayo: Integración y orquestación avanzada en producción con casos prácticos reales."
+        "desc": "Clase del 03 de Mayo: Integración y orquestación avanzada en producción con casos prácticos reales.",
+        "resources": []
       },
       {
         "id": "EHxM2Q4Sp-M",
@@ -340,18 +362,7 @@
         "status": "OCULTA",
         "title": "Despliegue y Orquestación de Agentes en Producción",
         "desc": "Clase del 17 de Mayo: Implementación práctica de agentes autónomos, pipelines de automatización y resolución de problemas en entornos reales.",
-        "resources": [
-          {
-            "title": "Manual de la Clase 4 (PDF)",
-            "type": "pdf",
-            "url": "/manuales/Manual_Clase_4_Colaborativo.pdf"
-          },
-          {
-            "title": "Resumen de la Clase 4 (HTML)",
-            "type": "html",
-            "url": "/manuales/resumen_clase_4.html"
-          }
-        ]
+        "resources": []
       },
       {
         "id": "FY_-Vq-bKjc",
@@ -359,28 +370,7 @@
         "status": "OCULTA",
         "title": "Monitoreo, Escalabilidad y Mantenimiento de Agentes",
         "desc": "Clase del 24 de Mayo: Estrategias avanzadas para el monitoreo, optimización de costos, seguridad y escalabilidad de agentes en producción.",
-        "resources": [
-          {
-            "title": "Manual de la Clase 5 (PDF)",
-            "type": "pdf",
-            "url": "/manuales/Manual_Clase_5_Conectividad.pdf"
-          },
-          {
-            "title": "Ficha Resumen del Valor Ganado (PDF)",
-            "type": "pdf",
-            "url": "/manuales/Resumen_Clase_5_Valor_Ganado.pdf"
-          },
-          {
-            "title": "Resumen Interactivo de la Clase 5 (HTML)",
-            "type": "html",
-            "url": "/manuales/resumen_clase_5.html"
-          },
-          {
-            "title": "Manual Avanzado de Soporte y EVM (PDF)",
-            "type": "pdf",
-            "url": "/manuales/Manual_Soporte_y_EVM_Clase_5.pdf"
-          }
-        ]
+        "resources": []
       }
     ]
   },
@@ -393,48 +383,47 @@
         "status": "OCULTA",
         "title": "Lección 01: Automatización de Procesos de Construcción (Introducción)",
         "desc": "Clase del 14 de Junio: Fundamentos de la automatización en obras, integración de software y desarrollo de herramientas ágiles.",
-        "resources": [
-          {
-            "title": "Resumen Interactivo de la Clase 1 (HTML)",
-            "type": "html",
-            "url": "/manuales/resumen_clase_6.html"
-          }
-        ]
+        "resources": []
       },
       {
         "id": "VN0_UzmTXa0",
         "num": "02",
         "status": "OCULTA",
         "title": "Lección 02: Automatización de Procesos - Clase 1",
-        "desc": "Clase del 28 de Junio: Primera sesión del curso enfocado en automatización de procesos de construcción con agentes de IA."
+        "desc": "Clase del 28 de Junio: Primera sesión del curso enfocado en automatización de procesos de construcción con agentes de IA.",
+        "resources": []
       },
       {
         "id": "Ta5nO3LpWuU",
         "num": "03",
         "status": "OCULTA",
         "title": "Lección 03: Automatización de Procesos - Clase 2",
-        "desc": "Clase del 05 de Julio: Segunda sesión del curso enfocado en automatización de procesos de construcción con agentes de IA."
+        "desc": "Clase del 05 de Julio: Segunda sesión del curso enfocado en automatización de procesos de construcción con agentes de IA.",
+        "resources": []
       },
       {
         "id": "yO7yivEBf0k",
         "num": "04",
         "status": "OCULTA",
         "title": "Lección 04: Automatización de Procesos - Clase 3",
-        "desc": "Clase del 26 de Julio (03:00 p.m. - 06:00 p.m.): Tercera sesión del curso enfocado en automatización de procesos de construcción con agentes de IA."
+        "desc": "Clase del 26 de Julio (03:00 p.m. - 06:00 p.m.): Tercera sesión del curso enfocado en automatización de procesos de construcción con agentes de IA.",
+        "resources": []
       },
       {
         "id": "I72FS-n0bPo",
         "num": "05",
         "status": "OCULTA",
         "title": "Lección 05: Automatización de Procesos - Clase 4 (02/08/2026)",
-        "desc": "Clase del 02 de Agosto (03:00 p.m. - 06:16 p.m.): Cuarta sesión del curso enfocado en automatización de procesos de construcción con agentes de IA (Duración: 3h 16m)."
+        "desc": "Clase del 02 de Agosto (03:00 p.m. - 06:16 p.m.): Cuarta sesión del curso enfocado en automatización de procesos de construcción con agentes de IA (Duración: 3h 16m).",
+        "resources": []
       },
       {
         "id": "jnL8GbiH3zI",
         "num": "06",
         "status": "OCULTA",
         "title": "Lección 06: Automatización de Procesos - Clase 5 (09/08/2026)",
-        "desc": "Clase del 09 de Agosto (03:00 p.m. - 06:06 p.m.): Quinta sesión del curso enfocado en automatización de procesos de construcción con agentes de IA (Duración: 3h 06m)."
+        "desc": "Clase del 09 de Agosto (03:00 p.m. - 06:06 p.m.): Quinta sesión del curso enfocado en automatización de procesos de construcción con agentes de IA (Duración: 3h 06m).",
+        "resources": []
       },
       {
         "id": "D8Qo7SopK7I",
@@ -442,18 +431,7 @@
         "status": "OCULTA",
         "title": "Resumen Clase 7",
         "desc": "Clase grabada correspondiente a la sesión del 2026-08-16 del curso Automatización y Soluciones de IA para la Gestión de Construcción.",
-        "resources": [
-          {
-            "title": "Resumen Interactivo de la Clase 7 (HTML)",
-            "type": "html",
-            "url": "/manuales/resumen_clase_7.html"
-          },
-          {
-            "title": "Guía de Prompts de Sincronización y Dashboards (HTML)",
-            "type": "html",
-            "url": "/manuales/MANUAL_PROMPTS_CLASE_7.html"
-          }
-        ]
+        "resources": []
       }
     ]
   },
@@ -465,14 +443,16 @@
         "num": "06-A",
         "status": "OCULTA",
         "title": "GIP Lección 06: Gestión de Proyectos El Despertar - Clase 5 (Parte 1)",
-        "desc": "Clase del 19 de Julio (10:00 a.m. - Parte 1): Quinta clase oficial sobre el uso avanzado de modelos de IA y flujos de automatización para la gestión de proyectos."
+        "desc": "Clase del 19 de Julio (10:00 a.m. - Parte 1): Quinta clase oficial sobre el uso avanzado de modelos de IA y flujos de automatización para la gestión de proyectos.",
+        "resources": []
       },
       {
         "id": "HgttITI9PU0",
         "num": "06-B",
         "status": "OCULTA",
         "title": "GIP Lección 06: Gestión de Proyectos El Despertar - Clase 5 (Parte 2)",
-        "desc": "Clase del 19 de Julio (11:09 a.m. - Parte 2): Quinta clase oficial sobre el uso avanzado de modelos de IA y flujos de automatización para la gestión de proyectos."
+        "desc": "Clase del 19 de Julio (11:09 a.m. - Parte 2): Quinta clase oficial sobre el uso avanzado de modelos de IA y flujos de automatización para la gestión de proyectos.",
+        "resources": []
       },
       {
         "id": "z4oJM3JKXqQ",
@@ -480,20 +460,15 @@
         "status": "OCULTA",
         "title": "GIP Lección 05: El Despertar Digital y Supervisión de Hitos (Clase 4)",
         "desc": "Clase 4 (12 de Julio): Uso de NotebookLM para inspección de hitos en carreteras, densímetros nucleares, topografía y auditorías de planillas de construcción civil. Migración avanzada de HTML a Word.",
-        "resources": [
-          {
-            "title": "Resumen Interactivo de la Clase 4 (HTML)",
-            "type": "html",
-            "url": "/manuales/resumen_clase_5.html"
-          }
-        ]
+        "resources": []
       },
       {
         "id": "qyX4p5Ze03Q",
         "num": "04",
         "status": "OCULTA",
         "title": "GIP Lección 04: Gestión de Proyectos El despertar - Clase 3",
-        "desc": "Clase del 05 de Julio: Tercera clase oficial sobre el uso avanzado de modelos de IA y flujos de automatización para la gestión de proyectos."
+        "desc": "Clase del 05 de Julio: Tercera clase oficial sobre el uso avanzado de modelos de IA y flujos de automatización para la gestión de proyectos.",
+        "resources": []
       },
       {
         "id": "vrnFxsbH8kE",
@@ -501,18 +476,7 @@
         "status": "OCULTA",
         "title": "GIP Lección 03: Gestión de Proyectos El despertar - Clase 2",
         "desc": "Clase del 28 de Junio: Segunda clase oficial sobre el uso avanzado de modelos de IA y flujos de automatización para la gestión de proyectos.",
-        "resources": [
-          {
-            "title": "Especificaciones Técnicas Civiles (PDF)",
-            "type": "pdf",
-            "url": "/manuales/06_EETT Civiles_Rv01.pdf"
-          },
-          {
-            "title": "Especificaciones Técnicas Civiles (Markdown)",
-            "type": "md",
-            "url": "/manuales/06_EETT Civiles_Rv01.md"
-          }
-        ]
+        "resources": []
       },
       {
         "id": "GN57dq1N7Rg",
@@ -520,13 +484,7 @@
         "status": "OCULTA",
         "title": "GIP Lección 02: Modelos de IA y Procesamiento de Documentos (Clase 1)",
         "desc": "Clase del 14 de Junio: Uso y configuración del ecosistema de modelos de Google AI Studio, metodologías ante límites de tokens y pipelines prácticos para convertir expedientes PDF a Markdown.",
-        "resources": [
-          {
-            "title": "Resumen Interactivo de la Clase 2 (HTML)",
-            "type": "html",
-            "url": "/manuales/resumen_clase_2.html"
-          }
-        ]
+        "resources": []
       },
       {
         "id": "5rvU9Tk0aEw",
@@ -534,13 +492,7 @@
         "status": "OCULTA",
         "title": "GIP Lección 01: El Despertar: Dashboards HTML y Mermaid (Introducción)",
         "desc": "Clase del 31 de Mayo: Generación de reportes interactivos, diagramas de flujo de trabajo profesionales con Mermaid y bases de la IA aplicada a la gestión de proyectos sin saber programar.",
-        "resources": [
-          {
-            "title": "Resumen Interactivo de la Clase 1 (HTML)",
-            "type": "html",
-            "url": "/manuales/resumen_clase_1.html"
-          }
-        ]
+        "resources": []
       }
     ]
   },

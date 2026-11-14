@@ -50,9 +50,9 @@ const agentesEspecializados = [
     icono: "view_in_ar",
     duracionVideo: "14 min",
     tiempoEntrega: "45 segundos",
-    problema: "¿Coordinar planos 2D en CAD, cronogramas de cientos de tareas y presupuestos desvinculados sin visualizar la obra en el tiempo?",
-    solucion: "Le proporcionas al Agente tus Planos (DWG/DXF), Cronograma (P6/MSP) y Presupuesto, y genera un Visor Web 3D 4D/5D interactivo con semáforo constructivo, Curva S y Lookahead.",
-    entregable: "Visor 3D interactivo en HTML/Three.js autocontenido, simulación temporal 4D, panel de costos 5D (EVM), Curva S y Lookahead a 4 semanas.",
+    problema: "¿Tu proyecto no fue modelado en Revit y necesitas coordinar planos 2D en CAD, cronogramas de cientos de tareas y presupuestos desvinculados sin poder visualizar la obra en el tiempo?",
+    solucion: "Si tu proyecto no fue configurado con Revit, este agente es la solución para tener un visor 3D vinculado al presupuesto y al cronograma como en aplicativos de última generación (Revit, Navisworks). Convierte tus planos en 2D (DWG/DXF) + presupuesto + cronograma (P6/MSP) en un visor 3D totalmente interactivo donde puedes hacer un recorrido virtual, con semáforo constructivo, Curva S y Lookahead.",
+    entregable: "Visor 3D interactivo en HTML/Three.js autocontenido con recorrido virtual, simulación temporal 4D, panel de costos 5D (EVM), Curva S y Lookahead a 4 semanas.",
     videoId: "skWw6d2JAes",
     tiktokUrl: "https://vt.tiktok.com/ZSgyYmMFX/",
     whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente de Planeamiento de Obra 4D y 5D (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
@@ -524,11 +524,10 @@ function ServiciosContent() {
               type="button"
               aria-pressed={activeTab === "agentes"}
               onClick={() => changeTab("agentes")}
-              className={`px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 ${
-                activeTab === "agentes"
+              className={`px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 ${activeTab === "agentes"
                   ? "bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 shadow-[0_0_30px_rgba(16,185,129,0.45)] ring-2 ring-emerald-400/50"
                   : "bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 border border-emerald-500/20"
-              }`}
+                }`}
             >
               <span className="material-symbols-outlined text-base">smart_toy</span>
               <span>Soluciones Agénticas</span>
@@ -538,11 +537,10 @@ function ServiciosContent() {
               type="button"
               aria-pressed={activeTab === "consultoria"}
               onClick={() => changeTab("consultoria")}
-              className={`px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 ${
-                activeTab === "consultoria"
+              className={`px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 ${activeTab === "consultoria"
                   ? "bg-amber-500 text-slate-950 shadow-[0_0_30px_rgba(245,158,11,0.45)] ring-2 ring-amber-400/50"
                   : "bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 border border-amber-500/20"
-              }`}
+                }`}
             >
               <span className="material-symbols-outlined text-base">engineering</span>
               <span>Consultoría y Asesoría Técnica</span>
@@ -624,11 +622,10 @@ function ServiciosContent() {
                   <button
                     type="button"
                     onClick={() => setStatusFilter("todos")}
-                    className={`min-w-0 px-2 md:px-3.5 py-2 rounded-xl text-[10px] md:text-xs font-bold uppercase leading-tight tracking-wide transition-all ${
-                      statusFilter === "todos"
+                    className={`min-w-0 px-2 md:px-3.5 py-2 rounded-xl text-[10px] md:text-xs font-bold uppercase leading-tight tracking-wide transition-all ${statusFilter === "todos"
                         ? "bg-cyan-500 text-slate-950 shadow-[0_0_15px_rgba(245,168,0,0.3)] font-black"
                         : "bg-slate-950/80 text-slate-400 hover:text-white border border-slate-800"
-                    }`}
+                      }`}
                   >
                     Todos ({agentesEspecializados.length})
                   </button>
@@ -636,11 +633,10 @@ function ServiciosContent() {
                   <button
                     type="button"
                     onClick={() => setStatusFilter("disponibles")}
-                    className={`min-w-0 px-2 md:px-3.5 py-2 rounded-xl text-[10px] md:text-xs font-bold uppercase leading-tight tracking-wide transition-all flex items-center justify-center gap-1 ${
-                      statusFilter === "disponibles"
+                    className={`min-w-0 px-2 md:px-3.5 py-2 rounded-xl text-[10px] md:text-xs font-bold uppercase leading-tight tracking-wide transition-all flex items-center justify-center gap-1 ${statusFilter === "disponibles"
                         ? "bg-red-600 text-white shadow-[0_0_15px_rgba(239,68,68,0.3)] font-black"
                         : "bg-slate-950/80 text-slate-400 hover:text-white border border-slate-800"
-                    }`}
+                      }`}
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
                     Disponibles ({countDisponibles})
@@ -649,11 +645,10 @@ function ServiciosContent() {
                   <button
                     type="button"
                     onClick={() => setStatusFilter("proximos")}
-                    className={`min-w-0 px-2 md:px-3.5 py-2 rounded-xl text-[10px] md:text-xs font-bold uppercase leading-tight tracking-wide transition-all flex items-center justify-center gap-1 ${
-                      statusFilter === "proximos"
+                    className={`min-w-0 px-2 md:px-3.5 py-2 rounded-xl text-[10px] md:text-xs font-bold uppercase leading-tight tracking-wide transition-all flex items-center justify-center gap-1 ${statusFilter === "proximos"
                         ? "bg-amber-500 text-slate-950 shadow-[0_0_15px_rgba(245,158,11,0.3)] font-black"
                         : "bg-slate-950/80 text-slate-400 hover:text-white border border-slate-800"
-                    }`}
+                      }`}
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
                     Próximamente ({countProximos})
@@ -686,15 +681,14 @@ function ServiciosContent() {
                     return (
                       <div
                         key={agente.id}
-                        className={`rounded-2xl border-2 transition-all duration-300 backdrop-blur-sm overflow-hidden ${
-                          isExpanded
+                        className={`rounded-2xl border-2 transition-all duration-300 backdrop-blur-sm overflow-hidden ${isExpanded
                             ? agente.estado === "Publicado en YouTube"
                               ? "border-cyan-500/60 bg-slate-900/90 shadow-[0_0_30px_rgba(245,168,0,0.18)] ring-1 ring-cyan-500/30"
                               : "border-slate-700 bg-slate-900/90 shadow-lg"
                             : agente.estado === "Publicado en YouTube"
-                            ? "border-cyan-500/40 bg-slate-900/60 hover:border-cyan-400/70 hover:bg-slate-900/80"
-                            : "border-slate-800/80 bg-slate-900/40 hover:border-slate-700 hover:bg-slate-900/60"
-                        }`}
+                              ? "border-cyan-500/40 bg-slate-900/60 hover:border-cyan-400/70 hover:bg-slate-900/80"
+                              : "border-slate-800/80 bg-slate-900/40 hover:border-slate-700 hover:bg-slate-900/60"
+                          }`}
                       >
                         {/* Cabecera Comprimible (Siempre Visible y Clickeable) */}
                         <button
@@ -706,21 +700,19 @@ function ServiciosContent() {
                         >
                           {/* Izquierda: Ícono, Título, Tag y Especialidad */}
                           <div className="flex items-center gap-3.5 min-w-0 flex-1">
-                            <div className={`w-9 h-9 rounded-lg border flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 ${
-                              agente.estado === "Publicado en YouTube"
+                            <div className={`w-9 h-9 rounded-lg border flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 ${agente.estado === "Publicado en YouTube"
                                 ? "bg-cyan-950/80 border-cyan-500/50 text-cyan-300"
                                 : "bg-slate-800 border-slate-700 text-slate-300"
-                            }`}>
-                                <span className="material-symbols-outlined text-xl">{agente.icono}</span>
+                              }`}>
+                              <span className="material-symbols-outlined text-xl">{agente.icono}</span>
                             </div>
 
                             <div className="min-w-0 flex-1">
                               <div className="flex flex-wrap items-center gap-2 mb-0.5">
-                                <h3 className={`text-sm sm:text-base font-bold leading-tight transition-colors ${
-                                  agente.estado === "Publicado en YouTube"
+                                <h3 className={`text-sm sm:text-base font-bold leading-tight transition-colors ${agente.estado === "Publicado en YouTube"
                                     ? "text-white group-hover:text-cyan-300"
                                     : "text-slate-200 group-hover:text-white"
-                                }`}>
+                                  }`}>
                                   {agente.nombre}
                                 </h3>
                                 <span className="hidden sm:inline text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
@@ -761,9 +753,8 @@ function ServiciosContent() {
                               <span className="hidden sm:inline text-[11px] uppercase tracking-wider">
                                 {isExpanded ? "Ocultar" : "Detalles"}
                               </span>
-                              <span className={`material-symbols-outlined text-xl transition-transform duration-300 ${
-                                isExpanded ? "rotate-180 text-cyan-400" : "text-slate-400"
-                              }`}>
+                              <span className={`material-symbols-outlined text-xl transition-transform duration-300 ${isExpanded ? "rotate-180 text-cyan-400" : "text-slate-400"
+                                }`}>
                                 expand_more
                               </span>
                             </div>
@@ -820,11 +811,10 @@ function ServiciosContent() {
                                   href={`https://wa.me/51993147501?text=${encodeURIComponent(agente.whatsappMsg)}`}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className={`px-4 py-3 rounded-xl font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2 shadow-lg hover:scale-[1.02] ${
-                                    agente.estado === "Publicado en YouTube"
+                                  className={`px-4 py-3 rounded-xl font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2 shadow-lg hover:scale-[1.02] ${agente.estado === "Publicado en YouTube"
                                       ? "bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.3)]"
                                       : "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700"
-                                  }`}
+                                    }`}
                                 >
                                   <span className="material-symbols-outlined text-base">chat</span>
                                   {agente.estado === "Publicado en YouTube" ? "Quiero el Agente (+51 993 147 501)" : "Lista de Espera (WhatsApp)"}
@@ -849,7 +839,7 @@ function ServiciosContent() {
                                       title="TikTok: Alcance y resultado obtenido"
                                     >
                                       <svg className="w-3.5 h-3.5 fill-current text-cyan-400" viewBox="0 0 24 24">
-                                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z" />
                                       </svg>
                                       TikTok (Alcance)
                                     </Link>
@@ -953,11 +943,10 @@ function ServiciosContent() {
                           key={clase.id}
                           type="button"
                           onClick={() => setSelectedFreeClass(clase)}
-                          className={`w-full flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-3.5 p-3.5 rounded-2xl transition-all text-left group ${
-                            isSelected
+                          className={`w-full flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-3.5 p-3.5 rounded-2xl transition-all text-left group ${isSelected
                               ? "bg-cyan-500/15 border border-cyan-500/40 shadow-[0_0_20px_rgba(6,182,212,0.12)]"
                               : "bg-slate-900/50 hover:bg-white/5 border border-slate-800/80"
-                          }`}
+                            }`}
                         >
                           <div className="relative w-full sm:w-32 lg:w-full xl:w-28 aspect-video rounded-xl overflow-hidden flex-shrink-0 bg-black border border-white/10">
                             <Image
@@ -967,9 +956,8 @@ function ServiciosContent() {
                               className="object-cover group-hover:scale-105 transition-transform opacity-80"
                             />
                             <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                              <span className={`material-symbols-outlined text-2xl ${
-                                isSelected ? "text-cyan-400" : "text-white/80 group-hover:text-red-400"
-                              }`}>
+                              <span className={`material-symbols-outlined text-2xl ${isSelected ? "text-cyan-400" : "text-white/80 group-hover:text-red-400"
+                                }`}>
                                 {isSelected ? "equalizer" : "play_circle"}
                               </span>
                             </div>
@@ -977,11 +965,10 @@ function ServiciosContent() {
 
                           <div className="flex flex-col justify-center min-w-0 flex-1">
                             <div className="flex items-center gap-2 mb-1">
-                              <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded ${
-                                isSelected
+                              <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded ${isSelected
                                   ? "bg-cyan-400 text-slate-950"
                                   : "bg-red-950/80 text-red-400 border border-red-500/30"
-                              }`}>
+                                }`}>
                                 CLASE {clase.num}
                               </span>
                               {isSelected && (
@@ -990,9 +977,8 @@ function ServiciosContent() {
                                 </span>
                               )}
                             </div>
-                            <span className={`text-xs font-bold leading-snug uppercase tracking-tight ${
-                              isSelected ? "text-cyan-300" : "text-slate-200 group-hover:text-white"
-                            }`}>
+                            <span className={`text-xs font-bold leading-snug uppercase tracking-tight ${isSelected ? "text-cyan-300" : "text-slate-200 group-hover:text-white"
+                              }`}>
                               {clase.titulo}
                             </span>
                             <p className="text-[11px] text-slate-400 line-clamp-2 mt-1">
@@ -1203,7 +1189,7 @@ function ServiciosContent() {
                       className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-black hover:bg-zinc-800 text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 border border-pink-500/40"
                     >
                       <svg className="w-3.5 h-3.5 fill-current text-cyan-400" viewBox="0 0 24 24">
-                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z" />
                       </svg>
                       Ver Alcance en TikTok
                     </Link>

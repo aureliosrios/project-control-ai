@@ -79,8 +79,8 @@ export default function Home() {
           {/* Manifiesto y Tesis de Project Control AI */}
           <p className="text-base sm:text-xl text-slate-300 leading-relaxed max-w-3xl mx-auto font-normal pt-2">
             En <strong className="text-white font-semibold">Project Control AI</strong> tenemos la misión de brindar{" "}
-            <span className="text-cyan-300 font-semibold">soluciones agénticas</span> a los profesionales y empresas de la construcción. 
-            Nos hemos dado cuenta de que el software tradicional ya no es suficiente: es inflexible, cerrado y te obliga a trabajar a su manera. 
+            <span className="text-cyan-300 font-semibold">soluciones agénticas</span> a los profesionales y empresas de la construcción.
+            Nos hemos dado cuenta de que el software tradicional ya no es suficiente: es inflexible, cerrado y te obliga a trabajar a su manera.
             Hoy el software rígido ya no es la solución; hoy la clave es{" "}
             <strong className="text-white font-semibold">adaptar la Inteligencia Artificial a la medida exacta de tu proyecto, de tu empresa o de tus necesidades individuales</strong>.
           </p>
@@ -200,7 +200,7 @@ export default function Home() {
               </h2>
 
               <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-                Le proporcionas tus Planos (DWG/DXF), Cronograma y Presupuesto, y el agente genera en segundos un <strong>Visor Web 3D interactivo autocontenido</strong> con semáforo temporal 4D, panel de costos 5D (EVM), Curva S y Lookahead a 4 semanas.
+                ¿Tu proyecto no fue configurado con Revit? Este agente convierte tus <strong>planos en 2D (DWG/DXF) + presupuesto + cronograma</strong> en un <strong>Visor Web 3D totalmente interactivo</strong> vinculado al costo y al tiempo —como en aplicativos de última generación (Revit, Navisworks)— donde puedes hacer un <strong>recorrido virtual</strong> con semáforo temporal 4D, panel de costos 5D (EVM), Curva S y Lookahead a 4 semanas.
               </p>
 
               {/* Caja de Inversión y Medios de Pago */}
@@ -292,7 +292,7 @@ export default function Home() {
                   title="TikTok: Alcance y resultado obtenido"
                 >
                   <svg className="w-3.5 h-3.5 fill-current text-cyan-400" viewBox="0 0 24 24">
-                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z" />
                   </svg>
                   TikTok (Alcance)
                 </Link>
@@ -424,7 +424,7 @@ export default function Home() {
                   title="TikTok: Alcance y resultado obtenido"
                 >
                   <svg className="w-3.5 h-3.5 fill-current text-cyan-400" viewBox="0 0 24 24">
-                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z" />
                   </svg>
                   TikTok (Alcance)
                 </Link>
@@ -556,7 +556,7 @@ export default function Home() {
                   title="TikTok: Alcance y resultado obtenido"
                 >
                   <svg className="w-3.5 h-3.5 fill-current text-cyan-400" viewBox="0 0 24 24">
-                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z" />
                   </svg>
                   TikTok (Alcance)
                 </Link>
@@ -688,7 +688,7 @@ export default function Home() {
                   title="TikTok: Alcance y resultado obtenido"
                 >
                   <svg className="w-3.5 h-3.5 fill-current text-cyan-400" viewBox="0 0 24 24">
-                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z" />
                   </svg>
                   TikTok (Alcance)
                 </Link>
@@ -858,7 +858,7 @@ export default function Home() {
                   title="TikTok: Alcance y resultado obtenido"
                 >
                   <svg className="w-3.5 h-3.5 fill-current text-cyan-400" viewBox="0 0 24 24">
-                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z" />
                   </svg>
                   TikTok (Alcance)
                 </Link>
@@ -990,7 +990,7 @@ export default function Home() {
                   title="TikTok: Alcance y resultado obtenido"
                 >
                   <svg className="w-3.5 h-3.5 fill-current text-cyan-400" viewBox="0 0 24 24">
-                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z" />
                   </svg>
                   TikTok (Alcance)
                 </Link>
@@ -1122,7 +1122,7 @@ export default function Home() {
                   title="TikTok: Alcance y resultado obtenido"
                 >
                   <svg className="w-3.5 h-3.5 fill-current text-cyan-400" viewBox="0 0 24 24">
-                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z" />
                   </svg>
                   TikTok (Alcance)
                 </Link>
@@ -1316,7 +1316,7 @@ export default function Home() {
         <div className="max-w-3xl mb-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-400 text-xs font-black uppercase tracking-[0.2em] mb-4">
             <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z" />
             </svg>
             Canal Oficial TikTok · @project.control.a
           </div>
@@ -1334,18 +1334,18 @@ export default function Home() {
 
           {/* Header perfil del Ing. Aurelio Solórzano */}
           <div className="mb-4">
-            <Link 
+            <Link
               href="https://wa.me/51993147501?text=Hola%20Ing.%20Aurelio,%20vengo%20de%20TikTok%20y%20necesito%20una%20consulta%20especializada."
               target="_blank"
               className="flex items-center gap-4 w-full bg-slate-900/90 p-4 rounded-2xl border border-cyan-500/30 shadow-lg group hover:border-cyan-400 hover:scale-[1.01] transition-all"
             >
               <div className="relative w-14 h-14 sm:w-16 sm:h-16 shrink-0">
-                <Image 
-                  src="/images/Aurelio Solorzano.png" 
-                  alt="Ing. Aurelio Solorzano" 
-                  fill 
+                <Image
+                  src="/images/Aurelio Solorzano.png"
+                  alt="Ing. Aurelio Solorzano"
+                  fill
                   sizes="64px"
-                  className="rounded-full object-cover border-2 border-cyan-400" 
+                  className="rounded-full object-cover border-2 border-cyan-400"
                 />
                 <div className="absolute bottom-0 right-0 w-4 h-4 bg-emerald-500 border-2 border-[#14161a] rounded-full shadow-[0_0_10px_rgba(16,185,129,0.8)]" />
               </div>
@@ -1364,8 +1364,8 @@ export default function Home() {
 
           {/* ⭐ HERO DESTACADO: GRUPO GRATUITO DE WHATSAPP */}
           <div className="mb-6">
-            <Link 
-              href="https://chat.whatsapp.com/Jq7YgCGPFpoKyEaQ2mwRx7" 
+            <Link
+              href="https://chat.whatsapp.com/Jq7YgCGPFpoKyEaQ2mwRx7"
               target="_blank"
               rel="noopener noreferrer"
               className="relative block w-full overflow-hidden p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-950/90 via-slate-950 to-emerald-950/80 border-2 border-emerald-400/90 shadow-[0_0_30px_rgba(16,185,129,0.35)] group hover:border-emerald-300 hover:scale-[1.02] transition-all"
@@ -1408,8 +1408,8 @@ export default function Home() {
           {/* Stack de Enlaces Rápidos (/mobile) */}
           <div className="space-y-3.5">
             {/* 1. Cursos Asincrónicos */}
-            <Link 
-              href="/formacion?tab=asinc#catalogo-formacion" 
+            <Link
+              href="/formacion?tab=asinc#catalogo-formacion"
               className="block w-full bg-slate-900/80 p-4 rounded-2xl border border-purple-500/30 hover:border-purple-400 transition-all group hover:scale-[1.01]"
             >
               <div className="flex items-center gap-3.5">
@@ -1436,8 +1436,8 @@ export default function Home() {
             </Link>
 
             {/* 2. Cursos Sincrónicos */}
-            <Link 
-              href="/formacion?tab=sinc#catalogo-formacion" 
+            <Link
+              href="/formacion?tab=sinc#catalogo-formacion"
               className="block w-full bg-slate-900/80 p-4 rounded-2xl border border-emerald-500/30 hover:border-emerald-400 transition-all group hover:scale-[1.01]"
             >
               <div className="flex items-center gap-3.5">
@@ -1464,8 +1464,8 @@ export default function Home() {
             </Link>
 
             {/* 3. Soluciones Agénticas */}
-            <Link 
-              href="/servicios?tab=agentes#agentes" 
+            <Link
+              href="/servicios?tab=agentes#agentes"
               className="block w-full bg-slate-900/80 p-4 rounded-2xl border border-cyan-500/30 hover:border-cyan-400 transition-all group hover:scale-[1.01]"
             >
               <div className="flex items-center gap-3.5">
@@ -1492,8 +1492,8 @@ export default function Home() {
             </Link>
 
             {/* 4. Consultorías */}
-            <Link 
-              href="/servicios?tab=consultoria#consultoria" 
+            <Link
+              href="/servicios?tab=consultoria#consultoria"
               className="block w-full bg-slate-900/80 p-4 rounded-2xl border border-amber-500/30 hover:border-amber-400 transition-all group hover:scale-[1.01]"
             >
               <div className="flex items-center gap-3.5">
@@ -1521,9 +1521,9 @@ export default function Home() {
 
             {/* Redes y Comunidad */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-2">
-              <Link 
-                href="https://chat.whatsapp.com/Jq7YgCGPFpoKyEaQ2mwRx7" 
-                target="_blank" 
+              <Link
+                href="https://chat.whatsapp.com/Jq7YgCGPFpoKyEaQ2mwRx7"
+                target="_blank"
                 className="flex items-center gap-2.5 p-3 rounded-xl bg-slate-900/60 border border-emerald-500/20 hover:border-emerald-500/50 transition-all group"
               >
                 <span className="material-symbols-outlined text-emerald-400 text-lg">group</span>
@@ -1533,9 +1533,9 @@ export default function Home() {
                 </div>
               </Link>
 
-              <Link 
-                href="https://www.youtube.com/@aurelioalfonsosolorzanorios" 
-                target="_blank" 
+              <Link
+                href="https://www.youtube.com/@aurelioalfonsosolorzanorios"
+                target="_blank"
                 className="flex items-center gap-2.5 p-3 rounded-xl bg-slate-900/60 border border-red-500/20 hover:border-red-500/50 transition-all group"
               >
                 <span className="material-symbols-outlined text-red-500 text-lg">subscriptions</span>
@@ -1545,13 +1545,13 @@ export default function Home() {
                 </div>
               </Link>
 
-              <Link 
-                href="https://vt.tiktok.com/ZSgyYmMFX/" 
-                target="_blank" 
+              <Link
+                href="https://vt.tiktok.com/ZSgyYmMFX/"
+                target="_blank"
                 className="flex items-center gap-2.5 p-3 rounded-xl bg-slate-900/60 border border-pink-500/20 hover:border-pink-500/50 transition-all group"
               >
                 <svg className="w-4 h-4 fill-current text-pink-400 shrink-0" viewBox="0 0 24 24">
-                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z" />
                 </svg>
                 <div className="text-left min-w-0">
                   <span className="block text-[11px] font-bold text-white group-hover:text-pink-300 truncate">TikTok Oficial</span>
@@ -1562,8 +1562,8 @@ export default function Home() {
 
             {/* Botón a /mobile */}
             <div className="pt-4 text-center">
-              <Link 
-                href="/mobile" 
+              <Link
+                href="/mobile"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-pink-600 via-purple-600 to-cyan-600 hover:from-pink-500 hover:to-cyan-500 text-white font-black text-xs uppercase tracking-widest transition-all shadow-[0_0_25px_rgba(236,72,153,0.3)] hover:scale-105"
               >
                 <span className="material-symbols-outlined text-sm">smartphone</span>

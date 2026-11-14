@@ -1252,6 +1252,121 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        {/* Agente 9: Programador Gantt & VBA (MS Project) */}
+        <div className="p-8 sm:p-12 rounded-[40px] bg-gradient-to-br from-[#171a1e] via-slate-900 to-[#14161a] border-2 border-blue-500/50 shadow-[0_0_50px_rgba(59,130,246,0.18)] relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 blur-[90px] pointer-events-none" />
+
+          <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+            <div className="max-w-2xl space-y-4">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full bg-red-950 text-red-400 border border-red-500/40 flex items-center gap-1.5 shadow-[0_0_12px_rgba(239,68,68,0.3)]">
+                  <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
+                  Nuevo Lanzamiento · Disponible Ahora
+                </span>
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-blue-950 text-blue-300 border border-blue-800">
+                  MS PROJECT & VBA
+                </span>
+                <span className="text-[10px] font-mono font-bold text-blue-300 bg-blue-950/60 px-2 py-1 rounded border border-blue-800/40">
+                  ⚡ 30 segundos
+                </span>
+              </div>
+
+              <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight uppercase leading-tight">
+                Agente Programador Gantt &amp; VBA (MS Project)
+              </h2>
+
+              <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                <strong>Entrada de datos:</strong> un presupuesto o cronograma en Excel o PDF, por ejemplo un export de Presto con análisis de precios unitarios. El agente lee metrados, APU, rendimientos y cuadrillas, calcula las duraciones (metrado ÷ rendimiento × cuadrillas) y propone la red de actividades con vínculos, desfases, hitos y plazo contractual, confirmando contigo la fecha de inicio y el calendario antes de exportar. <strong>Salida de datos:</strong> archivo nativo <em>.MPP</em> listo para abrir en Microsoft Project, módulo VBA (<em>.bas</em>), JSON validado con trazabilidad de cada dato y resumen con supuestos.
+              </p>
+
+              {/* Caja de Inversión y Medios de Pago */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-black/60 border border-blue-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4 max-w-xl">
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 block font-bold">Inversión del Agente</span>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-2xl sm:text-3xl font-black text-emerald-400 font-mono">S/ 70 PEN</span>
+                    <span className="text-xs text-slate-400 font-bold">ó</span>
+                    <span className="text-xl sm:text-2xl font-black text-cyan-300 font-mono">$25 USD</span>
+                  </div>
+                </div>
+                <div className="text-xs text-slate-300 space-y-1.5 border-t sm:border-t-0 sm:border-l border-slate-800 pt-3 sm:pt-0 sm:pl-4">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-purple-400 shrink-0" />
+                    <span><strong>Perú (Yape / Plin):</strong> 51 993147501</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0" />
+                    <span><strong>Extranjero (PayPal):</strong> $25 USD</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Acciones y Medios de Pago */}
+            <div className="flex flex-col gap-3 w-full lg:w-auto shrink-0 min-w-[280px]">
+              <div className="grid grid-cols-2 gap-2">
+                <a
+                  href="https://paypal.me/ProjectControlAI/25USD"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 shadow-md hover:scale-[1.02]"
+                >
+                  <span className="material-symbols-outlined text-sm">payment</span>
+                  PayPal ($25)
+                </a>
+                <a
+                  href={`https://wa.me/51993147501?text=${encodeURIComponent("Hola Ing. Aurelio, deseo adquirir el Agente Programador Gantt & VBA (MS Project) por Yape / Plin (S/ 70). Adjunto mi comprobante al 51 993147501.")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 shadow-md hover:scale-[1.02]"
+                >
+                  <span className="material-symbols-outlined text-sm">phone_iphone</span>
+                  Yape / Plin (S/ 70)
+                </a>
+              </div>
+
+              <a
+                href={`https://wa.me/51993147501?text=${encodeURIComponent("Hola Ing. Aurelio, deseo adquirir el Agente Programador Gantt & VBA (MS Project) (S/ 70 o $25 USD).")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.35)] hover:scale-[1.02]"
+              >
+                <span className="material-symbols-outlined text-base">chat</span>
+                Quiero el Agente (+51 993 147 501)
+              </a>
+
+              {/* Explicación del video en YouTube */}
+              <div className="p-3 rounded-xl bg-slate-950/80 border border-white/10 text-[11px] space-y-1.5 text-slate-300">
+                <div className="flex items-start gap-2">
+                  <span className="material-symbols-outlined text-red-500 text-sm shrink-0 mt-0.5">play_circle</span>
+                  <p className="leading-tight">
+                    <strong className="text-white font-bold">YouTube:</strong> Demostración: del presupuesto con APU al cronograma en MS Project (.MPP y VBA).
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-2">
+                <Link
+                  href="https://youtu.be/qpL0cwAror4"
+                  target="_blank"
+                  className="flex-1 px-3 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 shadow-md hover:scale-[1.02]"
+                  title="YouTube: Demostración del Agente Programador Gantt & VBA (MS Project)"
+                >
+                  <span className="material-symbols-outlined text-sm">play_circle</span>
+                  YouTube (8 min)
+                </Link>
+              </div>
+
+              <Link
+                href="/servicios?tab=agentes#agentes"
+                className="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 text-center text-[11px] font-bold uppercase tracking-wider transition-colors"
+              >
+                Ver Catálogo de Agentes
+              </Link>
+            </div>
+          </div>
+        </div>
       </section>
 
 

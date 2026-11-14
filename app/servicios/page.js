@@ -275,28 +275,28 @@ const agentesEspecializados = [
   {
     id: "agente-msproject",
     nombre: "Agente Programador Gantt & VBA (MS Project)",
-    especialidad: "Planeamiento y Programación",
+    especialidad: "Presupuesto con APU a Cronograma, Duraciones, Cuadrillas y Archivo .MPP",
     tag: "MS PROJECT & VBA",
-    estado: "Próximamente",
+    estado: "Publicado en YouTube",
     precioSoles: "S/ 70",
     precioDolares: "$25 USD",
     yape: "51 993147501",
     paypalUrl: "https://paypal.me/ProjectControlAI/25USD",
     theme: {
-      border: "border-slate-800 hover:border-slate-700",
-      bg: "bg-slate-900/50",
-      badge: "bg-slate-800 text-slate-300 border border-slate-700 font-bold",
-      pill: "bg-slate-800/80 text-slate-400 border border-slate-700/60",
-      btn: "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700"
+      border: "border-blue-500/40 hover:border-blue-400",
+      bg: "bg-slate-900/60",
+      badge: "bg-red-950 text-red-300 border border-red-500/40 font-bold",
+      pill: "bg-slate-800/80 text-blue-400 border border-blue-800/60",
+      btn: "bg-red-600 hover:bg-red-500 text-white"
     },
     icono: "calendar_month",
-    duracionVideo: "15 min",
-    tiempoEntrega: "20 segundos",
-    problema: "¿Vincular cientos de tareas una por una, ajustar calendarios y nivelar recursos a mano en MS Project te toma días?",
-    solucion: "Convierte cualquier WBS o presupuesto en un cronograma estructurado con ruta crítica CPM, hitos y duraciones calculadas con macros VBA.",
-    entregable: "Script VBA (.bas) listo para importar directamente a MS Project, generando el cronograma y diagrama de Gantt sin errores.",
-    videoId: "NjWnA5b9Zho",
-    whatsappMsg: "Hola Ing. Aurelio, deseo adquirir / reservar el Agente Programador Gantt & VBA (MS Project) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
+    duracionVideo: "8 min",
+    tiempoEntrega: "30 segundos",
+    problema: "¿Vincular cientos de tareas una por una, calcular duraciones partida por partida con los rendimientos del APU, estimar cuadrillas y ajustar calendarios a mano en MS Project te toma días?",
+    solucion: "Entrada de datos: recibe un presupuesto o cronograma en Excel o PDF (por ejemplo, un export de Presto con análisis de precios unitarios). Lee metrados, APU, rendimientos y cuadrillas, calcula las duraciones (metrado ÷ rendimiento × cuadrillas), propone la red de actividades con vínculos y desfases, hitos y plazo contractual, y confirma contigo la fecha de inicio y el calendario (días, turnos y feriados) antes de exportar.",
+    entregable: "Salida de datos: archivo nativo .MPP listo para abrir en Microsoft Project, módulo VBA (.bas) para regenerar el cronograma, JSON validado con la trazabilidad de cada dato (hoja y celda de origen) y resumen en Markdown con supuestos y decisiones que cambian la programación.",
+    videoId: "qpL0cwAror4",
+    whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente Programador Gantt & VBA (MS Project) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },
   {
     id: "agente-contratos",

@@ -742,10 +742,29 @@ export default function Home() {
                 </div>
                 <div className="p-3.5 rounded-2xl bg-slate-950/70 border border-cyan-500/30">
                   <div className="text-[11px] font-black uppercase tracking-wider text-cyan-300 mb-1">
-                    2. Agente Edificaciones y Habilitación Urbana
+                    2. Agente Edificaciones y Habilitación Urbana (Perú)
                   </div>
                   <p className="text-xs text-slate-300 leading-relaxed">
-                    Cumple con la Norma Técnica de Metrados para Obras de Edificación y Habilitaciones Urbanas (R.D. N° 073-2010 / RNE).
+                    Cumple con la Normativa Peruana de Metrados para Obras de Edificación y Habilitaciones Urbanas (R.D. N° 073-2010 / RNE).
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-3 max-w-2xl">
+                <div className="p-3.5 rounded-2xl bg-slate-950/70 border border-teal-500/30">
+                  <div className="text-[11px] font-black uppercase tracking-wider text-teal-300 mb-1">
+                    1. Agente Genérico (Cualquier Proyecto)
+                  </div>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    Multi-disciplina (civil, mecánica, electricidad e instrumentación) estructurado según la WBS/EDT de tu proyecto.
+                  </p>
+                </div>
+                <div className="p-3.5 rounded-2xl bg-slate-950/70 border border-cyan-500/30">
+                  <div className="text-[11px] font-black uppercase tracking-wider text-cyan-300 mb-1">
+                    2. Agente Edificaciones y Habilitación Urbana (Perú)
+                  </div>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    Cumple con la Normativa Peruana de Metrados para Obras de Edificación y Habilitaciones Urbanas (R.D. N° 073-2010 / RNE).
                   </p>
                 </div>
               </div>

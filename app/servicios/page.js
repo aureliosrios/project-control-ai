@@ -247,6 +247,32 @@ const agentesEspecializados = [
     whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente de Valorizaciones de Obra Pública (Perú) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },
   {
+    id: "agente-estados-de-pago-privado",
+    nombre: "Agente de Estados de Pago (Valorización) - Obra Privada",
+    especialidad: "Obra Privada a Suma Alzada (FIDIC · NEC4 · PMI), Sustento Trazable de Metrados y Órdenes de Cambio",
+    tag: "ESTADOS DE PAGO & EDP",
+    estado: "Publicado en YouTube",
+    precioSoles: "S/ 70",
+    precioDolares: "$25 USD",
+    yape: "51 993147501",
+    paypalUrl: "https://paypal.me/ProjectControlAI/25USD",
+    theme: {
+      border: "border-emerald-500/40 hover:border-emerald-400",
+      bg: "bg-slate-900/60",
+      badge: "bg-red-950 text-red-300 border border-red-500/40 font-bold",
+      pill: "bg-slate-800/80 text-emerald-400 border border-emerald-800/60",
+      btn: "bg-red-600 hover:bg-red-500 text-white"
+    },
+    icono: "fact_check",
+    duracionVideo: "9 min",
+    tiempoEntrega: "60 segundos",
+    problema: "¿Valorizar una obra privada te obliga a cruzar cada mes cientos de reportes diarios (DPR), protocolos QA/QC, RFI, transmittals y órdenes de cambio sin poder demostrar fácilmente de dónde sale cada metrado certificado?",
+    solucion: "Entrada de datos: recibe hasta 7 grupos de insumos (Presupuesto APU, Cronograma LB-0, Reportes Diarios DPR, Protocolos de Cierre QA/QC, RFI y Transmittals, Control de Cambios CO/CV y EDP Anterior) en JSON, Excel o PDF. Si no cuentas con todos los insumos, la IA se adapta a la información disponible con la que cuentas o sustentas tus metrados para el EDP; sin embargo, está preparada para cualquier situación de un Estado de Pago. Ejecuta validaciones V01–V14 / E00–E04 sin inventar cifras, respeta la moneda original y calcula ambos criterios de certificación: solo lo protocolizado vs. protocolizado + reporte diario.",
+    entregable: "Salida de datos: libro Excel oficial por periodo con 8 hojas y fórmulas vivas verificadas con LibreOffice (Resumen_EDP, Contrato_Vigente, Valorizacion_Contractual, Valorizacion_Cambios, Sustento_Metrados con selector de criterio, Sustento_Metrados_CO, Sustento_Documental y Parametros), archivo JSON estructurado, Informe Ejecutivo en Markdown, Matriz Consolidada multi-EDP y reportes de verificación S01–S08.",
+    videoId: "lF7T_IA7g0A",
+    whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente de Estados de Pago (Valorización) - Obra Privada (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
+  },
+  {
     id: "agente-msproject",
     nombre: "Agente Programador Gantt & VBA (MS Project)",
     especialidad: "Planeamiento y Programación",

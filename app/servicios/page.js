@@ -141,7 +141,7 @@ const agentesEspecializados = [
   {
     id: "agente-metrados-dwg",
     nombre: "Agente Automatizador de Metrados (Planos DWG a Excel)",
-    especialidad: "Cuantificación de Planos CAD (DWG/DXF), WBS/EDT y Planillas de Metrados en Excel",
+    especialidad: "2 Agentes a elegir: Genérico (Cualquier Proyecto) o Normativa de Edificaciones y Habilitación Urbana",
     tag: "METRADOS · DWG A EXCEL",
     estado: "Publicado en YouTube",
     precioSoles: "S/ 70",
@@ -159,11 +159,11 @@ const agentesEspecializados = [
     duracionVideo: "65 min",
     tiempoEntrega: "30 segundos",
     problema: "¿Pasas semanas midiendo polilíneas a mano en AutoCAD, contando bloques uno por uno y digitando medidas en Excel con alto riesgo de duplicidades o partidas omitidas?",
-    solucion: "Automatiza la extracción geométrica de entidades desde planos nativos AutoCAD (.DWG y .DXF) con LibreDWG/Python, estructura partidas por WBS/EDT en múltiples disciplinas (civil, mecánica, electricidad e instrumentación) y genera planillas de metrados con fórmulas vivas auditadas matemáticamente.",
-    entregable: "Carpeta de proyecto con libro Excel oficial de metrados con fórmulas vivas (Resumen WBS, detalle por paquete de trabajo, fuentes y criterios), protocolos de cobertura y supuestos, y semáforo de calidad técnica.",
+    solucion: "Automatiza la extracción geométrica desde planos nativos AutoCAD (.DWG y .DXF) con LibreDWG/Python. El usuario puede elegir entre dos agentes según su proyecto: (1) Agente Genérico para cualquier proyecto y múltiples disciplinas (civil, mecánica, electricidad, instrumentación, infraestructura) por WBS/EDT; o (2) Agente Normativo especializado en la Norma Técnica de Metrados para Obras de Edificación y Habilitaciones Urbanas (R.D. N° 073-2010 / RNE).",
+    entregable: "Carpeta de proyecto con libro Excel oficial de metrados con fórmulas vivas auditadas matemáticamente (Resumen WBS o partidas normativas de Edificaciones y Habilitación Urbana, detalle por paquete de trabajo, fuentes y criterios), protocolos de cobertura y supuestos, y semáforo de calidad técnica.",
     videoId: "9FqLHJgDC94",
     tiktokUrl: "https://vt.tiktok.com/ZSgsPDX9M/",
-    whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente Automatizador de Metrados (Planos DWG a Excel) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
+    whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente Automatizador de Metrados (Planos DWG a Excel) (S/ 70 PEN / $25 USD) — Versión a elegir: [Genérico / Edificaciones y Habilitación Urbana]. Adjunto mi comprobante de pago."
   },
   {
     id: "agente-ingesta-s10",

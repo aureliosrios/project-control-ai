@@ -728,8 +728,27 @@ export default function Home() {
               </h2>
 
               <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-                Le proporcionas tus planos nativos en <strong>DWG o DXF</strong> y el agente cuantifica longitudes, áreas y conteo de bloques por atributos y capas, generando planillas de metrados en <strong>Excel (.xlsx) con fórmulas vivas</strong> y estructuradas según el WBS/EDT de la obra.
+                Le proporcionas tus planos nativos en <strong>DWG o DXF</strong> y el agente cuantifica longitudes, áreas y conteo de bloques por atributos y capas en <strong>Excel (.xlsx) con fórmulas vivas</strong>. Puedes elegir entre <strong>dos agentes</strong> según el tipo de obra:
               </p>
+
+              <div className="grid sm:grid-cols-2 gap-3 max-w-2xl">
+                <div className="p-3.5 rounded-2xl bg-slate-950/70 border border-teal-500/30">
+                  <div className="text-[11px] font-black uppercase tracking-wider text-teal-300 mb-1">
+                    1. Agente Genérico (Cualquier Proyecto)
+                  </div>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    Multi-disciplina (civil, mecánica, electricidad e instrumentación) estructurado según la WBS/EDT de tu proyecto.
+                  </p>
+                </div>
+                <div className="p-3.5 rounded-2xl bg-slate-950/70 border border-cyan-500/30">
+                  <div className="text-[11px] font-black uppercase tracking-wider text-cyan-300 mb-1">
+                    2. Agente Edificaciones y Habilitación Urbana
+                  </div>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    Cumple con la Norma Técnica de Metrados para Obras de Edificación y Habilitaciones Urbanas (R.D. N° 073-2010 / RNE).
+                  </p>
+                </div>
+              </div>
 
               {/* Caja de Inversión y Medios de Pago */}
               <div className="p-4 sm:p-5 rounded-2xl bg-black/60 border border-teal-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4 max-w-xl">
@@ -767,7 +786,7 @@ export default function Home() {
                   PayPal ($25)
                 </a>
                 <a
-                  href={`https://wa.me/51993147501?text=${encodeURIComponent("Hola Ing. Aurelio, deseo adquirir el Agente Automatizador de Metrados (Planos DWG a Excel) por Yape / Plin (S/ 70). Adjunto mi comprobante al 51 993147501.")}`}
+                  href={`https://wa.me/51993147501?text=${encodeURIComponent("Hola Ing. Aurelio, deseo adquirir el Agente Automatizador de Metrados (Planos DWG a Excel) — [Genérico / Edificaciones y Habilitación Urbana] por Yape / Plin (S/ 70). Adjunto mi comprobante al 51 993147501.")}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-4 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1.5 shadow-md hover:scale-[1.02]"
@@ -778,7 +797,7 @@ export default function Home() {
               </div>
 
               <a
-                href={`https://wa.me/51993147501?text=${encodeURIComponent("Hola Ing. Aurelio, deseo adquirir el Agente Automatizador de Metrados (Planos DWG a Excel) (S/ 70 o $25 USD).")}`}
+                href={`https://wa.me/51993147501?text=${encodeURIComponent("Hola Ing. Aurelio, deseo adquirir el Agente Automatizador de Metrados (Planos DWG a Excel) — [Genérico / Edificaciones y Habilitación Urbana] (S/ 70 o $25 USD).")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-5 py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.35)] hover:scale-[1.02]"

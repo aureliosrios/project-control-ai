@@ -13,5 +13,15 @@
     "curso": "Agente de IA: Presupuesto y programación",
     "edicion": "18/10/2026",
     "courseKey": "AGENTE_PPTO_PROG"
+  },
+  {
+    "curso": "Agentes de IA: Presupuesto y Cronograma de Obra",
+    "edicion": "15/11/2026",
+    "courseKey": "AGENTE_PPTO_CRONO"
+  },
+  {
+    "curso": "Presupuestos y Planificación de Obras con IA",
+    "edicion": "15/11/2026",
+    "courseKey": "AGENTE_PPTO_CRONO"
   }
 ]

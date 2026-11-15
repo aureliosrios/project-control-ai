@@ -314,6 +314,12 @@ export default function StudentPortal() {
 
   const activeZoomSessions = [
     {
+      courseKey: "AGENTE_PPTO_CRONO",
+      zoomUrl: "https://us06web.zoom.us/j/85951795621?pwd=naEJFAWPk1PbPr2AaHLpCXQLG10msb.1",
+      title: "Agentes de IA: Presupuesto y Cronograma de Obra (Turno Tarde: 03:00 PM - 06:00 PM)",
+      message: "¡Hoy inicia tu curso! La sesión sincrónica está activa (3:00 p.m. a 6:00 p.m.). Toca el botón de abajo para ingresar a tu clase de hoy."
+    },
+    {
       courseKey: "AGENTE_PPTO_PROG",
       zoomUrl: "https://us06web.zoom.us/j/85436610256?pwd=YkJk9hB35KYaXIbcswMsg11u5r2muf.1",
       title: "Agente de IA: Presupuesto y programación (Domingos 10:00 AM - 01:00 PM)",

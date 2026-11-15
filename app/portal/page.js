@@ -315,7 +315,7 @@ export default function StudentPortal() {
   const activeZoomSessions = [
     {
       courseKey: "AGENTE_PPTO_CRONO",
-      zoomUrl: "https://us06web.zoom.us/j/85951795621?pwd=naEJFAWPk1PbPr2AaHLpCXQLG10msb.1",
+      zoomUrl: "https://us06web.zoom.us/j/85450009166?pwd=tbpSbBcUU9Jba9SJydwas2KwD3bKe8.1",
       title: "Agentes de IA: Presupuesto y Cronograma de Obra (Turno Tarde: 03:00 PM - 06:00 PM)",
       message: "¡Hoy inicia tu curso! La sesión sincrónica está activa (3:00 p.m. a 6:00 p.m.). Toca el botón de abajo para ingresar a tu clase de hoy."
     },

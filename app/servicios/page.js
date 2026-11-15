@@ -299,6 +299,32 @@ const agentesEspecializados = [
     whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente Programador Gantt & VBA (MS Project) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },
   {
+    id: "agente-expediente-tecnico",
+    nombre: "Agente para Expediente Técnico (Cerebro Digital)",
+    especialidad: "Cerebro Digital del Proyecto, Trazabilidad Total, EETT y Consolidación Word (.docx)",
+    tag: "EXPEDIENTE TÉCNICO · CEREBRO DIGITAL",
+    estado: "Publicado en YouTube",
+    precioSoles: "S/ 70",
+    precioDolares: "$25 USD",
+    yape: "51 993147501",
+    paypalUrl: "https://paypal.me/ProjectControlAI/25USD",
+    theme: {
+      border: "border-violet-500/40 hover:border-violet-400",
+      bg: "bg-slate-900/60",
+      badge: "bg-red-950 text-red-300 border border-red-500/40 font-bold",
+      pill: "bg-slate-800/80 text-violet-400 border border-violet-800/60",
+      btn: "bg-red-600 hover:bg-red-500 text-white"
+    },
+    icono: "hub",
+    duracionVideo: "10 min",
+    tiempoEntrega: "45 segundos",
+    problema: "¿Tienes estudios básicos, memorias, planos, metrados, catálogo de partidas y normativa dispersos en decenas de archivos sin coherencia ni sustento al armar el Expediente Técnico y las EETT?",
+    solucion: "Ingiere toda la documentación del proyecto organizada en 8 frentes —gestión y control documental (incluida la normativa vigente aplicable), base de diseño y datos generales, estudios básicos, memorias descriptivas, planos e ingeniería, WBS y catálogo de partidas, metrados maestros y trazabilidad/calidad— para construir un Cerebro Digital unificado. Vincula automáticamente cada partida con sus planos, metrados, ensayos y normas de respaldo, detecta discrepancias antes de redactar y convierte todo ese corpus en el Expediente Técnico y las Especificaciones Técnicas (EETT) trazables del proyecto.",
+    entregable: "Cerebro Digital del proyecto (corpus normalizado, grafo de conocimiento, wiki técnica navegable y matriz de trazabilidad bidireccional), Especificaciones Técnicas (EETT) por partida y Expediente Técnico consolidado en Markdown y Microsoft Word (.docx) editable.",
+    videoId: "C7PSBudh6CA",
+    whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente para Expediente Técnico (Cerebro Digital) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
+  },
+  {
     id: "agente-contratos",
     nombre: "Agente Auditor Contractual & Cerebro Digital",
     especialidad: "Oficina Técnica y Contractual",

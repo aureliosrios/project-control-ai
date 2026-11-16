@@ -145,25 +145,38 @@ export default function StudentPortal() {
       const processedEnrollments = Object.values(uniqueEnrollmentsMap).map(enroll => {
         const cert = certificates?.find(c => {
           if (!c || !c.certificado_id || c.estado_academico !== 'GRADUADO') return false;
-          const cName = (c.nombre_curso_oficial || c.nombre_curso_inscrito || c.curso || "").toLowerCase();
-          const eName = (enroll.curso || "").toLowerCase();
-          if (!cName || !eName) return false;
-          if (cName === eName) return true;
+          const officialName = (c.nombre_curso_oficial || '').toLowerCase().trim();
+          const registeredName = (c.nombre_curso_inscrito || '').toLowerCase().trim();
+          const legacyName = (c.curso || '').toLowerCase().trim();
+          const eName = (enroll.curso || '').toLowerCase().trim();
+          if (!eName) return false;
+
+          // Coincidencia exacta con cualquiera de los nombres registrados en el certificado
+          if ((officialName && officialName === eName) || (registeredName && registeredName === eName) || (legacyName && legacyName === eName)) return true;
+
           // El curso "Presupuesto y programación" no comparte certificado con cursos anteriores
-          if (eName.includes("programaci") !== cName.includes("programaci")) return false;
-          if (cName.includes(eName) || eName.includes(cName)) return true;
-          if (cName.includes("despertar") && eName.includes("despertar")) return true;
-          if (cName.includes("licitac") && eName.includes("licitac")) return true;
-          if (cName.includes("evm") && eName.includes("evm")) return true;
+          if (eName.includes('programaci') !== ((officialName && officialName.includes('programaci')) || (registeredName && registeredName.includes('programaci')))) return false;
+
+          // Coincidencia por familias de cursos
+          if ((officialName.includes('primavera') || registeredName.includes('primavera')) && eName.includes('primavera')) return true;
+          if ((officialName.includes('despertar') || registeredName.includes('despertar')) && eName.includes('despertar')) return true;
+          if ((officialName.includes('licitac') || registeredName.includes('licitac')) && eName.includes('licitac')) return true;
+          if ((officialName.includes('evm') || registeredName.includes('evm')) && eName.includes('evm')) return true;
           if (
-            (cName.includes("presupuesto") || cName.includes("eett") || cName.includes("cronograma")) &&
-            (eName.includes("presupuesto") || eName.includes("eett") || eName.includes("cronograma"))
+            ((officialName && (officialName.includes('presupuesto') || officialName.includes('eett') || officialName.includes('cronograma'))) ||
+             (registeredName && (registeredName.includes('presupuesto') || registeredName.includes('eett') || registeredName.includes('cronograma')))) &&
+            (eName.includes('presupuesto') || eName.includes('eett') || eName.includes('cronograma'))
           ) return true;
           if (
-            (cName.includes("automatizacion") || cName.includes("automation")) &&
-            (eName.includes("automatizacion") || eName.includes("automation")) &&
-            !eName.includes("presupuesto")
+            ((officialName && (officialName.includes('automatizacion') || officialName.includes('automation'))) ||
+             (registeredName && (registeredName.includes('automatizacion') || registeredName.includes('automation')))) &&
+            (eName.includes('automatizacion') || eName.includes('automation')) &&
+            !eName.includes('presupuesto')
           ) return true;
+
+          if (officialName && (officialName.includes(eName) || eName.includes(officialName))) return true;
+          if (registeredName && (registeredName.includes(eName) || eName.includes(registeredName))) return true;
+          if (legacyName && (legacyName.includes(eName) || eName.includes(legacyName))) return true;
           return false;
         });
         const hasValidCert = Boolean(cert && cert.certificado_id && cert.estado_academico === 'GRADUADO');

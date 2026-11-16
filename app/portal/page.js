@@ -80,6 +80,10 @@ export default function StudentPortal() {
         // Las cohortes registradas en data/cohortes.json conservan su nombre oficial
         if (registeredCourseKey(enroll.curso, enroll.edicion_curso)) {
           // sin homogeneizar
+        } else if (enroll.edicion_curso?.includes("15/11") || cursoLower?.includes("cronograma de obra") || cursoLower?.includes("planificacion de obras")) {
+          cursoHomogeneizado = "Agentes de IA: Presupuesto y Cronograma de Obra";
+        } else if (enroll.edicion_curso?.includes("18/10") || cursoLower?.includes("presupuesto y programacion")) {
+          cursoHomogeneizado = "Agente de IA: Presupuesto y programación";
         } else if (
           cursoLower?.includes("presupuesto") ||
           cursoLower?.includes("eett") || 
@@ -300,6 +304,12 @@ export default function StudentPortal() {
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "");
       
+    if (edicion.includes("15/11") || name.includes("cronograma de obra") || name.includes("planificacion de obras")) {
+      return "AGENTE_PPTO_CRONO";
+    }
+    if (edicion.includes("18/10") || name.includes("presupuesto y programacion")) {
+      return "AGENTE_PPTO_PROG";
+    }
     if (name.includes("presupuesto") || name.includes("eett") || name.includes("cronograma") || (name.includes("agentes") && name.includes("presupuesto")) || name.includes("agentes de ia")) {
       if (edicion.includes("tarde") || edicion.includes("20/09") || edicion.includes("grupo 2") || name.includes("tarde")) {
         return "AGENTES_IA_TARDE";

@@ -9,8 +9,8 @@ import { registeredCourseKey } from "@/lib/cohortes";
 import courses from "@/data/clases-grabadas.json";
 
 const getCourseKey = (dbCursoName, edicionCurso = "") => {
-    const registered = registeredCourseKey(dbCursoName, edicionCurso);
-    if (registered) return registered;
+  const registered = registeredCourseKey(dbCursoName, edicionCurso);
+  if (registered) return registered;
   if (!dbCursoName) return null;
   const name = dbCursoName
     .toLowerCase()
@@ -21,6 +21,12 @@ const getCourseKey = (dbCursoName, edicionCurso = "") => {
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
     
+  if (edicion.includes("15/11") || name.includes("cronograma de obra") || name.includes("planificacion de obras")) {
+    return "AGENTE_PPTO_CRONO";
+  }
+  if (edicion.includes("18/10") || name.includes("presupuesto y programacion")) {
+    return "AGENTE_PPTO_PROG";
+  }
   if (name.includes("presupuesto") || name.includes("eett") || name.includes("cronograma") || (name.includes("agentes") && name.includes("presupuesto")) || name.includes("agentes de ia")) {
     if (edicion.includes("tarde") || edicion.includes("20/09") || edicion.includes("grupo 2") || name.includes("tarde")) {
       return "AGENTES_IA_TARDE";

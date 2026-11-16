@@ -1,7 +1,16 @@
 {
   "AGENTE_PPTO_CRONO": {
     "name": "Agentes de IA: Presupuesto y Cronograma de Obra (Domingos 3pm a 6pm)",
-    "lessons": []
+    "lessons": [
+      {
+        "id": "phHAW7B1fHk",
+        "num": "01",
+        "status": "OCULTA",
+        "title": "Sesión 01: Agentes de IA en Presupuesto y Cronograma de Obra (15/11/2026)",
+        "desc": "Clase inaugural del domingo 15 de noviembre de 2026, de 3:00 p.m. a 6:00 p.m. (hora de Perú), del curso Agentes de IA: Presupuesto y Cronograma de Obra. Project Control AI.",
+        "resources": []
+      }
+    ]
   },
   "AGENTE_PPTO_PROG": {
     "name": "Agente de IA: Presupuesto y programación (Domingos 10am a 1pm)",
@@ -67,6 +76,14 @@
             "url": "/manuales/02_fuentes_de_costos_y_rendimientos.zip"
           }
         ]
+      },
+      {
+        "id": "8wgGKR_wyX8",
+        "num": "04",
+        "status": "OCULTA",
+        "title": "Sesión 04: Agente de IA para Presupuestos y Programación (15/11/2026)",
+        "desc": "Clase del domingo 15 de noviembre de 2026, de 10:00 a.m. a 1:00 p.m. (hora de Perú), del curso Agente de IA: Presupuesto y programación. Project Control AI.",
+        "resources": []
       }
     ]
   },

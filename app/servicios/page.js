@@ -859,10 +859,120 @@ function ServiciosContent() {
                   })}
                 </div>
               )}
-            </div>
+            {/* Masterclass Gratuita Oficial: De la Nube al Entorno Local con Agentes de IA */}
+            <section id="masterclass-agentes-ia" className="p-6 sm:p-8 md:p-10 rounded-[32px] bg-slate-900/80 border border-cyan-500/30 shadow-[0_0_40px_rgba(6,182,212,0.1)]">
+              <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 mb-8 pb-6 border-b border-slate-800">
+                <div className="space-y-2">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-red-500/20 text-red-400 border border-red-500/30">
+                      <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+                      MASTERCLASS COMPLETA · 100% GRATUITA
+                    </span>
+                    <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
+                      58 MINUTOS · ALTA DEFINICIÓN
+                    </span>
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase tracking-tight leading-tight">
+                    De la Nube al Entorno Local: <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">Agentes de IA para Ingenieros</span>
+                  </h3>
+                  <p className="text-slate-300 text-sm md:text-base max-w-4xl leading-relaxed">
+                    Dejemos atrás el software rígido y las limitaciones del chat en la nube. Aprende cómo configurar y poner a operar herramientas agénticas como <strong className="text-white">Codex</strong>, <strong className="text-white">Antigravity</strong> y <strong className="text-white">Claude Code</strong> navegando directamente por tu computador, y descubre las enormes bondades de trabajar con <strong className="text-cyan-300">IAs de frontera (Sonnet, Opus, Gemini / Argon)</strong> frente a las IAs gratuitas convencionales.
+                  </p>
+                </div>
 
+                <div className="flex flex-wrap items-center gap-3 shrink-0">
+                  <Link
+                    href="https://youtu.be/8eyHEGSdTuY"
+                    target="_blank"
+                    className="px-5 py-3 rounded-xl bg-red-600 hover:bg-red-500 text-white font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(239,68,68,0.35)]"
+                  >
+                    <span className="material-symbols-outlined text-base">smart_display</span>
+                    Ver en YouTube
+                  </Link>
+                  <Link
+                    href="https://www.youtube.com/@aurelioalfonsosolorzanorios"
+                    target="_blank"
+                    className="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 border border-slate-700"
+                  >
+                    <span className="material-symbols-outlined text-base">subscriptions</span>
+                    Canal Oficial
+                  </Link>
+                </div>
+              </div>
 
-          </div>
+              {/* Grid: Reproductor de Video + 3 Pilares Técnicos */}
+              <div className="grid lg:grid-cols-12 gap-8 items-start">
+                {/* Reproductor de Video */}
+                <div className="lg:col-span-7 space-y-4">
+                  <div className="aspect-video bg-black rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative">
+                    <iframe
+                      src="https://www.youtube.com/embed/8eyHEGSdTuY?modestbranding=1&rel=0"
+                      className="w-full h-full border-0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      title="Agentes de IA: Presupuestos y Planificación de Obra con IA | Sesión 1: Fundamentos y Entorno Local"
+                    />
+                  </div>
+
+                  <div className="p-4 sm:p-5 rounded-2xl bg-black/40 border border-slate-800 flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <span className="material-symbols-outlined text-cyan-400 text-2xl">verified</span>
+                      <div>
+                        <h4 className="text-sm font-bold text-white uppercase tracking-tight">Sesión Práctica en Vivo</h4>
+                        <p className="text-xs text-slate-400">Ing. Aurelio Solórzano Ríos · Project Control AI</p>
+                      </div>
+                    </div>
+                    <span className="text-[11px] font-mono font-bold text-emerald-400 px-3 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+                      Entorno Local Activo
+                    </span>
+                  </div>
+                </div>
+
+                {/* 3 Pilares del Aprendizaje */}
+                <div className="lg:col-span-5 space-y-4">
+                  <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800 hover:border-cyan-500/40 transition-colors space-y-2">
+                    <div className="flex items-center gap-2 text-cyan-400">
+                      <span className="material-symbols-outlined text-lg">desktop_windows</span>
+                      <h4 className="text-xs font-black uppercase tracking-wider">1. De la Nube al Entorno Local</h4>
+                    </div>
+                    <p className="text-xs text-slate-300 leading-relaxed">
+                      El chat en la nube pierde el contexto al superar 10-20 archivos técnicos. En tu máquina, los agentes leen expedientes completos, planos y bases de licitación sin truncar información ni olvidar parámetros.
+                    </p>
+                  </div>
+
+                  <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800 hover:border-purple-500/40 transition-colors space-y-2">
+                    <div className="flex items-center gap-2 text-purple-400">
+                      <span className="material-symbols-outlined text-lg">terminal</span>
+                      <h4 className="text-xs font-black uppercase tracking-wider">2. Codex, Antigravity y Claude Code</h4>
+                    </div>
+                    <p className="text-xs text-slate-300 leading-relaxed">
+                      Herramientas agénticas que navegan por tus carpetas, crean Workspaces de obra, generan WBS/EDT bajo el PMBOK y construyen libros Excel con fórmulas vivas directamente en tu disco.
+                    </p>
+                  </div>
+
+                  <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800 hover:border-emerald-500/40 transition-colors space-y-2">
+                    <div className="flex items-center gap-2 text-emerald-400">
+                      <span className="material-symbols-outlined text-lg">bolt</span>
+                      <h4 className="text-xs font-black uppercase tracking-wider">3. IAs de Frontera vs. IAs Gratuitas</h4>
+                    </div>
+                    <p className="text-xs text-slate-300 leading-relaxed">
+                      Aprende por qué modelos de frontera como <strong className="text-white">Claude Sonnet/Opus</strong> y <strong className="text-white">Gemini / Argon</strong> garantizan precisión matemática y consistencia técnica, superando las alucinaciones de las IAs free.
+                    </p>
+                  </div>
+
+                  <div className="pt-2">
+                    <Link
+                      href="https://wa.me/51993147501?text=Hola%20Ing.%20Aurelio,%20vi%20la%20Masterclass%20Gratuita%20de%20Agentes%20de%20IA%20y%20deseo%20m%C3%A1s%20informaci%C3%B3n"
+                      target="_blank"
+                      className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-cyan-500/20 to-emerald-500/20 hover:from-cyan-500/30 hover:to-emerald-500/30 text-cyan-200 border border-cyan-500/40 font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 text-center"
+                    >
+                      <span className="material-symbols-outlined text-base">chat</span>
+                      Consultar al WhatsApp por el Programa Completo
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </section>
         )}
 
         {/* 2. CONTENIDO: CONSULTORÍA Y ASESORÍA TÉCNICA */}

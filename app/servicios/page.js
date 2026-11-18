@@ -859,6 +859,8 @@ function ServiciosContent() {
                   })}
                 </div>
               )}
+            </div>
+
             {/* Masterclass Gratuita Oficial: De la Nube al Entorno Local con Agentes de IA */}
             <section id="masterclass-agentes-ia" className="p-6 sm:p-8 md:p-10 rounded-[32px] bg-slate-900/80 border border-cyan-500/30 shadow-[0_0_40px_rgba(6,182,212,0.1)]">
               <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 mb-8 pb-6 border-b border-slate-800">
@@ -876,7 +878,7 @@ function ServiciosContent() {
                     De la Nube al Entorno Local: <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">Agentes de IA para Ingenieros</span>
                   </h3>
                   <p className="text-slate-300 text-sm md:text-base max-w-4xl leading-relaxed">
-                    Dejemos atrás el software rígido y las limitaciones del chat en la nube. Aprende cómo configurar y poner a operar herramientas agénticas como <strong className="text-white">Codex</strong>, <strong className="text-white">Antigravity</strong> y <strong className="text-white">Claude Code</strong> navegando directamente por tu computador, y descubre las enormes bondades de trabajar con <strong className="text-cyan-300">IAs de frontera (Sonnet, Opus, Gemini / Argon)</strong> frente a las IAs gratuitas convencionales.
+                    Dejemos atrás el software rígido y las limitaciones del chat en la nube. Aprende cómo configurar y poner a operar herramientas agénticas como <strong className="text-white">Codex</strong>, <strong className="text-white">Antigravity</strong> y <strong className="text-white">Claude Code</strong> navegando directamente por tu computador, y descubre las enormes bondades de trabajar con <strong className="text-cyan-300">IAs de frontera (Sol, Opus, Sonnet, Argon / Gemini)</strong> frente a las IAs gratuitas convencionales.
                   </p>
                 </div>
 
@@ -953,10 +955,10 @@ function ServiciosContent() {
                   <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800 hover:border-emerald-500/40 transition-colors space-y-2">
                     <div className="flex items-center gap-2 text-emerald-400">
                       <span className="material-symbols-outlined text-lg">bolt</span>
-                      <h4 className="text-xs font-black uppercase tracking-wider">3. IAs de Frontera vs. IAs Gratuitas</h4>
+                      <h4 className="text-xs font-black uppercase tracking-wider">3. IAs de Frontera (Sol, Opus, Argon) vs. IAs Gratuitas</h4>
                     </div>
                     <p className="text-xs text-slate-300 leading-relaxed">
-                      Aprende por qué modelos de frontera como <strong className="text-white">Claude Sonnet/Opus</strong> y <strong className="text-white">Gemini / Argon</strong> garantizan precisión matemática y consistencia técnica, superando las alucinaciones de las IAs free.
+                      Aprende por qué modelos de frontera como <strong className="text-white">Sol</strong>, <strong className="text-white">Opus</strong>, <strong className="text-white">Sonnet</strong> y <strong className="text-white">Argon / Gemini</strong> garantizan precisión matemática, lógica de costos y consistencia técnica, superando las alucinaciones de las IAs free.
                     </p>
                   </div>
 
@@ -973,6 +975,7 @@ function ServiciosContent() {
                 </div>
               </div>
             </section>
+          </div>
         )}
 
         {/* 2. CONTENIDO: CONSULTORÍA Y ASESORÍA TÉCNICA */}

@@ -273,6 +273,7 @@ const agentesEspecializados = [
     solucion: "Entrada de datos: recibe un presupuesto o cronograma en Excel o PDF (por ejemplo, un export de Presto con análisis de precios unitarios). Lee metrados, APU, rendimientos y cuadrillas, calcula las duraciones (metrado ÷ rendimiento × cuadrillas), propone la red de actividades con vínculos y desfases, hitos y plazo contractual, y confirma contigo la fecha de inicio y el calendario (días, turnos y feriados) antes de exportar.",
     entregable: "Salida de datos: archivo nativo .MPP listo para abrir en Microsoft Project, módulo VBA (.bas) para regenerar el cronograma, JSON validado con la trazabilidad de cada dato (hoja y celda de origen) y resumen en Markdown con supuestos y decisiones que cambian la programación.",
     videoId: "qpL0cwAror4",
+    tiktokUrl: "https://vt.tiktok.com/ZSpc9DUaf/",
     whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente Programador Gantt & VBA (MS Project) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },
   {

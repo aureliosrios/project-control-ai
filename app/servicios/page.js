@@ -300,6 +300,7 @@ const agentesEspecializados = [
     solucion: "Ingiere toda la documentación del proyecto organizada en 8 frentes —gestión y control documental (incluida la normativa vigente aplicable), base de diseño y datos generales, estudios básicos, memorias descriptivas, planos e ingeniería, WBS y catálogo de partidas, metrados maestros y trazabilidad/calidad— para construir un Cerebro Digital unificado. Vincula automáticamente cada partida con sus planos, metrados, ensayos y normas de respaldo, detecta discrepancias antes de redactar y convierte todo ese corpus en el Expediente Técnico y las Especificaciones Técnicas (EETT) trazables del proyecto.",
     entregable: "Cerebro Digital del proyecto (corpus normalizado, grafo de conocimiento, wiki técnica navegable y matriz de trazabilidad bidireccional), Especificaciones Técnicas (EETT) por partida y Expediente Técnico consolidado en Markdown y Microsoft Word (.docx) editable.",
     videoId: "C7PSBudh6CA",
+    tiktokUrl: "https://vt.tiktok.com/ZSpc9Ucf8/",
     whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente para Expediente Técnico (Cerebro Digital) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },
   {

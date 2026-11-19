@@ -301,6 +301,33 @@ const agentesEspecializados = [
     whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente para Expediente Técnico (Cerebro Digital) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },
   {
+    id: "agente-consultas-obra-qaqc",
+    nombre: "Agente de Consultas de Obra & Calidad QA/QC (Cerebro Digital)",
+    especialidad: "Auditoría de Incoherencias, Compras Discrepantes, RFIs Técnicos y Reclamos Contractuales",
+    tag: "CALIDAD QA/QC · CONSULTAS DE OBRA",
+    estado: "Próximamente",
+    precioSoles: "S/ 70",
+    precioDolares: "$25 USD",
+    yape: "51 993147501",
+    paypalUrl: "https://paypal.me/ProjectControlAI/25USD",
+    theme: {
+      border: "border-rose-500/40 hover:border-rose-400",
+      bg: "bg-slate-900/60",
+      badge: "bg-slate-800 text-slate-300 border border-slate-700 font-bold",
+      pill: "bg-slate-800/80 text-rose-400 border border-rose-800/60",
+      btn: "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700"
+    },
+    icono: "verified_user",
+    duracionVideo: "12 min",
+    tiempoEntrega: "30 segundos",
+    problema: "¿Tu obra civil o metalmecánica tiene contratos, EETT, planos, normas (API 653/650, ASME V/IX, RNE, GRI-GM13) y registros de campo dispersos, donde compras adquiere materiales equivocados por seguir planos simplificados y responder un RFI o reclamo contractual toma días?",
+    solucion: "Audita y organiza toda la documentación del proyecto (gobernanza contractual, alcance civil y metalmecánico, normativa aplicable seleccionada y control de calidad en campo) manteniendo paridad PDF/Word/Excel para el equipo y Markdown/JSON con IDs para la IA. Construye un Cerebro Digital con Wiki modular y Grafo de Conocimiento interactivo para detectar incoherencias técnicas, validar compras internas de materiales frente a EETT y normas, y emitir dictámenes trazables de RFIs y reclamos contractuales.",
+    entregable: "Carpeta de proyecto saneada (PDF, MD y JSON estructurado con IDs), Cerebro Digital (Wiki modular + Grafo interactivo en HTML Dark Mode + .canvas), matriz de consistencia normativa y motor de consultas para compras discrepantes, RFIs y reclamos.",
+    videoId: "",
+    tiktokUrl: "https://vt.tiktok.com/ZSpcut4gg/",
+    whatsappMsg: "Hola Ing. Aurelio, deseo adquirir / reservar el Agente de Consultas de Obra & Calidad QA/QC (Cerebro Digital) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
+  },
+  {
     id: "agente-contratos",
     nombre: "Agente Auditor Contractual & Cerebro Digital",
     especialidad: "Oficina Técnica y Contractual",

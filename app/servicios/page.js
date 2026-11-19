@@ -219,7 +219,7 @@ const agentesEspecializados = [
     solucion: "Le proporcionas al Agente el Presupuesto Contractual (Excel con partidas y APUs tipo S10), el Cronograma de Ejecución de Obra (Excel con Línea Base LB-0) y el PDF del Cuaderno de Obra digitalizado. El Agente extrae los metrados ejecutados diarios, concilia avances acumulados y genera en minutos la valorización mensual con fórmulas vivas bajo la Ley de Contrataciones del Estado (D.L. 1444, D.S. 344-2018-EF).",
     entregable: "Expediente oficial en Excel con fórmulas vivas (Resumen General, Desagregado Contractual, Planilla de Metrados, Cálculo de Reajuste K por Fórmula Polinómica D.S. 011-79-VC, Amortizaciones y Deducciones de Adelanto Directo y Materiales, Retenciones), Informe Técnico en Markdown/PDF y Curva S programada vs ejecutada.",
     videoId: "0LPG5_YoXlM",
-    tiktokUrl: "https://vt.tiktok.com/ZSpFeuU4Y/",
+    tiktokUrl: "https://vt.tiktok.com/ZSpc9YGn5/",
     whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente de Valorizaciones de Obra Pública (Perú) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },
   {
@@ -246,6 +246,7 @@ const agentesEspecializados = [
     solucion: "Entrada de datos: recibe hasta 7 grupos de insumos (Presupuesto APU, Cronograma LB-0, Reportes Diarios DPR, Protocolos de Cierre QA/QC, RFI y Transmittals, Control de Cambios CO/CV y EDP Anterior) en JSON, Excel o PDF. Si no cuentas con todos los insumos, la IA se adapta a la información disponible con la que cuentas o sustentas tus metrados para el EDP; sin embargo, está preparada para cualquier situación de un Estado de Pago. Ejecuta validaciones V01–V14 / E00–E04 sin inventar cifras, respeta la moneda original y calcula ambos criterios de certificación: solo lo protocolizado vs. protocolizado + reporte diario.",
     entregable: "Salida de datos: libro Excel oficial por periodo con 8 hojas y fórmulas vivas verificadas con LibreOffice (Resumen_EDP, Contrato_Vigente, Valorizacion_Contractual, Valorizacion_Cambios, Sustento_Metrados con selector de criterio, Sustento_Metrados_CO, Sustento_Documental y Parametros), archivo JSON estructurado, Informe Ejecutivo en Markdown, Matriz Consolidada multi-EDP y reportes de verificación S01–S08.",
     videoId: "lF7T_IA7g0A",
+    tiktokUrl: "https://vt.tiktok.com/ZSpcH3KhH/",
     whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente de Estados de Pago (Valorización) - Obra Privada (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },
   {

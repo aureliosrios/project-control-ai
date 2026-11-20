@@ -541,13 +541,13 @@ export default function Home() {
 
               <div className="flex gap-2">
                 <Link
-                  href="https://youtu.be/Npqz9TnI6No"
+                  href="https://youtu.be/ggly4-8AcKw"
                   target="_blank"
                   className="flex-1 px-3 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-[11px] uppercase tracking-wider text-center transition-all flex items-center justify-center gap-1 shadow-md hover:scale-[1.02]"
                   title="YouTube: Guía práctica para el manejo del agente"
                 >
                   <span className="material-symbols-outlined text-sm">play_circle</span>
-                  YouTube (15 min)
+                  YouTube (7 min)
                 </Link>
                 <Link
                   href="https://vt.tiktok.com/ZSg9ThvSH/"

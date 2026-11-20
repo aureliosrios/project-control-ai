@@ -22,7 +22,7 @@ TOKEN_PATHS = [
 
 VIDEO_INFO = {
     "id_name": "Presupuesto_Presto",
-    "file": Path(r"D:\Soluciones Agenticas\02 Agente presupuesto tipo Presto\2026-10-24 20-43-37_Editado_Dinamico_1.1x_15x.mp4"),
+    "file": Path(r"D:\Soluciones Agenticas\02 Agente presupuesto tipo Presto\2026-10-24 20-43-37_Iapetus_Dinamico_10x.mp4"),
     "title": "Agente de IA para Presupuestos y APU Tipo Presto | De Expediente a Excel y BC3 con Fórmulas Vivas",
     "tags": [
         "Agente IA", "Presupuesto Presto", "Costos y Presupuestos", "APU", "Presto RIB",

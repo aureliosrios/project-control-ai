@@ -78,12 +78,12 @@ const agentesEspecializados = [
       btn: "bg-red-600 hover:bg-red-500 text-white"
     },
     icono: "table_chart",
-    duracionVideo: "15 min",
+    duracionVideo: "7 min",
     tiempoEntrega: "15 segundos",
     problema: "¿Expedientes complejos sin archivos nativos de Presto y horas perdidas transcribiendo partidas y APUs sin trazabilidad?",
     solucion: "Ingesta determinista de expedientes (PDF/Excel), generación de presupuesto en formato Presto con descomposición por naturalezas (mano de obra, maquinaria, materiales, subcontratas) y archivo estándar BC3 (FIEBDC-3/2020).",
     entregable: "Carpeta autocontenida con libro Excel oficial formato Presto de fórmulas vivas, archivo estándar nativo .bc3 para Presto, Cerebro Digital navegable y grafo de conocimiento.",
-    videoId: "Npqz9TnI6No",
+    videoId: "ggly4-8AcKw",
     tiktokUrl: "https://vt.tiktok.com/ZSg9ThvSH/",
     whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente de Presupuestos & APU Tipo Presto (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },

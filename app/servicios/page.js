@@ -331,6 +331,32 @@ const agentesEspecializados = [
     whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente de Consultas de Obra & Calidad QA/QC (Cerebro Digital) (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },
   {
+    id: "agente-lps",
+    nombre: "Agente de Lookahead desde Primavera P6 (.XER), MS Project (.MPP) y Excel",
+    especialidad: "Lookahead Planning, Last Planner System & Control Semanal",
+    tag: "LOOKAHEAD · XER / MPP / EXCEL",
+    estado: "Publicado en YouTube",
+    precioSoles: "S/ 70",
+    precioDolares: "$25 USD",
+    yape: "51 993147501",
+    paypalUrl: "https://paypal.me/ProjectControlAI/25USD",
+    theme: {
+      border: "border-sky-500/40 hover:border-sky-400",
+      bg: "bg-slate-900/60",
+      badge: "bg-red-950 text-red-300 border border-red-500/40 font-bold",
+      pill: "bg-slate-800/80 text-sky-400 border border-sky-800/60",
+      btn: "bg-red-600 hover:bg-red-500 text-white"
+    },
+    icono: "fact_check",
+    duracionVideo: "9 min",
+    tiempoEntrega: "15 segundos",
+    problema: "¿Pasas horas convirtiendo cronogramas de Primavera P6 (.xer), MS Project (.mpp) o Excel en un Lookahead semanal, ajustando feriados por país, calendarios de obra y calculando el PPC manualmente?",
+    solucion: "Lee directamente archivos Primavera P6 (.xer), MS Project (.mpp) y Excel (planeamiento o seguimiento con Línea Base 0 y fechas reales). Configura de forma guiada el país del proyecto para feriados oficiales, calendario laboral (6 o 7 días), fecha de corte y branding corporativo (logotipo y colores), ejecutando 11 revisiones automáticas de calidad antes de entregar el resultado.",
+    entregable: "Libro Excel formulado con Dashboard principal de KPIs, Lookahead Lean (arquitectura de 3 filas y distribución temporal), Plan Semanal con cálculo automático de PPC, Histórico de PPC, Matriz de Restricciones sugerida por IA, Parámetros y archivo JSON estructurado.",
+    videoId: "-fOxAm_LJhg",
+    whatsappMsg: "Hola Ing. Aurelio, deseo adquirir el Agente de Lookahead desde Primavera P6 (.XER), MS Project (.MPP) y Excel (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
+  },
+  {
     id: "agente-contratos",
     nombre: "Agente Auditor Contractual & Cerebro Digital",
     especialidad: "Oficina Técnica y Contractual",
@@ -355,32 +381,6 @@ const agentesEspecializados = [
     entregable: "Matriz ejecutiva de control contractual en Excel (dashboard A3) y grafo de conocimiento conectado en Obsidian.",
     videoId: "0nJQXGfkMB4",
     whatsappMsg: "Hola Ing. Aurelio, deseo adquirir / reservar el Agente Auditor Contractual & Cerebro Digital (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
-  },
-  {
-    id: "agente-lps",
-    nombre: "Agente Lookahead & Last Planner System",
-    especialidad: "Control Semanal y Producción",
-    tag: "LAST PLANNER SYSTEM",
-    estado: "Próximamente",
-    precioSoles: "S/ 70",
-    precioDolares: "$25 USD",
-    yape: "51 993147501",
-    paypalUrl: "https://paypal.me/ProjectControlAI/25USD",
-    theme: {
-      border: "border-slate-800 hover:border-slate-700",
-      bg: "bg-slate-900/50",
-      badge: "bg-slate-800 text-slate-300 border border-slate-700 font-bold",
-      pill: "bg-slate-800/80 text-slate-400 border border-slate-700/60",
-      btn: "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700"
-    },
-    icono: "fact_check",
-    duracionVideo: "11 min",
-    tiempoEntrega: "15 segundos",
-    problema: "¿Reuniones de producción caóticas, restricciones no identificadas a tiempo y cálculo manual del PPC cada semana?",
-    solucion: "Estructura el Lookahead a 6 semanas con arquitectura de 3 filas (Línea Base LB-0, Reprogramado y Real Campo), Plan Semanal WWP y restricciones.",
-    entregable: "Matriz viva de restricciones en Excel con semaforización automática, causas de no cumplimiento (CNC) y cálculo PPC.",
-    videoId: "dVZNMhvNSsw",
-    whatsappMsg: "Hola Ing. Aurelio, deseo adquirir / reservar el Agente Lookahead & Last Planner System (S/ 70 PEN / $25 USD). Adjunto mi comprobante de pago."
   },
   {
     id: "agente-eett",
@@ -556,8 +556,8 @@ function ServiciosContent() {
               aria-pressed={activeTab === "agentes"}
               onClick={() => changeTab("agentes")}
               className={`px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 ${activeTab === "agentes"
-                  ? "bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 shadow-[0_0_30px_rgba(16,185,129,0.45)] ring-2 ring-emerald-400/50"
-                  : "bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 border border-emerald-500/20"
+                ? "bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 shadow-[0_0_30px_rgba(16,185,129,0.45)] ring-2 ring-emerald-400/50"
+                : "bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 border border-emerald-500/20"
                 }`}
             >
               <span className="material-symbols-outlined text-base">smart_toy</span>
@@ -569,8 +569,8 @@ function ServiciosContent() {
               aria-pressed={activeTab === "consultoria"}
               onClick={() => changeTab("consultoria")}
               className={`px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 ${activeTab === "consultoria"
-                  ? "bg-amber-500 text-slate-950 shadow-[0_0_30px_rgba(245,158,11,0.45)] ring-2 ring-amber-400/50"
-                  : "bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 border border-amber-500/20"
+                ? "bg-amber-500 text-slate-950 shadow-[0_0_30px_rgba(245,158,11,0.45)] ring-2 ring-amber-400/50"
+                : "bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 border border-amber-500/20"
                 }`}
             >
               <span className="material-symbols-outlined text-base">engineering</span>
@@ -654,8 +654,8 @@ function ServiciosContent() {
                     type="button"
                     onClick={() => setStatusFilter("todos")}
                     className={`min-w-0 px-2 md:px-3.5 py-2 rounded-xl text-[10px] md:text-xs font-bold uppercase leading-tight tracking-wide transition-all ${statusFilter === "todos"
-                        ? "bg-cyan-500 text-slate-950 shadow-[0_0_15px_rgba(245,168,0,0.3)] font-black"
-                        : "bg-slate-950/80 text-slate-400 hover:text-white border border-slate-800"
+                      ? "bg-cyan-500 text-slate-950 shadow-[0_0_15px_rgba(245,168,0,0.3)] font-black"
+                      : "bg-slate-950/80 text-slate-400 hover:text-white border border-slate-800"
                       }`}
                   >
                     Todos ({agentesEspecializados.length})
@@ -665,8 +665,8 @@ function ServiciosContent() {
                     type="button"
                     onClick={() => setStatusFilter("disponibles")}
                     className={`min-w-0 px-2 md:px-3.5 py-2 rounded-xl text-[10px] md:text-xs font-bold uppercase leading-tight tracking-wide transition-all flex items-center justify-center gap-1 ${statusFilter === "disponibles"
-                        ? "bg-red-600 text-white shadow-[0_0_15px_rgba(239,68,68,0.3)] font-black"
-                        : "bg-slate-950/80 text-slate-400 hover:text-white border border-slate-800"
+                      ? "bg-red-600 text-white shadow-[0_0_15px_rgba(239,68,68,0.3)] font-black"
+                      : "bg-slate-950/80 text-slate-400 hover:text-white border border-slate-800"
                       }`}
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
@@ -677,8 +677,8 @@ function ServiciosContent() {
                     type="button"
                     onClick={() => setStatusFilter("proximos")}
                     className={`min-w-0 px-2 md:px-3.5 py-2 rounded-xl text-[10px] md:text-xs font-bold uppercase leading-tight tracking-wide transition-all flex items-center justify-center gap-1 ${statusFilter === "proximos"
-                        ? "bg-amber-500 text-slate-950 shadow-[0_0_15px_rgba(245,158,11,0.3)] font-black"
-                        : "bg-slate-950/80 text-slate-400 hover:text-white border border-slate-800"
+                      ? "bg-amber-500 text-slate-950 shadow-[0_0_15px_rgba(245,158,11,0.3)] font-black"
+                      : "bg-slate-950/80 text-slate-400 hover:text-white border border-slate-800"
                       }`}
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
@@ -713,12 +713,12 @@ function ServiciosContent() {
                       <div
                         key={agente.id}
                         className={`rounded-2xl border-2 transition-all duration-300 backdrop-blur-sm overflow-hidden ${isExpanded
-                            ? agente.estado === "Publicado en YouTube"
-                              ? "border-cyan-500/60 bg-slate-900/90 shadow-[0_0_30px_rgba(245,168,0,0.18)] ring-1 ring-cyan-500/30"
-                              : "border-slate-700 bg-slate-900/90 shadow-lg"
-                            : agente.estado === "Publicado en YouTube"
-                              ? "border-cyan-500/40 bg-slate-900/60 hover:border-cyan-400/70 hover:bg-slate-900/80"
-                              : "border-slate-800/80 bg-slate-900/40 hover:border-slate-700 hover:bg-slate-900/60"
+                          ? agente.estado === "Publicado en YouTube"
+                            ? "border-cyan-500/60 bg-slate-900/90 shadow-[0_0_30px_rgba(245,168,0,0.18)] ring-1 ring-cyan-500/30"
+                            : "border-slate-700 bg-slate-900/90 shadow-lg"
+                          : agente.estado === "Publicado en YouTube"
+                            ? "border-cyan-500/40 bg-slate-900/60 hover:border-cyan-400/70 hover:bg-slate-900/80"
+                            : "border-slate-800/80 bg-slate-900/40 hover:border-slate-700 hover:bg-slate-900/60"
                           }`}
                       >
                         {/* Cabecera Comprimible (Siempre Visible y Clickeable) */}
@@ -732,8 +732,8 @@ function ServiciosContent() {
                           {/* Izquierda: Ícono, Título, Tag y Especialidad */}
                           <div className="flex items-center gap-3.5 min-w-0 flex-1">
                             <div className={`w-9 h-9 rounded-lg border flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 ${agente.estado === "Publicado en YouTube"
-                                ? "bg-cyan-950/80 border-cyan-500/50 text-cyan-300"
-                                : "bg-slate-800 border-slate-700 text-slate-300"
+                              ? "bg-cyan-950/80 border-cyan-500/50 text-cyan-300"
+                              : "bg-slate-800 border-slate-700 text-slate-300"
                               }`}>
                               <span className="material-symbols-outlined text-xl">{agente.icono}</span>
                             </div>
@@ -741,8 +741,8 @@ function ServiciosContent() {
                             <div className="min-w-0 flex-1">
                               <div className="flex flex-wrap items-center gap-2 mb-0.5">
                                 <h3 className={`text-sm sm:text-base font-bold leading-tight transition-colors ${agente.estado === "Publicado en YouTube"
-                                    ? "text-white group-hover:text-cyan-300"
-                                    : "text-slate-200 group-hover:text-white"
+                                  ? "text-white group-hover:text-cyan-300"
+                                  : "text-slate-200 group-hover:text-white"
                                   }`}>
                                   {agente.nombre}
                                 </h3>
@@ -843,8 +843,8 @@ function ServiciosContent() {
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className={`px-4 py-3 rounded-xl font-black text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2 shadow-lg hover:scale-[1.02] ${agente.estado === "Publicado en YouTube"
-                                      ? "bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.3)]"
-                                      : "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700"
+                                    ? "bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.3)]"
+                                    : "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700"
                                     }`}
                                 >
                                   <span className="material-symbols-outlined text-base">chat</span>

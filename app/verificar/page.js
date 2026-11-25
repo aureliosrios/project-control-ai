@@ -280,7 +280,7 @@ export default function Verificar() {
       else if (slug.includes("p6")) archivo = "cert_primavera_p6.pdf";
 
       const templateUrl = `https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/academia/${archivo}`;
-      const response = await fetch(templateUrl);
+      const response = await fetch(templateUrl, { cache: 'no-store' });
       const pdfDoc = await PDFDocument.load(await response.arrayBuffer());
       const fontB = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
       const fontR = await pdfDoc.embedFont(StandardFonts.Helvetica);

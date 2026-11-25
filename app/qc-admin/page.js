@@ -163,7 +163,7 @@ export default function QCDashboard() {
       else if (slug.includes("construccion") || slug.includes("construcción")) plantilla = "cert_gestion_construccion.pdf";
       else if (slug.includes("p6") || slug.includes("primavera")) plantilla = "cert_primavera_p6.pdf";
 
-      const response = await fetch(`https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/academia/${plantilla}`);
+      const response = await fetch(`https://bpsumudexpywfffcwpun.supabase.co/storage/v1/object/public/academia/${plantilla}`, { cache: 'no-store' });
       const pdfDoc = await PDFDocument.load(await response.arrayBuffer());
       const fontB = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
       const fontR = await pdfDoc.embedFont(StandardFonts.Helvetica);

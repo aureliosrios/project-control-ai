@@ -42,6 +42,9 @@ export default function QCDashboard() {
       const isAsincronico = (
         !slug.includes("construccion") &&
         !slug.includes("construcción") &&
+        !slug.includes("agente") &&
+        !slug.includes("programacion") &&
+        !slug.includes("programación") &&
         (
           (cert.edicion_grupo || "").toUpperCase().includes("ASINCRONICO") ||
           slug.includes("forense") ||
@@ -159,7 +162,10 @@ export default function QCDashboard() {
       );
 
       let plantilla = "cert_gestion_integral.pdf";
-      if (slug.includes("automation") || slug.includes("automatizacion") || slug.includes("automatización")) plantilla = "cert_automatizacion.pdf";
+      if (slug.includes("agentes")) plantilla = "cert_agentes_ia.pdf";
+      else if (slug.includes("programacion") || slug.includes("programación")) plantilla = "cert_presupuestos_Cronograma.pdf";
+      else if (slug.includes("presupuesto") || slug.includes("presupuestos")) plantilla = "cert_presupuestos_ia.pdf";
+      else if (slug.includes("automation") || slug.includes("automatizacion") || slug.includes("automatización")) plantilla = "cert_automatizacion.pdf";
       else if (slug.includes("licitaciones")) plantilla = "cert_licitaciones_ia.pdf";
       else if (slug.includes("evm") || slug.includes("control")) plantilla = "cert_control_evm.pdf";
       else if (slug.includes("construccion") || slug.includes("construcción")) plantilla = "cert_gestion_construccion.pdf";
@@ -186,7 +192,8 @@ export default function QCDashboard() {
       });
 
       const isConstruccion = slug.includes("construccion") || slug.includes("construcción");
-      const horasVal = isConstruccion ? "15" : "45";
+      const isProgramacion = slug.includes("programacion") || slug.includes("programación");
+      const horasVal = (isConstruccion || isProgramacion) ? "15" : "45";
       const yDetalle = isConstruccion ? 250 : 278;
 
       const detalle = `con una duración de ${horasVal} horas académicas, impartidas del ${formatearFecha(cert.fecha_inicio_clases)} al ${formatearFecha(cert.fecha_fin_clases)} en modalidad online.`;

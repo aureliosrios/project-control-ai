@@ -276,6 +276,7 @@ export default function Verificar() {
       // --- RAMA SINCRÓNICA (lógica existente) ---
       let archivo = "cert_gestion_integral.pdf";
       if (slug.includes("agentes")) archivo = "cert_agentes_ia.pdf";
+      else if (slug.includes("programacion") || slug.includes("programación")) archivo = "cert_presupuestos_Cronograma.pdf";
       else if (slug.includes("presupuesto") || slug.includes("presupuestos")) archivo = "cert_presupuestos_ia.pdf";
       else if (slug.includes("automation") || slug.includes("automatizacion") || slug.includes("automatización")) archivo = "cert_automatizacion.pdf";
       else if (slug.includes("licitaciones")) archivo = "cert_licitaciones_ia.pdf";
@@ -298,6 +299,9 @@ export default function Verificar() {
       
       if (slug.includes("agentes")) {
         horasVal = "48";
+        yDetalle = 278;
+      } else if (slug.includes("programacion") || slug.includes("programación")) {
+        horasVal = "15";
         yDetalle = 278;
       } else if (slug.includes("automation") || slug.includes("automatizacion") || slug.includes("automatización")) {
         horasVal = "45";

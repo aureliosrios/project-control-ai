@@ -38,19 +38,11 @@ export default function QCDashboard() {
     try {
       const slug = (cert.nombre_curso_oficial || cert.nombre_curso_inscrito || "").toLowerCase();
 
-      // Detectar si es ASINCRÓNICO
+      // Detectar si es ASINCRÓNICO (folio empieza con ASIN o edición/slug lo indica)
       const isAsincronico = (
-        !slug.includes("construccion") &&
-        !slug.includes("construcción") &&
-        !slug.includes("agente") &&
-        !slug.includes("programacion") &&
-        !slug.includes("programación") &&
-        (
-          (cert.edicion_grupo || "").toUpperCase().includes("ASINCRONICO") ||
-          slug.includes("forense") ||
-          slug.includes("presupuesto") ||
-          slug.includes("asincronico")
-        )
+        (cert.codigo_verificacion || "").toUpperCase().startsWith("ASIN") ||
+        (cert.edicion_grupo || "").toUpperCase().includes("ASIN") ||
+        slug.includes("asincronico")
       );
 
       // ── RAMA ASINCRÓNICA ──────────────────────────────────────────

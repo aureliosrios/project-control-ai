@@ -141,17 +141,11 @@ export default function Verificar() {
       // 3. Selección de Plantilla
       const slug = (cert.nombre_curso_oficial || cert.nombre_curso_inscrito || "").toLowerCase();
 
-      // Detectar si es curso ASINCRÓNICO por palabras clave del nombre
+      // Detectar si es curso ASINCRÓNICO (folio empieza con ASIN o edición/slug lo indica)
       const isAsincronico = (
-        !slug.includes("construccion") &&
-        !slug.includes("construcción") &&
-        !slug.includes("agentes") && // Excluir Agentes de IA (sincrónico)
-        (
-          (cert.edicion_grupo || "").toUpperCase().includes("ASINCRONICO") ||
-          slug.includes("forense") ||
-          (slug.includes("presupuesto") && (slug.includes("costos") || slug.includes("aumentada") || slug.includes("asincronico"))) ||
-          slug.includes("asincronico")
-        )
+        (cert.codigo_verificacion || "").toUpperCase().startsWith("ASIN") ||
+        (cert.edicion_grupo || "").toUpperCase().includes("ASIN") ||
+        slug.includes("asincronico")
       );
 
       // --- RAMA ASINCRÓNICA ---
@@ -423,10 +417,9 @@ export default function Verificar() {
     const isConstruccion = slug.includes("construccion") || slug.includes("construcción");
     const isProgramacion = slug.includes("programacion") || slug.includes("programación");
     const isSincMixto = isConstruccion || isProgramacion;
-    const isAsinc = !isConstruccion && !isProgramacion && !slug.includes("agente") && (
-      (alumno.edicion_grupo || "").toUpperCase().includes("ASINCRONICO") ||
-      slug.includes("forense") ||
-      slug.includes("presupuesto") ||
+    const isAsinc = (
+      (alumno.codigo_verificacion || "").toUpperCase().startsWith("ASIN") ||
+      (alumno.edicion_grupo || "").toUpperCase().includes("ASIN") ||
       slug.includes("asincronico")
     );
 

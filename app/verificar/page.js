@@ -301,7 +301,7 @@ export default function Verificar() {
         horasVal = "48";
         yDetalle = 278;
       } else if (slug.includes("programacion") || slug.includes("programación")) {
-        horasVal = "15";
+        horasVal = "45";
         yDetalle = 278;
       } else if (slug.includes("automation") || slug.includes("automatizacion") || slug.includes("automatización")) {
         horasVal = "45";
@@ -421,7 +421,9 @@ export default function Verificar() {
   if (isValidating && searchDone && alumno) {
     const slug = (alumno.nombre_curso_oficial || alumno.nombre_curso_inscrito || "").toLowerCase();
     const isConstruccion = slug.includes("construccion") || slug.includes("construcción");
-    const isAsinc = !isConstruccion && (
+    const isProgramacion = slug.includes("programacion") || slug.includes("programación");
+    const isSincMixto = isConstruccion || isProgramacion;
+    const isAsinc = !isConstruccion && !isProgramacion && !slug.includes("agente") && (
       (alumno.edicion_grupo || "").toUpperCase().includes("ASINCRONICO") ||
       slug.includes("forense") ||
       slug.includes("presupuesto") ||
@@ -461,11 +463,11 @@ export default function Verificar() {
             <div className="bg-slate-50 p-5 rounded-2xl border-l-4 border-cyan-500 flex justify-between items-center">
               <div>
                 <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Modalidad</span>
-                <span className="text-sm font-bold text-slate-900">{isAsinc ? "Asincrónica Autogestionada" : (isConstruccion ? "Online en Vivo (Sincrónica + Asincrónica)" : "Online en Vivo")}</span>
+                <span className="text-sm font-bold text-slate-900">{isAsinc ? "Asincrónica Autogestionada" : (isSincMixto ? "Online en Vivo (Sincrónica + Asincrónica)" : "Online en Vivo")}</span>
               </div>
               <div className="text-right">
                 <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Duración</span>
-                <span className="text-sm font-bold text-slate-900">{isAsinc ? "12 Horas Académicas" : (isConstruccion ? "15h Sincrónicas / 30h Asincrónicas" : "45 Horas Académicas")}</span>
+                <span className="text-sm font-bold text-slate-900">{isAsinc ? "12 Horas Académicas" : (isSincMixto ? "15h Sincrónicas / 30h Asincrónicas" : "45 Horas Académicas")}</span>
               </div>
             </div>
           </div>

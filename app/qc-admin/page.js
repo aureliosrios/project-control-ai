@@ -192,8 +192,7 @@ export default function QCDashboard() {
       });
 
       const isConstruccion = slug.includes("construccion") || slug.includes("construcción");
-      const isProgramacion = slug.includes("programacion") || slug.includes("programación");
-      const horasVal = (isConstruccion || isProgramacion) ? "15" : "45";
+      const horasVal = isConstruccion ? "15" : "45";
       const yDetalle = isConstruccion ? 250 : 278;
 
       const detalle = `con una duración de ${horasVal} horas académicas, impartidas del ${formatearFecha(cert.fecha_inicio_clases)} al ${formatearFecha(cert.fecha_fin_clases)} en modalidad online.`;

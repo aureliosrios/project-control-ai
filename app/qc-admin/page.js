@@ -155,7 +155,7 @@ export default function QCDashboard() {
 
       let plantilla = "cert_gestion_integral.pdf";
       if (slug.includes("agentes")) plantilla = "cert_agentes_ia.pdf";
-      else if (slug.includes("programacion") || slug.includes("programación")) plantilla = "cert_presupuestos_Cronograma.pdf";
+      else if (slug.includes("programacion") || slug.includes("programación")) plantilla = "cert_presupuestos_programacion.pdf";
       else if (slug.includes("presupuesto") || slug.includes("presupuestos")) plantilla = "cert_presupuestos_ia.pdf";
       else if (slug.includes("automation") || slug.includes("automatizacion") || slug.includes("automatización")) plantilla = "cert_automatizacion.pdf";
       else if (slug.includes("licitaciones")) plantilla = "cert_licitaciones_ia.pdf";
